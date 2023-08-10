@@ -1,6 +1,6 @@
 import { type ButtonDefaultProps } from '../components/UI/Button';
 
-export type ButtonVariants = 'contained' | 'outlined' | 'text';
+export type ButtonVariants = 'filled' | 'elevated' | 'outlined' | 'text';
 export type ButtonSizes = 'sm' | 'md' | 'lg';
 export type ButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
@@ -16,7 +16,7 @@ export interface ButtonConfig {
 
 const buttonConfig: ButtonConfig = {
   defaultProps: {
-    variant: 'contained',
+    variant: 'filled',
     size: 'md',
     color: 'primary',
     fullwidth: false
@@ -50,60 +50,100 @@ const buttonConfig: ButtonConfig = {
       }
     },
     variants: {
-      contained: {
+      filled: {
         default: {
           default: {
-            shadow: 'shadow-md shadow-default-bg/20',
             fill: 'fill-default-text-dark',
             color: 'text-default-text-dark',
             background: 'bg-default-bg',
-            hover: 'hover:shadow-lg hover:shadow-default-bg/40 hover:bg-default-bg/90',
-            active: 'active:shadow-none active:bg-default-bg/80',
-            disabled: 'disabled:shadow-none'
+            hover: 'hover:bg-default-bg/90',
+            active: 'active:bg-default-bg/80'
           },
           primary: {
-            shadow: 'shadow-md shadow-default-primary/20',
             fill: 'fill-default-text-light',
             color: 'text-default-text-light',
             background: 'bg-default-primary',
-            hover: 'hover:shadow-lg hover:shadow-default-primary/40 hover:bg-default-primary/90',
-            active: 'active:shadow-none active:bg-default-primary/80',
-            disabled: 'disabled:shadow-none'
+            hover: 'hover:bg-default-primary/90',
+            active: 'active:bg-default-primary/80'
           },
           secondary: {
-            shadow: 'shadow-md shadow-default-secondary/20',
             fill: 'fill-default-text-light',
             color: 'text-default-text-light',
             background: 'bg-default-secondary',
-            hover: 'hover:shadow-lg hover:shadow-default-secondary/40 hover:bg-default-secondary/90',
-            active: 'active:shadow-none active:bg-default-secondary/80',
-            disabled: 'disabled:shadow-none'
+            hover: 'hover:bg-default-secondary/90',
+            active: 'active:bg-default-secondary/80'
           },
           success: {
-            shadow: 'shadow-md shadow-default-success/20',
             fill: 'fill-default-text-light',
             color: 'text-default-text-light',
             background: 'bg-default-success',
-            hover: 'hover:shadow-lg hover:shadow-default-success/40 hover:bg-default-success/90',
-            active: 'active:shadow-none active:bg-default-success/80',
-            disabled: 'disabled:shadow-none'
+            hover: 'hover:bg-default-success/90',
+            active: 'active:bg-default-success/80'
           },
           warning: {
-            shadow: 'shadow-md shadow-default-warning/20',
             fill: 'fill-default-text-dark',
             color: 'text-default-text-dark',
             background: 'bg-default-warning',
-            hover: 'hover:shadow-lg hover:shadow-default-warning/40 hover:bg-default-warning/90',
-            active: 'active:shadow-none active:bg-default-warning/80',
-            disabled: 'disabled:shadow-none'
+            hover: 'hover:bg-default-warning/90',
+            active: 'active:bg-default-warning/80'
           },
           error: {
-            shadow: 'shadow-md shadow-default-error/20',
             fill: 'fill-default-text-light',
             color: 'text-default-text-light',
             background: 'bg-default-error',
-            hover: 'hover:shadow-lg hover:shadow-default-error/40 hover:bg-default-error/90',
-            active: 'active:shadow-none active:bg-default-error/80',
+            hover: 'hover:bg-default-error/90',
+            active: 'active:bg-default-error/80'
+          }
+        }
+      },
+      elevated: {
+        default: {
+          default: {
+            shadow: 'shadow-md shadow-default-bg/20',
+            fill: 'fill-default-text-light',
+            color: 'text-default-text-light',
+            hover: 'hover:shadow-lg hover:shadow-default-bg/40 hover:bg-default-bg/10',
+            active: 'active:shadow-none active:bg-default-bg/20',
+            disabled: 'disabled:shadow-none'
+          },
+          primary: {
+            shadow: 'shadow-md shadow-default-bg-dark/20',
+            fill: 'fill-default-primary',
+            color: 'text-default-primary',
+            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-primary/10',
+            active: 'active:shadow-none active:bg-default-primary/20',
+            disabled: 'disabled:shadow-none'
+          },
+          secondary: {
+            shadow: 'shadow-md shadow-default-bg-dark/20',
+            fill: 'fill-default-secondary',
+            color: 'text-default-secondary',
+            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-secondary/10',
+            active: 'active:shadow-none active:bg-default-secondary/20',
+            disabled: 'disabled:shadow-none'
+          },
+          success: {
+            shadow: 'shadow-md shadow-default-bg-dark/20',
+            fill: 'fill-default-success',
+            color: 'text-default-success',
+            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-success/10',
+            active: 'active:shadow-none active:bg-default-success/20',
+            disabled: 'disabled:shadow-none'
+          },
+          warning: {
+            shadow: 'shadow-md shadow-default-bg-dark/20',
+            fill: 'fill-default-warning',
+            color: 'text-default-warning',
+            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-warning/10',
+            active: 'active:shadow-none active:bg-default-warning/20',
+            disabled: 'disabled:shadow-none'
+          },
+          error: {
+            shadow: 'shadow-md shadow-default-bg-dark/20',
+            fill: 'fill-default-error',
+            color: 'text-default-error',
+            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-error/10',
+            active: 'active:shadow-none active:bg-default-error/20',
             disabled: 'disabled:shadow-none'
           }
         }
