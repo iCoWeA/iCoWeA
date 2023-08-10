@@ -29,6 +29,7 @@ export interface TextareaDefaultProps {
   label?: ReactNode;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
+  labelPosition?: string;
   rootProps?: BaseHTMLAttributes<HTMLDivElement>;
   containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
   legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
@@ -51,6 +52,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>(
       label,
       startAdornment,
       endAdornment,
+      labelPosition,
       rootProps,
       containerProps,
       legendProps,
@@ -66,7 +68,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>(
     },
     rootRef
   ) => {
-    const inputRef = useRef<HTMLTextAreaElement | null>(null);
+    const textareaFocusRef = useRef<HTMLTextAreaElement | null>(null);
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.textarea;
     const rootStyles = styles.root;
@@ -101,15 +103,16 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>(
     /* Set root props */
     const {
       className: rootClassName,
-      onClick: onRootClick,
+      onMouseDown: onRootMouseDown,
       ...restRootProps
     } = rootProps;
 
-    const rootClickHandler: MouseEventHandler<HTMLDivElement> = (event) => {
-      inputRef.current?.focus();
+    const rootMouseDownHandler: MouseEventHandler<HTMLDivElement> = (event) => {
+      event.preventDefault();
+      textareaFocusRef.current?.focus();
 
-      if (onRootClick !== undefined) {
-        onRootClick(event);
+      if (onRootMouseDown !== undefined) {
+        onRootMouseDown(event);
       }
     };
 
@@ -153,13 +156,10 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>(
     const mergedTextareaClassName = twMerge(
       mergeClasses(
         textareaStyles.base,
-        textareaStyles.variants[variant],
         (isTextareaDisabled === true || (!valid && !invalid)) &&
           textareaStyles.colors[theme][color],
         valid && isTextareaDisabled !== true && textareaStyles.valid[theme],
         invalid && isTextareaDisabled !== true && textareaStyles.invalid[theme],
-        startAdornment !== null && textareaStyles.startAdornment,
-        endAdornment !== null && textareaStyles.endAdornment,
         textareaClassName
       )
     );
@@ -167,7 +167,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>(
     const setTextareaRef: (element: HTMLTextAreaElement) => void = (
       element
     ) => {
-      inputRef.current = element;
+      textareaFocusRef.current = element;
 
       if (textareaRef !== undefined) {
         textareaRef.current = element;
@@ -213,6 +213,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>(
           startAdornment !== null && labelStyles.startAdornment,
           valid && isTextareaDisabled !== true && labelStyles.valid[theme],
           invalid && isTextareaDisabled !== true && labelStyles.invalid[theme],
+          labelPosition,
           labelClassName
         )
       );
@@ -254,11 +255,12 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>(
 
     return (
       <div
-        onClick={rootClickHandler}
+        onMouseDown={rootMouseDownHandler}
         className={mergedRootClassName}
         ref={rootRef}
         {...restRootProps}
       >
+        {startAdornment}
         <textarea
           onFocus={focusTextareaHandler}
           onBlur={blurTextareaHandler}
@@ -276,7 +278,6 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>(
         >
           {labelNode}
         </fieldset>
-        {startAdornment}
         {endAdornment}
       </div>
     );

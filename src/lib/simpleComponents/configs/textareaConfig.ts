@@ -20,11 +20,8 @@ export interface TextareaConfig {
     },
     textarea: {
       base: Record<string, string>;
-      startAdornment: Record<string, string>;
-      endAdornment: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      variants: Record<TextareaVariants, Record<string, string>>;
       colors: Record<string, Record<TextareaColors, Record<string, string>>>;
     },
     legend: {
@@ -50,6 +47,7 @@ const textareaConfig: TextareaConfig = {
     label: null,
     startAdornment: null,
     endAdornment: null,
+    labelPosition: '',
     rootProps: {},
     containerProps: {},
     legendProps: {},
@@ -60,7 +58,10 @@ const textareaConfig: TextareaConfig = {
       base: {
         position: 'relative',
         display: 'flex',
+        gap: 'gap-2',
+        alignItems: 'items-center',
         width: 'w-full',
+        padding: 'px-4',
         focus: 'focus:outline-0',
         group: 'group'
       },
@@ -72,13 +73,13 @@ const textareaConfig: TextareaConfig = {
       },
       variants: {
         standard: {
-          padding: 'pt-2.5'
+          padding: 'pt-2.5 pb-1.5'
         },
         filled: {
-          padding: 'pt-6'
+          top: 'pt-7 pb-1.5'
         },
         outlined: {
-          padding: 'pt-2.5'
+          top: 'py-2'
         }
       }
     },
@@ -86,18 +87,9 @@ const textareaConfig: TextareaConfig = {
       base: {
         display: 'block',
         width: 'w-full',
-        padding: 'pt-1 px-4',
-        resize: 'resize-none',
-        overflow: 'overflow-scroll',
         font: 'antialiased font-normal text-base font-sans',
         background: 'bg-transparent',
         focus: 'focus:outline-0'
-      },
-      startAdornment: {
-        padding: 'pl-12'
-      },
-      endAdornment: {
-        padding: 'pr-12'
       },
       valid: {
         default: {
@@ -107,17 +99,6 @@ const textareaConfig: TextareaConfig = {
       invalid: {
         default: {
           color: 'text-default-error'
-        }
-      },
-      variants: {
-        standard: {
-          padding: 'pb-1.5'
-        },
-        filled: {
-          padding: 'pb-1.5'
-        },
-        outlined: {
-          padding: 'pb-2'
         }
       },
       colors: {
@@ -360,14 +341,14 @@ const textareaConfig: TextareaConfig = {
       },
       variants: {
         standard: {
-          top: 'top-[1.625rem]',
+          top: 'top-3.5',
           left: 'left-4',
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4 group-[.shifted]:text-sm'
         },
         filled: {
-          top: 'top-[1.625rem]',
+          top: 'top-7',
           left: 'left-4',
-          group: 'group-[.shifted]:top-1 group-[.shifted]:text-sm'
+          group: 'group-[.shifted]:top-2 group-[.shifted]:text-sm'
         },
         outlined: {
           top: 'top-2',
@@ -378,8 +359,8 @@ const textareaConfig: TextareaConfig = {
       colors: {
         default: {
           default: {
-            color: 'text-default-text-light',
-            group: 'group-[.shifted]:text-default-text-light group-[.focused]:group-[.shifted]:text-default-text-light'
+            color: 'text-default-text',
+            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-text-light'
           },
           primary: {
             color: 'text-default-text',
