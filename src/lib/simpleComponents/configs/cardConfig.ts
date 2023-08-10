@@ -1,53 +1,79 @@
 import { type CardDefaultProps } from '../components/UI/Card';
 
+export type CardVariants = 'filled' | 'outlined';
 export type CardColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface CardConfig {
   defaultProps: Required<CardDefaultProps>;
   styles: {
     base: Record<string, string>;
-    colors: Record<string, Record<CardColors, Record<string, string>>>;
+    elevated: Record<string, Record<string, string>>;
+    variants: Record<CardVariants, Record<string, Record<CardColors, Record<string, string>>>>;
   }
 }
 
 const cardConfig: CardConfig = {
   defaultProps: {
-    color: 'default'
+    variant: 'filled',
+    color: 'default',
+    elevated: false
   },
   styles: {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      shadow: 'shadow-md',
       borderRadius: 'rounded-2xl',
       overflow: 'overflow-hidden',
       focus: 'focus:outline-0'
     },
-    colors: {
+    elevated: {
       default: {
+        shadow: 'shadow-md shadow-default-bg-dark/20'
+      }
+    },
+    variants: {
+      filled: {
         default: {
-          shadow: 'shadow-default-bg-dark/20',
-          background: 'bg-default-bg'
-        },
-        primary: {
-          shadow: 'shadow-default-bg-dark/20',
-          background: 'bg-default-primary'
-        },
-        secondary: {
-          shadow: 'shadow-default-bg-dark/20',
-          background: 'bg-default-secondary'
-        },
-        success: {
-          shadow: 'shadow-default-bg-dark/20',
-          background: 'bg-default-success'
-        },
-        warning: {
-          shadow: 'shadow-default-bg-dark/20',
-          background: 'bg-default-warning'
-        },
-        error: {
-          shadow: 'shadow-default-bg-dark/20',
-          background: 'bg-default-error'
+          default: {
+            background: 'bg-default-bg'
+          },
+          primary: {
+            background: 'bg-default-primary'
+          },
+          secondary: {
+            background: 'bg-default-secondary'
+          },
+          success: {
+            background: 'bg-default-success'
+          },
+          warning: {
+            background: 'bg-default-warning'
+          },
+          error: {
+            background: 'bg-default-error'
+          }
+        }
+      },
+      outlined: {
+        default: {
+          default: {
+            border: 'border border-default-bg-light'
+          },
+          primary: {
+            border: 'border border-default-primary'
+          },
+          secondary: {
+            border: 'border border-default-secondary'
+          },
+          success: {
+            border: 'border border-default-success'
+          },
+          warning: {
+            border: 'border border-default-warning'
+          },
+          error: {
+            border: 'border border-default-error'
+          }
         }
       }
     }

@@ -1,11 +1,13 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type CardColors } from '../../configs/cardConfig';
+import { type CardVariants, type CardColors } from '../../configs/cardConfig';
 import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
 export interface CardDefaultProps {
+  variant?: CardVariants;
   color?: CardColors;
+  elevated?: boolean;
 }
 
 export interface CardProps
@@ -13,14 +15,21 @@ export interface CardProps
   BaseHTMLAttributes<HTMLDivElement> {}
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ color, className, ...restProps }, ref) => {
+  ({ variant, color, elevated, className, ...restProps }, ref) => {
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.card;
 
+    variant = variant ?? defaultProps.variant;
     color = color ?? defaultProps.color;
+    elevated = elevated ?? defaultProps.elevated;
 
     const mergedClassName = twMerge(
-      mergeClasses(styles.base, styles.colors[theme][color], className)
+      mergeClasses(
+        styles.base,
+        styles.variants[variant][theme][color],
+        elevated && styles.elevated[theme],
+        className
+      )
     );
 
     return (
