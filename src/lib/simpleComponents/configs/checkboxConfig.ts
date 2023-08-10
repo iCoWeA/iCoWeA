@@ -84,7 +84,7 @@ const checkboxConfig: CheckboxConfig = {
         default: {
           default: {
             border: 'after:border-default-bg-light',
-            hover: 'hover:bg-default-bg-light/10 hover:checked:bg-default-bg/10',
+            hover: 'hover:bg-default-bg/10 hover:checked:bg-default-bg/10',
             checked: 'checked:after:border-default-bg checked:after:bg-default-bg'
           },
           primary: {
