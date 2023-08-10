@@ -2,7 +2,8 @@ import React, {
   type BaseHTMLAttributes,
   forwardRef,
   useContext,
-  type ReactNode
+  type ReactNode,
+  type ButtonHTMLAttributes
 } from 'react';
 import {
   type AlertColors,
@@ -19,6 +20,7 @@ export interface AlertDefaultProps {
   icon?: ReactNode;
   action?: ReactNode;
   bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 interface AlertProps
@@ -37,6 +39,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       icon,
       action,
       bodyProps,
+      buttonProps,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps
@@ -56,6 +59,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     icon = icon ?? defaultProps.icon;
     action = action ?? defaultProps.action;
     bodyProps = bodyProps ?? defaultProps.bodyProps;
+    buttonProps = buttonProps ?? defaultProps.buttonProps;
 
     /* Set root props */
     const mergedRootClassName = twMerge(
@@ -76,11 +80,14 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     );
 
     /* Set button props */
+    const { className: buttonClassName, ...restButtonProps } = buttonProps;
+
     if (action === null && onClose !== undefined) {
       const mergedButtonClassName = twMerge(
         mergeClasses(
           buttonStyles.base,
-          buttonStyles.variants[variant][theme][color]
+          buttonStyles.variants[variant][theme][color],
+          buttonClassName
         )
       );
 
@@ -88,6 +95,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         <button
           onClick={onClose}
           className={mergedButtonClassName}
+          {...restButtonProps}
         >
           <svg viewBox="0 0 24 24">
             <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
