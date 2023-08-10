@@ -1,4 +1,4 @@
-import { type CheckboxDefaultProps } from '.';
+/* import { type CheckboxDefaultProps } from '.';
 
 export interface CheckboxConfig {
   defaultProps: Required<CheckboxDefaultProps>;
@@ -229,4 +229,4 @@ const checkboxConfig: CheckboxConfig = {
   }
 };
 
-export default checkboxConfig;
+export default checkboxConfig; */

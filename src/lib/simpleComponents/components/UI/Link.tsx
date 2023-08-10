@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from 'react';
-import { type LinkUnderlines } from '../../configs/linkConfig';
+import { type LinkColors, type LinkUnderlines } from '../../configs/linkConfig';
 import {
   type LinkProps as BaseLinkProps,
   Link as BaseLink
@@ -10,7 +10,7 @@ import { mergeClasses } from '../../utils/styleHelper';
 
 export interface LinkDefaultProps {
   underline?: LinkUnderlines;
-  color?: Colors;
+  color?: LinkColors;
   fullwidth?: boolean;
   disabled?: boolean;
 }

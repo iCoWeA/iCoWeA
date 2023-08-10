@@ -1,5 +1,5 @@
 import React, { useState, type FC, type ReactNode } from 'react';
-import themeContext, { initialState } from '.';
+import themeContext, { initialState } from '../../contexts/theme';
 
 interface Props {
   children: ReactNode;

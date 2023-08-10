@@ -1,4 +1,4 @@
-import React, {
+/* import React, {
   forwardRef,
   useContext,
   type BaseHTMLAttributes,
@@ -62,14 +62,12 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
     checkedIcon = checkedIcon ?? defaultProps.checkedIcon;
     rootProps = rootProps ?? defaultProps.containerProps;
 
-    /* Set container props */
     const { className: containerClassNames, ...restContainerProps } = rootProps;
 
     const containerClassName = twMerge(
       mergeClasses(containerClasses.base, containerClassNames)
     );
 
-    /* Set input props */
     const inputClassName = twMerge(
       mergeClasses(
         inputClasses.base,
@@ -87,7 +85,6 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
       }
     };
 
-    /* Set unchecked icon props */
     if (uncheckedIcon !== null) {
       uncheckedIconProps =
         uncheckedIconProps ?? defaultProps.uncheckedIconProps;
@@ -116,7 +113,6 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
       );
     }
 
-    /* Set checked icon props */
     if (checkedIcon !== null) {
       checkedIconProps = checkedIconProps ?? defaultProps.checkedIconProps;
 
@@ -167,4 +163,4 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
 
 Checkbox.displayName = 'Checkbox';
 
-export default Checkbox;
+export default Checkbox; */
