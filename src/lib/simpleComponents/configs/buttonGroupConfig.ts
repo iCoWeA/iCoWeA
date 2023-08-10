@@ -54,20 +54,20 @@ const buttonGroupConfig: ButtonGroupConfig = {
         disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
       },
       first: {
-        borderRadius: 'rounded-l-2xl'
+        borderRadius: 'rounded-l-full'
       },
       last: {
         contained: {
           border: 'border-0',
-          borderRadius: 'rounded-r-2xl'
+          borderRadius: 'rounded-r-full'
         },
         outlined: {
           border: 'border-r',
-          borderRadius: 'rounded-r-2xl'
+          borderRadius: 'rounded-r-full'
         },
         text: {
           border: 'border-0',
-          borderRadius: 'rounded-r-2xl'
+          borderRadius: 'rounded-r-full'
         }
       },
       fullwidth: {

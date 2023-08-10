@@ -28,7 +28,7 @@ const buttonConfig: ButtonConfig = {
       alignItems: 'items-center',
       height: 'h-fit',
       width: 'w-fit',
-      borderRadius: 'rounded-2xl',
+      borderRadius: 'rounded-full',
       font: 'antialiased font-normal text-base font-sans',
       transition: 'transition-all',
       focus: 'focus:outline-0',

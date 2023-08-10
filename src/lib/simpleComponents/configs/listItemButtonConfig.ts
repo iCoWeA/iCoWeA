@@ -27,7 +27,7 @@ const listItemButtonConfig: ListItemButtonConfig = {
       gap: 'gap-2',
       alignItems: 'items-center',
       width: 'w-full',
-      borderRadius: 'rounded-2xl',
+      borderRadius: 'rounded-full',
       font: 'antialiased font-normal text-base font-sans',
       transition: 'transition-colors',
       focus: 'focus:outline-0',
