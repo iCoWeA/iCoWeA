@@ -133,6 +133,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
     const mergedInputClassName = twMerge(
       mergeClasses(
         inputStyles.base,
+        inputStyles.variants[variant],
         (isInputDisabled === true || (!valid && !invalid)) &&
           inputStyles.colors[theme][color],
         valid && isInputDisabled !== true && inputStyles.valid[theme],
@@ -173,23 +174,16 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
 
     /* Set label props */
     if (label !== null) {
-      const legendStyles = styles.legend;
       const labelStyles = styles.label;
 
-      legendProps = legendProps ?? defaultProps.legendProps;
       labelProps = labelProps ?? defaultProps.labelProps;
-
-      const { className: legendClassName, ...restLegendProps } = legendProps;
-
-      const mergedLegendClassName = twMerge(
-        mergeClasses(legendStyles.base, legendClassName)
-      );
 
       const { className: labelClassName, ...restLabelProps } = labelProps;
 
       const mergedLabelClassName = twMerge(
         mergeClasses(
           labelStyles.base,
+          labelStyles.variants[variant],
           (isInputDisabled === true || (!valid && !invalid)) &&
             labelStyles.colors[theme][color],
           startAdornment !== null && labelStyles.startAdornment,
@@ -200,6 +194,28 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
       );
 
       labelNode = (
+        <label
+          className={mergedLabelClassName}
+          {...restLabelProps}
+        >
+          {label}
+        </label>
+      );
+    }
+
+    /* Set legend props */
+    if (label !== null && variant === 'outlined') {
+      const legendStyles = styles.legend;
+
+      legendProps = legendProps ?? defaultProps.legendProps;
+
+      const { className: legendClassName, ...restLegendProps } = legendProps;
+
+      const mergedLegendClassName = twMerge(
+        mergeClasses(legendStyles.base, legendClassName)
+      );
+
+      labelNode = (
         <>
           <legend
             className={mergedLegendClassName}
@@ -207,12 +223,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
           >
             {label}
           </legend>
-          <label
-            className={mergedLabelClassName}
-            {...restLabelProps}
-          >
-            {label}
-          </label>
+          {labelNode}
         </>
       );
     }

@@ -23,6 +23,7 @@ export interface InputConfig {
       endAdornment: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
+      variants: Record<InputVariants, Record<string, string>>;
       colors: Record<string, Record<InputColors, Record<string, string>>>;
     },
     legend: {
@@ -33,6 +34,7 @@ export interface InputConfig {
       startAdornment: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
+      variants: Record<InputVariants, Record<string, string>>;
       colors: Record<string, Record<InputColors, Record<string, string>>>;
     }
   }
@@ -72,7 +74,7 @@ const inputConfig: InputConfig = {
       base: {
         display: 'block',
         width: 'w-full',
-        padding: 'py-2 px-4',
+        padding: 'px-4',
         font: 'antialiased font-normal text-base font-sans',
         background: 'bg-transparent',
         focus: 'focus:outline-0'
@@ -91,6 +93,17 @@ const inputConfig: InputConfig = {
       invalid: {
         default: {
           color: 'text-default-error'
+        }
+      },
+      variants: {
+        standard: {
+          padding: 'pt-[1.625rem] pb-1.5'
+        },
+        filled: {
+          padding: 'pt-[1.625rem] pb-1.5'
+        },
+        outlined: {
+          padding: 'py-2'
         }
       },
       colors: {
@@ -311,9 +324,6 @@ const inputConfig: InputConfig = {
     label: {
       base: {
         position: 'absolute',
-        top: 'top-2/4',
-        left: 'left-4',
-        translate: '-translate-y-2/4',
         display: 'block',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition-all',
@@ -335,31 +345,48 @@ const inputConfig: InputConfig = {
           color: 'text-default-error'
         }
       },
+      variants: {
+        standard: {
+          top: 'top-[1.625rem]',
+          left: 'left-4',
+          group: 'group-[.shifted]:top-1 group-[.shifted]:text-sm'
+        },
+        filled: {
+          top: 'top-[1.625rem]',
+          left: 'left-4',
+          group: 'group-[.shifted]:top-1 group-[.shifted]:text-sm'
+        },
+        outlined: {
+          top: 'top-2',
+          left: 'left-4',
+          group: 'group-[.shifted]:left-0 group-[.shifted]:-top-px group-[.shifted]:mx-4 group-[.shifted]:px-0.5 group-[.shifted]:text-sm'
+        }
+      },
       colors: {
         default: {
           default: {
             color: 'text-default-text',
-            group: 'group-[.focused]:text-default-text-light'
+            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-text-light'
           },
           primary: {
             color: 'text-default-text',
-            group: 'group-[.focused]:text-default-primary'
+            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-primary'
           },
           secondary: {
             color: 'text-default-text',
-            group: 'group-[.focused]:text-default-secondary'
+            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-secondary'
           },
           success: {
             color: 'text-default-text',
-            group: 'group-[.focused]:text-default-success'
+            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-success'
           },
           warning: {
             color: 'text-default-text',
-            group: 'group-[.focused]:text-default-warning'
+            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-warning'
           },
           error: {
             color: 'text-default-text',
-            group: 'group-[.focused]:text-default-error'
+            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-error'
           }
         }
       }
