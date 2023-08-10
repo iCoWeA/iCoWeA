@@ -19,8 +19,6 @@ export interface InputConfig {
     },
     input: {
       base: Record<string, string>;
-      startAdornment: Record<string, string>;
-      endAdornment: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
       variants: Record<InputVariants, Record<string, string>>;
@@ -49,6 +47,7 @@ const inputConfig: InputConfig = {
     label: null,
     startAdornment: null,
     endAdornment: null,
+    labelPosition: '',
     rootProps: {},
     containerProps: {},
     legendProps: {},
@@ -59,7 +58,10 @@ const inputConfig: InputConfig = {
       base: {
         position: 'relative',
         display: 'flex',
+        gap: 'gap-2',
+        alignItems: 'items-center',
         width: 'w-full',
+        padding: 'px-4',
         focus: 'focus:outline-0',
         group: 'group'
       },
@@ -74,16 +76,9 @@ const inputConfig: InputConfig = {
       base: {
         display: 'block',
         width: 'w-full',
-        padding: 'px-4',
         font: 'antialiased font-normal text-base font-sans',
         background: 'bg-transparent',
         focus: 'focus:outline-0'
-      },
-      startAdornment: {
-        padding: 'pl-12'
-      },
-      endAdornment: {
-        padding: 'pr-12'
       },
       valid: {
         default: {
@@ -97,10 +92,10 @@ const inputConfig: InputConfig = {
       },
       variants: {
         standard: {
-          padding: 'pt-3.5 pb-1.5'
+          padding: 'pt-2.5 pb-1.5'
         },
         filled: {
-          padding: 'pt-[1.625rem] pb-1.5'
+          padding: 'pt-7 pb-1.5'
         },
         outlined: {
           padding: 'py-2'
@@ -351,9 +346,9 @@ const inputConfig: InputConfig = {
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4 group-[.shifted]:text-sm'
         },
         filled: {
-          top: 'top-[1.625rem]',
+          top: 'top-7',
           left: 'left-4',
-          group: 'group-[.shifted]:top-1 group-[.shifted]:text-sm'
+          group: 'group-[.shifted]:top-2 group-[.shifted]:text-sm'
         },
         outlined: {
           top: 'top-2',

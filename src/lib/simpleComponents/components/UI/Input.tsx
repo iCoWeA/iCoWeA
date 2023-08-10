@@ -9,7 +9,9 @@ import React, {
   type FocusEventHandler,
   useEffect,
   type BaseHTMLAttributes,
-  type LabelHTMLAttributes
+  type LabelHTMLAttributes,
+  useRef,
+  type MouseEventHandler
 } from 'react';
 import {
   type InputColors,
@@ -27,6 +29,7 @@ export interface InputDefaultProps {
   label?: ReactNode;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
+  labelPosition?: string;
   rootProps?: BaseHTMLAttributes<HTMLDivElement>;
   containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
   legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
@@ -49,6 +52,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
       label,
       startAdornment,
       endAdornment,
+      labelPosition,
       rootProps,
       containerProps,
       legendProps,
@@ -64,6 +68,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
     },
     rootRef
   ) => {
+    const inputFocusRef = useRef<HTMLInputElement | null>(null);
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.input;
     const rootStyles = styles.root;
@@ -96,7 +101,20 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
     }, [inputValue]);
 
     /* Set root props */
-    const { className: rootClassName, ...restRootProps } = rootProps;
+    const {
+      className: rootClassName,
+      onMouseDown: onRootMouseDown,
+      ...restRootProps
+    } = rootProps;
+
+    const rootMouseDownHandler: MouseEventHandler<HTMLDivElement> = (event) => {
+      event.preventDefault();
+      inputFocusRef.current?.focus();
+
+      if (onRootMouseDown !== undefined) {
+        onRootMouseDown(event);
+      }
+    };
 
     const mergedRootClassName = twMerge(
       mergeClasses(
@@ -138,13 +156,13 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
           inputStyles.colors[theme][color],
         valid && isInputDisabled !== true && inputStyles.valid[theme],
         invalid && isInputDisabled !== true && inputStyles.invalid[theme],
-        startAdornment !== null && inputStyles.startAdornment,
-        endAdornment !== null && inputStyles.endAdornment,
         inputClassName
       )
     );
 
     const setInputRef: (element: HTMLInputElement) => void = (element) => {
+      inputFocusRef.current = element;
+
       if (inputRef !== undefined) {
         inputRef.current = element;
       }
@@ -189,6 +207,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
           startAdornment !== null && labelStyles.startAdornment,
           valid && isInputDisabled !== true && labelStyles.valid[theme],
           invalid && isInputDisabled !== true && labelStyles.invalid[theme],
+          labelPosition,
           labelClassName
         )
       );
@@ -230,10 +249,12 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
 
     return (
       <div
+        onMouseDown={rootMouseDownHandler}
         className={mergedRootClassName}
         ref={rootRef}
         {...restRootProps}
       >
+        {startAdornment}
         <input
           onFocus={focusInputHandler}
           onBlur={blurInputHandler}
@@ -251,7 +272,6 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
         >
           {labelNode}
         </fieldset>
-        {startAdornment}
         {endAdornment}
       </div>
     );
