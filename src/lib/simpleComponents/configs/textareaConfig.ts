@@ -1,30 +1,31 @@
-import { type InputDefaultProps } from '../components/UI/Input';
+import { type TextareaDefaultProps } from '../components/UI/Textarea';
 
-export type InputVariants = 'outlined' | 'filled' | 'standard';
-export type InputColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
+export type TextareaVariants = 'outlined' | 'filled' | 'standard';
+export type TextareaColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface InputConfig {
-  defaultProps: Required<InputDefaultProps>;
+export interface TextareaConfig {
+  defaultProps: Required<TextareaDefaultProps>;
   styles: {
     root: {
       base: Record<string, string>;
       focused: Record<string, string>;
       shifted: Record<string, string>;
+      variants: Record<TextareaVariants, Record<string, string>>;
     },
     container: {
       base: Record<string, string>;
-      valid: Record<InputVariants, Record<string, Record<string, string>>>;
-      invalid: Record<InputVariants, Record<string, Record<string, string>>>;
-      variants: Record<InputVariants, Record<string, Record<InputColors, Record<string, string>>>>;
+      valid: Record<TextareaVariants, Record<string, Record<string, string>>>;
+      invalid: Record<TextareaVariants, Record<string, Record<string, string>>>;
+      variants: Record<TextareaVariants, Record<string, Record<TextareaColors, Record<string, string>>>>;
     },
-    input: {
+    textarea: {
       base: Record<string, string>;
       startAdornment: Record<string, string>;
       endAdornment: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      variants: Record<InputVariants, Record<string, string>>;
-      colors: Record<string, Record<InputColors, Record<string, string>>>;
+      variants: Record<TextareaVariants, Record<string, string>>;
+      colors: Record<string, Record<TextareaColors, Record<string, string>>>;
     },
     legend: {
       base: Record<string, string>;
@@ -34,13 +35,13 @@ export interface InputConfig {
       startAdornment: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      variants: Record<InputVariants, Record<string, string>>;
-      colors: Record<string, Record<InputColors, Record<string, string>>>;
+      variants: Record<TextareaVariants, Record<string, string>>;
+      colors: Record<string, Record<TextareaColors, Record<string, string>>>;
     }
   }
 }
 
-const inputConfig: InputConfig = {
+const textareaConfig: TextareaConfig = {
   defaultProps: {
     variant: 'outlined',
     color: 'primary',
@@ -68,13 +69,26 @@ const inputConfig: InputConfig = {
       },
       shifted: {
         group: 'shifted'
+      },
+      variants: {
+        standard: {
+          padding: 'pt-2.5'
+        },
+        filled: {
+          padding: 'pt-6'
+        },
+        outlined: {
+          padding: 'pt-2.5'
+        }
       }
     },
-    input: {
+    textarea: {
       base: {
         display: 'block',
         width: 'w-full',
-        padding: 'px-4',
+        padding: 'pt-1 px-4',
+        resize: 'resize-none',
+        overflow: 'overflow-scroll',
         font: 'antialiased font-normal text-base font-sans',
         background: 'bg-transparent',
         focus: 'focus:outline-0'
@@ -97,13 +111,13 @@ const inputConfig: InputConfig = {
       },
       variants: {
         standard: {
-          padding: 'pt-3.5 pb-1.5'
+          padding: 'pb-1.5'
         },
         filled: {
-          padding: 'pt-[1.625rem] pb-1.5'
+          padding: 'pb-1.5'
         },
         outlined: {
-          padding: 'py-2'
+          padding: 'pb-2'
         }
       },
       colors: {
@@ -346,7 +360,7 @@ const inputConfig: InputConfig = {
       },
       variants: {
         standard: {
-          top: 'top-3.5',
+          top: 'top-[1.625rem]',
           left: 'left-4',
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4 group-[.shifted]:text-sm'
         },
@@ -364,8 +378,8 @@ const inputConfig: InputConfig = {
       colors: {
         default: {
           default: {
-            color: 'text-default-text',
-            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-text-light'
+            color: 'text-default-text-light',
+            group: 'group-[.shifted]:text-default-text-light group-[.focused]:group-[.shifted]:text-default-text-light'
           },
           primary: {
             color: 'text-default-text',
@@ -393,4 +407,4 @@ const inputConfig: InputConfig = {
   }
 };
 
-export default inputConfig;
+export default textareaConfig;
