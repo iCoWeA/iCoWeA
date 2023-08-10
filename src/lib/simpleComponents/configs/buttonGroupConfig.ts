@@ -17,7 +17,7 @@ export interface ButtonGroupConfig {
       last: Record<ButtonGroupVariants, Record<string, string>>;
       fullwidth: Record<string, string>;
       sizes: Record<ButtonGroupSizes, Record<string, string>>;
-      elevated: Record<string, Record<string, string>>
+      elevated: Record<string, Record<string, string>>;
       variants: Record<ButtonGroupVariants, Record<string, Record<ButtonGroupColors, Record<string, string>>>>;
     }
   }

@@ -1,6 +1,6 @@
 import { type IconButtonDefaultProps } from '../components/UI/IconButton';
 
-export type IconButtonVariants = 'filled' | 'elevated' | 'outlined' | 'text';
+export type IconButtonVariants = 'filled' | 'outlined' | 'text';
 export type IconButtonSizes = 'sm' | 'md' | 'lg';
 export type IconButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
@@ -9,6 +9,7 @@ export interface IconButtonConfig {
   styles: {
     base: Record<string, string>;
     sizes: Record<IconButtonSizes, Record<string, string>>;
+    elevated: Record<string, Record<string, string>>;
     variants: Record<IconButtonVariants, Record<string, Record<IconButtonColors, Record<string, string>>>>;
   }
 }
@@ -17,7 +18,8 @@ const iconButtonConfig: IconButtonConfig = {
   defaultProps: {
     variant: 'filled',
     size: 'md',
-    color: 'primary'
+    color: 'primary',
+    elevated: false
   },
   styles: {
     base: {
@@ -42,6 +44,14 @@ const iconButtonConfig: IconButtonConfig = {
       lg: {
         width: 'w-11',
         padding: 'p-2.5'
+      }
+    },
+    elevated: {
+      default: {
+        shadow: 'shadow-md shadow-default-bg-dark/20',
+        hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40',
+        active: 'active:shadow-none',
+        disabled: 'disabled:shadow-none'
       }
     },
     variants: {
@@ -82,52 +92,6 @@ const iconButtonConfig: IconButtonConfig = {
             background: 'bg-default-error',
             hover: 'hover:bg-default-error/90',
             active: 'active:bg-default-error/80'
-          }
-        }
-      },
-      elevated: {
-        default: {
-          default: {
-            shadow: 'shadow-md shadow-default-bg/20',
-            fill: 'fill-default-text-light',
-            hover: 'hover:shadow-lg hover:shadow-default-bg/40 hover:bg-default-bg/10',
-            active: 'active:shadow-none active:bg-default-bg/20',
-            disabled: 'disabled:shadow-none'
-          },
-          primary: {
-            shadow: 'shadow-md shadow-default-bg-dark/20',
-            fill: 'fill-default-primary',
-            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-primary/10',
-            active: 'active:shadow-none active:bg-default-primary/20',
-            disabled: 'disabled:shadow-none'
-          },
-          secondary: {
-            shadow: 'shadow-md shadow-default-bg-dark/20',
-            fill: 'fill-default-secondary',
-            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-secondary/10',
-            active: 'active:shadow-none active:bg-default-secondary/20',
-            disabled: 'disabled:shadow-none'
-          },
-          success: {
-            shadow: 'shadow-md shadow-default-bg-dark/20',
-            fill: 'fill-default-success',
-            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-success/10',
-            active: 'active:shadow-none active:bg-default-success/20',
-            disabled: 'disabled:shadow-none'
-          },
-          warning: {
-            shadow: 'shadow-md shadow-default-bg-dark/20',
-            fill: 'fill-default-warning',
-            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-warning/10',
-            active: 'active:shadow-none active:bg-default-warning/20',
-            disabled: 'disabled:shadow-none'
-          },
-          error: {
-            shadow: 'shadow-md shadow-default-bg-dark/20',
-            fill: 'fill-default-error',
-            hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-error/10',
-            active: 'active:shadow-none active:bg-default-error/20',
-            disabled: 'disabled:shadow-none'
           }
         }
       },

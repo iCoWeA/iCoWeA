@@ -16,6 +16,7 @@ export interface IconButtonDefaultProps {
   variant?: IconButtonVariants;
   size?: IconButtonSizes;
   color?: IconButtonColors;
+  elevated?: boolean;
 }
 
 export interface IconButtonProps
@@ -23,19 +24,21 @@ export interface IconButtonProps
   ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ variant, size, color, className, ...restProps }, ref) => {
+  ({ variant, size, color, elevated, className, ...restProps }, ref) => {
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.iconButton;
 
     variant = variant ?? defaultProps.variant;
     size = size ?? defaultProps.size;
     color = color ?? defaultProps.color;
+    elevated = elevated ?? defaultProps.elevated;
 
     const mergedClassName = twMerge(
       mergeClasses(
         styles.base,
         styles.variants[variant][theme][color],
         styles.sizes[size],
+        elevated && styles.elevated[theme],
         className
       )
     );
