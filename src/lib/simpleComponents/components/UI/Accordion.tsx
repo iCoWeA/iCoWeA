@@ -22,11 +22,11 @@ export interface AccordionProps
   extends AccordionDefaultProps,
   BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
-  handler?: (isOpen: boolean) => void;
+  onToggle?: (isOpen: boolean) => void;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
-  ({ open, disabled, handler, className, ...restProps }, ref) => {
+  ({ open, disabled, onToggle, className, ...restProps }, ref) => {
     const prevOpen = usePrevious(open);
     const { config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordion;
@@ -50,12 +50,12 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
             setIsOpen((isOpen) => !isOpen);
           }
 
-          if (handler !== undefined) {
-            handler(open ?? isOpen);
+          if (onToggle !== undefined) {
+            onToggle(open ?? isOpen);
           }
         }
       }),
-      [open, isOpen, disabled, handler]
+      [open, isOpen, disabled, onToggle]
     );
 
     const mergedClassName = twMerge(

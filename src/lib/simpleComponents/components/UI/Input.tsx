@@ -11,7 +11,9 @@ import React, {
   type BaseHTMLAttributes,
   type LabelHTMLAttributes,
   useRef,
-  type MouseEventHandler
+  type MouseEventHandler,
+  useImperativeHandle,
+  type RefObject
 } from 'react';
 import {
   type InputColors,
@@ -42,7 +44,7 @@ export interface InputProps
   inputRef?: MutableRefObject<HTMLInputElement | undefined>;
 }
 
-const Input = forwardRef<HTMLDivElement, InputProps>(
+const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
   (
     {
       variant,
@@ -68,6 +70,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
     },
     rootRef
   ) => {
+    const rootFocusRef = useRef<HTMLDivElement>(null);
     const inputFocusRef = useRef<HTMLInputElement | null>(null);
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.input;
@@ -85,6 +88,8 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
     endAdornment = endAdornment ?? defaultProps.endAdornment;
     rootProps = rootProps ?? defaultProps.rootProps;
     containerProps = containerProps ?? defaultProps.containerProps;
+
+    useImperativeHandle(rootRef, () => rootFocusRef, []);
 
     const [isShifted, setIsShifted] = useState(
       (inputValue !== undefined && inputValue !== '') ||
@@ -109,7 +114,12 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
 
     const rootMouseDownHandler: MouseEventHandler<HTMLDivElement> = (event) => {
       event.preventDefault();
-      inputFocusRef.current?.focus();
+      if (
+        event.target === rootFocusRef.current ||
+        event.target === inputFocusRef.current
+      ) {
+        inputFocusRef.current?.focus();
+      }
 
       if (onRootMouseDown !== undefined) {
         onRootMouseDown(event);
@@ -251,7 +261,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>(
       <div
         onMouseDown={rootMouseDownHandler}
         className={mergedRootClassName}
-        ref={rootRef}
+        ref={rootFocusRef}
         {...restRootProps}
       >
         {startAdornment}
