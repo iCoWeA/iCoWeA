@@ -10,3 +10,5 @@ export const mergeClasses: (...classNames: Array<Record<string, string> | undefi
 
   return className;
 }).join(' ');
+
+export const isLast: (array: any[], index: number) => boolean = (array, index) => (array.length - 1 === index);

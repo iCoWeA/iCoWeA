@@ -8,6 +8,7 @@ import backdropConfig, { type BackdropConfig } from '../configs/backdropConfig';
 import badgeConfig, { type BadgeConfig } from '../configs/badgeConfig';
 import breadcrumbsConfig, { type BreadcrumbsConfig } from '../configs/breadcrumbsConfig';
 import buttonConfig, { type ButtonConfig } from '../configs/buttonConfig';
+import buttonGroupConfig, { type ButtonGroupConfig } from '../configs/buttonGroupConfig';
 import cardConfig, { type CardConfig } from '../configs/cardConfig';
 import cardBodyConfig, { type CardBodyConfig } from '../configs/cardBodyConfig';
 import cardFooterConfig, { type CardFooterConfig } from '../configs/cardFooterConfig';
@@ -47,6 +48,7 @@ interface ThemeContext {
     badge: BadgeConfig;
     breadcrumbs: BreadcrumbsConfig;
     button: ButtonConfig;
+    buttonGroup: ButtonGroupConfig;
     card: CardConfig;
     cardBody: CardBodyConfig;
     cardFooter: CardFooterConfig;
@@ -89,6 +91,7 @@ export const initialState: ThemeContext = {
     badge: badgeConfig,
     breadcrumbs: breadcrumbsConfig,
     button: buttonConfig,
+    buttonGroup: buttonGroupConfig,
     card: cardConfig,
     cardBody: cardBodyConfig,
     cardFooter: cardFooterConfig,

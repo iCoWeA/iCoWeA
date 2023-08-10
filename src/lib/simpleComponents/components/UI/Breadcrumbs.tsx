@@ -58,10 +58,10 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>(
     );
 
     /* Set items props */
+    const itemNodes: ReactNode[] = [];
     const childrenNodes = Array.isArray(rootChildren)
       ? [...rootChildren]
       : [rootChildren];
-    const itemNodes: ReactNode[] = [];
 
     for (let i = 0; i < childrenNodes.length; i++) {
       let separatorNode: ReactNode;
