@@ -29,7 +29,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
       icon,
       iconProps,
       onClick: onRootClick,
-      disabled: rootDisabled,
+      disabled: isRootDisabled,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps
@@ -87,7 +87,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     return (
       <button
         onClick={rootClickHandler}
-        disabled={rootDisabled === true || isDisabled}
+        disabled={isRootDisabled === true || isDisabled}
         className={mergedRootClassName}
         ref={rootRef}
         {...restRootProps}
