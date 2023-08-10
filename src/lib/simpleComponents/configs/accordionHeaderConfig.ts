@@ -92,6 +92,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
     icon: {
       base: {
         display: 'inline-block',
+        margin: 'ml-auto',
         width: 'w-6',
         aspectRatio: 'aspect-square',
         transition: 'transition-transform',
