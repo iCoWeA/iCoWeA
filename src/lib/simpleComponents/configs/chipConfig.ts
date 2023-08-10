@@ -29,7 +29,7 @@ const chipConfig: ChipConfig = {
     color: 'primary',
     invisible: false,
     action: null,
-    buttonProps: {}
+    componentsProps: {}
   },
   styles: {
     root: {

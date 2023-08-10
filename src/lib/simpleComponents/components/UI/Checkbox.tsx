@@ -17,8 +17,10 @@ export interface CheckboxDefaultProps {
   valid?: boolean;
   invalid?: boolean;
   icon?: ReactNode;
-  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
-  iconProps?: SVGAttributes<SVGSVGElement>;
+  componentsProps?: {
+    root?: BaseHTMLAttributes<HTMLDivElement>;
+    icon?: SVGAttributes<SVGSVGElement>;
+  };
 }
 
 export interface CheckboxProps
@@ -34,8 +36,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
       valid,
       invalid,
       icon,
-      rootProps,
-      iconProps,
+      componentsProps,
       checked: isInputChecked,
       disabled: isInputDisabled,
       type: inputType = 'checkbox',
@@ -56,10 +57,11 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
     valid = valid ?? defaultProps.valid;
     invalid = invalid ?? defaultProps.invalid;
     icon = icon ?? defaultProps.icon;
-    rootProps = rootProps ?? defaultProps.rootProps;
+    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
-    const { className: rootClassName, ...restRootProps } = rootProps;
+    const { className: rootClassName, ...restRootProps } =
+      componentsProps.root ?? {};
 
     const mergedRootClassName = twMerge(
       mergeClasses(rootStyles.base, rootClassName)
@@ -85,10 +87,9 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
 
     /* Set icon props */
     if (icon === null) {
-      iconProps = iconProps ?? defaultProps.iconProps;
-
       const iconStyles = styles.icon;
-      const { className: iconClassName, ...restIconProps } = iconProps;
+      const { className: iconClassName, ...restIconProps } =
+        componentsProps.icon ?? {};
 
       const mergedIconClassName = twMerge(
         mergeClasses(

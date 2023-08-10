@@ -28,8 +28,7 @@ const checkboxConfig: CheckboxConfig = {
     valid: false,
     invalid: false,
     icon: null,
-    rootProps: {},
-    iconProps: {}
+    componentsProps: {}
   },
   styles: {
     root: {

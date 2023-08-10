@@ -7,7 +7,9 @@ export interface CollapseDefaultProps {
   open?: boolean;
   openTransition?: string;
   closeTransition?: string;
-  containerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  componentsProps?: {
+    container?: BaseHTMLAttributes<HTMLDivElement>;
+  };
 }
 
 export interface CollapseProps
@@ -20,7 +22,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
       open,
       openTransition,
       closeTransition,
-      containerProps,
+      componentsProps,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps
@@ -35,7 +37,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
     open = open ?? defaultProps.open;
     openTransition = openTransition ?? defaultProps.openTransition;
     closeTransition = closeTransition ?? defaultProps.closeTransition;
-    containerProps = containerProps ?? defaultProps.containerProps;
+    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const mergedRootClassName = twMerge(
@@ -49,7 +51,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
 
     /* Set container props */
     const { className: containerClassName, ...restContainerProps } =
-      containerProps;
+      componentsProps.container ?? {};
 
     const mergedContainerClassName = twMerge(
       mergeClasses(containerStyles.base, containerClassName)

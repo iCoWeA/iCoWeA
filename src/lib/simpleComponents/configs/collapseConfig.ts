@@ -18,7 +18,7 @@ const collapseConfig: CollapseConfig = {
     open: false,
     openTransition: '',
     closeTransition: '',
-    containerProps: {}
+    componentsProps: {}
   },
   styles: {
     root: {

@@ -20,7 +20,9 @@ export interface ChipDefaultProps {
   color?: ChipColors;
   invisible?: boolean;
   action?: ReactNode;
-  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  componentsProps?: {
+    button?: ButtonHTMLAttributes<HTMLButtonElement>;
+  };
 }
 
 interface ChipProps
@@ -38,7 +40,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
       color,
       invisible,
       action,
-      buttonProps,
+      componentsProps,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps
@@ -55,6 +57,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
     color = color ?? defaultProps.color;
     invisible = invisible ?? defaultProps.invisible;
     action = action ?? defaultProps.action;
+    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const mergedRootClassName = twMerge(
@@ -71,10 +74,10 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
 
     /* Set button props */
     if (action === null && onClose !== undefined) {
-      buttonProps = buttonProps ?? defaultProps.buttonProps;
-
       const buttonStyles = styles.button;
-      const { className: buttonClassName, ...restButtonProps } = buttonProps;
+      const { className: buttonClassName, ...restButtonProps } =
+        componentsProps.button ?? {};
+
       const mergedButtonClassName = twMerge(
         mergeClasses(
           buttonStyles.base,
