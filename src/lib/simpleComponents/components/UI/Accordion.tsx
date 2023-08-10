@@ -59,7 +59,12 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     );
 
     const mergedClassName = twMerge(
-      mergeClasses(styles.base, disabled && styles.disabled, className)
+      mergeClasses(
+        styles.base,
+        (open ?? isOpen) && styles.open,
+        disabled && styles.disabled,
+        className
+      )
     );
 
     return (
