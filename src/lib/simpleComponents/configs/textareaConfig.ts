@@ -1,28 +1,28 @@
-import { type TextareaDefaultProps } from '../components/UI/Textarea';
+import { type TextAreaDefaultProps } from '../components/UI/TextArea';
 
-export type TextareaVariants = 'outlined' | 'filled' | 'standard';
-export type TextareaColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
+export type TextAreaVariants = 'outlined' | 'filled' | 'standard';
+export type TextAreaColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface TextareaConfig {
-  defaultProps: Required<TextareaDefaultProps>;
+export interface TextAreaConfig {
+  defaultProps: Required<TextAreaDefaultProps>;
   styles: {
     root: {
       base: Record<string, string>;
       focused: Record<string, string>;
       shifted: Record<string, string>;
-      variants: Record<TextareaVariants, Record<string, string>>;
+      variants: Record<TextAreaVariants, Record<string, string>>;
     },
     container: {
       base: Record<string, string>;
-      valid: Record<TextareaVariants, Record<string, Record<string, string>>>;
-      invalid: Record<TextareaVariants, Record<string, Record<string, string>>>;
-      variants: Record<TextareaVariants, Record<string, Record<TextareaColors, Record<string, string>>>>;
+      valid: Record<TextAreaVariants, Record<string, Record<string, string>>>;
+      invalid: Record<TextAreaVariants, Record<string, Record<string, string>>>;
+      variants: Record<TextAreaVariants, Record<string, Record<TextAreaColors, Record<string, string>>>>;
     },
-    textarea: {
+    textArea: {
       base: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      colors: Record<string, Record<TextareaColors, Record<string, string>>>;
+      colors: Record<string, Record<TextAreaColors, Record<string, string>>>;
     },
     legend: {
       base: Record<string, string>;
@@ -32,13 +32,13 @@ export interface TextareaConfig {
       startAdornment: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      variants: Record<TextareaVariants, Record<string, string>>;
-      colors: Record<string, Record<TextareaColors, Record<string, string>>>;
+      variants: Record<TextAreaVariants, Record<string, string>>;
+      colors: Record<string, Record<TextAreaColors, Record<string, string>>>;
     }
   }
 }
 
-const textareaConfig: TextareaConfig = {
+const textAreaConfig: TextAreaConfig = {
   defaultProps: {
     variant: 'outlined',
     color: 'primary',
@@ -83,10 +83,11 @@ const textareaConfig: TextareaConfig = {
         }
       }
     },
-    textarea: {
+    textArea: {
       base: {
         display: 'block',
         width: 'w-full',
+        resize: 'resize-none',
         font: 'antialiased font-normal text-base font-sans',
         background: 'bg-transparent',
         focus: 'focus:outline-0'
@@ -388,4 +389,4 @@ const textareaConfig: TextareaConfig = {
   }
 };
 
-export default textareaConfig;
+export default textAreaConfig;
