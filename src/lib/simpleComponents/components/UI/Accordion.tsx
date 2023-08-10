@@ -22,7 +22,7 @@ export interface AccordionProps
   extends AccordionDefaultProps,
   BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
-  handler?: () => void;
+  handler?: (isOpen: boolean) => void;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
@@ -51,7 +51,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           }
 
           if (handler !== undefined) {
-            handler();
+            handler(open ?? isOpen);
           }
         }
       }),
