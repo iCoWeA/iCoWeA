@@ -199,7 +199,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
         text: {
           default: {
             default: {
-              border: 'border-r border-default-light',
+              border: 'border-r border-bg',
               fill: 'fill-default-text-light',
               color: 'text-default-text-light',
               hover: 'hover:bg-default-bg/10',
