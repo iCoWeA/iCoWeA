@@ -1,6 +1,6 @@
 import { type ButtonGroupDefaultProps } from '../components/UI/ButtonGroup';
 
-export type ButtonGroupVariants = 'filled' | 'elevated' | 'outlined' | 'text';
+export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
 export type ButtonGroupSizes = 'sm' | 'md' | 'lg';
 export type ButtonGroupColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
@@ -17,6 +17,7 @@ export interface ButtonGroupConfig {
       last: Record<ButtonGroupVariants, Record<string, string>>;
       fullwidth: Record<string, string>;
       sizes: Record<ButtonGroupSizes, Record<string, string>>;
+      elevated: Record<string, Record<string, string>>
       variants: Record<ButtonGroupVariants, Record<string, Record<ButtonGroupColors, Record<string, string>>>>;
     }
   }
@@ -27,6 +28,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
     variant: 'filled',
     size: 'md',
     color: 'primary',
+    elevated: false,
     fullwidth: false
   },
   styles: {
@@ -61,10 +63,6 @@ const buttonGroupConfig: ButtonGroupConfig = {
           border: 'border-0',
           borderRadius: 'rounded-r-full'
         },
-        elevated: {
-          border: 'border-0',
-          borderRadius: 'rounded-r-full'
-        },
         outlined: {
           border: 'border-r',
           borderRadius: 'rounded-r-full'
@@ -87,6 +85,14 @@ const buttonGroupConfig: ButtonGroupConfig = {
         },
         lg: {
           padding: 'py-2.5 px-5'
+        }
+      },
+      elevated: {
+        default: {
+          shadow: 'shadow-md shadow-default-bg-dark/20',
+          hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40',
+          active: 'active:shadow-none',
+          disabled: 'disabled:shadow-none'
         }
       },
       variants: {
@@ -138,64 +144,6 @@ const buttonGroupConfig: ButtonGroupConfig = {
               background: 'bg-default-error',
               hover: 'hover:bg-default-error/90',
               active: 'active:bg-default-error/80'
-            }
-          }
-        },
-        elevated: {
-          default: {
-            default: {
-              shadow: 'shadow-md shadow-default-bg/20',
-              border: 'border-r border-bg',
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
-              hover: 'hover:shadow-lg hover:shadow-default-bg/40 hover:bg-default-bg/10',
-              active: 'active:shadow-none active:bg-default-bg/20',
-              disabled: 'disabled:shadow-none'
-            },
-            primary: {
-              shadow: 'shadow-md shadow-default-bg-dark/20',
-              border: 'border-r border-default-primary',
-              fill: 'fill-default-primary',
-              color: 'text-default-primary',
-              hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-primary/10',
-              active: 'active:shadow-none active:bg-default-primary/20',
-              disabled: 'disabled:shadow-none'
-            },
-            secondary: {
-              shadow: 'shadow-md shadow-default-bg-dark/20',
-              border: 'border-r border-default-secondary',
-              fill: 'fill-default-secondary',
-              color: 'text-default-secondary',
-              hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-secondary/10',
-              active: 'active:shadow-none active:bg-default-secondary/20',
-              disabled: 'disabled:shadow-none'
-            },
-            success: {
-              shadow: 'shadow-md shadow-default-bg-dark/20',
-              border: 'border-r border-default-success',
-              fill: 'fill-default-success',
-              color: 'text-default-success',
-              hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-success/10',
-              active: 'active:shadow-none active:bg-default-success/20',
-              disabled: 'disabled:shadow-none'
-            },
-            warning: {
-              shadow: 'shadow-md shadow-default-bg-dark/20',
-              border: 'border-r border-default-warning',
-              fill: 'fill-default-warning',
-              color: 'text-default-warning',
-              hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-warning/10',
-              active: 'active:shadow-none active:bg-default-warning/20',
-              disabled: 'disabled:shadow-none'
-            },
-            error: {
-              shadow: 'shadow-md shadow-default-bg-dark/20',
-              border: 'border-r border-default-error',
-              fill: 'fill-default-error',
-              color: 'text-default-error',
-              hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40 hover:bg-default-error/10',
-              active: 'active:shadow-none active:bg-default-error/20',
-              disabled: 'disabled:shadow-none'
             }
           }
         },

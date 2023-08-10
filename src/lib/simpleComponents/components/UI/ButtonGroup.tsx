@@ -18,6 +18,7 @@ export interface ButtonGroupDefaultProps {
   variant?: ButtonGroupVariants;
   size?: ButtonGroupSizes;
   color?: ButtonGroupColors;
+  elevated?: boolean;
   fullwidth?: boolean;
 }
 
@@ -31,6 +32,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
       variant,
       size,
       color,
+      elevated,
       fullwidth,
       className: rootClassName,
       children: rootChildren,
@@ -46,6 +48,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
     variant = variant ?? defaultProps.variant;
     size = size ?? defaultProps.size;
     color = color ?? defaultProps.color;
+    elevated = elevated ?? defaultProps.elevated;
     fullwidth = fullwidth ?? defaultProps.fullwidth;
 
     /* Set root props */
@@ -69,6 +72,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
           buttonStyles.base,
           buttonStyles.variants[variant][theme][color],
           buttonStyles.sizes[size],
+          elevated && buttonStyles.elevated[theme],
           i === 0 && buttonStyles.first,
           isLast(childrenNodes, i) && buttonStyles.last[variant]
         )
