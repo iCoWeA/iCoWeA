@@ -4,7 +4,8 @@ import React, {
   type BaseHTMLAttributes,
   type MutableRefObject,
   type InputHTMLAttributes,
-  type ReactNode
+  type ReactNode,
+  type SVGAttributes
 } from 'react';
 import { type CheckboxColors } from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
@@ -17,6 +18,7 @@ export interface CheckboxDefaultProps {
   invalid?: boolean;
   icon?: ReactNode;
   rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+  iconProps?: SVGAttributes<SVGSVGElement>;
 }
 
 export interface CheckboxProps
@@ -33,6 +35,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
       invalid,
       icon,
       rootProps,
+      iconProps,
       checked: isInputChecked,
       disabled: isInputDisabled,
       type: inputType = 'checkbox',
@@ -82,16 +85,24 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
 
     /* Set icon props */
     if (icon === null) {
+      iconProps = iconProps ?? defaultProps.iconProps;
+
       const iconStyles = styles.icon;
+      const { className: iconClassName, ...restIconProps } = iconProps;
 
       const mergedIconClassName = twMerge(
-        mergeClasses(iconStyles.base, iconStyles.colors[theme][color])
+        mergeClasses(
+          iconStyles.base,
+          iconStyles.colors[theme][color],
+          iconClassName
+        )
       );
 
       iconNode = (
         <svg
           className={mergedIconClassName}
           viewBox="0 0 24 24"
+          {...restIconProps}
         >
           <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
         </svg>

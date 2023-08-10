@@ -19,13 +19,13 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>(
 
     color = color ?? defaultProps.color;
 
-    const rootClassName = twMerge(
+    const mergedClassName = twMerge(
       mergeClasses(styles.base, styles.colors[theme][color], className)
     );
 
     return (
       <label
-        className={rootClassName}
+        className={mergedClassName}
         ref={ref}
         {...restProps}
       />

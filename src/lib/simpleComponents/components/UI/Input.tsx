@@ -202,10 +202,9 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
 
     /* Set label props */
     if (label !== null) {
-      const labelStyles = styles.label;
-
       labelProps = labelProps ?? defaultProps.labelProps;
 
+      const labelStyles = styles.label;
       const { className: labelClassName, ...restLabelProps } = labelProps;
 
       const mergedLabelClassName = twMerge(
@@ -234,10 +233,9 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
 
     /* Set legend props */
     if (label !== null && variant === 'outlined') {
-      const legendStyles = styles.legend;
-
       legendProps = legendProps ?? defaultProps.legendProps;
 
+      const legendStyles = styles.legend;
       const { className: legendClassName, ...restLegendProps } = legendProps;
 
       const mergedLegendClassName = twMerge(

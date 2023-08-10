@@ -64,10 +64,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     /* Set icon props */
     if (icon) {
-      const iconStyles = styles.icon;
-
       iconProps = iconProps ?? defaultProps.iconProps;
 
+      const iconStyles = styles.icon;
       const { className: iconClassName, ...restIconProps } = iconProps;
 
       const mergedIconClassName = twMerge(

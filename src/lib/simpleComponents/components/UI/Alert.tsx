@@ -50,7 +50,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     const { defaultProps, styles } = config.alert;
     const rootStyles = styles.root;
     const bodyStyles = styles.body;
-    const buttonStyles = styles.button;
     let buttonNode: ReactNode;
 
     variant = variant ?? defaultProps.variant;
@@ -59,7 +58,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     icon = icon ?? defaultProps.icon;
     action = action ?? defaultProps.action;
     bodyProps = bodyProps ?? defaultProps.bodyProps;
-    buttonProps = buttonProps ?? defaultProps.buttonProps;
 
     /* Set root props */
     const mergedRootClassName = twMerge(
@@ -80,6 +78,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     );
 
     /* Set button props */
+    buttonProps = buttonProps ?? defaultProps.buttonProps;
+
+    const buttonStyles = styles.button;
     const { className: buttonClassName, ...restButtonProps } = buttonProps;
 
     if (action === null && onClose !== undefined) {

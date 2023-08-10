@@ -48,7 +48,6 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.chip;
     const rootStyles = styles.root;
-    const buttonStyles = styles.button;
     let buttonNode: ReactNode;
 
     variant = variant ?? defaultProps.variant;
@@ -56,7 +55,6 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
     color = color ?? defaultProps.color;
     invisible = invisible ?? defaultProps.invisible;
     action = action ?? defaultProps.action;
-    buttonProps = buttonProps ?? defaultProps.buttonProps;
 
     /* Set root props */
     const mergedRootClassName = twMerge(
@@ -72,9 +70,11 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
     );
 
     /* Set button props */
-    const { className: buttonClassName, ...restButtonProps } = buttonProps;
-
     if (action === null && onClose !== undefined) {
+      buttonProps = buttonProps ?? defaultProps.buttonProps;
+
+      const buttonStyles = styles.button;
+      const { className: buttonClassName, ...restButtonProps } = buttonProps;
       const mergedButtonClassName = twMerge(
         mergeClasses(
           buttonStyles.base,
