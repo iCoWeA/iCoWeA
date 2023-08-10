@@ -16,6 +16,7 @@ export interface ButtonDefaultProps {
   variant?: ButtonVariants;
   size?: ButtonSizes;
   color?: ButtonColors;
+  elevated?: boolean;
   fullwidth?: boolean;
 }
 
@@ -24,13 +25,17 @@ export interface ButtonProps
   ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, size, color, fullwidth, className, ...restProps }, ref) => {
+  (
+    { variant, size, color, elevated, fullwidth, className, ...restProps },
+    ref
+  ) => {
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.button;
 
     variant = variant ?? defaultProps.variant;
     size = size ?? defaultProps.size;
     color = color ?? defaultProps.color;
+    elevated = elevated ?? defaultProps.elevated;
     fullwidth = fullwidth ?? defaultProps.fullwidth;
 
     const mergedClassName = twMerge(
@@ -38,6 +43,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         styles.base,
         styles.variants[variant][theme][color],
         styles.sizes[size],
+        elevated && styles.elevated[theme],
         fullwidth && styles.fullwidth,
         className
       )
