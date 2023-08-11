@@ -48,10 +48,7 @@ const inputConfig: InputConfig = {
     startAdornment: null,
     endAdornment: null,
     labelPosition: '',
-    rootProps: {},
-    containerProps: {},
-    legendProps: {},
-    labelProps: {}
+    componentsProps: {}
   },
   styles: {
     root: {

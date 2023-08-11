@@ -32,10 +32,12 @@ export interface InputDefaultProps {
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
   labelPosition?: string;
-  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
-  containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
-  legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
-  labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
+  componentsProps?: {
+    root?: BaseHTMLAttributes<HTMLDivElement>;
+    container?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+    legend?: BaseHTMLAttributes<HTMLLegendElement>;
+    label?: LabelHTMLAttributes<HTMLLabelElement>;
+  };
 }
 
 export interface InputProps
@@ -55,10 +57,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       startAdornment,
       endAdornment,
       labelPosition,
-      rootProps,
-      containerProps,
-      legendProps,
-      labelProps,
+      componentsProps,
       onFocus: onInputFocus,
       onBlur: onInputBlur,
       autoFocus: inputAutoFocus,
@@ -86,8 +85,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
     label = label ?? defaultProps.label;
     startAdornment = startAdornment ?? defaultProps.startAdornment;
     endAdornment = endAdornment ?? defaultProps.endAdornment;
-    rootProps = rootProps ?? defaultProps.rootProps;
-    containerProps = containerProps ?? defaultProps.containerProps;
+    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     useImperativeHandle(rootRef, () => rootFocusRef, []);
 
@@ -110,7 +108,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       className: rootClassName,
       onMouseDown: onRootMouseDown,
       ...restRootProps
-    } = rootProps;
+    } = componentsProps.root ?? {};
 
     const rootMouseDownHandler: MouseEventHandler<HTMLDivElement> = (event) => {
       event.preventDefault();
@@ -183,7 +181,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       className: containerClassName,
       disabled: containerDisabled,
       ...restContainerProps
-    } = containerProps;
+    } = componentsProps.container ?? {};
 
     const mergedContainerClassName = twMerge(
       mergeClasses(
@@ -202,10 +200,9 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
 
     /* Set label props */
     if (label !== null) {
-      labelProps = labelProps ?? defaultProps.labelProps;
-
       const labelStyles = styles.label;
-      const { className: labelClassName, ...restLabelProps } = labelProps;
+      const { className: labelClassName, ...restLabelProps } =
+        componentsProps.label ?? {};
 
       const mergedLabelClassName = twMerge(
         mergeClasses(
@@ -233,10 +230,9 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
 
     /* Set legend props */
     if (label !== null && variant === 'outlined') {
-      legendProps = legendProps ?? defaultProps.legendProps;
-
       const legendStyles = styles.legend;
-      const { className: legendClassName, ...restLegendProps } = legendProps;
+      const { className: legendClassName, ...restLegendProps } =
+        componentsProps.legend ?? {};
 
       const mergedLegendClassName = twMerge(
         mergeClasses(legendStyles.base, legendClassName)

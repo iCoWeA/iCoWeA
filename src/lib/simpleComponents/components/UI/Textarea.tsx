@@ -2,7 +2,6 @@ import React, {
   forwardRef,
   useContext,
   type MutableRefObject,
-  type TextareaHTMLAttributes,
   type ReactNode,
   type FieldsetHTMLAttributes,
   useState,
@@ -13,7 +12,8 @@ import React, {
   useRef,
   type MouseEventHandler,
   useImperativeHandle,
-  type RefObject
+  type RefObject,
+  type TextareaHTMLAttributes
 } from 'react';
 import {
   type TextAreaColors,
@@ -29,14 +29,14 @@ export interface TextAreaDefaultProps {
   valid?: boolean;
   invalid?: boolean;
   label?: ReactNode;
-  labelPosition?: string;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
-  componentsProps: {
-    root: BaseHTMLAttributes<HTMLDivElement>;
-    container: FieldsetHTMLAttributes<HTMLFieldSetElement>;
-    legend: BaseHTMLAttributes<HTMLLegendElement>;
-    label: LabelHTMLAttributes<HTMLLabelElement>;
+  labelPosition?: string;
+  componentsProps?: {
+    root?: BaseHTMLAttributes<HTMLDivElement>;
+    container?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+    legend?: BaseHTMLAttributes<HTMLLegendElement>;
+    label?: LabelHTMLAttributes<HTMLLabelElement>;
   };
 }
 
@@ -54,9 +54,9 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       valid,
       invalid,
       label,
-      labelPosition,
       startAdornment,
       endAdornment,
+      labelPosition,
       componentsProps,
       onFocus: onTextAreaFocus,
       onBlur: onTextAreaBlur,
@@ -108,7 +108,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       className: rootClassName,
       onMouseDown: onRootMouseDown,
       ...restRootProps
-    } = componentsProps.root;
+    } = componentsProps.root ?? {};
 
     const rootMouseDownHandler: MouseEventHandler<HTMLDivElement> = (event) => {
       event.preventDefault();
@@ -134,7 +134,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       )
     );
 
-    /* Set textArea props */
+    /* Set textarea props */
     const focusTextAreaHandler: FocusEventHandler<HTMLTextAreaElement> = (
       event
     ) => {
@@ -187,7 +187,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       className: containerClassName,
       disabled: containerDisabled,
       ...restContainerProps
-    } = componentsProps.container;
+    } = componentsProps.container ?? {};
 
     const mergedContainerClassName = twMerge(
       mergeClasses(
@@ -208,9 +208,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
     if (label !== null) {
       const labelStyles = styles.label;
       const { className: labelClassName, ...restLabelProps } =
-        componentsProps.label;
-
-      labelPosition = labelPosition ?? defaultProps.labelPosition;
+        componentsProps.label ?? {};
 
       const mergedLabelClassName = twMerge(
         mergeClasses(
@@ -240,7 +238,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
     if (label !== null && variant === 'outlined') {
       const legendStyles = styles.legend;
       const { className: legendClassName, ...restLegendProps } =
-        componentsProps.legend;
+        componentsProps.legend ?? {};
 
       const mergedLegendClassName = twMerge(
         mergeClasses(legendStyles.base, legendClassName)

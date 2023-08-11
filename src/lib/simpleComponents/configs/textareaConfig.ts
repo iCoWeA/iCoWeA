@@ -48,12 +48,7 @@ const textAreaConfig: TextAreaConfig = {
     startAdornment: null,
     endAdornment: null,
     labelPosition: '',
-    componentsProps: {
-      root: {},
-      container: {},
-      legend: {},
-      label: {}
-    }
+    componentsProps: {}
   },
   styles: {
     root: {
