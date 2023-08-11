@@ -24,8 +24,7 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
     separator: '/',
     color: 'default',
     fullwidth: false,
-    itemsProps: {},
-    separatorsProps: {}
+    componentsProps: {}
   },
   styles: {
     root: {

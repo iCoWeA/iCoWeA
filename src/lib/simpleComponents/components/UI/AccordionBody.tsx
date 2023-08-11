@@ -5,8 +5,10 @@ import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
 export interface AccordionBodyDefaultProps {
-  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
-  containerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  componentsProps: {
+    root?: BaseHTMLAttributes<HTMLDivElement>;
+    container?: BaseHTMLAttributes<HTMLDivElement>;
+  };
 }
 
 export interface AccordionBodyProps
@@ -18,8 +20,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     {
       className: bodyClassName,
       children: bodyChildren,
-      rootProps,
-      containerProps,
+      componentsProps,
       ...restBodyProps
     },
     rootRef
@@ -31,11 +32,11 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     const containerStyles = styles.constainer;
     const bodyStyles = styles.body;
 
-    rootProps = rootProps ?? defaultProps.rootProps;
-    containerProps = containerProps ?? defaultProps.containerProps;
+    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
-    const { className: rootClassName, ...restRootProps } = rootProps;
+    const { className: rootClassName, ...restRootProps } =
+      componentsProps.root ?? {};
 
     const mergedRootClassName = twMerge(
       mergeClasses(rootStyles.base, isOpen && rootStyles.open, rootClassName)
@@ -43,7 +44,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
 
     /* Set container props */
     const { className: containerClassName, ...restContainerProps } =
-      containerProps;
+      componentsProps.container ?? {};
 
     const mergedContainerClassName = twMerge(
       mergeClasses(containerStyles.base, containerClassName)

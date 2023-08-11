@@ -15,7 +15,9 @@ import { mergeClasses } from '../../utils/styleHelper';
 export interface AccordionHeaderDefaultProps {
   color?: AccordionHeaderColors;
   icon?: boolean;
-  iconProps?: SVGAttributes<SVGSVGElement>;
+  componentsProps?: {
+    icon?: SVGAttributes<SVGSVGElement>;
+  };
 }
 
 interface AccordionHeaderProps
@@ -27,7 +29,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     {
       color,
       icon,
-      iconProps,
+      componentsProps,
       onClick: onRootClick,
       disabled: isRootDisabled,
       className: rootClassName,
@@ -44,6 +46,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     color = color ?? defaultProps.color;
     icon = icon ?? defaultProps.icon;
+    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const rootClickHandler: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -64,10 +67,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     /* Set icon props */
     if (icon) {
-      iconProps = iconProps ?? defaultProps.iconProps;
-
       const iconStyles = styles.icon;
-      const { className: iconClassName, ...restIconProps } = iconProps;
+      const { className: iconClassName, ...restIconProps } =
+        componentsProps.icon ?? {};
 
       const mergedIconClassName = twMerge(
         mergeClasses(iconStyles.base, isOpen && iconStyles.open, iconClassName)

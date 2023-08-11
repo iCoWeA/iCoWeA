@@ -24,7 +24,7 @@ const progressConfig: ProgressConfig = {
     value: 0,
     size: 'md',
     color: 'primary',
-    rootProps: {}
+    componentsProps: {}
   },
   styles: {
     root: {

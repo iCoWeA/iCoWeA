@@ -17,7 +17,7 @@ export interface ProgressDefaultProps {
   size?: ProgressSizes;
   color?: ProgressColors;
   componentsProps?: {
-    root: BaseHTMLAttributes<HTMLDivElement>;
+    root?: BaseHTMLAttributes<HTMLDivElement>;
   };
 }
 
@@ -53,7 +53,8 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
-    const { className: rootClassName, ...restRootProps } = componentsProps.root;
+    const { className: rootClassName, ...restRootProps } =
+      componentsProps.root ?? {};
 
     const mergedRootClassName = twMerge(
       mergeClasses(

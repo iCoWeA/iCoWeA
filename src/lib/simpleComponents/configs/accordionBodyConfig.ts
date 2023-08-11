@@ -18,8 +18,7 @@ export interface AccordionBodyConfig {
 
 const accordionBodyConfig: AccordionBodyConfig = {
   defaultProps: {
-    rootProps: {},
-    containerProps: {}
+    componentsProps: {}
   },
   styles: {
     root: {

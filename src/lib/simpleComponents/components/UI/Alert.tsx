@@ -19,8 +19,10 @@ export interface AlertDefaultProps {
   invisible?: boolean;
   icon?: ReactNode;
   action?: ReactNode;
-  bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  componentsProps: {
+    body?: BaseHTMLAttributes<HTMLDivElement>;
+    button?: ButtonHTMLAttributes<HTMLButtonElement>;
+  };
 }
 
 interface AlertProps
@@ -38,8 +40,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       invisible,
       icon,
       action,
-      bodyProps,
-      buttonProps,
+      componentsProps,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps
@@ -57,7 +58,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     invisible = invisible ?? defaultProps.invisible;
     icon = icon ?? defaultProps.icon;
     action = action ?? defaultProps.action;
-    bodyProps = bodyProps ?? defaultProps.bodyProps;
+    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const mergedRootClassName = twMerge(
@@ -71,17 +72,17 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     );
 
     /* Set body props */
-    const { className: bodyClassName, ...restBodyProps } = bodyProps;
+    const { className: bodyClassName, ...restBodyProps } =
+      componentsProps.body ?? {};
 
     const mergedBodyClassName = twMerge(
       mergeClasses(bodyStyles.base, bodyClassName)
     );
 
     /* Set button props */
-    buttonProps = buttonProps ?? defaultProps.buttonProps;
-
     const buttonStyles = styles.button;
-    const { className: buttonClassName, ...restButtonProps } = buttonProps;
+    const { className: buttonClassName, ...restButtonProps } =
+      componentsProps.button ?? {};
 
     if (action === null && onClose !== undefined) {
       const mergedButtonClassName = twMerge(

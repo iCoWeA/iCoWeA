@@ -20,7 +20,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
   defaultProps: {
     color: 'default',
     icon: true,
-    iconProps: {}
+    componentsProps: {}
   },
   styles: {
     root: {

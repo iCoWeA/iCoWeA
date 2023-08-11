@@ -29,8 +29,7 @@ const alertConfig: AlertConfig = {
     invisible: false,
     icon: null,
     action: null,
-    bodyProps: {},
-    buttonProps: {}
+    componentsProps: {}
   },
   styles: {
     root: {
