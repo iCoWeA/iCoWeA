@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export enum Breakpoints {SM, MD, LG, XL, XXL}
 
-const calculateBreakpoint: (width: number) => Breakpoints = (width: number) => {
+const calculateBreakpoint = (width: number): Breakpoints => {
   if (width < 600) {
     return Breakpoints.SM;
   }
@@ -22,11 +22,11 @@ const calculateBreakpoint: (width: number) => Breakpoints = (width: number) => {
   return Breakpoints.XXL;
 };
 
-const useBreakpoint: () => Breakpoints = () => {
+const useBreakpoint = (): Breakpoints => {
   const [breakpoint, setBreakpoint] = useState(calculateBreakpoint(document.documentElement.clientWidth));
 
   useEffect(() => {
-    const resizeHandler: () => void = () => {
+    const resizeHandler = (): void => {
       setBreakpoint(calculateBreakpoint(document.documentElement.clientWidth));
     };
 
