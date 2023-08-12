@@ -9,7 +9,7 @@ interface Return {
 
 const initialTimerId = -1;
 
-const useMount = (open: boolean): Return => {
+const useMount = (open: boolean = false): Return => {
   const timerId = useRef(initialTimerId);
   const [isMounted, setIsMounted] = useState(open);
   const [isOpen, setIsOpen] = useState(false);

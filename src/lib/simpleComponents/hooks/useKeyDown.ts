@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-const useKeyDown: (key: string, dispatchKeyDown: () => void, dependencies?: any[]) => void = (key, dispatchKeyDown, dependencies) => {
+const useKeyDown = (key: string, dispatchKeyDown: () => void, dependencies?: any[]): void => {
   useEffect(() => {
-    const keyDownHandler: (event: KeyboardEvent) => void = (event) => {
+    const keyDownHandler = (event: KeyboardEvent): void => {
       if (event.key === key) {
         dispatchKeyDown();
       }
