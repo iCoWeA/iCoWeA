@@ -1,14 +1,18 @@
-export const validate: (input: HTMLInputElement | HTMLTextAreaElement, pattern?: RegExp) => boolean = (input, pattern) => {
-  if (pattern != null) {
-    return pattern.test(input.value);
+export const validate: (input?: HTMLInputElement | HTMLTextAreaElement, pattern?: string) => boolean = (input, pattern) => {
+  if (input === undefined) {
+    return false;
   }
 
-  if (input instanceof HTMLInputElement && input.pattern.trim() !== '') {
+  if (pattern !== undefined) {
+    return pattern.search(input.value) !== -1;
+  }
+
+  if (input instanceof HTMLInputElement) {
     return input.value.search(input.pattern) !== -1;
   }
 
   if (input.required) {
-    return input.checkValidity() && input.value.trim() !== '';
+    return input.checkValidity();
   }
 
   return true;
