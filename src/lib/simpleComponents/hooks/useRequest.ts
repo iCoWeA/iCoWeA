@@ -19,7 +19,7 @@ interface Actions {
   failed: (payload: unknown) => Action;
 }
 
-interface Request {
+interface Return {
   state: State,
   send: (url: string, request?: RequestInit) => Promise<void>;
 }
@@ -30,7 +30,7 @@ const actions: Actions = {
   failed: (payload) => ({ type: ActionTypes.FAILED, payload })
 };
 
-const reducer: (state: State, action: Action) => State = ({ data, error, isLoading }, { type, payload }) => {
+const reducer = ({ data, error, isLoading }: State, { type, payload }: Action): State => {
   if (type === ActionTypes.LOADING) {
     isLoading = true;
     data = null;
@@ -62,10 +62,10 @@ const initialState: State = {
   data: null
 };
 
-const useRequest: () => Request = () => {
+const useRequest = (): Return => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const send: (url: string, requestInit?: RequestInit) => Promise<void> = async (url, request) => {
+  const send = useCallback(async (url: string, request?: RequestInit): Promise<void> => {
     dispatch(actions.loading());
 
     try {
@@ -79,11 +79,11 @@ const useRequest: () => Request = () => {
     } catch (error) {
       dispatch(actions.failed(error));
     }
-  };
+  }, []);
 
   return {
     state,
-    send: useCallback(send, [])
+    send
   };
 };
 
