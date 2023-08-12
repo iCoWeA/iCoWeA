@@ -5,14 +5,10 @@ enum ActionTypes {CHANGE, DEBOUNCED_CHANGE, BLUR, REVALID, RESET, RESET_FORM}
 
 interface InputState {
   value: string;
-  showError: boolean;
   isValid: boolean;
+  showError: boolean;
+  errorMessage: string;
   timerId: number;
-  config: {
-    defaultValue: string;
-    errorMessage: string;
-    debounceDelay: number;
-  }
 }
 
 interface State {
@@ -22,71 +18,77 @@ interface State {
 
 interface Action {
   type: ActionTypes,
-  payload: { inputName: string; input?: HTMLInputElement | HTMLTextAreaElement, timerId?: number };
+  payload: { inputName: string; input?: HTMLInputElement | HTMLTextAreaElement, timerId?: number, defaultValue?: string, pattern?: string, errorMessage?: string; config?: Record<string, InputConfig> };
 }
 
-interface InputInitialConfig {
+interface Config {
+  inputs: Record<string, InputConfig>
+  deboundeDelay?: number;
+}
+
+interface InputConfig {
   defaultValue?: string;
   errorMessage?: string;
   debounceDelay?: number;
+  pattern?: string;
 }
 
-const initializeInput = ({ defaultValue = '', errorMessage = '', debounceDelay = 1000 }: InputInitialConfig): InputState => ({
+const initializeInput = (defaultValue: string = ''): InputState => ({
   value: defaultValue,
-  showError: false,
   isValid: false,
-  timerId: -1,
-  config: {
-    defaultValue,
-    errorMessage,
-    debounceDelay
-  }
+  showError: false,
+  errorMessage: '',
+  timerId: -1
 });
 
 const reducer = (state: State, { type, payload }: Action): State => {
   const inputs: Record<string, InputState> = JSON.parse(JSON.stringify(state.inputs));
 
-  if (type === ActionTypes.CHANGE && payload.input != null) {
+  if (type === ActionTypes.CHANGE) {
     clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName].timerId = -1;
-    inputs[payload.inputName].value = payload.input.value;
-    inputs[payload.inputName].isValid = validate(payload.input);
+    inputs[payload.inputName].value = payload?.input?.value ?? '';
+    inputs[payload.inputName].isValid = validate(payload.input, payload.pattern);
     inputs[payload.inputName].showError = !inputs[payload.inputName].isValid;
+    inputs[payload.inputName].errorMessage = inputs[payload.inputName].showError ? payload.errorMessage ?? '' : '';
+    inputs[payload.inputName].timerId = -1;
   }
 
-  if (type === ActionTypes.DEBOUNCED_CHANGE && payload.input != null) {
+  if (type === ActionTypes.DEBOUNCED_CHANGE) {
     clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName].timerId = payload.timerId ?? -1;
-    inputs[payload.inputName].value = payload.input.value;
-    inputs[payload.inputName].isValid = validate(payload.input);
+    inputs[payload.inputName].value = payload?.input?.value ?? '';
+    inputs[payload.inputName].isValid = validate(payload.input, payload.pattern);
     inputs[payload.inputName].showError = inputs[payload.inputName].isValid
       ? false
       : inputs[payload.inputName].showError;
+    inputs[payload.inputName].errorMessage = inputs[payload.inputName].showError ? payload.errorMessage ?? '' : '';
+    inputs[payload.inputName].timerId = payload.timerId ?? -1;
   }
 
-  if (type === ActionTypes.REVALID && payload.input != null) {
+  if (type === ActionTypes.REVALID) {
     clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName].timerId = -1;
-    inputs[payload.inputName].isValid = validate(payload.input);
+    inputs[payload.inputName].isValid = validate(payload.input, payload.pattern);
     inputs[payload.inputName].showError = !inputs[payload.inputName].isValid;
+    inputs[payload.inputName].errorMessage = inputs[payload.inputName].showError ? payload.errorMessage ?? '' : '';
+    inputs[payload.inputName].timerId = -1;
   }
 
-  if (type === ActionTypes.BLUR && payload.input != null) {
+  if (type === ActionTypes.BLUR) {
     clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName].timerId = -1;
-    inputs[payload.inputName].isValid = validate(payload.input);
+    inputs[payload.inputName].isValid = validate(payload.input, payload.pattern);
     inputs[payload.inputName].showError = !inputs[payload.inputName].isValid;
+    inputs[payload.inputName].errorMessage = inputs[payload.inputName].showError ? payload.errorMessage ?? '' : '';
+    inputs[payload.inputName].timerId = -1;
   }
 
   if (type === ActionTypes.RESET) {
     clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName] = initializeInput(inputs[payload.inputName].config);
+    inputs[payload.inputName] = initializeInput(payload.defaultValue);
   }
 
   if (type === ActionTypes.RESET_FORM) {
     Object.keys(inputs).forEach((inputName) => {
       clearTimeout(inputs[inputName].timerId);
-      inputs[inputName] = initializeInput(inputs[inputName].config);
+      inputs[inputName] = initializeInput(payload?.config !== undefined ? payload.config[payload.inputName].defaultValue : '');
     });
   }
 
@@ -96,58 +98,45 @@ const reducer = (state: State, { type, payload }: Action): State => {
   };
 };
 
-interface Config {
-  inputs: InputConfig[];
-  deboundeDelay?: number;
-}
-
-interface InputConfig {
-  name: string;
-  defaultValue?: string;
-  errorMessage?: string;
-  debounceDelay?: number;
-}
-
 const initializer = (config: Config): State => {
   const state: State = { isFormValid: false, inputs: {} };
 
-  config.inputs.forEach((input) => {
-    input.debounceDelay = input.debounceDelay ?? config.deboundeDelay;
-    state.inputs[input.name] = initializeInput(input);
+  Object.keys(config.inputs).forEach((inputName) => {
+    state.inputs[inputName] = initializeInput(config.inputs[inputName].defaultValue);
   });
 
   return state;
 };
 
 interface Actions {
-  change: (input: HTMLInputElement | HTMLTextAreaElement) => Action;
-  debouncedChange: (input: HTMLInputElement | HTMLTextAreaElement, timerId: number) => Action;
-  blur: (input: HTMLInputElement | HTMLTextAreaElement) => Action;
-  reset: (inputName: string) => Action;
-  revalid: (input: HTMLInputElement | HTMLTextAreaElement) => Action;
-  resetForm: () => Action;
+  change: (input: HTMLInputElement | HTMLTextAreaElement, pattern?: string, errorMessage?: string) => Action;
+  debouncedChange: (input: HTMLInputElement | HTMLTextAreaElement, timerId: number, pattern?: string, errorMessage?: string) => Action;
+  revalid: (input: HTMLInputElement | HTMLTextAreaElement, pattern?: string, errorMessage?: string) => Action;
+  blur: (input: HTMLInputElement | HTMLTextAreaElement, pattern?: string, errorMessage?: string) => Action;
+  reset: (inputName: string, defaultValue?: string) => Action;
+  resetForm: (config: Record<string, InputConfig>) => Action;
 }
 
 const actions: Actions = {
-  change: (input) => ({
+  change: (input, pattern, errorMessage) => ({
     type: ActionTypes.CHANGE,
-    payload: { inputName: input.name, input }
+    payload: { inputName: input.name, input, pattern, errorMessage }
   }),
-  debouncedChange: (input, timerId) => ({
+  debouncedChange: (input, timerId, pattern, errorMessage) => ({
     type: ActionTypes.DEBOUNCED_CHANGE,
-    payload: { inputName: input.name, input, timerId }
+    payload: { inputName: input.name, input, timerId, pattern, errorMessage }
   }),
-  blur: (input) => ({
-    type: ActionTypes.BLUR,
-    payload: { inputName: input.name, input }
-  }),
-  reset: (inputName) => ({
-    type: ActionTypes.RESET,
-    payload: { inputName }
-  }),
-  revalid: (input) => ({
+  revalid: (input, pattern, errorMessage) => ({
     type: ActionTypes.REVALID,
-    payload: { inputName: input.name, input }
+    payload: { inputName: input.name, input, pattern, errorMessage }
+  }),
+  blur: (input, pattern, errorMessage) => ({
+    type: ActionTypes.BLUR,
+    payload: { inputName: input.name, input, pattern, errorMessage }
+  }),
+  reset: (inputName, defaultValue) => ({
+    type: ActionTypes.RESET,
+    payload: { inputName, defaultValue }
   }),
   resetForm: () => ({ type: ActionTypes.RESET_FORM, payload: { inputName: '' } })
 };
@@ -161,6 +150,8 @@ interface Return {
   resetForm: () => void;
 }
 
+const initalDebounceDelay = 1000;
+
 const useForm = (config: Config): Return => {
   const [state, dispatch] = useReducer(
     reducer,
@@ -169,27 +160,27 @@ const useForm = (config: Config): Return => {
   );
 
   const change = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(actions.change(currentTarget));
+    dispatch(actions.change(currentTarget, config.inputs[currentTarget.name].pattern, config.inputs[currentTarget.name].errorMessage));
   }, []);
 
   const debouncedChange = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const timerId = window.setTimeout(() => {
-      dispatch(actions.revalid(currentTarget));
-    }, state.inputs[currentTarget.name].config.debounceDelay);
+      dispatch(actions.revalid(currentTarget, config.inputs[currentTarget.name].pattern, config.inputs[currentTarget.name].errorMessage));
+    }, config.inputs[currentTarget.name].debounceDelay ?? config.deboundeDelay ?? initalDebounceDelay);
 
-    dispatch(actions.debouncedChange(currentTarget, timerId));
+    dispatch(actions.debouncedChange(currentTarget, timerId, config.inputs[currentTarget.name].pattern, config.inputs[currentTarget.name].errorMessage));
   }, []);
 
   const blur: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> = ({ currentTarget }) => {
-    dispatch(actions.blur(currentTarget));
+    dispatch(actions.blur(currentTarget, config.inputs[currentTarget.name].pattern, config.inputs[currentTarget.name].errorMessage));
   };
 
   const reset = useCallback((inputName: string): void => {
-    dispatch(actions.reset(inputName));
+    dispatch(actions.reset(inputName, config.inputs[inputName].defaultValue));
   }, []);
 
   const resetForm = useCallback((): void => {
-    dispatch(actions.resetForm());
+    dispatch(actions.resetForm(config.inputs));
   }, []);
 
   return {
