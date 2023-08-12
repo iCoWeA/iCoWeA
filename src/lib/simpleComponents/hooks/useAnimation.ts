@@ -10,35 +10,29 @@ interface State {
   state: ActionTypes;
   className: string;
   timerId: number;
-  config: {
-    startClassName: string;
-    endClassName: string;
-  }
 }
 
 interface Action {
   type: ActionTypes;
-  payload: { timerId: number }
+  payload: { timerId?: number, className?: string };
 }
 
-const reducer = ({ state, className, timerId, config }: State, { type, payload }: Action): State => {
+const reducer = ({ state, className, timerId }: State, { type, payload }: Action): State => {
   if (type === ActionTypes.START || type === ActionTypes.RESET) {
     clearTimeout(timerId);
-    timerId = payload.timerId;
     state = ActionTypes.START;
-    className = config.startClassName;
+    className = payload.className ?? '';
+    timerId = payload.timerId ?? -1;
   }
 
   if (type === ActionTypes.END) {
-    clearTimeout(payload.timerId);
-    timerId = payload.timerId;
+    clearTimeout(timerId);
     state = ActionTypes.END;
-    className = config.endClassName;
+    className = payload.className ?? '';
+    timerId = payload.timerId ?? -1;
   }
 
-  return {
-    state, className, timerId, config
-  };
+  return { state, className, timerId };
 };
 
 interface Config {
@@ -50,12 +44,20 @@ interface Config {
 const initializer = ({ state = ActionTypes.START, startClassName = '', endClassName = '' }: Config): State => ({
   state,
   className: state === ActionTypes.START ? startClassName : endClassName,
-  timerId: -1,
-  config: {
-    startClassName,
-    endClassName
-  }
+  timerId: -1
 });
+
+interface Actions {
+  start: (timerId: number, className?: string) => Action;
+  end: (className?: string) => Action;
+  reset: (className?: string) => Action;
+}
+
+const actions: Actions = {
+  start: (timerId, className) => ({ type: ActionTypes.START, payload: { timerId, className } }),
+  end: (className) => ({ type: ActionTypes.END, payload: { className } }),
+  reset: (className) => ({ type: ActionTypes.RESET, payload: { className } })
+};
 
 interface Return {
   state: ActionTypes;
@@ -64,22 +66,22 @@ interface Return {
   reset: () => void;
 }
 
-const useAnimation = (transitionConfig: Config = {}): Return => {
+const useAnimation = (config: Config = {}): Return => {
   const [{
     state,
     className
-  }, dispatch] = useReducer(reducer, transitionConfig, initializer);
+  }, dispatch] = useReducer(reducer, config, initializer);
 
   const play = useCallback((duration: number, dispatchStart?: () => void, dispatchEnd?: () => void): void => {
     const timerId = window.setTimeout(() => {
-      dispatch(actions.end());
+      dispatch(actions.end(config.endClassName));
 
       if (dispatchEnd !== undefined) {
         dispatchEnd();
       }
     }, duration);
 
-    dispatch(actions.start(timerId));
+    dispatch(actions.start(timerId, config.startClassName));
 
     if (dispatchStart !== undefined) {
       dispatchStart();
@@ -87,7 +89,7 @@ const useAnimation = (transitionConfig: Config = {}): Return => {
   }, []);
 
   const reset = useCallback((): void => {
-    dispatch(actions.reset());
+    dispatch(actions.reset(config.startClassName));
   }, []);
 
   return {
@@ -96,18 +98,6 @@ const useAnimation = (transitionConfig: Config = {}): Return => {
     play,
     reset
   };
-};
-
-interface Actions {
-  start: (timerId: number) => Action;
-  end: () => Action;
-  reset: () => Action;
-}
-
-const actions: Actions = {
-  start: (timerId) => ({ type: ActionTypes.START, payload: { timerId } }),
-  end: () => ({ type: ActionTypes.END, payload: { timerId: -1 } }),
-  reset: () => ({ type: ActionTypes.RESET, payload: { timerId: -1 } })
 };
 
 export default useAnimation;
