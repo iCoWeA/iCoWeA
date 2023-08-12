@@ -13,23 +13,6 @@ interface Action {
   payload: unknown;
 }
 
-interface Actions {
-  loading: () => Action;
-  success: (payload: unknown) => Action;
-  failed: (payload: unknown) => Action;
-}
-
-interface Return {
-  state: State,
-  send: (url: string, request?: RequestInit) => Promise<void>;
-}
-
-const actions: Actions = {
-  loading: () => ({ type: ActionTypes.LOADING, payload: null }),
-  success: (payload) => ({ type: ActionTypes.SUCCESS, payload }),
-  failed: (payload) => ({ type: ActionTypes.FAILED, payload })
-};
-
 const reducer = ({ data, error, isLoading }: State, { type, payload }: Action): State => {
   if (type === ActionTypes.LOADING) {
     isLoading = true;
@@ -61,6 +44,23 @@ const initialState: State = {
   error: null,
   data: null
 };
+
+interface Actions {
+  loading: () => Action;
+  success: (payload: unknown) => Action;
+  failed: (payload: unknown) => Action;
+}
+
+const actions: Actions = {
+  loading: () => ({ type: ActionTypes.LOADING, payload: null }),
+  success: (payload) => ({ type: ActionTypes.SUCCESS, payload }),
+  failed: (payload) => ({ type: ActionTypes.FAILED, payload })
+};
+
+interface Return {
+  state: State,
+  send: (url: string, request?: RequestInit) => Promise<void>;
+}
 
 const useRequest = (): Return => {
   const [state, dispatch] = useReducer(reducer, initialState);

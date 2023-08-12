@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+const initialTimerId = -1;
+
 interface Return {
   isMounted: boolean;
   isOpen: boolean;
   show: () => void;
   hide: () => void;
 }
-
-const initialTimerId = -1;
 
 const useMount = (open: boolean = false): Return => {
   const timerId = useRef(initialTimerId);

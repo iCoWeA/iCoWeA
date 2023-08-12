@@ -21,31 +21,6 @@ interface Action {
   payload: { timerId: number }
 }
 
-interface Actions {
-  start: (timerId: number) => Action;
-  end: () => Action;
-  reset: () => Action;
-}
-
-interface AnimationConfig {
-  state?: ActionTypes;
-  startClassName?: string;
-  endClassName?: string;
-}
-
-interface Return {
-  state: ActionTypes;
-  className: string;
-  play: (duration: number, dispatchStart?: () => void, dispatchEnd?: () => void) => void;
-  reset: () => void;
-}
-
-const actions: Actions = {
-  start: (timerId) => ({ type: ActionTypes.START, payload: { timerId } }),
-  end: () => ({ type: ActionTypes.END, payload: { timerId: -1 } }),
-  reset: () => ({ type: ActionTypes.RESET, payload: { timerId: -1 } })
-};
-
 const reducer = ({ state, className, timerId, config }: State, { type, payload }: Action): State => {
   if (type === ActionTypes.START || type === ActionTypes.RESET) {
     clearTimeout(timerId);
@@ -66,7 +41,13 @@ const reducer = ({ state, className, timerId, config }: State, { type, payload }
   };
 };
 
-const initializer = ({ state = ActionTypes.START, startClassName = '', endClassName = '' }: AnimationConfig): State => ({
+interface Config {
+  state?: ActionTypes;
+  startClassName?: string;
+  endClassName?: string;
+}
+
+const initializer = ({ state = ActionTypes.START, startClassName = '', endClassName = '' }: Config): State => ({
   state,
   className: state === ActionTypes.START ? startClassName : endClassName,
   timerId: -1,
@@ -76,7 +57,14 @@ const initializer = ({ state = ActionTypes.START, startClassName = '', endClassN
   }
 });
 
-const useAnimation = (transitionConfig: AnimationConfig = {}): Return => {
+interface Return {
+  state: ActionTypes;
+  className: string;
+  play: (duration: number, dispatchStart?: () => void, dispatchEnd?: () => void) => void;
+  reset: () => void;
+}
+
+const useAnimation = (transitionConfig: Config = {}): Return => {
   const [{
     state,
     className
@@ -108,6 +96,18 @@ const useAnimation = (transitionConfig: AnimationConfig = {}): Return => {
     play,
     reset
   };
+};
+
+interface Actions {
+  start: (timerId: number) => Action;
+  end: () => Action;
+  reset: () => Action;
+}
+
+const actions: Actions = {
+  start: (timerId) => ({ type: ActionTypes.START, payload: { timerId } }),
+  end: () => ({ type: ActionTypes.END, payload: { timerId: -1 } }),
+  reset: () => ({ type: ActionTypes.RESET, payload: { timerId: -1 } })
 };
 
 export default useAnimation;
