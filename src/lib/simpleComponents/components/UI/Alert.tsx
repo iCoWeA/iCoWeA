@@ -3,7 +3,8 @@ import React, {
   forwardRef,
   useContext,
   type ReactNode,
-  type ButtonHTMLAttributes
+  type ButtonHTMLAttributes,
+  type MouseEvent
 } from 'react';
 import {
   type AlertColors,
@@ -80,11 +81,24 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     );
 
     /* Set button props */
-    const buttonStyles = styles.button;
-    const { className: buttonClassName, ...restButtonProps } =
-      componentsProps.button ?? {};
-
     if (action === null && onClose !== undefined) {
+      const buttonStyles = styles.button;
+      const {
+        className: buttonClassName,
+        onClick: onButtonClick,
+        ...restButtonProps
+      } = componentsProps.button ?? {};
+
+      const clickButtonHandler = (
+        event: MouseEvent<HTMLButtonElement>
+      ): void => {
+        onClose();
+
+        if (onButtonClick !== undefined) {
+          onButtonClick(event);
+        }
+      };
+
       const mergedButtonClassName = twMerge(
         mergeClasses(
           buttonStyles.base,
@@ -95,7 +109,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
       buttonNode = (
         <button
-          onClick={onClose}
+          onClick={clickButtonHandler}
           className={mergedButtonClassName}
           {...restButtonProps}
         >

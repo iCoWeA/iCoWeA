@@ -3,7 +3,8 @@ import React, {
   forwardRef,
   useContext,
   type ReactNode,
-  type ButtonHTMLAttributes
+  type ButtonHTMLAttributes,
+  type MouseEvent
 } from 'react';
 import {
   type ChipSizes,
@@ -75,8 +76,21 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
     /* Set button props */
     if (action === null && onClose !== undefined) {
       const buttonStyles = styles.button;
-      const { className: buttonClassName, ...restButtonProps } =
-        componentsProps.button ?? {};
+      const {
+        className: buttonClassName,
+        onClick: onButtonClick,
+        ...restButtonProps
+      } = componentsProps.button ?? {};
+
+      const clickButtonHandler = (
+        event: MouseEvent<HTMLButtonElement>
+      ): void => {
+        onClose();
+
+        if (onButtonClick !== undefined) {
+          onButtonClick(event);
+        }
+      };
 
       const mergedButtonClassName = twMerge(
         mergeClasses(
@@ -89,7 +103,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
 
       buttonNode = (
         <button
-          onClick={onClose}
+          onClick={clickButtonHandler}
           className={mergedButtonClassName}
           {...restButtonProps}
         >

@@ -2,7 +2,7 @@ import React, {
   forwardRef,
   type BaseHTMLAttributes,
   useContext,
-  type MouseEventHandler
+  type MouseEvent
 } from 'react';
 import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
@@ -25,7 +25,7 @@ export const Backdrop = forwardRef<HTMLDivElement, BackdropProps>(
 
     invisible = invisible ?? defaultProps.invisible;
 
-    const clickHandler: MouseEventHandler<HTMLDivElement> = (event) => {
+    const clickHandler = (event: MouseEvent<HTMLDivElement>): void => {
       if (onClose !== undefined) {
         onClose();
       }

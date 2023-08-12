@@ -73,7 +73,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
       mergeClasses(barStyles.base, barStyles.colors[theme][color], barClassName)
     );
 
-    const setBarRef: (element: HTMLDivElement) => void = (element) => {
+    const setBarRef = (element: HTMLDivElement): void => {
       if (barRef !== undefined) {
         barRef.current = element;
       }

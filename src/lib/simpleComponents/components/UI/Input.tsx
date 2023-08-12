@@ -6,14 +6,14 @@ import React, {
   type ReactNode,
   type FieldsetHTMLAttributes,
   useState,
-  type FocusEventHandler,
   useEffect,
   type BaseHTMLAttributes,
   type LabelHTMLAttributes,
   useRef,
-  type MouseEventHandler,
   useImperativeHandle,
-  type RefObject
+  type RefObject,
+  type MouseEvent,
+  type FocusEvent
 } from 'react';
 import {
   type InputColors,
@@ -110,7 +110,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       ...restRootProps
     } = componentsProps.root ?? {};
 
-    const rootMouseDownHandler: MouseEventHandler<HTMLDivElement> = (event) => {
+    const rootMouseDownHandler = (event: MouseEvent<HTMLDivElement>): void => {
       event.preventDefault();
       if (
         event.target === rootFocusRef.current ||
@@ -134,7 +134,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
     );
 
     /* Set input props */
-    const focusInputHandler: FocusEventHandler<HTMLInputElement> = (event) => {
+    const focusInputHandler = (event: FocusEvent<HTMLInputElement>): void => {
       setIsShifted(true);
       setIsFocused(true);
 
@@ -143,7 +143,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       }
     };
 
-    const blurInputHandler: FocusEventHandler<HTMLInputElement> = (event) => {
+    const blurInputHandler = (event: FocusEvent<HTMLInputElement>): void => {
       if (event.target.value !== '') {
         setIsFocused(false);
       } else {
@@ -168,7 +168,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       )
     );
 
-    const setInputRef: (element: HTMLInputElement) => void = (element) => {
+    const setInputRef = (element: HTMLInputElement): void => {
       inputFocusRef.current = element;
 
       if (inputRef !== undefined) {

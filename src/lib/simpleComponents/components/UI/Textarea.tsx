@@ -5,15 +5,15 @@ import React, {
   type ReactNode,
   type FieldsetHTMLAttributes,
   useState,
-  type FocusEventHandler,
   useEffect,
   type BaseHTMLAttributes,
   type LabelHTMLAttributes,
   useRef,
-  type MouseEventHandler,
   useImperativeHandle,
   type RefObject,
-  type TextareaHTMLAttributes
+  type TextareaHTMLAttributes,
+  type MouseEvent,
+  type FocusEvent
 } from 'react';
 import {
   type TextAreaColors,
@@ -110,7 +110,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       ...restRootProps
     } = componentsProps.root ?? {};
 
-    const rootMouseDownHandler: MouseEventHandler<HTMLDivElement> = (event) => {
+    const rootMouseDownHandler = (event: MouseEvent<HTMLDivElement>): void => {
       event.preventDefault();
       if (
         event.target === rootFocusRef.current ||
@@ -135,9 +135,9 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
     );
 
     /* Set textarea props */
-    const focusTextAreaHandler: FocusEventHandler<HTMLTextAreaElement> = (
-      event
-    ) => {
+    const focusTextAreaHandler = (
+      event: FocusEvent<HTMLTextAreaElement>
+    ): void => {
       setIsShifted(true);
       setIsFocused(true);
 
@@ -146,9 +146,9 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       }
     };
 
-    const blurTextAreaHandler: FocusEventHandler<HTMLTextAreaElement> = (
-      event
-    ) => {
+    const blurTextAreaHandler = (
+      event: FocusEvent<HTMLTextAreaElement>
+    ): void => {
       if (event.target.value !== '') {
         setIsFocused(false);
       } else {
@@ -172,9 +172,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       )
     );
 
-    const setTextAreaRef: (element: HTMLTextAreaElement) => void = (
-      element
-    ) => {
+    const setTextAreaRef = (element: HTMLTextAreaElement): void => {
       textAreaFocusRef.current = element;
 
       if (textAreaRef !== undefined) {

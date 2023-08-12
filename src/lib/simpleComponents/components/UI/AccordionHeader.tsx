@@ -2,9 +2,9 @@ import React, {
   type ButtonHTMLAttributes,
   forwardRef,
   useContext,
-  type MouseEventHandler,
   type SVGAttributes,
-  type ReactNode
+  type ReactNode,
+  type MouseEvent
 } from 'react';
 import { type AccordionHeaderColors } from '../../configs/accordionHeaderConfig';
 import accordionContext from '../../contexts/accordion';
@@ -49,7 +49,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
-    const rootClickHandler: MouseEventHandler<HTMLButtonElement> = (event) => {
+    const clickRootHandler = (event: MouseEvent<HTMLButtonElement>): void => {
       onToggle();
 
       if (onRootClick !== undefined) {
@@ -87,7 +87,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     return (
       <button
-        onClick={rootClickHandler}
+        onClick={clickRootHandler}
         disabled={isRootDisabled === true || isDisabled}
         className={mergedRootClassName}
         ref={rootRef}

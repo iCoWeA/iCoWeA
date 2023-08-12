@@ -79,7 +79,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
       )
     );
 
-    const setInputRef: (element: HTMLInputElement) => void = (element) => {
+    const setInputRef = (element: HTMLInputElement): void => {
       if (inputRef !== undefined) {
         inputRef.current = element;
       }
