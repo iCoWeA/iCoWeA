@@ -1,7 +1,8 @@
-import { type ListDefaultProps } from '../components/UI/List';
-
 export interface ListConfig {
-  defaultProps: Required<ListDefaultProps>;
+  defaultProps: {
+    row: boolean;
+    disableGap: boolean;
+  };
   styles: {
     base: Record<string, string>;
     row: Record<string, string>;
