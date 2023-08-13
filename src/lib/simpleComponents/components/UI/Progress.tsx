@@ -50,11 +50,10 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     value = value ?? defaultProps.value;
     size = size ?? defaultProps.size;
     color = color ?? defaultProps.color;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const { className: rootClassName, ...restRootProps } =
-      componentsProps.root ?? {};
+      componentsProps?.root ?? defaultProps.componentsProps.root;
 
     const mergedRootClassName = twMerge(
       mergeClasses(
