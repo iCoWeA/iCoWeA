@@ -72,8 +72,6 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       }
     }
 
-    console.log(open, isMounted, isOpen);
-
     const context: AccordionContext = useMemo(
       () => ({
         isMounted,
