@@ -1,20 +1,20 @@
 import React, {
   forwardRef,
   type BaseHTMLAttributes,
-  useMemo,
   useContext,
-  useEffect
+  useMemo
 } from 'react';
 import accordionContext, {
   type AccordionContext
 } from '../../contexts/accordion';
-import themeContext from '../../contexts/theme';
 import usePrevious from '../../hooks/usePrevious';
+import themeContext from '../../contexts/theme';
+import useMount from '../../hooks/useMount';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
-import useMount from '../../hooks/useMount';
 
 export interface AccordionDefaultProps {
+  hideDuration?: number;
   disabled?: boolean;
   unmountOnExit?: boolean;
 }
@@ -23,70 +23,90 @@ export interface AccordionProps
   extends AccordionDefaultProps,
   BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
-  onToggle?: (isOpen: boolean) => void;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
-    { open, onToggle, disabled, unmountOnExit, className, ...restProps },
+    {
+      open,
+      onOpen,
+      onClose,
+      hideDuration,
+      disabled,
+      unmountOnExit,
+      className,
+      ...restProps
+    },
     ref
   ) => {
     const prevOpen = usePrevious(open);
     const { config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordion;
 
+    hideDuration = hideDuration ?? defaultProps.hideDuration;
     disabled = disabled ?? defaultProps.disabled;
     unmountOnExit = unmountOnExit ?? defaultProps.unmountOnExit;
 
     const { isMounted, isOpen, show, hide, unmount } = useMount({
-      open: open ?? false
+      open: open ?? false,
+      hideDuration: hideDuration ?? defaultProps.hideDuration,
+      onOpen,
+      onClose
     });
 
-    useEffect(() => {
-      if (open === true) {
-        show();
-      }
+    if ((!isMounted || !isOpen) && open === true) {
+      show();
+    }
 
-      if (open === false) {
+    if ((isMounted || isOpen) && open === false) {
+      hide();
+    }
+
+    if (prevOpen !== undefined && open === undefined) {
+      if (prevOpen) {
+        show();
+      } else {
         hide();
       }
+    }
 
-      if (prevOpen !== undefined && open === undefined) {
-        if (prevOpen) {
-          show();
-        } else {
-          hide();
-        }
-      }
-    }, [open]);
+    console.log(open, isMounted, isOpen);
 
     const context: AccordionContext = useMemo(
       () => ({
         isMounted,
         isOpen,
+        hideDuration: hideDuration ?? defaultProps.hideDuration,
         isDisabled: disabled ?? defaultProps.disabled,
         unmountOnExit: unmountOnExit ?? defaultProps.unmountOnExit,
         unmount,
         onToggle: () => {
-          if (open === undefined && isOpen) {
-            hide();
-          }
-
           if (open === undefined && !isOpen) {
             show();
           }
+
+          if (open === undefined && isOpen) {
+            hide();
+          }
         }
       }),
-      [isMounted, isOpen, disabled, unmountOnExit, unmount, onToggle]
+      [
+        isMounted,
+        isOpen,
+        hideDuration,
+        disabled,
+        unmountOnExit,
+        unmount,
+        open,
+        show,
+        hide
+      ]
     );
 
     const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        isOpen && styles.open,
-        disabled && styles.disabled,
-        className
-      )
+      mergeClasses(styles.base, disabled && styles.disabled, className)
     );
 
     return (
