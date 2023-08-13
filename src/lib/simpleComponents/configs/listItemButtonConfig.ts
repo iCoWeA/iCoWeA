@@ -1,11 +1,14 @@
-import { type ListItemButtonDefaultProps } from '../components/UI/ListItemButton';
-
 export type ListItemButtonVariant = 'standard' | 'filled';
 export type ListItemButtonSizes = 'sm' | 'md' | 'lg';
 export type ListItemButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface ListItemButtonConfig {
-  defaultProps: Required<ListItemButtonDefaultProps>;
+  defaultProps: {
+    variant: ListItemButtonVariant;
+    size: ListItemButtonSizes;
+    color: ListItemButtonColors;
+    selected: boolean;
+  };
   styles: {
     base: Record<string, string>;
     sizes: Record<ListItemButtonSizes, Record<string, string>>;
