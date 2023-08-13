@@ -4,13 +4,9 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface ContainerDefaultProps {
+export interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ContainerVariants;
 }
-
-export interface ContainerProps
-  extends ContainerDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {}
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>(
   ({ variant, className, ...restProps }, ref) => {

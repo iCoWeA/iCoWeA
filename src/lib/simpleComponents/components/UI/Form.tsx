@@ -7,11 +7,9 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface FormDefaultProps {
+interface FormProps extends BaseFormProps {
   columns?: boolean;
 }
-
-interface FormProps extends FormDefaultProps, BaseFormProps {}
 
 const Form = forwardRef<HTMLFormElement, FormProps>(
   ({ columns, className, ...restProps }, ref) => {
