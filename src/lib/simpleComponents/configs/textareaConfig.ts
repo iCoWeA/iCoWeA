@@ -1,10 +1,25 @@
-import { type TextAreaDefaultProps } from '../components/UI/TextArea';
+import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes, type ReactNode } from 'react';
 
 export type TextAreaVariants = 'outlined' | 'filled' | 'standard';
 export type TextAreaColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface TextAreaConfig {
-  defaultProps: Required<TextAreaDefaultProps>;
+  defaultProps: {
+    variant: TextAreaVariants;
+    color: TextAreaColors;
+    valid: boolean;
+    invalid: boolean;
+    label: ReactNode;
+    startAdornment: ReactNode;
+    endAdornment: ReactNode;
+    labelPosition: string;
+    componentsProps: {
+      root: BaseHTMLAttributes<HTMLDivElement>;
+      container: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+      legend: BaseHTMLAttributes<HTMLLegendElement>;
+      label: LabelHTMLAttributes<HTMLLabelElement>;
+    };
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -48,7 +63,12 @@ const textAreaConfig: TextAreaConfig = {
     startAdornment: null,
     endAdornment: null,
     labelPosition: '',
-    componentsProps: {}
+    componentsProps: {
+      root: {},
+      container: {},
+      legend: {},
+      label: {}
+    }
   },
   styles: {
     root: {

@@ -85,7 +85,6 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
     label = label ?? defaultProps.label;
     startAdornment = startAdornment ?? defaultProps.startAdornment;
     endAdornment = endAdornment ?? defaultProps.endAdornment;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     useImperativeHandle(rootRef, () => rootFocusRef, []);
 
@@ -108,7 +107,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       className: rootClassName,
       onMouseDown: onRootMouseDown,
       ...restRootProps
-    } = componentsProps.root ?? {};
+    } = componentsProps?.root ?? defaultProps.componentsProps.root;
 
     const rootMouseDownHandler = (event: MouseEvent<HTMLDivElement>): void => {
       event.preventDefault();
@@ -185,7 +184,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       className: containerClassName,
       disabled: containerDisabled,
       ...restContainerProps
-    } = componentsProps.container ?? {};
+    } = componentsProps?.container ?? defaultProps.componentsProps.container;
 
     const mergedContainerClassName = twMerge(
       mergeClasses(
@@ -206,7 +205,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
     if (label !== null) {
       const labelStyles = styles.label;
       const { className: labelClassName, ...restLabelProps } =
-        componentsProps.label ?? {};
+        componentsProps?.label ?? defaultProps.componentsProps.label;
 
       const mergedLabelClassName = twMerge(
         mergeClasses(
@@ -236,7 +235,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
     if (label !== null && variant === 'outlined') {
       const legendStyles = styles.legend;
       const { className: legendClassName, ...restLegendProps } =
-        componentsProps.legend ?? {};
+        componentsProps?.legend ?? defaultProps.componentsProps.legend;
 
       const mergedLegendClassName = twMerge(
         mergeClasses(legendStyles.base, legendClassName)
