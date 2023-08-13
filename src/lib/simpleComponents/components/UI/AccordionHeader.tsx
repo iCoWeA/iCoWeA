@@ -35,7 +35,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     },
     rootRef
   ) => {
-    const { state, isDisabled, duration, onToggle } =
+    const { state, isDisabled, duration, onClick } =
       useContext(accordionContext);
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordionHeader;
@@ -47,7 +47,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     /* Set root props */
     const clickRootHandler = (event: MouseEvent<HTMLButtonElement>): void => {
-      onToggle();
+      onClick();
 
       if (onRootClick !== undefined) {
         onRootClick(event);
