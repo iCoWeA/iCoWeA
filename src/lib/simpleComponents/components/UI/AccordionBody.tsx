@@ -8,17 +8,14 @@ import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
+import { States } from '../../hooks/useMount';
 
-export interface AccordionBodyDefaultProps {
+export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
   componentsProps?: {
     root?: BaseHTMLAttributes<HTMLDivElement>;
     container?: BaseHTMLAttributes<HTMLDivElement>;
   };
 }
-
-export interface AccordionBodyProps
-  extends AccordionBodyDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {}
 
 const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
   (
@@ -30,20 +27,12 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     },
     rootRef
   ) => {
-    const { isMounted, isOpen, transitionDuration, unmountOnExit, unmount } =
-      useContext(accordionContext);
+    const { state, duration, onExit } = useContext(accordionContext);
     const { config } = useContext(themeContext);
-
-    if (unmountOnExit && !isMounted) {
-      return <></>;
-    }
-
     const { defaultProps, styles } = config.accordionBody;
     const rootStyles = styles.root;
     const containerStyles = styles.constainer;
     const bodyStyles = styles.body;
-
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const {
@@ -51,14 +40,12 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
       style: rootStyle,
       className: rootClassName,
       ...restRootProps
-    } = componentsProps.root ?? {};
+    } = componentsProps?.root ?? defaultProps.componentsProps.root;
 
     const transitionEndRootHandler = (
       event: TransitionEvent<HTMLDivElement>
     ): void => {
-      if (unmountOnExit && !isOpen) {
-        unmount();
-      }
+      onExit();
 
       if (onRootTransitionEnd !== undefined) {
         onRootTransitionEnd(event);
@@ -66,17 +53,22 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     };
 
     const mergedRootStyle = mergeStyles(
-      { transitionDuration: `${transitionDuration}ms` },
+      { transitionDuration: `${duration}ms` },
       rootStyle
     );
 
     const mergedRootClassName = twMerge(
-      mergeClasses(rootStyles.base, isOpen && rootStyles.open, rootClassName)
+      mergeClasses(
+        rootStyles.base,
+        (state === States.ENTERING || state === States.ENTERED) &&
+          rootStyles.open,
+        rootClassName
+      )
     );
 
     /* Set container props */
     const { className: containerClassName, ...restContainerProps } =
-      componentsProps.container ?? {};
+      componentsProps?.container ?? defaultProps.componentsProps.container;
 
     const mergedContainerClassName = twMerge(
       mergeClasses(containerStyles.base, containerClassName)
