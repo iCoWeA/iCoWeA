@@ -68,10 +68,16 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
     const rootFocusRef = useRef<HTMLDivElement>(null);
     const textAreaFocusRef = useRef<HTMLTextAreaElement | null>(null);
     const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.textArea;
-    const rootStyles = styles.root;
-    const containerStyles = styles.container;
-    const textAreaStyles = styles.textArea;
+    const {
+      defaultProps,
+      styles: {
+        root: rootStyles,
+        container: containerStyles,
+        textArea: textAreaStyles,
+        label: labelStyles,
+        legend: legendStyles
+      }
+    } = config.textArea;
     let labelNode: ReactNode;
 
     variant = variant ?? defaultProps.variant;
@@ -199,7 +205,6 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
 
     /* Set label props */
     if (label !== null) {
-      const labelStyles = styles.label;
       const { className: labelClassName, ...restLabelProps } =
         componentsProps?.label ?? defaultProps.componentsProps.label;
 
@@ -229,7 +234,6 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
 
     /* Set legend props */
     if (label !== null && variant === 'outlined') {
-      const legendStyles = styles.legend;
       const { className: legendClassName, ...restLegendProps } =
         componentsProps?.legend ?? defaultProps.componentsProps.legend;
 

@@ -38,9 +38,10 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     rootRef
   ) => {
     const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.progress;
-    const rootStyles = styles.root;
-    const barStyles = styles.bar;
+    const {
+      defaultProps,
+      styles: { root: rootStyles, bar: barStyles }
+    } = config.progress;
 
     value = value ?? defaultProps.value;
     size = size ?? defaultProps.size;

@@ -67,10 +67,16 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
     const rootFocusRef = useRef<HTMLDivElement>(null);
     const inputFocusRef = useRef<HTMLInputElement | null>(null);
     const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.input;
-    const rootStyles = styles.root;
-    const containerStyles = styles.container;
-    const inputStyles = styles.input;
+    const {
+      defaultProps,
+      styles: {
+        root: rootStyles,
+        container: containerStyles,
+        input: inputStyles,
+        label: labelStyles,
+        legend: legendStyles
+      }
+    } = config.input;
     let labelNode: ReactNode;
 
     variant = variant ?? defaultProps.variant;
@@ -194,7 +200,6 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
 
     /* Set label props */
     if (label !== null) {
-      const labelStyles = styles.label;
       const { className: labelClassName, ...restLabelProps } =
         componentsProps?.label ?? defaultProps.componentsProps.label;
 
@@ -224,7 +229,6 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
 
     /* Set legend props */
     if (label !== null && variant === 'outlined') {
-      const legendStyles = styles.legend;
       const { className: legendClassName, ...restLegendProps } =
         componentsProps?.legend ?? defaultProps.componentsProps.legend;
 

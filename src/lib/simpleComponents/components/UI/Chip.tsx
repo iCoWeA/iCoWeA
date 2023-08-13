@@ -44,8 +44,10 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
     rootRef
   ) => {
     const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.chip;
-    const rootStyles = styles.root;
+    const {
+      defaultProps,
+      styles: { root: rootStyles, button: buttonStyles }
+    } = config.chip;
     let buttonNode: ReactNode;
 
     variant = variant ?? defaultProps.variant;
@@ -69,7 +71,6 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
 
     /* Set button props */
     if (action === null && onClose !== undefined) {
-      const buttonStyles = styles.button;
       const {
         className: buttonClassName,
         onClick: onButtonClick,
