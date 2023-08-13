@@ -30,7 +30,7 @@ interface Action {
 
 interface Config {
   inputs: Record<string, InputConfig>
-  deboundeDelay?: number;
+  debounceDelay?: number;
 }
 
 interface Actions {
@@ -155,6 +155,7 @@ const actions: Actions = {
 const initalDebounceDelay = 1000;
 
 const useForm = (config: Config): Return => {
+  const { inputs, debounceDelay } = config;
   const [state, dispatch] = useReducer(
     reducer,
     config,
@@ -162,27 +163,27 @@ const useForm = (config: Config): Return => {
   );
 
   const change = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(actions.change(currentTarget, config.inputs[currentTarget.name].pattern, config.inputs[currentTarget.name].errorMessage));
+    dispatch(actions.change(currentTarget, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
   }, []);
 
   const debouncedChange = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const timerId = window.setTimeout(() => {
-      dispatch(actions.revalid(currentTarget, config.inputs[currentTarget.name].pattern, config.inputs[currentTarget.name].errorMessage));
-    }, config.inputs[currentTarget.name].debounceDelay ?? config.deboundeDelay ?? initalDebounceDelay);
+      dispatch(actions.revalid(currentTarget, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
+    }, inputs[currentTarget.name].debounceDelay ?? debounceDelay ?? initalDebounceDelay);
 
-    dispatch(actions.debouncedChange(currentTarget, timerId, config.inputs[currentTarget.name].pattern, config.inputs[currentTarget.name].errorMessage));
+    dispatch(actions.debouncedChange(currentTarget, timerId, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
   }, []);
 
   const blur = useCallback(({ currentTarget }: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(actions.blur(currentTarget, config.inputs[currentTarget.name].pattern, config.inputs[currentTarget.name].errorMessage));
+    dispatch(actions.blur(currentTarget, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
   }, []);
 
   const reset = useCallback((inputName: string): void => {
-    dispatch(actions.reset(inputName, config.inputs[inputName].defaultValue));
+    dispatch(actions.reset(inputName, inputs[inputName].defaultValue));
   }, []);
 
   const resetForm = useCallback((): void => {
-    dispatch(actions.resetForm(config.inputs));
+    dispatch(actions.resetForm(inputs));
   }, []);
 
   return {

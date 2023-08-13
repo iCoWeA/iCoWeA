@@ -7,6 +7,8 @@ interface Config {
   showDelay?: number;
   hideDelay?: number;
   hideDuration?: number;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
 
 interface Return {
@@ -17,16 +19,20 @@ interface Return {
   unmount: () => void;
 }
 
-const useMount = (config: Config = {}): Return => {
+const useMount = ({ open, showDelay, hideDelay, hideDuration, onOpen, onClose }: Config = {}): Return => {
   const timerId = useRef(initialTimerId);
-  const [isMounted, setIsMounted] = useState(config.open ?? false);
+  const [isMounted, setIsMounted] = useState(open ?? false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (isMounted) {
       timerId.current = window.setTimeout(() => {
         setIsOpen(true);
-      }, config.showDelay ?? 0);
+
+        if (onOpen !== undefined) {
+          onOpen();
+        }
+      }, showDelay ?? 0);
     }
   }, [isMounted]);
 
@@ -36,7 +42,11 @@ const useMount = (config: Config = {}): Return => {
     if (isMounted) {
       timerId.current = window.setTimeout(() => {
         setIsOpen(true);
-      }, config.showDelay ?? 0);
+
+        if (onOpen !== undefined) {
+          onOpen();
+        }
+      }, showDelay ?? 0);
     } else {
       setIsMounted(true);
     }
@@ -48,16 +58,24 @@ const useMount = (config: Config = {}): Return => {
     timerId.current = window.setTimeout(() => {
       timerId.current = window.setTimeout(() => {
         setIsMounted(false);
-      }, config.hideDuration ?? 0);
+      }, hideDuration ?? 0);
 
       setIsOpen(false);
-    }, config.hideDelay ?? 0);
+
+      if (onClose !== undefined) {
+        onClose();
+      }
+    }, hideDelay ?? 0);
   }, []);
 
   const unmount = useCallback(() => {
     clearTimeout(timerId.current);
     setIsOpen(false);
     setIsMounted(false);
+
+    if (onClose !== undefined) {
+      onClose();
+    }
   }, []);
 
   return {

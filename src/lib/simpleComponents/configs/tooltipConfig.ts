@@ -22,7 +22,7 @@ export interface TooltipConfig {
 
 const tooltipConfig: TooltipConfig = {
   defaultProps: {
-    position: 'top',
+    position: 'bottom',
     color: 'default',
     spacing: 1,
     arrow: false,

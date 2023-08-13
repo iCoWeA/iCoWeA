@@ -71,17 +71,18 @@ const useAnimation = (config: Config = {}): Return => {
     state,
     className
   }, dispatch] = useReducer(reducer, config, initializer);
+  const { startClassName, endClassName } = config;
 
   const play = useCallback((duration: number, dispatchStart?: () => void, dispatchEnd?: () => void): void => {
     const timerId = window.setTimeout(() => {
-      dispatch(actions.end(config.endClassName));
+      dispatch(actions.end(endClassName));
 
       if (dispatchEnd !== undefined) {
         dispatchEnd();
       }
     }, duration);
 
-    dispatch(actions.start(timerId, config.startClassName));
+    dispatch(actions.start(timerId, startClassName));
 
     if (dispatchStart !== undefined) {
       dispatchStart();
@@ -89,7 +90,7 @@ const useAnimation = (config: Config = {}): Return => {
   }, []);
 
   const reset = useCallback((): void => {
-    dispatch(actions.reset(config.startClassName));
+    dispatch(actions.reset(startClassName));
   }, []);
 
   return {
