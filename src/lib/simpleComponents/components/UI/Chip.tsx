@@ -15,7 +15,7 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface ChipDefaultProps {
+interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ChipVariants;
   size?: ChipSizes;
   color?: ChipColors;
@@ -24,24 +24,19 @@ export interface ChipDefaultProps {
   componentsProps?: {
     button?: ButtonHTMLAttributes<HTMLButtonElement>;
   };
-}
-
-interface ChipProps
-  extends ChipDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 }
 
 const Chip = forwardRef<HTMLDivElement, ChipProps>(
   (
     {
-      onClose,
       variant,
       size,
       color,
       invisible,
       action,
       componentsProps,
+      onClose,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps

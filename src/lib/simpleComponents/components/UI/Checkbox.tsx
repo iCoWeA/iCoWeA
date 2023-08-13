@@ -12,7 +12,7 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface CheckboxDefaultProps {
+export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   color?: CheckboxColors;
   valid?: boolean;
   invalid?: boolean;
@@ -21,11 +21,6 @@ export interface CheckboxDefaultProps {
     root?: BaseHTMLAttributes<HTMLDivElement>;
     icon?: SVGAttributes<SVGSVGElement>;
   };
-}
-
-export interface CheckboxProps
-  extends CheckboxDefaultProps,
-  InputHTMLAttributes<HTMLInputElement> {
   inputRef?: MutableRefObject<HTMLInputElement | undefined>;
 }
 

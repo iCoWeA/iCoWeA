@@ -3,14 +3,10 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface CardBodyDefaultProps {
+export interface CardBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
   columns?: boolean;
   fullwidht?: boolean;
 }
-
-export interface CardBodyProps
-  extends CardBodyDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {}
 
 const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
   ({ columns, fullwidht, className, ...restProps }, ref) => {
