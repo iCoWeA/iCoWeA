@@ -4,15 +4,14 @@ export interface AccordionConfig {
   defaultProps: Required<AccordionDefaultProps>;
   styles: {
     base: Record<string, string>;
-    open: Record<string, string>;
     disabled: Record<string, string>;
   }
 }
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
-    disabled: false,
     hideDuration: 250,
+    disabled: false,
     unmountOnExit: false
   },
   styles: {
@@ -20,11 +19,7 @@ const accordionConfig: AccordionConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       width: 'w-full',
-      group: 'group',
       focus: 'focus:outline-0'
-    },
-    open: {
-      group: 'open'
     },
     disabled: {
       opacity: 'opacity-50',
