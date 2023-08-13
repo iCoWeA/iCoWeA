@@ -1,9 +1,15 @@
-import { type AccordionHeaderDefaultProps } from '../components/UI/AccordionHeader';
+import { type SVGAttributes } from 'react';
 
 export type AccordionHeaderColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface AccordionHeaderConfig {
-  defaultProps: Required<AccordionHeaderDefaultProps>;
+  defaultProps: {
+    color: AccordionHeaderColors;
+    icon: boolean;
+    componentsProps: {
+      icon: SVGAttributes<SVGSVGElement>;
+    };
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -20,7 +26,9 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
   defaultProps: {
     color: 'default',
     icon: true,
-    componentsProps: {}
+    componentsProps: {
+      icon: {}
+    }
   },
   styles: {
     root: {

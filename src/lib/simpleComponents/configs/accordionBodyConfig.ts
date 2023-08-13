@@ -1,7 +1,12 @@
-import { type AccordionBodyDefaultProps } from '../components/UI/AccordionBody';
+import { type BaseHTMLAttributes } from 'react';
 
 export interface AccordionBodyConfig {
-  defaultProps: Required<AccordionBodyDefaultProps>;
+  defaultProps: {
+    componentsProps: {
+      root: BaseHTMLAttributes<HTMLDivElement>;
+      container: BaseHTMLAttributes<HTMLDivElement>;
+    };
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -18,7 +23,10 @@ export interface AccordionBodyConfig {
 
 const accordionBodyConfig: AccordionBodyConfig = {
   defaultProps: {
-    componentsProps: {}
+    componentsProps: {
+      root: {},
+      container: {}
+    }
   },
   styles: {
     root: {
