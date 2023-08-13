@@ -7,10 +7,10 @@ import React, {
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
-import { mergeClasses } from '../../utils/styleHelper';
+import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
 export interface AccordionBodyDefaultProps {
-  componentsProps: {
+  componentsProps?: {
     root?: BaseHTMLAttributes<HTMLDivElement>;
     container?: BaseHTMLAttributes<HTMLDivElement>;
   };
@@ -30,7 +30,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     },
     rootRef
   ) => {
-    const { isMounted, isOpen, unmountOnExit, unmount } =
+    const { isMounted, isOpen, hideDuration, unmountOnExit, unmount } =
       useContext(accordionContext);
     const { config } = useContext(themeContext);
 
@@ -47,8 +47,9 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
 
     /* Set root props */
     const {
-      className: rootClassName,
       onTransitionEnd: onRootTransitionEnd,
+      style: rootStyle,
+      className: rootClassName,
       ...restRootProps
     } = componentsProps.root ?? {};
 
@@ -63,6 +64,11 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
         onRootTransitionEnd(event);
       }
     };
+
+    const mergedRootStyle = mergeStyles(
+      { transitionDuration: `${hideDuration}ms` },
+      rootStyle
+    );
 
     const mergedRootClassName = twMerge(
       mergeClasses(rootStyles.base, isOpen && rootStyles.open, rootClassName)
@@ -84,6 +90,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     return (
       <div
         onTransitionEnd={transitionEndRootHandler}
+        style={mergedRootStyle}
         className={mergedRootClassName}
         ref={rootRef}
         {...restRootProps}
