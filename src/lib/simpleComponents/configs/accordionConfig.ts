@@ -11,7 +11,8 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
-    disabled: false
+    disabled: false,
+    unmountOnExit: false
   },
   styles: {
     base: {

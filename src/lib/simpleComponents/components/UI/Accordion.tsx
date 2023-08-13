@@ -16,6 +16,7 @@ import { mergeClasses } from '../../utils/styleHelper';
 
 export interface AccordionDefaultProps {
   disabled?: boolean;
+  unmountOnExit?: boolean;
 }
 
 export interface AccordionProps
@@ -26,12 +27,16 @@ export interface AccordionProps
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
-  ({ open, disabled, onToggle, className, ...restProps }, ref) => {
+  (
+    { open, onToggle, disabled, unmountOnExit, className, ...restProps },
+    ref
+  ) => {
     const prevOpen = usePrevious(open);
     const { config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordion;
 
     disabled = disabled ?? defaultProps.disabled;
+    unmountOnExit = unmountOnExit ?? defaultProps.unmountOnExit;
 
     const [isOpen, setIsOpen] = useState(open ?? false);
 
@@ -45,6 +50,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       () => ({
         isOpen: open ?? isOpen,
         isDisabled: disabled ?? defaultProps.disabled,
+        unmountOnExit: unmountOnExit ?? defaultProps.unmountOnExit,
         onToggle: () => {
           if (open === undefined) {
             setIsOpen((isOpen) => !isOpen);
