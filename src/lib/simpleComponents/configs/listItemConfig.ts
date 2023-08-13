@@ -1,10 +1,12 @@
-import { type ListItemDefaultProps } from '../components/UI/ListItem';
-
 export type ListItemSizes = 'sm' | 'md' | 'lg';
 export type ListItemColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface ListItemConfig {
-  defaultProps: Required<ListItemDefaultProps>;
+  defaultProps: {
+    size: ListItemSizes;
+    color: ListItemColors;
+    disablePadding: boolean;
+  };
   styles: {
     base: Record<string, string>;
     disablePadding: Record<string, string>;
