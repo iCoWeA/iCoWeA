@@ -10,19 +10,15 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface BreadcrumbsDefaultProps {
+export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLUListElement> {
   separator?: ReactNode;
   color?: BreadcrumbsColors;
   fullwidth?: boolean;
-  componentsProps: {
+  componentsProps?: {
     items?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
     separators?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
   };
 }
-
-export interface BreadcrumbsProps
-  extends BreadcrumbsDefaultProps,
-  BaseHTMLAttributes<HTMLUListElement> {}
 
 const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>(
   (

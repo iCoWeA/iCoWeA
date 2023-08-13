@@ -7,17 +7,13 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface BadgeDefaultProps {
+export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
   position?: { vertical: 'top' | 'bottom'; horizontal: 'left' | 'right' };
   color?: BadgeColors;
   withBorder?: boolean;
   borderColor?: BadgeBorderColors;
   invisible?: boolean;
 }
-
-export interface BadgeProps
-  extends BadgeDefaultProps,
-  BaseHTMLAttributes<HTMLSpanElement> {}
 
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   (

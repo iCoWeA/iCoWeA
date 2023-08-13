@@ -4,15 +4,11 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface CardDefaultProps {
+export interface CardProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: CardVariants;
   color?: CardColors;
   elevated?: boolean;
 }
-
-export interface CardProps
-  extends CardDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {}
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ variant, color, elevated, className, ...restProps }, ref) => {

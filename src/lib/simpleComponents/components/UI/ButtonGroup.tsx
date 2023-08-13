@@ -14,17 +14,13 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { isLast, mergeClasses } from '../../utils/styleHelper';
 
-export interface ButtonGroupDefaultProps {
+export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ButtonGroupVariants;
   size?: ButtonGroupSizes;
   color?: ButtonGroupColors;
   elevated?: boolean;
   fullwidth?: boolean;
 }
-
-export interface ButtonGroupProps
-  extends ButtonGroupDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {}
 
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
   (
