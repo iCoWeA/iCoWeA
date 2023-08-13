@@ -14,7 +14,7 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface AlertDefaultProps {
+interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: AlertVariants;
   color?: AlertColors;
   invisible?: boolean;
@@ -24,24 +24,19 @@ export interface AlertDefaultProps {
     body?: BaseHTMLAttributes<HTMLDivElement>;
     button?: ButtonHTMLAttributes<HTMLButtonElement>;
   };
-}
-
-interface AlertProps
-  extends AlertDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 }
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
-      onClose,
       variant,
       color,
       invisible,
       icon,
       action,
       componentsProps,
+      onClose,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps

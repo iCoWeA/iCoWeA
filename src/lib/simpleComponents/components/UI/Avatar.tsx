@@ -8,16 +8,12 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface AvatarDefaultProps {
+interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   variant?: AvatarVariants;
   size?: AvatarSizes;
   color?: AvatarColors;
   withBorder?: boolean;
 }
-
-interface AvatarProps
-  extends AvatarDefaultProps,
-  ImgHTMLAttributes<HTMLImageElement> {}
 
 const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
   ({ variant, size, color, withBorder, className, ...restProps }, ref) => {
