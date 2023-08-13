@@ -39,6 +39,8 @@ export interface TooltipProps
   TooltipDefaultProps {
   open?: boolean;
   anchorElem?: RefObject<Element> | MutableRefObject<Element>;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
@@ -46,6 +48,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     {
       open,
       anchorElem,
+      onOpen,
+      onClose,
       position,
       color,
       spacing,
@@ -75,24 +79,24 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       open: open ?? false,
       hideDuration,
       showDelay,
-      hideDelay
+      hideDelay,
+      onOpen,
+      onClose
     });
 
-    useEffect(() => {
-      if (open === true) {
-        show();
-      }
+    if ((!isMounted || !isOpen) && open === true) {
+      show();
+    }
 
-      if (open === false) {
+    if ((isMounted || isOpen) && open === false) {
+      hide();
+    }
+
+    if (prevOpen !== undefined && open === undefined) {
+      if (!isHovered.current) {
         hide();
       }
-
-      if (prevOpen !== undefined && open === undefined) {
-        if (!isHovered.current) {
-          hide();
-        }
-      }
-    }, [open]);
+    }
 
     useEffect(() => {
       if (anchorElem?.current !== undefined) {
@@ -120,7 +124,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           anchorElem.current?.removeEventListener('mouseleave', hideHandler);
         };
       }
-    }, [open, isMounted]);
+    }, [open, show, hide]);
 
     if (anchorElem === undefined || !isMounted) {
       return <></>;
