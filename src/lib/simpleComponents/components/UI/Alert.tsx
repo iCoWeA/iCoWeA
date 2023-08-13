@@ -20,11 +20,11 @@ interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   invisible?: boolean;
   icon?: ReactNode;
   action?: ReactNode;
+  onClose?: () => void;
   componentsProps?: {
     body?: BaseHTMLAttributes<HTMLDivElement>;
     button?: ButtonHTMLAttributes<HTMLButtonElement>;
   };
-  onClose?: () => void;
 }
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
@@ -35,8 +35,8 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       invisible,
       icon,
       action,
-      componentsProps,
       onClose,
+      componentsProps,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps

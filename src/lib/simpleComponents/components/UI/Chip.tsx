@@ -21,10 +21,10 @@ interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: ChipColors;
   invisible?: boolean;
   action?: ReactNode;
+  onClose?: () => void;
   componentsProps?: {
     button?: ButtonHTMLAttributes<HTMLButtonElement>;
   };
-  onClose?: () => void;
 }
 
 const Chip = forwardRef<HTMLDivElement, ChipProps>(
@@ -35,8 +35,8 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
       color,
       invisible,
       action,
-      componentsProps,
       onClose,
+      componentsProps,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps
