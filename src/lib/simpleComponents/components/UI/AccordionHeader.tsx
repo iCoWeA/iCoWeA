@@ -10,7 +10,7 @@ import { type AccordionHeaderColors } from '../../configs/accordionHeaderConfig'
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
-import { mergeClasses } from '../../utils/styleHelper';
+import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
 export interface AccordionHeaderDefaultProps {
   color?: AccordionHeaderColors;
@@ -38,7 +38,8 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     },
     rootRef
   ) => {
-    const { isOpen, isDisabled, onToggle } = useContext(accordionContext);
+    const { isOpen, isDisabled, transitionDuration, onToggle } =
+      useContext(accordionContext);
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordionHeader;
     const rootStyles = styles.root;
@@ -68,8 +69,16 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     /* Set icon props */
     if (icon) {
       const iconStyles = styles.icon;
-      const { className: iconClassName, ...restIconProps } =
-        componentsProps.icon ?? {};
+      const {
+        style: iconStyle,
+        className: iconClassName,
+        ...restIconProps
+      } = componentsProps.icon ?? {};
+
+      const mergedIconStyle = mergeStyles(
+        { transitionDuration: `${transitionDuration}ms` },
+        iconStyle
+      );
 
       const mergedIconClassName = twMerge(
         mergeClasses(iconStyles.base, isOpen && iconStyles.open, iconClassName)
@@ -77,6 +86,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
       iconNode = (
         <svg
+          style={mergedIconStyle}
           className={mergedIconClassName}
           {...restIconProps}
         >
