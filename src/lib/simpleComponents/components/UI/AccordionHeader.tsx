@@ -11,18 +11,15 @@ import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
+import { States } from '../../hooks/useMount';
 
-export interface AccordionHeaderDefaultProps {
+interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: AccordionHeaderColors;
   icon?: boolean;
   componentsProps?: {
     icon?: SVGAttributes<SVGSVGElement>;
   };
 }
-
-interface AccordionHeaderProps
-  extends AccordionHeaderDefaultProps,
-  ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
   (
@@ -38,7 +35,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     },
     rootRef
   ) => {
-    const { isOpen, isDisabled, transitionDuration, onToggle } =
+    const { state, isDisabled, duration, onToggle } =
       useContext(accordionContext);
     const { theme, config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordionHeader;
@@ -47,7 +44,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     color = color ?? defaultProps.color;
     icon = icon ?? defaultProps.icon;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const clickRootHandler = (event: MouseEvent<HTMLButtonElement>): void => {
@@ -73,15 +69,20 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         style: iconStyle,
         className: iconClassName,
         ...restIconProps
-      } = componentsProps.icon ?? {};
+      } = componentsProps?.icon ?? defaultProps.componentsProps.icon;
 
       const mergedIconStyle = mergeStyles(
-        { transitionDuration: `${transitionDuration}ms` },
+        { transitionDuration: `${duration}ms` },
         iconStyle
       );
 
       const mergedIconClassName = twMerge(
-        mergeClasses(iconStyles.base, isOpen && iconStyles.open, iconClassName)
+        mergeClasses(
+          iconStyles.base,
+          (state === States.ENTERING || state === States.ENTERED) &&
+            iconStyles.open,
+          iconClassName
+        )
       );
 
       iconNode = (
