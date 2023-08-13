@@ -8,17 +8,14 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface TypographyDefaultProps {
+export interface TypographyProps
+  extends BaseHTMLAttributes<
+  HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement
+  > {
   variant?: TypographyVariants;
   align?: TypographyAligns;
   color?: TypographyColors;
 }
-
-export interface TypographyProps
-  extends TypographyDefaultProps,
-  BaseHTMLAttributes<
-  HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement
-  > {}
 
 const Typography = forwardRef<
 HTMLParagraphElement | HTMLHeadingElement,
