@@ -1,10 +1,25 @@
-import { type InputDefaultProps } from '../components/UI/Input';
+import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes, type ReactNode } from 'react';
 
 export type InputVariants = 'outlined' | 'filled' | 'standard';
 export type InputColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface InputConfig {
-  defaultProps: Required<InputDefaultProps>;
+  defaultProps: {
+    variant: InputVariants;
+    color: InputColors;
+    valid: boolean;
+    invalid: boolean;
+    label: ReactNode;
+    startAdornment: ReactNode;
+    endAdornment: ReactNode;
+    labelPosition: string;
+    componentsProps: {
+      root: BaseHTMLAttributes<HTMLDivElement>;
+      container: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+      legend: BaseHTMLAttributes<HTMLLegendElement>;
+      label: LabelHTMLAttributes<HTMLLabelElement>;
+    }
+  },
   styles: {
     root: {
       base: Record<string, string>;
@@ -48,7 +63,12 @@ const inputConfig: InputConfig = {
     startAdornment: null,
     endAdornment: null,
     labelPosition: '',
-    componentsProps: {}
+    componentsProps: {
+      root: {},
+      container: {},
+      legend: {},
+      label: {}
+    }
   },
   styles: {
     root: {

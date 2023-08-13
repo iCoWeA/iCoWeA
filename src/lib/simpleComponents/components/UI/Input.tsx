@@ -85,7 +85,6 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
     label = label ?? defaultProps.label;
     startAdornment = startAdornment ?? defaultProps.startAdornment;
     endAdornment = endAdornment ?? defaultProps.endAdornment;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     useImperativeHandle(rootRef, () => rootFocusRef, []);
 
@@ -108,7 +107,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       className: rootClassName,
       onMouseDown: onRootMouseDown,
       ...restRootProps
-    } = componentsProps.root ?? {};
+    } = componentsProps?.root ?? defaultProps.componentsProps.root;
 
     const rootMouseDownHandler = (event: MouseEvent<HTMLDivElement>): void => {
       event.preventDefault();
@@ -181,7 +180,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       className: containerClassName,
       disabled: containerDisabled,
       ...restContainerProps
-    } = componentsProps.container ?? {};
+    } = componentsProps?.container ?? defaultProps.componentsProps.container;
 
     const mergedContainerClassName = twMerge(
       mergeClasses(
@@ -202,7 +201,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
     if (label !== null) {
       const labelStyles = styles.label;
       const { className: labelClassName, ...restLabelProps } =
-        componentsProps.label ?? {};
+        componentsProps?.label ?? defaultProps.componentsProps.label;
 
       const mergedLabelClassName = twMerge(
         mergeClasses(
@@ -232,7 +231,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
     if (label !== null && variant === 'outlined') {
       const legendStyles = styles.legend;
       const { className: legendClassName, ...restLegendProps } =
-        componentsProps.legend ?? {};
+        componentsProps?.legend ?? defaultProps.componentsProps.legend;
 
       const mergedLegendClassName = twMerge(
         mergeClasses(legendStyles.base, legendClassName)
