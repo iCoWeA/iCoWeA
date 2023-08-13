@@ -3,17 +3,28 @@ import { useCallback, useReducer } from 'react';
 enum ActionTypes {LOADING, SUCCESS, FAILED}
 
 interface State {
+  isLoading: boolean;
   data: unknown;
   error: unknown;
-  isLoading?: boolean;
 }
 
 interface Action {
   type: ActionTypes,
-  payload: unknown;
+  payload?: unknown;
 }
 
-const reducer = ({ data, error, isLoading }: State, { type, payload }: Action): State => {
+interface Actions {
+  loading: () => Action;
+  success: (data: unknown) => Action;
+  failed: (error: unknown) => Action;
+}
+
+interface Return {
+  state: State,
+  send: (url: string, request?: RequestInit) => Promise<void>;
+}
+
+const reducer = ({ isLoading, data, error }: State, { type, payload }: Action): State => {
   if (type === ActionTypes.LOADING) {
     isLoading = true;
     data = null;
@@ -39,28 +50,17 @@ const reducer = ({ data, error, isLoading }: State, { type, payload }: Action): 
   };
 };
 
+const actions: Actions = {
+  loading: () => ({ type: ActionTypes.LOADING }),
+  success: (data) => ({ type: ActionTypes.SUCCESS, payload: data }),
+  failed: (error) => ({ type: ActionTypes.FAILED, payload: error })
+};
+
 const initialState: State = {
   isLoading: true,
   error: null,
   data: null
 };
-
-interface Actions {
-  loading: () => Action;
-  success: (payload: unknown) => Action;
-  failed: (payload: unknown) => Action;
-}
-
-const actions: Actions = {
-  loading: () => ({ type: ActionTypes.LOADING, payload: null }),
-  success: (payload) => ({ type: ActionTypes.SUCCESS, payload }),
-  failed: (payload) => ({ type: ActionTypes.FAILED, payload })
-};
-
-interface Return {
-  state: State,
-  send: (url: string, request?: RequestInit) => Promise<void>;
-}
 
 const useRequest = (): Return => {
   const [state, dispatch] = useReducer(reducer, initialState);

@@ -1,48 +1,71 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 
 const initialTimerId = -1;
+
+interface Config {
+  open?: boolean;
+  showDelay?: number;
+  hideDelay?: number;
+  hideDuration?: number;
+}
 
 interface Return {
   isMounted: boolean;
   isOpen: boolean;
   show: () => void;
   hide: () => void;
+  unmount: () => void;
 }
 
-const useMount = (open: boolean = false): Return => {
+const useMount = (config: Config = {}): Return => {
   const timerId = useRef(initialTimerId);
-  const [isMounted, setIsMounted] = useState(open);
+  const [isMounted, setIsMounted] = useState(config.open ?? false);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMounted) {
+      timerId.current = window.setTimeout(() => {
+        setIsOpen(true);
+      }, config.showDelay ?? 0);
+    }
+  }, [isMounted]);
 
   const show = useCallback(() => {
     clearTimeout(timerId.current);
-    timerId.current = initialTimerId;
 
     if (isMounted) {
-      setIsOpen(true);
+      timerId.current = window.setTimeout(() => {
+        setIsOpen(true);
+      }, config.showDelay ?? 0);
     } else {
       setIsMounted(true);
     }
   }, [isMounted]);
 
   const hide = useCallback(() => {
-    setIsOpen(false);
+    clearTimeout(timerId.current);
+
     timerId.current = window.setTimeout(() => {
-      setIsMounted(false);
-    }, 500);
+      timerId.current = window.setTimeout(() => {
+        setIsMounted(false);
+      }, config.hideDuration ?? 0);
+
+      setIsOpen(false);
+    }, config.hideDelay ?? 0);
   }, []);
 
-  useEffect(() => {
-    if (isMounted) {
-      setIsOpen(true);
-    }
-  }, [isMounted]);
+  const unmount = useCallback(() => {
+    clearTimeout(timerId.current);
+    setIsOpen(false);
+    setIsMounted(false);
+  }, []);
 
   return {
     isMounted,
     isOpen,
     show,
-    hide
+    hide,
+    unmount
   };
 };
 
