@@ -1,9 +1,9 @@
-import { type LabelDefaultProps } from '../components/UI/Label';
-
 export type LabelColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface LabelConfig {
-  defaultProps: Required<LabelDefaultProps>;
+  defaultProps: {
+    color?: LabelColors;
+  };
   styles: {
     base: Record<string, string>;
     colors: Record<string, Record<LabelColors, Record<string, string>>>;
