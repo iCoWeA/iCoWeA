@@ -20,7 +20,7 @@ const backdropConfig: BackdropConfig = {
       display: 'block',
       height: 'h-screen',
       width: 'w-screen',
-      background: 'bg-black/50',
+      background: 'bg-black/20',
       focus: 'focus:outline-0'
     },
     invisible: {
