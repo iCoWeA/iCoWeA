@@ -20,7 +20,7 @@ export interface AlertDefaultProps {
   invisible?: boolean;
   icon?: ReactNode;
   action?: ReactNode;
-  componentsProps: {
+  componentsProps?: {
     body?: BaseHTMLAttributes<HTMLDivElement>;
     button?: ButtonHTMLAttributes<HTMLButtonElement>;
   };
@@ -59,7 +59,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     invisible = invisible ?? defaultProps.invisible;
     icon = icon ?? defaultProps.icon;
     action = action ?? defaultProps.action;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const mergedRootClassName = twMerge(
@@ -74,7 +73,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
     /* Set body props */
     const { className: bodyClassName, ...restBodyProps } =
-      componentsProps.body ?? {};
+      componentsProps?.body ?? defaultProps.componentsProps.body;
 
     const mergedBodyClassName = twMerge(
       mergeClasses(bodyStyles.base, bodyClassName)
@@ -87,7 +86,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         className: buttonClassName,
         onClick: onButtonClick,
         ...restButtonProps
-      } = componentsProps.button ?? {};
+      } = componentsProps?.button ?? defaultProps.componentsProps.button;
 
       const clickButtonHandler = (
         event: MouseEvent<HTMLButtonElement>

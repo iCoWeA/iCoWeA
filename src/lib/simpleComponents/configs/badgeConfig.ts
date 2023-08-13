@@ -1,10 +1,14 @@
-import { type BadgeDefaultProps } from '../components/UI/Badge';
-
 export type BadgeColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 export type BadgeBorderColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface BadgeConfig {
-  defaultProps: Required<BadgeDefaultProps>;
+  defaultProps: {
+    position: { vertical: 'top' | 'bottom'; horizontal: 'left' | 'right' };
+    color: BadgeColors;
+    withBorder: boolean;
+    borderColor: BadgeBorderColors;
+    invisible: boolean;
+  };
   styles: {
     base: Record<string, string>;
     invisible: Record<string, string>;

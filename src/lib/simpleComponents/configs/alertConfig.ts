@@ -1,10 +1,20 @@
-import { type AlertDefaultProps } from '../components/UI/Alert';
+import { type BaseHTMLAttributes, type ButtonHTMLAttributes, type ReactNode } from 'react';
 
 export type AlertVariants = 'filled' | 'outlined' | 'ghost';
 export type AlertColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface AlertConfig {
-  defaultProps: Required<AlertDefaultProps>;
+  defaultProps: {
+    variant: AlertVariants;
+    color: AlertColors;
+    invisible: boolean;
+    icon: ReactNode;
+    action: ReactNode;
+    componentsProps: {
+      body: BaseHTMLAttributes<HTMLDivElement>;
+      button: ButtonHTMLAttributes<HTMLButtonElement>;
+    };
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -29,7 +39,10 @@ const alertConfig: AlertConfig = {
     invisible: false,
     icon: null,
     action: null,
-    componentsProps: {}
+    componentsProps: {
+      body: {},
+      button: {}
+    }
   },
   styles: {
     root: {

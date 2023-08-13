@@ -1,11 +1,14 @@
-import { type AvatarDefaultProps } from '../components/UI/Avatar';
-
 export type AvatarVariants = 'rounded' | 'circular' | 'square';
 export type AvatarSizes = 'none' | 'sm' | 'md' | 'lg';
 export type AvatarColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface AvatarConfig {
-  defaultProps: Required<AvatarDefaultProps>;
+  defaultProps: {
+    variant: AvatarVariants;
+    size: AvatarSizes;
+    color: AvatarColors;
+    withBorder: boolean;
+  };
   styles: {
     base: Record<string, string>;
     withBorder: Record<string, Record<string, string>>;
