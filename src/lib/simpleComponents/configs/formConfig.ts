@@ -1,7 +1,7 @@
-import { type FormDefaultProps } from '../components/UI/Form';
-
 export interface FormConfig {
-  defaultProps: Required<FormDefaultProps>;
+  defaultProps: {
+    columns: boolean;
+  };
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;

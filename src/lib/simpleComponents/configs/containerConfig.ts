@@ -1,9 +1,9 @@
-import { type ContainerDefaultProps } from '../components/UI/Container';
-
 export type ContainerVariants = 'flex' | 'flex-col' | 'grid' | 'column' | 'default' | 'standard' | 'dashboard' | 'fluid';
 
 export interface ContainerConfig {
-  defaultProps: Required<ContainerDefaultProps>;
+  defaultProps: {
+    variant: ContainerVariants;
+  };
   styles: {
     base: Record<string, string>;
     variants: Record<ContainerVariants, Record<string, string>>;

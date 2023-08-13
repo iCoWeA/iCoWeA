@@ -1,10 +1,11 @@
-import { type IconDefaultProps } from '../components/UI/Icon';
-
 export type IconSizes = 'xs' | 'sm' | 'md' | 'lg' | 'full';
 export type IconColors = 'none' | 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface IconConfig {
-  defaultProps: Required<IconDefaultProps>;
+  defaultProps: {
+    size: IconSizes;
+    color: IconColors;
+  };
   styles: {
     base: Record<string, string>;
     sizes: Record<IconSizes, Record<string, string>>;

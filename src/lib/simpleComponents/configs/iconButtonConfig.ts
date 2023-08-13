@@ -1,11 +1,14 @@
-import { type IconButtonDefaultProps } from '../components/UI/IconButton';
-
 export type IconButtonVariants = 'filled' | 'outlined' | 'text';
 export type IconButtonSizes = 'sm' | 'md' | 'lg';
 export type IconButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface IconButtonConfig {
-  defaultProps: Required<IconButtonDefaultProps>;
+  defaultProps: {
+    variant: IconButtonVariants;
+    size: IconButtonSizes;
+    color: IconButtonColors;
+    elevated: boolean;
+  };
   styles: {
     base: Record<string, string>;
     sizes: Record<IconButtonSizes, Record<string, string>>;

@@ -1,7 +1,7 @@
-import { type FormGroupDefaultProps } from '../components/UI/FormGroup';
-
 export interface FormGroupConfig {
-  defaultProps: Required<FormGroupDefaultProps>;
+  defaultProps: {
+    row: boolean;
+  };
   styles: {
     base: Record<string, string>;
     row: Record<string, string>;
