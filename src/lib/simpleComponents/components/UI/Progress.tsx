@@ -12,18 +12,13 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
-export interface ProgressDefaultProps {
+export interface ProgressProps extends BaseHTMLAttributes<HTMLDivElement> {
   value?: number | string;
   size?: ProgressSizes;
   color?: ProgressColors;
   componentsProps?: {
     root?: BaseHTMLAttributes<HTMLDivElement>;
   };
-}
-
-export interface ProgressProps
-  extends ProgressDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {
   barRef?: MutableRefObject<HTMLDivElement | undefined>;
 }
 
