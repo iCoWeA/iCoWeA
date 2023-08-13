@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
 export interface CardFooterDefaultProps {
-  columns: boolean;
+  columns?: boolean;
   fullwidht?: boolean;
 }
 

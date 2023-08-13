@@ -1,7 +1,8 @@
-import { type CardFooterDefaultProps } from '../components/UI/CardFooter';
-
 export interface CardFooterConfig {
-  defaultProps: Required<CardFooterDefaultProps>;
+  defaultProps: {
+    columns: boolean;
+    fullwidht: boolean;
+  };
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;

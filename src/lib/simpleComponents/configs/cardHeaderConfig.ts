@@ -1,7 +1,8 @@
-import { type CardHeaderDefaultProps } from '../components/UI/CardHeader';
-
 export interface CardHeaderConfig {
-  defaultProps: Required<CardHeaderDefaultProps>;
+  defaultProps: {
+    columns: boolean;
+    fullwidht: boolean;
+  };
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;
