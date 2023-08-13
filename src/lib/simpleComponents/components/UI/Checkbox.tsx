@@ -57,11 +57,10 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
     valid = valid ?? defaultProps.valid;
     invalid = invalid ?? defaultProps.invalid;
     icon = icon ?? defaultProps.icon;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const { className: rootClassName, ...restRootProps } =
-      componentsProps.root ?? {};
+      componentsProps?.root ?? defaultProps.componentsProps?.root;
 
     const mergedRootClassName = twMerge(
       mergeClasses(rootStyles.base, rootClassName)
@@ -89,7 +88,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
     if (icon === null) {
       const iconStyles = styles.icon;
       const { className: iconClassName, ...restIconProps } =
-        componentsProps.icon ?? {};
+        componentsProps?.icon ?? defaultProps.componentsProps.icon;
 
       const mergedIconClassName = twMerge(
         mergeClasses(
