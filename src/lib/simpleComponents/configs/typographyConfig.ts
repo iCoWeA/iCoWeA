@@ -1,5 +1,3 @@
-import { type TypographyDefaultProps } from '../components/UI/Typography';
-
 export type TypographyVariants = 'h1'
 | 'h2'
 | 'h3'
@@ -14,7 +12,11 @@ export type TypographyAligns = 'left' | 'center' | 'right' | 'justify' | 'start'
 export type TypographyColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface TypographyConfig {
-  defaultProps: Required<TypographyDefaultProps>;
+  defaultProps: {
+    variant: TypographyVariants;
+    align: TypographyAligns;
+    color: TypographyColors;
+  };
   styles: {
     base: Record<string, string>;
     aligns: Record<TypographyAligns, Record<string, string>>;
