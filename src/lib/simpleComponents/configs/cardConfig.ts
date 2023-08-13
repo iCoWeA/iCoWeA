@@ -1,10 +1,12 @@
-import { type CardDefaultProps } from '../components/UI/Card';
-
 export type CardVariants = 'filled' | 'outlined';
 export type CardColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface CardConfig {
-  defaultProps: Required<CardDefaultProps>;
+  defaultProps: {
+    variant: CardVariants;
+    color: CardColors;
+    elevated: boolean;
+  };
   styles: {
     base: Record<string, string>;
     elevated: Record<string, Record<string, string>>;

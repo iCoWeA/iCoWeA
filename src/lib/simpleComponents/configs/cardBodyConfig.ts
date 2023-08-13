@@ -1,7 +1,8 @@
-import { type CardBodyDefaultProps } from '../components/UI/CardBody';
-
 export interface CardBodyConfig {
-  defaultProps: Required<CardBodyDefaultProps>;
+  defaultProps: {
+    columns: boolean;
+    fullwidht: boolean;
+  };
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;

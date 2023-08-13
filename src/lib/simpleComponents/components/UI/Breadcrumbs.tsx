@@ -46,7 +46,6 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>(
     separator = separator ?? defaultProps.separator;
     color = color ?? defaultProps.color;
     fullwidth = fullwidth ?? defaultProps.fullwidth;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set list props */
     const mergedRootClassName = twMerge(
@@ -68,7 +67,7 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>(
 
       /* Set item props */
       const { className: itemClassName, ...restItemProps } =
-        componentsProps?.items?.[i] ?? {};
+        componentsProps?.items?.[i] ?? defaultProps.componentsProps.items;
 
       const mergedItemClassName = twMerge(
         mergeClasses(itemStyles.base, itemClassName)
@@ -77,7 +76,8 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>(
       /* Set separator props */
       if (i !== childrenNodes.length - 1) {
         const { className: separatorClassName, ...restSeparatorProps } =
-          componentsProps?.separators?.[i] ?? {};
+          componentsProps?.separators?.[i] ??
+          defaultProps.componentsProps.separators;
 
         const mergedSeparatorClassName = twMerge(
           mergeClasses(

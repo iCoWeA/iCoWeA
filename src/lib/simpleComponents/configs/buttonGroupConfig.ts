@@ -1,11 +1,15 @@
-import { type ButtonGroupDefaultProps } from '../components/UI/ButtonGroup';
-
 export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
 export type ButtonGroupSizes = 'sm' | 'md' | 'lg';
 export type ButtonGroupColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface ButtonGroupConfig {
-  defaultProps: Required<ButtonGroupDefaultProps>;
+  defaultProps: {
+    variant: ButtonGroupVariants;
+    size: ButtonGroupSizes;
+    color: ButtonGroupColors;
+    elevated: boolean;
+    fullwidth: boolean;
+  };
   styles: {
     root: {
       base: Record<string, string>;
