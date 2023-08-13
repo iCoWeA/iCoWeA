@@ -3,7 +3,6 @@ import React, {
   type BaseHTMLAttributes,
   useMemo,
   useContext,
-  useState,
   useEffect
 } from 'react';
 import accordionContext, {
@@ -13,6 +12,7 @@ import themeContext from '../../contexts/theme';
 import usePrevious from '../../hooks/usePrevious';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
+import useMount from '../../hooks/useMount';
 
 export interface AccordionDefaultProps {
   disabled?: boolean;
@@ -38,36 +38,52 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     disabled = disabled ?? defaultProps.disabled;
     unmountOnExit = unmountOnExit ?? defaultProps.unmountOnExit;
 
-    const [isOpen, setIsOpen] = useState(open ?? false);
+    const { isMounted, isOpen, show, hide, unmount } = useMount({
+      open: open ?? false
+    });
 
     useEffect(() => {
+      if (open === true) {
+        show();
+      }
+
+      if (open === false) {
+        hide();
+      }
+
       if (prevOpen !== undefined && open === undefined) {
-        setIsOpen(prevOpen);
+        if (prevOpen) {
+          show();
+        } else {
+          hide();
+        }
       }
     }, [open]);
 
     const context: AccordionContext = useMemo(
       () => ({
-        isOpen: open ?? isOpen,
+        isMounted,
+        isOpen,
         isDisabled: disabled ?? defaultProps.disabled,
         unmountOnExit: unmountOnExit ?? defaultProps.unmountOnExit,
+        unmount,
         onToggle: () => {
-          if (open === undefined) {
-            setIsOpen((isOpen) => !isOpen);
+          if (open === undefined && isOpen) {
+            hide();
           }
 
-          if (onToggle !== undefined) {
-            onToggle(open ?? isOpen);
+          if (open === undefined && !isOpen) {
+            show();
           }
         }
       }),
-      [open, isOpen, disabled, onToggle]
+      [isMounted, isOpen, disabled, unmountOnExit, unmount, onToggle]
     );
 
     const mergedClassName = twMerge(
       mergeClasses(
         styles.base,
-        (open ?? isOpen) && styles.open,
+        isOpen && styles.open,
         disabled && styles.disabled,
         className
       )

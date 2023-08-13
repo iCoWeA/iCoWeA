@@ -1,4 +1,9 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
+import React, {
+  forwardRef,
+  useContext,
+  type BaseHTMLAttributes,
+  type TransitionEvent
+} from 'react';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
@@ -25,8 +30,14 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     },
     rootRef
   ) => {
-    const { isOpen } = useContext(accordionContext);
+    const { isMounted, isOpen, unmountOnExit, unmount } =
+      useContext(accordionContext);
     const { config } = useContext(themeContext);
+
+    if (unmountOnExit && !isMounted) {
+      return <></>;
+    }
+
     const { defaultProps, styles } = config.accordionBody;
     const rootStyles = styles.root;
     const containerStyles = styles.constainer;
@@ -35,8 +46,23 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
-    const { className: rootClassName, ...restRootProps } =
-      componentsProps.root ?? {};
+    const {
+      className: rootClassName,
+      onTransitionEnd: onRootTransitionEnd,
+      ...restRootProps
+    } = componentsProps.root ?? {};
+
+    const transitionEndRootHandler = (
+      event: TransitionEvent<HTMLDivElement>
+    ): void => {
+      if (unmountOnExit && !isOpen) {
+        unmount();
+      }
+
+      if (onRootTransitionEnd !== undefined) {
+        onRootTransitionEnd(event);
+      }
+    };
 
     const mergedRootClassName = twMerge(
       mergeClasses(rootStyles.base, isOpen && rootStyles.open, rootClassName)
@@ -57,6 +83,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
 
     return (
       <div
+        onTransitionEnd={transitionEndRootHandler}
         className={mergedRootClassName}
         ref={rootRef}
         {...restRootProps}

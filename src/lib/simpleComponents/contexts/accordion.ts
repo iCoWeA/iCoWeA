@@ -6,6 +6,7 @@ export interface AccordionContext {
   isDisabled: boolean;
   unmountOnExit: boolean;
   onToggle: () => void;
+  unmount: () => void;
 }
 
 export const initialState: AccordionContext = {
@@ -13,7 +14,8 @@ export const initialState: AccordionContext = {
   isOpen: false,
   isDisabled: false,
   unmountOnExit: false,
-  onToggle: () => {}
+  onToggle: () => {},
+  unmount: () => {}
 };
 
 const accordionContext = createContext(initialState);
