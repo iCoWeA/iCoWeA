@@ -4,14 +4,10 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface IconDefaultProps {
+export interface IconProps extends SVGAttributes<SVGSVGElement> {
   size?: IconSizes;
   color?: IconColors;
 }
-
-export interface IconProps
-  extends IconDefaultProps,
-  SVGAttributes<SVGSVGElement> {}
 
 const Icon = forwardRef<SVGSVGElement, IconProps>(
   ({ size, color, viewBox = '0 0 24 24', className, ...restProps }, ref) => {

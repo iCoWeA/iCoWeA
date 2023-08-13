@@ -23,7 +23,7 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface InputDefaultProps {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   variant?: InputVariants;
   color?: InputColors;
   valid?: boolean;
@@ -38,11 +38,6 @@ export interface InputDefaultProps {
     legend?: BaseHTMLAttributes<HTMLLegendElement>;
     label?: LabelHTMLAttributes<HTMLLabelElement>;
   };
-}
-
-export interface InputProps
-  extends InputDefaultProps,
-  InputHTMLAttributes<HTMLInputElement> {
   inputRef?: MutableRefObject<HTMLInputElement | undefined>;
 }
 

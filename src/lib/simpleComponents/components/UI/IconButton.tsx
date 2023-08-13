@@ -12,16 +12,13 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface IconButtonDefaultProps {
+export interface IconButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: IconButtonVariants;
   size?: IconButtonSizes;
   color?: IconButtonColors;
   elevated?: boolean;
 }
-
-export interface IconButtonProps
-  extends IconButtonDefaultProps,
-  ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ variant, size, color, elevated, className, ...restProps }, ref) => {
