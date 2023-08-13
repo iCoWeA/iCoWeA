@@ -23,7 +23,8 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface TextAreaDefaultProps {
+export interface TextAreaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: TextAreaVariants;
   color?: TextAreaColors;
   valid?: boolean;
@@ -38,11 +39,6 @@ export interface TextAreaDefaultProps {
     legend?: BaseHTMLAttributes<HTMLLegendElement>;
     label?: LabelHTMLAttributes<HTMLLabelElement>;
   };
-}
-
-export interface TextAreaProps
-  extends TextAreaDefaultProps,
-  TextareaHTMLAttributes<HTMLTextAreaElement> {
   textAreaRef?: MutableRefObject<HTMLTextAreaElement | undefined>;
 }
 
