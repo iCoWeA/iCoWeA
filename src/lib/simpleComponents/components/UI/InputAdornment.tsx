@@ -4,13 +4,10 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface InputAdornmentDefaultProps {
+export interface InputAdornmentProps
+  extends BaseHTMLAttributes<HTMLDivElement> {
   color?: InputAdornmentColor;
 }
-
-export interface InputAdornmentProps
-  extends InputAdornmentDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {}
 
 const InputAdornment = forwardRef<HTMLDivElement, InputAdornmentProps>(
   ({ color, className, ...restProps }, ref) => {
