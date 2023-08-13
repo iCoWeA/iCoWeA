@@ -58,7 +58,6 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
     color = color ?? defaultProps.color;
     invisible = invisible ?? defaultProps.invisible;
     action = action ?? defaultProps.action;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const mergedRootClassName = twMerge(
@@ -80,7 +79,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
         className: buttonClassName,
         onClick: onButtonClick,
         ...restButtonProps
-      } = componentsProps.button ?? {};
+      } = componentsProps?.button ?? defaultProps.componentsProps.button;
 
       const clickButtonHandler = (
         event: MouseEvent<HTMLButtonElement>

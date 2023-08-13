@@ -1,11 +1,20 @@
-import { type ChipDefaultProps } from '../components/UI/Chip';
+import { type ButtonHTMLAttributes, type ReactNode } from 'react';
 
 export type ChipVariants = 'filled' | 'outlined' | 'ghost';
 export type ChipSizes = 'sm' | 'md' | 'lg';
 export type ChipColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface ChipConfig {
-  defaultProps: Required<ChipDefaultProps>;
+  defaultProps: {
+    variant: ChipVariants;
+    size: ChipSizes;
+    color: ChipColors;
+    invisible: boolean;
+    action: ReactNode;
+    componentsProps: {
+      button: ButtonHTMLAttributes<HTMLButtonElement>;
+    };
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -29,7 +38,9 @@ const chipConfig: ChipConfig = {
     color: 'primary',
     invisible: false,
     action: null,
-    componentsProps: {}
+    componentsProps: {
+      button: {}
+    }
   },
   styles: {
     root: {
