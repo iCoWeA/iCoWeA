@@ -3,14 +3,10 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface ListDefaultProps {
+export interface ListProps extends BaseHTMLAttributes<HTMLUListElement> {
   row?: boolean;
   disableGap?: boolean;
 }
-
-export interface ListProps
-  extends ListDefaultProps,
-  BaseHTMLAttributes<HTMLUListElement> {}
 
 const List = forwardRef<HTMLUListElement, ListProps>(
   ({ row, disableGap, className, ...restProps }, ref) => {

@@ -4,13 +4,9 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface LabelDefaultProps {
+export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   color?: LabelColors;
 }
-
-export interface LabelProps
-  extends LabelDefaultProps,
-  LabelHTMLAttributes<HTMLLabelElement> {}
 
 const Label = forwardRef<HTMLLabelElement, LabelProps>(
   ({ color, className, ...restProps }, ref) => {

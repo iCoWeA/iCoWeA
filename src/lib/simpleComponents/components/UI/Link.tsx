@@ -8,14 +8,12 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface LinkDefaultProps {
+export interface LinkProps extends BaseLinkProps {
   underline?: LinkUnderlines;
   color?: LinkColors;
   fullwidth?: boolean;
   disabled?: boolean;
 }
-
-export interface LinkProps extends LinkDefaultProps, BaseLinkProps {}
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ underline, color, fullwidth, disabled, className, ...restProps }, ref) => {

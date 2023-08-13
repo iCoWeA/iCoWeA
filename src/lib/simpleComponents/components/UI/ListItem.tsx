@@ -7,15 +7,11 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface ListItemDefaultProps {
+export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
   size?: ListItemSizes;
   color?: ListItemColors;
   disablePadding?: boolean;
 }
-
-export interface ListItemProps
-  extends ListItemDefaultProps,
-  LiHTMLAttributes<HTMLLIElement> {}
 
 const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ size, color, disablePadding, className, ...restProps }, ref) => {
