@@ -26,7 +26,7 @@ export interface TooltipDefaultProps {
   color?: TooltipColors;
   spacing?: number;
   arrow?: boolean;
-  hideDuration?: number;
+  transitionDuration?: number;
   showDelay?: number;
   hideDelay?: number;
   componentsProps?: {
@@ -54,7 +54,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       color,
       spacing,
       arrow,
-      hideDuration,
+      transitionDuration,
       showDelay,
       hideDelay,
       componentsProps,
@@ -71,13 +71,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const { theme, config } = useContext(themeContext);
     const { defaultProps } = config.tooltip;
 
-    hideDuration = hideDuration ?? defaultProps.hideDuration;
+    transitionDuration = transitionDuration ?? defaultProps.transitionDuration;
     showDelay = showDelay ?? defaultProps.showDelay;
     hideDelay = hideDelay ?? defaultProps.hideDelay;
 
     const { isMounted, isOpen, show, hide, unmount } = useMount({
       open: open ?? false,
-      hideDuration,
+      hideDuration: transitionDuration,
       showDelay,
       hideDelay,
       onOpen,
@@ -218,7 +218,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           top,
           left
         },
-        { transitionDuration: `${hideDuration}ms` },
+        { transitionDuration: `${transitionDuration}ms` },
         rootStyle
       );
     }

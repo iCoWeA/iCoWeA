@@ -30,7 +30,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     },
     rootRef
   ) => {
-    const { isMounted, isOpen, hideDuration, unmountOnExit, unmount } =
+    const { isMounted, isOpen, transitionDuration, unmountOnExit, unmount } =
       useContext(accordionContext);
     const { config } = useContext(themeContext);
 
@@ -66,7 +66,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     };
 
     const mergedRootStyle = mergeStyles(
-      { transitionDuration: `${hideDuration}ms` },
+      { transitionDuration: `${transitionDuration}ms` },
       rootStyle
     );
 

@@ -14,7 +14,7 @@ import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
 export interface AccordionDefaultProps {
-  hideDuration?: number;
+  transitionDuration?: number;
   disabled?: boolean;
   unmountOnExit?: boolean;
 }
@@ -33,7 +33,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       open,
       onOpen,
       onClose,
-      hideDuration,
+      transitionDuration,
       disabled,
       unmountOnExit,
       className,
@@ -45,13 +45,13 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     const { config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordion;
 
-    hideDuration = hideDuration ?? defaultProps.hideDuration;
+    transitionDuration = transitionDuration ?? defaultProps.transitionDuration;
     disabled = disabled ?? defaultProps.disabled;
     unmountOnExit = unmountOnExit ?? defaultProps.unmountOnExit;
 
     const { isMounted, isOpen, show, hide, unmount } = useMount({
       open: open ?? false,
-      hideDuration: hideDuration ?? defaultProps.hideDuration,
+      hideDuration: transitionDuration,
       onOpen,
       onClose
     });
@@ -78,7 +78,8 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       () => ({
         isMounted,
         isOpen,
-        hideDuration: hideDuration ?? defaultProps.hideDuration,
+        transitionDuration:
+          transitionDuration ?? defaultProps.transitionDuration,
         isDisabled: disabled ?? defaultProps.disabled,
         unmountOnExit: unmountOnExit ?? defaultProps.unmountOnExit,
         unmount,
@@ -95,7 +96,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       [
         isMounted,
         isOpen,
-        hideDuration,
+        transitionDuration,
         disabled,
         unmountOnExit,
         unmount,
