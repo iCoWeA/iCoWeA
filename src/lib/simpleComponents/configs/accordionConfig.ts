@@ -10,7 +10,7 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
-    hideDuration: 250,
+    transitionDuration: 250,
     disabled: false,
     unmountOnExit: false
   },

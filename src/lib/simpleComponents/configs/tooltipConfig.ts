@@ -26,7 +26,7 @@ const tooltipConfig: TooltipConfig = {
     color: 'default',
     spacing: 1,
     arrow: false,
-    hideDuration: 250,
+    transitionDuration: 250,
     showDelay: 0,
     hideDelay: 0,
     componentsProps: {}

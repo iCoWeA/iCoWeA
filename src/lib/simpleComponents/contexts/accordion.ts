@@ -3,7 +3,7 @@ import { createContext } from 'react';
 export interface AccordionContext {
   isMounted: boolean;
   isOpen: boolean;
-  hideDuration: number;
+  transitionDuration: number;
   isDisabled: boolean;
   unmountOnExit: boolean;
   onToggle: () => void;
@@ -13,7 +13,7 @@ export interface AccordionContext {
 export const initialState: AccordionContext = {
   isMounted: false,
   isOpen: false,
-  hideDuration: 250,
+  transitionDuration: 250,
   isDisabled: false,
   unmountOnExit: false,
   onToggle: () => {},
