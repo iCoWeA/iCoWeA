@@ -3,13 +3,9 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface FormGroupDefaultProps {
+export interface FormGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   row?: boolean;
 }
-
-export interface FormGroupProps
-  extends FormGroupDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {}
 
 const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
   ({ row, className, ...restProps }, ref) => {
