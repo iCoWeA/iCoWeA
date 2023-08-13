@@ -17,7 +17,10 @@ const collapseConfig: CollapseConfig = {
   defaultProps: {
     open: false,
     openTransition: '',
-    closeTransition: '',
+    transitionDuration: 250,
+    showDelay: 0,
+    hideDelay: 0,
+    unmountOnExit: false,
     componentsProps: {}
   },
   styles: {
