@@ -27,7 +27,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     },
     rootRef
   ) => {
-    const { state, duration, onExit } = useContext(accordionContext);
+    const { state, duration, onTransitionEnd } = useContext(accordionContext);
     const { config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordionBody;
     const rootStyles = styles.root;
@@ -45,7 +45,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     const transitionEndRootHandler = (
       event: TransitionEvent<HTMLDivElement>
     ): void => {
-      onExit();
+      onTransitionEnd();
 
       if (onRootTransitionEnd !== undefined) {
         onRootTransitionEnd(event);

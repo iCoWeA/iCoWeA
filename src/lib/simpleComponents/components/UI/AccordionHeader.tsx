@@ -38,8 +38,10 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     const { state, isDisabled, duration, onClick } =
       useContext(accordionContext);
     const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.accordionHeader;
-    const rootStyles = styles.root;
+    const {
+      defaultProps,
+      styles: { root: rootStyles, icon: iconStyles }
+    } = config.accordionHeader;
     let iconNode: ReactNode;
 
     color = color ?? defaultProps.color;
@@ -64,7 +66,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     /* Set icon props */
     if (icon) {
-      const iconStyles = styles.icon;
       const {
         style: iconStyle,
         className: iconClassName,
