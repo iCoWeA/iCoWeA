@@ -4,8 +4,6 @@ import React, {
   useContext,
   type ReactNode,
   useEffect,
-  type RefObject,
-  type MutableRefObject,
   type CSSProperties,
   useRef,
   type TransitionEvent
@@ -22,6 +20,8 @@ import { twMerge } from 'tailwind-merge';
 import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
 export interface TooltipDefaultProps {
+  anchorRef?: Element | null;
+  overlayRef?: Element | null;
   position?: TooltipPositions;
   color?: TooltipColors;
   spacing?: number;
@@ -38,7 +38,6 @@ export interface TooltipProps
   extends BaseHTMLAttributes<HTMLDivElement>,
   TooltipDefaultProps {
   open?: boolean;
-  anchorElem?: RefObject<Element> | MutableRefObject<Element>;
   onOpen?: () => void;
   onClose?: () => void;
 }
@@ -47,9 +46,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       open,
-      anchorElem,
       onOpen,
       onClose,
+      anchorRef,
+      overlayRef,
       position,
       color,
       spacing,
@@ -99,7 +99,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }
 
     useEffect(() => {
-      if (anchorElem?.current !== undefined) {
+      if (anchorRef !== null) {
         const showHandler: () => void = () => {
           isHovered.current = true;
 
@@ -116,17 +116,17 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           }
         };
 
-        anchorElem.current?.addEventListener('mouseenter', showHandler);
-        anchorElem.current?.addEventListener('mouseleave', hideHandler);
+        anchorRef?.addEventListener('mouseenter', showHandler);
+        anchorRef?.addEventListener('mouseleave', hideHandler);
 
         return () => {
-          anchorElem.current?.removeEventListener('mouseenter', showHandler);
-          anchorElem.current?.removeEventListener('mouseleave', hideHandler);
+          anchorRef?.removeEventListener('mouseenter', showHandler);
+          anchorRef?.removeEventListener('mouseleave', hideHandler);
         };
       }
-    }, [open, show, hide]);
+    }, [anchorRef, open, show, hide]);
 
-    if (anchorElem === undefined || !isMounted) {
+    if (anchorRef === null || !isMounted) {
       return <></>;
     }
 
@@ -135,6 +135,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     let arrowNode: ReactNode;
     let mergedRootStyle: CSSProperties = {};
 
+    overlayRef = overlayRef ?? defaultProps.overlayRef;
     position = position ?? defaultProps.position;
     color = color ?? defaultProps.color;
     spacing = spacing ?? defaultProps.spacing;
@@ -177,39 +178,39 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }
     };
 
-    const anchorElemOrigin = anchorElem.current?.getBoundingClientRect();
+    const anchorRefOrigin = anchorRef?.getBoundingClientRect();
 
-    if (anchorElemOrigin !== undefined) {
+    if (anchorRefOrigin !== undefined) {
       let top: string = '';
       let left: string = '';
 
       if (position.startsWith('top') || position.startsWith('bottom')) {
         const horizontal = position.startsWith('top') ? 'top' : 'bottom';
 
-        top = `calc(${anchorElemOrigin[horizontal]}px ${
+        top = `calc(${anchorRefOrigin[horizontal]}px ${
           horizontal === 'top' ? '-' : '+'
         } ${spacing}rem)`;
 
         if (position.endsWith('start')) {
-          left = `${anchorElemOrigin.left}px`;
+          left = `${anchorRefOrigin.left}px`;
         } else if (position.endsWith('end')) {
-          left = `${anchorElemOrigin.right}px`;
+          left = `${anchorRefOrigin.right}px`;
         } else {
-          left = `${anchorElemOrigin.left + anchorElemOrigin.width / 2}px`;
+          left = `${anchorRefOrigin.left + anchorRefOrigin.width / 2}px`;
         }
       } else if (position.startsWith('left') || position.startsWith('right')) {
         const vertical = position.startsWith('left') ? 'left' : 'right';
 
-        left = `calc(${anchorElemOrigin[vertical]}px ${
+        left = `calc(${anchorRefOrigin[vertical]}px ${
           vertical === 'left' ? '-' : '+'
         } ${spacing}rem)`;
 
         if (position.endsWith('start')) {
-          top = `${anchorElemOrigin.top}px`;
+          top = `${anchorRefOrigin.top}px`;
         } else if (position.endsWith('end')) {
-          top = `${anchorElemOrigin.bottom}px`;
+          top = `${anchorRefOrigin.bottom}px`;
         } else {
-          top = `${anchorElemOrigin.top + anchorElemOrigin.height / 2}px`;
+          top = `${anchorRefOrigin.top + anchorRefOrigin.height / 2}px`;
         }
       }
 
@@ -233,7 +234,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       )
     );
 
-    let rootNode = (
+    const rootNode = (
       <div
         onTransitionEnd={transitionEndRootHandler}
         style={mergedRootStyle}
@@ -246,12 +247,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       </div>
     );
 
-    const tooltipNode = document.getElementById('tooltip');
-
-    rootNode =
-      tooltipNode === null ? rootNode : createPortal(rootNode, tooltipNode);
-
-    return rootNode;
+    return overlayRef === null ? rootNode : createPortal(rootNode, overlayRef);
   }
 );
 

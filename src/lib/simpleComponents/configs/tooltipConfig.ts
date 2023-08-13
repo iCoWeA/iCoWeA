@@ -22,6 +22,8 @@ export interface TooltipConfig {
 
 const tooltipConfig: TooltipConfig = {
   defaultProps: {
+    anchorRef: null,
+    overlayRef: null,
     position: 'bottom',
     color: 'default',
     spacing: 1,
