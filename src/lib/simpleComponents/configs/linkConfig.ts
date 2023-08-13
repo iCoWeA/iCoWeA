@@ -1,10 +1,13 @@
-import { type LinkDefaultProps } from '../components/UI/Link';
-
 export type LinkUnderlines = 'none' | 'hover' | 'always';
 export type LinkColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface LinkConfig {
-  defaultProps: Required<LinkDefaultProps>;
+  defaultProps: {
+    underline: LinkUnderlines;
+    color: LinkColors;
+    fullwidth: boolean;
+    disabled: boolean;
+  };
   styles: {
     base: Record<string, string>;
     fullwidth: Record<string, string>;
