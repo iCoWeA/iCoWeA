@@ -12,16 +12,13 @@ import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface ListItemButtonDefaultProps {
+export interface ListItemButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ListItemButtonVariant;
   size?: ListItemButtonSizes;
   color?: ListItemButtonColors;
   selected?: boolean;
 }
-
-export interface ListItemButtonProps
-  extends ListItemButtonDefaultProps,
-  ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const ListItemButton = forwardRef<HTMLButtonElement, ListItemButtonProps>(
   ({ variant, size, color, selected, className, ...restProps }, ref) => {
