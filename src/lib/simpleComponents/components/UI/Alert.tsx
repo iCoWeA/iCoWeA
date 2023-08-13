@@ -44,9 +44,10 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     rootRef
   ) => {
     const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.alert;
-    const rootStyles = styles.root;
-    const bodyStyles = styles.body;
+    const {
+      defaultProps,
+      styles: { root: rootStyles, body: bodyStyles, button: buttonStyles }
+    } = config.alert;
     let buttonNode: ReactNode;
 
     variant = variant ?? defaultProps.variant;
@@ -76,7 +77,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
     /* Set button props */
     if (action === null && onClose !== undefined) {
-      const buttonStyles = styles.button;
       const {
         className: buttonClassName,
         onClick: onButtonClick,

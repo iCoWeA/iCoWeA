@@ -34,10 +34,10 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>(
     rootRef
   ) => {
     const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.breadcrumbs;
-    const rootStyles = styles.root;
-    const itemStyles = styles.item;
-    const separatorStyles = styles.separator;
+    const {
+      defaultProps,
+      styles: { root: rootStyles, item: itemStyles, separator: separatorStyles }
+    } = config.breadcrumbs;
 
     separator = separator ?? defaultProps.separator;
     color = color ?? defaultProps.color;

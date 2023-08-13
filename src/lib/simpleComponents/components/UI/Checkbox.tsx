@@ -43,9 +43,10 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
     rootRef
   ) => {
     const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.checkbox;
-    const rootStyles = styles.root;
-    const inputStyles = styles.input;
+    const {
+      defaultProps,
+      styles: { root: rootStyles, input: inputStyles, icon: iconStyles }
+    } = config.checkbox;
     let iconNode: ReactNode;
 
     color = color ?? defaultProps.color;
@@ -81,7 +82,6 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
 
     /* Set icon props */
     if (icon === null) {
-      const iconStyles = styles.icon;
       const { className: iconClassName, ...restIconProps } =
         componentsProps?.icon ?? defaultProps.componentsProps.icon;
 

@@ -37,9 +37,10 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
     rootRef
   ) => {
     const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.buttonGroup;
-    const rootStyles = styles.root;
-    const buttonStyles = styles.button;
+    const {
+      defaultProps,
+      styles: { root: rootStyles, button: buttonStyles }
+    } = config.buttonGroup;
 
     variant = variant ?? defaultProps.variant;
     size = size ?? defaultProps.size;
