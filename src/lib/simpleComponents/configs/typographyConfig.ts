@@ -11,12 +11,14 @@ export type TypographyVariants = 'h1'
 export type TypographyAligns = 'left' | 'center' | 'right' | 'justify' | 'start' | 'end';
 export type TypographyColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
+export interface TypographyDefaultProps {
+  variant?: TypographyVariants;
+  align?: TypographyAligns;
+  color?: TypographyColors;
+}
+
 export interface TypographyConfig {
-  defaultProps: {
-    variant: TypographyVariants;
-    align: TypographyAligns;
-    color: TypographyColors;
-  };
+  defaultProps: Required<TypographyDefaultProps>;
   styles: {
     base: Record<string, string>;
     aligns: Record<TypographyAligns, Record<string, string>>;

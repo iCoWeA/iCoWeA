@@ -1,33 +1,26 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import {
-  type TypographyVariants,
-  type TypographyAligns,
-  type TypographyColors
+  type TypographyDefaultProps
 } from '../../configs/typographyConfig';
+import { setDefaultProps, mergeClasses } from '../../utils/propsHelper';
 import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
-import { mergeClasses } from '../../utils/styleHelper';
 
 export interface TypographyProps
-  extends BaseHTMLAttributes<
+  extends TypographyDefaultProps,
+  BaseHTMLAttributes<
   HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement
-  > {
-  variant?: TypographyVariants;
-  align?: TypographyAligns;
-  color?: TypographyColors;
-}
+  > {}
 
 const Typography = forwardRef<
 HTMLParagraphElement | HTMLHeadingElement,
 TypographyProps
->(({ variant, align, color, className, ...restProps }, ref) => {
+>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.typography;
+  const { variant, align, color, className, ...restProps } = setDefaultProps(props, defaultProps);
 
-  variant = variant ?? defaultProps.variant;
-  align = align ?? defaultProps.align;
-  color = color ?? defaultProps.color;
-
+  /* Set props */
   if (variant === 'h1') {
     const mergedClassName = twMerge(
       mergeClasses(
