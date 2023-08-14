@@ -13,8 +13,8 @@ import { twMerge } from 'tailwind-merge';
 import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
 export interface CollapseTransitionProps extends TransitionConfig {
+  unmountOnExit?: boolean;
   enterTransition?: string;
-  exitTransition?: string;
 }
 
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -45,9 +45,10 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
       styles: { root: rootStyles, container: containerStyles }
     } = config.collapse;
     const {
+      unmountOnExit = defaultProps.transitionProps.unmountOnExit,
+      enterTransition = defaultProps.transitionProps.enterTransition,
       enterDuration = defaultProps.transitionProps.enterDuration,
-      exitDuration = defaultProps.transitionProps.exitDuration,
-      enterTransition = defaultProps.transitionProps.enterTransition
+      exitDuration = defaultProps.transitionProps.exitDuration
     } = transitionProps ?? {};
 
     open = open ?? defaultProps.open;
@@ -63,6 +64,10 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
 
     if (enterState && !open) {
       exit();
+    }
+
+    if (unmountOnExit && state === States.EXITED) {
+      return <></>;
     }
 
     /* Set root props */

@@ -4,9 +4,10 @@ export interface CollapseConfig {
   defaultProps: {
     open: boolean;
     transitionProps: {
+      unmountOnExit: boolean;
+      enterTransition: string;
       enterDuration: number;
       exitDuration: number;
-      enterTransition: string;
     };
     componentsProps: {
       container: BaseHTMLAttributes<HTMLDivElement>;
@@ -27,9 +28,10 @@ const collapseConfig: CollapseConfig = {
   defaultProps: {
     open: false,
     transitionProps: {
+      unmountOnExit: false,
+      enterTransition: '',
       enterDuration: 500,
-      exitDuration: 500,
-      enterTransition: ''
+      exitDuration: 500
     },
     componentsProps: {
       container: {}
