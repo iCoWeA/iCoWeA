@@ -2,7 +2,8 @@ import React, {
   forwardRef,
   useContext,
   type BaseHTMLAttributes,
-  type TransitionEvent
+  type TransitionEvent,
+  type AnimationEvent
 } from 'react';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
@@ -51,6 +52,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     /* Set root props */
     const {
       onTransitionEnd: onRootTransitionEnd,
+      onAnimationEnd: onRootAnimationEnd,
       style: rootStyle,
       className: rootClassName,
       ...restRootProps
@@ -63,6 +65,16 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
 
       if (onRootTransitionEnd !== undefined) {
         onRootTransitionEnd(event);
+      }
+    };
+
+    const animationEndRootHnadler = (
+      event: AnimationEvent<HTMLDivElement>
+    ): void => {
+      onTransitionEnd();
+
+      if (onRootAnimationEnd !== undefined) {
+        onRootAnimationEnd(event);
       }
     };
 
@@ -97,6 +109,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     return (
       <div
         onTransitionEnd={transitionEndRootHandler}
+        onAnimationEnd={animationEndRootHnadler}
         style={mergedRootStyle}
         className={mergedRootClassName}
         ref={rootRef}
