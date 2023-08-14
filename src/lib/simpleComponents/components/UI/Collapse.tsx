@@ -5,40 +5,31 @@ import React, {
   type TransitionEvent
 } from 'react';
 import themeContext from '../../contexts/theme';
-import useMount from '../../hooks/useMount';
+import useMount, {
+  States,
+  type Config as TransitionConfig
+} from '../../hooks/useMount';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
-export interface CollapseDefaultProps {
+export interface CollapseTransitionProps extends TransitionConfig {
+  enterTransition?: string;
+  exitTransition?: string;
+}
+
+export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
-  openTransition?: string;
-  transitionDuration?: number;
-  showDelay?: number;
-  hideDelay?: number;
-  unmountOnExit?: boolean;
+  transitionProps?: CollapseTransitionProps;
   componentsProps?: {
     container?: BaseHTMLAttributes<HTMLDivElement>;
   };
 }
 
-export interface CollapseProps
-  extends CollapseDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {
-  onOpen?: () => void;
-  onClose?: () => void;
-}
-
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
   (
     {
-      onOpen,
-      onClose,
       open,
-      openTransition,
-      transitionDuration,
-      showDelay,
-      hideDelay,
-      unmountOnExit,
+      transitionProps,
       componentsProps,
       onTransitionEnd: onRootTransitionEnd,
       style: rootStyle,
@@ -49,47 +40,39 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
     rootRef
   ) => {
     const { config } = useContext(themeContext);
-    const { defaultProps, styles } = config.collapse;
+    const {
+      defaultProps,
+      styles: { root: rootStyles, container: containerStyles }
+    } = config.collapse;
+    const {
+      enterDuration = defaultProps.transitionProps.enterDuration,
+      exitDuration = defaultProps.transitionProps.exitDuration,
+      enterTransition = defaultProps.transitionProps.enterTransition
+    } = transitionProps ?? {};
 
     open = open ?? defaultProps.open;
-    transitionDuration = transitionDuration ?? defaultProps.transitionDuration;
-    showDelay = showDelay ?? defaultProps.showDelay;
-    hideDelay = hideDelay ?? defaultProps.hideDelay;
-    unmountOnExit = unmountOnExit ?? defaultProps.unmountOnExit;
 
-    const { isMounted, isOpen, show, hide, unmount } = useMount({
-      open,
-      hideDuration: transitionDuration,
-      showDelay,
-      hideDelay,
-      onOpen,
-      onClose
+    const { state, enterState, exitState, enter, exit } = useMount({
+      ...defaultProps.transitionProps,
+      ...transitionProps
     });
 
-    if ((!isMounted || !isOpen) && open) {
-      show();
+    if (exitState && open) {
+      enter();
     }
 
-    if ((isMounted || isOpen) && !open) {
-      hide();
+    if (enterState && !open) {
+      exit();
     }
-
-    if (unmountOnExit && !isMounted) {
-      return <></>;
-    }
-
-    const rootStyles = styles.root;
-    const containerStyles = styles.container;
-
-    openTransition = openTransition ?? defaultProps.openTransition;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set root props */
     const transitionEndRootHandler = (
       event: TransitionEvent<HTMLDivElement>
     ): void => {
-      if (unmountOnExit === true && !isOpen) {
-        unmount();
+      if (enterState) {
+        enter(true);
+      } else {
+        exit(true);
       }
 
       if (onRootTransitionEnd !== undefined) {
@@ -98,22 +81,24 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
     };
 
     const mergedRootStyle = mergeStyles(
-      { transitionDuration: `${transitionDuration}ms` },
+      { transitionDuration: `${enterState ? enterDuration : exitDuration}ms` },
       rootStyle
     );
 
     const mergedRootClassName = twMerge(
       mergeClasses(
         rootStyles.base,
-        isOpen && rootStyles.open,
-        isOpen && openTransition,
+        (state === States.ENTERING || state === States.ENTERED) &&
+          rootStyles.open,
+        (state === States.ENTERING || state === States.ENTERED) &&
+          enterTransition,
         rootClassName
       )
     );
 
     /* Set container props */
     const { className: containerClassName, ...restContainerProps } =
-      componentsProps.container ?? {};
+      componentsProps?.container ?? defaultProps.componentsProps.container;
 
     const mergedContainerClassName = twMerge(
       mergeClasses(containerStyles.base, containerClassName)

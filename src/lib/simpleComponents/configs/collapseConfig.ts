@@ -1,7 +1,17 @@
-import { type CollapseDefaultProps } from '../components/UI/Collapse';
+import { type BaseHTMLAttributes } from 'react';
 
 export interface CollapseConfig {
-  defaultProps: Required<CollapseDefaultProps>;
+  defaultProps: {
+    open: boolean;
+    transitionProps: {
+      enterDuration: number;
+      exitDuration: number;
+      enterTransition: string;
+    };
+    componentsProps: {
+      container: BaseHTMLAttributes<HTMLDivElement>;
+    };
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -16,12 +26,14 @@ export interface CollapseConfig {
 const collapseConfig: CollapseConfig = {
   defaultProps: {
     open: false,
-    openTransition: '',
-    transitionDuration: 250,
-    showDelay: 0,
-    hideDelay: 0,
-    unmountOnExit: false,
-    componentsProps: {}
+    transitionProps: {
+      enterDuration: 500,
+      exitDuration: 500,
+      enterTransition: ''
+    },
+    componentsProps: {
+      container: {}
+    }
   },
   styles: {
     root: {
@@ -37,6 +49,7 @@ const collapseConfig: CollapseConfig = {
     },
     container: {
       base: {
+        display: 'flex',
         overflow: 'overflow-hidden',
         focus: 'focus:outline-0'
       }
