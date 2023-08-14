@@ -43,7 +43,6 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         focus: 'focus:outline-0',
         disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
       },
-
       colors: {
         default: {
           default: {
