@@ -8,8 +8,8 @@ export interface TooltipConfig {
     anchorRef: Element | null;
     overlayRef: Element | null;
     position: TooltipPositions;
-    color: TooltipColors;
     spacing: number;
+    color: TooltipColors;
     arrow: boolean;
     transitionProps: {
       enterDuration: number;
@@ -40,8 +40,8 @@ const tooltipConfig: TooltipConfig = {
     anchorRef: null,
     overlayRef: null,
     position: 'bottom',
-    color: 'default',
     spacing: 1,
+    color: 'default',
     arrow: false,
     transitionProps: {
       enterDuration: 500,

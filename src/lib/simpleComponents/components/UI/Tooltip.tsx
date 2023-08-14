@@ -29,8 +29,8 @@ export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
   anchorRef?: Element | null;
   overlayRef?: Element | null;
   position?: TooltipPositions;
-  color?: TooltipColors;
   spacing?: number;
+  color?: TooltipColors;
   arrow?: boolean;
   transitionProps?: TooltipTransitionProps;
   componentsProps?: {
@@ -45,8 +45,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       anchorRef,
       overlayRef,
       position,
-      color,
       spacing,
+      color,
       arrow,
       transitionProps,
       componentsProps,
@@ -119,8 +119,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     overlayRef = overlayRef ?? defaultProps.overlayRef;
     position = position ?? defaultProps.position;
-    color = color ?? defaultProps.color;
     spacing = spacing ?? defaultProps.spacing;
+    color = color ?? defaultProps.color;
     arrow = arrow ?? defaultProps.arrow;
 
     /* Set arrow props */
