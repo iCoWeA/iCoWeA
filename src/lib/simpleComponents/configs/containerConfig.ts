@@ -1,9 +1,11 @@
 export type ContainerVariants = 'flex' | 'flex-col' | 'grid' | 'column' | 'default' | 'standard' | 'dashboard' | 'fluid';
 
+export interface ContainerDefaultProps {
+  variant?: ContainerVariants;
+}
+
 export interface ContainerConfig {
-  defaultProps: {
-    variant: ContainerVariants;
-  };
+  defaultProps: Required<ContainerDefaultProps>;
   styles: {
     base: Record<string, string>;
     variants: Record<ContainerVariants, Record<string, string>>;

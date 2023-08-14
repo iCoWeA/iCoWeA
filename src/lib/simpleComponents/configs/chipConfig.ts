@@ -4,17 +4,16 @@ export type ChipVariants = 'filled' | 'outlined' | 'ghost';
 export type ChipSizes = 'sm' | 'md' | 'lg';
 export type ChipColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
+export interface ChipDefaultProps {
+  variant?: ChipVariants;
+  size?: ChipSizes;
+  color?: ChipColors;
+  invisible?: boolean;
+  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+}
+
 export interface ChipConfig {
-  defaultProps: {
-    variant: ChipVariants;
-    size: ChipSizes;
-    color: ChipColors;
-    invisible: boolean;
-    action: ReactNode;
-    componentsProps: {
-      button: ButtonHTMLAttributes<HTMLButtonElement>;
-    };
-  };
+  defaultProps: Required<ChipDefaultProps>;
   styles: {
     root: {
       base: Record<string, string>;
@@ -37,10 +36,7 @@ const chipConfig: ChipConfig = {
     size: 'md',
     color: 'primary',
     invisible: false,
-    action: null,
-    componentsProps: {
-      button: {}
-    }
+    buttonProps: {}
   },
   styles: {
     root: {
