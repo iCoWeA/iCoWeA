@@ -1,39 +1,26 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import { type CardBodyDefaultProps } from '../../configs/cardBodyConfig';
 import themeContext from '../../contexts/theme';
-import { twMerge } from 'tailwind-merge';
-import { mergeClasses } from '../../utils/styleHelper';
+import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface CardBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
-  columns?: boolean;
-  fullwidht?: boolean;
-}
+export interface CardBodyProps extends CardBodyDefaultProps, BaseHTMLAttributes<HTMLDivElement> {}
 
-const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
-  ({ columns, fullwidht, className, ...restProps }, ref) => {
-    const { config } = useContext(themeContext);
-    const { defaultProps, styles } = config.cardBody;
+const CardBody = forwardRef<HTMLDivElement, CardBodyProps>((props, ref) => {
+  const { config } = useContext(themeContext);
+  const { defaultProps, styles } = config.cardBody;
+  const { columns, fullwidht, className, ...restProps } = setDefaultProps(props, defaultProps);
 
-    columns = columns ?? defaultProps.columns;
-    fullwidht = fullwidht ?? defaultProps.fullwidht;
+  /* Set props */
+  const mergedClassName = mergeClasses(styles.base, columns && styles.columns, fullwidht && styles.fullwidth, className);
 
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        columns && styles.columns,
-        fullwidht && styles.fullwidth,
-        className
-      )
-    );
-
-    return (
-      <div
-        className={mergedClassName}
-        ref={ref}
-        {...restProps}
-      />
-    );
-  }
-);
+  return (
+    <div
+      className={mergedClassName}
+      ref={ref}
+      {...restProps}
+    />
+  );
+});
 
 CardBody.displayName = 'CardBody';
 

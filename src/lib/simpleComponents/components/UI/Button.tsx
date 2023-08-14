@@ -10,6 +10,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { defaultProps, styles } = config.button;
   const { variant, size, color, elevated, fullwidth, className, ...restProps } = setDefaultProps(props, defaultProps);
 
+  /* Set props */
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
