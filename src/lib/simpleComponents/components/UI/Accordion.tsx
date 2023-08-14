@@ -43,9 +43,9 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     const { config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordion;
     const {
+      unmountOnExit = defaultProps.transitionProps.unmountOnExit,
       enterDuration = defaultProps.transitionProps.enterDuration,
-      exitDuration = defaultProps.transitionProps.exitDuration,
-      unmountOnExit = defaultProps.transitionProps.unmountOnExit
+      exitDuration = defaultProps.transitionProps.exitDuration
     } = transitionProps ?? {};
 
     disabled = disabled ?? defaultProps.disabled;

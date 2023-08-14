@@ -2,9 +2,9 @@ export interface AccordionConfig {
   defaultProps: {
     disabled: boolean;
     transitionProps: {
+      unmountOnExit: boolean;
       enterDuration: number;
       exitDuration: number;
-      unmountOnExit: boolean;
     };
   };
   styles: {
@@ -17,9 +17,9 @@ const accordionConfig: AccordionConfig = {
   defaultProps: {
     disabled: false,
     transitionProps: {
+      unmountOnExit: false,
       enterDuration: 500,
-      exitDuration: 500,
-      unmountOnExit: false
+      exitDuration: 500
     }
   },
   styles: {

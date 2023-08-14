@@ -12,9 +12,9 @@ export interface TooltipConfig {
     color: TooltipColors;
     arrow: boolean;
     transitionProps: {
+      unmountOnExit: boolean;
       enterDuration: number;
       exitDuration: number;
-      unmountOnExit: boolean;
     };
     componentsProps: {
       arrow: BaseHTMLAttributes<HTMLDivElement>;
@@ -44,9 +44,9 @@ const tooltipConfig: TooltipConfig = {
     color: 'default',
     arrow: false,
     transitionProps: {
+      unmountOnExit: true,
       enterDuration: 500,
-      exitDuration: 500,
-      unmountOnExit: true
+      exitDuration: 500
     },
     componentsProps: {
       arrow: {}

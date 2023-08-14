@@ -64,9 +64,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       styles: { root: rootStyles, arrow: arrowStyles }
     } = config.tooltip;
     const {
+      unmountOnExit = defaultProps.transitionProps.unmountOnExit,
       enterDuration = defaultProps.transitionProps.enterDuration,
-      exitDuration = defaultProps.transitionProps.exitDuration,
-      unmountOnExit = defaultProps.transitionProps.unmountOnExit
+      exitDuration = defaultProps.transitionProps.exitDuration
     } = transitionProps ?? {};
 
     const { state, enterState, exitState, enter, exit } = useMount({
