@@ -6,7 +6,7 @@ import React, {
   type AnimationEvent
 } from 'react';
 import themeContext from '../../contexts/theme';
-import useMount, {
+import useTransition, {
   States,
   type Config as TransitionConfig
 } from '../../hooks/useTransition';
@@ -60,7 +60,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
       exitState,
       enter,
       exit
-    } = useMount({
+    } = useTransition({
       ...defaultProps.transitionProps,
       ...transitionProps
     });
