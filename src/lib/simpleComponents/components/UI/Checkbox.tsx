@@ -33,7 +33,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
       icon,
       componentsProps,
       checked: isInputChecked,
-      disabled: isInputDisabled,
+      disabled: inputDisabled,
       type: inputType = 'checkbox',
       className: inputClassNames,
       children: inputChildren,
@@ -111,7 +111,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
         {...restRootProps}
       >
         <input
-          disabled={isInputDisabled}
+          disabled={inputDisabled}
           checked={isInputChecked}
           type={inputType}
           className={mergedInputClassName}

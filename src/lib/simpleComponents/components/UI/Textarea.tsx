@@ -57,7 +57,7 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       onFocus: onTextAreaFocus,
       onBlur: onTextAreaBlur,
       autoFocus: textAreaAutoFocus,
-      disabled: isTextAreaDisabled,
+      disabled: textAreaDisabled,
       value: textAreaValue,
       className: textAreaClassName,
       textAreaRef,
@@ -92,10 +92,10 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
 
     const [isShifted, setIsShifted] = useState(
       (textAreaValue !== undefined && textAreaValue !== '') ||
-        (textAreaAutoFocus === true && isTextAreaDisabled === false)
+        (textAreaAutoFocus === true && textAreaDisabled === false)
     );
     const [isFocused, setIsFocused] = useState(
-      textAreaAutoFocus === true && isTextAreaDisabled === false
+      textAreaAutoFocus === true && textAreaDisabled === false
     );
 
     useEffect(() => {
@@ -165,10 +165,10 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
     const mergedTextAreaClassName = twMerge(
       mergeClasses(
         textAreaStyles.base,
-        (isTextAreaDisabled === true || (!valid && !invalid)) &&
+        (textAreaDisabled === true || (!valid && !invalid)) &&
           textAreaStyles.colors[theme][color],
-        valid && isTextAreaDisabled !== true && textAreaStyles.valid[theme],
-        invalid && isTextAreaDisabled !== true && textAreaStyles.invalid[theme],
+        valid && textAreaDisabled !== true && textAreaStyles.valid[theme],
+        invalid && textAreaDisabled !== true && textAreaStyles.invalid[theme],
         textAreaClassName
       )
     );
@@ -188,16 +188,19 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
       ...restContainerProps
     } = componentsProps?.container ?? defaultProps.componentsProps.container;
 
+    const isContainerDisabled =
+      containerDisabled === undefined ? textAreaDisabled : containerDisabled;
+
     const mergedContainerClassName = twMerge(
       mergeClasses(
         containerStyles.base,
-        (isTextAreaDisabled === true || (!valid && !invalid)) &&
+        (isContainerDisabled === true || (!valid && !invalid)) &&
           containerStyles.variants[variant][theme][color],
         valid &&
-          isTextAreaDisabled !== true &&
+          isContainerDisabled !== true &&
           containerStyles.valid[variant][theme],
         invalid &&
-          isTextAreaDisabled !== true &&
+          isContainerDisabled !== true &&
           containerStyles.invalid[variant][theme],
         rootClassName
       )
@@ -212,11 +215,11 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
         mergeClasses(
           labelStyles.base,
           labelStyles.variants[variant],
-          (isTextAreaDisabled === true || (!valid && !invalid)) &&
+          (textAreaDisabled === true || (!valid && !invalid)) &&
             labelStyles.colors[theme][color],
           startAdornment !== null && labelStyles.startAdornment,
-          valid && isTextAreaDisabled !== true && labelStyles.valid[theme],
-          invalid && isTextAreaDisabled !== true && labelStyles.invalid[theme],
+          valid && textAreaDisabled !== true && labelStyles.valid[theme],
+          invalid && textAreaDisabled !== true && labelStyles.invalid[theme],
           labelPosition,
           labelClassName
         )
@@ -266,14 +269,14 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
           onFocus={focusTextAreaHandler}
           onBlur={blurTextAreaHandler}
           autoFocus={textAreaAutoFocus}
-          disabled={isTextAreaDisabled}
+          disabled={textAreaDisabled}
           value={textAreaValue}
           className={mergedTextAreaClassName}
           ref={setTextAreaRef}
           {...restTextAreaProps}
         />
         <fieldset
-          disabled={containerDisabled === true || isTextAreaDisabled}
+          disabled={isContainerDisabled}
           className={mergedContainerClassName}
           {...restContainerProps}
         >

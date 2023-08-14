@@ -56,7 +56,7 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       onFocus: onInputFocus,
       onBlur: onInputBlur,
       autoFocus: inputAutoFocus,
-      disabled: isInputDisabled,
+      disabled: inputDisabled,
       value: inputValue,
       className: inputClassName,
       inputRef,
@@ -91,10 +91,10 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
 
     const [isShifted, setIsShifted] = useState(
       (inputValue !== undefined && inputValue !== '') ||
-        (inputAutoFocus === true && isInputDisabled === false)
+        (inputAutoFocus === true && inputDisabled === false)
     );
     const [isFocused, setIsFocused] = useState(
-      inputAutoFocus === true && isInputDisabled === false
+      inputAutoFocus === true && inputDisabled === false
     );
 
     useEffect(() => {
@@ -160,10 +160,10 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       mergeClasses(
         inputStyles.base,
         inputStyles.variants[variant],
-        (isInputDisabled === true || (!valid && !invalid)) &&
+        (inputDisabled === true || (!valid && !invalid)) &&
           inputStyles.colors[theme][color],
-        valid && isInputDisabled !== true && inputStyles.valid[theme],
-        invalid && isInputDisabled !== true && inputStyles.invalid[theme],
+        valid && inputDisabled !== true && inputStyles.valid[theme],
+        invalid && inputDisabled !== true && inputStyles.invalid[theme],
         inputClassName
       )
     );
@@ -183,16 +183,19 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
       ...restContainerProps
     } = componentsProps?.container ?? defaultProps.componentsProps.container;
 
+    const isContainerDisabled =
+      containerDisabled === undefined ? inputDisabled : containerDisabled;
+
     const mergedContainerClassName = twMerge(
       mergeClasses(
         containerStyles.base,
-        (isInputDisabled === true || (!valid && !invalid)) &&
+        (isContainerDisabled === true || (!valid && !invalid)) &&
           containerStyles.variants[variant][theme][color],
         valid &&
-          isInputDisabled !== true &&
+          isContainerDisabled !== true &&
           containerStyles.valid[variant][theme],
         invalid &&
-          isInputDisabled !== true &&
+          isContainerDisabled !== true &&
           containerStyles.invalid[variant][theme],
         rootClassName
       )
@@ -207,11 +210,11 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
         mergeClasses(
           labelStyles.base,
           labelStyles.variants[variant],
-          (isInputDisabled === true || (!valid && !invalid)) &&
+          (inputDisabled === true || (!valid && !invalid)) &&
             labelStyles.colors[theme][color],
           startAdornment !== null && labelStyles.startAdornment,
-          valid && isInputDisabled !== true && labelStyles.valid[theme],
-          invalid && isInputDisabled !== true && labelStyles.invalid[theme],
+          valid && inputDisabled !== true && labelStyles.valid[theme],
+          invalid && inputDisabled !== true && labelStyles.invalid[theme],
           labelPosition,
           labelClassName
         )
@@ -261,14 +264,14 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
           onFocus={focusInputHandler}
           onBlur={blurInputHandler}
           autoFocus={inputAutoFocus}
-          disabled={isInputDisabled}
+          disabled={inputDisabled}
           value={inputValue}
           className={mergedInputClassName}
           ref={setInputRef}
           {...restInputProps}
         />
         <fieldset
-          disabled={containerDisabled === true || isInputDisabled}
+          disabled={isContainerDisabled}
           className={mergedContainerClassName}
           {...restContainerProps}
         >
