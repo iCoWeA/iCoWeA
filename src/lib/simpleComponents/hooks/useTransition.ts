@@ -1,12 +1,12 @@
 import { useRef, useState, useCallback } from 'react';
 
 export enum States {
-  ENTER = 'ENTER',
-  ENTERING = 'ENTERING',
-  ENTERED = 'ENTERED',
-  EXIT = 'EXIT',
-  EXITING = 'EXITING',
-  EXITED = 'EXITED'
+  ENTER,
+  ENTERING,
+  ENTERED,
+  EXIT,
+  EXITING,
+  EXITED
 }
 
 export interface Config {
@@ -14,6 +14,12 @@ export interface Config {
   exitDelay?: number;
   enterDuration?: number
   exitDuration?: number;
+  enterClassName?: string;
+  enteringClassName?: string;
+  enteredClassName?: string;
+  exitClassName?: string;
+  exitingClassName?: string;
+  exitedClassName?: string;
   onEnter?: () => void;
   onEntering?: () => void;
   onEntered?: () => void;
@@ -24,6 +30,7 @@ export interface Config {
 
 interface Return {
   state: States;
+  className: string;
   enterState: boolean;
   exitState: boolean;
   enter: (instant?: boolean) => void;
@@ -32,9 +39,17 @@ interface Return {
 
 const initialTimerId = -1;
 
-const useTransition = ({ enterDelay, exitDelay, enterDuration, exitDuration, onEnter, onEntering, onEntered, onExit, onExiting, onExited }: Config = {}): Return => {
+const useTransition = ({ enterDelay, exitDelay, enterDuration, exitDuration, enterClassName = '', enteringClassName = '', enteredClassName = '', exitClassName = '', exitingClassName = '', exitedClassName = '', onEnter, onEntering, onEntered, onExit, onExiting, onExited }: Config = {}): Return => {
   const timerId = useRef(initialTimerId);
   const [state, setState] = useState(States.EXITED);
+  const classNames = {
+    [States.ENTER]: enterClassName,
+    [States.ENTERING]: enteringClassName,
+    [States.ENTERED]: enteredClassName,
+    [States.EXIT]: exitClassName,
+    [States.EXITING]: exitingClassName,
+    [States.EXITED]: exitedClassName
+  };
 
   const enter = useCallback((instant: boolean = false) => {
     if (instant) {
@@ -112,6 +127,7 @@ const useTransition = ({ enterDelay, exitDelay, enterDuration, exitDuration, onE
     state,
     enterState: (state === States.ENTER || state === States.ENTERING || state === States.ENTERED),
     exitState: (state === States.EXIT || state === States.EXITING || state === States.EXITED),
+    className: classNames[state],
     enter,
     exit
   };
