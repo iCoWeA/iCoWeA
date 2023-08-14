@@ -3,58 +3,31 @@ import React, {
   forwardRef,
   useContext,
   type ReactNode,
-  type ButtonHTMLAttributes,
   type MouseEvent
 } from 'react';
 import {
-  type AlertColors,
-  type AlertVariants
+  type AlertDefaultProps
 } from '../../configs/alertConfig';
 import themeContext from '../../contexts/theme';
+import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 import { twMerge } from 'tailwind-merge';
-import { mergeClasses } from '../../utils/styleHelper';
 
-interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: AlertVariants;
-  color?: AlertColors;
-  invisible?: boolean;
+export interface AlertProps extends AlertDefaultProps, BaseHTMLAttributes<HTMLDivElement> {
   icon?: ReactNode;
   action?: ReactNode;
   onClose?: () => void;
-  componentsProps?: {
-    body?: BaseHTMLAttributes<HTMLDivElement>;
-    button?: ButtonHTMLAttributes<HTMLButtonElement>;
-  };
 }
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
-    {
-      variant,
-      color,
-      invisible,
-      icon,
-      action,
-      onClose,
-      componentsProps,
-      className: rootClassName,
-      children: rootChildren,
-      ...restRootProps
-    },
+    rootProps,
     rootRef
   ) => {
     const { theme, config } = useContext(themeContext);
-    const {
-      defaultProps,
-      styles: { root: rootStyles, body: bodyStyles, button: buttonStyles }
-    } = config.alert;
+    const { defaultProps, styles } = config.alert;
+    const { icon, action, onClose, variant, color, invisible, bodyProps, buttonProps, className: rootClassName, children: rootChildren, ...restRootProps } = setDefaultProps(rootProps, defaultProps);
+    const { root: rootStyles, body: bodyStyles } = styles;
     let buttonNode: ReactNode;
-
-    variant = variant ?? defaultProps.variant;
-    color = color ?? defaultProps.color;
-    invisible = invisible ?? defaultProps.invisible;
-    icon = icon ?? defaultProps.icon;
-    action = action ?? defaultProps.action;
 
     /* Set root props */
     const mergedRootClassName = twMerge(
@@ -62,26 +35,26 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         rootStyles.base,
         rootStyles.variants[variant][theme][color],
         invisible && rootStyles.invisible,
-        (action !== null || onClose !== undefined) && rootStyles.actionSpace,
+        (action !== undefined || onClose !== undefined) && rootStyles.actionSpace,
         rootClassName
       )
     );
 
     /* Set body props */
-    const { className: bodyClassName, ...restBodyProps } =
-      componentsProps?.body ?? defaultProps.componentsProps.body;
+    const { className: bodyClassName, ...restBodyProps } = bodyProps;
 
     const mergedBodyClassName = twMerge(
       mergeClasses(bodyStyles.base, bodyClassName)
     );
 
     /* Set button props */
-    if (action === null && onClose !== undefined) {
+    if (action === undefined && onClose !== undefined) {
+      const buttonStyles = styles.button;
       const {
         onClick: onButtonClick,
         className: buttonClassName,
         ...restButtonProps
-      } = componentsProps?.button ?? defaultProps.componentsProps.button;
+      } = buttonProps;
 
       const clickButtonHandler = (
         event: MouseEvent<HTMLButtonElement>

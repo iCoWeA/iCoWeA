@@ -2,8 +2,8 @@ import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import {
   type TypographyDefaultProps
 } from '../../configs/typographyConfig';
-import { setDefaultProps, mergeClasses } from '../../utils/propsHelper';
 import themeContext from '../../contexts/theme';
+import { setDefaultProps, mergeClasses } from '../../utils/propsHelper';
 import { twMerge } from 'tailwind-merge';
 
 export interface TypographyProps
