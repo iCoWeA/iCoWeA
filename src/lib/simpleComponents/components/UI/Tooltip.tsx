@@ -13,50 +13,44 @@ import {
   type TooltipPositions,
   type TooltipColors
 } from '../../configs/tooltipConfig';
-import usePrevious from '../../hooks/usePrevious';
 import themeContext from '../../contexts/theme';
-import useMount from '../../hooks/useMount';
+import usePrevious from '../../hooks/usePrevious';
+import useMount, {
+  States,
+  type Config as TransitionConfig
+} from '../../hooks/useMount';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
-export interface TooltipDefaultProps {
+export interface TooltipTransitionProps extends TransitionConfig {
+  unmountOnExit?: boolean;
+}
+
+export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
+  open?: boolean;
   anchorRef?: Element | null;
   overlayRef?: Element | null;
   position?: TooltipPositions;
   color?: TooltipColors;
   spacing?: number;
   arrow?: boolean;
-  transitionDuration?: number;
-  showDelay?: number;
-  hideDelay?: number;
+  transitionProps?: TooltipTransitionProps;
   componentsProps?: {
     arrow?: BaseHTMLAttributes<HTMLDivElement>;
   };
-}
-
-export interface TooltipProps
-  extends BaseHTMLAttributes<HTMLDivElement>,
-  TooltipDefaultProps {
-  open?: boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       open,
-      onOpen,
-      onClose,
       anchorRef,
       overlayRef,
       position,
       color,
       spacing,
       arrow,
-      transitionDuration,
-      showDelay,
-      hideDelay,
+      transitionProps,
       componentsProps,
       onTransitionEnd: onRootTransitionEnd,
       style: rootStyle,
@@ -66,35 +60,35 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     rootRef
   ) => {
-    const prevOpen = usePrevious(open);
+    const prevState = usePrevious(open);
     const isHovered = useRef(open ?? false);
     const { theme, config } = useContext(themeContext);
-    const { defaultProps } = config.tooltip;
+    const {
+      defaultProps,
+      styles: { root: rootStyles, arrow: arrowStyles }
+    } = config.tooltip;
+    const {
+      enterDuration = defaultProps.transitionProps.enterDuration,
+      exitDuration = defaultProps.transitionProps.exitDuration,
+      unmountOnExit = defaultProps.transitionProps.unmountOnExit
+    } = transitionProps ?? {};
 
-    transitionDuration = transitionDuration ?? defaultProps.transitionDuration;
-    showDelay = showDelay ?? defaultProps.showDelay;
-    hideDelay = hideDelay ?? defaultProps.hideDelay;
-
-    const { isMounted, isOpen, show, hide, unmount } = useMount({
-      open: open ?? false,
-      hideDuration: transitionDuration,
-      showDelay,
-      hideDelay,
-      onOpen,
-      onClose
+    const { state, enterState, exitState, enter, exit } = useMount({
+      ...defaultProps.transitionProps,
+      ...transitionProps
     });
 
-    if ((!isMounted || !isOpen) && open === true) {
-      show();
+    if (exitState && open === true) {
+      enter();
     }
 
-    if ((isMounted || isOpen) && open === false) {
-      hide();
+    if (enterState && open === false) {
+      exit();
     }
 
-    if (prevOpen !== undefined && open === undefined) {
+    if (prevState !== undefined && open === undefined) {
       if (!isHovered.current) {
-        hide();
+        exit();
       }
     }
 
@@ -104,7 +98,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           isHovered.current = true;
 
           if (open === undefined) {
-            show();
+            enter();
           }
         };
 
@@ -112,7 +106,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           isHovered.current = false;
 
           if (open === undefined) {
-            hide();
+            exit();
           }
         };
 
@@ -124,14 +118,12 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           anchorRef?.removeEventListener('mouseleave', hideHandler);
         };
       }
-    }, [anchorRef, open, show, hide]);
+    }, [anchorRef, isHovered, open, enter, exit]);
 
-    if (anchorRef === null || !isMounted) {
+    if (anchorRef === null || (unmountOnExit && state === States.EXITED)) {
       return <></>;
     }
 
-    const { styles } = config.tooltip;
-    const rootStyles = styles.root;
     let arrowNode: ReactNode;
     let mergedRootStyle: CSSProperties = {};
 
@@ -140,13 +132,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     color = color ?? defaultProps.color;
     spacing = spacing ?? defaultProps.spacing;
     arrow = arrow ?? defaultProps.arrow;
-    componentsProps = componentsProps ?? defaultProps.componentsProps;
 
     /* Set arrow props */
     if (arrow) {
-      const arrowStyles = styles.arrow;
       const { className: arrowClassName, ...restArrowProps } =
-        componentsProps.arrow ?? {};
+        componentsProps?.arrow ?? defaultProps.componentsProps.arrow;
 
       const mergedArrowClassName = twMerge(
         mergeClasses(
@@ -169,8 +159,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const transitionEndRootHandler = (
       event: TransitionEvent<HTMLDivElement>
     ): void => {
-      if (!isOpen) {
-        unmount();
+      if (enterState) {
+        enter(true);
+      } else {
+        exit(true);
       }
 
       if (onRootTransitionEnd !== undefined) {
@@ -219,7 +211,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           top,
           left
         },
-        { transitionDuration: `${transitionDuration}ms` },
+        {
+          transitionDuration: `${enterState ? enterDuration : exitDuration}ms`
+        },
         rootStyle
       );
     }
@@ -229,7 +223,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         rootStyles.base,
         rootStyles.positions[position],
         rootStyles.colors[theme][color],
-        isOpen && rootStyles.show,
+        (state === States.ENTERING || state === States.ENTERED) &&
+          rootStyles.show,
         rootClassName
       )
     );

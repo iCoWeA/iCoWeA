@@ -1,10 +1,25 @@
-import { type TooltipDefaultProps } from '../components/UI/Tooltip';
+import { type BaseHTMLAttributes } from 'react';
 
 export type TooltipPositions = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end';
 export type TooltipColors = 'default' | 'light' | string;
 
 export interface TooltipConfig {
-  defaultProps: Required<TooltipDefaultProps>;
+  defaultProps: {
+    anchorRef: Element | null;
+    overlayRef: Element | null;
+    position: TooltipPositions;
+    color: TooltipColors;
+    spacing: number;
+    arrow: boolean;
+    transitionProps: {
+      enterDuration: number;
+      exitDuration: number;
+      unmountOnExit: boolean;
+    };
+    componentsProps: {
+      arrow: BaseHTMLAttributes<HTMLDivElement>;
+    };
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -28,10 +43,14 @@ const tooltipConfig: TooltipConfig = {
     color: 'default',
     spacing: 1,
     arrow: false,
-    transitionDuration: 250,
-    showDelay: 0,
-    hideDelay: 0,
-    componentsProps: {}
+    transitionProps: {
+      enterDuration: 500,
+      exitDuration: 500,
+      unmountOnExit: true
+    },
+    componentsProps: {
+      arrow: {}
+    }
   },
   styles: {
     root: {
