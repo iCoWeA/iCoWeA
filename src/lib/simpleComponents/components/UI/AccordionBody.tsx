@@ -20,19 +20,23 @@ export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
 const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
   (
     {
+      componentsProps,
       className: bodyClassName,
       children: bodyChildren,
-      componentsProps,
       ...restBodyProps
     },
     rootRef
   ) => {
     const { state, duration, onTransitionEnd } = useContext(accordionContext);
     const { config } = useContext(themeContext);
-    const { defaultProps, styles } = config.accordionBody;
-    const rootStyles = styles.root;
-    const containerStyles = styles.constainer;
-    const bodyStyles = styles.body;
+    const {
+      defaultProps,
+      styles: {
+        root: rootStyles,
+        constainer: containerStyles,
+        body: bodyStyles
+      }
+    } = config.accordionBody;
 
     /* Set root props */
     const {
