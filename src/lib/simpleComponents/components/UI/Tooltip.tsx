@@ -22,6 +22,7 @@ import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
 export interface TooltipTransitionProps extends TransitionConfig {
   unmountOnExit?: boolean;
+  enterTransition?: string;
 }
 
 export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -65,6 +66,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     } = config.tooltip;
     const {
       unmountOnExit = defaultProps.transitionProps.unmountOnExit,
+      enterTransition = defaultProps.transitionProps.enterTransition,
       enterDuration = defaultProps.transitionProps.enterDuration,
       exitDuration = defaultProps.transitionProps.exitDuration
     } = transitionProps ?? {};
@@ -215,7 +217,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         rootStyles.colors[theme][color],
         (state === States.ENTERING || state === States.ENTERED) &&
           rootStyles.open,
-        rootClassName
+        rootClassName,
+        (state === States.ENTERING || state === States.ENTERED) &&
+          enterTransition
       )
     );
 

@@ -95,9 +95,9 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
         rootStyles.base,
         (state === States.ENTERING || state === States.ENTERED) &&
           rootStyles.open,
+        rootClassName,
         (state === States.ENTERING || state === States.ENTERED) &&
-          enterTransition,
-        rootClassName
+          enterTransition
       )
     );
 

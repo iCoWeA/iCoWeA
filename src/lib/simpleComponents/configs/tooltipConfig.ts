@@ -13,6 +13,7 @@ export interface TooltipConfig {
     arrow: boolean;
     transitionProps: {
       unmountOnExit: boolean;
+      enterTransition: string;
       enterDuration: number;
       exitDuration: number;
     };
@@ -45,6 +46,7 @@ const tooltipConfig: TooltipConfig = {
     arrow: false,
     transitionProps: {
       unmountOnExit: true,
+      enterTransition: '',
       enterDuration: 500,
       exitDuration: 500
     },
