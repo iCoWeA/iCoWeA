@@ -5,7 +5,6 @@ export interface CollapseConfig {
     open: boolean;
     transitionProps: {
       unmountOnExit: boolean;
-      enterTransition: string;
       enterDuration: number;
       exitDuration: number;
     };
@@ -29,7 +28,6 @@ const collapseConfig: CollapseConfig = {
     open: false,
     transitionProps: {
       unmountOnExit: false,
-      enterTransition: '',
       enterDuration: 500,
       exitDuration: 500
     },

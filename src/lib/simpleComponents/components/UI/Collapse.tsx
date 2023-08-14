@@ -2,7 +2,8 @@ import React, {
   forwardRef,
   useContext,
   type BaseHTMLAttributes,
-  type TransitionEvent
+  type TransitionEvent,
+  type AnimationEvent
 } from 'react';
 import themeContext from '../../contexts/theme';
 import useMount, {
@@ -14,7 +15,6 @@ import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
 export interface CollapseTransitionProps extends TransitionConfig {
   unmountOnExit?: boolean;
-  enterTransition?: string;
 }
 
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -32,6 +32,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
       transitionProps,
       componentsProps,
       onTransitionEnd: onRootTransitionEnd,
+      onAnimationEnd: onRootAnimationEnd,
       style: rootStyle,
       className: rootClassName,
       children: rootChildren,
@@ -46,14 +47,20 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
     } = config.collapse;
     const {
       unmountOnExit = defaultProps.transitionProps.unmountOnExit,
-      enterTransition = defaultProps.transitionProps.enterTransition,
       enterDuration = defaultProps.transitionProps.enterDuration,
       exitDuration = defaultProps.transitionProps.exitDuration
     } = transitionProps ?? {};
 
     open = open ?? defaultProps.open;
 
-    const { state, enterState, exitState, enter, exit } = useMount({
+    const {
+      state,
+      className: transitionClassName,
+      enterState,
+      exitState,
+      enter,
+      exit
+    } = useMount({
       ...defaultProps.transitionProps,
       ...transitionProps
     });
@@ -85,6 +92,20 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
       }
     };
 
+    const animationEndRootHandler = (
+      event: AnimationEvent<HTMLDivElement>
+    ): void => {
+      if (enterState) {
+        enter(true);
+      } else {
+        exit(true);
+      }
+
+      if (onRootAnimationEnd !== undefined) {
+        onRootAnimationEnd(event);
+      }
+    };
+
     const mergedRootStyle = mergeStyles(
       { transitionDuration: `${enterState ? enterDuration : exitDuration}ms` },
       rootStyle
@@ -96,8 +117,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
         (state === States.ENTERING || state === States.ENTERED) &&
           rootStyles.open,
         rootClassName,
-        (state === States.ENTERING || state === States.ENTERED) &&
-          enterTransition
+        transitionClassName
       )
     );
 
@@ -112,6 +132,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
     return (
       <div
         onTransitionEnd={transitionEndRootHandler}
+        onAnimationEnd={animationEndRootHandler}
         style={mergedRootStyle}
         className={mergedRootClassName}
         ref={rootRef}
