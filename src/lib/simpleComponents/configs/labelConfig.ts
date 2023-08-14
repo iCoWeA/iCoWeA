@@ -2,7 +2,7 @@ export type LabelColors = 'default' | 'primary' | 'secondary' | 'success' | 'war
 
 export interface LabelConfig {
   defaultProps: {
-    color?: LabelColors;
+    color: LabelColors;
   };
   styles: {
     base: Record<string, string>;
