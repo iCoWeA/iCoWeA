@@ -2,15 +2,13 @@ import React, {
   forwardRef,
   type BaseHTMLAttributes,
   useContext,
-  useMemo,
-  type ReactNode
+  useMemo
 } from 'react';
 import accordionContext, {
   type AccordionContext
 } from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
-import useMount, {
-  States,
+import useTransition, {
   type Config as TransitionConfig
 } from '../../hooks/useTransition';
 import { twMerge } from 'tailwind-merge';
@@ -22,7 +20,6 @@ export interface AccordionTransitionProps extends TransitionConfig {
 }
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
-  header?: ReactNode;
   open?: boolean;
   disabled?: boolean;
   transitionProps?: AccordionTransitionProps;
@@ -30,15 +27,7 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
-    {
-      header,
-      open,
-      disabled,
-      transitionProps,
-      className,
-      children,
-      ...restProps
-    },
+    { open, disabled, transitionProps, className, children, ...restProps },
     ref
   ) => {
     const { config } = useContext(themeContext);
@@ -52,7 +41,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     disabled = disabled ?? defaultProps.disabled;
 
-    const { state, enterState, exitState, enter, exit } = useMount({
+    const { state, enterState, exitState, enter, exit } = useTransition({
       ...defaultProps.transitionProps,
       ...transitionProps
     });
@@ -69,6 +58,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       () => ({
         state,
         duration: enterState ? enterDuration : exitDuration,
+        unmountOnExit,
         enterTransition,
         isDisabled: disabled ?? defaultProps.disabled,
         onClick: () => {
@@ -94,6 +84,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         exitState,
         enterDuration,
         exitDuration,
+        unmountOnExit,
         enterTransition,
         disabled,
         open
@@ -104,8 +95,6 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       mergeClasses(styles.base, disabled && styles.disabled, className)
     );
 
-    const childrenNode = (unmountOnExit && state === States.EXITED) || children;
-
     return (
       <accordionContext.Provider value={context}>
         <div
@@ -113,8 +102,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           ref={ref}
           {...restProps}
         >
-          {header}
-          {childrenNode}
+          {children}
         </div>
       </accordionContext.Provider>
     );

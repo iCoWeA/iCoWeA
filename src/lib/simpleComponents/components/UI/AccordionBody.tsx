@@ -27,7 +27,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     },
     rootRef
   ) => {
-    const { state, duration, enterTransition, onTransitionEnd } =
+    const { state, duration, unmountOnExit, enterTransition, onTransitionEnd } =
       useContext(accordionContext);
     const { config } = useContext(themeContext);
     const {
@@ -38,6 +38,10 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
         body: bodyStyles
       }
     } = config.accordionBody;
+
+    if (unmountOnExit && state === States.EXITED) {
+      return <></>;
+    }
 
     /* Set root props */
     const {
