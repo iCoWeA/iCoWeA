@@ -10,6 +10,7 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>((props, ref) => {
   const { defaultProps, styles } = config.badge;
   const { position, color, withBorder, borderColor, invisible, className, ...restProps } = setDefaultProps(props, defaultProps);
 
+  /* Set props */
   const mergedClassName = mergeClasses(
     styles.base,
     styles.positions[position.horizontal],

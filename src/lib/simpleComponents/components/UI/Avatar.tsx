@@ -10,6 +10,7 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
   const { defaultProps, styles } = config.avatar;
   const { variant, size, color, withBorder, className, ...restProps } = setDefaultProps(props, defaultProps);
 
+  /* Set props */
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant],

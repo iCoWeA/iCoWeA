@@ -25,10 +25,10 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
     children: rootChildren,
     ...restRootProps
   } = setDefaultProps(rootProps, defaultProps);
-  const { root: rootStyles, body: bodyStyles } = styles;
   let buttonNode: ReactNode;
 
   /* Set root props */
+  const rootStyles = styles.root;
   const mergedRootClassName = mergeClasses(
     rootStyles.base,
     rootStyles.variants[variant][theme][color],
@@ -38,6 +38,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
   );
 
   /* Set body props */
+  const bodyStyles = styles.body;
   const { className: bodyClassName, ...restBodyProps } = bodyProps;
 
   const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
