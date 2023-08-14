@@ -105,8 +105,8 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
 
     /* Set root props */
     const {
-      className: rootClassName,
       onMouseDown: onRootMouseDown,
+      className: rootClassName,
       ...restRootProps
     } = componentsProps?.root ?? defaultProps.componentsProps.root;
 
@@ -178,8 +178,8 @@ const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
 
     /* Set container props */
     const {
-      className: containerClassName,
       disabled: containerDisabled,
+      className: containerClassName,
       ...restContainerProps
     } = componentsProps?.container ?? defaultProps.componentsProps.container;
 

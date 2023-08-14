@@ -106,8 +106,8 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
 
     /* Set root props */
     const {
-      className: rootClassName,
       onMouseDown: onRootMouseDown,
+      className: rootClassName,
       ...restRootProps
     } = componentsProps?.root ?? defaultProps.componentsProps.root;
 
@@ -183,8 +183,8 @@ const TextArea = forwardRef<RefObject<HTMLDivElement>, TextAreaProps>(
 
     /* Set container props */
     const {
-      className: containerClassName,
       disabled: containerDisabled,
+      className: containerClassName,
       ...restContainerProps
     } = componentsProps?.container ?? defaultProps.componentsProps.container;
 

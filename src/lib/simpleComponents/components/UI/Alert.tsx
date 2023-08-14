@@ -78,8 +78,8 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     /* Set button props */
     if (action === null && onClose !== undefined) {
       const {
-        className: buttonClassName,
         onClick: onButtonClick,
+        className: buttonClassName,
         ...restButtonProps
       } = componentsProps?.button ?? defaultProps.componentsProps.button;
 
