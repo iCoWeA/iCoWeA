@@ -2,105 +2,97 @@ import React, {
   forwardRef,
   type BaseHTMLAttributes,
   useContext,
-  useMemo
+  useMemo,
+  type ReactNode
 } from 'react';
 import accordionContext, {
   type AccordionContext
 } from '../../contexts/accordion';
-import usePrevious from '../../hooks/usePrevious';
 import themeContext from '../../contexts/theme';
-import useMount from '../../hooks/useMount';
+import useMount, {
+  States,
+  type Config as TransitionConfig
+} from '../../hooks/useMount';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 
-export interface AccordionDefaultProps {
-  transitionDuration?: number;
-  disabled?: boolean;
+export interface AccordionTransitionProps extends TransitionConfig {
   unmountOnExit?: boolean;
 }
 
-export interface AccordionProps
-  extends AccordionDefaultProps,
-  BaseHTMLAttributes<HTMLDivElement> {
+export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
+  header?: ReactNode;
   open?: boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
+  disabled?: boolean;
+  transitionProps?: AccordionTransitionProps;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
+      header,
       open,
-      onOpen,
-      onClose,
-      transitionDuration,
       disabled,
-      unmountOnExit,
+      transitionProps,
       className,
+      children,
       ...restProps
     },
     ref
   ) => {
-    const prevOpen = usePrevious(open);
     const { config } = useContext(themeContext);
     const { defaultProps, styles } = config.accordion;
+    const {
+      enterDuration = defaultProps.transitionProps.enterDuration,
+      exitDuration = defaultProps.transitionProps.exitDuration,
+      unmountOnExit = defaultProps.transitionProps.unmountOnExit
+    } = transitionProps ?? {};
 
-    transitionDuration = transitionDuration ?? defaultProps.transitionDuration;
     disabled = disabled ?? defaultProps.disabled;
-    unmountOnExit = unmountOnExit ?? defaultProps.unmountOnExit;
 
-    const { isMounted, isOpen, show, hide, unmount } = useMount({
-      open: open ?? false,
-      hideDuration: transitionDuration,
-      onOpen,
-      onClose
+    const { state, enterState, exitState, enter, exit } = useMount({
+      ...defaultProps.transitionProps,
+      ...transitionProps
     });
 
-    if ((!isMounted || !isOpen) && open === true) {
-      show();
+    if (exitState && open === true) {
+      enter();
     }
 
-    if ((isMounted || isOpen) && open === false) {
-      hide();
-    }
-
-    if (prevOpen !== undefined && open === undefined) {
-      if (prevOpen) {
-        show();
-      } else {
-        hide();
-      }
+    if (enterState && open === false) {
+      exit();
     }
 
     const context: AccordionContext = useMemo(
       () => ({
-        isMounted,
-        isOpen,
-        transitionDuration:
-          transitionDuration ?? defaultProps.transitionDuration,
+        state,
+        duration: enterState ? enterDuration : exitDuration,
         isDisabled: disabled ?? defaultProps.disabled,
-        unmountOnExit: unmountOnExit ?? defaultProps.unmountOnExit,
-        unmount,
-        onToggle: () => {
-          if (open === undefined && !isOpen) {
-            show();
+        onClick: () => {
+          if (exitState && open === undefined) {
+            enter();
           }
 
-          if (open === undefined && isOpen) {
-            hide();
+          if (enterState && open === undefined) {
+            exit();
+          }
+        },
+        onTransitionEnd: () => {
+          if (enterState) {
+            enter(true);
+          } else {
+            exit(true);
           }
         }
       }),
       [
-        isMounted,
-        isOpen,
-        transitionDuration,
+        state,
+        enterState,
+        exitState,
+        enterDuration,
+        exitDuration,
         disabled,
-        unmountOnExit,
-        unmount,
-        open,
-        show,
-        hide
+        open
       ]
     );
 
@@ -108,13 +100,18 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       mergeClasses(styles.base, disabled && styles.disabled, className)
     );
 
+    const childrenNode = (unmountOnExit && state === States.EXITED) || children;
+
     return (
       <accordionContext.Provider value={context}>
         <div
           className={mergedClassName}
           ref={ref}
           {...restProps}
-        />
+        >
+          {header}
+          {childrenNode}
+        </div>
       </accordionContext.Provider>
     );
   }

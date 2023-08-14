@@ -1,7 +1,12 @@
-import { type AccordionDefaultProps } from '../components/UI/Accordion';
-
 export interface AccordionConfig {
-  defaultProps: Required<AccordionDefaultProps>;
+  defaultProps: {
+    disabled: boolean;
+    transitionProps: {
+      enterDuration: number;
+      exitDuration: number;
+      unmountOnExit: boolean;
+    };
+  };
   styles: {
     base: Record<string, string>;
     disabled: Record<string, string>;
@@ -10,9 +15,12 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
-    transitionDuration: 250,
     disabled: false,
-    unmountOnExit: false
+    transitionProps: {
+      enterDuration: 500,
+      exitDuration: 500,
+      unmountOnExit: false
+    }
   },
   styles: {
     base: {
