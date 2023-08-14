@@ -18,6 +18,7 @@ import { mergeClasses } from '../../utils/styleHelper';
 
 export interface AccordionTransitionProps extends TransitionConfig {
   unmountOnExit?: boolean;
+  enterTransition?: string;
 }
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -44,6 +45,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     const { defaultProps, styles } = config.accordion;
     const {
       unmountOnExit = defaultProps.transitionProps.unmountOnExit,
+      enterTransition = defaultProps.transitionProps.enterTransition,
       enterDuration = defaultProps.transitionProps.enterDuration,
       exitDuration = defaultProps.transitionProps.exitDuration
     } = transitionProps ?? {};
@@ -67,6 +69,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       () => ({
         state,
         duration: enterState ? enterDuration : exitDuration,
+        enterTransition,
         isDisabled: disabled ?? defaultProps.disabled,
         onClick: () => {
           if (exitState && open === undefined) {
@@ -91,6 +94,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         exitState,
         enterDuration,
         exitDuration,
+        enterTransition,
         disabled,
         open
       ]

@@ -27,7 +27,8 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     },
     rootRef
   ) => {
-    const { state, duration, onTransitionEnd } = useContext(accordionContext);
+    const { state, duration, enterTransition, onTransitionEnd } =
+      useContext(accordionContext);
     const { config } = useContext(themeContext);
     const {
       defaultProps,
@@ -66,6 +67,8 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
         rootStyles.base,
         (state === States.ENTERING || state === States.ENTERED) &&
           rootStyles.open,
+        (state === States.ENTERING || state === States.ENTERED) &&
+          enterTransition,
         rootClassName
       )
     );
