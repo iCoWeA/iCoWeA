@@ -2,14 +2,16 @@ export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
 export type ButtonGroupSizes = 'sm' | 'md' | 'lg';
 export type ButtonGroupColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
+export interface ButtonGroupDefaultProps {
+  variant?: ButtonGroupVariants;
+  size?: ButtonGroupSizes;
+  color?: ButtonGroupColors;
+  elevated?: boolean;
+  fullwidth?: boolean;
+}
+
 export interface ButtonGroupConfig {
-  defaultProps: {
-    variant: ButtonGroupVariants;
-    size: ButtonGroupSizes;
-    color: ButtonGroupColors;
-    elevated: boolean;
-    fullwidth: boolean;
-  };
+  defaultProps: Required<ButtonGroupDefaultProps>;
   styles: {
     root: {
       base: Record<string, string>;

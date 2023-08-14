@@ -1,8 +1,10 @@
+export interface CardBodyDefaultProps {
+  columns?: boolean;
+  fullwidht?: boolean;
+}
+
 export interface CardBodyConfig {
-  defaultProps: {
-    columns: boolean;
-    fullwidht: boolean;
-  };
+  defaultProps: Required<CardBodyDefaultProps>;
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;
