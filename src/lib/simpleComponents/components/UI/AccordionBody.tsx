@@ -8,7 +8,7 @@ import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
-import { States } from '../../hooks/useMount';
+import { States } from '../../hooks/useTransition';
 
 export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
   componentsProps?: {

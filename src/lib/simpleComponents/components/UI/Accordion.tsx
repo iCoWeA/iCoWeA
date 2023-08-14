@@ -12,7 +12,7 @@ import themeContext from '../../contexts/theme';
 import useMount, {
   States,
   type Config as TransitionConfig
-} from '../../hooks/useMount';
+} from '../../hooks/useTransition';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses } from '../../utils/styleHelper';
 

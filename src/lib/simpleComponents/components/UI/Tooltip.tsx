@@ -18,7 +18,7 @@ import usePrevious from '../../hooks/usePrevious';
 import useMount, {
   States,
   type Config as TransitionConfig
-} from '../../hooks/useMount';
+} from '../../hooks/useTransition';
 import { twMerge } from 'tailwind-merge';
 import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
 
