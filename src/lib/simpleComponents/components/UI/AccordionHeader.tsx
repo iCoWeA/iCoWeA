@@ -35,8 +35,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     },
     rootRef
   ) => {
-    const { state, isDisabled, duration, onClick } =
-      useContext(accordionContext);
+    const { state, disabled, duration, onClick } = useContext(accordionContext);
     const { theme, config } = useContext(themeContext);
     const {
       defaultProps,
@@ -100,7 +99,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     return (
       <button
         onClick={clickRootHandler}
-        disabled={isRootDisabled === true || isDisabled}
+        disabled={isRootDisabled === true || disabled}
         className={mergedRootClassName}
         ref={rootRef}
         {...restRootProps}
