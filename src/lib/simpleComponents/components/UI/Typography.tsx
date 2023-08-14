@@ -4,7 +4,6 @@ import {
 } from '../../configs/typographyConfig';
 import themeContext from '../../contexts/theme';
 import { setDefaultProps, mergeClasses } from '../../utils/propsHelper';
-import { twMerge } from 'tailwind-merge';
 
 export interface TypographyProps
   extends TypographyDefaultProps,
@@ -22,14 +21,12 @@ TypographyProps
 
   /* Set props */
   if (variant === 'h1') {
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants.h1,
-        styles.aligns[align],
-        styles.colors[theme][color],
-        className
-      )
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.variants.h1,
+      styles.aligns[align],
+      styles.colors[theme][color],
+      className
     );
 
     return (
@@ -42,14 +39,12 @@ TypographyProps
   }
 
   if (variant === 'h2') {
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants.h2,
-        styles.aligns[align],
-        styles.colors[theme][color],
-        className
-      )
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.variants.h2,
+      styles.aligns[align],
+      styles.colors[theme][color],
+      className
     );
 
     return (
@@ -62,14 +57,12 @@ TypographyProps
   }
 
   if (variant === 'h3') {
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants.h3,
-        styles.aligns[align],
-        styles.colors[theme][color],
-        className
-      )
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.variants.h3,
+      styles.aligns[align],
+      styles.colors[theme][color],
+      className
     );
 
     return (
@@ -82,14 +75,12 @@ TypographyProps
   }
 
   if (variant === 'h4') {
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants.h4,
-        styles.aligns[align],
-        styles.colors[theme][color],
-        className
-      )
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.variants.h4,
+      styles.aligns[align],
+      styles.colors[theme][color],
+      className
     );
 
     return (
@@ -102,14 +93,12 @@ TypographyProps
   }
 
   if (variant === 'h5') {
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants.h5,
-        styles.aligns[align],
-        styles.colors[theme][color],
-        className
-      )
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.variants.h5,
+      styles.aligns[align],
+      styles.colors[theme][color],
+      className
     );
 
     return (
@@ -122,14 +111,12 @@ TypographyProps
   }
 
   if (variant === 'h6') {
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants.h6,
-        styles.aligns[align],
-        styles.colors[theme][color],
-        className
-      )
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.variants.h6,
+      styles.aligns[align],
+      styles.colors[theme][color],
+      className
     );
 
     return (
@@ -142,14 +129,12 @@ TypographyProps
   }
 
   if (variant === 'lead') {
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants.lead,
-        styles.aligns[align],
-        styles.colors[theme][color],
-        className
-      )
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.variants.lead,
+      styles.aligns[align],
+      styles.colors[theme][color],
+      className
     );
 
     return (
@@ -162,14 +147,12 @@ TypographyProps
   }
 
   if (variant === 'paragraph') {
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants.paragraph,
-        styles.aligns[align],
-        styles.colors[theme][color],
-        className
-      )
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.variants.paragraph,
+      styles.aligns[align],
+      styles.colors[theme][color],
+      className
     );
 
     return (
@@ -182,14 +165,12 @@ TypographyProps
   }
 
   if (variant === 'small') {
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants.small,
-        styles.aligns[align],
-        styles.colors[theme][color],
-        className
-      )
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.variants.small,
+      styles.aligns[align],
+      styles.colors[theme][color],
+      className
     );
 
     return (
@@ -201,14 +182,12 @@ TypographyProps
     );
   }
 
-  const mergedClassName = twMerge(
-    mergeClasses(
-      styles.base,
-      styles.variants.span,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    )
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.variants.span,
+    styles.aligns[align],
+    styles.colors[theme][color],
+    className
   );
 
   return (
