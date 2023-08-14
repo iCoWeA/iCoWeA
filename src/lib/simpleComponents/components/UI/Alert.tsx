@@ -10,7 +10,6 @@ import {
 } from '../../configs/alertConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
-import { twMerge } from 'tailwind-merge';
 
 export interface AlertProps extends AlertDefaultProps, BaseHTMLAttributes<HTMLDivElement> {
   icon?: ReactNode;
@@ -30,22 +29,19 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     let buttonNode: ReactNode;
 
     /* Set root props */
-    const mergedRootClassName = twMerge(
-      mergeClasses(
-        rootStyles.base,
-        rootStyles.variants[variant][theme][color],
-        invisible && rootStyles.invisible,
-        (action !== undefined || onClose !== undefined) && rootStyles.actionSpace,
-        rootClassName
-      )
+    const mergedRootClassName = mergeClasses(
+      rootStyles.base,
+      rootStyles.variants[variant][theme][color],
+      invisible && rootStyles.invisible,
+      (action !== undefined || onClose !== undefined) && rootStyles.actionSpace,
+      rootClassName
+
     );
 
     /* Set body props */
     const { className: bodyClassName, ...restBodyProps } = bodyProps;
 
-    const mergedBodyClassName = twMerge(
-      mergeClasses(bodyStyles.base, bodyClassName)
-    );
+    const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
 
     /* Set button props */
     if (action === undefined && onClose !== undefined) {
@@ -66,12 +62,11 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         }
       };
 
-      const mergedButtonClassName = twMerge(
-        mergeClasses(
-          buttonStyles.base,
-          buttonStyles.variants[variant][theme][color],
-          buttonClassName
-        )
+      const mergedButtonClassName = mergeClasses(
+        buttonStyles.base,
+        buttonStyles.variants[variant][theme][color],
+        buttonClassName
+
       );
 
       buttonNode = (
