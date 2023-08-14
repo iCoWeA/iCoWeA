@@ -1,33 +1,18 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import {
-  type TypographyDefaultProps
-} from '../../configs/typographyConfig';
+import { type TypographyDefaultProps } from '../../configs/typographyConfig';
 import themeContext from '../../contexts/theme';
 import { setDefaultProps, mergeClasses } from '../../utils/propsHelper';
 
-export interface TypographyProps
-  extends TypographyDefaultProps,
-  BaseHTMLAttributes<
-  HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement
-  > {}
+export interface TypographyProps extends TypographyDefaultProps, BaseHTMLAttributes<HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement> {}
 
-const Typography = forwardRef<
-HTMLParagraphElement | HTMLHeadingElement,
-TypographyProps
->((props, ref) => {
+const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, TypographyProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.typography;
   const { variant, align, color, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   if (variant === 'h1') {
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.variants.h1,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    );
+    const mergedClassName = mergeClasses(styles.base, styles.variants.h1, styles.aligns[align], styles.colors[theme][color], className);
 
     return (
       <h1
@@ -39,13 +24,7 @@ TypographyProps
   }
 
   if (variant === 'h2') {
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.variants.h2,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    );
+    const mergedClassName = mergeClasses(styles.base, styles.variants.h2, styles.aligns[align], styles.colors[theme][color], className);
 
     return (
       <h2
@@ -57,13 +36,7 @@ TypographyProps
   }
 
   if (variant === 'h3') {
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.variants.h3,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    );
+    const mergedClassName = mergeClasses(styles.base, styles.variants.h3, styles.aligns[align], styles.colors[theme][color], className);
 
     return (
       <h3
@@ -75,13 +48,7 @@ TypographyProps
   }
 
   if (variant === 'h4') {
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.variants.h4,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    );
+    const mergedClassName = mergeClasses(styles.base, styles.variants.h4, styles.aligns[align], styles.colors[theme][color], className);
 
     return (
       <h4
@@ -93,13 +60,7 @@ TypographyProps
   }
 
   if (variant === 'h5') {
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.variants.h5,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    );
+    const mergedClassName = mergeClasses(styles.base, styles.variants.h5, styles.aligns[align], styles.colors[theme][color], className);
 
     return (
       <h5
@@ -111,13 +72,7 @@ TypographyProps
   }
 
   if (variant === 'h6') {
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.variants.h6,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    );
+    const mergedClassName = mergeClasses(styles.base, styles.variants.h6, styles.aligns[align], styles.colors[theme][color], className);
 
     return (
       <h6
@@ -129,13 +84,7 @@ TypographyProps
   }
 
   if (variant === 'lead') {
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.variants.lead,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    );
+    const mergedClassName = mergeClasses(styles.base, styles.variants.lead, styles.aligns[align], styles.colors[theme][color], className);
 
     return (
       <p
@@ -147,13 +96,7 @@ TypographyProps
   }
 
   if (variant === 'paragraph') {
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.variants.paragraph,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    );
+    const mergedClassName = mergeClasses(styles.base, styles.variants.paragraph, styles.aligns[align], styles.colors[theme][color], className);
 
     return (
       <p
@@ -165,13 +108,7 @@ TypographyProps
   }
 
   if (variant === 'small') {
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.variants.small,
-      styles.aligns[align],
-      styles.colors[theme][color],
-      className
-    );
+    const mergedClassName = mergeClasses(styles.base, styles.variants.small, styles.aligns[align], styles.colors[theme][color], className);
 
     return (
       <p
@@ -182,13 +119,7 @@ TypographyProps
     );
   }
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants.span,
-    styles.aligns[align],
-    styles.colors[theme][color],
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, styles.variants.span, styles.aligns[align], styles.colors[theme][color], className);
 
   return (
     <span
