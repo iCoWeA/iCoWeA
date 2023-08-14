@@ -68,7 +68,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
       }
     };
 
-    const animationEndRootHnadler = (
+    const animationEndRootHandler = (
       event: AnimationEvent<HTMLDivElement>
     ): void => {
       onTransitionEnd();
@@ -109,7 +109,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     return (
       <div
         onTransitionEnd={transitionEndRootHandler}
-        onAnimationEnd={animationEndRootHnadler}
+        onAnimationEnd={animationEndRootHandler}
         style={mergedRootStyle}
         className={mergedRootClassName}
         ref={rootRef}

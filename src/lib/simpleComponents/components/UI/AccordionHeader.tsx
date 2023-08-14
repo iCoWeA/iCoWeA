@@ -28,7 +28,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
       icon,
       componentsProps,
       onClick: onRootClick,
-      disabled: isRootDisabled,
+      disabled: rootDisabled,
       className: rootClassName,
       children: rootChildren,
       ...restRootProps
@@ -54,6 +54,8 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         onRootClick(event);
       }
     };
+
+    const isRootDisabled = rootDisabled === undefined ? disabled : rootDisabled;
 
     const mergedRootClassName = twMerge(
       mergeClasses(
@@ -99,7 +101,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     return (
       <button
         onClick={clickRootHandler}
-        disabled={isRootDisabled === true || disabled}
+        disabled={isRootDisabled}
         className={mergedRootClassName}
         ref={rootRef}
         {...restRootProps}
