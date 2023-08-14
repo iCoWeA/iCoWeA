@@ -3,7 +3,6 @@ export interface AccordionConfig {
     disabled: boolean;
     transitionProps: {
       unmountOnExit: boolean;
-      enterTransition: string;
       enterDuration: number;
       exitDuration: number;
     };
@@ -19,7 +18,6 @@ const accordionConfig: AccordionConfig = {
     disabled: false,
     transitionProps: {
       unmountOnExit: false,
-      enterTransition: '',
       enterDuration: 500,
       exitDuration: 500
     }
