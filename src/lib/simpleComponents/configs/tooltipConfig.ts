@@ -23,7 +23,7 @@ export interface TooltipConfig {
   styles: {
     root: {
       base: Record<string, string>;
-      show: Record<string, string>;
+      open: Record<string, string>;
       positions: Record<TooltipPositions, Record<string, string>>;
       colors: Record<string, Record<TooltipColors, Record<string, string>>>
     },
@@ -66,7 +66,7 @@ const tooltipConfig: TooltipConfig = {
         transition: 'transition-[opacity]',
         focus: 'focus:outline-0'
       },
-      show: {
+      open: {
         opacity: 'opacity-100'
       },
       positions: {

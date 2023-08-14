@@ -5,7 +5,6 @@ import React, {
   type ReactNode,
   useEffect,
   type CSSProperties,
-  useRef,
   type TransitionEvent
 } from 'react';
 import { createPortal } from 'react-dom';
@@ -14,7 +13,6 @@ import {
   type TooltipColors
 } from '../../configs/tooltipConfig';
 import themeContext from '../../contexts/theme';
-import usePrevious from '../../hooks/usePrevious';
 import useMount, {
   States,
   type Config as TransitionConfig
@@ -60,8 +58,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     rootRef
   ) => {
-    const prevState = usePrevious(open);
-    const isHovered = useRef(open ?? false);
     const { theme, config } = useContext(themeContext);
     const {
       defaultProps,
@@ -86,29 +82,23 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       exit();
     }
 
-    if (prevState !== undefined && open === undefined) {
-      if (!isHovered.current) {
-        exit();
-      }
-    }
-
     useEffect(() => {
       if (anchorRef !== null) {
         const showHandler: () => void = () => {
-          isHovered.current = true;
-
           if (open === undefined) {
             enter();
           }
         };
 
         const hideHandler: () => void = () => {
-          isHovered.current = false;
-
           if (open === undefined) {
             exit();
           }
         };
+
+        if (anchorRef?.matches(':hover') === false && open === undefined) {
+          exit();
+        }
 
         anchorRef?.addEventListener('mouseenter', showHandler);
         anchorRef?.addEventListener('mouseleave', hideHandler);
@@ -118,7 +108,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           anchorRef?.removeEventListener('mouseleave', hideHandler);
         };
       }
-    }, [anchorRef, isHovered, open, enter, exit]);
+    }, [anchorRef, open, enter, exit]);
 
     if (anchorRef === null || (unmountOnExit && state === States.EXITED)) {
       return <></>;
@@ -224,7 +214,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         rootStyles.positions[position],
         rootStyles.colors[theme][color],
         (state === States.ENTERING || state === States.ENTERED) &&
-          rootStyles.show,
+          rootStyles.open,
         rootClassName
       )
     );
