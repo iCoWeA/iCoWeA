@@ -39,7 +39,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef)
   const mergedInputClassName = mergeClasses(
     inputStyles.base,
     inputStyles.after,
-    !invalid && !valid && inputStyles.colors[theme][color],
+    !valid && !invalid && inputStyles.colors[theme][color],
     valid && inputStyles.valid[theme],
     invalid && inputStyles.invalid[theme],
     inputClassNames
