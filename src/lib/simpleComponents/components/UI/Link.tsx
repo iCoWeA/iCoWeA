@@ -1,12 +1,10 @@
 import React, { forwardRef, useContext } from 'react';
-import { type LinkDefaultProps } from '../../configs/linkConfig';
+import { type LinkProps } from '../../configs/linkConfig';
 import { type LinkProps as BaseLinkProps, Link as BaseLink } from 'react-router-dom';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface LinkProps extends LinkDefaultProps, BaseLinkProps {}
-
-const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
+const Link = forwardRef<HTMLAnchorElement, LinkProps & BaseLinkProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.link;
   const { underline, color, fullwidth, disabled, className, ...restProps } = setDefaultProps(props, defaultProps);

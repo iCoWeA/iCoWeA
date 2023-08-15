@@ -1,11 +1,9 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type ListDefaultProps } from '../../configs/listConfig';
+import { type ListProps } from '../../configs/listConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface ListProps extends ListDefaultProps, BaseHTMLAttributes<HTMLUListElement> {}
-
-const List = forwardRef<HTMLUListElement, ListProps>((props, ref) => {
+const List = forwardRef<HTMLUListElement, ListProps & BaseHTMLAttributes<HTMLUListElement>>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.list;
   const { row, disableGap, className, ...restProps } = setDefaultProps(props, defaultProps);
