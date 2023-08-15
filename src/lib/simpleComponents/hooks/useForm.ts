@@ -61,54 +61,54 @@ const initializeInput = (defaultValue: string = ''): InputState => ({
   timerId: initialTimerId
 });
 
-const reducer = (state: State, { type, payload }: Action): State => {
+const reducer = (state: State, { type, payload: { inputName, input, timerId = initialTimerId, defaultValue = '', pattern = '', errorMessage = '', config = {} } }: Action): State => {
   const inputs: Record<string, InputState> = JSON.parse(JSON.stringify(state.inputs));
 
   if (type === ActionTypes.CHANGE) {
-    clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName].value = payload?.input?.value ?? '';
-    inputs[payload.inputName].isValid = validate(payload.input, payload.pattern);
-    inputs[payload.inputName].showError = !inputs[payload.inputName].isValid;
-    inputs[payload.inputName].errorMessage = inputs[payload.inputName].showError ? payload.errorMessage ?? '' : '';
-    inputs[payload.inputName].timerId = initialTimerId;
+    clearTimeout(inputs[inputName].timerId);
+    inputs[inputName].value = input?.value ?? '';
+    inputs[inputName].isValid = validate(input, pattern);
+    inputs[inputName].showError = !inputs[inputName].isValid;
+    inputs[inputName].errorMessage = inputs[inputName].showError ? errorMessage : '';
+    inputs[inputName].timerId = initialTimerId;
   }
 
   if (type === ActionTypes.DEBOUNCED_CHANGE) {
-    clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName].value = payload?.input?.value ?? '';
-    inputs[payload.inputName].isValid = validate(payload.input, payload.pattern);
-    inputs[payload.inputName].showError = inputs[payload.inputName].isValid
+    clearTimeout(inputs[inputName].timerId);
+    inputs[inputName].value = input?.value ?? '';
+    inputs[inputName].isValid = validate(input, pattern);
+    inputs[inputName].showError = inputs[inputName].isValid
       ? false
-      : inputs[payload.inputName].showError;
-    inputs[payload.inputName].errorMessage = inputs[payload.inputName].showError ? payload.errorMessage ?? '' : '';
-    inputs[payload.inputName].timerId = payload.timerId ?? initialTimerId;
+      : inputs[inputName].showError;
+    inputs[inputName].errorMessage = inputs[inputName].showError ? errorMessage : '';
+    inputs[inputName].timerId = timerId;
   }
 
   if (type === ActionTypes.REVALID) {
-    clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName].isValid = validate(payload.input, payload.pattern);
-    inputs[payload.inputName].showError = !inputs[payload.inputName].isValid;
-    inputs[payload.inputName].errorMessage = inputs[payload.inputName].showError ? payload.errorMessage ?? '' : '';
-    inputs[payload.inputName].timerId = initialTimerId;
+    clearTimeout(inputs[inputName].timerId);
+    inputs[inputName].isValid = validate(input, pattern);
+    inputs[inputName].showError = !inputs[inputName].isValid;
+    inputs[inputName].errorMessage = inputs[inputName].showError ? errorMessage : '';
+    inputs[inputName].timerId = initialTimerId;
   }
 
   if (type === ActionTypes.BLUR) {
-    clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName].isValid = validate(payload.input, payload.pattern);
-    inputs[payload.inputName].showError = !inputs[payload.inputName].isValid;
-    inputs[payload.inputName].errorMessage = inputs[payload.inputName].showError ? payload.errorMessage ?? '' : '';
-    inputs[payload.inputName].timerId = initialTimerId;
+    clearTimeout(inputs[inputName].timerId);
+    inputs[inputName].isValid = validate(input, pattern);
+    inputs[inputName].showError = !inputs[inputName].isValid;
+    inputs[inputName].errorMessage = inputs[inputName].showError ? errorMessage : '';
+    inputs[inputName].timerId = initialTimerId;
   }
 
   if (type === ActionTypes.RESET) {
-    clearTimeout(inputs[payload.inputName].timerId);
-    inputs[payload.inputName] = initializeInput(payload.defaultValue);
+    clearTimeout(inputs[inputName].timerId);
+    inputs[inputName] = initializeInput(defaultValue);
   }
 
   if (type === ActionTypes.RESET_FORM) {
     Object.keys(inputs).forEach((inputName) => {
       clearTimeout(inputs[inputName].timerId);
-      inputs[inputName] = initializeInput(payload?.config !== undefined ? payload.config[payload.inputName].defaultValue : '');
+      inputs[inputName] = initializeInput(config !== undefined ? config[inputName].defaultValue : '');
     });
   }
 
