@@ -2,15 +2,16 @@ export type IconButtonVariants = 'filled' | 'outlined' | 'text';
 export type IconButtonSizes = 'sm' | 'md' | 'lg';
 export type IconButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface IconButtonDefaultProps {
+export interface IconButtonProps {
   variant?: IconButtonVariants;
   size?: IconButtonSizes;
   color?: IconButtonColors;
   elevated?: boolean;
+  className?: string;
 }
 
 export interface IconButtonConfig {
-  defaultProps: Required<IconButtonDefaultProps>;
+  defaultProps: IconButtonProps;
   styles: {
     base: Record<string, string>;
     sizes: Record<IconButtonSizes, Record<string, string>>;
@@ -24,7 +25,8 @@ const iconButtonConfig: IconButtonConfig = {
     variant: 'filled',
     size: 'md',
     color: 'primary',
-    elevated: false
+    elevated: false,
+    className: ''
   },
   styles: {
     base: {
