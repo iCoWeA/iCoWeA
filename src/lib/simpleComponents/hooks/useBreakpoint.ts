@@ -30,7 +30,7 @@ const useBreakpoint = (): Breakpoints => {
       setBreakpoint(calculateBreakpoint(document.documentElement.clientWidth));
     };
 
-    window.addEventListener('resize', resizeHandler);
+    document.addEventListener('resize', resizeHandler);
 
     return () => { document.removeEventListener('resize', resizeHandler); };
   }, []);
