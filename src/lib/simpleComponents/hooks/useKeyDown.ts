@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-const useKeyDown = (element: HTMLElement, key: string, dispatchKeyDown: () => void): void => {
+const useKeyDown = (element: HTMLElement, key: string, onKeydown: () => void): void => {
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent): void => {
       if (event.key === key) {
-        dispatchKeyDown();
+        onKeydown();
       }
     };
 
@@ -13,7 +13,7 @@ const useKeyDown = (element: HTMLElement, key: string, dispatchKeyDown: () => vo
     return () => {
       element.removeEventListener('keydown', keyDownHandler);
     };
-  }, [element, key, dispatchKeyDown]);
+  }, [element, key, onKeydown]);
 };
 
 export default useKeyDown;

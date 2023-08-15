@@ -164,7 +164,7 @@ const useForm = (config: Config): Return => {
 
   const change = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     dispatch(actions.change(currentTarget, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
-  }, []);
+  }, [inputs]);
 
   const debouncedChange = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const timerId = window.setTimeout(() => {
@@ -172,19 +172,19 @@ const useForm = (config: Config): Return => {
     }, inputs[currentTarget.name].debounceDelay ?? debounceDelay ?? initalDebounceDelay);
 
     dispatch(actions.debouncedChange(currentTarget, timerId, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
-  }, []);
+  }, [inputs, debounceDelay]);
 
   const blur = useCallback(({ currentTarget }: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     dispatch(actions.blur(currentTarget, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
-  }, []);
+  }, [inputs]);
 
   const reset = useCallback((inputName: string): void => {
     dispatch(actions.reset(inputName, inputs[inputName].defaultValue));
-  }, []);
+  }, [inputs]);
 
   const resetForm = useCallback((): void => {
     dispatch(actions.resetForm(inputs));
-  }, []);
+  }, [inputs]);
 
   return {
     state,

@@ -85,7 +85,7 @@ const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitD
         onEntering();
       }
     }, enterDelay);
-  }, []);
+  }, [enterDuration, enterDelay]);
 
   const exit = useCallback((instant: boolean = false): void => {
     if (instant) {
@@ -121,7 +121,7 @@ const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitD
         onExiting();
       }
     }, exitDelay);
-  }, []);
+  }, [exitDuration, exitDelay]);
 
   return {
     state,
