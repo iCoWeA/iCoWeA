@@ -1,10 +1,11 @@
-export interface CardHeaderDefaultProps {
+export interface CardHeaderProps {
   columns?: boolean;
   fullwidht?: boolean;
+  className?: string;
 }
 
 export interface CardHeaderConfig {
-  defaultProps: Required<CardHeaderDefaultProps>;
+  defaultProps: CardHeaderProps;
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;
@@ -15,7 +16,8 @@ export interface CardHeaderConfig {
 const cardHeaderConfig: CardHeaderConfig = {
   defaultProps: {
     columns: false,
-    fullwidht: false
+    fullwidht: false,
+    className: ''
   },
   styles: {
     base: {
