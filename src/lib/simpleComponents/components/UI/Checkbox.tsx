@@ -21,7 +21,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef)
     iconProps,
     checked: inputChecked,
     disabled: inputDisabled,
-    type: inputType = 'checkbox',
+    type: inputType,
     className: inputClassNames,
     children: inputChildren,
     ...restInputProps

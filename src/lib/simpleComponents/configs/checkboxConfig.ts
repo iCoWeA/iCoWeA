@@ -1,4 +1,4 @@
-import { type BaseHTMLAttributes, type SVGAttributes } from 'react';
+import { type BaseHTMLAttributes, type SVGAttributes, type HTMLInputTypeAttribute } from 'react';
 
 export type CheckboxColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
@@ -8,6 +8,7 @@ export interface CheckboxDefaultProps {
   invalid?: boolean;
   rootProps?: BaseHTMLAttributes<HTMLDivElement>;
   iconProps?: SVGAttributes<SVGSVGElement>;
+  type?: HTMLInputTypeAttribute
 }
 
 export interface CheckboxConfig {
@@ -36,7 +37,8 @@ const checkboxConfig: CheckboxConfig = {
     valid: false,
     invalid: false,
     rootProps: {},
-    iconProps: {}
+    iconProps: {},
+    type: 'checkbox'
   },
   styles: {
     root: {
