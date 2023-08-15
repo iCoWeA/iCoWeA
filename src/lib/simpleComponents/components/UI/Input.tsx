@@ -14,7 +14,7 @@ import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 import useOutsideClick from '../../hooks/useOutsideClick';
 
-const Input = forwardRef<HTMLDivElement, InputProps & InputHTMLAttributes<HTMLInputElement>>((props, rootRef) => {
+const Input = forwardRef<HTMLDivElement, InputProps & InputHTMLAttributes<HTMLInputElement>>((inputProps, rootRef) => {
   const componentsRefs = useRef<{ root: HTMLDivElement | null; input: HTMLInputElement | null }>({ root: null, input: null });
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.input;
@@ -37,7 +37,7 @@ const Input = forwardRef<HTMLDivElement, InputProps & InputHTMLAttributes<HTMLIn
     value: inputValue,
     className: inputClassName,
     ...restInputProps
-  } = setDefaultProps(props, defaultProps);
+  } = setDefaultProps(defaultProps, inputProps);
   let labelNode: ReactNode;
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRefs.current.root, []);

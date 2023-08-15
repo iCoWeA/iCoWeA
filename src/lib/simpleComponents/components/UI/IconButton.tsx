@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps & ButtonHTMLAttributes<HTMLButtonElement>>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.iconButton;
-  const { variant, size, color, elevated, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { variant, size, color, elevated, className, ...restProps } = setDefaultProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.sizes[size], elevated && styles.elevated[theme], className);

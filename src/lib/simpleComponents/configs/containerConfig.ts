@@ -6,7 +6,7 @@ export interface ContainerProps {
 }
 
 export interface ContainerConfig {
-  defaultProps: ContainerProps;
+  defaultProps: Required<ContainerProps>;
   styles: {
     base: Record<string, string>;
     variants: Record<ContainerVariants, Record<string, string>>;

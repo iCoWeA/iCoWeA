@@ -1,25 +1,43 @@
-import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes, type ReactNode } from 'react';
+import { type MutableRefObject, type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes, type ReactNode, type FocusEventHandler } from 'react';
 
 export type InputVariants = 'outlined' | 'filled' | 'standard';
 export type InputColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
+export interface InputProps {
+  variant?: InputVariants;
+  color?: InputColors;
+  valid?: boolean;
+  invalid?: boolean;
+  label?: ReactNode;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
+  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+  containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+  legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
+  labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
+  inputRef?: MutableRefObject<HTMLInputElement> | null;
+  onFocus?: FocusEventHandler<HTMLInputElement>;
+  autoFocus?: boolean;
+  disabled?: boolean;
+  value?: string;
+  className?: string;
+}
+
 export interface InputConfig {
   defaultProps: {
-    variant: InputVariants;
+    variant: Required<InputVariants>;
     color: InputColors;
     valid: boolean;
     invalid: boolean;
-    label: ReactNode;
-    startAdornment: ReactNode;
-    endAdornment: ReactNode;
-    labelPosition: string;
-    componentsProps: {
-      root: BaseHTMLAttributes<HTMLDivElement>;
-      container: FieldsetHTMLAttributes<HTMLFieldSetElement>;
-      legend: BaseHTMLAttributes<HTMLLegendElement>;
-      label: LabelHTMLAttributes<HTMLLabelElement>;
-    }
-  },
+    rootProps: BaseHTMLAttributes<HTMLDivElement>;
+    containerProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+    legendProps: BaseHTMLAttributes<HTMLLegendElement>;
+    labelProps: LabelHTMLAttributes<HTMLLabelElement>;
+    autoFocus: boolean;
+    disabled: boolean;
+    value: string;
+    className: string;
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -59,16 +77,14 @@ const inputConfig: InputConfig = {
     color: 'primary',
     valid: false,
     invalid: false,
-    label: null,
-    startAdornment: null,
-    endAdornment: null,
-    labelPosition: '',
-    componentsProps: {
-      root: {},
-      container: {},
-      legend: {},
-      label: {}
-    }
+    rootProps: {},
+    containerProps: {},
+    legendProps: {},
+    labelProps: {},
+    autoFocus: false,
+    disabled: false,
+    value: '',
+    className: ''
   },
   styles: {
     root: {
@@ -109,13 +125,13 @@ const inputConfig: InputConfig = {
       },
       variants: {
         standard: {
-          padding: 'pt-2.5 pb-1.5'
+          margin: 'mt-2.5 mb-1.5'
         },
         filled: {
-          padding: 'pt-7 pb-1.5'
+          margin: 'mt-7 mb-1.5'
         },
         outlined: {
-          padding: 'py-2'
+          margin: 'my-2'
         }
       },
       colors: {
@@ -336,6 +352,7 @@ const inputConfig: InputConfig = {
     label: {
       base: {
         position: 'absolute',
+        left: 'left-4',
         display: 'block',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition-all',
@@ -359,17 +376,14 @@ const inputConfig: InputConfig = {
       variants: {
         standard: {
           top: 'top-3.5',
-          left: 'left-4',
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4 group-[.shifted]:text-sm'
         },
         filled: {
           top: 'top-7',
-          left: 'left-4',
           group: 'group-[.shifted]:top-2 group-[.shifted]:text-sm'
         },
         outlined: {
           top: 'top-2',
-          left: 'left-4',
           group: 'group-[.shifted]:left-0 group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4 group-[.shifted]:mx-4 group-[.shifted]:px-0.5 group-[.shifted]:text-sm'
         }
       },

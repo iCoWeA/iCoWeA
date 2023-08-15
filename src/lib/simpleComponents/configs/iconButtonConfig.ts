@@ -11,7 +11,7 @@ export interface IconButtonProps {
 }
 
 export interface IconButtonConfig {
-  defaultProps: IconButtonProps;
+  defaultProps: Required<IconButtonProps>;
   styles: {
     base: Record<string, string>;
     sizes: Record<IconButtonSizes, Record<string, string>>;

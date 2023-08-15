@@ -9,7 +9,7 @@ export interface IconProps {
 }
 
 export interface IconConfig {
-  defaultProps: IconProps;
+  defaultProps: Required<IconProps>;
   styles: {
     base: Record<string, string>;
     sizes: Record<IconSizes, Record<string, string>>;

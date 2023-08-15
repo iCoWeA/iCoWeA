@@ -4,7 +4,7 @@ export interface FormProps {
 }
 
 export interface FormConfig {
-  defaultProps: FormProps;
+  defaultProps: Required<FormProps>;
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;

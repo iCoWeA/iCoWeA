@@ -4,7 +4,7 @@ export interface FormGroupProps {
 }
 
 export interface FormGroupConfig {
-  defaultProps: FormGroupProps;
+  defaultProps: Required<FormGroupProps>;
   styles: {
     base: Record<string, string>;
     row: Record<string, string>;
