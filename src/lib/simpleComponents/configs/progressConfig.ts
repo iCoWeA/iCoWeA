@@ -4,7 +4,7 @@ export type ProgressSizeVariants = 'default' | 'label';
 export type ProgressSizes = 'sm' | 'md' | 'lg';
 export type ProgressColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface ProgressDefaultProps {
+export interface ProgressProps {
   value?: number | string;
   size?: ProgressSizes;
   color?: ProgressColors;
@@ -15,7 +15,14 @@ export interface ProgressDefaultProps {
 }
 
 export interface ProgressConfig {
-  defaultProps: Required<ProgressDefaultProps>;
+  defaultProps: {
+    value?: number | string;
+    size?: ProgressSizes;
+    color?: ProgressColors;
+    rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+    style?: CSSProperties;
+    className?: string;
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -35,7 +42,6 @@ const progressConfig: ProgressConfig = {
     size: 'md',
     color: 'primary',
     rootProps: {},
-    barRef: null,
     style: {},
     className: ''
   },

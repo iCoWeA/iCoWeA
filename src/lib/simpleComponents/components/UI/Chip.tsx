@@ -45,7 +45,9 @@ const Chip = forwardRef<HTMLDivElement, ChipProps & BaseHTMLAttributes<HTMLDivEl
     const { onClick: onButtonClick, className: buttonClassName, ...restButtonProps } = buttonProps;
 
     const clickButtonHandler = (event: MouseEvent<HTMLButtonElement>): void => {
-      onClose();
+      if (onClose !== undefined) {
+        onClose();
+      }
 
       if (onButtonClick !== undefined) {
         onButtonClick(event);

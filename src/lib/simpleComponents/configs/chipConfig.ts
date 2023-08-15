@@ -5,7 +5,7 @@ export type ChipSizes = 'sm' | 'md' | 'lg';
 export type ChipColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface ChipProps {
-  onClose?: (() => void) | null;
+  onClose?: () => void;
   variant?: ChipVariants;
   size?: ChipSizes;
   color?: ChipColors;
@@ -18,7 +18,16 @@ export interface ChipProps {
 }
 
 export interface ChipConfig {
-  defaultProps: Required<ChipProps>;
+  defaultProps: {
+    variant?: ChipVariants;
+    size?: ChipSizes;
+    color?: ChipColors;
+    invisible?: boolean;
+    bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
+    buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+    buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+    className?: string;
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -41,12 +50,10 @@ export interface ChipConfig {
 
 const chipConfig: ChipConfig = {
   defaultProps: {
-    onClose: null,
     variant: 'filled',
     size: 'md',
     color: 'primary',
     invisible: false,
-    action: null,
     bodyProps: {},
     buttonContainerProps: {},
     buttonProps: {},

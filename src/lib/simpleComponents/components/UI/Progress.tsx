@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes, type MutableRefObject } from 'react';
+import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
 import { type ProgressProps } from '../../configs/progressConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeStyles, setDefaultProps } from '../../utils/propsHelper';
@@ -12,8 +12,8 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps & BaseHTMLAttributes<H
     color,
     rootProps,
     barRef,
-    className: barClassName,
     style: barStyle,
+    className: barClassName,
     children: barChildren,
     ...restBarProps
   } = setDefaultProps(props, defaultProps);
@@ -32,15 +32,16 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps & BaseHTMLAttributes<H
 
   /* Set bar props */
   const barStyles = styles.bar;
-  const mergedBarStyle = mergeStyles({ width: `${value}%` }, barStyle);
-
-  const mergedBarClassName = mergeClasses(barStyles.base, barStyles.colors[theme][color], barClassName);
 
   const setBarRef = (element: HTMLDivElement): void => {
-    if (barRef !== undefined) {
+    if (barRef !== undefined && barRef !== null) {
       barRef.current = element;
     }
   };
+
+  const mergedBarStyle = mergeStyles({ width: `${value}%` }, barStyle);
+
+  const mergedBarClassName = mergeClasses(barStyles.base, barStyles.colors[theme][color], barClassName);
 
   return (
     <div

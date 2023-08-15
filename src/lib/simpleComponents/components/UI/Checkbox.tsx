@@ -41,13 +41,13 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps & InputHTMLAttributes<
   );
 
   const setInputRef = (element: HTMLInputElement): void => {
-    if (inputRef !== null) {
+    if (inputRef !== undefined && inputRef !== null) {
       inputRef.current = element;
     }
   };
 
   /* Set icon props */
-  if (icon === null) {
+  if (icon === undefined) {
     const iconStyles = styles.icon;
     const { className: iconClassName, ...restIconProps } = iconProps;
 

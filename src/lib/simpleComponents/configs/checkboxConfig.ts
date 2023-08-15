@@ -17,7 +17,17 @@ export interface CheckboxProps {
 }
 
 export interface CheckboxConfig {
-  defaultProps: CheckboxProps;
+  defaultProps: {
+    color?: CheckboxColors;
+    valid?: boolean;
+    invalid?: boolean;
+    rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+    iconProps?: SVGAttributes<SVGSVGElement>;
+    checked?: boolean;
+    disabled?: boolean;
+    type?: HTMLInputTypeAttribute
+    className?: string;
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -41,10 +51,8 @@ const checkboxConfig: CheckboxConfig = {
     color: 'primary',
     valid: false,
     invalid: false,
-    icon: null,
     rootProps: {},
     iconProps: {},
-    inputRef: null,
     checked: false,
     disabled: false,
     type: 'checkbox',
