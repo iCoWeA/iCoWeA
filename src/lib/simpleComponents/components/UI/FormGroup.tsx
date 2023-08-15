@@ -1,32 +1,26 @@
 import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
+import { type FormGroupDefaultProps } from '../../configs/formGroup';
 import themeContext from '../../contexts/theme';
-import { twMerge } from 'tailwind-merge';
-import { mergeClasses } from '../../utils/styleHelper';
+import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface FormGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
-  row?: boolean;
-}
+export interface FormGroupProps extends FormGroupDefaultProps, BaseHTMLAttributes<HTMLDivElement> {}
 
-const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
-  ({ row, className, ...restProps }, ref) => {
-    const { config } = useContext(themeContext);
-    const { defaultProps, styles } = config.formGroup;
+const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>((props, ref) => {
+  const { config } = useContext(themeContext);
+  const { defaultProps, styles } = config.formGroup;
+  const { row, className, ...restProps } = setDefaultProps(props, defaultProps);
 
-    row = row ?? defaultProps.row;
+  /* Set props */
+  const mergedClassName = mergeClasses(styles.base, row && styles.row, className);
 
-    const mergedClassName = twMerge(
-      mergeClasses(styles.base, row && styles.row, className)
-    );
-
-    return (
-      <div
-        className={mergedClassName}
-        ref={ref}
-        {...restProps}
-      />
-    );
-  }
-);
+  return (
+    <div
+      className={mergedClassName}
+      ref={ref}
+      {...restProps}
+    />
+  );
+});
 
 FormGroup.displayName = 'FormGroup';
 
