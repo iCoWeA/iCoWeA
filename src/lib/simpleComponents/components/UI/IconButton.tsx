@@ -1,54 +1,26 @@
-import React, {
-  forwardRef,
-  type ButtonHTMLAttributes,
-  useContext
-} from 'react';
-import {
-  type IconButtonColors,
-  type IconButtonSizes,
-  type IconButtonVariants
-} from '../../configs/iconButtonConfig';
+import React, { forwardRef, type ButtonHTMLAttributes, useContext } from 'react';
+import { type IconButtonDefaultProps } from '../../configs/iconButtonConfig';
 import themeContext from '../../contexts/theme';
-import { twMerge } from 'tailwind-merge';
-import { mergeClasses } from '../../utils/styleHelper';
+import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface IconButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: IconButtonVariants;
-  size?: IconButtonSizes;
-  color?: IconButtonColors;
-  elevated?: boolean;
-}
+export interface IconButtonProps extends IconButtonDefaultProps, ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ variant, size, color, elevated, className, ...restProps }, ref) => {
-    const { theme, config } = useContext(themeContext);
-    const { defaultProps, styles } = config.iconButton;
+const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
+  const { theme, config } = useContext(themeContext);
+  const { defaultProps, styles } = config.iconButton;
+  const { variant, size, color, elevated, className, ...restProps } = setDefaultProps(props, defaultProps);
 
-    variant = variant ?? defaultProps.variant;
-    size = size ?? defaultProps.size;
-    color = color ?? defaultProps.color;
-    elevated = elevated ?? defaultProps.elevated;
+  /* Set props */
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.sizes[size], elevated && styles.elevated[theme], className);
 
-    const mergedClassName = twMerge(
-      mergeClasses(
-        styles.base,
-        styles.variants[variant][theme][color],
-        styles.sizes[size],
-        elevated && styles.elevated[theme],
-        className
-      )
-    );
-
-    return (
-      <button
-        className={mergedClassName}
-        ref={ref}
-        {...restProps}
-      />
-    );
-  }
-);
+  return (
+    <button
+      className={mergedClassName}
+      ref={ref}
+      {...restProps}
+    />
+  );
+});
 
 IconButton.displayName = 'IconButton';
 
