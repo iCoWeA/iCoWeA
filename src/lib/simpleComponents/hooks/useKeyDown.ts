@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useKeyDown = (key: string, dispatchKeyDown: () => void, dependencies?: any[]): void => {
+const useKeyDown = (element: HTMLElement, key: string, dispatchKeyDown: () => void): void => {
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent): void => {
       if (event.key === key) {
@@ -8,12 +8,12 @@ const useKeyDown = (key: string, dispatchKeyDown: () => void, dependencies?: any
       }
     };
 
-    document.addEventListener('keydown', keyDownHandler);
+    element.addEventListener('keydown', keyDownHandler);
 
     return () => {
-      document.removeEventListener('keydown', keyDownHandler);
+      element.removeEventListener('keydown', keyDownHandler);
     };
-  }, dependencies);
+  }, [element, key, dispatchKeyDown]);
 };
 
 export default useKeyDown;
