@@ -1,31 +1,47 @@
-import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes, type ReactNode } from 'react';
+import { type MutableRefObject, type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes, type ReactNode, type FocusEventHandler } from 'react';
 
 export type TextAreaVariants = 'outlined' | 'filled' | 'standard';
 export type TextAreaColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
+export interface TextAreaProps {
+  variant?: TextAreaVariants;
+  color?: TextAreaColors;
+  valid?: boolean;
+  invalid?: boolean;
+  label?: ReactNode;
+  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+  containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+  legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
+  labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
+  textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
+  onFocus?: FocusEventHandler<HTMLTextAreaElement>;
+  autoFocus?: boolean;
+  disabled?: boolean;
+  value?: string;
+  className?: string;
+}
+
 export interface TextAreaConfig {
   defaultProps: {
-    variant: TextAreaVariants;
-    color: TextAreaColors;
-    valid: boolean;
-    invalid: boolean;
-    label: ReactNode;
-    startAdornment: ReactNode;
-    endAdornment: ReactNode;
-    labelPosition: string;
-    componentsProps: {
-      root: BaseHTMLAttributes<HTMLDivElement>;
-      container: FieldsetHTMLAttributes<HTMLFieldSetElement>;
-      legend: BaseHTMLAttributes<HTMLLegendElement>;
-      label: LabelHTMLAttributes<HTMLLabelElement>;
-    };
+    variant?: TextAreaVariants;
+    color?: TextAreaColors;
+    valid?: boolean;
+    invalid?: boolean;
+    rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+    containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+    legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
+    labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
+    textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
+    autoFocus?: boolean;
+    disabled?: boolean;
+    value?: string;
+    className?: string;
   };
   styles: {
     root: {
       base: Record<string, string>;
       focused: Record<string, string>;
       shifted: Record<string, string>;
-      variants: Record<TextAreaVariants, Record<string, string>>;
     },
     container: {
       base: Record<string, string>;
@@ -37,6 +53,7 @@ export interface TextAreaConfig {
       base: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
+      variants: Record<TextAreaVariants, Record<string, string>>;
       colors: Record<string, Record<TextAreaColors, Record<string, string>>>;
     },
     legend: {
@@ -44,7 +61,6 @@ export interface TextAreaConfig {
     },
     label: {
       base: Record<string, string>;
-      startAdornment: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
       variants: Record<TextAreaVariants, Record<string, string>>;
@@ -59,16 +75,14 @@ const textAreaConfig: TextAreaConfig = {
     color: 'primary',
     valid: false,
     invalid: false,
-    label: null,
-    startAdornment: null,
-    endAdornment: null,
-    labelPosition: '',
-    componentsProps: {
-      root: {},
-      container: {},
-      legend: {},
-      label: {}
-    }
+    rootProps: {},
+    containerProps: {},
+    legendProps: {},
+    labelProps: {},
+    autoFocus: false,
+    disabled: false,
+    value: '',
+    className: ''
   },
   styles: {
     root: {
@@ -87,24 +101,12 @@ const textAreaConfig: TextAreaConfig = {
       },
       shifted: {
         group: 'shifted'
-      },
-      variants: {
-        standard: {
-          padding: 'pt-2.5 pb-1.5'
-        },
-        filled: {
-          top: 'pt-7 pb-1.5'
-        },
-        outlined: {
-          top: 'py-2'
-        }
       }
     },
     textArea: {
       base: {
         display: 'block',
         width: 'w-full',
-        resize: 'resize-none',
         font: 'antialiased font-normal text-base font-sans',
         background: 'bg-transparent',
         focus: 'focus:outline-0'
@@ -117,6 +119,17 @@ const textAreaConfig: TextAreaConfig = {
       invalid: {
         default: {
           color: 'text-default-error'
+        }
+      },
+      variants: {
+        standard: {
+          margin: 'mt-2.5 mb-1.5'
+        },
+        filled: {
+          margin: 'mt-7 mb-1.5'
+        },
+        outlined: {
+          margin: 'my-2'
         }
       },
       colors: {
@@ -343,9 +356,6 @@ const textAreaConfig: TextAreaConfig = {
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
         focus: 'focus:outline-0'
-      },
-      startAdornment: {
-        position: 'left-12'
       },
       valid: {
         default: {
