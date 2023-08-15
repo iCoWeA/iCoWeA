@@ -1,8 +1,10 @@
+export interface ListDefaultProps {
+  row?: boolean;
+  disableGap?: boolean;
+}
+
 export interface ListConfig {
-  defaultProps: {
-    row: boolean;
-    disableGap: boolean;
-  };
+  defaultProps: Required<ListDefaultProps>;
   styles: {
     base: Record<string, string>;
     row: Record<string, string>;
