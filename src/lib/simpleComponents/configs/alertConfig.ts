@@ -7,7 +7,9 @@ export interface AlertDefaultProps {
   variant?: AlertVariants;
   color?: AlertColors;
   invisible?: boolean;
+  iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
@@ -16,11 +18,16 @@ export interface AlertConfig {
   styles: {
     root: {
       base: Record<string, string>;
-      actionSpace: Record<string, string>;
       invisible: Record<string, string>;
       variants: Record<AlertVariants, Record<string, Record<AlertColors, Record<string, string>>>>
     },
+    iconContainer: {
+      base: Record<string, string>;
+    }
     body: {
+      base: Record<string, string>;
+    },
+    buttonContainer: {
       base: Record<string, string>;
     },
     button: {
@@ -35,22 +42,20 @@ const alertConfig: AlertConfig = {
     variant: 'filled',
     color: 'primary',
     invisible: false,
+    iconContainerProps: {},
     bodyProps: {},
+    buttonContainerProps: {},
     buttonProps: {}
   },
   styles: {
     root: {
       base: {
-        position: 'relative',
         display: 'flex',
-        gap: 'gap-2',
+        alignItems: 'items-start',
         width: 'w-full',
-        padding: 'p-4',
+        padding: 'p-2',
         borderRadius: 'rounded-2xl',
         focus: 'focus:outline-0'
-      },
-      actionSpace: {
-        padding: 'pr-12'
       },
       invisible: {
         display: 'hidden'
@@ -160,19 +165,37 @@ const alertConfig: AlertConfig = {
         }
       }
     },
+    iconContainer: {
+      base: {
+        display: 'flex',
+        gap: 'gap-2',
+        alignItems: 'items-center',
+        height: 'h-10',
+        padding: 'pl-2',
+        focus: 'focus:outline-0'
+      }
+    },
     body: {
       base: {
         display: 'flex',
         flexDirection: 'flex-col',
         gap: 'gap-4',
+        padding: 'p-2',
+        focus: 'focus:outline-0'
+      }
+    },
+    buttonContainer: {
+      base: {
+        display: 'flex',
+        gap: 'gap-2',
+        alignItems: 'items-center',
+        margin: 'ml-auto',
+        height: 'h-10',
         focus: 'focus:outline-0'
       }
     },
     button: {
       base: {
-        position: 'absolute',
-        top: 'top-2',
-        right: 'right-2',
         display: 'flex',
         alignItems: 'items-center',
         justifyContent: 'justify-center',

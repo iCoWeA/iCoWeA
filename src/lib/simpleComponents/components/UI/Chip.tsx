@@ -18,11 +18,14 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
     size,
     color,
     invisible,
+    bodyProps,
+    buttonContainerProps,
     buttonProps,
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
   } = setDefaultProps(rootProps, defaultProps);
+  let buttonContainerNode: ReactNode;
   let buttonNode: ReactNode;
 
   /* Set root props */
@@ -32,12 +35,17 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
     rootStyles.variants[variant][theme][color],
     rootStyles.sizes[size],
     invisible && rootStyles.invisible,
-    (action !== null || onClose !== undefined) && rootStyles.actionSpace[size],
     rootClassName
   );
 
+  /* Set body props */
+  const bodyStyles = styles.body;
+  const { className: bodyClassName, ...restBodyProps } = bodyProps;
+
+  const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
+
   /* Set button props */
-  if (action === null && onClose !== undefined) {
+  if (action === undefined && onClose !== undefined) {
     const buttonStyles = styles.button;
     const { onClick: onButtonClick, className: buttonClassName, ...restButtonProps } = buttonProps;
 
@@ -49,7 +57,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
       }
     };
 
-    const mergedButtonClassName = mergeClasses(buttonStyles.base, buttonStyles.variants[variant][theme][color], buttonStyles.sizes[size], buttonClassName);
+    const mergedButtonClassName = mergeClasses(buttonStyles.base, buttonStyles.variants[variant][theme][color], buttonClassName);
 
     buttonNode = (
       <button
@@ -64,14 +72,36 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
     );
   }
 
+  /* Set button container props */
+  if (action !== undefined || onClose !== undefined) {
+    const buttonContainerStyles = styles.buttonContainer;
+    const { className: buttonContainerClassName, ...restButtonContainerProps } = buttonContainerProps;
+
+    const mergedButtonContainerClassName = mergeClasses(buttonContainerStyles.base, buttonContainerClassName);
+
+    buttonContainerNode = (
+      <div
+        className={mergedButtonContainerClassName}
+        {...restButtonContainerProps}
+      >
+        {buttonNode}
+      </div>
+    );
+  }
+
   return (
     <div
       className={mergedRootClassName}
       ref={rootRef}
       {...restRootProps}
     >
-      {rootChildren}
-      {buttonNode}
+      <div
+        className={mergedBodyClassName}
+        {...restBodyProps}
+      >
+        {rootChildren}
+      </div>
+      {buttonContainerNode}
     </div>
   );
 });

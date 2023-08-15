@@ -19,23 +19,38 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
     variant,
     color,
     invisible,
+    iconContainerProps,
     bodyProps,
+    buttonContainerProps,
     buttonProps,
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
   } = setDefaultProps(rootProps, defaultProps);
+  let iconContainerNode: ReactNode;
+  let buttonContainerNode: ReactNode;
   let buttonNode: ReactNode;
 
   /* Set root props */
   const rootStyles = styles.root;
-  const mergedRootClassName = mergeClasses(
-    rootStyles.base,
-    rootStyles.variants[variant][theme][color],
-    invisible && rootStyles.invisible,
-    (action !== undefined || onClose !== undefined) && rootStyles.actionSpace,
-    rootClassName
-  );
+  const mergedRootClassName = mergeClasses(rootStyles.base, rootStyles.variants[variant][theme][color], invisible && rootStyles.invisible, rootClassName);
+
+  /* Set icon container props */
+  if (icon !== undefined) {
+    const iconContainerStyles = styles.iconContainer;
+    const { className: iconContainerClassName, ...restButtonContainerProps } = iconContainerProps;
+
+    const mergedButtonContainerClassName = mergeClasses(iconContainerStyles.base, iconContainerClassName);
+
+    iconContainerNode = (
+      <div
+        className={mergedButtonContainerClassName}
+        {...restButtonContainerProps}
+      >
+        {icon}
+      </div>
+    );
+  }
 
   /* Set body props */
   const bodyStyles = styles.body;
@@ -71,20 +86,37 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
     );
   }
 
+  /* Set button container props */
+  if (action !== undefined || onClose !== undefined) {
+    const buttonContainerStyles = styles.buttonContainer;
+    const { className: buttonContainerClassName, ...restButtonContainerProps } = buttonContainerProps;
+
+    const mergedButtonContainerClassName = mergeClasses(buttonContainerStyles.base, buttonContainerClassName);
+
+    buttonContainerNode = (
+      <div
+        className={mergedButtonContainerClassName}
+        {...restButtonContainerProps}
+      >
+        {buttonNode}
+      </div>
+    );
+  }
+
   return (
     <div
       className={mergedRootClassName}
       ref={rootRef}
       {...restRootProps}
     >
-      {icon}
+      {iconContainerNode}
       <div
         className={mergedBodyClassName}
         {...restBodyProps}
       >
         {rootChildren}
       </div>
-      {buttonNode}
+      {buttonContainerNode}
     </div>
   );
 });

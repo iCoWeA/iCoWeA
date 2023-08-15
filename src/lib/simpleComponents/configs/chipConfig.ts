@@ -1,4 +1,4 @@
-import { type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
 
 export type ChipVariants = 'filled' | 'outlined' | 'ghost';
 export type ChipSizes = 'sm' | 'md' | 'lg';
@@ -9,6 +9,8 @@ export interface ChipDefaultProps {
   size?: ChipSizes;
   color?: ChipColors;
   invisible?: boolean;
+  bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
@@ -19,12 +21,16 @@ export interface ChipConfig {
       base: Record<string, string>;
       invisible: Record<string, string>;
       sizes: Record<ChipSizes, Record<string, string>>;
-      actionSpace: Record<ChipSizes, Record<string, string>>;
       variants: Record<ChipVariants, Record<string, Record<ChipColors, Record<string, string>>>>
+    },
+    body: {
+      base: Record<string, string>;
+    },
+    buttonContainer: {
+      base: Record<string, string>;
     },
     button: {
       base: Record<string, string>;
-      sizes: Record<ChipSizes, Record<string, string>>;
       variants: Record<ChipVariants, Record<string, Record<ChipColors, Record<string, string>>>>;
     }
   }
@@ -36,18 +42,17 @@ const chipConfig: ChipConfig = {
     size: 'md',
     color: 'primary',
     invisible: false,
+    bodyProps: {},
+    buttonContainerProps: {},
     buttonProps: {}
   },
   styles: {
     root: {
       base: {
-        position: 'relative',
         display: 'flex',
-        gap: 'gap-2',
         alignItems: 'items-center',
         width: 'w-full',
         borderRadius: 'rounded-2xl',
-        font: 'antialiased font-bold text-xs font-sans',
         focus: 'focus:outline-0'
       },
       invisible: {
@@ -55,24 +60,13 @@ const chipConfig: ChipConfig = {
       },
       sizes: {
         sm: {
-          padding: 'py-1 px-2'
+          padding: 'py-0.5 px-2 pr-1.5'
         },
         md: {
-          padding: 'py-1.5 px-3'
+          padding: 'py-1 px-3 pr-2.5'
         },
         lg: {
-          padding: 'py-2 px-4'
-        }
-      },
-      actionSpace: {
-        sm: {
-          padding: 'pr-8'
-        },
-        md: {
-          padding: 'pr-9'
-        },
-        lg: {
-          padding: 'pr-10'
+          padding: 'py-1.5 px-4 pr-3.5'
         }
       },
       variants: {
@@ -180,9 +174,28 @@ const chipConfig: ChipConfig = {
         }
       }
     },
+    body: {
+      base: {
+        display: 'flex',
+        flexDirection: 'flex-col',
+        gap: 'gap-4',
+        padding: 'py-0.5 pr-0.5',
+        font: 'antialiased font-bold text-xs font-sans',
+        focus: 'focus:outline-0'
+      }
+    },
+    buttonContainer: {
+      base: {
+        display: 'flex',
+        gap: 'gap-2',
+        alignItems: 'items-center',
+        margin: 'ml-auto',
+        padding: 'pl-1.5',
+        focus: 'focus:outline-0'
+      }
+    },
     button: {
       base: {
-        position: 'absolute',
         display: 'flex',
         alignItems: 'items-center',
         justifyContent: 'justify-center',
@@ -193,20 +206,6 @@ const chipConfig: ChipConfig = {
         transition: 'transition-colors',
         focus: 'focus:outline-0',
         disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
-      },
-      sizes: {
-        sm: {
-          top: 'top-0.5',
-          right: 'right-1.5'
-        },
-        md: {
-          top: 'top-1',
-          right: 'right-2.5'
-        },
-        lg: {
-          top: 'top-1.5',
-          right: 'right-3.5'
-        }
       },
       variants: {
         filled: {
