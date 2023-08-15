@@ -1,7 +1,9 @@
+export interface FormDefaultProps {
+  columns?: boolean;
+}
+
 export interface FormConfig {
-  defaultProps: {
-    columns: boolean;
-  };
+  defaultProps: Required<FormDefaultProps>;
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;

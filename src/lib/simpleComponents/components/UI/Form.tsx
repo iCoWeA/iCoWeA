@@ -1,36 +1,27 @@
 import React, { forwardRef, useContext } from 'react';
-import {
-  Form as BaseForm,
-  type FormProps as BaseFormProps
-} from 'react-router-dom';
+import { Form as BaseForm, type FormProps as BaseFormProps } from 'react-router-dom';
+import { type FormDefaultProps } from '../../configs/formConfig';
 import themeContext from '../../contexts/theme';
-import { twMerge } from 'tailwind-merge';
-import { mergeClasses } from '../../utils/styleHelper';
+import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-interface FormProps extends BaseFormProps {
-  columns?: boolean;
-}
+interface FormProps extends FormDefaultProps, BaseFormProps {}
 
-const Form = forwardRef<HTMLFormElement, FormProps>(
-  ({ columns, className, ...restProps }, ref) => {
-    const { config } = useContext(themeContext);
-    const { defaultProps, styles } = config.form;
+const Form = forwardRef<HTMLFormElement, FormProps>((props, ref) => {
+  const { config } = useContext(themeContext);
+  const { defaultProps, styles } = config.form;
+  const { columns, className, ...restProps } = setDefaultProps(props, defaultProps);
 
-    columns = columns ?? defaultProps.columns;
+  /* Set props */
+  const mergedClassName = mergeClasses(styles.base, columns && styles.columns, className);
 
-    const mergedClassName = twMerge(
-      mergeClasses(styles.base, columns && styles.columns, className)
-    );
-
-    return (
-      <BaseForm
-        className={mergedClassName}
-        ref={ref}
-        {...restProps}
-      />
-    );
-  }
-);
+  return (
+    <BaseForm
+      className={mergedClassName}
+      ref={ref}
+      {...restProps}
+    />
+  );
+});
 
 Form.displayName = 'Form';
 
