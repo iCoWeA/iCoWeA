@@ -17,7 +17,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, rootRef) => {
     rootProps,
     className: barClassName,
     style: barStyle,
-    children: barLabel,
+    children: barChildren,
     barRef,
     ...restBarProps
   } = setDefaultProps(props, defaultProps);
@@ -28,8 +28,8 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, rootRef) => {
 
   const mergedRootClassName = mergeClasses(
     rootStyles.base,
-    barLabel === undefined && rootStyles.sizes.default[size],
-    barLabel !== undefined && rootStyles.sizes.label[size],
+    barChildren === undefined && rootStyles.sizes.default[size],
+    barChildren !== undefined && rootStyles.sizes.label[size],
     rootStyles.colors[theme][color],
     rootClassName
   );
@@ -58,7 +58,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, rootRef) => {
         ref={setBarRef}
         {...restBarProps}
       >
-        {barLabel}
+        {barChildren}
       </div>
     </div>
   );
