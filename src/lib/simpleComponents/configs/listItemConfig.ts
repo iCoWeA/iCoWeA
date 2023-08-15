@@ -1,12 +1,14 @@
 export type ListItemSizes = 'sm' | 'md' | 'lg';
 export type ListItemColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
+export interface ListItemDefaultProps {
+  size?: ListItemSizes;
+  color?: ListItemColors;
+  disablePadding?: boolean;
+}
+
 export interface ListItemConfig {
-  defaultProps: {
-    size: ListItemSizes;
-    color: ListItemColors;
-    disablePadding: boolean;
-  };
+  defaultProps: Required<ListItemDefaultProps>;
   styles: {
     base: Record<string, string>;
     disablePadding: Record<string, string>;
