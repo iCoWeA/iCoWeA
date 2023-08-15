@@ -11,9 +11,9 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   const { variant, align, color, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
-  if (variant === 'h1') {
-    const mergedClassName = mergeClasses(styles.base, styles.variants.h1, styles.aligns[align], styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant], styles.aligns[align], styles.colors[theme][color], className);
 
+  if (variant === 'h1') {
     return (
       <h1
         className={mergedClassName}
@@ -24,8 +24,6 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   }
 
   if (variant === 'h2') {
-    const mergedClassName = mergeClasses(styles.base, styles.variants.h2, styles.aligns[align], styles.colors[theme][color], className);
-
     return (
       <h2
         className={mergedClassName}
@@ -36,8 +34,6 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   }
 
   if (variant === 'h3') {
-    const mergedClassName = mergeClasses(styles.base, styles.variants.h3, styles.aligns[align], styles.colors[theme][color], className);
-
     return (
       <h3
         className={mergedClassName}
@@ -48,8 +44,6 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   }
 
   if (variant === 'h4') {
-    const mergedClassName = mergeClasses(styles.base, styles.variants.h4, styles.aligns[align], styles.colors[theme][color], className);
-
     return (
       <h4
         className={mergedClassName}
@@ -60,8 +54,6 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   }
 
   if (variant === 'h5') {
-    const mergedClassName = mergeClasses(styles.base, styles.variants.h5, styles.aligns[align], styles.colors[theme][color], className);
-
     return (
       <h5
         className={mergedClassName}
@@ -72,8 +64,6 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   }
 
   if (variant === 'h6') {
-    const mergedClassName = mergeClasses(styles.base, styles.variants.h6, styles.aligns[align], styles.colors[theme][color], className);
-
     return (
       <h6
         className={mergedClassName}
@@ -84,8 +74,6 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   }
 
   if (variant === 'lead') {
-    const mergedClassName = mergeClasses(styles.base, styles.variants.lead, styles.aligns[align], styles.colors[theme][color], className);
-
     return (
       <p
         className={mergedClassName}
@@ -96,8 +84,6 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   }
 
   if (variant === 'paragraph') {
-    const mergedClassName = mergeClasses(styles.base, styles.variants.paragraph, styles.aligns[align], styles.colors[theme][color], className);
-
     return (
       <p
         className={mergedClassName}
@@ -108,8 +94,6 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   }
 
   if (variant === 'small') {
-    const mergedClassName = mergeClasses(styles.base, styles.variants.small, styles.aligns[align], styles.colors[theme][color], className);
-
     return (
       <p
         className={mergedClassName}
@@ -118,8 +102,6 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
       />
     );
   }
-
-  const mergedClassName = mergeClasses(styles.base, styles.variants.span, styles.aligns[align], styles.colors[theme][color], className);
 
   return (
     <span
