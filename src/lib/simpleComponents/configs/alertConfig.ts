@@ -1,20 +1,24 @@
-import { type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
+import { type ReactNode, type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
 
 export type AlertVariants = 'filled' | 'outlined' | 'ghost';
 export type AlertColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface AlertDefaultProps {
-  variant?: AlertVariants;
-  color?: AlertColors;
-  invisible?: boolean;
-  iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+export interface AlertProps {
+  onClose: (() => void) | null;
+  variant: AlertVariants;
+  color: AlertColors;
+  invisible: boolean;
+  icon: ReactNode;
+  action: ReactNode;
+  iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+  bodyProps: BaseHTMLAttributes<HTMLDivElement>;
+  buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+  buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
+  className: string;
 }
 
 export interface AlertConfig {
-  defaultProps: Required<AlertDefaultProps>
+  defaultProps: AlertProps;
   styles: {
     root: {
       base: Record<string, string>;
@@ -39,13 +43,17 @@ export interface AlertConfig {
 
 const alertConfig: AlertConfig = {
   defaultProps: {
+    onClose: null,
     variant: 'filled',
     color: 'primary',
     invisible: false,
+    icon: null,
+    action: null,
     iconContainerProps: {},
     bodyProps: {},
     buttonContainerProps: {},
-    buttonProps: {}
+    buttonProps: {},
+    className: ''
   },
   styles: {
     root: {

@@ -1,24 +1,18 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent } from 'react';
-import { type AlertDefaultProps } from '../../configs/alertConfig';
+import { type AlertProps } from '../../configs/alertConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface AlertProps extends AlertDefaultProps, BaseHTMLAttributes<HTMLDivElement> {
-  icon?: ReactNode;
-  action?: ReactNode;
-  onClose?: () => void;
-}
-
-const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
+const Alert = forwardRef<HTMLDivElement, AlertProps & BaseHTMLAttributes<HTMLDivElement>>((rootProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.alert;
   const {
-    icon,
-    action,
     onClose,
     variant,
     color,
     invisible,
+    icon,
+    action,
     iconContainerProps,
     bodyProps,
     buttonContainerProps,
@@ -36,7 +30,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
   const mergedRootClassName = mergeClasses(rootStyles.base, rootStyles.variants[variant][theme][color], invisible && rootStyles.invisible, rootClassName);
 
   /* Set icon container props */
-  if (icon !== undefined) {
+  if (icon !== null) {
     const iconContainerStyles = styles.iconContainer;
     const { className: iconContainerClassName, ...restButtonContainerProps } = iconContainerProps;
 
@@ -59,7 +53,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
   const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
 
   /* Set button props */
-  if (action === undefined && onClose !== undefined) {
+  if (action === null && onClose !== null) {
     const buttonStyles = styles.button;
     const { onClick: onButtonClick, className: buttonClassName, ...restButtonProps } = buttonProps;
 
@@ -87,7 +81,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
   }
 
   /* Set button container props */
-  if (action !== undefined || onClose !== undefined) {
+  if (action !== null || onClose !== null) {
     const buttonContainerStyles = styles.buttonContainer;
     const { className: buttonContainerClassName, ...restButtonContainerProps } = buttonContainerProps;
 
