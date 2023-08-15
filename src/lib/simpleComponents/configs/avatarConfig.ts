@@ -2,15 +2,16 @@ export type AvatarVariants = 'rounded' | 'circular' | 'square';
 export type AvatarSizes = 'none' | 'sm' | 'md' | 'lg';
 export type AvatarColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface AvatarDefaultProps {
+export interface AvatarProps {
   variant?: AvatarVariants;
   size?: AvatarSizes;
   color?: AvatarColors;
   withBorder?: boolean;
+  className?: string;
 }
 
 export interface AvatarConfig {
-  defaultProps: Required<AvatarDefaultProps>
+  defaultProps: AvatarProps
   styles: {
     base: Record<string, string>;
     withBorder: Record<string, Record<string, string>>;
@@ -25,7 +26,8 @@ const avatarConfig: AvatarConfig = {
     variant: 'circular',
     size: 'none',
     color: 'default',
-    withBorder: false
+    withBorder: false,
+    className: ''
   },
   styles: {
     base: {

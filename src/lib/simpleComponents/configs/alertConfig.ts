@@ -4,17 +4,17 @@ export type AlertVariants = 'filled' | 'outlined' | 'ghost';
 export type AlertColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface AlertProps {
-  onClose: (() => void) | null;
-  variant: AlertVariants;
-  color: AlertColors;
-  invisible: boolean;
-  icon: ReactNode;
-  action: ReactNode;
-  iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
-  bodyProps: BaseHTMLAttributes<HTMLDivElement>;
-  buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
-  buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
-  className: string;
+  onClose?: (() => void) | null;
+  variant?: AlertVariants;
+  color?: AlertColors;
+  invisible?: boolean;
+  icon?: ReactNode;
+  action?: ReactNode;
+  iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  className?: string;
 }
 
 export interface AlertConfig {
