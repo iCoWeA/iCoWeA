@@ -2,16 +2,17 @@ export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
 export type ButtonGroupSizes = 'sm' | 'md' | 'lg';
 export type ButtonGroupColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface ButtonGroupDefaultProps {
+export interface ButtonGroupProps {
   variant?: ButtonGroupVariants;
   size?: ButtonGroupSizes;
   color?: ButtonGroupColors;
   elevated?: boolean;
   fullwidth?: boolean;
+  className?: string;
 }
 
 export interface ButtonGroupConfig {
-  defaultProps: Required<ButtonGroupDefaultProps>;
+  defaultProps: ButtonGroupProps;
   styles: {
     root: {
       base: Record<string, string>;
@@ -35,7 +36,8 @@ const buttonGroupConfig: ButtonGroupConfig = {
     size: 'md',
     color: 'primary',
     elevated: false,
-    fullwidth: false
+    fullwidth: false,
+    className: ''
   },
   styles: {
     root: {
