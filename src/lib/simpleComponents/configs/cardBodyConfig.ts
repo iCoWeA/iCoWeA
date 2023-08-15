@@ -5,7 +5,7 @@ export interface CardBodyProps {
 }
 
 export interface CardBodyConfig {
-  defaultProps: CardBodyProps;
+  defaultProps: Required<CardBodyProps>;
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;

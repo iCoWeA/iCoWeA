@@ -5,7 +5,7 @@ export interface CardFooterProps {
 }
 
 export interface CardFooterConfig {
-  defaultProps: CardFooterProps;
+  defaultProps: Required<CardFooterProps>;
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;

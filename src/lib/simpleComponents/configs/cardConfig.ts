@@ -9,7 +9,7 @@ export interface CardProps {
 }
 
 export interface CardConfig {
-  defaultProps: CardProps;
+  defaultProps: Required<CardProps>;
   styles: {
     base: Record<string, string>;
     elevated: Record<string, Record<string, string>>;

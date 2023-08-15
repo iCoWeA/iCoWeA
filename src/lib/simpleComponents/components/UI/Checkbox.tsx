@@ -20,7 +20,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps & InputHTMLAttributes<
     className: inputClassNames,
     children: inputChildren,
     ...restInputProps
-  } = setDefaultProps(inputProps, defaultProps);
+  } = setDefaultProps(defaultProps, inputProps);
   let iconNode: ReactNode;
 
   /* Set root props */

@@ -12,7 +12,7 @@ export interface ButtonGroupProps {
 }
 
 export interface ButtonGroupConfig {
-  defaultProps: ButtonGroupProps;
+  defaultProps: Required<ButtonGroupProps>;
   styles: {
     root: {
       base: Record<string, string>;

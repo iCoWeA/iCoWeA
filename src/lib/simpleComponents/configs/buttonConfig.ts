@@ -12,7 +12,7 @@ export interface ButtonProps {
 }
 
 export interface ButtonConfig {
-  defaultProps: ButtonProps;
+  defaultProps: Required<ButtonProps>;
   styles: {
     base: Record<string, string>;
     fullwidth: Record<string, string>;

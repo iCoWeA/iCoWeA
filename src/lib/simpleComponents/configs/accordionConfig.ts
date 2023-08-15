@@ -1,11 +1,7 @@
-export interface AccordionConfig {
+/* export interface AccordionConfig {
   defaultProps: {
     disabled: boolean;
-    transitionProps: {
-      unmountOnExit: boolean;
-      enterDuration: number;
-      exitDuration: number;
-    };
+    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -15,6 +11,9 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
+    unmountOnExit: false,
+    enterDuration: 500,
+    exitDuration: 500,
     disabled: false,
     transitionProps: {
       unmountOnExit: false,
@@ -37,4 +36,4 @@ const accordionConfig: AccordionConfig = {
   }
 };
 
-export default accordionConfig;
+export default accordionConfig; */
