@@ -7,7 +7,7 @@ export interface InputAdornmentProps {
 }
 
 export interface InputAdornmentConfig {
-  defaultProps: InputAdornmentProps;
+  defaultProps: Required<InputAdornmentProps>;
   styles: {
     base: Record<string, string>;
     colors: Record<string, Record<InputAdornmentColor, Record<string, string>>>;
@@ -24,7 +24,9 @@ const inputAdornmentConfig: InputAdornmentConfig = {
       position: 'flex',
       gap: 'gap-2',
       alignItems: 'items-center',
+      width: 'w-6',
       font: 'antialiased font-normal text-base font-sans',
+      overflow: 'overflow-hidden',
       pointer: 'pointer-events-none',
       userSelect: 'select-none',
       focus: 'focus:outline-0'

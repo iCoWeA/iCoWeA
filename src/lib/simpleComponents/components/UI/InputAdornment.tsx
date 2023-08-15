@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const InputAdornment = forwardRef<HTMLDivElement, InputAdornmentProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.inputAdornment;
-  const { color, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { color, className, ...restProps } = setDefaultProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);

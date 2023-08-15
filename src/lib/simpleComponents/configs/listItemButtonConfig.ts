@@ -11,7 +11,7 @@ export interface ListItemButtonProps {
 }
 
 export interface ListItemButtonConfig {
-  defaultProps: ListItemButtonProps;
+  defaultProps: Required<ListItemButtonProps>;
   styles: {
     base: Record<string, string>;
     sizes: Record<ListItemButtonSizes, Record<string, string>>;

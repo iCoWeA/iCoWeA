@@ -16,12 +16,12 @@ export interface ProgressProps {
 
 export interface ProgressConfig {
   defaultProps: {
-    value?: number | string;
-    size?: ProgressSizes;
-    color?: ProgressColors;
-    rootProps?: BaseHTMLAttributes<HTMLDivElement>;
-    style?: CSSProperties;
-    className?: string;
+    value: number | string;
+    size: ProgressSizes;
+    color: ProgressColors;
+    rootProps: BaseHTMLAttributes<HTMLDivElement>;
+    style: CSSProperties;
+    className: string;
   };
   styles: {
     root: {

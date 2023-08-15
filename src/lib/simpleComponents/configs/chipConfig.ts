@@ -19,14 +19,14 @@ export interface ChipProps {
 
 export interface ChipConfig {
   defaultProps: {
-    variant?: ChipVariants;
-    size?: ChipSizes;
-    color?: ChipColors;
-    invisible?: boolean;
-    bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
-    buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-    buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
-    className?: string;
+    variant: ChipVariants;
+    size: ChipSizes;
+    color: ChipColors;
+    invisible: boolean;
+    bodyProps: BaseHTMLAttributes<HTMLDivElement>;
+    buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
+    className: string;
   };
   styles: {
     root: {

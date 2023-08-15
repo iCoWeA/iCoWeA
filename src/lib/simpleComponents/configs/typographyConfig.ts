@@ -19,7 +19,7 @@ export interface TypographyProps {
 }
 
 export interface TypographyConfig {
-  defaultProps: TypographyProps;
+  defaultProps: Required<TypographyProps>;
   styles: {
     base: Record<string, string>;
     aligns: Record<TypographyAligns, Record<string, string>>;

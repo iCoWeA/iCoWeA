@@ -9,7 +9,7 @@ export interface ListItemProps {
 }
 
 export interface ListItemConfig {
-  defaultProps: ListItemProps;
+  defaultProps: Required<ListItemProps>;
   styles: {
     base: Record<string, string>;
     disablePadding: Record<string, string>;

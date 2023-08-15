@@ -14,7 +14,7 @@ import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 import useOutsideClick from '../../hooks/useOutsideClick';
 
-const TextArea = forwardRef<HTMLDivElement, TextAreaProps & TextareaHTMLAttributes<HTMLTextAreaElement>>((props, rootRef) => {
+const TextArea = forwardRef<HTMLDivElement, TextAreaProps & TextareaHTMLAttributes<HTMLTextAreaElement>>((inputProps, rootRef) => {
   const componentsRefs = useRef<{ root: HTMLDivElement | null; textArea: HTMLTextAreaElement | null }>({ root: null, textArea: null });
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.textArea;
@@ -35,7 +35,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps & TextareaHTMLAttribut
     value: textAreaValue,
     className: textAreaClassName,
     ...restTextAreaProps
-  } = setDefaultProps(props, defaultProps);
+  } = setDefaultProps(defaultProps, inputProps);
   let labelNode: ReactNode;
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRefs.current.root, []);

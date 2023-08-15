@@ -5,7 +5,7 @@ export interface ListProps {
 }
 
 export interface ListConfig {
-  defaultProps: ListProps;
+  defaultProps: Required<ListProps>;
   styles: {
     base: Record<string, string>;
     row: Record<string, string>;

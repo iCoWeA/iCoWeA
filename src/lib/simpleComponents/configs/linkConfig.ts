@@ -10,7 +10,7 @@ export interface LinkProps {
 }
 
 export interface LinkConfig {
-  defaultProps: LinkProps;
+  defaultProps: Required<LinkProps>;
   styles: {
     base: Record<string, string>;
     fullwidth: Record<string, string>;

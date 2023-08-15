@@ -6,7 +6,7 @@ export interface LabelProps {
 }
 
 export interface LabelConfig {
-  defaultProps: LabelProps;
+  defaultProps: Required<LabelProps>;
   styles: {
     base: Record<string, string>;
     colors: Record<string, Record<LabelColors, Record<string, string>>>;

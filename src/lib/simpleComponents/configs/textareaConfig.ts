@@ -23,19 +23,18 @@ export interface TextAreaProps {
 
 export interface TextAreaConfig {
   defaultProps: {
-    variant?: TextAreaVariants;
-    color?: TextAreaColors;
-    valid?: boolean;
-    invalid?: boolean;
-    rootProps?: BaseHTMLAttributes<HTMLDivElement>;
-    containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
-    legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
-    labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
-    textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
-    autoFocus?: boolean;
-    disabled?: boolean;
-    value?: string;
-    className?: string;
+    variant: TextAreaVariants;
+    color: TextAreaColors;
+    valid: boolean;
+    invalid: boolean;
+    rootProps: BaseHTMLAttributes<HTMLDivElement>;
+    containerProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+    legendProps: BaseHTMLAttributes<HTMLLegendElement>;
+    labelProps: LabelHTMLAttributes<HTMLLabelElement>;
+    autoFocus: boolean;
+    disabled: boolean;
+    value: string;
+    className: string;
   };
   styles: {
     root: {
@@ -350,6 +349,7 @@ const textAreaConfig: TextAreaConfig = {
     label: {
       base: {
         position: 'absolute',
+        left: 'left-4',
         display: 'block',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition-all',
@@ -370,17 +370,14 @@ const textAreaConfig: TextAreaConfig = {
       variants: {
         standard: {
           top: 'top-3.5',
-          left: 'left-4',
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4 group-[.shifted]:text-sm'
         },
         filled: {
           top: 'top-7',
-          left: 'left-4',
           group: 'group-[.shifted]:top-2 group-[.shifted]:text-sm'
         },
         outlined: {
           top: 'top-2',
-          left: 'left-4',
           group: 'group-[.shifted]:left-0 group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4 group-[.shifted]:mx-4 group-[.shifted]:px-0.5 group-[.shifted]:text-sm'
         }
       },
