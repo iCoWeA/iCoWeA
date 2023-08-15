@@ -20,7 +20,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps & BaseHTMLAttributes<HTMLDiv
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
-  } = setDefaultProps(rootProps, defaultProps);
+  } = setDefaultProps(defaultProps, rootProps);
   let iconContainerNode: ReactNode;
   let buttonContainerNode: ReactNode;
   let buttonNode: ReactNode;

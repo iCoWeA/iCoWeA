@@ -11,7 +11,7 @@ export interface AvatarProps {
 }
 
 export interface AvatarConfig {
-  defaultProps: AvatarProps
+  defaultProps: Required<AvatarProps>;
   styles: {
     base: Record<string, string>;
     withBorder: Record<string, Record<string, string>>;

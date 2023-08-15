@@ -12,7 +12,7 @@ export interface BreadcrumbsProps {
 }
 
 export interface BreadcrumbsConfig {
-  defaultProps: BreadcrumbsProps
+  defaultProps: Required<BreadcrumbsProps>;
   styles: {
     root: {
       base: Record<string, string>;

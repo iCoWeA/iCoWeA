@@ -11,7 +11,7 @@ export interface BadgeProps {
 }
 
 export interface BadgeConfig {
-  defaultProps: BadgeProps
+  defaultProps: Required<BadgeProps>;
   styles: {
     base: Record<string, string>;
     invisible: Record<string, string>;

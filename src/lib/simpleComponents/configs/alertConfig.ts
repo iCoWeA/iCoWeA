@@ -19,14 +19,14 @@ export interface AlertProps {
 
 export interface AlertConfig {
   defaultProps: {
-    variant?: AlertVariants;
-    color?: AlertColors;
-    invisible?: boolean;
-    iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-    bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
-    buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-    buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
-    className?: string;
+    variant: AlertVariants;
+    color: AlertColors;
+    invisible: boolean;
+    iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    bodyProps: BaseHTMLAttributes<HTMLDivElement>;
+    buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
+    className: string;
   };
   styles: {
     root: {
