@@ -1,9 +1,11 @@
 export type LabelColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
+export interface LabelDefaultProps {
+  color?: LabelColors;
+}
+
 export interface LabelConfig {
-  defaultProps: {
-    color: LabelColors;
-  };
+  defaultProps: Required<LabelDefaultProps>;
   styles: {
     base: Record<string, string>;
     colors: Record<string, Record<LabelColors, Record<string, string>>>;
