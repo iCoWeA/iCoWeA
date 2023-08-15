@@ -1,21 +1,24 @@
-import { type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
+import { type ReactNode, type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
 
 export type ChipVariants = 'filled' | 'outlined' | 'ghost';
 export type ChipSizes = 'sm' | 'md' | 'lg';
 export type ChipColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface ChipDefaultProps {
+export interface ChipProps {
+  onClose?: (() => void) | null;
   variant?: ChipVariants;
   size?: ChipSizes;
   color?: ChipColors;
   invisible?: boolean;
+  action?: ReactNode;
   bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
   buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  className?: string;
 }
 
 export interface ChipConfig {
-  defaultProps: Required<ChipDefaultProps>;
+  defaultProps: Required<ChipProps>;
   styles: {
     root: {
       base: Record<string, string>;
@@ -38,13 +41,16 @@ export interface ChipConfig {
 
 const chipConfig: ChipConfig = {
   defaultProps: {
+    onClose: null,
     variant: 'filled',
     size: 'md',
     color: 'primary',
     invisible: false,
+    action: null,
     bodyProps: {},
     buttonContainerProps: {},
-    buttonProps: {}
+    buttonProps: {},
+    className: ''
   },
   styles: {
     root: {

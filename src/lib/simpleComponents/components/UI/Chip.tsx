@@ -1,23 +1,18 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent } from 'react';
-import { type ChipDefaultProps } from '../../configs/chipConfig';
+import { type ChipProps } from '../../configs/chipConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-interface ChipProps extends ChipDefaultProps, BaseHTMLAttributes<HTMLDivElement> {
-  action?: ReactNode;
-  onClose?: () => void;
-}
-
-const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
+const Chip = forwardRef<HTMLDivElement, ChipProps & BaseHTMLAttributes<HTMLDivElement>>((rootProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.chip;
   const {
-    action,
     onClose,
     variant,
     size,
     color,
     invisible,
+    action,
     bodyProps,
     buttonContainerProps,
     buttonProps,
@@ -45,7 +40,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
   const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
 
   /* Set button props */
-  if (action === undefined && onClose !== undefined) {
+  if (action === null && onClose !== null) {
     const buttonStyles = styles.button;
     const { onClick: onButtonClick, className: buttonClassName, ...restButtonProps } = buttonProps;
 
@@ -73,7 +68,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
   }
 
   /* Set button container props */
-  if (action !== undefined || onClose !== undefined) {
+  if (action !== null || onClose !== null) {
     const buttonContainerStyles = styles.buttonContainer;
     const { className: buttonContainerClassName, ...restButtonContainerProps } = buttonContainerProps;
 
