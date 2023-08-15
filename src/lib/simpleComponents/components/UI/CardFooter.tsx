@@ -1,11 +1,9 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type CardFooterDefaultProps } from '../../configs/cardFooterConfig';
+import { type CardFooterProps } from '../../configs/cardFooterConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface CardFooterProps extends CardFooterDefaultProps, BaseHTMLAttributes<HTMLDivElement> {}
-
-const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>((props, ref) => {
+const CardFooter = forwardRef<HTMLDivElement, CardFooterProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.cardFooter;
   const { columns, fullwidht, className, ...restProps } = setDefaultProps(props, defaultProps);

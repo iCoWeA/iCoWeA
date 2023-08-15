@@ -1,10 +1,11 @@
-export interface CardFooterDefaultProps {
+export interface CardFooterProps {
   columns?: boolean;
   fullwidht?: boolean;
+  className?: string;
 }
 
 export interface CardFooterConfig {
-  defaultProps: Required<CardFooterDefaultProps>;
+  defaultProps: CardFooterProps;
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;
@@ -15,7 +16,8 @@ export interface CardFooterConfig {
 const cardFooterConfig: CardFooterConfig = {
   defaultProps: {
     columns: false,
-    fullwidht: false
+    fullwidht: false,
+    className: ''
   },
   styles: {
     base: {
