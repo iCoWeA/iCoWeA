@@ -1,24 +1,19 @@
-import React, { forwardRef, useContext, type InputHTMLAttributes, type ReactNode, type MutableRefObject } from 'react';
-import { type CheckboxDefaultProps } from '../../configs/checkboxConfig';
+import React, { forwardRef, useContext, type InputHTMLAttributes, type ReactNode } from 'react';
+import { type CheckboxProps } from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface CheckboxProps extends CheckboxDefaultProps, InputHTMLAttributes<HTMLInputElement> {
-  icon?: ReactNode;
-  inputRef?: MutableRefObject<HTMLInputElement>;
-}
-
-const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef) => {
+const Checkbox = forwardRef<HTMLDivElement, CheckboxProps & InputHTMLAttributes<HTMLInputElement>>((inputProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.checkbox;
   const {
-    icon,
-    inputRef,
     color,
     valid,
     invalid,
+    icon,
     rootProps,
     iconProps,
+    inputRef,
     checked: inputChecked,
     disabled: inputDisabled,
     type: inputType,
@@ -46,13 +41,13 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef)
   );
 
   const setInputRef = (element: HTMLInputElement): void => {
-    if (inputRef !== undefined && inputRef !== null) {
+    if (inputRef !== null) {
       inputRef.current = element;
     }
   };
 
   /* Set icon props */
-  if (icon === undefined) {
+  if (icon === null) {
     const iconStyles = styles.icon;
     const { className: iconClassName, ...restIconProps } = iconProps;
 
@@ -76,8 +71,8 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef)
       {...restRootProps}
     >
       <input
-        disabled={inputDisabled}
         checked={inputChecked}
+        disabled={inputDisabled}
         type={inputType}
         className={mergedInputClassName}
         ref={setInputRef}
