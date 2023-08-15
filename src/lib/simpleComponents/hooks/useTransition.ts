@@ -39,7 +39,7 @@ interface Return {
 
 const initialTimerId = -1;
 
-const useTransition = ({ enterDelay, exitDelay, enterDuration, exitDuration, enterClassName = '', enteringClassName = '', enteredClassName = '', exitClassName = '', exitingClassName = '', exitedClassName = '', onEnter, onEntering, onEntered, onExit, onExiting, onExited }: Config = {}): Return => {
+const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitDuration = 0, enterClassName = '', enteringClassName = '', enteredClassName = '', exitClassName = '', exitingClassName = '', exitedClassName = '', onEnter, onEntering, onEntered, onExit, onExiting, onExited }: Config = {}): Return => {
   const timerId = useRef(initialTimerId);
   const [state, setState] = useState(States.EXITED);
   const classNames = {
@@ -77,14 +77,14 @@ const useTransition = ({ enterDelay, exitDelay, enterDuration, exitDuration, ent
         if (onEntered !== undefined) {
           onEntered();
         }
-      }, enterDuration ?? 0);
+      }, enterDuration);
 
       setState(States.ENTERING);
 
       if (onEntering !== undefined) {
         onEntering();
       }
-    }, enterDelay ?? 0);
+    }, enterDelay);
   }, []);
 
   const exit = useCallback((instant: boolean = false): void => {
@@ -113,21 +113,21 @@ const useTransition = ({ enterDelay, exitDelay, enterDuration, exitDuration, ent
         if (onExited !== undefined) {
           onExited();
         }
-      }, exitDuration ?? 0);
+      }, exitDuration);
 
       setState(States.EXITING);
 
       if (onExiting !== undefined) {
         onExiting();
       }
-    }, exitDelay ?? 0);
+    }, exitDelay);
   }, []);
 
   return {
     state,
+    className: classNames[state],
     enterState: (state === States.ENTER || state === States.ENTERING || state === States.ENTERED),
     exitState: (state === States.EXIT || state === States.EXITING || state === States.EXITED),
-    className: classNames[state],
     enter,
     exit
   };
