@@ -1,11 +1,9 @@
 import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
-import { type FormGroupDefaultProps } from '../../configs/formGroup';
+import { type FormGroupProps } from '../../configs/formGroup';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface FormGroupProps extends FormGroupDefaultProps, BaseHTMLAttributes<HTMLDivElement> {}
-
-const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>((props, ref) => {
+const FormGroup = forwardRef<HTMLDivElement, FormGroupProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.formGroup;
   const { row, className, ...restProps } = setDefaultProps(props, defaultProps);

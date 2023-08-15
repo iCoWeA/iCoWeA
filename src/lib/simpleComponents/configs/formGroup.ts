@@ -1,9 +1,10 @@
-export interface FormGroupDefaultProps {
+export interface FormGroupProps {
   row?: boolean;
+  className?: string;
 }
 
 export interface FormGroupConfig {
-  defaultProps: Required<FormGroupDefaultProps>;
+  defaultProps: FormGroupProps;
   styles: {
     base: Record<string, string>;
     row: Record<string, string>;
@@ -12,7 +13,8 @@ export interface FormGroupConfig {
 
 const formGroupConfig: FormGroupConfig = {
   defaultProps: {
-    row: false
+    row: false,
+    className: ''
   },
   styles: {
     base: {
