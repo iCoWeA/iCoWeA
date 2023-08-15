@@ -10,6 +10,7 @@ const InputAdornment = forwardRef<HTMLDivElement, InputAdornmentProps>((props, r
   const { defaultProps, styles } = config.inputAdornment;
   const { color, className, ...restProps } = setDefaultProps(props, defaultProps);
 
+  /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
 
   return (
