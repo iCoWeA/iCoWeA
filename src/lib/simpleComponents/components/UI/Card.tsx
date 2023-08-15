@@ -1,11 +1,9 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type CardDefaultProps } from '../../configs/cardConfig';
+import { type CardProps } from '../../configs/cardConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface CardProps extends CardDefaultProps, BaseHTMLAttributes<HTMLDivElement> {}
-
-const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
+const Card = forwardRef<HTMLDivElement, CardProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.card;
   const { variant, color, elevated, className, ...restProps } = setDefaultProps(props, defaultProps);
