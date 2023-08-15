@@ -1,11 +1,12 @@
 export type ContainerVariants = 'flex' | 'flex-col' | 'grid' | 'column' | 'default' | 'standard' | 'dashboard' | 'fluid';
 
-export interface ContainerDefaultProps {
+export interface ContainerProps {
   variant?: ContainerVariants;
+  className?: string;
 }
 
 export interface ContainerConfig {
-  defaultProps: Required<ContainerDefaultProps>;
+  defaultProps: ContainerProps;
   styles: {
     base: Record<string, string>;
     variants: Record<ContainerVariants, Record<string, string>>;
@@ -14,7 +15,8 @@ export interface ContainerConfig {
 
 const containerConfig: ContainerConfig = {
   defaultProps: {
-    variant: 'flex'
+    variant: 'flex',
+    className: ''
   },
   styles: {
     base: {

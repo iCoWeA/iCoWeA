@@ -2,7 +2,7 @@ import { type BaseHTMLAttributes, type SVGAttributes, type HTMLInputTypeAttribut
 
 export type CheckboxColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface CheckboxDefaultProps {
+export interface CheckboxProps {
   color?: CheckboxColors;
   valid?: boolean;
   invalid?: boolean;
@@ -13,10 +13,11 @@ export interface CheckboxDefaultProps {
   checked?: boolean;
   disabled?: boolean;
   type?: HTMLInputTypeAttribute
+  className?: string;
 }
 
 export interface CheckboxConfig {
-  defaultProps: Required<CheckboxDefaultProps>;
+  defaultProps: CheckboxProps;
   styles: {
     root: {
       base: Record<string, string>;
@@ -46,7 +47,8 @@ const checkboxConfig: CheckboxConfig = {
     inputRef: null,
     checked: false,
     disabled: false,
-    type: 'checkbox'
+    type: 'checkbox',
+    className: ''
   },
   styles: {
     root: {
