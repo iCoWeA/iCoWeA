@@ -4,7 +4,7 @@ export type AlertVariants = 'filled' | 'outlined' | 'ghost';
 export type AlertColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface AlertProps {
-  onClose?: (() => void) | null;
+  onClose?: () => void;
   variant?: AlertVariants;
   color?: AlertColors;
   invisible?: boolean;
@@ -18,7 +18,16 @@ export interface AlertProps {
 }
 
 export interface AlertConfig {
-  defaultProps: AlertProps;
+  defaultProps: {
+    variant?: AlertVariants;
+    color?: AlertColors;
+    invisible?: boolean;
+    iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+    bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
+    buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+    buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+    className?: string;
+  };
   styles: {
     root: {
       base: Record<string, string>;
@@ -43,12 +52,9 @@ export interface AlertConfig {
 
 const alertConfig: AlertConfig = {
   defaultProps: {
-    onClose: null,
     variant: 'filled',
     color: 'primary',
     invisible: false,
-    icon: null,
-    action: null,
     iconContainerProps: {},
     bodyProps: {},
     buttonContainerProps: {},

@@ -30,7 +30,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps & BaseHTMLAttributes<HTMLDiv
   const mergedRootClassName = mergeClasses(rootStyles.base, rootStyles.variants[variant][theme][color], invisible && rootStyles.invisible, rootClassName);
 
   /* Set icon container props */
-  if (icon !== null) {
+  if (icon !== undefined) {
     const iconContainerStyles = styles.iconContainer;
     const { className: iconContainerClassName, ...restButtonContainerProps } = iconContainerProps;
 
@@ -53,7 +53,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps & BaseHTMLAttributes<HTMLDiv
   const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
 
   /* Set button props */
-  if (action === null && onClose !== null) {
+  if (action === undefined && onClose !== undefined) {
     const buttonStyles = styles.button;
     const { onClick: onButtonClick, className: buttonClassName, ...restButtonProps } = buttonProps;
 
@@ -81,7 +81,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps & BaseHTMLAttributes<HTMLDiv
   }
 
   /* Set button container props */
-  if (action !== null || onClose !== null) {
+  if (action !== undefined || onClose !== undefined) {
     const buttonContainerStyles = styles.buttonContainer;
     const { className: buttonContainerClassName, ...restButtonContainerProps } = buttonContainerProps;
 
