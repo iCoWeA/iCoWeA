@@ -1,13 +1,15 @@
 export type LinkUnderlines = 'none' | 'hover' | 'always';
 export type LinkColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
+export interface LinkDefaultProps {
+  underline?: LinkUnderlines;
+  color?: LinkColors;
+  fullwidth?: boolean;
+  disabled?: boolean;
+}
+
 export interface LinkConfig {
-  defaultProps: {
-    underline: LinkUnderlines;
-    color: LinkColors;
-    fullwidth: boolean;
-    disabled: boolean;
-  };
+  defaultProps: Required<LinkDefaultProps>;
   styles: {
     base: Record<string, string>;
     fullwidth: Record<string, string>;
