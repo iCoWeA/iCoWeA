@@ -1,11 +1,13 @@
 export type IconSizes = 'xs' | 'sm' | 'md' | 'lg' | 'full';
 export type IconColors = 'none' | 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
+export interface IconDefaultProps {
+  size?: IconSizes;
+  color?: IconColors;
+}
+
 export interface IconConfig {
-  defaultProps: {
-    size: IconSizes;
-    color: IconColors;
-  };
+  defaultProps: Required<IconDefaultProps>;
   styles: {
     base: Record<string, string>;
     sizes: Record<IconSizes, Record<string, string>>;
