@@ -2,16 +2,17 @@ import { type LiHTMLAttributes, type ReactNode } from 'react';
 
 export type BreadcrumbsColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
-export interface BreadcrumbsDefaultProps {
+export interface BreadcrumbsProps {
   separator?: ReactNode;
   color?: BreadcrumbsColors;
   fullwidth?: boolean;
   itemsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
   separatorsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
+  className?: string;
 }
 
 export interface BreadcrumbsConfig {
-  defaultProps: Required<BreadcrumbsDefaultProps>
+  defaultProps: BreadcrumbsProps
   styles: {
     root: {
       base: Record<string, string>;
@@ -33,7 +34,8 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
     color: 'default',
     fullwidth: false,
     itemsProps: {},
-    separatorsProps: {}
+    separatorsProps: {},
+    className: ''
   },
   styles: {
     root: {

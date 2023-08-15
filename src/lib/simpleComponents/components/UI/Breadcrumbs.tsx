@@ -1,11 +1,9 @@
 import React, { forwardRef, type BaseHTMLAttributes, useContext, type ReactNode } from 'react';
-import { type BreadcrumbsDefaultProps } from '../../configs/breadcrumbsConfig';
+import { type BreadcrumbsProps } from '../../configs/breadcrumbsConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface BreadcrumbsProps extends BreadcrumbsDefaultProps, BaseHTMLAttributes<HTMLUListElement> {}
-
-const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((rootProps, rootRef) => {
+const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps & BaseHTMLAttributes<HTMLUListElement>>((rootProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.breadcrumbs;
   const {
