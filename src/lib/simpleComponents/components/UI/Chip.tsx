@@ -40,7 +40,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps & BaseHTMLAttributes<HTMLDivEl
   const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
 
   /* Set button props */
-  if (action === null && onClose !== null) {
+  if (action === undefined && onClose !== undefined) {
     const buttonStyles = styles.button;
     const { onClick: onButtonClick, className: buttonClassName, ...restButtonProps } = buttonProps;
 
@@ -70,7 +70,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps & BaseHTMLAttributes<HTMLDivEl
   }
 
   /* Set button container props */
-  if (action !== null || onClose !== null) {
+  if (action !== undefined || onClose !== undefined) {
     const buttonContainerStyles = styles.buttonContainer;
     const { className: buttonContainerClassName, ...restButtonContainerProps } = buttonContainerProps;
 

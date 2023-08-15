@@ -1,287 +1,187 @@
 import React, {
   forwardRef,
   useContext,
-  type MutableRefObject,
-  type InputHTMLAttributes,
   type ReactNode,
-  type FieldsetHTMLAttributes,
   useState,
-  useEffect,
-  type BaseHTMLAttributes,
-  type LabelHTMLAttributes,
   useRef,
   useImperativeHandle,
-  type RefObject,
-  type MouseEvent,
-  type FocusEvent
+  type FocusEvent,
+  type InputHTMLAttributes,
+  useCallback
 } from 'react';
-import {
-  type InputColors,
-  type InputVariants
-} from '../../configs/inputConfig';
+import { type InputProps } from '../../configs/inputConfig';
 import themeContext from '../../contexts/theme';
-import { twMerge } from 'tailwind-merge';
-import { mergeClasses } from '../../utils/styleHelper';
+import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  variant?: InputVariants;
-  color?: InputColors;
-  valid?: boolean;
-  invalid?: boolean;
-  label?: ReactNode;
-  startAdornment?: ReactNode;
-  endAdornment?: ReactNode;
-  labelPosition?: string;
-  componentsProps?: {
-    root?: BaseHTMLAttributes<HTMLDivElement>;
-    container?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
-    legend?: BaseHTMLAttributes<HTMLLegendElement>;
-    label?: LabelHTMLAttributes<HTMLLabelElement>;
+const Input = forwardRef<HTMLDivElement, InputProps & InputHTMLAttributes<HTMLInputElement>>((props, rootRef) => {
+  const componentsRefs = useRef<{ root: HTMLDivElement | null; input: HTMLInputElement | null }>({ root: null, input: null });
+  const { theme, config } = useContext(themeContext);
+  const { defaultProps, styles } = config.input;
+  const {
+    variant,
+    color,
+    valid,
+    invalid,
+    label,
+    startAdornment,
+    endAdornment,
+    rootProps,
+    containerProps,
+    legendProps,
+    labelProps,
+    inputRef,
+    onFocus: onInputFocus,
+    autoFocus: inputAutoFocus,
+    disabled: inputDisabled,
+    value: inputValue,
+    className: inputClassName,
+    ...restInputProps
+  } = setDefaultProps(props, defaultProps);
+  let labelNode: ReactNode;
+
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRefs.current.root, []);
+
+  const [isShifted, setIsShifted] = useState(inputValue !== '' || (inputAutoFocus && !inputDisabled));
+  const [isFocused, setIsFocused] = useState(inputAutoFocus && !inputDisabled);
+
+  /* Set root props */
+  const rootStyles = styles.root;
+  const { className: rootClassName, ...restRootProps } = rootProps;
+
+  const outsideRootClickHandler = useCallback(() => {
+    if (componentsRefs.current.input?.value === '') {
+      setIsShifted(false);
+      setIsFocused(false);
+    } else {
+      setIsFocused(false);
+    }
+  }, []);
+
+  const insideRootClickHandler = useCallback(() => {
+    componentsRefs.current.input?.focus();
+  }, []);
+
+  useOutsideClick(componentsRefs.current.root, outsideRootClickHandler, insideRootClickHandler);
+
+  const setRootRef = (element: HTMLDivElement): void => {
+    componentsRefs.current.root = element;
   };
-  inputRef?: MutableRefObject<HTMLInputElement | undefined>;
-}
 
-const Input = forwardRef<RefObject<HTMLDivElement>, InputProps>(
-  (
-    {
-      variant,
-      color,
-      valid,
-      invalid,
-      label,
-      startAdornment,
-      endAdornment,
-      labelPosition,
-      componentsProps,
-      onFocus: onInputFocus,
-      onBlur: onInputBlur,
-      autoFocus: inputAutoFocus,
-      disabled: inputDisabled,
-      value: inputValue,
-      className: inputClassName,
-      inputRef,
-      ...restInputProps
-    },
-    rootRef
-  ) => {
-    const rootFocusRef = useRef<HTMLDivElement>(null);
-    const inputFocusRef = useRef<HTMLInputElement | null>(null);
-    const { theme, config } = useContext(themeContext);
-    const {
-      defaultProps,
-      styles: {
-        root: rootStyles,
-        container: containerStyles,
-        input: inputStyles,
-        label: labelStyles,
-        legend: legendStyles
-      }
-    } = config.input;
-    let labelNode: ReactNode;
+  const mergedRootClassName = mergeClasses(rootStyles.base, isFocused && rootStyles.focused, isShifted && rootStyles.shifted, rootClassName);
 
-    variant = variant ?? defaultProps.variant;
-    color = color ?? defaultProps.color;
-    valid = valid ?? defaultProps.valid;
-    invalid = invalid ?? defaultProps.invalid;
-    label = label ?? defaultProps.label;
-    startAdornment = startAdornment ?? defaultProps.startAdornment;
-    endAdornment = endAdornment ?? defaultProps.endAdornment;
+  /* Set input props */
+  const inputStyles = styles.input;
+  const focusInputHandler = (event: FocusEvent<HTMLInputElement>): void => {
+    setIsShifted(true);
+    setIsFocused(true);
 
-    useImperativeHandle(rootRef, () => rootFocusRef, []);
-
-    const [isShifted, setIsShifted] = useState(
-      (inputValue !== undefined && inputValue !== '') ||
-        (inputAutoFocus === true && inputDisabled === false)
-    );
-    const [isFocused, setIsFocused] = useState(
-      inputAutoFocus === true && inputDisabled === false
-    );
-
-    useEffect(() => {
-      if (inputValue === '') {
-        setIsShifted(false);
-      }
-    }, [inputValue]);
-
-    /* Set root props */
-    const {
-      onMouseDown: onRootMouseDown,
-      className: rootClassName,
-      ...restRootProps
-    } = componentsProps?.root ?? defaultProps.componentsProps.root;
-
-    const rootMouseDownHandler = (event: MouseEvent<HTMLDivElement>): void => {
-      event.preventDefault();
-      if (
-        event.target === rootFocusRef.current ||
-        event.target === inputFocusRef.current
-      ) {
-        inputFocusRef.current?.focus();
-      }
-
-      if (onRootMouseDown !== undefined) {
-        onRootMouseDown(event);
-      }
-    };
-
-    const mergedRootClassName = twMerge(
-      mergeClasses(
-        rootStyles.base,
-        isFocused && rootStyles.focused,
-        isShifted && rootStyles.shifted,
-        rootClassName
-      )
-    );
-
-    /* Set input props */
-    const focusInputHandler = (event: FocusEvent<HTMLInputElement>): void => {
-      setIsShifted(true);
-      setIsFocused(true);
-
-      if (onInputFocus !== undefined) {
-        onInputFocus(event);
-      }
-    };
-
-    const blurInputHandler = (event: FocusEvent<HTMLInputElement>): void => {
-      if (event.target.value !== '') {
-        setIsFocused(false);
-      } else {
-        setIsShifted(false);
-        setIsFocused(false);
-      }
-
-      if (onInputBlur !== undefined) {
-        onInputBlur(event);
-      }
-    };
-
-    const mergedInputClassName = twMerge(
-      mergeClasses(
-        inputStyles.base,
-        inputStyles.variants[variant],
-        (inputDisabled === true || (!valid && !invalid)) &&
-          inputStyles.colors[theme][color],
-        valid && inputDisabled !== true && inputStyles.valid[theme],
-        invalid && inputDisabled !== true && inputStyles.invalid[theme],
-        inputClassName
-      )
-    );
-
-    const setInputRef = (element: HTMLInputElement): void => {
-      inputFocusRef.current = element;
-
-      if (inputRef !== undefined) {
-        inputRef.current = element;
-      }
-    };
-
-    /* Set container props */
-    const {
-      disabled: containerDisabled,
-      className: containerClassName,
-      ...restContainerProps
-    } = componentsProps?.container ?? defaultProps.componentsProps.container;
-
-    const isContainerDisabled =
-      containerDisabled === undefined ? inputDisabled : containerDisabled;
-
-    const mergedContainerClassName = twMerge(
-      mergeClasses(
-        containerStyles.base,
-        (isContainerDisabled === true || (!valid && !invalid)) &&
-          containerStyles.variants[variant][theme][color],
-        valid &&
-          isContainerDisabled !== true &&
-          containerStyles.valid[variant][theme],
-        invalid &&
-          isContainerDisabled !== true &&
-          containerStyles.invalid[variant][theme],
-        rootClassName
-      )
-    );
-
-    /* Set label props */
-    if (label !== null) {
-      const { className: labelClassName, ...restLabelProps } =
-        componentsProps?.label ?? defaultProps.componentsProps.label;
-
-      const mergedLabelClassName = twMerge(
-        mergeClasses(
-          labelStyles.base,
-          labelStyles.variants[variant],
-          (inputDisabled === true || (!valid && !invalid)) &&
-            labelStyles.colors[theme][color],
-          startAdornment !== null && labelStyles.startAdornment,
-          valid && inputDisabled !== true && labelStyles.valid[theme],
-          invalid && inputDisabled !== true && labelStyles.invalid[theme],
-          labelPosition,
-          labelClassName
-        )
-      );
-
-      labelNode = (
-        <label
-          className={mergedLabelClassName}
-          {...restLabelProps}
-        >
-          {label}
-        </label>
-      );
+    if (onInputFocus !== undefined) {
+      onInputFocus(event);
     }
+  };
 
-    /* Set legend props */
-    if (label !== null && variant === 'outlined') {
-      const { className: legendClassName, ...restLegendProps } =
-        componentsProps?.legend ?? defaultProps.componentsProps.legend;
+  const setInputRef = (element: HTMLInputElement): void => {
+    componentsRefs.current.input = element;
 
-      const mergedLegendClassName = twMerge(
-        mergeClasses(legendStyles.base, legendClassName)
-      );
-
-      labelNode = (
-        <>
-          <legend
-            className={mergedLegendClassName}
-            {...restLegendProps}
-          >
-            {label}
-          </legend>
-          {labelNode}
-        </>
-      );
+    if (inputRef !== undefined && inputRef !== null) {
+      inputRef.current = element;
     }
+  };
 
-    return (
-      <div
-        onMouseDown={rootMouseDownHandler}
-        className={mergedRootClassName}
-        ref={rootFocusRef}
-        {...restRootProps}
+  const mergedInputClassName = mergeClasses(
+    inputStyles.base,
+    inputStyles.variants[variant],
+    !valid && !invalid && inputStyles.colors[theme][color],
+    valid && inputStyles.valid[theme],
+    invalid && inputStyles.invalid[theme],
+    inputClassName
+  );
+
+  /* Set container props */
+  const containerStyles = styles.container;
+  const { disabled: containerDisabled = inputDisabled, className: containerClassName, ...restContainerProps } = containerProps;
+
+  const mergedContainerClassName = mergeClasses(
+    containerStyles.base,
+    !valid && !invalid && containerStyles.variants[variant][theme][color],
+    valid && containerStyles.valid[variant][theme],
+    invalid && containerStyles.invalid[variant][theme],
+    rootClassName
+  );
+
+  /* Set label props */
+  if (label !== null) {
+    const labelStyles = styles.label;
+    const { className: labelClassName, ...restLabelProps } = labelProps;
+
+    const mergedLabelClassName = mergeClasses(
+      labelStyles.base,
+      labelStyles.variants[variant],
+      !valid && !invalid && labelStyles.colors[theme][color],
+      valid && labelStyles.valid[theme],
+      invalid && labelStyles.invalid[theme],
+      startAdornment !== undefined && labelStyles.startAdornment,
+      labelClassName
+    );
+
+    labelNode = (
+      <label
+        className={mergedLabelClassName}
+        {...restLabelProps}
       >
-        {startAdornment}
-        <input
-          onFocus={focusInputHandler}
-          onBlur={blurInputHandler}
-          autoFocus={inputAutoFocus}
-          disabled={inputDisabled}
-          value={inputValue}
-          className={mergedInputClassName}
-          ref={setInputRef}
-          {...restInputProps}
-        />
-        <fieldset
-          disabled={isContainerDisabled}
-          className={mergedContainerClassName}
-          {...restContainerProps}
-        >
-          {labelNode}
-        </fieldset>
-        {endAdornment}
-      </div>
+        {label}
+      </label>
     );
   }
-);
+
+  /* Set legend props */
+  if (label !== null && variant === 'outlined') {
+    const legendStyles = styles.legend;
+    const { className: legendClassName, ...restLegendProps } = legendProps;
+
+    const mergedLegendClassName = mergeClasses(legendStyles.base, legendClassName);
+
+    labelNode = (
+      <>
+        <legend
+          className={mergedLegendClassName}
+          {...restLegendProps}
+        >
+          {label}
+        </legend>
+        {labelNode}
+      </>
+    );
+  }
+
+  return (
+    <div
+      className={mergedRootClassName}
+      ref={setRootRef}
+      {...restRootProps}
+    >
+      {startAdornment}
+      <input
+        onFocus={focusInputHandler}
+        autoFocus={inputAutoFocus}
+        disabled={inputDisabled}
+        value={inputValue}
+        className={mergedInputClassName}
+        ref={setInputRef}
+        {...restInputProps}
+      />
+      <fieldset
+        disabled={containerDisabled}
+        className={mergedContainerClassName}
+        {...restContainerProps}
+      >
+        {labelNode}
+      </fieldset>
+      {endAdornment}
+    </div>
+  );
+});
 
 Input.displayName = 'Input';
 
