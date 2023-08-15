@@ -8,6 +8,8 @@ export interface CheckboxDefaultProps {
   invalid?: boolean;
   rootProps?: BaseHTMLAttributes<HTMLDivElement>;
   iconProps?: SVGAttributes<SVGSVGElement>;
+  checked?: boolean;
+  disabled?: boolean;
   type?: HTMLInputTypeAttribute
 }
 
@@ -38,6 +40,8 @@ const checkboxConfig: CheckboxConfig = {
     invalid: false,
     rootProps: {},
     iconProps: {},
+    checked: false,
+    disabled: false,
     type: 'checkbox'
   },
   styles: {
