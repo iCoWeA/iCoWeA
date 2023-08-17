@@ -13,7 +13,7 @@ import React, {
 } from 'react';
 import themeContext from '../../contexts/theme';
 import useTransition, { type TransitionConfig, TransitionStates } from '../../hooks/useTransition';
-import { mergeClasses, mergeStyles, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
 
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
@@ -28,7 +28,8 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.collapse;
-  const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = mergeProps(defaultProps, props);
+  const mergedTransitionConfig = mergeProps(defaultProps.transitionConfig, transitionConfig);
   let mergedStyle: CSSProperties = {};
 
   const height = useRef(0);
@@ -36,7 +37,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
 
-  const { state: transitionState, className: transitionClassName, enterState, exitState, enter, exit } = useTransition(transitionConfig);
+  const { state: transitionState, className: transitionClassName, enterState, exitState, enter, exit } = useTransition(mergedTransitionConfig);
 
   useEffect(() => {
     height.current = componentRef.current?.offsetHeight ?? 0;
@@ -85,7 +86,10 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   if (componentRef.current !== null) {
     mergedStyle = mergeStyles(
-      { height: `${open ? height.current : 0}px`, transitionDuration: `${open ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms` },
+      {
+        height: `${open ? height.current : 0}px`,
+        transitionDuration: `${open ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`
+      },
       style
     );
   } else {
