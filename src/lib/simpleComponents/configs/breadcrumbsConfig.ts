@@ -2,16 +2,6 @@ import { type LiHTMLAttributes, type ReactNode } from 'react';
 
 export type BreadcrumbsColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
-export interface BreadcrumbsProps {
-  separator?: ReactNode;
-  color?: BreadcrumbsColors;
-  fullwidth?: boolean;
-  itemsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
-  separatorsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
-  className?: string;
-  children?: ReactNode;
-}
-
 export interface BreadcrumbsConfig {
   defaultProps: {
     separator: ReactNode;

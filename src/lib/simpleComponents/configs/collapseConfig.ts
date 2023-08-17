@@ -1,58 +1,40 @@
-import { type BaseHTMLAttributes } from 'react';
+import { type CSSProperties, type TransitionEventHandler, type AnimationEventHandler } from 'react';
 
 export interface CollapseConfig {
   defaultProps: {
     open: boolean;
-    transitionProps: {
-      unmountOnExit: boolean;
+    unmountOnExit: boolean;
+    transitionConfig: {
       enterDuration: number;
       exitDuration: number;
     };
-    componentsProps: {
-      container: BaseHTMLAttributes<HTMLDivElement>;
-    };
+    onTransitionEnd?: TransitionEventHandler,
+    onAnimationEnd?: AnimationEventHandler,
+    style: CSSProperties;
+    className: string;
   };
   styles: {
-    root: {
-      base: Record<string, string>;
-      open: Record<string, string>;
-    },
-    container: {
-      base: Record<string, string>;
-    }
+    base: Record<string, string>;
   }
 }
 
 const collapseConfig: CollapseConfig = {
   defaultProps: {
     open: false,
-    transitionProps: {
-      unmountOnExit: false,
+    unmountOnExit: false,
+    transitionConfig: {
       enterDuration: 500,
       exitDuration: 500
     },
-    componentsProps: {
-      container: {}
-    }
+    style: {},
+    className: ''
   },
   styles: {
-    root: {
-      base: {
-        display: 'grid',
-        gridTemplateRows: 'grid-rows-[0fr]',
-        focus: 'focus:outline-0',
-        transition: 'transition-[grid-template-rows]'
-      },
-      open: {
-        gridTemplateRows: 'grid-rows-[1fr]'
-      }
-    },
-    container: {
-      base: {
-        display: 'flex',
-        overflow: 'overflow-hidden',
-        focus: 'focus:outline-0'
-      }
+    base: {
+      display: 'flex',
+      overflow: 'overflow-hidden',
+      transition: 'transition-[height]',
+      focus: 'focus:outline-0'
     }
   }
 };

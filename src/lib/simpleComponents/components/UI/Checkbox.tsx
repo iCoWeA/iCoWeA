@@ -12,7 +12,7 @@ import { type CheckboxColors } from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface CheckboxProps {
+export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   color?: CheckboxColors;
   valid?: boolean;
   invalid?: boolean;
@@ -27,7 +27,7 @@ export interface CheckboxProps {
   children?: ReactNode;
 }
 
-const Checkbox = forwardRef<HTMLDivElement, CheckboxProps & InputHTMLAttributes<HTMLInputElement>>((inputProps, rootRef) => {
+const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.checkbox;
   const {

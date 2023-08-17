@@ -3,21 +3,6 @@ import { type ReactNode, type BaseHTMLAttributes, type ButtonHTMLAttributes } fr
 export type AlertVariants = 'filled' | 'outlined' | 'ghost';
 export type AlertColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface AlertProps {
-  onClose?: () => void;
-  variant?: AlertVariants;
-  color?: AlertColors;
-  invisible?: boolean;
-  icon?: ReactNode;
-  action?: ReactNode;
-  iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
-  className?: string;
-  children?: ReactNode;
-}
-
 export interface AlertConfig {
   defaultProps: {
     onClose?: () => void;

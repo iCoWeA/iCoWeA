@@ -2,17 +2,15 @@ export type ButtonVariants = 'filled' | 'outlined' | 'text';
 export type ButtonSizes = 'sm' | 'md' | 'lg';
 export type ButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface ButtonProps {
-  variant?: ButtonVariants;
-  size?: ButtonSizes;
-  color?: ButtonColors;
-  elevated?: boolean;
-  fullwidth?: boolean;
-  className?: string;
-}
-
 export interface ButtonConfig {
-  defaultProps: Required<ButtonProps>;
+  defaultProps: {
+    variant: ButtonVariants;
+    size: ButtonSizes;
+    color: ButtonColors;
+    elevated: boolean;
+    fullwidth: boolean;
+    className: string;
+  };
   styles: {
     base: Record<string, string>;
     fullwidth: Record<string, string>;

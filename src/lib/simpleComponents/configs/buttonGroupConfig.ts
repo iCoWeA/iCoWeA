@@ -4,16 +4,6 @@ export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
 export type ButtonGroupSizes = 'sm' | 'md' | 'lg';
 export type ButtonGroupColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface ButtonGroupProps {
-  variant?: ButtonGroupVariants;
-  size?: ButtonGroupSizes;
-  color?: ButtonGroupColors;
-  elevated?: boolean;
-  fullwidth?: boolean;
-  className?: string;
-  children?: ReactNode;
-}
-
 export interface ButtonGroupConfig {
   defaultProps: {
     variant: ButtonGroupVariants;

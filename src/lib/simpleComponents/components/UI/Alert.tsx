@@ -1,9 +1,24 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent } from 'react';
-import { type AlertProps } from '../../configs/alertConfig';
+import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type ButtonHTMLAttributes } from 'react';
+import { type AlertVariants, type AlertColors } from '../../configs/alertConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const Alert = forwardRef<HTMLDivElement, AlertProps & BaseHTMLAttributes<HTMLDivElement>>((rootProps, rootRef) => {
+export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
+  onClose?: () => void;
+  variant?: AlertVariants;
+  color?: AlertColors;
+  invisible?: boolean;
+  icon?: ReactNode;
+  action?: ReactNode;
+  iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  className?: string;
+  children?: ReactNode;
+}
+
+const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.alert;
   const {

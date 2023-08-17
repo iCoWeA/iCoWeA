@@ -1,17 +1,15 @@
 export type BadgeColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 export type BadgeBorderColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface BadgeProps {
-  position?: { vertical: 'top' | 'bottom'; horizontal: 'left' | 'right' };
-  color?: BadgeColors;
-  withBorder?: boolean;
-  borderColor?: BadgeBorderColors;
-  invisible?: boolean;
-  className?: string;
-}
-
 export interface BadgeConfig {
-  defaultProps: Required<BadgeProps>;
+  defaultProps: {
+    position: { vertical: 'top' | 'bottom'; horizontal: 'left' | 'right' };
+    color: BadgeColors;
+    withBorder: boolean;
+    borderColor: BadgeBorderColors;
+    invisible: boolean;
+    className: string;
+  };
   styles: {
     base: Record<string, string>;
     invisible: Record<string, string>;
