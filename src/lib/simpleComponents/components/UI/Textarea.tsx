@@ -7,14 +7,37 @@ import React, {
   useImperativeHandle,
   type FocusEvent,
   type TextareaHTMLAttributes,
-  useCallback
+  useCallback,
+  type BaseHTMLAttributes,
+  type FieldsetHTMLAttributes,
+  type FocusEventHandler,
+  type LabelHTMLAttributes,
+  type MutableRefObject
 } from 'react';
-import { type TextAreaProps } from '../../configs/textAreaConfig';
+import { type TextAreaColors, type TextAreaVariants } from '../../configs/textAreaConfig';
 import themeContext from '../../contexts/theme';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const TextArea = forwardRef<HTMLDivElement, TextAreaProps & TextareaHTMLAttributes<HTMLTextAreaElement>>((textAreaProps, rootRef) => {
+export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  variant?: TextAreaVariants;
+  color?: TextAreaColors;
+  valid?: boolean;
+  invalid?: boolean;
+  label?: ReactNode;
+  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+  containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+  legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
+  labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
+  textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
+  onFocus?: FocusEventHandler<HTMLTextAreaElement>;
+  autoFocus?: boolean;
+  disabled?: boolean;
+  value?: string;
+  className?: string;
+}
+
+const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.textArea;
   const {

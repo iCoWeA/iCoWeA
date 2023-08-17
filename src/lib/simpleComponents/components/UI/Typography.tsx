@@ -1,12 +1,16 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type TypographyProps } from '../../configs/typographyConfig';
+import { type TypographyVariants, type TypographyAligns, type TypographyColors } from '../../configs/typographyConfig';
 import themeContext from '../../contexts/theme';
 import { setDefaultProps, mergeClasses } from '../../utils/propsHelper';
 
-const Typography = forwardRef<
-HTMLParagraphElement | HTMLHeadingElement,
-TypographyProps & BaseHTMLAttributes<HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement>
->((props, ref) => {
+export interface TypographyProps extends BaseHTMLAttributes<HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement> {
+  variant?: TypographyVariants;
+  align?: TypographyAligns;
+  color?: TypographyColors;
+  className?: string;
+}
+
+const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, TypographyProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.typography;
   const { variant, align, color, className, ...restProps } = setDefaultProps(props, defaultProps);

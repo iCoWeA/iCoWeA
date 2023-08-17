@@ -3,24 +3,6 @@ import { type MutableRefObject, type BaseHTMLAttributes, type FieldsetHTMLAttrib
 export type TextAreaVariants = 'outlined' | 'filled' | 'standard';
 export type TextAreaColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface TextAreaProps {
-  variant?: TextAreaVariants;
-  color?: TextAreaColors;
-  valid?: boolean;
-  invalid?: boolean;
-  label?: ReactNode;
-  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
-  containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
-  legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
-  labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
-  textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
-  onFocus?: FocusEventHandler<HTMLTextAreaElement>;
-  autoFocus?: boolean;
-  disabled?: boolean;
-  value?: string;
-  className?: string;
-}
-
 export interface TextAreaConfig {
   defaultProps: {
     variant: TextAreaVariants;
