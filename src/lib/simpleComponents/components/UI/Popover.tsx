@@ -62,7 +62,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     exit();
   }
 
-  if (anchorRef === undefined || (unmountOnExit && transitionState === TransitionStates.EXITED)) {
+  if (anchorRef === null || (unmountOnExit && transitionState === TransitionStates.EXITED)) {
     return <></>;
   }
 
