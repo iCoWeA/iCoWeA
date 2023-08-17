@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const CardFooter = forwardRef<HTMLDivElement, CardFooterProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.cardFooter;
-  const { columns, fullwidht, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { columns, fullwidht, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, columns && styles.columns, fullwidht && styles.fullwidth, className);

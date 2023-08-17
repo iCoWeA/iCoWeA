@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const Badge = forwardRef<HTMLSpanElement, BadgeProps & BaseHTMLAttributes<HTMLSpanElement>>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.badge;
-  const { position, color, withBorder, borderColor, invisible, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { position, color, withBorder, borderColor, invisible, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(

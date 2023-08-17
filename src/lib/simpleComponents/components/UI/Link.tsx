@@ -7,7 +7,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const Link = forwardRef<HTMLAnchorElement, LinkProps & BaseLinkProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.link;
-  const { underline, color, fullwidth, disabled, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { underline, color, fullwidth, disabled, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(

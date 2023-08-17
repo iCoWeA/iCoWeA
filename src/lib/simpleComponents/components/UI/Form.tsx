@@ -7,7 +7,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const Form = forwardRef<HTMLFormElement, FormProps & BaseFormProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.form;
-  const { columns, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { columns, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, columns && styles.columns, className);

@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const List = forwardRef<HTMLUListElement, ListProps & BaseHTMLAttributes<HTMLUListElement>>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.list;
-  const { row, disableGap, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { row, disableGap, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, row && styles.row, disableGap && styles.disableGap, className);

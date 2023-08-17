@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const Label = forwardRef<HTMLLabelElement, LabelProps & LabelHTMLAttributes<HTMLLabelElement>>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.label;
-  const { color, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { color, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);

@@ -11,11 +11,10 @@ import React, {
 } from 'react';
 import { type InputProps } from '../../configs/inputConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 import useOutsideClick from '../../hooks/useOutsideClick';
+import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
 const Input = forwardRef<HTMLDivElement, InputProps & InputHTMLAttributes<HTMLInputElement>>((inputProps, rootRef) => {
-  const componentsRefs = useRef<{ root: HTMLDivElement | null; input: HTMLInputElement | null }>({ root: null, input: null });
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.input;
   const {
@@ -39,6 +38,8 @@ const Input = forwardRef<HTMLDivElement, InputProps & InputHTMLAttributes<HTMLIn
     ...restInputProps
   } = setDefaultProps(defaultProps, inputProps);
   let labelNode: ReactNode;
+
+  const componentsRefs = useRef<{ root: HTMLDivElement | null; input: HTMLInputElement | null }>({ root: null, input: null });
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRefs.current.root, []);
 

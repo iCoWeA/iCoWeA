@@ -16,7 +16,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps & BaseHTMLAttributes<H
     className: barClassName,
     children: barChildren,
     ...restBarProps
-  } = setDefaultProps(defaultProps, props);
+  } = setDefaultProps(props, defaultProps);
 
   /* Set root props */
   const rootStyles = styles.root;

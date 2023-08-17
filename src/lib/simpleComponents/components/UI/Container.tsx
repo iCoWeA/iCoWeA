@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const Container = forwardRef<HTMLDivElement, ContainerProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.container;
-  const { variant, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { variant, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant], className);

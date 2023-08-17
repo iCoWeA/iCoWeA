@@ -19,7 +19,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps & BaseHTMLAttributes<HTMLDivEl
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
-  } = setDefaultProps(defaultProps, rootProps);
+  } = setDefaultProps(rootProps, defaultProps);
   let buttonContainerNode: ReactNode;
   let buttonNode: ReactNode;
 

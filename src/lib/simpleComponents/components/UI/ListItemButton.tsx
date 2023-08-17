@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const ListItemButton = forwardRef<HTMLButtonElement, ListItemButtonProps & ButtonHTMLAttributes<HTMLButtonElement>>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.listItemButton;
-  const { variant, size, color, selected, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { variant, size, color, selected, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(

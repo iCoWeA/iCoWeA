@@ -9,7 +9,7 @@ TypographyProps & BaseHTMLAttributes<HTMLParagraphElement | HTMLHeadingElement |
 >((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.typography;
-  const { variant, align, color, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { variant, align, color, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant], styles.aligns[align], styles.colors[theme][color], className);

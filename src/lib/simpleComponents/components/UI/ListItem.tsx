@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const ListItem = forwardRef<HTMLLIElement, ListItemProps & LiHTMLAttributes<HTMLLIElement>>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.listItem;
-  const { size, color, disablePadding, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { size, color, disablePadding, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.sizes[size], styles.colors[theme][color], disablePadding && styles.disablePadding, className);

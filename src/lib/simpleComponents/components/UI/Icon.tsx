@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const Icon = forwardRef<SVGSVGElement, IconProps & SVGAttributes<SVGSVGElement>>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.icon;
-  const { size, color, viewBox, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { size, color, viewBox, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.sizes[size], styles.colors[theme][color], className);

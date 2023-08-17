@@ -6,7 +6,7 @@ import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 const FormGroup = forwardRef<HTMLDivElement, FormGroupProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.formGroup;
-  const { row, className, ...restProps } = setDefaultProps(defaultProps, props);
+  const { row, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, row && styles.row, className);

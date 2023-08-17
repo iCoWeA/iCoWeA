@@ -15,7 +15,7 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps & BaseHTMLAttr
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
-  } = setDefaultProps(defaultProps, rootProps);
+  } = setDefaultProps(rootProps, defaultProps);
 
   /* Set root props */
   const rootStyles = styles.root;

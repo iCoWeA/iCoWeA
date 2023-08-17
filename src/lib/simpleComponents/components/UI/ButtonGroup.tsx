@@ -15,7 +15,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps & BaseHTMLAttrib
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
-  } = setDefaultProps(defaultProps, rootProps);
+  } = setDefaultProps(rootProps, defaultProps);
 
   /* Set root props */
   const rootStyles = styles.root;
