@@ -4,6 +4,7 @@ export interface AccordionConfig {
     open?: boolean;
     duration: number;
     disabled: boolean;
+    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -14,7 +15,8 @@ export interface AccordionConfig {
 const accordionConfig: AccordionConfig = {
   defaultProps: {
     duration: 500,
-    disabled: false
+    disabled: false,
+    className: ''
   },
   styles: {
     base: {

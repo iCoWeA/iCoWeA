@@ -1,8 +1,8 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import Collapse, { type CollapseProps } from './Collapse';
+import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
-import accordionContext from '../../contexts/accordion';
 
 export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
   rootProps?: CollapseProps;

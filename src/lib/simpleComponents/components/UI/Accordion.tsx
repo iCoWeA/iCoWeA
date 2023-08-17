@@ -8,12 +8,13 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
   duration?: number;
   disabled?: boolean;
+  clasName?: string;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.accordion;
-  const { open, duration, disabled, onToggle, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { onToggle, open, duration, disabled, className, ...restProps } = setDefaultProps(props, defaultProps);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -35,6 +36,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
     [open, isOpen, disabled]
   );
 
+  /* Set props */
   const mergedClassName = mergeClasses(styles.base, disabled && styles.disabled, className);
 
   return (
