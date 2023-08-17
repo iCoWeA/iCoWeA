@@ -23,12 +23,4 @@ export const deepClone = (object: Record<string, any>): Record<string, any> => {
   return newObject;
 };
 
-export const setDefaultProps = <T extends Record<string, any>, V extends Record<string, any>>(props: T, defaultProps: V): T & V => {
-  const newProps: Record<string, any> = Object.assign({}, props);
-
-  for (const key in defaultProps) {
-    newProps[key] = typeof newProps[key] === 'object' && typeof defaultProps[key] === 'object' ? setDefaultProps(newProps[key], defaultProps[key]) : newProps[key] ?? defaultProps[key];
-  }
-
-  return newProps as T & V;
-};
+export const mergeProps = <T extends object, V extends object>(defaultProps: T, props: V): T & V => Object.assign(defaultProps, props);

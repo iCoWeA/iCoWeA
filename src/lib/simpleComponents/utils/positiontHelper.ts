@@ -1,58 +1,58 @@
-export interface PositionProps {
+export interface Position {
   vertical: 'top' | 'center' | 'bottom';
   horizontal: 'left' | 'center' | 'right';
 }
 
-export interface Position {
+export interface Cords {
   top: number;
   left: number;
 }
 
-export const setOrigin = (anchor?: HTMLElement | null, positionProps?: PositionProps, element?: HTMLElement | null, transformPositionProps?: PositionProps): Position => {
-  const position: Position = { top: 0, left: 0 };
+export const setCords = (anchor?: HTMLElement | null, position?: Position, element?: HTMLElement | null, transformPosition?: Position): Cords => {
+  const cords: Cords = { top: 0, left: 0 };
 
   if (anchor === undefined || anchor === null) {
-    return position;
+    return cords;
   }
 
-  position.top = anchor.offsetTop;
-  position.left = anchor.offsetLeft;
+  cords.top = anchor.offsetTop;
+  cords.left = anchor.offsetLeft;
 
-  if (positionProps?.vertical === 'center') {
-    position.top += anchor.offsetHeight / 2;
+  if (position?.vertical === 'center') {
+    cords.top += anchor.offsetHeight / 2;
   }
 
-  if (positionProps?.vertical === 'bottom') {
-    position.top += anchor.offsetHeight;
+  if (position?.vertical === 'bottom') {
+    cords.top += anchor.offsetHeight;
   }
 
-  if (positionProps?.horizontal === 'center') {
-    position.left += anchor.offsetWidth / 2;
+  if (position?.horizontal === 'center') {
+    cords.left += anchor.offsetWidth / 2;
   }
 
-  if (positionProps?.horizontal === 'right') {
-    position.left += anchor.offsetWidth;
+  if (position?.horizontal === 'right') {
+    cords.left += anchor.offsetWidth;
   }
 
   if (element === undefined || element === null) {
-    return position;
+    return cords;
   }
 
-  if (transformPositionProps?.vertical === 'center') {
-    position.top -= element.offsetHeight / 2;
+  if (transformPosition?.vertical === 'center') {
+    cords.top -= element.offsetHeight / 2;
   }
 
-  if (transformPositionProps?.vertical === 'bottom') {
-    position.top -= element.offsetHeight;
+  if (transformPosition?.vertical === 'bottom') {
+    cords.top -= element.offsetHeight;
   }
 
-  if (transformPositionProps?.horizontal === 'center') {
-    position.left -= element.offsetWidth / 2;
+  if (transformPosition?.horizontal === 'center') {
+    cords.left -= element.offsetWidth / 2;
   }
 
-  if (transformPositionProps?.horizontal === 'right') {
-    position.left -= element.offsetWidth;
+  if (transformPosition?.horizontal === 'right') {
+    cords.left -= element.offsetWidth;
   }
 
-  return position;
+  return cords;
 };
