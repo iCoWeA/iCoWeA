@@ -2,7 +2,7 @@ import React, { type ButtonHTMLAttributes, forwardRef, useContext, type ReactNod
 import { type AccordionHeaderColors } from '../../configs/accordionHeaderConfig';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, mergeStyles, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: AccordionHeaderColors;
@@ -27,7 +27,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((roo
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
-  } = setDefaultProps(rootProps, { ...defaultProps, disabled });
+  } = mergeProps({ ...defaultProps, disabled }, rootProps);
   let iconNode: ReactNode;
 
   /* Set root props */
