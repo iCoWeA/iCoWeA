@@ -15,6 +15,7 @@ export interface ChipProps {
   buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
   className?: string;
+  children?: ReactNode;
 }
 
 export interface ChipConfig {
@@ -27,6 +28,7 @@ export interface ChipConfig {
     buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
     className: string;
+    children?: ReactNode;
   };
   styles: {
     root: {

@@ -1,3 +1,5 @@
+import { type ReactNode } from 'react';
+
 export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
 export type ButtonGroupSizes = 'sm' | 'md' | 'lg';
 export type ButtonGroupColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
@@ -9,10 +11,19 @@ export interface ButtonGroupProps {
   elevated?: boolean;
   fullwidth?: boolean;
   className?: string;
+  children?: ReactNode;
 }
 
 export interface ButtonGroupConfig {
-  defaultProps: Required<ButtonGroupProps>;
+  defaultProps: {
+    variant: ButtonGroupVariants;
+    size: ButtonGroupSizes;
+    color: ButtonGroupColors;
+    elevated: boolean;
+    fullwidth: boolean;
+    className: string;
+    children?: ReactNode;
+  };
   styles: {
     root: {
       base: Record<string, string>;

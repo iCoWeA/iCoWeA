@@ -9,10 +9,19 @@ export interface BreadcrumbsProps {
   itemsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
   separatorsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
   className?: string;
+  children?: ReactNode;
 }
 
 export interface BreadcrumbsConfig {
-  defaultProps: Required<BreadcrumbsProps>;
+  defaultProps: {
+    separator: ReactNode;
+    color: BreadcrumbsColors;
+    fullwidth: boolean;
+    itemsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
+    separatorsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
+    className: string;
+    children?: ReactNode;
+  };
   styles: {
     root: {
       base: Record<string, string>;

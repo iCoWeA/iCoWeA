@@ -14,6 +14,7 @@ export interface CheckboxProps {
   disabled?: boolean;
   type?: HTMLInputTypeAttribute
   className?: string;
+  children?: ReactNode;
 }
 
 export interface CheckboxConfig {
@@ -27,6 +28,7 @@ export interface CheckboxConfig {
     disabled: boolean;
     type: HTMLInputTypeAttribute
     className: string;
+    children?: ReactNode;
   };
   styles: {
     root: {

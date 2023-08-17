@@ -1,4 +1,4 @@
-import { type CSSProperties, type BaseHTMLAttributes, type MutableRefObject } from 'react';
+import { type CSSProperties, type BaseHTMLAttributes, type MutableRefObject, type ReactNode } from 'react';
 
 export type ProgressSizeVariants = 'default' | 'label';
 export type ProgressSizes = 'sm' | 'md' | 'lg';
@@ -12,6 +12,7 @@ export interface ProgressProps {
   barRef?: MutableRefObject<HTMLDivElement> | null;
   style?: CSSProperties;
   className?: string;
+  children?: ReactNode;
 }
 
 export interface ProgressConfig {
@@ -22,6 +23,7 @@ export interface ProgressConfig {
     rootProps: BaseHTMLAttributes<HTMLDivElement>;
     style: CSSProperties;
     className: string;
+    children?: ReactNode
   };
   styles: {
     root: {
