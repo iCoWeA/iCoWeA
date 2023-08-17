@@ -4,17 +4,6 @@ export type ProgressSizeVariants = 'default' | 'label';
 export type ProgressSizes = 'sm' | 'md' | 'lg';
 export type ProgressColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface ProgressProps {
-  value?: number | string;
-  size?: ProgressSizes;
-  color?: ProgressColors;
-  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
-  barRef?: MutableRefObject<HTMLDivElement> | null;
-  style?: CSSProperties;
-  className?: string;
-  children?: ReactNode;
-}
-
 export interface ProgressConfig {
   defaultProps: {
     value: number | string;

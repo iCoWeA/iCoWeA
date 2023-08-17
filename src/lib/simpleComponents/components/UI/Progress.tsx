@@ -1,9 +1,20 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
-import { type ProgressProps } from '../../configs/progressConfig';
+import React, { forwardRef, useContext, type BaseHTMLAttributes, type CSSProperties, type MutableRefObject, type ReactNode } from 'react';
+import { type ProgressSizes, type ProgressColors } from '../../configs/progressConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeStyles, setDefaultProps } from '../../utils/propsHelper';
 
-const Progress = forwardRef<HTMLDivElement, ProgressProps & BaseHTMLAttributes<HTMLDivElement>>((props, rootRef) => {
+export interface ProgressProps extends BaseHTMLAttributes<HTMLDivElement> {
+  value?: number | string;
+  size?: ProgressSizes;
+  color?: ProgressColors;
+  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+  barRef?: MutableRefObject<HTMLDivElement> | null;
+  style?: CSSProperties;
+  className?: string;
+  children?: ReactNode;
+}
+
+const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.progress;
   const {
