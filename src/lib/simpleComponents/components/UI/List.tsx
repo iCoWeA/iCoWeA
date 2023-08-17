@@ -1,6 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ListProps extends BaseHTMLAttributes<HTMLUListElement> {
   row?: boolean;
@@ -11,7 +11,7 @@ export interface ListProps extends BaseHTMLAttributes<HTMLUListElement> {
 const List = forwardRef<HTMLUListElement, ListProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.list;
-  const { row, disableGap, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { row, disableGap, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, row && styles.row, disableGap && styles.disableGap, className);

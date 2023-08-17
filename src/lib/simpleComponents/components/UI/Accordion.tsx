@@ -1,7 +1,7 @@
 import React, { forwardRef, type BaseHTMLAttributes, useContext, useMemo, useState } from 'react';
 import accordionContext, { type AccordionContext } from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   onToggle?: (open?: boolean) => void;
@@ -14,7 +14,7 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.accordion;
-  const { onToggle, open, duration, disabled, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { onToggle, open, duration, disabled, className, ...restProps } = mergeProps(defaultProps, props);
 
   const [isOpen, setIsOpen] = useState(false);
 

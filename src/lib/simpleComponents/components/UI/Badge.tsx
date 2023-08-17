@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import { type BadgeColors, type BadgeBorderColors } from '../../configs/badgeConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
   position?: { vertical: 'top' | 'bottom'; horizontal: 'left' | 'right' };
@@ -15,7 +15,7 @@ export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.badge;
-  const { position, color, withBorder, borderColor, invisible, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { position, color, withBorder, borderColor, invisible, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(

@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext, type ImgHTMLAttributes } from 'react';
 import { type AvatarVariants, type AvatarSizes, type AvatarColors } from '../../configs/avatarConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   variant?: AvatarVariants;
@@ -14,7 +14,7 @@ export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
 const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.avatar;
-  const { variant, size, color, withBorder, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { variant, size, color, withBorder, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(

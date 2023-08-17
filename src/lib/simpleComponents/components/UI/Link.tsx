@@ -2,7 +2,7 @@ import React, { forwardRef, useContext } from 'react';
 import { type LinkColors, type LinkUnderlines } from '../../configs/linkConfig';
 import { type LinkProps as BaseLinkProps, Link as BaseLink } from 'react-router-dom';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface LinkProps extends BaseLinkProps {
   underline?: LinkUnderlines;
@@ -15,7 +15,7 @@ export interface LinkProps extends BaseLinkProps {
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.link;
-  const { underline, color, fullwidth, disabled, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { underline, color, fullwidth, disabled, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(

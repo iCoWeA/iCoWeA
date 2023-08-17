@@ -1,7 +1,7 @@
 import React, { forwardRef, type BaseHTMLAttributes, useContext, type ReactNode, type LiHTMLAttributes } from 'react';
 import { type BreadcrumbsColors } from '../../configs/breadcrumbsConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLUListElement> {
   separator?: ReactNode;
@@ -25,7 +25,7 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((rootProps, r
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
-  } = setDefaultProps(rootProps, defaultProps);
+  } = mergeProps(defaultProps, rootProps);
 
   /* Set root props */
   const rootStyles = styles.root;

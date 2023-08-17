@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface FormGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   row?: boolean;
@@ -10,7 +10,7 @@ export interface FormGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
 const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.formGroup;
-  const { row, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { row, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, row && styles.row, className);

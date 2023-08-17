@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type ButtonHTMLAttributes } from 'react';
 import { type AlertVariants, type AlertColors } from '../../configs/alertConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
@@ -35,7 +35,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
-  } = setDefaultProps(rootProps, defaultProps);
+  } = mergeProps(defaultProps, rootProps);
   let iconContainerNode: ReactNode;
   let buttonContainerNode: ReactNode;
   let buttonNode: ReactNode;

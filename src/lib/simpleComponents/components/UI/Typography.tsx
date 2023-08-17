@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import { type TypographyVariants, type TypographyAligns, type TypographyColors } from '../../configs/typographyConfig';
 import themeContext from '../../contexts/theme';
-import { setDefaultProps, mergeClasses } from '../../utils/propsHelper';
+import { mergeProps, mergeClasses } from '../../utils/propsHelper';
 
 export interface TypographyProps extends BaseHTMLAttributes<HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement> {
   variant?: TypographyVariants;
@@ -13,7 +13,7 @@ export interface TypographyProps extends BaseHTMLAttributes<HTMLParagraphElement
 const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, TypographyProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.typography;
-  const { variant, align, color, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { variant, align, color, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant], styles.aligns[align], styles.colors[theme][color], className);

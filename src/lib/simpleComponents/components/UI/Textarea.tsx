@@ -17,7 +17,7 @@ import React, {
 import { type TextAreaColors, type TextAreaVariants } from '../../configs/textAreaConfig';
 import themeContext from '../../contexts/theme';
 import useOutsideClick from '../../hooks/useOutsideClick';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: TextAreaVariants;
@@ -57,7 +57,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
     value: textAreaValue,
     className: textAreaClassName,
     ...restTextAreaProps
-  } = setDefaultProps(textAreaProps, defaultProps);
+  } = mergeProps(defaultProps, textAreaProps);
   let labelNode: ReactNode;
 
   const componentsRefs = useRef<{ root: HTMLDivElement | null; textArea: HTMLTextAreaElement | null }>({ root: null, textArea: null });

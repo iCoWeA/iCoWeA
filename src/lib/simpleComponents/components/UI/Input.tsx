@@ -17,7 +17,7 @@ import React, {
 import { type InputVariants, type InputColors } from '../../configs/inputConfig';
 import themeContext from '../../contexts/theme';
 import useOutsideClick from '../../hooks/useOutsideClick';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   variant?: InputVariants;
@@ -61,7 +61,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
     value: inputValue,
     className: inputClassName,
     ...restInputProps
-  } = setDefaultProps(defaultProps, inputProps);
+  } = mergeProps(defaultProps, inputProps);
   let labelNode: ReactNode;
 
   const componentsRefs = useRef<{ root: HTMLDivElement | null; input: HTMLInputElement | null }>({ root: null, input: null });

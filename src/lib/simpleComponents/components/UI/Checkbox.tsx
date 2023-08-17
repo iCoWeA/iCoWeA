@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import { type CheckboxColors } from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   color?: CheckboxColors;
@@ -44,7 +44,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef)
     className: inputClassNames,
     children: inputChildren,
     ...restInputProps
-  } = setDefaultProps(inputProps, defaultProps);
+  } = mergeProps(defaultProps, inputProps);
   let iconNode: ReactNode;
 
   /* Set root props */

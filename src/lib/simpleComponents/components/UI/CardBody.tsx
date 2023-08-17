@@ -1,6 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface CardBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
   columns?: boolean;
@@ -11,7 +11,7 @@ export interface CardBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
 const CardBody = forwardRef<HTMLDivElement, CardBodyProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.cardBody;
-  const { columns, fullwidht, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { columns, fullwidht, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, columns && styles.columns, fullwidht && styles.fullwidth, className);

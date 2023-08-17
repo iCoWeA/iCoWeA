@@ -1,7 +1,7 @@
 import React, { forwardRef, type ButtonHTMLAttributes, useContext } from 'react';
 import { type ButtonVariants, type ButtonSizes, type ButtonColors } from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariants;
@@ -15,7 +15,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.button;
-  const { variant, size, color, elevated, fullwidth, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { variant, size, color, elevated, fullwidth, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(

@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext, type ButtonHTMLAttributes } from 'react';
 import { type ListItemButtonColors, type ListItemButtonSizes, type ListItemButtonVariant } from '../../configs/listItemButtonConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ListItemButtonVariant;
@@ -14,7 +14,7 @@ export interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
 const ListItemButton = forwardRef<HTMLButtonElement, ListItemButtonProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.listItemButton;
-  const { variant, size, color, selected, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { variant, size, color, selected, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(

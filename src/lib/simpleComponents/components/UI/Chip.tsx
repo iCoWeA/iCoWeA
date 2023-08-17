@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type ButtonHTMLAttributes } from 'react';
 import { type ChipVariants, type ChipSizes, type ChipColors } from '../../configs/chipConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
@@ -33,7 +33,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
     className: rootClassName,
     children: rootChildren,
     ...restRootProps
-  } = setDefaultProps(rootProps, defaultProps);
+  } = mergeProps(defaultProps, rootProps);
   let buttonContainerNode: ReactNode;
   let buttonNode: ReactNode;
 

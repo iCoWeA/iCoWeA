@@ -1,7 +1,7 @@
 import React, { type LiHTMLAttributes, forwardRef, useContext } from 'react';
 import { type ListItemSizes, type ListItemColors } from '../../configs/listItemConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
   size?: ListItemSizes;
@@ -13,7 +13,7 @@ export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
 const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.listItem;
-  const { size, color, disablePadding, className, ...restProps } = setDefaultProps(props, defaultProps);
+  const { size, color, disablePadding, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.sizes[size], styles.colors[theme][color], disablePadding && styles.disablePadding, className);

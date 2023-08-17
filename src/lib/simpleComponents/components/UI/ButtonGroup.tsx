@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext, type BaseHTMLAttributes, type ReactNode, cloneElement } from 'react';
 import { type ButtonGroupVariants, type ButtonGroupSizes, type ButtonGroupColors } from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
-import { isLast, mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import { isLast, mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ButtonGroupVariants;
@@ -16,16 +16,7 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.buttonGroup;
-  const {
-    variant,
-    size,
-    color,
-    elevated,
-    fullwidth,
-    className: rootClassName,
-    children: rootChildren,
-    ...restRootProps
-  } = setDefaultProps(rootProps, defaultProps);
+  const { variant, size, color, elevated, fullwidth, className: rootClassName, children: rootChildren, ...restRootProps } = mergeProps(defaultProps, rootProps);
 
   /* Set root props */
   const rootStyles = styles.root;
