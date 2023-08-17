@@ -1,22 +1,27 @@
 import React, {
+  type BaseHTMLAttributes,
   forwardRef,
   useContext,
-  type BaseHTMLAttributes,
   type TransitionEvent,
-  type AnimationEvent,
-  useRef,
   useImperativeHandle,
-  useEffect,
-  type CSSProperties,
+  useRef,
+  type AnimationEvent,
   type AnimationEventHandler,
+  type CSSProperties,
   type TransitionEventHandler
 } from 'react';
 import themeContext from '../../contexts/theme';
-import useTransition, { type TransitionConfig, TransitionStates } from '../../hooks/useTransition';
+import useTransition, { TransitionStates, type TransitionConfig } from '../../hooks/useTransition';
 import { mergeClasses, mergeStyles, setDefaultProps } from '../../utils/propsHelper';
+import { type PositionProps, setOrigin } from '../../utils/positiontHelper';
+import { createPortal } from 'react-dom';
 
-export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
+  anchorRef?: HTMLElement | null;
+  position?: PositionProps;
+  transformPosition?: PositionProps;
+  overlayRef?: HTMLElement | null;
   unmountOnExit?: boolean;
   transitionConfig?: TransitionConfig;
   onTransitionEnd?: TransitionEventHandler;
@@ -25,22 +30,29 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
+const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   const { config } = useContext(themeContext);
-  const { defaultProps, styles } = config.collapse;
-  const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = setDefaultProps(props, defaultProps);
-  let mergedStyle: CSSProperties = {};
+  const { defaultProps, styles } = config.popover;
+  const {
+    open,
+    anchorRef,
+    position,
+    transformPosition,
+    overlayRef,
+    unmountOnExit,
+    transitionConfig,
+    onTransitionEnd,
+    onAnimationEnd,
+    style,
+    className,
+    ...restProps
+  } = setDefaultProps(props, defaultProps);
 
-  const height = useRef(0);
   const componentRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
 
   const { state: transitionState, className: transitionClassName, enterState, exitState, enter, exit } = useTransition(transitionConfig);
-
-  useEffect(() => {
-    height.current = componentRef.current?.offsetHeight ?? 0;
-  }, []);
 
   if (exitState && open) {
     enter();
@@ -50,9 +62,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     exit();
   }
 
-  if (unmountOnExit && transitionState === TransitionStates.EXITED) {
+  if (anchorRef === undefined || (unmountOnExit && transitionState === TransitionStates.EXITED)) {
     return <></>;
   }
+
+  const origin = setOrigin(anchorRef, position, componentRef.current, transformPosition);
 
   /* Set props */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
@@ -83,29 +97,35 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     }
   };
 
-  if (componentRef.current !== null) {
-    mergedStyle = mergeStyles(
-      { height: `${open ? height.current : 0}px`, transitionDuration: `${open ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms` },
-      style
-    );
-  } else {
-    mergedStyle = style;
-  }
+  const mergeStyle = mergeStyles(
+    {
+      top: `${origin.top}px`,
+      left: `${origin.left}px`
+    },
+    style
+  );
 
-  const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    (transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && styles.open,
+    className,
+    transitionClassName
+  );
 
-  return (
+  const node = (
     <div
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
-      style={mergedStyle}
+      style={mergeStyle}
       className={mergedClassName}
       ref={componentRef}
       {...restProps}
     />
   );
+
+  return overlayRef === null ? node : createPortal(node, overlayRef);
 });
 
-Collapse.displayName = 'Collapse';
+Popover.displayName = 'Popover';
 
-export default Collapse;
+export default Popover;

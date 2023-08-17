@@ -5,11 +5,11 @@ export interface CollapseConfig {
     open: boolean;
     unmountOnExit: boolean;
     transitionConfig: {
-      enterDuration: number;
-      exitDuration: number;
+      enterDuration: number,
+      exitDuration: number
     };
-    onTransitionEnd?: TransitionEventHandler,
-    onAnimationEnd?: AnimationEventHandler,
+    onTransitionEnd?: TransitionEventHandler;
+    onAnimationEnd?: AnimationEventHandler;
     style: CSSProperties;
     className: string;
   };
