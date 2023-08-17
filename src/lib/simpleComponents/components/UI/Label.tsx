@@ -1,9 +1,14 @@
 import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
-import { type LabelProps } from '../../configs/labelConfig';
+import { type LabelColors } from '../../configs/labelConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const Label = forwardRef<HTMLLabelElement, LabelProps & LabelHTMLAttributes<HTMLLabelElement>>((props, ref) => {
+export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+  color?: LabelColors;
+  className?: string;
+}
+
+const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.label;
   const { color, className, ...restProps } = setDefaultProps(props, defaultProps);

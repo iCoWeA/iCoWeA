@@ -1,9 +1,14 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type ListProps } from '../../configs/listConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const List = forwardRef<HTMLUListElement, ListProps & BaseHTMLAttributes<HTMLUListElement>>((props, ref) => {
+export interface ListProps extends BaseHTMLAttributes<HTMLUListElement> {
+  row?: boolean;
+  disableGap?: boolean;
+  className?: string;
+}
+
+const List = forwardRef<HTMLUListElement, ListProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.list;
   const { row, disableGap, className, ...restProps } = setDefaultProps(props, defaultProps);

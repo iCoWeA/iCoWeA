@@ -1,11 +1,9 @@
-export interface ListProps {
-  row?: boolean;
-  disableGap?: boolean;
-  className?: string;
-}
-
 export interface ListConfig {
-  defaultProps: Required<ListProps>;
+  defaultProps: {
+    row: boolean;
+    disableGap: boolean;
+    className: string;
+  };
   styles: {
     base: Record<string, string>;
     row: Record<string, string>;

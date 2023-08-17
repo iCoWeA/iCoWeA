@@ -3,14 +3,14 @@ import { type ListItemSizes, type ListItemColors } from '../../configs/listItemC
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-export interface ListItemProps {
+export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
   size?: ListItemSizes;
   color?: ListItemColors;
   disablePadding?: boolean;
   className?: string;
 }
 
-const ListItem = forwardRef<HTMLLIElement, ListItemProps & LiHTMLAttributes<HTMLLIElement>>((props, ref) => {
+const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.listItem;
   const { size, color, disablePadding, className, ...restProps } = setDefaultProps(props, defaultProps);
