@@ -1,20 +1,12 @@
-import { type BaseHTMLAttributes } from 'react';
+import { type CollapseProps } from '../components/UI/Collapse';
 
 export interface AccordionBodyConfig {
   defaultProps: {
-    componentsProps: {
-      root: BaseHTMLAttributes<HTMLDivElement>;
-      container: BaseHTMLAttributes<HTMLDivElement>;
-    };
+    rootProps: CollapseProps;
+    className: string;
   };
   styles: {
-    root: {
-      base: Record<string, string>;
-      open: Record<string, string>;
-    },
-    constainer: {
-      base: Record<string, string>;
-    }
+    root: Record<string, string>,
     body: {
       base: Record<string, string>;
     }
@@ -23,30 +15,11 @@ export interface AccordionBodyConfig {
 
 const accordionBodyConfig: AccordionBodyConfig = {
   defaultProps: {
-    componentsProps: {
-      root: {},
-      container: {}
-    }
+    rootProps: {},
+    className: ''
   },
   styles: {
-    root: {
-      base: {
-        display: 'grid',
-        gridTemplateRows: 'grid-rows-[0fr]',
-        transition: 'transition-[grid-template-rows]',
-        focus: 'focus:outline-0'
-      },
-      open: {
-        gridTemplateRows: 'grid-rows-[1fr]'
-      }
-    },
-    constainer: {
-      base: {
-        display: 'flex',
-        overflow: 'overflow-hidden',
-        focus: 'focus:outline-0'
-      }
-    },
+    root: {},
     body: {
       base: {
         display: 'flex',

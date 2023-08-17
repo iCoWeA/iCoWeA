@@ -1,24 +1,17 @@
 import { createContext } from 'react';
-import { States as TransitionStates } from '../hooks/useTransition';
 
 export interface AccordionContext {
-  state: TransitionStates,
-  duration: number,
-  unmountOnExit: boolean;
-  enterTransition: string;
-  isDisabled: boolean;
+  open: boolean;
+  duration: number;
+  disabled: boolean;
   onClick: () => void;
-  onTransitionEnd: () => void;
 }
 
 export const initialState: AccordionContext = {
-  state: TransitionStates.EXITED,
-  duration: 250,
-  unmountOnExit: false,
-  enterTransition: '',
-  isDisabled: false,
-  onClick: () => {},
-  onTransitionEnd: () => {}
+  open: false,
+  duration: 500,
+  disabled: false,
+  onClick: () => {}
 };
 
 const accordionContext = createContext(initialState);

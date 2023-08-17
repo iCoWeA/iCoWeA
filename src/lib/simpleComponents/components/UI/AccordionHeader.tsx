@@ -1,10 +1,20 @@
-import React, { type ButtonHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent } from 'react';
-import { type AccordionHeaderProps } from '../../configs/accordionHeaderConfig';
+import React, { type ButtonHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type MouseEventHandler, type SVGAttributes } from 'react';
+import { type AccordionHeaderColors } from '../../configs/accordionHeaderConfig';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeStyles, setDefaultProps } from '../../utils/propsHelper';
 
-const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps & ButtonHTMLAttributes<HTMLButtonElement>>((rootProps, rootRef) => {
+export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  color?: AccordionHeaderColors;
+  icon?: boolean;
+  iconProps?: SVGAttributes<SVGSVGElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+  className?: string;
+  children?: ReactNode;
+}
+
+const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((rootProps, rootRef) => {
   const { open, disabled, duration, onClick } = useContext(accordionContext);
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.accordionHeader;

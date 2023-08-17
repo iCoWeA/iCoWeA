@@ -2,16 +2,6 @@ import { type MouseEventHandler, type ReactNode, type SVGAttributes } from 'reac
 
 export type AccordionHeaderColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
-export interface AccordionHeaderProps {
-  color?: AccordionHeaderColors;
-  icon?: boolean;
-  iconProps?: SVGAttributes<SVGSVGElement>;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
-  className?: string;
-  children?: ReactNode;
-}
-
 export interface AccordionHeaderConfig {
   defaultProps: {
     color: AccordionHeaderColors;

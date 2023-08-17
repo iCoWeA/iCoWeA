@@ -1,136 +1,41 @@
-import React, {
-  forwardRef,
-  useContext,
-  type BaseHTMLAttributes,
-  type TransitionEvent,
-  type AnimationEvent
-} from 'react';
-import accordionContext from '../../contexts/accordion';
+import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import Collapse, { type CollapseProps } from './Collapse';
 import themeContext from '../../contexts/theme';
-import { twMerge } from 'tailwind-merge';
-import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
-import { States } from '../../hooks/useTransition';
+import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+import accordionContext from '../../contexts/accordion';
 
 export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
-  componentsProps?: {
-    root?: BaseHTMLAttributes<HTMLDivElement>;
-    container?: BaseHTMLAttributes<HTMLDivElement>;
-  };
+  rootProps?: CollapseProps;
+  className?: string;
 }
 
-const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
-  (
-    {
-      componentsProps,
-      className: bodyClassName,
-      children: bodyChildren,
-      ...restBodyProps
-    },
-    rootRef
-  ) => {
-    const {
-      state,
-      className: transitionClassName,
-      duration,
-      unmountOnExit,
-      onTransitionEnd
-    } = useContext(accordionContext);
-    const { config } = useContext(themeContext);
-    const {
-      defaultProps,
-      styles: {
-        root: rootStyles,
-        constainer: containerStyles,
-        body: bodyStyles
-      }
-    } = config.accordionBody;
+const Card = forwardRef<HTMLDivElement, AccordionBodyProps>((bodyProps, rootRef) => {
+  const { open, duration } = useContext(accordionContext);
+  const { config } = useContext(themeContext);
+  const { defaultProps, styles } = config.accordionBody;
+  const {
+    rootProps,
+    className: bodyClassName,
+    ...restBodyProps
+  } = setDefaultProps(bodyProps, { ...defaultProps, rootProps: { open, transitionConfig: { enterDuration: duration, exitDuration: duration } } });
 
-    if (unmountOnExit && state === States.EXITED) {
-      return <></>;
-    }
+  /* Set body props */
+  const bodyStyles = styles.body;
+  const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
 
-    /* Set root props */
-    const {
-      onTransitionEnd: onRootTransitionEnd,
-      onAnimationEnd: onRootAnimationEnd,
-      style: rootStyle,
-      className: rootClassName,
-      ...restRootProps
-    } = componentsProps?.root ?? defaultProps.componentsProps.root;
-
-    const transitionEndRootHandler = (
-      event: TransitionEvent<HTMLDivElement>
-    ): void => {
-      onTransitionEnd();
-
-      if (onRootTransitionEnd !== undefined) {
-        onRootTransitionEnd(event);
-      }
-    };
-
-    const animationEndRootHandler = (
-      event: AnimationEvent<HTMLDivElement>
-    ): void => {
-      onTransitionEnd();
-
-      if (onRootAnimationEnd !== undefined) {
-        onRootAnimationEnd(event);
-      }
-    };
-
-    const mergedRootStyle = mergeStyles(
-      { transitionDuration: `${duration}ms` },
-      rootStyle
-    );
-
-    const mergedRootClassName = twMerge(
-      mergeClasses(
-        rootStyles.base,
-        (state === States.ENTERING || state === States.ENTERED) &&
-          rootStyles.open,
-        rootClassName,
-        transitionClassName
-      )
-    );
-
-    /* Set container props */
-    const { className: containerClassName, ...restContainerProps } =
-      componentsProps?.container ?? defaultProps.componentsProps.container;
-
-    const mergedContainerClassName = twMerge(
-      mergeClasses(containerStyles.base, containerClassName)
-    );
-
-    /* Set body props */
-    const mergedBodyClassName = twMerge(
-      mergeClasses(bodyStyles.base, bodyClassName)
-    );
-
-    return (
+  return (
+    <Collapse
+      ref={rootRef}
+      {...rootProps}
+    >
       <div
-        onTransitionEnd={transitionEndRootHandler}
-        onAnimationEnd={animationEndRootHandler}
-        style={mergedRootStyle}
-        className={mergedRootClassName}
-        ref={rootRef}
-        {...restRootProps}
-      >
-        <div
-          className={mergedContainerClassName}
-          {...restContainerProps}
-        >
-          <div
-            className={mergedBodyClassName}
-            {...restBodyProps}
-          >
-            {bodyChildren}
-          </div>
-        </div>
-      </div>
-    );
-  }
-);
+        className={mergedBodyClassName}
+        {...restBodyProps}
+      />
+    </Collapse>
+  );
+});
 
-AccordionBody.displayName = 'AccordionBody';
+Card.displayName = 'Card';
 
-export default AccordionBody;
+export default Card;

@@ -3,151 +3,108 @@ import React, {
   useContext,
   type BaseHTMLAttributes,
   type TransitionEvent,
-  type AnimationEvent
+  type AnimationEvent,
+  useRef,
+  useImperativeHandle,
+  useEffect,
+  type CSSProperties,
+  type AnimationEventHandler,
+  type TransitionEventHandler
 } from 'react';
+import useTransition, { type TransitionConfig, TransitionStates } from '../../hooks/useTransition';
 import themeContext from '../../contexts/theme';
-import useTransition, {
-  States,
-  type Config as TransitionConfig
-} from '../../hooks/useTransition';
-import { twMerge } from 'tailwind-merge';
-import { mergeClasses, mergeStyles } from '../../utils/styleHelper';
-
-export interface CollapseTransitionProps extends TransitionConfig {
-  unmountOnExit?: boolean;
-}
+import { mergeClasses, mergeStyles, setDefaultProps } from '../../utils/propsHelper';
 
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
-  transitionProps?: CollapseTransitionProps;
-  componentsProps?: {
-    container?: BaseHTMLAttributes<HTMLDivElement>;
-  };
+  unmountOnExit?: boolean;
+  transitionConfig?: TransitionConfig;
+  onTransitionEnd?: TransitionEventHandler;
+  onAnimationEnd?: AnimationEventHandler;
+  style?: CSSProperties;
+  className?: string;
 }
 
-const Collapse = forwardRef<HTMLDivElement, CollapseProps>(
-  (
-    {
-      open,
-      transitionProps,
-      componentsProps,
-      onTransitionEnd: onRootTransitionEnd,
-      onAnimationEnd: onRootAnimationEnd,
-      style: rootStyle,
-      className: rootClassName,
-      children: rootChildren,
-      ...restRootProps
-    },
-    rootRef
-  ) => {
-    const { config } = useContext(themeContext);
-    const {
-      defaultProps,
-      styles: { root: rootStyles, container: containerStyles }
-    } = config.collapse;
-    const {
-      unmountOnExit = defaultProps.transitionProps.unmountOnExit,
-      enterDuration = defaultProps.transitionProps.enterDuration,
-      exitDuration = defaultProps.transitionProps.exitDuration
-    } = transitionProps ?? {};
+const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
+  const { config } = useContext(themeContext);
+  const { defaultProps, styles } = config.collapse;
+  const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = setDefaultProps(props, defaultProps);
+  let mergedStyle: CSSProperties = {};
 
-    open = open ?? defaultProps.open;
+  const height = useRef(0);
+  const componentRef = useRef<HTMLDivElement>(null);
 
-    const {
-      state,
-      className: transitionClassName,
-      enterState,
-      exitState,
-      enter,
-      exit
-    } = useTransition({
-      ...defaultProps.transitionProps,
-      ...transitionProps
-    });
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
 
-    if (exitState && open) {
-      enter();
-    }
+  const { state: transitionState, className: transitionClassName, enterState, exitState, enter, exit } = useTransition(transitionConfig);
 
-    if (enterState && !open) {
-      exit();
-    }
+  useEffect(() => {
+    height.current = componentRef.current?.offsetHeight ?? 0;
+  }, []);
 
-    if (unmountOnExit && state === States.EXITED) {
-      return <></>;
-    }
-
-    /* Set root props */
-    const transitionEndRootHandler = (
-      event: TransitionEvent<HTMLDivElement>
-    ): void => {
-      if (enterState) {
-        enter(true);
-      } else {
-        exit(true);
-      }
-
-      if (onRootTransitionEnd !== undefined) {
-        onRootTransitionEnd(event);
-      }
-    };
-
-    const animationEndRootHandler = (
-      event: AnimationEvent<HTMLDivElement>
-    ): void => {
-      if (enterState) {
-        enter(true);
-      } else {
-        exit(true);
-      }
-
-      if (onRootAnimationEnd !== undefined) {
-        onRootAnimationEnd(event);
-      }
-    };
-
-    const mergedRootStyle = mergeStyles(
-      { transitionDuration: `${enterState ? enterDuration : exitDuration}ms` },
-      rootStyle
-    );
-
-    const mergedRootClassName = twMerge(
-      mergeClasses(
-        rootStyles.base,
-        (state === States.ENTERING || state === States.ENTERED) &&
-          rootStyles.open,
-        rootClassName,
-        transitionClassName
-      )
-    );
-
-    /* Set container props */
-    const { className: containerClassName, ...restContainerProps } =
-      componentsProps?.container ?? defaultProps.componentsProps.container;
-
-    const mergedContainerClassName = twMerge(
-      mergeClasses(containerStyles.base, containerClassName)
-    );
-
-    return (
-      <div
-        onTransitionEnd={transitionEndRootHandler}
-        onAnimationEnd={animationEndRootHandler}
-        style={mergedRootStyle}
-        className={mergedRootClassName}
-        ref={rootRef}
-        {...restRootProps}
-      >
-        <div
-          className={mergedContainerClassName}
-          {...restContainerProps}
-        >
-          {rootChildren}
-        </div>
-      </div>
-    );
+  if (exitState && open) {
+    enter();
   }
-);
+
+  if (enterState && !open) {
+    exit();
+  }
+
+  if (unmountOnExit && transitionState === TransitionStates.EXITED) {
+    return <></>;
+  }
+
+  /* Set props */
+  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
+    if (transitionState === TransitionStates.ENTERING) {
+      enter(true);
+    }
+
+    if (transitionState === TransitionStates.EXITING) {
+      exit(true);
+    }
+
+    if (onTransitionEnd !== undefined) {
+      onTransitionEnd(event);
+    }
+  };
+
+  const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
+    if (transitionState === TransitionStates.ENTERING) {
+      enter(true);
+    }
+
+    if (transitionState === TransitionStates.EXITING) {
+      exit(true);
+    }
+
+    if (onAnimationEnd !== undefined) {
+      onAnimationEnd(event);
+    }
+  };
+
+  if (componentRef.current !== null) {
+    mergedStyle = mergeStyles(
+      { height: `${open ? height.current : 0}px`, transitionDuration: `${open ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms` },
+      style
+    );
+  } else {
+    mergedStyle = style;
+  }
+
+  const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
+
+  return (
+    <div
+      onTransitionEnd={transitionEndHandler}
+      onAnimationEnd={animationEndHandler}
+      style={mergedStyle}
+      className={mergedClassName}
+      ref={componentRef}
+      {...restProps}
+    />
+  );
+});
 
 Collapse.displayName = 'Collapse';
 
