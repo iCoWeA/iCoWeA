@@ -23,4 +23,4 @@ export const deepClone = (object: Record<string, any>): Record<string, any> => {
   return newObject;
 };
 
-export const mergeProps = <T extends object, V extends object>(defaultProps: T, props: V): T & V => Object.assign(defaultProps, props);
+export const mergeProps = <T extends object, V extends object>(defaultProps: T, props: V): T & V => ({ ...defaultProps, ...props });
