@@ -1,4 +1,5 @@
 import { useCallback, useReducer, type FocusEventHandler, type ChangeEventHandler, type ChangeEvent, type FocusEvent } from 'react';
+import { deepClone } from '../utils/propsHelper';
 import { validate } from '../utils/validationHelper';
 
 enum ActionTypes {CHANGE, DEBOUNCED_CHANGE, BLUR, REVALID, RESET, RESET_FORM}
@@ -62,7 +63,7 @@ const initializeInput = (defaultValue: string = ''): InputState => ({
 });
 
 const reducer = (state: State, { type, payload: { inputName, input, timerId = initialTimerId, defaultValue = '', pattern = '', errorMessage = '', config = {} } }: Action): State => {
-  const inputs: Record<string, InputState> = JSON.parse(JSON.stringify(state.inputs));
+  const inputs: Record<string, InputState> = deepClone(state.inputs);
 
   if (type === ActionTypes.CHANGE) {
     clearTimeout(inputs[inputName].timerId);

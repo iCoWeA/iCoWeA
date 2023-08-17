@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback } from 'react';
 
-export enum States {
+export enum TransitionStates {
   ENTER,
   ENTERING,
   ENTERED,
@@ -9,7 +9,7 @@ export enum States {
   EXITED
 }
 
-export interface Config {
+export interface TransitionConfig {
   enterDelay?: number;
   exitDelay?: number;
   enterDuration?: number
@@ -29,7 +29,7 @@ export interface Config {
 }
 
 interface Return {
-  state: States;
+  state: TransitionStates;
   className: string;
   enterState: boolean;
   exitState: boolean;
@@ -39,22 +39,23 @@ interface Return {
 
 const initialTimerId = -1;
 
-const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitDuration = 0, enterClassName = '', enteringClassName = '', enteredClassName = '', exitClassName = '', exitingClassName = '', exitedClassName = '', onEnter, onEntering, onEntered, onExit, onExiting, onExited }: Config = {}): Return => {
+const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitDuration = 0, enterClassName = '', enteringClassName = '', enteredClassName = '', exitClassName = '', exitingClassName = '', exitedClassName = '', onEnter, onEntering, onEntered, onExit, onExiting, onExited }: TransitionConfig = {}): Return => {
   const timerId = useRef(initialTimerId);
-  const [state, setState] = useState(States.EXITED);
+  const [state, setState] = useState(TransitionStates.EXITED);
   const classNames = {
-    [States.ENTER]: enterClassName,
-    [States.ENTERING]: enteringClassName,
-    [States.ENTERED]: enteredClassName,
-    [States.EXIT]: exitClassName,
-    [States.EXITING]: exitingClassName,
-    [States.EXITED]: exitedClassName
+    [TransitionStates.ENTER]: enterClassName,
+    [TransitionStates.ENTERING]: enteringClassName,
+    [TransitionStates.ENTERED]: enteredClassName,
+    [TransitionStates.EXIT]: exitClassName,
+    [TransitionStates.EXITING]: exitingClassName,
+    [TransitionStates.EXITED]: exitedClassName
   };
 
   const enter = useCallback((instant: boolean = false) => {
+    clearTimeout(timerId.current);
+
     if (instant) {
-      clearTimeout(timerId.current);
-      setState(States.ENTERED);
+      setState(TransitionStates.ENTERED);
 
       if (onEntered !== undefined) {
         onEntered();
@@ -63,8 +64,7 @@ const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitD
       return;
     }
 
-    clearTimeout(timerId.current);
-    setState(States.ENTER);
+    setState(TransitionStates.ENTER);
 
     if (onEnter !== undefined) {
       onEnter();
@@ -72,14 +72,14 @@ const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitD
 
     timerId.current = window.setTimeout(() => {
       timerId.current = window.setTimeout(() => {
-        setState(States.ENTERED);
+        setState(TransitionStates.ENTERED);
 
         if (onEntered !== undefined) {
           onEntered();
         }
       }, enterDuration);
 
-      setState(States.ENTERING);
+      setState(TransitionStates.ENTERING);
 
       if (onEntering !== undefined) {
         onEntering();
@@ -88,9 +88,10 @@ const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitD
   }, [enterDuration, enterDelay]);
 
   const exit = useCallback((instant: boolean = false): void => {
+    clearTimeout(timerId.current);
+
     if (instant) {
-      clearTimeout(timerId.current);
-      setState(States.EXITED);
+      setState(TransitionStates.EXITED);
 
       if (onExited !== undefined) {
         onExited();
@@ -99,8 +100,7 @@ const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitD
       return;
     }
 
-    clearTimeout(timerId.current);
-    setState(States.EXIT);
+    setState(TransitionStates.EXIT);
 
     if (onExit !== undefined) {
       onExit();
@@ -108,14 +108,14 @@ const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitD
 
     timerId.current = window.setTimeout(() => {
       timerId.current = window.setTimeout(() => {
-        setState(States.EXITED);
+        setState(TransitionStates.EXITED);
 
         if (onExited !== undefined) {
           onExited();
         }
       }, exitDuration);
 
-      setState(States.EXITING);
+      setState(TransitionStates.EXITING);
 
       if (onExiting !== undefined) {
         onExiting();
@@ -126,8 +126,8 @@ const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitD
   return {
     state,
     className: classNames[state],
-    enterState: (state === States.ENTER || state === States.ENTERING || state === States.ENTERED),
-    exitState: (state === States.EXIT || state === States.EXITING || state === States.EXITED),
+    enterState: (state === TransitionStates.ENTER || state === TransitionStates.ENTERING || state === TransitionStates.ENTERED),
+    exitState: (state === TransitionStates.EXIT || state === TransitionStates.EXITING || state === TransitionStates.EXITED),
     enter,
     exit
   };
