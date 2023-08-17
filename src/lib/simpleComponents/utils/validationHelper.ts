@@ -3,7 +3,7 @@ export const validate: (input?: HTMLInputElement | HTMLTextAreaElement, pattern?
     return false;
   }
 
-  if (pattern !== undefined) {
+  if (pattern !== undefined && pattern !== '') {
     return pattern.search(input.value) !== -1;
   }
 
