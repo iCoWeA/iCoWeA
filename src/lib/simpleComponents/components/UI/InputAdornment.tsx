@@ -1,9 +1,14 @@
 import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
-import { type InputAdornmentProps } from '../../configs/inputAdornmentConfig';
+import { type InputAdornmentColor } from '../../configs/inputAdornmentConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const InputAdornment = forwardRef<HTMLDivElement, InputAdornmentProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
+export interface InputAdornmentProps extends BaseHTMLAttributes<HTMLDivElement> {
+  color?: InputAdornmentColor;
+  className?: string;
+}
+
+const InputAdornment = forwardRef<HTMLDivElement, InputAdornmentProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.inputAdornment;
   const { color, className, ...restProps } = setDefaultProps(props, defaultProps);

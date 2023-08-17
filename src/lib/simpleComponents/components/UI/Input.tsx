@@ -7,14 +7,39 @@ import React, {
   useImperativeHandle,
   type FocusEvent,
   type InputHTMLAttributes,
-  useCallback
+  useCallback,
+  type BaseHTMLAttributes,
+  type FieldsetHTMLAttributes,
+  type FocusEventHandler,
+  type LabelHTMLAttributes,
+  type MutableRefObject
 } from 'react';
-import { type InputProps } from '../../configs/inputConfig';
+import { type InputVariants, type InputColors } from '../../configs/inputConfig';
 import themeContext from '../../contexts/theme';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const Input = forwardRef<HTMLDivElement, InputProps & InputHTMLAttributes<HTMLInputElement>>((inputProps, rootRef) => {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  variant?: InputVariants;
+  color?: InputColors;
+  valid?: boolean;
+  invalid?: boolean;
+  label?: ReactNode;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
+  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+  containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+  legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
+  labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
+  inputRef?: MutableRefObject<HTMLInputElement> | null;
+  onFocus?: FocusEventHandler<HTMLInputElement>;
+  autoFocus?: boolean;
+  disabled?: boolean;
+  value?: string;
+  className?: string;
+}
+
+const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.input;
   const {

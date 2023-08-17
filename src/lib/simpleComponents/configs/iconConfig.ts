@@ -1,15 +1,13 @@
 export type IconSizes = 'xs' | 'sm' | 'md' | 'lg' | 'full';
 export type IconColors = 'none' | 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
-export interface IconProps {
-  size?: IconSizes;
-  color?: IconColors;
-  viewBox?: string;
-  className?: string;
-}
-
 export interface IconConfig {
-  defaultProps: Required<IconProps>;
+  defaultProps: {
+    size: IconSizes;
+    color: IconColors;
+    viewBox: string;
+    className: string;
+  };
   styles: {
     base: Record<string, string>;
     sizes: Record<IconSizes, Record<string, string>>;

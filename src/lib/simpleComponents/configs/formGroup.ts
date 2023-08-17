@@ -1,10 +1,8 @@
-export interface FormGroupProps {
-  row?: boolean;
-  className?: string;
-}
-
 export interface FormGroupConfig {
-  defaultProps: Required<FormGroupProps>;
+  defaultProps: {
+    row: boolean;
+    className: string;
+  };
   styles: {
     base: Record<string, string>;
     row: Record<string, string>;

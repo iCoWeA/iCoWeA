@@ -1,13 +1,11 @@
 export type InputAdornmentPositions = 'start' | 'end';
 export type InputAdornmentColor = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
-export interface InputAdornmentProps {
-  color?: InputAdornmentColor;
-  className?: string;
-}
-
 export interface InputAdornmentConfig {
-  defaultProps: Required<InputAdornmentProps>;
+  defaultProps: {
+    color: InputAdornmentColor;
+    className: string;
+  };
   styles: {
     base: Record<string, string>;
     colors: Record<string, Record<InputAdornmentColor, Record<string, string>>>;

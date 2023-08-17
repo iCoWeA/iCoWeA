@@ -1,9 +1,16 @@
 import React, { forwardRef, useContext, type SVGAttributes } from 'react';
-import { type IconProps } from '../../configs/iconConfig';
+import { type IconColors, type IconSizes } from '../../configs/iconConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const Icon = forwardRef<SVGSVGElement, IconProps & SVGAttributes<SVGSVGElement>>((props, ref) => {
+export interface IconProps extends SVGAttributes<SVGSVGElement> {
+  size?: IconSizes;
+  color?: IconColors;
+  viewBox?: string;
+  className?: string;
+}
+
+const Icon = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.icon;
   const { size, color, viewBox, className, ...restProps } = setDefaultProps(props, defaultProps);
