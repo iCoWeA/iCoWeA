@@ -2,16 +2,14 @@ export type ListItemButtonVariant = 'standard' | 'filled';
 export type ListItemButtonSizes = 'sm' | 'md' | 'lg';
 export type ListItemButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface ListItemButtonProps {
-  variant?: ListItemButtonVariant;
-  size?: ListItemButtonSizes;
-  color?: ListItemButtonColors;
-  selected?: boolean;
-  className?: string;
-}
-
 export interface ListItemButtonConfig {
-  defaultProps: Required<ListItemButtonProps>;
+  defaultProps: {
+    variant: ListItemButtonVariant;
+    size: ListItemButtonSizes;
+    color: ListItemButtonColors;
+    selected: boolean;
+    className: string;
+  };
   styles: {
     base: Record<string, string>;
     sizes: Record<ListItemButtonSizes, Record<string, string>>;
