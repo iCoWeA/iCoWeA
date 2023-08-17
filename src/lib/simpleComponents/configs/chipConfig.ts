@@ -20,10 +20,12 @@ export interface ChipProps {
 
 export interface ChipConfig {
   defaultProps: {
+    onClose?: () => void;
     variant: ChipVariants;
     size: ChipSizes;
     color: ChipColors;
     invisible: boolean;
+    action?: ReactNode;
     bodyProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;

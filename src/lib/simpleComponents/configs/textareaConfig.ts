@@ -27,10 +27,13 @@ export interface TextAreaConfig {
     color: TextAreaColors;
     valid: boolean;
     invalid: boolean;
+    label?: ReactNode;
     rootProps: BaseHTMLAttributes<HTMLDivElement>;
     containerProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
     legendProps: BaseHTMLAttributes<HTMLLegendElement>;
     labelProps: LabelHTMLAttributes<HTMLLabelElement>;
+    textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
+    onFocus?: FocusEventHandler<HTMLTextAreaElement>;
     autoFocus: boolean;
     disabled: boolean;
     value: string;

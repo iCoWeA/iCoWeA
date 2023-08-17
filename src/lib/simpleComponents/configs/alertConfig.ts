@@ -20,9 +20,12 @@ export interface AlertProps {
 
 export interface AlertConfig {
   defaultProps: {
+    onClose?: () => void;
     variant: AlertVariants;
     color: AlertColors;
     invisible: boolean;
+    icon?: ReactNode;
+    action?: ReactNode;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     bodyProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;

@@ -25,14 +25,19 @@ export interface InputProps {
 
 export interface InputConfig {
   defaultProps: {
-    variant: Required<InputVariants>;
+    variant: InputVariants;
     color: InputColors;
     valid: boolean;
     invalid: boolean;
+    label?: ReactNode;
+    startAdornment?: ReactNode;
+    endAdornment?: ReactNode;
     rootProps: BaseHTMLAttributes<HTMLDivElement>;
     containerProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
     legendProps: BaseHTMLAttributes<HTMLLegendElement>;
     labelProps: LabelHTMLAttributes<HTMLLabelElement>;
+    inputRef?: MutableRefObject<HTMLInputElement> | null;
+    onFocus?: FocusEventHandler<HTMLInputElement>;
     autoFocus: boolean;
     disabled: boolean;
     value: string;

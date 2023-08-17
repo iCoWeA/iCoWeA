@@ -21,6 +21,7 @@ export interface ProgressConfig {
     size: ProgressSizes;
     color: ProgressColors;
     rootProps: BaseHTMLAttributes<HTMLDivElement>;
+    barRef?: MutableRefObject<HTMLDivElement> | null;
     style: CSSProperties;
     className: string;
     children?: ReactNode

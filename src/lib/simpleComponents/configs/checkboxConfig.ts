@@ -22,8 +22,10 @@ export interface CheckboxConfig {
     color: CheckboxColors;
     valid: boolean;
     invalid: boolean;
+    icon?: ReactNode;
     rootProps: BaseHTMLAttributes<HTMLDivElement>;
     iconProps: SVGAttributes<SVGSVGElement>;
+    inputRef?: MutableRefObject<HTMLInputElement> | null;
     checked: boolean;
     disabled: boolean;
     type: HTMLInputTypeAttribute
