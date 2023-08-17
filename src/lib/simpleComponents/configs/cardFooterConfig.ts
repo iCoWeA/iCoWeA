@@ -1,11 +1,9 @@
-export interface CardFooterProps {
-  columns?: boolean;
-  fullwidht?: boolean;
-  className?: string;
-}
-
 export interface CardFooterConfig {
-  defaultProps: Required<CardFooterProps>;
+  defaultProps: {
+    columns: boolean;
+    fullwidht: boolean;
+    className: string;
+  };
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;

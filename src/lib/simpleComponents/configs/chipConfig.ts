@@ -4,20 +4,6 @@ export type ChipVariants = 'filled' | 'outlined' | 'ghost';
 export type ChipSizes = 'sm' | 'md' | 'lg';
 export type ChipColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface ChipProps {
-  onClose?: () => void;
-  variant?: ChipVariants;
-  size?: ChipSizes;
-  color?: ChipColors;
-  invisible?: boolean;
-  action?: ReactNode;
-  bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
-  className?: string;
-  children?: ReactNode;
-}
-
 export interface ChipConfig {
   defaultProps: {
     onClose?: () => void;

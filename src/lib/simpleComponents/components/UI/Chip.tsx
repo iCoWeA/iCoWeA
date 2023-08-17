@@ -1,9 +1,23 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent } from 'react';
-import { type ChipProps } from '../../configs/chipConfig';
+import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type ButtonHTMLAttributes } from 'react';
+import { type ChipVariants, type ChipSizes, type ChipColors } from '../../configs/chipConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const Chip = forwardRef<HTMLDivElement, ChipProps & BaseHTMLAttributes<HTMLDivElement>>((rootProps, rootRef) => {
+export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
+  onClose?: () => void;
+  variant?: ChipVariants;
+  size?: ChipSizes;
+  color?: ChipColors;
+  invisible?: boolean;
+  action?: ReactNode;
+  bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  className?: string;
+  children?: ReactNode;
+}
+
+const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.chip;
   const {

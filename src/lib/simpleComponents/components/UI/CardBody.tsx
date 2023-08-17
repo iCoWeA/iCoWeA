@@ -1,9 +1,14 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type CardBodyProps } from '../../configs/cardBodyConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const CardBody = forwardRef<HTMLDivElement, CardBodyProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
+export interface CardBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
+  columns?: boolean;
+  fullwidht?: boolean;
+  className?: string;
+}
+
+const CardBody = forwardRef<HTMLDivElement, CardBodyProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.cardBody;
   const { columns, fullwidht, className, ...restProps } = setDefaultProps(props, defaultProps);

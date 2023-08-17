@@ -1,9 +1,14 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type ContainerProps } from '../../configs/containerConfig';
+import { type ContainerVariants } from '../../configs/containerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
 
-const Container = forwardRef<HTMLDivElement, ContainerProps & BaseHTMLAttributes<HTMLDivElement>>((props, ref) => {
+export interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
+  variant?: ContainerVariants;
+  className?: string;
+}
+
+const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.container;
   const { variant, className, ...restProps } = setDefaultProps(props, defaultProps);

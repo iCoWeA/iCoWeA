@@ -1,15 +1,13 @@
 export type CardVariants = 'filled' | 'outlined';
 export type CardColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
-export interface CardProps {
-  variant?: CardVariants;
-  color?: CardColors;
-  elevated?: boolean;
-  className?: string;
-}
-
 export interface CardConfig {
-  defaultProps: Required<CardProps>;
+  defaultProps: {
+    variant: CardVariants;
+    color: CardColors;
+    elevated: boolean;
+    className: string;
+  };
   styles: {
     base: Record<string, string>;
     elevated: Record<string, Record<string, string>>;

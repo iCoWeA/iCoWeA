@@ -1,7 +1,31 @@
-import React, { forwardRef, useContext, type InputHTMLAttributes, type ReactNode } from 'react';
-import { type CheckboxProps } from '../../configs/checkboxConfig';
+import React, {
+  forwardRef,
+  useContext,
+  type InputHTMLAttributes,
+  type ReactNode,
+  type BaseHTMLAttributes,
+  type HTMLInputTypeAttribute,
+  type MutableRefObject,
+  type SVGAttributes
+} from 'react';
+import { type CheckboxColors } from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, setDefaultProps } from '../../utils/propsHelper';
+
+export interface CheckboxProps {
+  color?: CheckboxColors;
+  valid?: boolean;
+  invalid?: boolean;
+  icon?: ReactNode;
+  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+  iconProps?: SVGAttributes<SVGSVGElement>;
+  inputRef?: MutableRefObject<HTMLInputElement> | null;
+  checked?: boolean;
+  disabled?: boolean;
+  type?: HTMLInputTypeAttribute;
+  className?: string;
+  children?: ReactNode;
+}
 
 const Checkbox = forwardRef<HTMLDivElement, CheckboxProps & InputHTMLAttributes<HTMLInputElement>>((inputProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
