@@ -9,7 +9,7 @@ export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const Card = forwardRef<HTMLDivElement, AccordionBodyProps>((bodyProps, rootRef) => {
+const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((bodyProps, rootRef) => {
   const { open, duration } = useContext(accordionContext);
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.accordionBody;
@@ -36,6 +36,6 @@ const Card = forwardRef<HTMLDivElement, AccordionBodyProps>((bodyProps, rootRef)
   );
 });
 
-Card.displayName = 'Card';
+AccordionBody.displayName = 'AccordionBody';
 
-export default Card;
+export default AccordionBody;
