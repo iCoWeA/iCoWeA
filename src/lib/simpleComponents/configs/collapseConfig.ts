@@ -1,4 +1,4 @@
-import { type CSSProperties, type TransitionEventHandler, type AnimationEventHandler } from 'react';
+import { type TransitionEventHandler, type AnimationEventHandler, type CSSProperties } from 'react';
 
 export interface CollapseConfig {
   defaultProps: {
@@ -31,7 +31,7 @@ const collapseConfig: CollapseConfig = {
   },
   styles: {
     base: {
-      display: 'flex',
+      display: 'block',
       overflow: 'overflow-hidden',
       transition: 'transition-[height]',
       focus: 'focus:outline-0'

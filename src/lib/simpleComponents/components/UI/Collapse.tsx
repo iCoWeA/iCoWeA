@@ -6,14 +6,13 @@ import React, {
   type AnimationEvent,
   useRef,
   useImperativeHandle,
-  useEffect,
   type CSSProperties,
   type AnimationEventHandler,
   type TransitionEventHandler
 } from 'react';
 import themeContext from '../../contexts/theme';
 import useTransition, { type TransitionConfig, TransitionStates } from '../../hooks/useTransition';
-import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
+import { mergeClasses, mergeProps, mergeStyles } from '../../utils/propsHelper';
 
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
@@ -30,18 +29,12 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   const { defaultProps, styles } = config.collapse;
   const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = mergeProps(defaultProps, props);
   const mergedTransitionConfig = mergeProps(defaultProps.transitionConfig, transitionConfig);
-  let mergedStyle: CSSProperties = {};
 
-  const height = useRef(0);
   const componentRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
 
   const { state: transitionState, className: transitionClassName, enterState, exitState, enter, exit } = useTransition(mergedTransitionConfig);
-
-  useEffect(() => {
-    height.current = componentRef.current?.offsetHeight ?? 0;
-  }, []);
 
   if (exitState && open) {
     enter();
@@ -84,19 +77,9 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     }
   };
 
-  if (componentRef.current !== null) {
-    mergedStyle = mergeStyles(
-      {
-        height: `${open ? height.current : 0}px`,
-        transitionDuration: `${open ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`
-      },
-      style
-    );
-  } else {
-    mergedStyle = style;
-  }
-
   const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
+
+  const mergedStyle = mergeStyles({ height: `${!open || componentRef.current === null ? 0 : componentRef.current.scrollHeight}px` }, style);
 
   return (
     <div
