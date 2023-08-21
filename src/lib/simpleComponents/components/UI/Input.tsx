@@ -12,7 +12,8 @@ import React, {
   type FieldsetHTMLAttributes,
   type FocusEventHandler,
   type LabelHTMLAttributes,
-  type MutableRefObject
+  type MutableRefObject,
+  type MouseEvent
 } from 'react';
 import { type InputVariants, type InputColors } from '../../configs/inputConfig';
 import themeContext from '../../contexts/theme';
@@ -73,7 +74,15 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
 
   /* Set root props */
   const rootStyles = styles.root;
-  const { className: rootClassName, ...restRootProps } = rootProps;
+  const { onClick: onRootClick, className: rootClassName, ...restRootProps } = rootProps;
+
+  const clickRootHandler = (event: MouseEvent<HTMLDivElement>): void => {
+    componentsRefs.current.input?.focus();
+
+    if (onRootClick !== undefined) {
+      onRootClick(event);
+    }
+  };
 
   const outsideRootClickHandler = useCallback(() => {
     if (componentsRefs.current.input?.value === '') {
@@ -84,11 +93,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
     }
   }, []);
 
-  const insideRootClickHandler = useCallback(() => {
-    componentsRefs.current.input?.focus();
-  }, []);
-
-  useOutsideClick(componentsRefs.current.root, outsideRootClickHandler, insideRootClickHandler);
+  useOutsideClick(componentsRefs.current.root, outsideRootClickHandler);
 
   const setRootRef = (element: HTMLDivElement): void => {
     componentsRefs.current.root = element;
@@ -183,6 +188,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
 
   return (
     <div
+      onClick={clickRootHandler}
       className={mergedRootClassName}
       ref={setRootRef}
       {...restRootProps}

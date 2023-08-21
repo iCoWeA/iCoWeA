@@ -12,7 +12,8 @@ import React, {
   type FieldsetHTMLAttributes,
   type FocusEventHandler,
   type LabelHTMLAttributes,
-  type MutableRefObject
+  type MutableRefObject,
+  type MouseEvent
 } from 'react';
 import { type TextAreaColors, type TextAreaVariants } from '../../configs/textAreaConfig';
 import themeContext from '../../contexts/theme';
@@ -69,7 +70,15 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
 
   /* Set root props */
   const rootStyles = styles.root;
-  const { className: rootClassName, ...restRootProps } = rootProps;
+  const { onClick: onRootClick, className: rootClassName, ...restRootProps } = rootProps;
+
+  const clickRootHandler = (event: MouseEvent<HTMLDivElement>): void => {
+    componentsRefs.current.textArea?.focus();
+
+    if (onRootClick !== undefined) {
+      onRootClick(event);
+    }
+  };
 
   const outsideRootClickHandler = useCallback(() => {
     if (componentsRefs.current.textArea?.value === '') {
@@ -80,11 +89,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
     }
   }, []);
 
-  const insideRootClickHandler = useCallback(() => {
-    componentsRefs.current.textArea?.focus();
-  }, []);
-
-  useOutsideClick(componentsRefs.current.root, outsideRootClickHandler, insideRootClickHandler);
+  useOutsideClick(componentsRefs.current.root, outsideRootClickHandler);
 
   const setRootRef = (element: HTMLDivElement): void => {
     componentsRefs.current.root = element;
@@ -178,6 +183,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
 
   return (
     <div
+      onClick={clickRootHandler}
       className={mergedRootClassName}
       ref={setRootRef}
       {...restRootProps}
