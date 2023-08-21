@@ -8,19 +8,26 @@ import React, {
   type AnimationEvent,
   type AnimationEventHandler,
   type CSSProperties,
-  type TransitionEventHandler
+  type TransitionEventHandler,
+  useEffect,
+  type ReactNode,
+  useCallback
 } from 'react';
 import themeContext from '../../contexts/theme';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../hooks/useTransition';
-import { mergeClasses, mergeStyles, setDefaultProps } from '../../utils/propsHelper';
-import { type PositionProps, setOrigin } from '../../utils/positiontHelper';
+import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
+import { calculateResponsiveCords } from '../../utils/positiontHelper';
 import { createPortal } from 'react-dom';
+import useOutsideClick from '../../hooks/useOutsideClick';
+import useScroll from '../../hooks/useScroll';
 
 export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
+  onClose?: () => void;
   open?: boolean;
   anchorRef?: HTMLElement | null;
-  position?: PositionProps;
-  transformPosition?: PositionProps;
+  position: Positions;
+  gap?: number;
+  responsive?: boolean;
   overlayRef?: HTMLElement | null;
   unmountOnExit?: boolean;
   transitionConfig?: TransitionConfig;
@@ -28,16 +35,23 @@ export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   onAnimationEnd?: AnimationEventHandler;
   style?: CSSProperties;
   className?: string;
+  children?: ReactNode;
 }
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
+
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.popover;
   const {
+    onClose,
     open,
     anchorRef,
     position,
-    transformPosition,
+    gap,
+    responsive,
     overlayRef,
     unmountOnExit,
     transitionConfig,
@@ -45,28 +59,45 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     onAnimationEnd,
     style,
     className,
+    children,
     ...restProps
-  } = setDefaultProps(props, defaultProps);
+  } = mergeProps(defaultProps, props);
+  const mergedTransitionConfig = mergeProps(defaultProps.transitionConfig, transitionConfig);
 
-  const componentRef = useRef<HTMLDivElement>(null);
+  mergedTransitionConfig.onExited = () => {
+    if (onClose !== undefined) {
+      onClose();
+    }
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
+    if (transitionConfig.onExited !== undefined) {
+      transitionConfig.onExited();
+    }
+  };
 
-  const { state: transitionState, className: transitionClassName, enterState, exitState, enter, exit } = useTransition(transitionConfig);
+  const { state: transitionState, enterState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
 
-  if (exitState && open) {
-    enter();
-  }
+  const scrollHandler = useCallback((): void => {
+    if (componentRef.current !== null) {
+      const calculatedRootCords = calculateResponsiveCords(anchorRef, componentRef.current, position, gap, responsive);
 
-  if (enterState && !open) {
-    exit();
-  }
+      componentRef.current.style.top = `${calculatedRootCords.top}px`;
+      componentRef.current.style.left = `${calculatedRootCords.left}px`;
+    }
+  }, [anchorRef, position, gap, responsive]);
 
-  if (anchorRef === null || (unmountOnExit && transitionState === TransitionStates.EXITED)) {
-    return <></>;
-  }
+  useOutsideClick(componentRef.current, exit, transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED);
 
-  const origin = setOrigin(anchorRef, position, componentRef.current, transformPosition);
+  useScroll(scrollHandler, enterState);
+
+  useEffect(() => {
+    if (anchorRef !== null) {
+      if (open) {
+        enter();
+      } else {
+        exit();
+      }
+    }
+  }, [open, anchorRef]);
 
   /* Set props */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
@@ -97,30 +128,33 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     }
   };
 
-  const mergeStyle = mergeStyles(
+  const calculatedRootCords = calculateResponsiveCords(anchorRef, componentRef.current, position, gap, responsive);
+
+  const mergedStyle = mergeStyles(
     {
-      top: `${origin.top}px`,
-      left: `${origin.left}px`
+      opacity: `${(transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && componentRef.current !== null ? 100 : 0}`,
+      top: `${calculatedRootCords.top}px`,
+      left: `${calculatedRootCords.left}px`,
+      transitionDuration: `${open ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`
     },
     style
   );
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    (transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && styles.open,
-    className,
-    transitionClassName
-  );
+  const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
+
+  const childrenNode = anchorRef !== null && (!unmountOnExit || (unmountOnExit && transitionState !== TransitionStates.EXITED)) && children;
 
   const node = (
     <div
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
-      style={mergeStyle}
+      style={mergedStyle}
       className={mergedClassName}
       ref={componentRef}
       {...restProps}
-    />
+    >
+      {childrenNode}
+    </div>
   );
 
   return overlayRef === null ? node : createPortal(node, overlayRef);
