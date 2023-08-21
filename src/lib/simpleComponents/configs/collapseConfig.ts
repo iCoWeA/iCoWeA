@@ -1,4 +1,4 @@
-import { type TransitionEventHandler, type AnimationEventHandler, type CSSProperties } from 'react';
+import { type TransitionEventHandler, type AnimationEventHandler, type CSSProperties, type ReactNode } from 'react';
 
 export interface CollapseConfig {
   defaultProps: {
@@ -12,6 +12,7 @@ export interface CollapseConfig {
     onAnimationEnd?: AnimationEventHandler;
     style: CSSProperties;
     className: string;
+    children?: ReactNode
   };
   styles: {
     base: Record<string, string>;
