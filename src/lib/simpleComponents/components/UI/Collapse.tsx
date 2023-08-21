@@ -86,7 +86,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
 
-  const childrenNode = !unmountOnExit && transitionState !== TransitionStates.EXITED && children;
+  const childrenNode = (!unmountOnExit || (unmountOnExit && transitionState !== TransitionStates.EXITED)) && children;
 
   return (
     <div
