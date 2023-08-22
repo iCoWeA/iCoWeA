@@ -12,7 +12,8 @@ import React, {
   useEffect,
   useCallback,
   type ReactElement,
-  cloneElement
+  cloneElement,
+  type MouseEvent
 } from 'react';
 import themeContext from '../../contexts/theme';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../hooks/useTransition';
@@ -40,7 +41,7 @@ export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) => {
   const { config } = useContext(themeContext);
-  const { defaultProps, styles } = config.popover;
+  const { defaultProps, styles: rootStyles } = config.popover;
   const {
     open,
     position,
@@ -98,9 +99,20 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
     }
   }, [open]);
 
+  const calculatedCords = calculateResponsiveCords(
+    componentsRef.current.root,
+    position,
+    componentsRef.current.handler?.offsetTop,
+    componentsRef.current.handler?.offsetLeft,
+    componentsRef.current.handler?.offsetHeight,
+    componentsRef.current.handler?.offsetWidth,
+    gap,
+    responsive
+  );
+
   /* Set handler props */
   if (handler !== undefined) {
-    const onHandlerClick = (event: HTMLElement): void => {
+    const onHandlerClick = (event: MouseEvent<HTMLElement>): void => {
       if (open === undefined && enterState) {
         exit();
       }
@@ -163,28 +175,17 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
     componentsRef.current.root = element;
   };
 
-  const calculatedRootCords = calculateResponsiveCords(
-    componentsRef.current.root,
-    position,
-    componentsRef.current.handler?.offsetTop,
-    componentsRef.current.handler?.offsetLeft,
-    componentsRef.current.handler?.offsetHeight,
-    componentsRef.current.handler?.offsetWidth,
-    gap,
-    responsive
-  );
-
   const mergedRootStyle = mergeStyles(
     {
       opacity: `${transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED ? 100 : 0}`,
-      top: `${calculatedRootCords.top}px`,
-      left: `${calculatedRootCords.left}px`,
+      top: `${calculatedCords.top}px`,
+      left: `${calculatedCords.left}px`,
       transitionDuration: `${enterState ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`
     },
     rootStyle
   );
 
-  const mergedRootClassName = mergeClasses(styles.base, rootClassName, transitionClassName);
+  const mergedRootClassName = mergeClasses(rootStyles.base, rootClassName, transitionClassName);
 
   const rootChildrenNode =
     componentsRef.current.root !== null &&
