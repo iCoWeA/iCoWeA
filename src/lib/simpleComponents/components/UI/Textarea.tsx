@@ -61,9 +61,9 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
   } = mergeProps(defaultProps, textAreaProps);
   let labelNode: ReactNode;
 
-  const componentsRefs = useRef<{ root: HTMLDivElement | null; textArea: HTMLTextAreaElement | null }>({ root: null, textArea: null });
+  const componentsRef = useRef<{ root: HTMLDivElement | null; textArea: HTMLTextAreaElement | null }>({ root: null, textArea: null });
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRefs.current.root, []);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRef.current.root, []);
 
   const [isShifted, setIsShifted] = useState(textAreaValue !== '' || (textAreaAutoFocus && !textAreaDisabled));
   const [isFocused, setIsFocused] = useState(textAreaAutoFocus && !textAreaDisabled);
@@ -73,7 +73,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
   const { onClick: onRootClick, className: rootClassName, ...restRootProps } = rootProps;
 
   const clickRootHandler = (event: MouseEvent<HTMLDivElement>): void => {
-    componentsRefs.current.textArea?.focus();
+    componentsRef.current.textArea?.focus();
 
     if (onRootClick !== undefined) {
       onRootClick(event);
@@ -81,7 +81,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
   };
 
   const outsideRootClickHandler = useCallback(() => {
-    if (componentsRefs.current.textArea?.value === '') {
+    if (componentsRef.current.textArea?.value === '') {
       setIsShifted(false);
       setIsFocused(false);
     } else {
@@ -89,10 +89,10 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
     }
   }, []);
 
-  useOutsideClick(componentsRefs.current.root, outsideRootClickHandler);
+  useOutsideClick(componentsRef.current.root, outsideRootClickHandler);
 
   const setRootRef = (element: HTMLDivElement): void => {
-    componentsRefs.current.root = element;
+    componentsRef.current.root = element;
   };
 
   const mergedRootClassName = mergeClasses(rootStyles.base, isFocused && rootStyles.focused, isShifted && rootStyles.shifted, rootClassName);
@@ -109,7 +109,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
   };
 
   const setTextAreaRef = (element: HTMLTextAreaElement): void => {
-    componentsRefs.current.textArea = element;
+    componentsRef.current.textArea = element;
 
     if (textAreaRef !== undefined && textAreaRef !== null) {
       textAreaRef.current = element;

@@ -65,9 +65,9 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   } = mergeProps(defaultProps, inputProps);
   let labelNode: ReactNode;
 
-  const componentsRefs = useRef<{ root: HTMLDivElement | null; input: HTMLInputElement | null }>({ root: null, input: null });
+  const componentsRef = useRef<{ root: HTMLDivElement | null; input: HTMLInputElement | null }>({ root: null, input: null });
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRefs.current.root, []);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRef.current.root, []);
 
   const [isShifted, setIsShifted] = useState(inputValue !== '' || (inputAutoFocus && !inputDisabled));
   const [isFocused, setIsFocused] = useState(inputAutoFocus && !inputDisabled);
@@ -77,7 +77,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   const { onClick: onRootClick, className: rootClassName, ...restRootProps } = rootProps;
 
   const clickRootHandler = (event: MouseEvent<HTMLDivElement>): void => {
-    componentsRefs.current.input?.focus();
+    componentsRef.current.input?.focus();
 
     if (onRootClick !== undefined) {
       onRootClick(event);
@@ -85,7 +85,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   };
 
   const outsideRootClickHandler = useCallback(() => {
-    if (componentsRefs.current.input?.value === '') {
+    if (componentsRef.current.input?.value === '') {
       setIsShifted(false);
       setIsFocused(false);
     } else {
@@ -93,10 +93,10 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
     }
   }, []);
 
-  useOutsideClick(componentsRefs.current.root, outsideRootClickHandler);
+  useOutsideClick(componentsRef.current.root, outsideRootClickHandler);
 
   const setRootRef = (element: HTMLDivElement): void => {
-    componentsRefs.current.root = element;
+    componentsRef.current.root = element;
   };
 
   const mergedRootClassName = mergeClasses(rootStyles.base, isFocused && rootStyles.focused, isShifted && rootStyles.shifted, rootClassName);
@@ -113,7 +113,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   };
 
   const setInputRef = (element: HTMLInputElement): void => {
-    componentsRefs.current.input = element;
+    componentsRef.current.input = element;
 
     if (inputRef !== undefined && inputRef !== null) {
       inputRef.current = element;
