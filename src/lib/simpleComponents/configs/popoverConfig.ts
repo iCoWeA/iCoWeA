@@ -1,19 +1,18 @@
-import { type TransitionEventHandler, type AnimationEventHandler, type CSSProperties, type ReactNode } from 'react';
+import { type TransitionEventHandler, type AnimationEventHandler, type CSSProperties, type ReactNode, type ReactElement } from 'react';
 
 export interface PopoverConfig {
   defaultProps: {
-    onClose?: () => void;
-    open: boolean;
-    anchorRef: HTMLElement | null;
+    open?: boolean;
     position: Positions;
     gap: number;
     responsive: boolean;
-    overlayRef: HTMLElement | null;
+    overlayRef: Element | null;
     unmountOnExit: boolean;
     transitionConfig: {
       enterDuration: number,
       exitDuration: number
     };
+    handler?: ReactElement;
     onTransitionEnd?: TransitionEventHandler;
     onAnimationEnd?: AnimationEventHandler;
     style: CSSProperties;
@@ -27,8 +26,6 @@ export interface PopoverConfig {
 
 const popoverConfig: PopoverConfig = {
   defaultProps: {
-    open: false,
-    anchorRef: null,
     position: 'bottom',
     gap: 1,
     responsive: true,

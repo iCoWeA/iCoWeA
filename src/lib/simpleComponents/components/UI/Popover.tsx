@@ -10,8 +10,9 @@ import React, {
   type CSSProperties,
   type TransitionEventHandler,
   useEffect,
-  type ReactNode,
-  useCallback
+  useCallback,
+  type ReactElement,
+  cloneElement
 } from 'react';
 import themeContext from '../../contexts/theme';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../hooks/useTransition';
@@ -22,85 +23,115 @@ import useOutsideClick from '../../hooks/useOutsideClick';
 import useScroll from '../../hooks/useScroll';
 
 export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
-  onClose?: () => void;
   open?: boolean;
-  anchorRef?: HTMLElement | null;
-  position: Positions;
+  position?: Positions;
   gap?: number;
   responsive?: boolean;
-  overlayRef?: HTMLElement | null;
+  overlayRef?: Element | null;
   unmountOnExit?: boolean;
   transitionConfig?: TransitionConfig;
+  handler?: ReactElement;
   onTransitionEnd?: TransitionEventHandler;
   onAnimationEnd?: AnimationEventHandler;
   style?: CSSProperties;
   className?: string;
-  children?: ReactNode;
+  children?: ReactElement;
 }
 
-const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
-  const componentRef = useRef<HTMLDivElement>(null);
-
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
-
+const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) => {
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.popover;
   const {
-    onClose,
     open,
-    anchorRef,
     position,
     gap,
     responsive,
     overlayRef,
     unmountOnExit,
     transitionConfig,
-    onTransitionEnd,
-    onAnimationEnd,
-    style,
-    className,
-    children,
-    ...restProps
-  } = mergeProps(defaultProps, props);
+    handler,
+    onTransitionEnd: onRootTransitionEnd,
+    onAnimationEnd: onRootAnimationEnd,
+    style: rootStyle,
+    className: rootClassName,
+    children: rootChildren,
+    ...restRootProps
+  } = mergeProps(defaultProps, rootProps);
   const mergedTransitionConfig = mergeProps(defaultProps.transitionConfig, transitionConfig);
+  let handlerNode = handler;
 
-  mergedTransitionConfig.onExited = () => {
-    if (onClose !== undefined) {
-      onClose();
-    }
+  const componentsRef = useRef<{ root: HTMLDivElement | null; handler: HTMLElement | null }>({ root: null, handler: null });
 
-    if (transitionConfig.onExited !== undefined) {
-      transitionConfig.onExited();
-    }
-  };
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRef.current.root, []);
 
-  const { state: transitionState, enterState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
+  const { state: transitionState, enterState, exitState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
 
   const scrollHandler = useCallback((): void => {
-    if (componentRef.current !== null) {
-      const calculatedRootCords = calculateResponsiveCords(anchorRef, componentRef.current, position, gap, responsive);
+    if (componentsRef.current.root !== null && componentsRef.current.handler !== null) {
+      const calculatedRootCords = calculateResponsiveCords(
+        componentsRef.current.root,
+        position,
+        componentsRef.current.handler.offsetTop,
+        componentsRef.current.handler.offsetLeft,
+        componentsRef.current.handler.offsetHeight,
+        componentsRef.current.handler.offsetWidth,
+        gap,
+        responsive
+      );
 
-      componentRef.current.style.top = `${calculatedRootCords.top}px`;
-      componentRef.current.style.left = `${calculatedRootCords.left}px`;
+      componentsRef.current.root.style.top = `${calculatedRootCords.top}px`;
+      componentsRef.current.root.style.left = `${calculatedRootCords.left}px`;
     }
-  }, [anchorRef, position, gap, responsive]);
+  }, [position, gap, responsive]);
 
-  useOutsideClick(componentRef.current, exit, transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED);
+  useOutsideClick(componentsRef.current.root, exit, transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED);
 
   useScroll(scrollHandler, enterState);
 
   useEffect(() => {
-    if (anchorRef !== null) {
-      if (open) {
-        enter();
-      } else {
+    if (open === true) {
+      enter();
+    }
+
+    if (open === false) {
+      exit();
+    }
+  }, [open]);
+
+  /* Set handler props */
+  if (handler !== undefined) {
+    const onHandlerClick = (event: HTMLElement): void => {
+      if (open === undefined && enterState) {
         exit();
       }
-    }
-  }, [open, anchorRef]);
 
-  /* Set props */
-  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
+      if (open === undefined && exitState) {
+        enter();
+      }
+
+      if (handler.props.onClick !== undefined) {
+        handler.props.onClick(event);
+      }
+    };
+
+    if ((handler as any).ref === null) {
+      handlerNode = cloneElement(handler, {
+        onClick: onHandlerClick,
+        ref: (element: HTMLElement) => {
+          componentsRef.current.handler = element;
+        }
+      });
+    } else {
+      componentsRef.current.handler = (handler as any).ref.current;
+
+      handlerNode = cloneElement(handler, {
+        onClick: onHandlerClick
+      });
+    }
+  }
+
+  /* Set root props */
+  const transitionEndRootHandler = (event: TransitionEvent<HTMLDivElement>): void => {
     if (transitionState === TransitionStates.ENTERING) {
       enter(true);
     }
@@ -109,12 +140,12 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
       exit(true);
     }
 
-    if (onTransitionEnd !== undefined) {
-      onTransitionEnd(event);
+    if (onRootTransitionEnd !== undefined) {
+      onRootTransitionEnd(event);
     }
   };
 
-  const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
+  const animationEndRootHandler = (event: AnimationEvent<HTMLDivElement>): void => {
     if (transitionState === TransitionStates.ENTERING) {
       enter(true);
     }
@@ -123,41 +154,65 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
       exit(true);
     }
 
-    if (onAnimationEnd !== undefined) {
-      onAnimationEnd(event);
+    if (onRootAnimationEnd !== undefined) {
+      onRootAnimationEnd(event);
     }
   };
 
-  const calculatedRootCords = calculateResponsiveCords(anchorRef, componentRef.current, position, gap, responsive);
+  const setRootRef = (element: HTMLDivElement): void => {
+    componentsRef.current.root = element;
+  };
 
-  const mergedStyle = mergeStyles(
-    {
-      opacity: `${(transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && componentRef.current !== null ? 100 : 0}`,
-      top: `${calculatedRootCords.top}px`,
-      left: `${calculatedRootCords.left}px`,
-      transitionDuration: `${open ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`
-    },
-    style
+  const calculatedRootCords = calculateResponsiveCords(
+    componentsRef.current.root,
+    position,
+    componentsRef.current.handler?.offsetTop,
+    componentsRef.current.handler?.offsetLeft,
+    componentsRef.current.handler?.offsetHeight,
+    componentsRef.current.handler?.offsetWidth,
+    gap,
+    responsive
   );
 
-  const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
+  const mergedRootStyle = mergeStyles(
+    {
+      opacity: `${transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED ? 100 : 0}`,
+      top: `${calculatedRootCords.top}px`,
+      left: `${calculatedRootCords.left}px`,
+      transitionDuration: `${enterState ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`
+    },
+    rootStyle
+  );
 
-  const childrenNode = anchorRef !== null && (!unmountOnExit || (unmountOnExit && transitionState !== TransitionStates.EXITED)) && children;
+  const mergedRootClassName = mergeClasses(styles.base, rootClassName, transitionClassName);
 
-  const node = (
+  const rootChildrenNode =
+    componentsRef.current.root !== null &&
+    componentsRef.current.handler !== null &&
+    (!unmountOnExit || (unmountOnExit && transitionState !== TransitionStates.EXITED)) &&
+    rootChildren;
+
+  let rootNode = (
     <div
-      onTransitionEnd={transitionEndHandler}
-      onAnimationEnd={animationEndHandler}
-      style={mergedStyle}
-      className={mergedClassName}
-      ref={componentRef}
-      {...restProps}
+      onTransitionEnd={transitionEndRootHandler}
+      onAnimationEnd={animationEndRootHandler}
+      style={mergedRootStyle}
+      className={mergedRootClassName}
+      ref={setRootRef}
+      {...restRootProps}
     >
-      {childrenNode}
+      {rootChildrenNode}
     </div>
   );
 
-  return overlayRef === null ? node : createPortal(node, overlayRef);
+  rootNode = overlayRef === null ? rootNode : createPortal(rootNode, overlayRef);
+
+  return (
+    <>
+      {handlerNode}
+      {rootNode}
+    </>
+  );
 });
 
 Popover.displayName = 'Popover';
