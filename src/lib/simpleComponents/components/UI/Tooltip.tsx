@@ -17,6 +17,7 @@ import React, {
   type ReactNode,
   useState
 } from 'react';
+import { createPortal } from 'react-dom';
 import { type TooltipPositions, type TooltipColors } from '../../configs/tooltipConfig';
 import themeContext from '../../contexts/theme';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../hooks/useTransition';
@@ -24,7 +25,6 @@ import { setElementPosition } from '../../utils/positiontHelper';
 import useScroll from '../../hooks/useScroll';
 import useResize from '../../hooks/useResize';
 import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
-import { createPortal } from 'react-dom';
 
 export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;

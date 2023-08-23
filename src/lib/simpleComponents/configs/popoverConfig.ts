@@ -9,12 +9,17 @@ export interface PopoverConfig {
     gap: number;
     responsive: boolean;
     overlayRef: Element | null;
+    disableScrolling: boolean;
     unmountOnExit: boolean;
     transitionConfig: {
       enterDuration: number,
       exitDuration: number
     };
     handler?: ReactElement;
+    backdrop: boolean;
+    backdropProps: {
+      invisible: boolean;
+    }
     onTransitionEnd?: TransitionEventHandler;
     onAnimationEnd?: AnimationEventHandler;
     style: CSSProperties;
@@ -32,10 +37,15 @@ const popoverConfig: PopoverConfig = {
     gap: 1,
     responsive: true,
     overlayRef: null,
+    disableScrolling: false,
     unmountOnExit: true,
     transitionConfig: {
       enterDuration: 500,
       exitDuration: 500
+    },
+    backdrop: false,
+    backdropProps: {
+      invisible: true
     },
     style: {},
     className: ''

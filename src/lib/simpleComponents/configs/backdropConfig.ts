@@ -5,6 +5,7 @@ export interface BackdropConfig {
     onClose?: () => void;
     open: boolean;
     invisible: boolean;
+    overlayRef: Element | null;
     onClick?: MouseEventHandler;
     className: string;
   };
@@ -20,6 +21,7 @@ const backdropConfig: BackdropConfig = {
   defaultProps: {
     open: false,
     invisible: false,
+    overlayRef: null,
     className: ''
   },
   styles: {
@@ -42,7 +44,7 @@ const backdropConfig: BackdropConfig = {
     },
     color: {
       default: {
-        background: 'bg-default-dark/70'
+        background: 'bg-default-bg-dark/70'
       }
     }
   }
