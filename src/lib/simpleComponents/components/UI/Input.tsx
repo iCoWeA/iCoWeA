@@ -142,7 +142,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   );
 
   /* Set label props */
-  if (label !== null) {
+  if (label !== undefined) {
     const labelStyles = styles.label;
     const { className: labelClassName, ...restLabelProps } = labelProps;
 
@@ -167,7 +167,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   }
 
   /* Set legend props */
-  if (label !== null && variant === 'outlined') {
+  if (label !== undefined && variant === 'outlined') {
     const legendStyles = styles.legend;
     const { className: legendClassName, ...restLegendProps } = legendProps;
 

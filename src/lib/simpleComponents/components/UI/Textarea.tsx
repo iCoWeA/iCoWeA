@@ -138,7 +138,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
   );
 
   /* Set label props */
-  if (label !== null) {
+  if (label !== undefined) {
     const labelStyles = styles.label;
     const { className: labelClassName, ...restLabelProps } = labelProps;
 
@@ -162,7 +162,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
   }
 
   /* Set legend props */
-  if (label !== null && variant === 'outlined') {
+  if (label !== undefined && variant === 'outlined') {
     const legendStyles = styles.legend;
     const { className: legendClassName, ...restLegendProps } = legendProps;
 
