@@ -1,9 +1,11 @@
 import { type TransitionEventHandler, type AnimationEventHandler, type CSSProperties, type ReactNode, type ReactElement } from 'react';
 
+export type PopoverPositions = Positions;
+
 export interface PopoverConfig {
   defaultProps: {
     open?: boolean;
-    position: Positions;
+    position: PopoverPositions;
     gap: number;
     responsive: boolean;
     overlayRef: Element | null;

@@ -13,19 +13,22 @@ import React, {
   useCallback,
   type ReactElement,
   cloneElement,
-  type MouseEvent
+  type MouseEvent,
+  type ReactNode
 } from 'react';
+import { type PopoverPositions } from '../../configs/popoverConfig';
 import themeContext from '../../contexts/theme';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../hooks/useTransition';
-import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
-import { calculateResponsiveCords } from '../../utils/positiontHelper';
-import { createPortal } from 'react-dom';
+import { setElementPosition } from '../../utils/positiontHelper';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import useScroll from '../../hooks/useScroll';
+import useResize from '../../hooks/useResize';
+import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
+import { createPortal } from 'react-dom';
 
 export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
-  position?: Positions;
+  position?: PopoverPositions;
   gap?: number;
   responsive?: boolean;
   overlayRef?: Element | null;
@@ -59,7 +62,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
     ...restRootProps
   } = mergeProps(defaultProps, rootProps);
   const mergedTransitionConfig = mergeProps(defaultProps.transitionConfig, transitionConfig);
-  let handlerNode = handler;
+  let handlerNode: ReactNode;
 
   const componentsRef = useRef<{ root: HTMLDivElement | null; handler: HTMLElement | null }>({ root: null, handler: null });
 
@@ -67,9 +70,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
 
   const { state: transitionState, enterState, exitState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
 
-  const scrollHandler = useCallback((): void => {
+  const resize = useCallback((): void => {
     if (componentsRef.current.root !== null && componentsRef.current.handler !== null) {
-      const calculatedRootCords = calculateResponsiveCords(
+      setElementPosition(
         componentsRef.current.root,
         position,
         componentsRef.current.handler.offsetTop,
@@ -79,15 +82,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
         gap,
         responsive
       );
-
-      componentsRef.current.root.style.top = `${calculatedRootCords.top}px`;
-      componentsRef.current.root.style.left = `${calculatedRootCords.left}px`;
     }
   }, [position, gap, responsive]);
 
   useOutsideClick(componentsRef.current.root, exit, transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED);
 
-  useScroll(scrollHandler, enterState);
+  useScroll(resize, enterState);
+
+  useResize(resize, enterState);
 
   useEffect(() => {
     if (open === true) {
@@ -99,16 +101,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
     }
   }, [open]);
 
-  const calculatedCords = calculateResponsiveCords(
-    componentsRef.current.root,
-    position,
-    componentsRef.current.handler?.offsetTop,
-    componentsRef.current.handler?.offsetLeft,
-    componentsRef.current.handler?.offsetHeight,
-    componentsRef.current.handler?.offsetWidth,
-    gap,
-    responsive
-  );
+  resize();
 
   /* Set handler props */
   if (handler !== undefined) {
@@ -126,7 +119,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
       }
     };
 
-    if ((handler as any).ref === null) {
+    if ((handler as Record<string, any>)?.ref === undefined || (handler as Record<string, any>).ref === null) {
       handlerNode = cloneElement(handler, {
         onClick: onHandlerClick,
         ref: (element: HTMLElement) => {
@@ -134,7 +127,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
         }
       });
     } else {
-      componentsRef.current.handler = (handler as any).ref.current;
+      componentsRef.current.handler = (handler as Record<string, any>).ref.current;
 
       handlerNode = cloneElement(handler, {
         onClick: onHandlerClick
@@ -178,8 +171,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
   const mergedRootStyle = mergeStyles(
     {
       opacity: `${transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED ? 100 : 0}`,
-      top: `${calculatedCords.top}px`,
-      left: `${calculatedCords.left}px`,
       transitionDuration: `${enterState ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`
     },
     rootStyle

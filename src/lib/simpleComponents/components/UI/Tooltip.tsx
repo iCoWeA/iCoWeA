@@ -20,9 +20,9 @@ import React, {
 import { type TooltipPositions, type TooltipColors } from '../../configs/tooltipConfig';
 import themeContext from '../../contexts/theme';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../hooks/useTransition';
+import { setElementPosition } from '../../utils/positiontHelper';
 import useScroll from '../../hooks/useScroll';
 import useResize from '../../hooks/useResize';
-import { setElementPosition } from '../../utils/positiontHelper';
 import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
 import { createPortal } from 'react-dom';
 
