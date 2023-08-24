@@ -1,12 +1,9 @@
-export type BadgeColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
-export type BadgeBorderColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
-
 export interface BadgeConfig {
   defaultProps: {
     position: { vertical: 'top' | 'bottom'; horizontal: 'left' | 'right' };
-    color: BadgeColors;
+    color: Colors;
     withBorder: boolean;
-    borderColor: BadgeBorderColors;
+    borderColor: Colors;
     invisible: boolean;
     className: string;
   };
@@ -15,8 +12,8 @@ export interface BadgeConfig {
     invisible: Record<string, string>;
     withBorder: Record<string, string>;
     positions: Record<string, Record<string, string>>;
-    colors: Record<string, Record<BadgeColors, Record<string, string>>>;
-    borderColors: Record<string, Record<BadgeBorderColors, Record<string, string>>>;
+    colors: Record<string, Record<Colors, Record<string, string>>>;
+    borderColors: Record<string, Record<Colors, Record<string, string>>>;
   }
 }
 
@@ -69,41 +66,51 @@ const badgeConfig: BadgeConfig = {
     colors: {
       default: {
         default: {
-          fill: 'fill-default-text-dark',
-          color: 'text-default-text-dark',
-          background: 'bg-default-bg'
+          fill: 'fill-default-dark',
+          color: 'text-default-dark',
+          background: 'bg-default-default'
         },
         primary: {
-          fill: 'fill-default-text-light',
-          color: 'text-default-text-light',
+          fill: 'fill-default-light',
+          color: 'text-default-light',
           background: 'bg-default-primary'
         },
         secondary: {
-          fill: 'fill-default-text-light',
-          color: 'text-default-text-light',
+          fill: 'fill-default-light',
+          color: 'text-default-light',
           background: 'bg-default-secondary'
         },
         success: {
-          fill: 'fill-default-text-light',
-          color: 'text-default-text-light',
+          fill: 'fill-default-light',
+          color: 'text-default-light',
           background: 'bg-default-success'
         },
         warning: {
-          fill: 'fill-default-text-dark',
-          color: 'text-default-text-dark',
+          fill: 'fill-default-dark',
+          color: 'text-default-dark',
           background: 'bg-default-warning'
         },
         error: {
-          fill: 'fill-default-text-light',
-          color: 'text-default-text-light',
+          fill: 'fill-default-light',
+          color: 'text-default-light',
           background: 'bg-default-error'
+        },
+        light: {
+          fill: 'fill-default-dark',
+          color: 'text-default-dark',
+          background: 'bg-default-light'
+        },
+        dark: {
+          fill: 'fill-default-light',
+          color: 'text-default-light',
+          background: 'bg-default-dark'
         }
       }
     },
     borderColors: {
       default: {
         default: {
-          border: 'border-default-bg'
+          border: 'border-default-default'
         },
         primary: {
           border: 'border-default-primary'
@@ -119,6 +126,12 @@ const badgeConfig: BadgeConfig = {
         },
         error: {
           border: 'border-default-error'
+        },
+        light: {
+          border: 'border-default-light'
+        },
+        dark: {
+          border: 'border-default-dark'
         }
       }
     }

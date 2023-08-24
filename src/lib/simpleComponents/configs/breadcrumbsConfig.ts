@@ -1,11 +1,9 @@
 import { type LiHTMLAttributes, type ReactNode } from 'react';
 
-export type BreadcrumbsColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
-
 export interface BreadcrumbsConfig {
   defaultProps: {
     separator: ReactNode;
-    color: BreadcrumbsColors;
+    color: Colors;
     fullwidth: boolean;
     itemsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
     separatorsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
@@ -22,7 +20,7 @@ export interface BreadcrumbsConfig {
     },
     separator: {
       base: Record<string, string>;
-      colors: Record<string, Record<BreadcrumbsColors, Record<string, string>>>;
+      colors: Record<string, Record<Colors, Record<string, string>>>;
     }
   }
 }
@@ -72,8 +70,8 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
       colors: {
         default: {
           default: {
-            fill: 'fill-default-text/70',
-            color: 'text-default-text/70'
+            fill: 'fill-default-default/70',
+            color: 'text-default-default/70'
           },
           primary: {
             fill: 'fill-default-primary/70',
@@ -96,12 +94,12 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
             color: 'text-default-error/70'
           },
           light: {
-            fill: 'fill-default-text-light/70',
-            color: 'text-default-text-light/70'
+            fill: 'fill-default-light/70',
+            color: 'text-default-light/70'
           },
           dark: {
-            fill: 'fill-default-text-dark/70',
-            color: 'text-default-text-dark/70'
+            fill: 'fill-default-dark/70',
+            color: 'text-default-dark/70'
           }
         }
       }

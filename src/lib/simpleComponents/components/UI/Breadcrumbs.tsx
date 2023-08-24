@@ -1,11 +1,10 @@
 import React, { forwardRef, type BaseHTMLAttributes, useContext, type ReactNode, type LiHTMLAttributes } from 'react';
-import { type BreadcrumbsColors } from '../../configs/breadcrumbsConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLUListElement> {
   separator?: ReactNode;
-  color?: BreadcrumbsColors;
+  color?: Colors;
   fullwidth?: boolean;
   itemsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
   separatorsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
@@ -40,14 +39,14 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((rootProps, r
 
     /* Set item props */
     const itemStyles = styles.item;
-    const { className: itemClassName, ...restItemProps } = itemsProps[i];
+    const { className: itemClassName, ...restItemProps } = itemsProps[i] ?? {};
 
     const mergedItemClassName = mergeClasses(itemStyles.base, itemClassName);
 
     /* Set separator props */
     if (i !== childrenNodes.length - 1) {
       const separatorStyles = styles.separator;
-      const { className: separatorClassName, ...restSeparatorProps } = separatorsProps[i];
+      const { className: separatorClassName, ...restSeparatorProps } = separatorsProps[i] ?? {};
 
       const mergedSeparatorClassName = mergeClasses(separatorStyles.base, separatorStyles.colors[theme][color], separatorClassName);
 

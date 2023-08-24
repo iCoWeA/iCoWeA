@@ -1,13 +1,12 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type BadgeColors, type BadgeBorderColors } from '../../configs/badgeConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
   position?: { vertical: 'top' | 'bottom'; horizontal: 'left' | 'right' };
-  color?: BadgeColors;
+  color?: Colors;
   withBorder?: boolean;
-  borderColor?: BadgeBorderColors;
+  borderColor?: Colors;
   invisible?: boolean;
   className?: string;
 }
