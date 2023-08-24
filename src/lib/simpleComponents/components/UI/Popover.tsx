@@ -43,7 +43,7 @@ export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   onAnimationEnd?: AnimationEventHandler;
   style?: CSSProperties;
   className?: string;
-  children?: ReactElement;
+  children?: ReactNode;
 }
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) => {
