@@ -43,7 +43,7 @@ export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
   onAnimationEnd?: AnimationEventHandler;
   style?: CSSProperties;
   className?: string;
-  children?: ReactElement;
+  children?: ReactNode;
 }
 
 const setArrowPosition = (element: HTMLElement | null, position: TooltipPositions): void => {
