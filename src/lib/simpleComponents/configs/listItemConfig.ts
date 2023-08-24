@@ -1,10 +1,9 @@
 export type ListItemSizes = 'sm' | 'md' | 'lg';
-export type ListItemColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface ListItemConfig {
   defaultProps: {
     size: ListItemSizes;
-    color: ListItemColors;
+    color: Colors;
     disablePadding: boolean;
     className: string;
   };
@@ -12,7 +11,7 @@ export interface ListItemConfig {
     base: Record<string, string>;
     disablePadding: Record<string, string>;
     sizes: Record<ListItemSizes, Record<string, string>>;
-    colors: Record<string, Record<ListItemColors, Record<string, string>>>;
+    colors: Record<string, Record<Colors, Record<string, string>>>;
   }
 }
 
@@ -49,8 +48,8 @@ const listItemConfig: ListItemConfig = {
     colors: {
       default: {
         default: {
-          fill: 'fill-default-text',
-          color: 'text-default-text'
+          fill: 'fill-default-default',
+          color: 'text-default-default'
         },
         primary: {
           fill: 'fill-default-primary',
@@ -73,12 +72,12 @@ const listItemConfig: ListItemConfig = {
           color: 'text-default-error'
         },
         light: {
-          fill: 'fill-default-text-light',
-          color: 'text-default-text-light'
+          fill: 'fill-default-light',
+          color: 'text-default-light'
         },
         dark: {
-          fill: 'fill-default-text-dark',
-          color: 'text-default-text-dark'
+          fill: 'fill-default-dark',
+          color: 'text-default-dark'
         }
       }
     }

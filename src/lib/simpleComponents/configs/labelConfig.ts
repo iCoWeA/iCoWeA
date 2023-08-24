@@ -1,13 +1,11 @@
-export type LabelColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
-
 export interface LabelConfig {
   defaultProps: {
-    color: LabelColors;
+    color: Colors;
     className: string;
   };
   styles: {
     base: Record<string, string>;
-    colors: Record<string, Record<LabelColors, Record<string, string>>>;
+    colors: Record<string, Record<Colors, Record<string, string>>>;
   }
 }
 
@@ -25,8 +23,8 @@ const labelConfig: LabelConfig = {
     colors: {
       default: {
         default: {
-          fill: 'fill-default-text',
-          color: 'text-default-text'
+          fill: 'fill-default-default',
+          color: 'text-default-default'
         },
         primary: {
           fill: 'fill-default-primary',
@@ -49,12 +47,12 @@ const labelConfig: LabelConfig = {
           color: 'text-default-error'
         },
         light: {
-          fill: 'fill-default-text-light',
-          color: 'text-default-text-light'
+          fill: 'fill-default-light',
+          color: 'text-default-light'
         },
         dark: {
-          fill: 'fill-default-text-dark',
-          color: 'text-default-text-dark'
+          fill: 'fill-default-dark',
+          color: 'text-default-dark'
         }
       }
     }

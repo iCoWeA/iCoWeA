@@ -1,10 +1,9 @@
 export type LinkUnderlines = 'none' | 'hover' | 'always';
-export type LinkColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface LinkConfig {
   defaultProps: {
     underline: LinkUnderlines;
-    color: LinkColors;
+    color: Colors;
     fullwidth: boolean;
     disabled: boolean;
     clasName: string;
@@ -14,7 +13,7 @@ export interface LinkConfig {
     fullwidth: Record<string, string>;
     disabled: Record<string, string>;
     underlines: Record<LinkUnderlines, Record<string, string>>;
-    colors: Record<string, Record<LinkColors, Record<string, string>>>;
+    colors: Record<string, Record<Colors, Record<string, string>>>;
   }
 }
 
@@ -58,10 +57,10 @@ const linkConfig: LinkConfig = {
     colors: {
       default: {
         default: {
-          fill: 'fill-default-text',
-          color: 'text-default-text',
-          underline: 'decoration-default-text/60',
-          hover: 'hover:decoration-default-text'
+          fill: 'fill-default-default',
+          color: 'text-default-default',
+          underline: 'decoration-default-default/60',
+          hover: 'hover:decoration-default-default'
         },
         primary: {
           fill: 'fill-default-primary',
@@ -94,16 +93,16 @@ const linkConfig: LinkConfig = {
           hover: 'hover:decoration-default-error'
         },
         light: {
-          fill: 'fill-default-text-light',
-          color: 'text-default-text-light',
-          underline: 'decoration-default-text-light/60',
-          hover: 'hover:decoration-default-text-light'
+          fill: 'fill-default-light',
+          color: 'text-default-light',
+          underline: 'decoration-default-light/60',
+          hover: 'hover:decoration-default-light'
         },
         dark: {
-          fill: 'fill-default-text-dark',
-          color: 'text-default-text-dark',
-          underline: 'decoration-default-text-dark/60',
-          hover: 'hover:decoration-default-text-dark'
+          fill: 'fill-default-dark',
+          color: 'text-default-dark',
+          underline: 'decoration-default-dark/60',
+          hover: 'hover:decoration-default-dark'
         }
       }
     }

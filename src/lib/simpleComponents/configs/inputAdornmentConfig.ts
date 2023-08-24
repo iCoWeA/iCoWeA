@@ -1,14 +1,13 @@
 export type InputAdornmentPositions = 'start' | 'end';
-export type InputAdornmentColor = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface InputAdornmentConfig {
   defaultProps: {
-    color: InputAdornmentColor;
+    color: Colors;
     className: string;
   };
   styles: {
     base: Record<string, string>;
-    colors: Record<string, Record<InputAdornmentColor, Record<string, string>>>;
+    colors: Record<string, Record<Colors, Record<string, string>>>;
   };
 }
 
@@ -32,8 +31,8 @@ const inputAdornmentConfig: InputAdornmentConfig = {
     colors: {
       default: {
         default: {
-          fill: 'fill-default-text',
-          color: 'text-default-text'
+          fill: 'fill-default-default',
+          color: 'text-default-default'
         },
         primary: {
           fill: 'fill-default-primary',
@@ -56,12 +55,12 @@ const inputAdornmentConfig: InputAdornmentConfig = {
           color: 'text-default-error'
         },
         light: {
-          fill: 'fill-default-text-light',
-          color: 'text-default-text-light'
+          fill: 'fill-default-light',
+          color: 'text-default-light'
         },
         dark: {
-          fill: 'fill-default-text-dark',
-          color: 'text-default-text-dark'
+          fill: 'fill-default-dark',
+          color: 'text-default-dark'
         }
       }
     }
