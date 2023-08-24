@@ -7,7 +7,7 @@ enum ActionTypes {CHANGE, DEBOUNCED_CHANGE, BLUR, REVALID, RESET, RESET_FORM}
 interface InputState {
   value: string;
   isValid: boolean;
-  showError: boolean;
+  error: boolean;
   errorMessage: string;
   timerId: number;
 }
@@ -57,7 +57,7 @@ const initialTimerId = -1;
 const initializeInput = (defaultValue: string = ''): InputState => ({
   value: defaultValue,
   isValid: false,
-  showError: false,
+  error: false,
   errorMessage: '',
   timerId: initialTimerId
 });
@@ -69,8 +69,8 @@ const reducer = (state: State, { type, payload: { inputName, input, timerId = in
     clearTimeout(inputs[inputName].timerId);
     inputs[inputName].value = input?.value ?? '';
     inputs[inputName].isValid = validate(input, pattern);
-    inputs[inputName].showError = !inputs[inputName].isValid;
-    inputs[inputName].errorMessage = inputs[inputName].showError ? errorMessage : '';
+    inputs[inputName].error = !inputs[inputName].isValid;
+    inputs[inputName].errorMessage = inputs[inputName].error ? errorMessage : '';
     inputs[inputName].timerId = initialTimerId;
   }
 
@@ -78,26 +78,26 @@ const reducer = (state: State, { type, payload: { inputName, input, timerId = in
     clearTimeout(inputs[inputName].timerId);
     inputs[inputName].value = input?.value ?? '';
     inputs[inputName].isValid = validate(input, pattern);
-    inputs[inputName].showError = inputs[inputName].isValid
+    inputs[inputName].error = inputs[inputName].isValid
       ? false
-      : inputs[inputName].showError;
-    inputs[inputName].errorMessage = inputs[inputName].showError ? errorMessage : '';
+      : inputs[inputName].error;
+    inputs[inputName].errorMessage = inputs[inputName].error ? errorMessage : '';
     inputs[inputName].timerId = timerId;
   }
 
   if (type === ActionTypes.REVALID) {
     clearTimeout(inputs[inputName].timerId);
     inputs[inputName].isValid = validate(input, pattern);
-    inputs[inputName].showError = !inputs[inputName].isValid;
-    inputs[inputName].errorMessage = inputs[inputName].showError ? errorMessage : '';
+    inputs[inputName].error = !inputs[inputName].isValid;
+    inputs[inputName].errorMessage = inputs[inputName].error ? errorMessage : '';
     inputs[inputName].timerId = initialTimerId;
   }
 
   if (type === ActionTypes.BLUR) {
     clearTimeout(inputs[inputName].timerId);
     inputs[inputName].isValid = validate(input, pattern);
-    inputs[inputName].showError = !inputs[inputName].isValid;
-    inputs[inputName].errorMessage = inputs[inputName].showError ? errorMessage : '';
+    inputs[inputName].error = !inputs[inputName].isValid;
+    inputs[inputName].errorMessage = inputs[inputName].error ? errorMessage : '';
     inputs[inputName].timerId = initialTimerId;
   }
 
