@@ -15,14 +15,14 @@ import React, {
   type MutableRefObject,
   type MouseEvent
 } from 'react';
-import { type InputVariants, type InputColors } from '../../configs/inputConfig';
+import { type InputVariants } from '../../configs/inputConfig';
 import themeContext from '../../contexts/theme';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   variant?: InputVariants;
-  color?: InputColors;
+  color?: Colors;
   valid?: boolean;
   invalid?: boolean;
   label?: ReactNode;

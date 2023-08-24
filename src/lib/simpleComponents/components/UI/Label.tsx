@@ -1,10 +1,9 @@
 import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
-import { type LabelColors } from '../../configs/labelConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
-  color?: LabelColors;
+  color?: Colors;
   className?: string;
 }
 

@@ -1,10 +1,9 @@
 import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
-import { type InputAdornmentColor } from '../../configs/inputAdornmentConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface InputAdornmentProps extends BaseHTMLAttributes<HTMLDivElement> {
-  color?: InputAdornmentColor;
+  color?: Color;
   className?: string;
 }
 

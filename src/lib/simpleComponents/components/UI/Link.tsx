@@ -1,12 +1,12 @@
 import React, { forwardRef, useContext } from 'react';
-import { type LinkColors, type LinkUnderlines } from '../../configs/linkConfig';
+import { type LinkUnderlines } from '../../configs/linkConfig';
 import { type LinkProps as BaseLinkProps, Link as BaseLink } from 'react-router-dom';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface LinkProps extends BaseLinkProps {
   underline?: LinkUnderlines;
-  color?: LinkColors;
+  color?: Colors;
   fullwidth?: boolean;
   disabled?: boolean;
   clasName?: string;
