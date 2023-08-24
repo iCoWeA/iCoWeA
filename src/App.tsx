@@ -1,7 +1,9 @@
 import React, { type FC } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RootComponent from './pages/Root';
+import { Provider } from 'react-redux';
 import ThemeProvider from './lib/simpleComponents/components/providers/ThemeProvider';
+import store from './store';
 
 const router = createBrowserRouter([
   {
@@ -13,7 +15,9 @@ const router = createBrowserRouter([
 const App: FC = () => {
   return (
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </ThemeProvider>
   );
 };
