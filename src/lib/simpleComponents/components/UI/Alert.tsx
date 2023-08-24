@@ -1,12 +1,12 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type ButtonHTMLAttributes } from 'react';
-import { type AlertVariants, type AlertColors } from '../../configs/alertConfig';
+import { type AlertVariants } from '../../configs/alertConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   variant?: AlertVariants;
-  color?: AlertColors;
+  color?: Colors;
   invisible?: boolean;
   icon?: ReactNode;
   action?: ReactNode;

@@ -1,11 +1,10 @@
 import React, { type ButtonHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type MouseEventHandler, type SVGAttributes } from 'react';
-import { type AccordionHeaderColors } from '../../configs/accordionHeaderConfig';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: AccordionHeaderColors;
+  color?: Colors;
   icon?: boolean;
   iconProps?: SVGAttributes<SVGSVGElement>;
   onClick?: MouseEventHandler<HTMLButtonElement>;

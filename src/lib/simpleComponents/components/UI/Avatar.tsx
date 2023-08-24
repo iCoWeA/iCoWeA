@@ -1,12 +1,12 @@
 import React, { forwardRef, useContext, type ImgHTMLAttributes } from 'react';
-import { type AvatarVariants, type AvatarSizes, type AvatarColors } from '../../configs/avatarConfig';
+import { type AvatarVariants, type AvatarSizes } from '../../configs/avatarConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   variant?: AvatarVariants;
   size?: AvatarSizes;
-  color?: AvatarColors;
+  color?: Colors;
   withBorder?: boolean;
   className?: string;
 }

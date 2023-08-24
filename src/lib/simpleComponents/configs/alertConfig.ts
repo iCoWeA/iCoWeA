@@ -1,13 +1,12 @@
 import { type ReactNode, type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
 
 export type AlertVariants = 'filled' | 'outlined' | 'ghost';
-export type AlertColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface AlertConfig {
   defaultProps: {
     onClose?: () => void;
     variant: AlertVariants;
-    color: AlertColors;
+    color: Colors;
     invisible: boolean;
     icon?: ReactNode;
     action?: ReactNode;
@@ -22,7 +21,7 @@ export interface AlertConfig {
     root: {
       base: Record<string, string>;
       invisible: Record<string, string>;
-      variants: Record<AlertVariants, Record<string, Record<AlertColors, Record<string, string>>>>
+      variants: Record<AlertVariants, Record<string, Record<Colors, Record<string, string>>>>
     },
     iconContainer: {
       base: Record<string, string>;
@@ -35,7 +34,7 @@ export interface AlertConfig {
     },
     button: {
       base: Record<string, string>;
-      variants: Record<AlertVariants, Record<string, Record<AlertColors, Record<string, string>>>>;
+      variants: Record<AlertVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
   }
 }
@@ -68,43 +67,53 @@ const alertConfig: AlertConfig = {
         filled: {
           default: {
             default: {
-              fill: 'fill-default-text-dark',
-              color: 'text-default-text-dark',
-              background: 'bg-default-bg'
+              fill: 'fill-default-dark',
+              color: 'text-default-dark',
+              background: 'bg-default-default'
             },
             primary: {
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
               background: 'bg-default-primary'
             },
             secondary: {
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
               background: 'bg-default-secondary'
             },
             success: {
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
               background: 'bg-default-success'
             },
             warning: {
-              fill: 'fill-default-text-dark',
-              color: 'text-default-text-dark',
+              fill: 'fill-default-dark',
+              color: 'text-default-dark',
               background: 'bg-default-warning'
             },
             error: {
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
               background: 'bg-default-error'
+            },
+            light: {
+              fill: 'fill-default-dark',
+              color: 'text-default-dark',
+              background: 'bg-default-light'
+            },
+            dark: {
+              fill: 'fill-default-light',
+              color: 'text-default-light',
+              background: 'bg-default-dark'
             }
           }
         },
         outlined: {
           default: {
             default: {
-              border: 'border border-default-bg',
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light'
+              border: 'border border-default-default',
+              fill: 'fill-default-default',
+              color: 'text-default-default'
             },
             primary: {
               border: 'border border-default-primary',
@@ -130,15 +139,25 @@ const alertConfig: AlertConfig = {
               border: 'border border-default-error',
               fill: 'fill-default-error',
               color: 'text-default-error'
+            },
+            light: {
+              border: 'border border-default-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light'
+            },
+            dark: {
+              border: 'border border-default-dark',
+              fill: 'fill-default-dark',
+              color: 'text-default-dark'
             }
           }
         },
         ghost: {
           default: {
             default: {
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
-              background: 'bg-default-bg/20'
+              fill: 'fill-default-default',
+              color: 'text-default-default',
+              background: 'bg-default-default/20'
             },
             primary: {
               fill: 'fill-default-primary',
@@ -164,6 +183,16 @@ const alertConfig: AlertConfig = {
               fill: 'fill-default-error',
               color: 'text-default-error',
               background: 'bg-default-error/20'
+            },
+            light: {
+              fill: 'fill-default-light',
+              color: 'text-default-light',
+              background: 'bg-default-light/20'
+            },
+            dark: {
+              fill: 'fill-default-dark',
+              color: 'text-default-dark',
+              background: 'bg-default-dark/20'
             }
           }
         }
@@ -215,43 +244,53 @@ const alertConfig: AlertConfig = {
         filled: {
           default: {
             default: {
-              fill: 'fill-default-text-dark',
-              hover: 'hover:bg-default-bg-dark/10',
-              active: 'active:bg-default-bg-dark/20'
+              fill: 'fill-default-dark',
+              hover: 'hover:bg-default-dark/10',
+              active: 'active:bg-default-dark/20'
             },
             primary: {
-              fill: 'fill-default-text-light',
-              hover: 'hover:bg-default-bg/10',
-              active: 'active:bg-default-bg/20'
+              fill: 'fill-default-light',
+              hover: 'hover:bg-default-light/10',
+              active: 'active:bg-default-light/20'
             },
             secondary: {
-              fill: 'fill-default-text-light',
-              hover: 'hover:bg-default-bg/10',
-              active: 'active:bg-default-bg/20'
+              fill: 'fill-default-light',
+              hover: 'hover:bg-default-light/10',
+              active: 'active:bg-default-light/20'
             },
             success: {
-              fill: 'fill-default-text-light',
-              hover: 'hover:bg-default-bg/10',
-              active: 'active:bg-default-bg/20'
+              fill: 'fill-default-light',
+              hover: 'hover:bg-default-light/10',
+              active: 'active:bg-default-light/20'
             },
             warning: {
-              fill: 'fill-default-text-dark',
-              hover: 'hover:bg-default-bg-dark/10',
-              active: 'active:bg-default-bg-dark/20'
+              fill: 'fill-default-dark',
+              hover: 'hover:bg-default-dark-dark/10',
+              active: 'active:bg-default-dark-dark/20'
             },
             error: {
-              fill: 'fill-default-text-light',
-              hover: 'hover:bg-default-bg/10',
-              active: 'active:bg-default-bg/20'
+              fill: 'fill-default-light',
+              hover: 'hover:bg-default-light/10',
+              active: 'active:bg-default-light/20'
+            },
+            light: {
+              fill: 'fill-default-dark',
+              hover: 'hover:bg-default-dark/10',
+              active: 'active:bg-default-dark/20'
+            },
+            dark: {
+              fill: 'fill-default-light',
+              hover: 'hover:bg-default-light/10',
+              active: 'active:bg-default-light/20'
             }
           }
         },
         outlined: {
           default: {
             default: {
-              fill: 'fill-default-text-light',
-              hover: 'hover:bg-default-bg/10',
-              active: 'active:bg-default-bg/20'
+              fill: 'fill-default-default',
+              hover: 'hover:bg-default-default/10',
+              active: 'active:bg-default-default/20'
             },
             primary: {
               fill: 'fill-default-primary',
@@ -277,15 +316,25 @@ const alertConfig: AlertConfig = {
               fill: 'fill-default-error',
               hover: 'hover:bg-default-error/10',
               active: 'active:bg-default-error/20'
+            },
+            light: {
+              fill: 'fill-default-light',
+              hover: 'hover:bg-default-light/10',
+              active: 'active:bg-default-light/20'
+            },
+            dark: {
+              fill: 'fill-default-dark',
+              hover: 'hover:bg-default-dark/10',
+              active: 'active:bg-default-dark/20'
             }
           }
         },
         ghost: {
           default: {
             default: {
-              fill: 'fill-default-text-light',
-              hover: 'hover:bg-default-bg/10',
-              active: 'active:bg-default-bg/20'
+              fill: 'fill-default-default',
+              hover: 'hover:bg-default-default/10',
+              active: 'active:bg-default-default/20'
             },
             primary: {
               fill: 'fill-default-primary',
@@ -311,6 +360,16 @@ const alertConfig: AlertConfig = {
               fill: 'fill-default-error',
               hover: 'hover:bg-default-error/10',
               active: 'active:bg-default-error/20'
+            },
+            light: {
+              fill: 'fill-default-light',
+              hover: 'hover:bg-default-light/10',
+              active: 'active:bg-default-light/20'
+            },
+            dark: {
+              fill: 'fill-default-dark',
+              hover: 'hover:bg-default-dark/10',
+              active: 'active:bg-default-dark/20'
             }
           }
         }

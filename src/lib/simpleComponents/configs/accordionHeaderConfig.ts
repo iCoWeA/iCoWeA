@@ -1,10 +1,8 @@
 import { type MouseEventHandler, type ReactNode, type SVGAttributes } from 'react';
 
-export type AccordionHeaderColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
-
 export interface AccordionHeaderConfig {
   defaultProps: {
-    color: AccordionHeaderColors;
+    color: Colors;
     icon: boolean;
     iconProps: SVGAttributes<SVGSVGElement>;
     onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -15,7 +13,7 @@ export interface AccordionHeaderConfig {
   styles: {
     root: {
       base: Record<string, string>;
-      colors: Record<string, Record<AccordionHeaderColors, Record<string, string>>>
+      colors: Record<string, Record<Colors, Record<string, string>>>
     },
     icon: {
       base: Record<string, string>;
@@ -48,10 +46,10 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       colors: {
         default: {
           default: {
-            fill: 'fill-default-text/70',
-            color: 'text-default-text/70',
-            hover: 'hover:text-default-text hover:fill-default-text',
-            disabled: 'disabled:fill-default-text disabled:text-default-text'
+            fill: 'fill-default-default/70',
+            color: 'text-default-default/70',
+            hover: 'hover:text-default-default hover:fill-default-default',
+            disabled: 'disabled:fill-default-default disabled:text-default-default'
           },
           primary: {
             fill: 'fill-default-primary/70',
@@ -84,16 +82,16 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
             disabled: 'disabled:fill-default-error disabled:text-default-error'
           },
           light: {
-            fill: 'fill-default-text-light/70',
-            color: 'text-default-text-light/70',
-            hover: 'hover:text-default-text-light hover:fill-default-text-light',
-            disabled: 'disabled:fill-default-text-light disabled:text-default-text-light'
+            fill: 'fill-default-light/70',
+            color: 'text-default-light/70',
+            hover: 'hover:text-default-light hover:fill-default-light',
+            disabled: 'disabled:fill-default-light disabled:text-default-light'
           },
           dark: {
-            fill: 'fill-default-text-dark/70',
-            color: 'text-default-text-dark/70',
-            hover: 'hover:text-default-text-dark hover:fill-default-text-dark',
-            disabled: 'disabled:fill-default-text-dark disabled:text-default-text-dark'
+            fill: 'fill-default-dark/70',
+            color: 'text-default-dark/70',
+            hover: 'hover:text-default-dark hover:fill-default-dark',
+            disabled: 'disabled:fill-default-dark disabled:text-default-dark'
           }
         }
       }
