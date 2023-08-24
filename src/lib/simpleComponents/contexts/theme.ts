@@ -4,6 +4,7 @@ import accordionBodyConfig, { type AccordionBodyConfig } from '../configs/accord
 import accordionHeaderConfig, { type AccordionHeaderConfig } from '../configs/accordionHeaderConfig';
 import alertConfig, { type AlertConfig } from '../configs/alertConfig';
 import avatarConfig, { type AvatarConfig } from '../configs/avatarConfig';
+import backdropConfig, { type BackdropConfig } from '../configs/backdropConfig';
 import badgeConfig, { type BadgeConfig } from '../configs/badgeConfig';
 import breadcrumbsConfig, { type BreadcrumbsConfig } from '../configs/breadcrumbsConfig';
 import buttonConfig, { type ButtonConfig } from '../configs/buttonConfig';
@@ -17,7 +18,7 @@ import chipConfig, { type ChipConfig } from '../configs/chipConfig';
 import collapseConfig, { type CollapseConfig } from '../configs/collapseConfig';
 import containerConfig, { type ContainerConfig } from '../configs/containerConfig';
 import formConfig, { type FormConfig } from '../configs/formConfig';
-import formGroupConfig, { type FormGroupConfig } from '../configs/formGroup';
+import formGroupConfig, { type FormGroupConfig } from '../configs/formGroupConfig';
 import iconConfig, { type IconConfig } from '../configs/iconConfig';
 import iconButtonConfig, { type IconButtonConfig } from '../configs/iconButtonConfig';
 import inputConfig, { type InputConfig } from '../configs/inputConfig';
@@ -27,6 +28,10 @@ import linkConfig, { type LinkConfig } from '../configs/linkConfig';
 import listConfig, { type ListConfig } from '../configs/listConfig';
 import listItemConfig, { type ListItemConfig } from '../configs/listItemConfig';
 import listItemButtonConfig, { type ListItemButtonConfig } from '../configs/listItemButtonConfig';
+import menuConfig, { type MenuConfig } from '../configs/menuConfig';
+import menuBodyConfig, { type MenuBodyConfig } from '../configs/menuBodyConfig';
+import menuFooterConfig, { type MenuFooterConfig } from '../configs/menuFooterConfig';
+import menuHeaderConfig, { type MenuHeaderConfig } from '../configs/menuHeaderConfig';
 import popoverConfig, { type PopoverConfig } from '../configs/popoverConfig';
 import progressConfig, { type ProgressConfig } from '../configs/progressConfig';
 import textAreaConfig, { type TextAreaConfig } from '../configs/textAreaConfig';
@@ -41,6 +46,7 @@ interface ThemeContext {
     accordionHeader: AccordionHeaderConfig;
     alert: AlertConfig;
     avatar: AvatarConfig;
+    backdrop: BackdropConfig;
     badge: BadgeConfig;
     breadcrumbs: BreadcrumbsConfig;
     button: ButtonConfig;
@@ -64,6 +70,10 @@ interface ThemeContext {
     list: ListConfig;
     listItem: ListItemConfig;
     listItemButton: ListItemButtonConfig;
+    menu: MenuConfig;
+    menuBody: MenuBodyConfig;
+    menuFooter: MenuFooterConfig;
+    menuHeader: MenuHeaderConfig;
     popover: PopoverConfig;
     progress: ProgressConfig;
     textArea: TextAreaConfig;
@@ -81,6 +91,7 @@ export const initialState: ThemeContext = {
     accordionHeader: accordionHeaderConfig,
     alert: alertConfig,
     avatar: avatarConfig,
+    backdrop: backdropConfig,
     badge: badgeConfig,
     breadcrumbs: breadcrumbsConfig,
     button: buttonConfig,
@@ -104,6 +115,10 @@ export const initialState: ThemeContext = {
     list: listConfig,
     listItem: listItemConfig,
     listItemButton: listItemButtonConfig,
+    menu: menuConfig,
+    menuBody: menuBodyConfig,
+    menuFooter: menuFooterConfig,
+    menuHeader: menuHeaderConfig,
     popover: popoverConfig,
     progress: progressConfig,
     textArea: textAreaConfig,
