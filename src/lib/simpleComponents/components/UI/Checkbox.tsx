@@ -8,12 +8,11 @@ import React, {
   type MutableRefObject,
   type SVGAttributes
 } from 'react';
-import { type CheckboxColors } from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-  color?: CheckboxColors;
+  color?: Colors;
   valid?: boolean;
   invalid?: boolean;
   icon?: ReactNode;

@@ -1,11 +1,11 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type CardColors, type CardVariants } from '../../configs/cardConfig';
+import { type CardVariants } from '../../configs/cardConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface CardProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: CardVariants;
-  color?: CardColors;
+  color?: Colors;
   elevated?: boolean;
   className?: string;
 }

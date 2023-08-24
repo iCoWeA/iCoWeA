@@ -1,12 +1,12 @@
 import React, { forwardRef, useContext, type BaseHTMLAttributes, type ReactNode, cloneElement } from 'react';
-import { type ButtonGroupVariants, type ButtonGroupSizes, type ButtonGroupColors } from '../../configs/buttonGroupConfig';
+import { type ButtonGroupVariants } from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
 import { isLast, mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ButtonGroupVariants;
-  size?: ButtonGroupSizes;
-  color?: ButtonGroupColors;
+  size?: Sizes;
+  color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
   className?: string;

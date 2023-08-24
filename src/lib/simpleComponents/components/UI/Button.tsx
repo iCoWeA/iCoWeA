@@ -1,12 +1,12 @@
 import React, { forwardRef, type ButtonHTMLAttributes, useContext } from 'react';
-import { type ButtonVariants, type ButtonSizes, type ButtonColors } from '../../configs/buttonConfig';
+import { type ButtonVariants } from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariants;
-  size?: ButtonSizes;
-  color?: ButtonColors;
+  size?: Sizes;
+  color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
   className?: string;

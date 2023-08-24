@@ -1,13 +1,13 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type ButtonHTMLAttributes } from 'react';
-import { type ChipVariants, type ChipSizes, type ChipColors } from '../../configs/chipConfig';
+import { type ChipVariants } from '../../configs/chipConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   variant?: ChipVariants;
-  size?: ChipSizes;
-  color?: ChipColors;
+  size?: Sizes;
+  color?: Colors;
   invisible?: boolean;
   action?: ReactNode;
   bodyProps?: BaseHTMLAttributes<HTMLDivElement>;

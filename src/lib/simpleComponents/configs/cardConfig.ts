@@ -1,17 +1,16 @@
 export type CardVariants = 'filled' | 'outlined';
-export type CardColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface CardConfig {
   defaultProps: {
     variant: CardVariants;
-    color: CardColors;
+    color: Colors;
     elevated: boolean;
     className: string;
   };
   styles: {
     base: Record<string, string>;
     elevated: Record<string, Record<string, string>>;
-    variants: Record<CardVariants, Record<string, Record<CardColors, Record<string, string>>>>;
+    variants: Record<CardVariants, Record<string, Record<Colors, Record<string, string>>>>;
   }
 }
 
@@ -39,7 +38,7 @@ const cardConfig: CardConfig = {
       filled: {
         default: {
           default: {
-            background: 'bg-default-bg'
+            background: 'bg-default-default'
           },
           primary: {
             background: 'bg-default-primary'
@@ -55,13 +54,19 @@ const cardConfig: CardConfig = {
           },
           error: {
             background: 'bg-default-error'
+          },
+          light: {
+            background: 'bg-default-light'
+          },
+          dark: {
+            background: 'bg-default-dark'
           }
         }
       },
       outlined: {
         default: {
           default: {
-            border: 'border border-default-bg-light'
+            border: 'border border-default-default'
           },
           primary: {
             border: 'border border-default-primary'
@@ -77,6 +82,12 @@ const cardConfig: CardConfig = {
           },
           error: {
             border: 'border border-default-error'
+          },
+          light: {
+            border: 'border border-default-light'
+          },
+          dark: {
+            border: 'border border-default-dark'
           }
         }
       }

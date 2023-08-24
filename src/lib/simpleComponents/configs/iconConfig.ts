@@ -1,17 +1,16 @@
 export type IconSizes = 'xs' | 'sm' | 'md' | 'lg' | 'full';
-export type IconColors = 'none' | 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface IconConfig {
   defaultProps: {
     size: IconSizes;
-    color: IconColors;
+    color: Colors;
     viewBox: string;
     className: string;
   };
   styles: {
     base: Record<string, string>;
     sizes: Record<IconSizes, Record<string, string>>;
-    colors: Record<string, Record<IconColors, Record<string, string>>>
+    colors: Record<string, Record<Colors, Record<string, string>>>
   }
 }
 
@@ -47,7 +46,7 @@ const iconConfig: IconConfig = {
     colors: {
       default: {
         default: {
-          fill: 'fill-default-text'
+          fill: 'fill-default-default'
         },
         primary: {
           fill: 'fill-default-primary'
@@ -65,10 +64,10 @@ const iconConfig: IconConfig = {
           fill: 'fill-default-error'
         },
         light: {
-          fill: 'fill-default-text-light'
+          fill: 'fill-default-light'
         },
         dark: {
-          fill: 'fill-default-text-dark'
+          fill: 'fill-default-dark'
         }
       }
     }

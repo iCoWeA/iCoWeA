@@ -1,12 +1,10 @@
 export type ButtonVariants = 'filled' | 'outlined' | 'text';
-export type ButtonSizes = 'sm' | 'md' | 'lg';
-export type ButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface ButtonConfig {
   defaultProps: {
     variant: ButtonVariants;
-    size: ButtonSizes;
-    color: ButtonColors;
+    size: Sizes;
+    color: Colors;
     elevated: boolean;
     fullwidth: boolean;
     className: string;
@@ -14,9 +12,9 @@ export interface ButtonConfig {
   styles: {
     base: Record<string, string>;
     fullwidth: Record<string, string>;
-    sizes: Record<ButtonSizes, Record<string, string>>;
+    sizes: Record<Sizes, Record<string, string>>;
     elevated: Record<string, Record<string, string>>;
-    variants: Record<ButtonVariants, Record<string, Record<ButtonColors, Record<string, string>>>>;
+    variants: Record<ButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
   }
 }
 
@@ -69,57 +67,71 @@ const buttonConfig: ButtonConfig = {
       filled: {
         default: {
           default: {
-            fill: 'fill-default-text-dark',
-            color: 'text-default-text-dark',
-            background: 'bg-default-bg',
-            hover: 'hover:bg-default-bg/90',
-            active: 'active:bg-default-bg/80'
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
+            background: 'bg-default-default',
+            hover: 'hover:bg-default-default/90',
+            active: 'active:bg-default-default/80'
           },
           primary: {
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
+            fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-primary',
             hover: 'hover:bg-default-primary/90',
             active: 'active:bg-default-primary/80'
           },
           secondary: {
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
+            fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-secondary',
             hover: 'hover:bg-default-secondary/90',
             active: 'active:bg-default-secondary/80'
           },
           success: {
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
+            fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-success',
             hover: 'hover:bg-default-success/90',
             active: 'active:bg-default-success/80'
           },
           warning: {
-            fill: 'fill-default-text-dark',
-            color: 'text-default-text-dark',
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
             background: 'bg-default-warning',
             hover: 'hover:bg-default-warning/90',
             active: 'active:bg-default-warning/80'
           },
           error: {
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
+            fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-error',
             hover: 'hover:bg-default-error/90',
             active: 'active:bg-default-error/80'
+          },
+          light: {
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
+            background: 'bg-default-light',
+            hover: 'hover:bg-default-light/90',
+            active: 'active:bg-default-light/80'
+          },
+          dark: {
+            fill: 'fill-default-light',
+            color: 'text-default-light',
+            background: 'bg-default-dark',
+            hover: 'hover:bg-default-dark/90',
+            active: 'active:bg-default-dark/80'
           }
         }
       },
       outlined: {
         default: {
           default: {
-            border: 'border border-default-bg',
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
-            hover: 'hover:bg-default-bg/10',
-            active: 'active:bg-default-bg/20'
+            border: 'border border-default-default',
+            fill: 'fill-default-default',
+            color: 'text-default-default',
+            hover: 'hover:bg-default-default/10',
+            active: 'active:bg-default-default/20'
           },
           primary: {
             border: 'border border-default-primary',
@@ -155,16 +167,30 @@ const buttonConfig: ButtonConfig = {
             color: 'text-default-error',
             hover: 'hover:bg-default-error/10',
             active: 'active:bg-default-error/20'
+          },
+          light: {
+            border: 'border border-default-light',
+            fill: 'fill-default-light',
+            color: 'text-default-light',
+            hover: 'hover:bg-default-light/10',
+            active: 'active:bg-default-light/20'
+          },
+          dark: {
+            border: 'border border-default-dark',
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
+            hover: 'hover:bg-default-dark/10',
+            active: 'active:bg-default-dark/20'
           }
         }
       },
       text: {
         default: {
           default: {
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
-            hover: 'hover:bg-default-bg/10',
-            active: 'active:bg-default-bg/20'
+            fill: 'fill-default-default',
+            color: 'text-default-default',
+            hover: 'hover:bg-default-default/10',
+            active: 'active:bg-default-default/20'
           },
           primary: {
             fill: 'fill-default-primary',
@@ -191,10 +217,22 @@ const buttonConfig: ButtonConfig = {
             active: 'active:bg-default-warning/20'
           },
           error: {
-            fill: 'fill-default-erro',
+            fill: 'fill-default-error',
             color: 'text-default-error',
             hover: 'hover:bg-default-error/10',
             active: 'active:bg-default-error/20'
+          },
+          light: {
+            fill: 'fill-default-light',
+            color: 'text-default-light',
+            hover: 'hover:bg-default-light/10',
+            active: 'active:bg-default-light/20'
+          },
+          dark: {
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
+            hover: 'hover:bg-default-dark/10',
+            active: 'active:bg-default-dark/20'
           }
         }
       }

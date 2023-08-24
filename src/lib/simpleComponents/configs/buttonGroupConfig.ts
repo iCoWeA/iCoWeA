@@ -1,14 +1,12 @@
 import { type ReactNode } from 'react';
 
 export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
-export type ButtonGroupSizes = 'sm' | 'md' | 'lg';
-export type ButtonGroupColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface ButtonGroupConfig {
   defaultProps: {
     variant: ButtonGroupVariants;
-    size: ButtonGroupSizes;
-    color: ButtonGroupColors;
+    size: Sizes;
+    color: Colors;
     elevated: boolean;
     fullwidth: boolean;
     className: string;
@@ -24,9 +22,9 @@ export interface ButtonGroupConfig {
       first: Record<string, string>;
       last: Record<ButtonGroupVariants, Record<string, string>>;
       fullwidth: Record<string, string>;
-      sizes: Record<ButtonGroupSizes, Record<string, string>>;
+      sizes: Record<Sizes, Record<string, string>>;
       elevated: Record<string, Record<string, string>>;
-      variants: Record<ButtonGroupVariants, Record<string, Record<ButtonGroupColors, Record<string, string>>>>;
+      variants: Record<ButtonGroupVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
   }
 }
@@ -108,11 +106,12 @@ const buttonGroupConfig: ButtonGroupConfig = {
         filled: {
           default: {
             default: {
+              border: 'border-r border-black/[0.15]',
               fill: 'fill-default-text-dark',
               color: 'text-default-text-dark',
-              background: 'bg-default-bg',
-              hover: 'hover:bg-default-bg/90',
-              active: 'active:bg-default-bg/80'
+              background: 'bg-default-default',
+              hover: 'hover:bg-default-default/90',
+              active: 'active:bg-default-default/80'
             },
             primary: {
               border: 'border-r border-black/[0.15]',
@@ -153,17 +152,33 @@ const buttonGroupConfig: ButtonGroupConfig = {
               background: 'bg-default-error',
               hover: 'hover:bg-default-error/90',
               active: 'active:bg-default-error/80'
+            },
+            light: {
+              border: 'border-r border-black/[0.15]',
+              fill: 'fill-default-text-dark',
+              color: 'text-default-text-dark',
+              background: 'bg-default-light',
+              hover: 'hover:bg-default-light/90',
+              active: 'active:bg-default-light/80'
+            },
+            dark: {
+              border: 'border-r border-black/[0.15]',
+              fill: 'fill-default-text-light',
+              color: 'text-default-text-light',
+              background: 'bg-default-dark',
+              hover: 'hover:bg-default-dark/90',
+              active: 'active:bg-default-dark/80'
             }
           }
         },
         outlined: {
           default: {
             default: {
-              border: 'border border-r-0 border-default-bg',
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
-              hover: 'hover:bg-default-bg/10',
-              active: 'active:bg-default-bg/20'
+              border: 'border border-r-0 border-default-default',
+              fill: 'fill-default-default',
+              color: 'text-default-default',
+              hover: 'hover:bg-default-default/10',
+              active: 'active:bg-default-default/20'
             },
             primary: {
               border: 'border border-r-0 border-default-primary',
@@ -199,17 +214,31 @@ const buttonGroupConfig: ButtonGroupConfig = {
               color: 'text-default-error',
               hover: 'hover:bg-default-error/10',
               active: 'active:bg-default-error/20'
+            },
+            light: {
+              border: 'border border-r-0 border-default-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
+              hover: 'hover:bg-default-light/10',
+              active: 'active:bg-default-light/20'
+            },
+            dark: {
+              border: 'border border-r-0 border-default-dark',
+              fill: 'fill-default-dark',
+              color: 'text-default-dark',
+              hover: 'hover:bg-default-dark/10',
+              active: 'active:bg-default-dark/20'
             }
           }
         },
         text: {
           default: {
             default: {
-              border: 'border-r border-bg',
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
-              hover: 'hover:bg-default-bg/10',
-              active: 'active:bg-default-bg/20'
+              border: 'border-r border-default',
+              fill: 'fill-default-default',
+              color: 'text-default-default',
+              hover: 'hover:bg-default-default/10',
+              active: 'active:bg-default-default/20'
             },
             primary: {
               border: 'border-r border-default-primary',
@@ -241,10 +270,24 @@ const buttonGroupConfig: ButtonGroupConfig = {
             },
             error: {
               border: 'border-r border-default-error',
-              fill: 'fill-default-erro',
+              fill: 'fill-default-error',
               color: 'text-default-error',
               hover: 'hover:bg-default-error/10',
               active: 'active:bg-default-error/20'
+            },
+            light: {
+              border: 'border-r border-default-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
+              hover: 'hover:bg-default-light/10',
+              active: 'active:bg-default-light/20'
+            },
+            dark: {
+              border: 'border-r border-default-dark',
+              fill: 'fill-default-dark',
+              color: 'text-default-dark',
+              hover: 'hover:bg-default-dark/10',
+              active: 'active:bg-default-dark/20'
             }
           }
         }
