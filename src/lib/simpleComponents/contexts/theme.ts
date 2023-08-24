@@ -28,12 +28,14 @@ import linkConfig, { type LinkConfig } from '../configs/linkConfig';
 import listConfig, { type ListConfig } from '../configs/listConfig';
 import listItemConfig, { type ListItemConfig } from '../configs/listItemConfig';
 import listItemButtonConfig, { type ListItemButtonConfig } from '../configs/listItemButtonConfig';
+import mainConfig, { type MainConfig } from '../configs/mainConfig';
 import menuConfig, { type MenuConfig } from '../configs/menuConfig';
 import menuBodyConfig, { type MenuBodyConfig } from '../configs/menuBodyConfig';
 import menuFooterConfig, { type MenuFooterConfig } from '../configs/menuFooterConfig';
 import menuHeaderConfig, { type MenuHeaderConfig } from '../configs/menuHeaderConfig';
 import popoverConfig, { type PopoverConfig } from '../configs/popoverConfig';
 import progressConfig, { type ProgressConfig } from '../configs/progressConfig';
+import sectionConfig, { type SectionConfig } from '../configs/sectionConfig';
 import textAreaConfig, { type TextAreaConfig } from '../configs/textAreaConfig';
 import tooltipConfig, { type TooltipConfig } from '../configs/tooltipConfig';
 import typographyConfig, { type TypographyConfig } from '../configs/typographyConfig';
@@ -70,12 +72,14 @@ interface ThemeContext {
     list: ListConfig;
     listItem: ListItemConfig;
     listItemButton: ListItemButtonConfig;
+    main: MainConfig;
     menu: MenuConfig;
     menuBody: MenuBodyConfig;
     menuFooter: MenuFooterConfig;
     menuHeader: MenuHeaderConfig;
     popover: PopoverConfig;
     progress: ProgressConfig;
+    section: SectionConfig;
     textArea: TextAreaConfig;
     tooltip: TooltipConfig;
     typography: TypographyConfig;
@@ -115,12 +119,14 @@ export const initialState: ThemeContext = {
     list: listConfig,
     listItem: listItemConfig,
     listItemButton: listItemButtonConfig,
+    main: mainConfig,
     menu: menuConfig,
     menuBody: menuBodyConfig,
     menuFooter: menuFooterConfig,
     menuHeader: menuHeaderConfig,
     popover: popoverConfig,
     progress: progressConfig,
+    section: sectionConfig,
     textArea: textAreaConfig,
     tooltip: tooltipConfig,
     typography: typographyConfig
