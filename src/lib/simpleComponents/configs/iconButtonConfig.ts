@@ -7,6 +7,7 @@ export interface IconButtonConfig {
     color: Colors;
     elevated: boolean;
     className: string;
+    type: 'submit' | 'reset' | 'button';
   };
   styles: {
     base: Record<string, string>;
@@ -22,7 +23,8 @@ const iconButtonConfig: IconButtonConfig = {
     size: 'md',
     color: 'primary',
     elevated: false,
-    className: ''
+    className: '',
+    type: 'button'
   },
   styles: {
     base: {

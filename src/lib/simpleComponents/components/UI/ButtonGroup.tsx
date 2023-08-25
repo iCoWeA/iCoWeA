@@ -10,13 +10,24 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   elevated?: boolean;
   fullwidth?: boolean;
   className?: string;
+  type?: 'submit' | 'reset' | 'button';
   children?: ReactNode;
 }
 
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.buttonGroup;
-  const { variant, size, color, elevated, fullwidth, className: rootClassName, children: rootChildren, ...restRootProps } = mergeProps(defaultProps, rootProps);
+  const {
+    variant,
+    size,
+    color,
+    elevated,
+    fullwidth,
+    className: rootClassName,
+    type: buttonType,
+    children: rootChildren,
+    ...restRootProps
+  } = mergeProps(defaultProps, rootProps);
 
   /* Set root props */
   const rootStyles = styles.root;
@@ -34,11 +45,13 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, roo
       buttonStyles.sizes[size],
       elevated && buttonStyles.elevated[theme],
       i === 0 && buttonStyles.first,
-      isLast(childrenNodes, i) && buttonStyles.last[variant]
+      isLast(childrenNodes, i) && buttonStyles.last[variant],
+      childrenNodes[i].props.className
     );
 
     buttonNodes[i] = cloneElement(childrenNodes[i], {
       className: mergedButtonClassName,
+      type: childrenNodes[i].props.type ?? buttonType,
       key: i
     });
   }

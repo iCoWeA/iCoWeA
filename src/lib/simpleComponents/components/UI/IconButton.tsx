@@ -9,12 +9,13 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   color?: Colors;
   elevated?: boolean;
   className?: string;
+  type?: 'submit' | 'reset' | 'button';
 }
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.iconButton;
-  const { variant, size, color, elevated, className, ...restProps } = mergeProps(defaultProps, props);
+  const { variant, size, color, elevated, className, type, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.sizes[size], elevated && styles.elevated[theme], className);
@@ -22,6 +23,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
   return (
     <button
       className={mergedClassName}
+      type={type}
       ref={ref}
       {...restProps}
     />

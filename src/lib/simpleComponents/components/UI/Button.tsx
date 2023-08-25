@@ -10,12 +10,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   elevated?: boolean;
   fullwidth?: boolean;
   className?: string;
+  type?: 'submit' | 'reset' | 'button';
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.button;
-  const { variant, size, color, elevated, fullwidth, className, ...restProps } = mergeProps(defaultProps, props);
+  const { variant, size, color, elevated, fullwidth, className, type, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(
@@ -30,6 +31,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   return (
     <button
       className={mergedClassName}
+      type={type}
       ref={ref}
       {...restProps}
     />

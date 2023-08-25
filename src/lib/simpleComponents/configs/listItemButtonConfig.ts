@@ -7,6 +7,7 @@ export interface ListItemButtonConfig {
     color: Colors;
     selected: boolean;
     className: string;
+    type: 'submit' | 'reset' | 'button';
   };
   styles: {
     base: Record<string, string>;
@@ -22,7 +23,8 @@ const listItemButtonConfig: ListItemButtonConfig = {
     size: 'md',
     color: 'default',
     selected: false,
-    className: ''
+    className: '',
+    type: 'button'
   },
   styles: {
     base: {
