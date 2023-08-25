@@ -1,12 +1,12 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type TypographyVariants, type TypographyAligns, type TypographyColors } from '../../configs/typographyConfig';
+import { type TypographyVariants } from '../../configs/typographyConfig';
 import themeContext from '../../contexts/theme';
 import { mergeProps, mergeClasses } from '../../utils/propsHelper';
 
 export interface TypographyProps extends BaseHTMLAttributes<HTMLParagraphElement | HTMLHeadingElement | HTMLSpanElement> {
   variant?: TypographyVariants;
-  align?: TypographyAligns;
-  color?: TypographyColors;
+  align?: Aligns;
+  color?: Colors;
   className?: string;
 }
 

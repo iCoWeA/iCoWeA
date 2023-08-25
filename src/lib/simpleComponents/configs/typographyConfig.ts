@@ -8,21 +8,19 @@ export type TypographyVariants = 'h1'
 | 'paragraph'
 | 'small'
 | 'span';
-export type TypographyAligns = 'left' | 'center' | 'right' | 'justify' | 'start' | 'end';
-export type TypographyColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'light' | 'dark' | string;
 
 export interface TypographyConfig {
   defaultProps: {
     variant: TypographyVariants;
-    align: TypographyAligns;
-    color: TypographyColors;
+    align: Aligns;
+    color: Colors;
     className: string;
   };
   styles: {
     base: Record<string, string>;
-    aligns: Record<TypographyAligns, Record<string, string>>;
+    aligns: Record<Aligns, Record<string, string>>;
     variants: Record<TypographyVariants, Record<string, string>>;
-    colors: Record<string, Record<TypographyColors, Record<string, string>>>;
+    colors: Record<string, Record<Colors, Record<string, string>>>;
   }
 }
 
@@ -103,7 +101,7 @@ const typographyConfig: TypographyConfig = {
     colors: {
       default: {
         default: {
-          color: 'text-default-text'
+          color: 'text-default-default'
         },
         primary: {
           color: 'text-default-primary'
@@ -121,10 +119,10 @@ const typographyConfig: TypographyConfig = {
           color: 'text-default-error'
         },
         light: {
-          color: 'text-default-text-light'
+          color: 'text-default-light'
         },
         dark: {
-          color: 'text-default-text-dark'
+          color: 'text-default-dark'
         }
       }
     }

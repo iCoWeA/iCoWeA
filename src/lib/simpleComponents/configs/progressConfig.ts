@@ -1,14 +1,12 @@
 import { type CSSProperties, type BaseHTMLAttributes, type MutableRefObject, type ReactNode } from 'react';
 
 export type ProgressSizeVariants = 'default' | 'label';
-export type ProgressSizes = 'sm' | 'md' | 'lg';
-export type ProgressColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface ProgressConfig {
   defaultProps: {
     value: number | string;
-    size: ProgressSizes;
-    color: ProgressColors;
+    size: Sizes;
+    color: Colors;
     rootProps: BaseHTMLAttributes<HTMLDivElement>;
     barRef?: MutableRefObject<HTMLDivElement> | null;
     style: CSSProperties;
@@ -18,12 +16,12 @@ export interface ProgressConfig {
   styles: {
     root: {
       base: Record<string, string>;
-      sizes: Record<ProgressSizeVariants, Record<ProgressSizes, Record<string, string>>>;
-      colors: Record<string, Record<ProgressColors, Record<string, string>>>;
+      sizes: Record<ProgressSizeVariants, Record<Sizes, Record<string, string>>>;
+      color: Record<string, Record<string, string>>;
     },
     bar: {
       base: Record<string, string>;
-      colors: Record<string, Record<ProgressColors, Record<string, string>>>
+      colors: Record<string, Record<Colors, Record<string, string>>>
     }
   }
 }
@@ -69,26 +67,9 @@ const progressConfig: ProgressConfig = {
           }
         }
       },
-      colors: {
+      color: {
         default: {
-          default: {
-            background: 'bg-default-bg-light'
-          },
-          primary: {
-            background: 'bg-default-bg-light'
-          },
-          secondary: {
-            background: 'bg-default-bg-light'
-          },
-          success: {
-            background: 'bg-default-bg-light'
-          },
-          warning: {
-            background: 'bg-default-bg-light'
-          },
-          error: {
-            background: 'bg-default-bg-light'
-          }
+          background: 'bg-default-bg-light'
         }
       }
     },
@@ -108,34 +89,44 @@ const progressConfig: ProgressConfig = {
       colors: {
         default: {
           default: {
-            fill: 'fill-default-text-dark',
-            color: 'text-default-text-dark',
-            background: 'bg-default-bg'
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
+            background: 'bg-default-default'
           },
           primary: {
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
+            fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-primary'
           },
           secondary: {
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
+            fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-secondary'
           },
           success: {
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
+            fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-success'
           },
           warning: {
-            fill: 'fill-default-text-dark',
-            color: 'text-default-text-dark',
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
             background: 'bg-default-warning'
           },
           error: {
-            fill: 'fill-default-text-light',
-            color: 'text-default-text-light',
+            fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-error'
+          },
+          light: {
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
+            background: 'bg-default-light'
+          },
+          dark: {
+            fill: 'fill-default-light',
+            color: 'text-default-light',
+            background: 'bg-default-dark'
           }
         }
       }

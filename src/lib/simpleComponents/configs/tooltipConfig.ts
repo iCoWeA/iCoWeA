@@ -1,13 +1,10 @@
 import { type ReactElement, type TransitionEventHandler, type AnimationEventHandler, type CSSProperties, type ReactNode, type BaseHTMLAttributes } from 'react';
 
-export type TooltipPositions = Positions;
-export type TooltipColors = 'default' | 'light' | string;
-
 export interface TooltipConfig {
   defaultProps: {
     open?: boolean;
-    color: TooltipColors;
-    position: TooltipPositions;
+    color: Colors;
+    position: Positions;
     gap: number;
     responsive: boolean;
     followCursor: boolean;
@@ -29,11 +26,11 @@ export interface TooltipConfig {
   styles: {
     root: {
       base: Record<string, string>;
-      colors: Record<string, Record<TooltipColors, Record<string, string>>>
+      colors: Record<string, Record<Colors, Record<string, string>>>
     },
     arrow: {
       base: Record<string, string>;
-      colors: Record<string, Record<TooltipColors, Record<string, string>>>
+      colors: Record<string, Record<Colors, Record<string, string>>>
     }
   }
 }
@@ -72,10 +69,44 @@ const tooltipConfig: TooltipConfig = {
       colors: {
         default: {
           default: {
-            background: 'bg-default-bg-dark/70'
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
+            background: 'bg-default-default/90'
+          },
+          primary: {
+            fill: 'fill-default-light',
+            color: 'text-default-light',
+            background: 'bg-default-primary/90'
+          },
+          secondary: {
+            fill: 'fill-default-light',
+            color: 'text-default-light',
+            background: 'bg-default-secondary/90'
+          },
+          success: {
+            fill: 'fill-default-light',
+            color: 'text-default-light',
+            background: 'bg-default-success/90'
+          },
+          warning: {
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
+            background: 'bg-default-warning/90'
+          },
+          error: {
+            fill: 'fill-default-light',
+            color: 'text-default-light',
+            background: 'bg-default-error/90'
           },
           light: {
-            background: 'bg-default-bg/70'
+            fill: 'fill-default-dark',
+            color: 'text-default-dark',
+            background: 'bg-default-light/90'
+          },
+          dark: {
+            fill: 'fill-default-light',
+            color: 'text-default-light',
+            background: 'bg-default-dark/90'
           }
         }
       }
@@ -91,10 +122,28 @@ const tooltipConfig: TooltipConfig = {
       colors: {
         default: {
           default: {
-            border: 'border-b-default-bg-dark/70'
+            border: 'border-b-default-default/90'
+          },
+          primary: {
+            border: 'border-b-default-primary/90'
+          },
+          secondary: {
+            border: 'border-b-default-secondary/90'
+          },
+          success: {
+            border: 'border-b-default-success/90'
+          },
+          warning: {
+            border: 'border-b-default-warning/90'
+          },
+          error: {
+            border: 'border-b-default-error/90'
           },
           light: {
-            border: 'border-b-default-bg/70'
+            border: 'border-b-default-light/90'
+          },
+          dark: {
+            border: 'border-b-default-dark/90'
           }
         }
       }

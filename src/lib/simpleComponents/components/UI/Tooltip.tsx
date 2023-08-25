@@ -18,7 +18,6 @@ import React, {
   useState
 } from 'react';
 import { createPortal } from 'react-dom';
-import { type TooltipPositions, type TooltipColors } from '../../configs/tooltipConfig';
 import themeContext from '../../contexts/theme';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../hooks/useTransition';
 import { setElementPosition } from '../../utils/positiontHelper';
@@ -28,8 +27,8 @@ import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
 
 export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
-  color?: TooltipColors;
-  position?: TooltipPositions;
+  color?: Colors;
+  position?: Positions;
   gap?: number;
   responsive?: boolean;
   followCursor?: boolean;
@@ -46,7 +45,7 @@ export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-const setArrowPosition = (element: HTMLElement | null, position: TooltipPositions): void => {
+const setArrowPosition = (element: HTMLElement | null, position: Positions): void => {
   if (element === null) {
     return;
   }
@@ -55,27 +54,27 @@ const setArrowPosition = (element: HTMLElement | null, position: TooltipPosition
 
   if (splitedPosition === 'top') {
     element.style.top = '100%';
-    element.style.left = '50%';
+    element.style.left = 'calc(50% - 0.25rem)';
     element.style.transform = 'rotate(180deg)';
     element.style.translate = '0 0';
   }
 
   if (splitedPosition === 'bottom') {
     element.style.top = '0';
-    element.style.left = '50%';
+    element.style.left = 'calc(50% - 0.25rem)';
     element.style.transform = 'rotate(0deg)';
     element.style.translate = '0 -100%';
   }
 
   if (splitedPosition === 'left') {
-    element.style.top = '50%';
+    element.style.top = 'calc(50% - 0.25rem)';
     element.style.left = '100%';
     element.style.transform = 'rotate(90deg)';
     element.style.translate = '0 0';
   }
 
   if (splitedPosition === 'right') {
-    element.style.top = '50%';
+    element.style.top = 'calc(50% - 0.25rem)';
     element.style.left = '0';
     element.style.transform = 'rotate(-90deg)';
     element.style.translate = '-100% 0';
@@ -123,7 +122,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) =>
 
   const resize = useCallback((): void => {
     if (componentsRef.current.root !== null && componentsRef.current.handler !== null) {
-      let newPosition: TooltipPositions;
+      let newPosition: Positions;
 
       if (!followCursor) {
         newPosition = setElementPosition(

@@ -15,14 +15,14 @@ import React, {
   type MutableRefObject,
   type MouseEvent
 } from 'react';
-import { type TextAreaColors, type TextAreaVariants } from '../../configs/textAreaConfig';
+import { type TextAreaVariants } from '../../configs/textAreaConfig';
 import themeContext from '../../contexts/theme';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: TextAreaVariants;
-  color?: TextAreaColors;
+  color?: Colors;
   valid?: boolean;
   invalid?: boolean;
   label?: ReactNode;

@@ -1,12 +1,11 @@
 import React, { forwardRef, useContext, type BaseHTMLAttributes, type CSSProperties, type MutableRefObject, type ReactNode } from 'react';
-import { type ProgressSizes, type ProgressColors } from '../../configs/progressConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
 
 export interface ProgressProps extends BaseHTMLAttributes<HTMLDivElement> {
   value?: number | string;
-  size?: ProgressSizes;
-  color?: ProgressColors;
+  size?: Sizes;
+  color?: Colors;
   rootProps?: BaseHTMLAttributes<HTMLDivElement>;
   barRef?: MutableRefObject<HTMLDivElement> | null;
   style?: CSSProperties;
@@ -37,7 +36,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, rootRef) => {
     rootStyles.base,
     barChildren === undefined && rootStyles.sizes.default[size],
     barChildren !== undefined && rootStyles.sizes.label[size],
-    rootStyles.colors[theme][color],
+    rootStyles.color[theme],
     rootClassName
   );
 
