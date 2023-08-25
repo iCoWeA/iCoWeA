@@ -17,7 +17,7 @@ export interface CardConfig {
 const cardConfig: CardConfig = {
   defaultProps: {
     variant: 'filled',
-    color: 'default',
+    color: 'light',
     elevated: false,
     className: ''
   },
