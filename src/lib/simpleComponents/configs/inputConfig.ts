@@ -1,12 +1,11 @@
 import { type MutableRefObject, type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes, type ReactNode, type FocusEventHandler } from 'react';
 
 export type InputVariants = 'outlined' | 'filled' | 'standard';
-export type InputColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface InputConfig {
   defaultProps: {
     variant: InputVariants;
-    color: InputColors;
+    color: Colors;
     valid: boolean;
     invalid: boolean;
     label?: ReactNode;
@@ -33,14 +32,14 @@ export interface InputConfig {
       base: Record<string, string>;
       valid: Record<InputVariants, Record<string, Record<string, string>>>;
       invalid: Record<InputVariants, Record<string, Record<string, string>>>;
-      variants: Record<InputVariants, Record<string, Record<InputColors, Record<string, string>>>>;
+      variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
     },
     input: {
       base: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
       variants: Record<InputVariants, Record<string, string>>;
-      colors: Record<string, Record<InputColors, Record<string, string>>>;
+      colors: Record<string, Record<Colors, Record<string, string>>>;
     },
     legend: {
       base: Record<string, string>;
@@ -51,7 +50,7 @@ export interface InputConfig {
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
       variants: Record<InputVariants, Record<string, string>>;
-      colors: Record<string, Record<InputColors, Record<string, string>>>;
+      colors: Record<string, Record<Colors, Record<string, string>>>;
     }
   }
 }
@@ -122,22 +121,28 @@ const inputConfig: InputConfig = {
       colors: {
         default: {
           default: {
-            color: 'text-default-text-light'
+            color: 'text-default-dark'
           },
           primary: {
-            color: 'text-default-text-dark'
+            color: 'text-default-dark'
           },
           secondary: {
-            color: 'text-default-text-dark'
+            color: 'text-default-dark'
           },
           success: {
-            color: 'text-default-text-dark'
+            color: 'text-default-dark'
           },
           warning: {
-            color: 'text-default-text-dark'
+            color: 'text-default-dark'
           },
           error: {
-            color: 'text-default-text-dark'
+            color: 'text-default-dark'
+          },
+          light: {
+            color: 'text-default-light'
+          },
+          dark: {
+            color: 'text-default-dark'
           }
         }
       }
@@ -210,114 +215,148 @@ const inputConfig: InputConfig = {
         standard: {
           default: {
             default: {
-              border: 'pb-px border-b border-default-bg-light',
-              group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-bg'
+              border: 'pb-px border-b border-default-default',
+              group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-default'
             },
             primary: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-primary'
             },
             secondary: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-secondary'
             },
             success: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success'
             },
             warning: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-warning'
             },
             error: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error'
+            },
+            light: {
+              border: 'pb-px border-b border-default-default',
+              group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-light'
+            },
+            dark: {
+              border: 'pb-px border-b border-default-default',
+              group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-dark'
             }
           }
         },
         filled: {
           default: {
             default: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-bg/10',
-              hover: 'hover:bg-default-bg/20',
-              group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-bg',
-              groupHover: 'group-[.focused]:hover:bg-default-bg/10'
+              background: 'bg-default-default/10',
+              hover: 'hover:bg-default-default/20',
+              group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-default',
+              groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             primary: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-bg-dark/10',
-              hover: 'hover:bg-default-bg-dark/20',
+              background: 'bg-default-default/10',
+              hover: 'hover:bg-default-default/20',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-primary',
-              groupHover: 'group-[.focused]:hover:bg-default-bg-dark/10'
+              groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             secondary: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-bg-dark/10',
-              hover: 'hover:bg-default-bg-dark/20',
+              background: 'bg-default-default/10',
+              hover: 'hover:bg-default-default/20',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-secondary',
-              groupHover: 'group-[.focused]:hover:bg-default-bg-dark/10'
+              groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             success: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-bg-dark/10',
-              hover: 'hover:bg-default-bg-dark/20',
+              background: 'bg-default-default/10',
+              hover: 'hover:bg-default-default/20',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success',
-              groupHover: 'group-[.focused]:hover:bg-default-bg-dark/10'
+              groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             warning: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-bg-dark/10',
-              hover: 'hover:bg-default-bg-dark/20',
+              background: 'bg-default-default/10',
+              hover: 'hover:bg-default-default/20',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-warning',
-              groupHover: 'group-[.focused]:hover:bg-default-bg-dark/10'
+              groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             error: {
-              border: 'pb-px border-b border-default-bg-light',
+              border: 'pb-px border-b border-default-default',
               borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-bg-dark/10',
-              hover: 'hover:bg-default-bg-dark/20',
+              background: 'bg-default-default/10',
+              hover: 'hover:bg-default-default/20',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error',
-              groupHover: 'group-[.focused]:hover:bg-default-bg-dark/10'
+              groupHover: 'group-[.focused]:hover:bg-default-default/10'
+            },
+            light: {
+              border: 'pb-px border-b border-default-default',
+              borderRadius: 'rounded-t-2xl',
+              background: 'bg-default-default/10',
+              hover: 'hover:bg-default-default/20',
+              group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-light',
+              groupHover: 'group-[.focused]:hover:bg-default-default/10'
+            },
+            dark: {
+              border: 'pb-px border-b border-default-default',
+              borderRadius: 'rounded-t-2xl',
+              background: 'bg-default-default/10',
+              hover: 'hover:bg-default-default/20',
+              group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-dark',
+              groupHover: 'group-[.focused]:hover:bg-default-default/10'
             }
           }
         },
         outlined: {
           default: {
             default: {
-              border: 'p-px border border-default-bg-light',
+              border: 'p-px border border-default-default',
               borderRadius: 'rounded-2xl',
-              group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-bg'
+              group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-default'
             },
             primary: {
-              border: 'p-px border border-default-bg-light',
+              border: 'p-px border border-default-default',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-primary'
             },
             secondary: {
-              border: 'p-px border border-default-bg-light',
+              border: 'p-px border border-default-default',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-secondary'
             },
             success: {
-              border: 'p-px border border-default-bg-light',
+              border: 'p-px border border-default-default',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-success'
             },
             warning: {
-              border: 'p-px border border-default-bg-light',
+              border: 'p-px border border-default-default',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-warning'
             },
             error: {
-              border: 'p-px border border-default-bg-light',
+              border: 'p-px border border-default-default',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-error'
+            },
+            light: {
+              border: 'p-px border border-default-default',
+              borderRadius: 'rounded-2xl',
+              group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-light'
+            },
+            dark: {
+              border: 'p-px border border-default-default',
+              borderRadius: 'rounded-2xl',
+              group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-dark'
             }
           }
         }
@@ -375,28 +414,36 @@ const inputConfig: InputConfig = {
       colors: {
         default: {
           default: {
-            color: 'text-default-text',
-            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-text-light'
+            color: 'text-default-default',
+            group: 'group-[.shifted]:text-default-default  group-[.focused]:group-[.shifted]:text-default-default'
           },
           primary: {
-            color: 'text-default-text',
-            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-primary'
+            color: 'text-default-default',
+            group: 'group-[.shifted]:text-default-default group-[.focused]:group-[.shifted]:text-default-primary'
           },
           secondary: {
-            color: 'text-default-text',
-            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-secondary'
+            color: 'text-default-default',
+            group: 'group-[.shifted]:text-default-default  group-[.focused]:group-[.shifted]:text-default-secondary'
           },
           success: {
-            color: 'text-default-text',
-            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-success'
+            color: 'text-default-default',
+            group: 'group-[.shifted]:text-default-default  group-[.focused]:group-[.shifted]:text-default-success'
           },
           warning: {
-            color: 'text-default-text',
-            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-warning'
+            color: 'text-default-default',
+            group: 'group-[.shifted]:text-default-default  group-[.focused]:group-[.shifted]:text-default-warning'
           },
           error: {
-            color: 'text-default-text',
-            group: 'group-[.shifted]:text-default-text-dark group-[.focused]:group-[.shifted]:text-default-error'
+            color: 'text-default-default',
+            group: 'group-[.shifted]:text-default-default  group-[.focused]:group-[.shifted]:text-default-error'
+          },
+          light: {
+            color: 'text-default-default',
+            group: 'group-[.shifted]:text-default-default  group-[.focused]:group-[.shifted]:text-default-light'
+          },
+          dark: {
+            color: 'text-default-default',
+            group: 'group-[.shifted]:text-default-default  group-[.focused]:group-[.shifted]:text-default-dark'
           }
         }
       }

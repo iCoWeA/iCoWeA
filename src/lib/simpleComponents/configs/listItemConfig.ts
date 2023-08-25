@@ -1,8 +1,6 @@
-export type ListItemSizes = 'sm' | 'md' | 'lg';
-
 export interface ListItemConfig {
   defaultProps: {
-    size: ListItemSizes;
+    size: Sizes;
     color: Colors;
     disablePadding: boolean;
     className: string;
@@ -10,7 +8,7 @@ export interface ListItemConfig {
   styles: {
     base: Record<string, string>;
     disablePadding: Record<string, string>;
-    sizes: Record<ListItemSizes, Record<string, string>>;
+    sizes: Record<Sizes, Record<string, string>>;
     colors: Record<string, Record<Colors, Record<string, string>>>;
   }
 }

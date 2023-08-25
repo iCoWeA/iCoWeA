@@ -3,7 +3,7 @@ import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface InputAdornmentProps extends BaseHTMLAttributes<HTMLDivElement> {
-  color?: Color;
+  color?: Colors;
   className?: string;
 }
 

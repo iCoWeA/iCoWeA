@@ -1,11 +1,10 @@
 import React, { type LiHTMLAttributes, forwardRef, useContext } from 'react';
-import { type ListItemSizes, type ListItemColors } from '../../configs/listItemConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
-  size?: ListItemSizes;
-  color?: ListItemColors;
+  size?: Sizes;
+  color?: Colors;
   disablePadding?: boolean;
   className?: string;
 }

@@ -1,13 +1,13 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactElement } from 'react';
 import Popover, { type PopoverProps } from './Popover';
-import { type MenuColors, type MenuVariants } from '../../configs/menuConfig';
+import { type MenuVariants } from '../../configs/menuConfig';
 import { type PopoverPositions } from '../../configs/popoverConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: MenuVariants;
-  color?: MenuColors;
+  color?: Colors;
   elevated?: boolean;
   open?: boolean;
   position?: PopoverPositions;

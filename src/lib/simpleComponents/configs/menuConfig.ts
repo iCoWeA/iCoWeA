@@ -3,12 +3,11 @@ import { type PopoverProps } from '../components/UI/Popover';
 import { type PopoverPositions } from './popoverConfig';
 
 export type MenuVariants = 'filled' | 'outlined';
-export type MenuColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
 
 export interface MenuConfig {
   defaultProps: {
     variant: MenuVariants;
-    color: MenuColors;
+    color: Colors;
     elevated: boolean;
     open?: boolean;
     position: PopoverPositions;
@@ -21,14 +20,14 @@ export interface MenuConfig {
   styles: {
     base: Record<string, string>;
     elevated: Record<string, Record<string, string>>;
-    variants: Record<MenuVariants, Record<string, Record<MenuColors, Record<string, string>>>>;
+    variants: Record<MenuVariants, Record<string, Record<Colors, Record<string, string>>>>;
   }
 }
 
 const menuConfig: MenuConfig = {
   defaultProps: {
     variant: 'filled',
-    color: 'default',
+    color: 'light',
     elevated: false,
     position: 'bottom',
     overlayRef: null,
@@ -53,7 +52,7 @@ const menuConfig: MenuConfig = {
       filled: {
         default: {
           default: {
-            background: 'bg-default-bg'
+            background: 'bg-default-default'
           },
           primary: {
             background: 'bg-default-primary'
@@ -69,13 +68,19 @@ const menuConfig: MenuConfig = {
           },
           error: {
             background: 'bg-default-error'
+          },
+          light: {
+            background: 'bg-default-light'
+          },
+          dark: {
+            background: 'bg-default-dark'
           }
         }
       },
       outlined: {
         default: {
           default: {
-            border: 'border border-default-bg-light'
+            border: 'border border-default-default'
           },
           primary: {
             border: 'border border-default-primary'
@@ -91,6 +96,12 @@ const menuConfig: MenuConfig = {
           },
           error: {
             border: 'border border-default-error'
+          },
+          light: {
+            border: 'border border-default-light'
+          },
+          dark: {
+            border: 'border border-default-dark'
           }
         }
       }

@@ -1,12 +1,12 @@
 import React, { forwardRef, useContext, type ButtonHTMLAttributes } from 'react';
-import { type ListItemButtonColors, type ListItemButtonSizes, type ListItemButtonVariant } from '../../configs/listItemButtonConfig';
+import { type ListItemButtonVariant } from '../../configs/listItemButtonConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ListItemButtonVariant;
-  size?: ListItemButtonSizes;
-  color?: ListItemButtonColors;
+  size?: Sizes;
+  color?: Colors;
   selected?: boolean;
   className?: string;
 }

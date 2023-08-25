@@ -1,13 +1,11 @@
-export type MainColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | string;
-
 export interface MainConfig {
   defaultProps: {
-    color: MainColors;
+    color: Colors;
     className: string;
   };
   styles: {
     base: Record<string, string>;
-    colors: Record<string, Record<MainColors, Record<string, string>>>;
+    colors: Record<string, Record<Colors, Record<string, string>>>;
   };
 }
 
@@ -27,7 +25,7 @@ const mainConfig: MainConfig = {
     colors: {
       default: {
         default: {
-          background: 'bg-default-bg'
+          background: 'bg-default-default'
         },
         primary: {
           background: 'bg-default-primary'
@@ -43,6 +41,12 @@ const mainConfig: MainConfig = {
         },
         error: {
           background: 'bg-default-error'
+        },
+        light: {
+          background: 'bg-default-light'
+        },
+        dark: {
+          background: 'bg-default-dark'
         }
       }
     }
