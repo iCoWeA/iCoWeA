@@ -1,5 +1,3 @@
-export type InputAdornmentPositions = 'start' | 'end';
-
 export interface InputAdornmentConfig {
   defaultProps: {
     color: Colors;

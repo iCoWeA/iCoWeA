@@ -1,10 +1,9 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type MainColors } from '../../configs/mainConfig';
 import themeContext from '../../contexts/theme';
 import { mergeProps, mergeClasses } from '../../utils/propsHelper';
 
 export interface MainProps extends BaseHTMLAttributes<HTMLElement> {
-  color?: MainColors;
+  color?: Colors;
   className?: string;
 }
 

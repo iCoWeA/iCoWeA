@@ -1,10 +1,9 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import { type SectionColors } from '../../configs/sectionConfig';
 import themeContext from '../../contexts/theme';
 import { mergeProps, mergeClasses } from '../../utils/propsHelper';
 
 export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
-  color?: SectionColors;
+  color?: Colors;
   className?: string;
 }
 

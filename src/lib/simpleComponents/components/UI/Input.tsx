@@ -13,7 +13,8 @@ import React, {
   type FocusEventHandler,
   type LabelHTMLAttributes,
   type MutableRefObject,
-  type MouseEvent
+  type MouseEvent,
+  useEffect
 } from 'react';
 import { type InputVariants } from '../../configs/inputConfig';
 import themeContext from '../../contexts/theme';
@@ -71,6 +72,17 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
 
   const [isShifted, setIsShifted] = useState(inputValue !== '' || (inputAutoFocus && !inputDisabled));
   const [isFocused, setIsFocused] = useState(inputAutoFocus && !inputDisabled);
+
+  useEffect(() => {
+    if (inputValue !== '') {
+      setIsShifted(true);
+    }
+
+    if (inputAutoFocus) {
+      setIsShifted(true);
+      setIsFocused(true);
+    }
+  }, [inputValue, inputAutoFocus]);
 
   /* Set root props */
   const rootStyles = styles.root;
