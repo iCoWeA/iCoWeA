@@ -16,12 +16,9 @@ module.exports = {
     extend: {
       colors: {
         default: {
-          text: '#b3b3b3',
-          'text-light': '#ffffff',
-          'text-dark': '#595959',
-          bg: '#ffffff',
-          'bg-light': '#b3b3b3',
-          'bg-dark': '#595959',
+          default: '#b3b3b3',
+          light: '#ffffff',
+          dark: '#595959',
           primary: '#2c7cf5',
           secondary: '#fea716',
           success: '#00cc44',

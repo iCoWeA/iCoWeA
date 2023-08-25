@@ -62,7 +62,7 @@ const initializeInput = (defaultValue: string = ''): InputState => ({
   timerId: initialTimerId
 });
 
-const reducer = (state: State, { type, payload: { inputName, input, timerId = initialTimerId, defaultValue = '', pattern = '', errorMessage = '', config = {} } }: Action): State => {
+const reducer = (state: State, { type, payload: { inputName, input, defaultValue, pattern, timerId = initialTimerId, errorMessage = '', config = {} } }: Action): State => {
   const inputs: Record<string, InputState> = deepClone(state.inputs);
 
   if (type === ActionTypes.CHANGE) {
@@ -109,7 +109,7 @@ const reducer = (state: State, { type, payload: { inputName, input, timerId = in
   if (type === ActionTypes.RESET_FORM) {
     Object.keys(inputs).forEach((inputName) => {
       clearTimeout(inputs[inputName].timerId);
-      inputs[inputName] = initializeInput(config !== undefined ? config[inputName].defaultValue : '');
+      inputs[inputName] = initializeInput(config[inputName]?.defaultValue ?? '');
     });
   }
 

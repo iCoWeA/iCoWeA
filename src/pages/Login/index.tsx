@@ -7,7 +7,6 @@ import { redirect } from 'react-router-dom';
 
 export const Component: FC = () => (
   <Main
-    color="primary"
     className="justify-center"
   >
     <LoginForm />

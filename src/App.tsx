@@ -8,7 +8,19 @@ import store from './store';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootComponent />
+    element: <RootComponent />,
+    children: [
+      {
+        path: '',
+        lazy: async () => await import('./pages/DefaultLayout'),
+        children: [
+          {
+            path: 'login',
+            lazy: async () => await import('./pages/Login')
+          }
+        ]
+      }
+    ]
   }
 ]);
 
