@@ -13,7 +13,8 @@ import React, {
   type FocusEventHandler,
   type LabelHTMLAttributes,
   type MutableRefObject,
-  type MouseEvent
+  type MouseEvent,
+  useEffect
 } from 'react';
 import { type TextAreaVariants } from '../../configs/textAreaConfig';
 import themeContext from '../../contexts/theme';
@@ -67,6 +68,17 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
 
   const [isShifted, setIsShifted] = useState(textAreaValue !== '' || (textAreaAutoFocus && !textAreaDisabled));
   const [isFocused, setIsFocused] = useState(textAreaAutoFocus && !textAreaDisabled);
+
+  useEffect(() => {
+    if (textAreaValue !== '') {
+      setIsShifted(true);
+    }
+
+    if (textAreaAutoFocus) {
+      setIsShifted(true);
+      setIsFocused(true);
+    }
+  }, [textAreaValue, textAreaAutoFocus]);
 
   /* Set root props */
   const rootStyles = styles.root;
