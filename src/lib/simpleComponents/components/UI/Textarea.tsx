@@ -74,11 +74,15 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
       setIsShifted(true);
     }
 
+    if (textAreaValue === '' && !isFocused) {
+      setIsShifted(false);
+    }
+
     if (textAreaAutoFocus) {
       setIsShifted(true);
       setIsFocused(true);
     }
-  }, [textAreaValue, textAreaAutoFocus]);
+  }, [textAreaValue, isFocused, textAreaAutoFocus]);
 
   /* Set root props */
   const rootStyles = styles.root;

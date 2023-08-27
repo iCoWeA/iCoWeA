@@ -78,11 +78,15 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
       setIsShifted(true);
     }
 
+    if (inputValue === '' && !isFocused) {
+      setIsShifted(false);
+    }
+
     if (inputAutoFocus) {
       setIsShifted(true);
       setIsFocused(true);
     }
-  }, [inputValue, inputAutoFocus]);
+  }, [inputValue, isFocused, inputAutoFocus]);
 
   /* Set root props */
   const rootStyles = styles.root;
