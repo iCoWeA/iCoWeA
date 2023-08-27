@@ -1,6 +1,7 @@
-import React, { forwardRef, type BaseHTMLAttributes, useContext, useMemo, useState } from 'react';
+import React, { forwardRef, type BaseHTMLAttributes, useContext, useMemo, useState, useEffect } from 'react';
 import accordionContext, { type AccordionContext } from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
+import usePrevious from '../../hooks/usePrevious';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -17,6 +18,14 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   const { onToggle, open, duration, disabled, className, ...restProps } = mergeProps(defaultProps, props);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const prevOpen = usePrevious(open);
+
+  useEffect(() => {
+    if (prevOpen !== undefined && open === undefined) {
+      setIsOpen(prevOpen);
+    }
+  }, [open]);
 
   const context: AccordionContext = useMemo(
     () => ({
