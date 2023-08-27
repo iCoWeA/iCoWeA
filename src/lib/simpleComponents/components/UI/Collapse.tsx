@@ -37,15 +37,17 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, children, ...restProps } = mergeProps(defaultProps, props);
   const mergedTransitionConfig = mergeProps(defaultProps.transitionConfig, transitionConfig);
 
-  const { state: transitionState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
+  const { state: transitionState, enterState, exitState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
 
   useEffect(() => {
-    if (open) {
+    if (open && exitState) {
       enter();
-    } else {
+    }
+
+    if (!open && enterState) {
       exit();
     }
-  }, [open]);
+  }, [open, exitState, enterState]);
 
   /* Set props */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {

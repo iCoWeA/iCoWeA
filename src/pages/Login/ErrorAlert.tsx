@@ -25,7 +25,9 @@ const ErrorAlert: FC = () => {
         setShowAlert(false);
       }, TIMER);
     } else {
-      setShowAlert(false);
+      if (showAlert) {
+        setShowAlert(false);
+      }
     }
   }, [navigation.state, error]);
 

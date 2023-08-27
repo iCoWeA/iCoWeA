@@ -159,14 +159,14 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) =>
   useResize(resize, enterState);
 
   useEffect(() => {
-    if (open === true) {
+    if (open === true && exitState) {
       enter();
     }
 
-    if (open === false) {
+    if (open === false && enterState) {
       exit();
     }
-  }, [open]);
+  }, [open, exitState, enterState]);
 
   resize();
 

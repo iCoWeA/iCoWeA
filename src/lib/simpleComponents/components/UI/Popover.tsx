@@ -106,14 +106,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
   useResize(resize, enterState);
 
   useEffect(() => {
-    if (open === true) {
+    if (open === true && exitState) {
       enter();
     }
 
-    if (open === false) {
+    if (open === false && enterState) {
       exit();
     }
-  }, [open]);
+  }, [open, exitState, enterState]);
 
   useEffect(() => {
     if (disableScrolling && enterState) {
