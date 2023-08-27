@@ -35,22 +35,22 @@ const LoginForm: FC = () => {
             >
               <Input
                 label="Email"
-                name={email}
-                value={inputs[email].value}
                 invalid={inputs[email].error}
-                type="email"
-                required
                 onChange={debouncedChange}
                 onBlur={blur}
+                name={email}
+                value={inputs[email].value}
+                type="email"
+                required
               />
               <PasswordInput
                 label="Password"
-                name={password}
-                value={inputs[password].value}
                 invalid={inputs[password].error}
-                required
                 onChange={debouncedChange}
                 onBlur={blur}
+                name={password}
+                value={inputs[password].value}
+                required
               />
               <Button
                 fullwidth
