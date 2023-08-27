@@ -5,12 +5,14 @@ export interface ListItemButtonConfig {
     variant: ListItemButtonVariant;
     size: Sizes;
     color: Colors;
+    fullwidth: boolean;
     selected: boolean;
     className: string;
     type: 'submit' | 'reset' | 'button';
   };
   styles: {
     base: Record<string, string>;
+    fullwidth: Record<string, string>;
     sizes: Record<Sizes, Record<string, string>>;
     selected: Record<ListItemButtonVariant, Record<string, Record<Colors, Record<string, string>>>>;
     variants: Record<ListItemButtonVariant, Record<string, Record<Colors, Record<string, string>>>>;
@@ -22,6 +24,7 @@ const listItemButtonConfig: ListItemButtonConfig = {
     variant: 'filled',
     size: 'md',
     color: 'default',
+    fullwidth: false,
     selected: false,
     className: '',
     type: 'button'
@@ -37,6 +40,9 @@ const listItemButtonConfig: ListItemButtonConfig = {
       transition: 'transition-colors',
       focus: 'focus:outline-0',
       disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
+    },
+    fullwidth: {
+      borderRadius: 'rounded-none'
     },
     sizes: {
       sm: {

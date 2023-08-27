@@ -7,6 +7,7 @@ export interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
   variant?: ListItemButtonVariant;
   size?: Sizes;
   color?: Colors;
+  fullwidth?: boolean;
   selected?: boolean;
   className?: string;
   type?: 'submit' | 'reset' | 'button';
@@ -15,12 +16,13 @@ export interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
 const ListItemButton = forwardRef<HTMLButtonElement, ListItemButtonProps>((props, ref) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.listItemButton;
-  const { variant, size, color, selected, className, type, ...restProps } = mergeProps(defaultProps, props);
+  const { variant, size, color, fullwidth, selected, className, type, ...restProps } = mergeProps(defaultProps, props);
 
   /* Set props */
   const mergedClassName = mergeClasses(
     styles.base,
     styles.sizes[size],
+    fullwidth && styles.fullwidth,
     !selected && styles.variants[variant][theme][color],
     selected && styles.selected[variant][theme][color],
     className
