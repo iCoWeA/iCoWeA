@@ -6,6 +6,7 @@ import Card from '../../lib/simpleComponents/components/UI/Card';
 import CardBody from '../../lib/simpleComponents/components/UI/CardBody';
 import Form from '../../lib/simpleComponents/components/UI/Form';
 import Input from '../../lib/simpleComponents/components/UI/Input';
+import PasswordInput from '../../components/PasswordInput';
 import Button from '../../lib/simpleComponents/components/UI/Button';
 
 const LoginForm: FC = () => {
@@ -19,8 +20,6 @@ const LoginForm: FC = () => {
   } = useForm({
     inputs: { [email]: {}, [password]: {} }
   });
-
-  console.log(inputs);
 
   return (
     <Section>
@@ -44,7 +43,7 @@ const LoginForm: FC = () => {
                 onChange={debouncedChange}
                 onBlur={blur}
               />
-              <Input
+              <PasswordInput
                 label="Password"
                 name={password}
                 value={inputs[password].value}
