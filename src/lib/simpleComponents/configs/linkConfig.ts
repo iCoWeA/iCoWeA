@@ -6,7 +6,7 @@ export interface LinkConfig {
     color: Colors;
     fullwidth: boolean;
     disabled: boolean;
-    clasName: string;
+    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -23,7 +23,7 @@ const linkConfig: LinkConfig = {
     color: 'primary',
     fullwidth: false,
     disabled: false,
-    clasName: ''
+    className: ''
   },
   styles: {
     base: {

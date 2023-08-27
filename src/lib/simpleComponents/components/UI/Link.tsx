@@ -9,7 +9,7 @@ export interface LinkProps extends BaseLinkProps {
   color?: Colors;
   fullwidth?: boolean;
   disabled?: boolean;
-  clasName?: string;
+  className?: string;
 }
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
