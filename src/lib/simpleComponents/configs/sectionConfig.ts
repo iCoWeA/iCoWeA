@@ -19,7 +19,6 @@ const sectionConfig: SectionConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       gap: 'gap-4',
-      padding: 'py-4',
       focus: 'focus:outline-0'
     },
     colors: {
