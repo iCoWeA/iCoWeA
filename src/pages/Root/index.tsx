@@ -1,5 +1,5 @@
 import React, { type FC } from 'react';
-import { Outlet, ScrollRestoration } from 'react-router-dom';
+import { ScrollRestoration, Outlet } from 'react-router-dom';
 
 const Component: FC = () => (
   <>
