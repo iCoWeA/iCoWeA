@@ -1,10 +1,10 @@
 import React, { type FC } from 'react';
 import Menu from '../../lib/simpleComponents/components/UI/Menu';
+import Avatar from '../../lib/simpleComponents/components/UI/Avatar';
 import MenuBody from '../../lib/simpleComponents/components/UI/MenuBody';
 import List from '../../lib/simpleComponents/components/UI/List';
 import ListItemButton from '../../lib/simpleComponents/components/UI/ListItemButton';
 import Link from '../../lib/simpleComponents/components/UI/Link';
-import Avatar from '../../lib/simpleComponents/components/UI/Avatar';
 
 const DashboardAvatar: FC = () => {
   const overlay = document.getElementById('overlay');

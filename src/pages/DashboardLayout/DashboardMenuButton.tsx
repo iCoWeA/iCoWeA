@@ -1,8 +1,8 @@
 import React, { type FC } from 'react';
-import IconButton from '../../lib/simpleComponents/components/UI/IconButton';
-import Icon from '../../lib/simpleComponents/components/UI/Icon';
 import { useDispatch } from 'react-redux';
 import navMenu from '../../store/Slices/NavMenu';
+import IconButton from '../../lib/simpleComponents/components/UI/IconButton';
+import Icon from '../../lib/simpleComponents/components/UI/Icon';
 
 const DashboardMenuButton: FC = () => {
   const dispatch = useDispatch();
