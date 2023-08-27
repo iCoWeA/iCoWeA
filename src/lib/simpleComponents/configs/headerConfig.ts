@@ -17,8 +17,8 @@ const headerConfig: HeaderConfig = {
   styles: {
     base: {
       display: 'flex',
-      flexDirection: 'flex-col',
-      gap: 'gap-4',
+      gap: 'gap-6',
+      padding: 'py-2',
       focus: 'focus:outline-0'
     },
     colors: {
