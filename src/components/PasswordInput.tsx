@@ -15,8 +15,8 @@ export interface PasswordInputProps extends InputProps {
 }
 
 const defaultProps = {
-  color: 'primary',
-  buttonProps: {}
+  buttonProps: {},
+  color: 'primary'
 };
 
 const PasswordInput = forwardRef<HTMLDivElement, PasswordInputProps>((rootProps, rootRef) => {
