@@ -26,8 +26,8 @@ export interface MenuConfig {
 
 const menuConfig: MenuConfig = {
   defaultProps: {
-    variant: 'filled',
-    color: 'light',
+    variant: 'outlined',
+    color: 'default',
     elevated: false,
     position: 'bottom',
     overlayRef: null,
@@ -80,28 +80,36 @@ const menuConfig: MenuConfig = {
       outlined: {
         default: {
           default: {
-            border: 'border border-default-default'
+            border: 'border border-default-default/20',
+            background: 'bg-default-light'
           },
           primary: {
-            border: 'border border-default-primary'
+            border: 'border border-default-primary/20',
+            background: 'bg-default-light'
           },
           secondary: {
-            border: 'border border-default-secondary'
+            border: 'border border-default-secondary/20',
+            background: 'bg-default-light'
           },
           success: {
-            border: 'border border-default-success'
+            border: 'border border-default-success/20',
+            background: 'bg-default-light'
           },
           warning: {
-            border: 'border border-default-warning'
+            border: 'border border-default-warning/20',
+            background: 'bg-default-light'
           },
           error: {
-            border: 'border border-default-error'
+            border: 'border border-default-error/20',
+            background: 'bg-default-light'
           },
           light: {
-            border: 'border border-default-light'
+            border: 'border border-default-light/20',
+            background: 'bg-default-light'
           },
           dark: {
-            border: 'border border-default-dark'
+            border: 'border border-default-dark/20',
+            background: 'bg-default-light'
           }
         }
       }
