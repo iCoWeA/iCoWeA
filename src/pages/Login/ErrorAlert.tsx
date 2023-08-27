@@ -1,7 +1,7 @@
 import React, { type FC, useRef, useState, useEffect } from 'react';
 import { useNavigation, useActionData } from 'react-router-dom';
-import Alert from '../../lib/simpleComponents/components/UI/Alert';
 import Popover from '../../lib/simpleComponents/components/UI/Popover';
+import Alert from '../../lib/simpleComponents/components/UI/Alert';
 
 const TIMER = 5000;
 
