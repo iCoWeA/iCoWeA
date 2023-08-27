@@ -19,6 +19,7 @@ import collapseConfig, { type CollapseConfig } from '../configs/collapseConfig';
 import containerConfig, { type ContainerConfig } from '../configs/containerConfig';
 import formConfig, { type FormConfig } from '../configs/formConfig';
 import formGroupConfig, { type FormGroupConfig } from '../configs/formGroupConfig';
+import headerConfig, { type HeaderConfig } from '../configs/headerConfig';
 import iconConfig, { type IconConfig } from '../configs/iconConfig';
 import iconButtonConfig, { type IconButtonConfig } from '../configs/iconButtonConfig';
 import inputConfig, { type InputConfig } from '../configs/inputConfig';
@@ -63,6 +64,7 @@ interface ThemeContext {
     container: ContainerConfig;
     form: FormConfig;
     formGroup: FormGroupConfig;
+    header: HeaderConfig;
     icon: IconConfig;
     iconButton: IconButtonConfig;
     input: InputConfig;
@@ -110,6 +112,7 @@ export const initialState: ThemeContext = {
     container: containerConfig,
     form: formConfig,
     formGroup: formGroupConfig,
+    header: headerConfig,
     icon: iconConfig,
     iconButton: iconButtonConfig,
     input: inputConfig,
