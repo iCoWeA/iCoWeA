@@ -257,11 +257,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) =>
   const rootStyles = styles.root;
 
   const transitionEndRootHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING) {
+    if (transitionState === TransitionStates.ENTERING && event.target === componentsRef.current.root) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING) {
+    if (transitionState === TransitionStates.EXITING && event.target === componentsRef.current.root) {
       exit(true);
     }
 
@@ -271,11 +271,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) =>
   };
 
   const animationEndRootHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING) {
+    if (transitionState === TransitionStates.ENTERING && event.target === componentsRef.current.root) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING) {
+    if (transitionState === TransitionStates.EXITING && event.target === componentsRef.current.root) {
       exit(true);
     }
 
@@ -291,7 +291,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) =>
   const mergedRootStyle = mergeStyles(
     {
       opacity: `${transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED ? 100 : 0}`,
-      transitionDuration: `${enterState ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`
+      transitionDuration: `${enterState ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`
     },
     rootStyle
   );

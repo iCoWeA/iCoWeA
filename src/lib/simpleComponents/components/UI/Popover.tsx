@@ -34,6 +34,7 @@ export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   responsive?: boolean;
   overlayRef?: Element | null;
   disableScrolling?: boolean;
+  disableOutsideClick?: boolean;
   unmountOnExit?: boolean;
   transitionConfig?: TransitionConfig;
   handler?: ReactElement;
@@ -56,6 +57,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
     responsive,
     overlayRef,
     disableScrolling,
+    disableOutsideClick,
     unmountOnExit,
     transitionConfig,
     handler,
@@ -96,7 +98,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
   useOutsideClick(
     componentsRef.current.root,
     exit,
-    (transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && !backdrop
+    (transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && !backdrop && !disableOutsideClick
   );
 
   useScroll(resize, enterState);
@@ -174,7 +176,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
       }
     };
 
-    const mergedBackdropStyle = mergeStyles({ transitionDuration: `${enterState ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms` });
+    const mergedBackdropStyle = mergeStyles({
+      transitionDuration: `${enterState ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`
+    });
 
     backdropNode = (
       <Backdrop
@@ -188,11 +192,11 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
 
   /* Set root props */
   const transitionEndRootHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING) {
+    if (transitionState === TransitionStates.ENTERING && event.target === componentsRef.current.root) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING) {
+    if (transitionState === TransitionStates.EXITING && event.target === componentsRef.current.root) {
       exit(true);
     }
 
@@ -202,11 +206,11 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
   };
 
   const animationEndRootHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING) {
+    if (transitionState === TransitionStates.ENTERING && event.target === componentsRef.current.root) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING) {
+    if (transitionState === TransitionStates.EXITING && event.target === componentsRef.current.root) {
       exit(true);
     }
 
@@ -222,20 +226,18 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
   const mergedRootStyle = mergeStyles(
     {
       opacity: `${transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED ? 100 : 0}`,
-      transitionDuration: `${enterState ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`
+      transitionDuration: `${enterState ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`
     },
     rootStyle
   );
 
   const mergedRootClassName = mergeClasses(rootStyles.base, rootClassName, transitionClassName);
 
-  const rootChildrenNode = componentsRef.current.root !== null &&
-    componentsRef.current.handler !== null &&
-    (!unmountOnExit || (unmountOnExit && transitionState !== TransitionStates.EXITED)) && (
-      <>
-        {backdropNode}
-        {rootChildren}
-      </>
+  const rootChildrenNode = componentsRef.current.root !== null && (!unmountOnExit || (unmountOnExit && transitionState !== TransitionStates.EXITED)) && (
+    <>
+      {backdropNode}
+      {rootChildren}
+    </>
   );
 
   let rootNode = (

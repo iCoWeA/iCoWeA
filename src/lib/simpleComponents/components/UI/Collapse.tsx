@@ -49,11 +49,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   /* Set props */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING) {
+    if (transitionState === TransitionStates.ENTERING && event.target === componentRef.current) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING) {
+    if (transitionState === TransitionStates.EXITING && event.target === componentRef.current) {
       exit(true);
     }
 
@@ -63,11 +63,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING) {
+    if (transitionState === TransitionStates.ENTERING && event.target === componentRef.current) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING) {
+    if (transitionState === TransitionStates.EXITING && event.target === componentRef.current) {
       exit(true);
     }
 
@@ -79,7 +79,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   const mergedStyle = mergeStyles(
     {
       height: `${!open || componentRef.current === null ? 0 : componentRef.current.scrollHeight}px`,
-      transitionDuration: `${open ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`
+      transitionDuration: `${open ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`
     },
     style
   );
