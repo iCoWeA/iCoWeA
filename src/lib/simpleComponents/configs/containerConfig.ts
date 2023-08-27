@@ -64,9 +64,8 @@ const containerConfig: ContainerConfig = {
         gridTemplateColumns: 'grid-cols-4',
         gap: 'gap-[16px]',
         margin: 'mx-[16px]',
-        width: 'w-full',
         md: 'md:grid-cols-8 md:gap-[24px] md:mx-[32px]',
-        lg: 'lg:grid-cols-12 lg:mx-auto lg:max-w-[840px]',
+        lg: 'lg:grid-cols-12 lg:mx-auto lg:w-full lg:max-w-[840px]',
         xl: 'xl:mx-[200px] xl:max-w-none',
         xxl: 'xxl:mx-auto xxl:max-w-[1040px]'
       }
