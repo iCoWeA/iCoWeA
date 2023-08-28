@@ -1,12 +1,10 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactElement } from 'react';
 import Popover, { type PopoverProps } from './Popover';
-import { type MenuVariants } from '../../configs/menuConfig';
 import { type PopoverPositions } from '../../configs/popoverConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: MenuVariants;
   color?: Colors;
   elevated?: boolean;
   open?: boolean;
@@ -22,7 +20,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, rootRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.menu;
   const {
-    variant,
     color,
     elevated,
     open,
@@ -46,7 +43,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, rootRef) => {
   } = rootProps;
 
   /* Set contianer props */
-  const mergedContainerClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], elevated && styles.elevated[theme], containerClassName);
+  const mergedContainerClassName = mergeClasses(styles.base, styles.colors[theme][color], elevated && styles.elevated[theme], containerClassName);
 
   return (
     <Popover
