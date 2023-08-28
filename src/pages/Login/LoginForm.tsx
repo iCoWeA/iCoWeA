@@ -15,8 +15,8 @@ const LoginForm: FC = () => {
   const {
     state: { inputs, isFormValid },
     debouncedChange,
-    resetForm,
-    blur
+    blur,
+    resetForm
   } = useForm({
     inputs: { [email]: {}, [password]: {} }
   });

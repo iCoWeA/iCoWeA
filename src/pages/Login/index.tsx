@@ -15,17 +15,17 @@ export const Component: FC = () => {
 
   const timerId = useRef(-1);
 
-  const closeHandler = (): void => {
-    clearTimeout(timerId.current);
-    dispatch(statusAlert.actions.hide());
-  };
-
   useEffect(() => {
     clearTimeout(timerId.current);
   }, [navigation.state]);
 
   useEffect(() => {
     if (navigation.state === 'idle' && error !== undefined) {
+      const closeHandler = (): void => {
+        clearTimeout(timerId.current);
+        dispatch(statusAlert.actions.hide());
+      };
+
       dispatch(statusAlert.actions.show({ onClose: closeHandler, color: 'error', children: typeof error === 'string' ? error : '' }));
 
       timerId.current = window.setTimeout(() => {
