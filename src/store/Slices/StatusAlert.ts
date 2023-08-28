@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { type StoreState } from '..';
 import { type AlertProps } from '../../lib/simpleComponents/components/UI/Alert';
+import { type StoreState } from '..';
 
 interface State {
   open: boolean;
