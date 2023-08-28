@@ -16,7 +16,7 @@ const DashboardAvatar: FC = () => {
       handler={
         <Avatar
           src={require('../../assets/images/photo.png')}
-          className="ml-auto w-10"
+          className="w-10"
         />
       }
     >

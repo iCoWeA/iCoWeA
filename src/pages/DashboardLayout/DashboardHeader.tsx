@@ -1,6 +1,7 @@
 import React, { type FC } from 'react';
 import useBreakpoint, { Breakpoints } from '../../lib/simpleComponents/hooks/useBreakpoint';
 import Header from '../../lib/simpleComponents/components/layouts/Header';
+import Container from '../../lib/simpleComponents/components/UI/Container';
 import DashboardMenuButton from './DashboardMenuButton';
 import DashboardLogo from './DashboardLogo';
 import DashboardAvatar from './DashboardAvatar';
@@ -13,9 +14,12 @@ const DashboardHeader: FC = () => {
       <Header
         flex
         color="light"
+        className="justify-between"
       >
-        <DashboardMenuButton />
-        <DashboardLogo />
+        <Container>
+          <DashboardMenuButton />
+          <DashboardLogo />
+        </Container>
         <DashboardAvatar />
       </Header>
     );
@@ -25,7 +29,7 @@ const DashboardHeader: FC = () => {
     <Header
       flex
       color="light"
-      className="md:pl-6"
+      className="justify-between md:pl-6"
     >
       <DashboardLogo />
       <DashboardAvatar />
