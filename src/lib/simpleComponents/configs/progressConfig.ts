@@ -69,7 +69,7 @@ const progressConfig: ProgressConfig = {
       },
       color: {
         default: {
-          background: 'bg-default-bg-light'
+          background: 'bg-default-divider'
         }
       }
     },

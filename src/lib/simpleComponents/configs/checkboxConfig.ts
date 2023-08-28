@@ -98,42 +98,42 @@ const checkboxConfig: CheckboxConfig = {
       colors: {
         default: {
           default: {
-            border: 'after:border-default-default',
+            border: 'after:border-default-divider',
             hover: 'hover:bg-default-default/10 hover:checked:bg-default-default/10',
             checked: 'checked:after:border-default-default checked:after:bg-default-default'
           },
           primary: {
-            border: 'after:border-default-default',
+            border: 'after:border-default-divider',
             hover: 'hover:bg-default-default/10 hover:checked:bg-default-primary/10',
             checked: 'checked:after:border-default-primary checked:after:bg-default-primary'
           },
           secondary: {
-            border: 'after:border-default-default',
+            border: 'after:border-default-divider',
             hover: 'hover:bg-default-default/10 hover:checked:bg-default-secondary/10',
             checked: 'checked:after:border-default-secondary checked:after:bg-default-secondary'
           },
           success: {
-            border: 'after:border-default-default',
+            border: 'after:border-default-divider',
             hover: 'hover:bg-default-default/10 hover:checked:bg-default-success/10',
             checked: 'checked:after:border-default-success checked:after:bg-default-success'
           },
           warning: {
-            border: 'after:border-default-default',
+            border: 'after:border-default-divider',
             hover: 'hover:bg-default-default/10 hover:checked:bg-default-warning/10',
             checked: 'checked:after:border-default-warning checked:after:bg-default-warning'
           },
           error: {
-            border: 'after:border-default-default',
+            border: 'after:border-default-divider',
             hover: 'hover:bg-default-default/10 hover:checked:bg-default-error/10',
             checked: 'checked:after:border-default-error checked:after:bg-default-error'
           },
           light: {
-            border: 'after:border-default-default',
+            border: 'after:border-default-divider',
             hover: 'hover:bg-default-default/10 hover:checked:bg-default-light/10',
             checked: 'checked:after:border-default-light checked:after:bg-default-light'
           },
           dark: {
-            border: 'after:border-default-default',
+            border: 'after:border-default-divider',
             hover: 'hover:bg-default-default/10 hover:checked:bg-default-dark/10',
             checked: 'checked:after:border-default-dark checked:after:bg-default-dark'
           }

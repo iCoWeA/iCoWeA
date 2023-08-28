@@ -215,35 +215,35 @@ const inputConfig: InputConfig = {
         standard: {
           default: {
             default: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-default'
             },
             primary: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-primary'
             },
             secondary: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-secondary'
             },
             success: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success'
             },
             warning: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-warning'
             },
             error: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error'
             },
             light: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-light'
             },
             dark: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               group: 'group-[.focused]:pb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-dark'
             }
           }
@@ -251,7 +251,7 @@ const inputConfig: InputConfig = {
         filled: {
           default: {
             default: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               borderRadius: 'rounded-t-2xl',
               background: 'bg-default-default/10',
               hover: 'hover:bg-default-default/20',
@@ -259,7 +259,7 @@ const inputConfig: InputConfig = {
               groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             primary: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               borderRadius: 'rounded-t-2xl',
               background: 'bg-default-default/10',
               hover: 'hover:bg-default-default/20',
@@ -267,7 +267,7 @@ const inputConfig: InputConfig = {
               groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             secondary: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               borderRadius: 'rounded-t-2xl',
               background: 'bg-default-default/10',
               hover: 'hover:bg-default-default/20',
@@ -275,7 +275,7 @@ const inputConfig: InputConfig = {
               groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             success: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               borderRadius: 'rounded-t-2xl',
               background: 'bg-default-default/10',
               hover: 'hover:bg-default-default/20',
@@ -283,7 +283,7 @@ const inputConfig: InputConfig = {
               groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             warning: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               borderRadius: 'rounded-t-2xl',
               background: 'bg-default-default/10',
               hover: 'hover:bg-default-default/20',
@@ -291,7 +291,7 @@ const inputConfig: InputConfig = {
               groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             error: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               borderRadius: 'rounded-t-2xl',
               background: 'bg-default-default/10',
               hover: 'hover:bg-default-default/20',
@@ -299,7 +299,7 @@ const inputConfig: InputConfig = {
               groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             light: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               borderRadius: 'rounded-t-2xl',
               background: 'bg-default-default/10',
               hover: 'hover:bg-default-default/20',
@@ -307,7 +307,7 @@ const inputConfig: InputConfig = {
               groupHover: 'group-[.focused]:hover:bg-default-default/10'
             },
             dark: {
-              border: 'pb-px border-b border-default-default',
+              border: 'pb-px border-b border-default-divider',
               borderRadius: 'rounded-t-2xl',
               background: 'bg-default-default/10',
               hover: 'hover:bg-default-default/20',
@@ -319,42 +319,42 @@ const inputConfig: InputConfig = {
         outlined: {
           default: {
             default: {
-              border: 'p-px border border-default-default',
+              border: 'p-px border border-default-divider',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-default'
             },
             primary: {
-              border: 'p-px border border-default-default',
+              border: 'p-px border border-default-divider',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-primary'
             },
             secondary: {
-              border: 'p-px border border-default-default',
+              border: 'p-px border border-default-divider',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-secondary'
             },
             success: {
-              border: 'p-px border border-default-default',
+              border: 'p-px border border-default-divider',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-success'
             },
             warning: {
-              border: 'p-px border border-default-default',
+              border: 'p-px border border-default-divider',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-warning'
             },
             error: {
-              border: 'p-px border border-default-default',
+              border: 'p-px border border-default-divider',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-error'
             },
             light: {
-              border: 'p-px border border-default-default',
+              border: 'p-px border border-default-divider',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-light'
             },
             dark: {
-              border: 'p-px border border-default-default',
+              border: 'p-px border border-default-divider',
               borderRadius: 'rounded-2xl',
               group: 'group-[.focused]:p-0 group-[.focused]:border-2 group-[.focused]:border-default-dark'
             }
