@@ -5,8 +5,8 @@ export interface Position {
 
 export const getViewportCords = (): { top: number; bottom: number; left: number; right: number; } => ({ top: document.documentElement.scrollTop, left: document.documentElement.scrollLeft, bottom: document.documentElement.scrollTop + document.documentElement.clientHeight, right: document.documentElement.scrollLeft + document.documentElement.clientWidth });
 
-export const setElementPosition = (element: HTMLElement | null, position: Positions, anchorTop: number = 0, anchorLeft: number = 0, anchorHeight: number = 0, anchorWidth: number = 0, gap: number = 0, responsive: boolean = false): Positions => {
-  if (element === null) {
+export const setElementPosition = (element: HTMLElement | null, position: Positions, anchorTop?: number, anchorLeft?: number, anchorHeight: number = 0, anchorWidth: number = 0, gap: number = 0, responsive: boolean = false): Positions => {
+  if (element === null || anchorTop === undefined || anchorLeft === undefined) {
     return position;
   }
 
