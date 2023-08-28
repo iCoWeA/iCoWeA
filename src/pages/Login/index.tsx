@@ -2,12 +2,11 @@ import React, { useEffect, useRef, type FC } from 'react';
 import { redirect, useActionData, useNavigation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import statusAlert from '../../store/Slices/StatusAlert';
+import { ALERT_TIMER } from '../../data/constants';
 import Main from '../../lib/simpleComponents/components/layouts/Main';
 import LoginForm from './LoginForm';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
-
-const TIMER = 5000;
 
 export const Component: FC = () => {
   const navigation = useNavigation();
@@ -31,7 +30,7 @@ export const Component: FC = () => {
 
       timerId.current = window.setTimeout(() => {
         dispatch(statusAlert.actions.hide());
-      }, TIMER);
+      }, ALERT_TIMER);
     } else {
       dispatch(statusAlert.actions.hide());
     }
