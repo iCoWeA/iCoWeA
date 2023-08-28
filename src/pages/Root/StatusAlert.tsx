@@ -1,6 +1,6 @@
 import React, { useRef, type FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import statusAlert, { selectState } from '../../store/Slices/StatusAlert';
+import statusAlert, { selectState } from '../../store/Slices/statusAlert';
 import Popover from '../../lib/simpleComponents/components/UI/Popover';
 import Alert from '../../lib/simpleComponents/components/UI/Alert';
 

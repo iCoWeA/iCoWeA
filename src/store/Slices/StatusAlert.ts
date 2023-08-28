@@ -10,7 +10,7 @@ interface State {
   props: AlertProps;
 }
 
-interface ShowAction {
+interface Action {
   closable?: boolean;
   timer?: number;
   props?: AlertProps
@@ -22,7 +22,7 @@ const statusAlert = createSlice({
   name: 'statusAlert',
   initialState,
   reducers: {
-    show (_, { payload: { closable = true, timer = ALERT_TIMER, props = {} } }: PayloadAction<ShowAction>) { return { open: true, closable, timer, props }; },
+    show (_, { payload: { closable = true, timer = ALERT_TIMER, props = {} } }: PayloadAction<Action>) { return { open: true, closable, timer, props }; },
     hide (prevState) { return { open: false, closable: prevState.closable, timer: prevState.timer, props: prevState.props }; }
   }
 });
