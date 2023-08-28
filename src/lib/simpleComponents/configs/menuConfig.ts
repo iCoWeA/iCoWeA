@@ -23,7 +23,7 @@ export interface MenuConfig {
 
 const menuConfig: MenuConfig = {
   defaultProps: {
-    color: 'default',
+    color: 'light',
     elevated: false,
     position: 'bottom',
     overlayRef: null,
@@ -41,7 +41,7 @@ const menuConfig: MenuConfig = {
     },
     elevated: {
       default: {
-        shadow: 'shadow-md shadow-default-default/20'
+        shadow: 'shadow-md shadow-default-default/80'
       }
     },
     colors: {

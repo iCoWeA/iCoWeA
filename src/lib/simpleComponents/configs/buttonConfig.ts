@@ -59,8 +59,8 @@ const buttonConfig: ButtonConfig = {
     },
     elevated: {
       default: {
-        shadow: 'shadow-md shadow-default-bg-dark/20',
-        hover: 'hover:shadow-lg hover:shadow-default-bg-dark/40',
+        shadow: 'shadow-md shadow-default-default/80',
+        hover: 'hover:shadow-lg hover:shadow-default-default',
         active: 'active:shadow-none',
         disabled: 'disabled:shadow-none'
       }
