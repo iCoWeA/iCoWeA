@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import navMenu from './Slices/NavMenu';
-import statusAlert from './Slices/StatusAlert';
+import navMenu from './Slices/navMenu';
+import statusAlert from './Slices/statusAlert';
 
 const store = configureStore({
   reducer: {

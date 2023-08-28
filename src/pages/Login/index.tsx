@@ -1,7 +1,7 @@
 import React, { useEffect, type FC } from 'react';
 import { redirect, useActionData, useNavigation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import statusAlert, { selectState } from '../../store/Slices/StatusAlert';
+import statusAlert, { selectState } from '../../store/Slices/statusAlert';
 import Main from '../../lib/simpleComponents/components/layouts/Main';
 import LoginForm from './LoginForm';
 import { signInWithEmailAndPassword } from 'firebase/auth';
