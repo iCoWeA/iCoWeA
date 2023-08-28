@@ -10,7 +10,10 @@ const DashboardHeader: FC = () => {
 
   if (breakpoint === Breakpoints.SM) {
     return (
-      <Header flex>
+      <Header
+        flex
+        color="light"
+      >
         <DashboardMenuButton />
         <DashboardLogo />
         <DashboardAvatar />
@@ -21,6 +24,7 @@ const DashboardHeader: FC = () => {
   return (
     <Header
       flex
+      color="light"
       className="md:pl-6"
     >
       <DashboardLogo />
