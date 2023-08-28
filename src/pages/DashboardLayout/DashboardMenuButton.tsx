@@ -7,11 +7,13 @@ import Icon from '../../lib/simpleComponents/components/UI/Icon';
 const DashboardMenuButton: FC = () => {
   const dispatch = useDispatch();
 
+  const clickHandler = (): void => {
+    dispatch(navMenu.actions.toggle());
+  };
+
   return (
     <IconButton
-      onClick={() => {
-        dispatch(navMenu.actions.toggle());
-      }}
+      onClick={clickHandler}
       className="shrink-0"
     >
       <Icon>
