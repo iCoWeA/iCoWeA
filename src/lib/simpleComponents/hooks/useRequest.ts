@@ -27,13 +27,10 @@ interface Return {
 const reducer = ({ isLoading, data, error }: State, { type, payload }: Action): State => {
   if (type === ActionTypes.LOADING) {
     isLoading = true;
-    data = null;
-    error = null;
   }
 
   if (type === ActionTypes.FAILED) {
     isLoading = false;
-    data = null;
     error = payload;
   }
 
