@@ -14,7 +14,7 @@ export const Component: FC = () => {
 
   useEffect(() => {
     if (navigation.state === 'idle' && error !== undefined) {
-      dispatch(statusAlert.actions.show(props: { color: 'error', children: typeof error === 'string' ? error : '' }));
+      dispatch(statusAlert.actions.show({ props: { color: 'error', children: typeof error === 'string' ? error : '' } }));
     } else {
       dispatch(statusAlert.actions.hide());
     }
