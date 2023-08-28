@@ -27,7 +27,7 @@ const cardConfig: CardConfig = {
     },
     elevated: {
       default: {
-        shadow: 'shadow-md shadow-default-bg-dark/20'
+        shadow: 'shadow-md shadow-default-default/20'
       }
     },
     colors: {
