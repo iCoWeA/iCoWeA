@@ -1,5 +1,6 @@
 import React, { useEffect, type FC } from 'react';
 import { ScrollRestoration, Outlet } from 'react-router-dom';
+import StatusAlert from './StatusAlert';
 
 const Component: FC = () => {
   useEffect(() => {
@@ -10,6 +11,7 @@ const Component: FC = () => {
     <>
       <ScrollRestoration />
       <Outlet />
+      <StatusAlert />
     </>
   );
 };
