@@ -1,6 +1,6 @@
 import React, { type FC } from 'react';
 import { useDispatch } from 'react-redux';
-import navMenu from '../../store/Slices/NavMenu';
+import navMenu from '../../store/Slices/navMenu';
 import IconButton from '../../lib/simpleComponents/components/UI/IconButton';
 import Icon from '../../lib/simpleComponents/components/UI/Icon';
 
