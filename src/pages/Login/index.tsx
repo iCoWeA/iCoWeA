@@ -27,7 +27,7 @@ export const Component: FC = () => {
 
   useEffect(() => {
     if (navigation.state === 'idle' && error !== undefined) {
-      dispatch(statusAlert.actions.show({ color: 'error', onClose: closeHandler }));
+      dispatch(statusAlert.actions.show({ color: 'error', onClose: closeHandler, children: typeof error === 'string' ? error : '' }));
 
       timerId.current = window.setTimeout(() => {
         dispatch(statusAlert.actions.hide());
