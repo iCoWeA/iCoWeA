@@ -13,7 +13,7 @@ const statusAlert = createSlice({
   name: 'statusAlert',
   initialState,
   reducers: {
-    show (_, action: PayloadAction<State>) { return { open: action.payload.open, props: action.payload.props }; },
+    show (_, action: PayloadAction<AlertProps>) { return { open: true, props: action.payload }; },
     hide (prevState) { return { open: false, props: prevState.props }; }
   }
 });

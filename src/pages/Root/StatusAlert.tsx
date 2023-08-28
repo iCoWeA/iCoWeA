@@ -1,11 +1,11 @@
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
-import { selectStatusAlertState } from '../../store/Slices/StatusAlert';
+import { selectState } from '../../store/Slices/StatusAlert';
 import Popover from '../../lib/simpleComponents/components/UI/Popover';
 import Alert from '../../lib/simpleComponents/components/UI/Alert';
 
 const StatusAlert: FC = () => {
-  const { open, props: alertProps } = useSelector(selectStatusAlertState);
+  const { open, props: alertProps } = useSelector(selectState);
 
   const overlayRef = document.getElementById('overlay');
 
