@@ -12,7 +12,6 @@ const DashboardHeader: FC = () => {
   if (breakpoint === Breakpoints.SM) {
     return (
       <Header
-        flex
         color="light"
         className="justify-between"
       >
@@ -27,7 +26,6 @@ const DashboardHeader: FC = () => {
 
   return (
     <Header
-      flex
       color="light"
       className="justify-between md:pl-6"
     >
