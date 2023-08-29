@@ -4,6 +4,7 @@ import { type DataSnapshot } from 'firebase/database';
 import Section from '../../../lib/simpleComponents/components/layouts/Section';
 import Container from '../../../lib/simpleComponents/components/UI/Container';
 import MessagesCard from './MessagesCard';
+import MessagesError from './MessagesError';
 
 const Messages: FC = () => {
   const deferedMessages = (useLoaderData() as { snapchot: Promise<DataSnapshot> }).snapchot;
@@ -31,7 +32,12 @@ const Messages: FC = () => {
         className="px-[16px] md:pl-6 md:pr-[32px]"
       >
         <Suspense fallback={fallbackNode}>
-          <Await resolve={deferedMessages}>{resolvedNode}</Await>
+          <Await
+            resolve={deferedMessages}
+            errorElement={<MessagesError>{data.current}</MessagesError>}
+          >
+            {resolvedNode}
+          </Await>
         </Suspense>
       </Container>
     </Section>
