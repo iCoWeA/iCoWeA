@@ -19,6 +19,7 @@ const mainConfig: MainConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       gap: 'gap-4',
+      width: 'w-full',
       padding: 'py-4',
       focus: 'focus:outline-0'
     },
