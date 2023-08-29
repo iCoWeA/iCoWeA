@@ -17,9 +17,7 @@ const LoginForm: FC = () => {
     debouncedChange,
     blur,
     resetForm
-  } = useForm({
-    inputs: { [email]: {}, [password]: {} }
-  });
+  } = useForm({ [email]: {}, [password]: {} });
 
   return (
     <Section>
