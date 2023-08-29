@@ -81,14 +81,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
   const { state: transitionState, enterState, exitState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
 
   const resize = useCallback((): void => {
-    if (componentsRef.current.root !== null && componentsRef.current.handler !== null) {
+    if (componentsRef.current.root !== null) {
       setElementPosition(
         componentsRef.current.root,
         position,
-        componentsRef.current.handler.offsetTop,
-        componentsRef.current.handler.offsetLeft,
-        componentsRef.current.handler.offsetHeight,
-        componentsRef.current.handler.offsetWidth,
+        componentsRef.current.handler?.offsetTop,
+        componentsRef.current.handler?.offsetLeft,
+        componentsRef.current.handler?.offsetHeight,
+        componentsRef.current.handler?.offsetWidth,
         gap,
         responsive
       );
