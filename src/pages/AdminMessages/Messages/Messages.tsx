@@ -6,7 +6,7 @@ import Container from '../../../lib/simpleComponents/components/UI/Container';
 import MessagesCard from './MessagesCard';
 
 const Messages: FC = () => {
-  const deferedMessages = useLoaderData() as { snapchot: Promise<DataSnapshot> };
+  const deferedMessages = (useLoaderData() as { snapchot: Promise<DataSnapshot> }).snapchot;
 
   const data = useRef<Record<string, Message> | null>(null);
 
@@ -14,9 +14,14 @@ const Messages: FC = () => {
   const fallbackNode = <MessagesCard>{data.current}</MessagesCard>;
 
   /* Set children props */
-  const resolvedNode = (resolvedData: any): ReactNode => {
-    data.current = resolvedData;
-    return <MessagesCard>{resolvedData}</MessagesCard>;
+  const resolvedNode = (resolvedData: DataSnapshot): ReactNode => {
+    if (resolvedData.exists()) {
+      data.current = resolvedData.val();
+    } else {
+      data.current = {};
+    }
+
+    return <MessagesCard>{data.current}</MessagesCard>;
   };
 
   return (
@@ -26,7 +31,7 @@ const Messages: FC = () => {
         className="px-[16px] md:pl-6 md:pr-[32px]"
       >
         <Suspense fallback={fallbackNode}>
-          <Await resolve={deferedMessages.snapchot}>{resolvedNode}</Await>
+          <Await resolve={deferedMessages}>{resolvedNode}</Await>
         </Suspense>
       </Container>
     </Section>
