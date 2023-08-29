@@ -3,34 +3,39 @@ import { deepClone } from '../utils/propsHelper';
 
 enum ActionTypes {FILTER, RESET}
 
-interface State {
-  data: unknown;
+interface State<T> {
+  data: T;
   pattern: string;
 }
 
-interface Action {
+interface Action<T> {
   type: ActionTypes,
   payload: {
-    data: unknown;
+    data: T;
     pattern?: string;
   };
 }
 
 interface Actions {
-  filter: (data: unknown, pattern: string) => Action;
-  reset: (data: unknown) => Action;
+  set: <T>(data: T, pattern: string) => Action<T>;
+  reset: <T>(data: T) => Action<T>;
 }
 
-interface Return {
-  state: State,
-  filter: (data: unknown, pattern: string) => void;
-  reset: (data: unknown) => void;
+interface Return<T> {
+  state: State<T>,
+  set: (data: T, pattern: string) => void;
+  reset: (data: T) => void;
 }
 
-const reducer = (prevState: State, { type, payload: { data, pattern = '' } }: Action): State => {
+const createReducer = <T>() => (prevState: State<T>, { type, payload: { data, pattern = '' } }: Action<T>): State<T> => {
   const state = deepClone(prevState);
 
-  if (type === ActionTypes.FILTER || type === ActionTypes.RESET) {
+  if (type === ActionTypes.FILTER) {
+    state.data = data;
+    state.pattern = pattern;
+  }
+
+  if (type === ActionTypes.RESET) {
     state.data = data;
     state.pattern = pattern;
   }
@@ -39,29 +44,26 @@ const reducer = (prevState: State, { type, payload: { data, pattern = '' } }: Ac
 };
 
 const actions: Actions = {
-  filter: (data, pattern) => ({ type: ActionTypes.FILTER, payload: { data, pattern } }),
+  set: (data, pattern) => ({ type: ActionTypes.FILTER, payload: { data, pattern } }),
   reset: (data) => ({ type: ActionTypes.RESET, payload: { data } })
 };
 
-const initialState: State = {
-  data: null,
-  pattern: ''
-};
-
-const useSearch = (): Return => {
+const useSearch = <T>(data: T, pattern: string = ''): Return<T> => {
+  const reducer = createReducer<T>();
+  const initialState = { data, pattern };
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const filter = useCallback((data: unknown, pattern: string): void => {
-    dispatch(actions.filter(data, pattern));
+  const set = useCallback((data: T, pattern: string): void => {
+    dispatch(actions.set(data, pattern));
   }, []);
 
-  const reset = useCallback((data: unknown): void => {
+  const reset = useCallback((data: T): void => {
     dispatch(actions.reset(data));
   }, []);
 
   return {
     state,
-    filter,
+    set,
     reset
   };
 };

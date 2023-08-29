@@ -3,29 +3,32 @@ import { deepClone } from '../utils/propsHelper';
 
 enum ActionTypes {LOADING, SUCCESS, FAILED}
 
-interface State {
+interface State<T> {
   isLoading: boolean;
-  data: unknown;
+  data?: T;
   error: unknown;
 }
 
-interface Action {
-  type: ActionTypes,
-  payload?: unknown;
+interface Action<T> {
+  type: ActionTypes;
+  payload: {
+    data?: T;
+    error?: unknown;
+  };
 }
 
 interface Actions {
-  loading: () => Action;
-  success: (data: unknown) => Action;
-  failed: (error: unknown) => Action;
+  loading: <T>() => Action<T>;
+  success: <T>(data: T) => Action<T>;
+  failed: <T>(error: unknown) => Action<T>;
 }
 
-interface Return {
-  state: State,
+interface Return<T> {
+  state: State<T>,
   send: (url: string, request?: RequestInit) => Promise<void>;
 }
 
-const reducer = (prevState: State, { type, payload }: Action): State => {
+const createReducer = <T>() => (prevState: State<T>, { type, payload: { data, error } }: Action<T>): State<T> => {
   const state = deepClone(prevState);
 
   if (type === ActionTypes.LOADING) {
@@ -34,31 +37,27 @@ const reducer = (prevState: State, { type, payload }: Action): State => {
 
   if (type === ActionTypes.FAILED) {
     state.isLoading = false;
-    state.error = payload;
+    state.error = error;
   }
 
   if (type === ActionTypes.SUCCESS) {
     state.isLoading = false;
-    state.data = payload;
-    state.error = null;
+    state.data = data;
+    state.error = error;
   }
 
   return state;
 };
 
 const actions: Actions = {
-  loading: () => ({ type: ActionTypes.LOADING }),
-  success: (data) => ({ type: ActionTypes.SUCCESS, payload: data }),
-  failed: (error) => ({ type: ActionTypes.FAILED, payload: error })
+  loading: () => ({ type: ActionTypes.LOADING, payload: {} }),
+  success: (data) => ({ type: ActionTypes.SUCCESS, payload: { data } }),
+  failed: (error) => ({ type: ActionTypes.FAILED, payload: { error } })
 };
 
-const initialState: State = {
-  isLoading: true,
-  error: null,
-  data: null
-};
-
-const useRequest = (): Return => {
+const useRequest = <T>(data?: T, isLoading: boolean = false, error: unknown = null): Return<T> => {
+  const reducer = createReducer<T>();
+  const initialState = { data, isLoading, error };
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const send = useCallback(async (url: string, request?: RequestInit): Promise<void> => {

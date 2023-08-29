@@ -29,11 +29,6 @@ interface Action {
   payload: { inputName: string; input?: HTMLInputElement | HTMLTextAreaElement, timerId?: number, defaultValue?: string, pattern?: string, errorMessage?: string; config?: Record<string, InputConfig> };
 }
 
-interface Config {
-  inputs: Record<string, InputConfig>
-  debounceDelay?: number;
-}
-
 interface Actions {
   change: (input: HTMLInputElement | HTMLTextAreaElement, pattern?: string, errorMessage?: string) => Action;
   debouncedChange: (input: HTMLInputElement | HTMLTextAreaElement, timerId: number, pattern?: string, errorMessage?: string) => Action;
@@ -119,11 +114,11 @@ const reducer = (prevState: State, { type, payload: { inputName, input, defaultV
   };
 };
 
-const initializer = (config: Config): State => {
+const initializer = (inputsConfig: Record<string, InputConfig>): State => {
   const state: State = { isFormValid: false, inputs: {} };
 
-  Object.keys(config.inputs).forEach((inputName) => {
-    state.inputs[inputName] = initializeInput(config.inputs[inputName].defaultValue);
+  Object.keys(inputsConfig).forEach((inputName) => {
+    state.inputs[inputName] = initializeInput(inputsConfig[inputName].defaultValue);
   });
 
   return state;
@@ -153,39 +148,36 @@ const actions: Actions = {
   resetForm: () => ({ type: ActionTypes.RESET_FORM, payload: { inputName: '' } })
 };
 
-const initalDebounceDelay = 1000;
-
-const useForm = (config: Config): Return => {
-  const { inputs, debounceDelay } = config;
+const useForm = (inputsConfig: Record<string, InputConfig>, debounceDelay: number = 1000): Return => {
   const [state, dispatch] = useReducer(
     reducer,
-    config,
+    inputsConfig,
     initializer
   );
 
   const change = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(actions.change(currentTarget, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
-  }, [inputs]);
+    dispatch(actions.change(currentTarget, inputsConfig[currentTarget.name].pattern, inputsConfig[currentTarget.name].errorMessage));
+  }, []);
 
   const debouncedChange = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const timerId = window.setTimeout(() => {
-      dispatch(actions.revalid(currentTarget, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
-    }, inputs[currentTarget.name].debounceDelay ?? debounceDelay ?? initalDebounceDelay);
+      dispatch(actions.revalid(currentTarget, inputsConfig[currentTarget.name].pattern, inputsConfig[currentTarget.name].errorMessage));
+    }, inputsConfig[currentTarget.name].debounceDelay ?? debounceDelay);
 
-    dispatch(actions.debouncedChange(currentTarget, timerId, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
-  }, [inputs, debounceDelay]);
+    dispatch(actions.debouncedChange(currentTarget, timerId, inputsConfig[currentTarget.name].pattern, inputsConfig[currentTarget.name].errorMessage));
+  }, []);
 
   const blur = useCallback(({ currentTarget }: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(actions.blur(currentTarget, inputs[currentTarget.name].pattern, inputs[currentTarget.name].errorMessage));
-  }, [inputs]);
+    dispatch(actions.blur(currentTarget, inputsConfig[currentTarget.name].pattern, inputsConfig[currentTarget.name].errorMessage));
+  }, []);
 
   const reset = useCallback((inputName: string): void => {
-    dispatch(actions.reset(inputName, inputs[inputName].defaultValue));
-  }, [inputs]);
+    dispatch(actions.reset(inputName, inputsConfig[inputName].defaultValue));
+  }, []);
 
   const resetForm = useCallback((): void => {
-    dispatch(actions.resetForm(inputs));
-  }, [inputs]);
+    dispatch(actions.resetForm(inputsConfig));
+  }, []);
 
   return {
     state,
