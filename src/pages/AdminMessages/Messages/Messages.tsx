@@ -36,7 +36,7 @@ const Messages: FC = () => {
         variant="column"
         className="px-[16px] md:pl-6 md:pr-[32px]"
       >
-        <MessagesCard onRefetch={refetchMessages}>{data as Message | null}</MessagesCard>
+        <MessagesCard onRefetch={refetchMessages}>{data as Record<string, Message> | null}</MessagesCard>
       </Container>
     </Section>
   );
