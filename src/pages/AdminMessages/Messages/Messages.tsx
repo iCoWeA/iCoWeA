@@ -34,7 +34,7 @@ const Messages: FC = () => {
         <Suspense fallback={fallbackNode}>
           <Await
             resolve={deferedMessages}
-            errorElement={<MessagesError>{data.current}</MessagesError>}
+            errorElement={<MessagesError />}
           >
             {resolvedNode}
           </Await>

@@ -3,11 +3,7 @@ import { useDispatch } from 'react-redux';
 import statusAlert from '../../../store/Slices/statusAlert';
 import MessagesCard from './MessagesCard';
 
-interface MessagesErrorProps {
-  children: Record<string, Message> | null;
-}
-
-const MessagesError: FC<MessagesErrorProps> = ({ children }) => {
+const MessagesError: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +14,7 @@ const MessagesError: FC<MessagesErrorProps> = ({ children }) => {
     };
   }, []);
 
-  return <MessagesCard>{children}</MessagesCard>;
+  return <MessagesCard>{{}}</MessagesCard>;
 };
 
 export default MessagesError;
