@@ -62,8 +62,8 @@ const initializeInput = (defaultValue: string = ''): InputState => ({
   timerId: initialTimerId
 });
 
-const reducer = (state: State, { type, payload: { inputName, input, defaultValue, pattern, timerId = initialTimerId, errorMessage = '', config = {} } }: Action): State => {
-  const inputs: Record<string, InputState> = deepClone(state.inputs);
+const reducer = (prevState: State, { type, payload: { inputName, input, defaultValue, pattern, timerId = initialTimerId, errorMessage = '', config = {} } }: Action): State => {
+  const inputs = deepClone(prevState.inputs);
 
   if (type === ActionTypes.CHANGE) {
     clearTimeout(inputs[inputName].timerId);

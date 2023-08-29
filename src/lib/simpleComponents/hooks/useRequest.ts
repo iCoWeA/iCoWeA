@@ -1,4 +1,5 @@
 import { useCallback, useReducer } from 'react';
+import { deepClone } from '../utils/propsHelper';
 
 enum ActionTypes {LOADING, SUCCESS, FAILED}
 
@@ -24,27 +25,25 @@ interface Return {
   send: (url: string, request?: RequestInit) => Promise<void>;
 }
 
-const reducer = ({ isLoading, data, error }: State, { type, payload }: Action): State => {
+const reducer = (prevState: State, { type, payload }: Action): State => {
+  const state = deepClone(prevState);
+
   if (type === ActionTypes.LOADING) {
-    isLoading = true;
+    state.isLoading = true;
   }
 
   if (type === ActionTypes.FAILED) {
-    isLoading = false;
-    error = payload;
+    state.isLoading = false;
+    state.error = payload;
   }
 
   if (type === ActionTypes.SUCCESS) {
-    isLoading = false;
-    data = payload;
-    error = null;
+    state.isLoading = false;
+    state.data = payload;
+    state.error = null;
   }
 
-  return {
-    data,
-    isLoading,
-    error
-  };
+  return state;
 };
 
 const actions: Actions = {
