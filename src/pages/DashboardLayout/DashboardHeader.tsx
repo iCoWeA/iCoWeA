@@ -13,7 +13,7 @@ const DashboardHeader: FC = () => {
     return (
       <Header
         color="light"
-        className="justify-between"
+        className="justify-between px-[16px]"
       >
         <Container>
           <DashboardMenuButton />
@@ -27,7 +27,7 @@ const DashboardHeader: FC = () => {
   return (
     <Header
       color="light"
-      className="justify-between md:pl-6"
+      className="justify-between pr-[32px] md:pl-6"
     >
       <DashboardLogo />
       <DashboardAvatar />
