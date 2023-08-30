@@ -34,7 +34,6 @@ export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   responsive?: boolean;
   overlayRef?: Element | null;
   lockScroll?: boolean;
-  disableOutsideClick?: boolean;
   unmountOnExit?: boolean;
   transitionConfig?: TransitionConfig;
   handler?: ReactElement;
@@ -57,7 +56,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((containerProps, contai
     responsive,
     overlayRef,
     lockScroll,
-    disableOutsideClick,
     unmountOnExit,
     transitionConfig,
     handler,
@@ -96,7 +94,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((containerProps, contai
   }, [position, gap, responsive]);
 
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    console.log('vykonane');
     if (!(componentsRef.current.container?.contains(event.target as Node) ?? false)) {
       exit();
     }
@@ -104,7 +101,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((containerProps, contai
 
   useOutsideClick(
     outsideClickHandler,
-    (transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && !disableOutsideClick && !backdrop
+    (transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && open === undefined && !backdrop
   );
 
   useScroll(resize, enterState);
@@ -183,7 +180,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((containerProps, contai
     } = mergeProps(defaultProps.backdropProps, backdropProps);
 
     const closeBackdropHandler = (): void => {
-      exit();
+      if (open === undefined) {
+        exit();
+      }
 
       if (onBackdropClose !== undefined) {
         onBackdropClose();

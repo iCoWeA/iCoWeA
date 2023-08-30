@@ -10,7 +10,6 @@ export interface PopoverConfig {
     responsive: boolean;
     overlayRef: Element | null;
     lockScroll: boolean;
-    disableOutsideClick: boolean;
     unmountOnExit: boolean;
     transitionConfig: {
       enterDuration: number,
@@ -39,7 +38,6 @@ const popoverConfig: PopoverConfig = {
     responsive: true,
     overlayRef: null,
     lockScroll: false,
-    disableOutsideClick: false,
     unmountOnExit: true,
     transitionConfig: {
       enterDuration: 500,
