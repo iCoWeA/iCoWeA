@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ButtonHTMLAttributes, type ReactNode } from 'react';
 
 export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
 
@@ -9,8 +9,9 @@ export interface ButtonGroupConfig {
     color: Colors;
     elevated: boolean;
     fullwidth: boolean;
+    type: 'submit' | 'reset' | 'button';
+    buttonProps: Record<number, ButtonHTMLAttributes<HTMLButtonElement>>;
     className: string;
-    type?: 'submit' | 'reset' | 'button';
     children?: ReactNode;
   };
   styles: {
@@ -37,8 +38,9 @@ const buttonGroupConfig: ButtonGroupConfig = {
     color: 'primary',
     elevated: false,
     fullwidth: false,
-    className: '',
-    type: 'button'
+    type: 'button',
+    buttonProps: {},
+    className: ''
   },
   styles: {
     root: {

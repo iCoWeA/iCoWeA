@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes, type ReactNode, cloneElement } from 'react';
+import React, { forwardRef, useContext, type BaseHTMLAttributes, type ReactNode, type ButtonHTMLAttributes } from 'react';
 import { type ButtonGroupVariants } from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
 import { isLast, mergeClasses, mergeProps } from '../../utils/propsHelper';
@@ -9,8 +9,9 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
-  className?: string;
   type?: 'submit' | 'reset' | 'button';
+  buttonProps?: Record<number, ButtonHTMLAttributes<HTMLButtonElement>>;
+  className?: string;
   children?: ReactNode;
 }
 
@@ -23,8 +24,9 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, roo
     color,
     elevated,
     fullwidth,
+    type,
+    buttonProps,
     className: rootClassName,
-    type: buttonType,
     children: rootChildren,
     ...restRootProps
   } = mergeProps(defaultProps, rootProps);
@@ -39,6 +41,13 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, roo
 
   for (let i = 0; i < childrenNodes.length; i++) {
     const buttonStyles = styles.button;
+    const {
+      className: buttonClassName,
+      children: buttonChildren = childrenNodes[i].props.children,
+      type: buttonType = type,
+      ...restButtonProps
+    } = buttonProps[i] ?? {};
+
     const mergedButtonClassName = mergeClasses(
       buttonStyles.base,
       buttonStyles.variants[variant][theme][color],
@@ -46,14 +55,19 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, roo
       elevated && buttonStyles.elevated[theme],
       i === 0 && buttonStyles.first,
       isLast(childrenNodes, i) && buttonStyles.last[variant],
-      childrenNodes[i].props.className
+      buttonClassName
     );
 
-    buttonNodes[i] = cloneElement(childrenNodes[i], {
-      className: mergedButtonClassName,
-      type: childrenNodes[i].props.type ?? buttonType,
-      key: i
-    });
+    buttonNodes[i] = (
+      <button
+        key={i}
+        className={mergedButtonClassName}
+        type={buttonType}
+        {...restButtonProps}
+      >
+        {buttonChildren}
+      </button>
+    );
   }
 
   return (
