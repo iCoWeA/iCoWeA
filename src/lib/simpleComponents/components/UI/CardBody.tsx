@@ -9,11 +9,12 @@ export interface CardBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const CardBody = forwardRef<HTMLDivElement, CardBodyProps>((props, ref) => {
+  /* --- Set default props --- */
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.cardBody;
   const { columns, fullwidht, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, columns && styles.columns, fullwidht && styles.fullwidth, className);
 
   return (

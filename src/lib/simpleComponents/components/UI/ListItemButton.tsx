@@ -14,11 +14,12 @@ export interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
 }
 
 const ListItemButton = forwardRef<HTMLButtonElement, ListItemButtonProps>((props, ref) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.listItemButton;
   const { variant, size, color, fullwidth, selected, className, type, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
     styles.sizes[size],

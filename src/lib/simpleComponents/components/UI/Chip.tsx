@@ -18,6 +18,7 @@ export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Chip = forwardRef<HTMLDivElement, ChipProps>((containerProps, containerRef) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.chip;
   const {
@@ -34,10 +35,8 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((containerProps, containerRef
     children: containerChildren,
     ...restContainerProps
   } = mergeProps(defaultProps, containerProps);
-  let buttonContainerNode: ReactNode;
-  let buttonNode: ReactNode;
 
-  /* Set container props */
+  /* --- Set container props --- */
   const containerStyles = styles.container;
   const mergedContainerClassName = mergeClasses(
     containerStyles.base,
@@ -47,21 +46,21 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((containerProps, containerRef
     containerClassName
   );
 
-  /* Set body props */
+  /* --- Set body props --- */
   const bodyStyles = styles.body;
   const { className: bodyClassName, ...restBodyProps } = bodyProps;
 
   const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
 
-  /* Set button props */
+  /* --- Set button props --- */
+  let buttonNode: ReactNode;
+
   if (action === undefined && onClose !== undefined) {
     const buttonStyles = styles.button;
     const { onClick: onButtonClick, className: buttonClassName, ...restButtonProps } = buttonProps;
 
     const clickButtonHandler = (event: MouseEvent<HTMLButtonElement>): void => {
-      if (onClose !== undefined) {
-        onClose();
-      }
+      onClose();
 
       if (onButtonClick !== undefined) {
         onButtonClick(event);
@@ -83,7 +82,9 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((containerProps, containerRef
     );
   }
 
-  /* Set button container props */
+  /* --- Set button container props --- */
+  let buttonContainerNode: ReactNode;
+
   if (action !== undefined || onClose !== undefined) {
     const buttonContainerStyles = styles.buttonContainer;
     const { className: buttonContainerClassName, ...restButtonContainerProps } = buttonContainerProps;

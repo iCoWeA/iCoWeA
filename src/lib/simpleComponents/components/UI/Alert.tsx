@@ -19,6 +19,7 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerRef) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.alert;
   const {
@@ -36,11 +37,8 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerR
     children: containerChildren,
     ...restContainerProps
   } = mergeProps(defaultProps, containerProps);
-  let iconContainerNode: ReactNode;
-  let buttonContainerNode: ReactNode;
-  let buttonNode: ReactNode;
 
-  /* Set container props */
+  /* --- Set container props --- */
   const containerStyles = styles.container;
   const mergedContainerClassName = mergeClasses(
     containerStyles.base,
@@ -49,7 +47,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerR
     containerClassName
   );
 
-  /* Set icon container props */
+  /* --- Set icon container props --- */
+  let iconContainerNode: ReactNode;
+
   if (icon !== undefined) {
     const iconContainerStyles = styles.iconContainer;
     const { className: iconContainerClassName, ...restButtonContainerProps } = iconContainerProps;
@@ -66,13 +66,15 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerR
     );
   }
 
-  /* Set body props */
+  /* --- Set body props --- */
   const bodyStyles = styles.body;
   const { className: bodyClassName, ...restBodyProps } = bodyProps;
 
   const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
 
-  /* Set button props */
+  /* --- Set button props --- */
+  let buttonNode: ReactNode;
+
   if (action === undefined && onClose !== undefined) {
     const buttonStyles = styles.button;
     const { onClick: onButtonClick, className: buttonClassName, ...restButtonProps } = buttonProps;
@@ -100,7 +102,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerR
     );
   }
 
-  /* Set button container props */
+  /* --- Set button container props --- */
+  let buttonContainerNode: ReactNode;
+
   if (action !== undefined || onClose !== undefined) {
     const buttonContainerStyles = styles.buttonContainer;
     const { className: buttonContainerClassName, ...restButtonContainerProps } = buttonContainerProps;

@@ -12,11 +12,12 @@ export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
 }
 
 const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.avatar;
   const { variant, size, color, withBorder, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant],

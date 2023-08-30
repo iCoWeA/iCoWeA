@@ -17,6 +17,7 @@ export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>((props, popoverRef) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.menu;
   const {
@@ -32,7 +33,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, popoverRef) => {
     ...restContainerProps
   } = mergeProps(defaultProps, props);
 
-  /* Set popover props */
+  /* --- Set popover props --- */
   const {
     open: popoverOpen = open,
     position: popoverPosition = position,
@@ -42,7 +43,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, popoverRef) => {
     ...restPopoverProps
   } = popoverProps;
 
-  /* Set contianer props */
+  /* --- Set contianer props --- */
   const mergedContainerClassName = mergeClasses(styles.base, styles.colors[theme][color], elevated && styles.elevated[theme], containerClassName);
 
   return (

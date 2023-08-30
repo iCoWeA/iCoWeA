@@ -14,6 +14,7 @@ export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonEle
 }
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((buttonProps, buttonRef) => {
+  /* --- Set default props --- */
   const { open, disabled, duration, onClick } = useContext(accordionContext);
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.accordionHeader;
@@ -27,9 +28,8 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((but
     children: buttonChildren,
     ...restButtonProps
   } = mergeProps({ ...defaultProps, disabled }, buttonProps);
-  let iconNode: ReactNode;
 
-  /* Set button props */
+  /* --- Set button props --- */
   const buttonStyles = styles.button;
   const clickButtonHandler = (event: MouseEvent<HTMLButtonElement>): void => {
     onClick();
@@ -41,7 +41,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((but
 
   const mergedButtonClassName = mergeClasses(buttonStyles.base, buttonStyles.colors[theme][color], buttonClassName);
 
-  /* Set icon props */
+  /* --- Set icon props --- */
+  let iconNode: ReactNode;
+
   if (icon) {
     const iconStyles = styles.icon;
     const { style: iconStyle, className: iconClassName, ...restIconProps } = iconProps;

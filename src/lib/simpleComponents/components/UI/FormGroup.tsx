@@ -8,11 +8,12 @@ export interface FormGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>((props, ref) => {
+  /* --- Set default props --- */
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.formGroup;
   const { row, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, row && styles.row, className);
 
   return (

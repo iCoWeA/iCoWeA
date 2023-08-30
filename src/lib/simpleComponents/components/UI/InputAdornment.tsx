@@ -8,11 +8,12 @@ export interface InputAdornmentProps extends BaseHTMLAttributes<HTMLDivElement> 
 }
 
 const InputAdornment = forwardRef<HTMLDivElement, InputAdornmentProps>((props, ref) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.inputAdornment;
   const { color, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
 
   return (

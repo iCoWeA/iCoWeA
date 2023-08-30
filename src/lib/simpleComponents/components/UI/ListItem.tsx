@@ -10,11 +10,12 @@ export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
 }
 
 const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.listItem;
   const { size, color, disablePadding, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.sizes[size], styles.colors[theme][color], disablePadding && styles.disablePadding, className);
 
   return (

@@ -14,6 +14,7 @@ export interface ProgressProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, containerRef) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.progress;
   const {
@@ -28,7 +29,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, containerRef)
     ...restBarProps
   } = mergeProps(defaultProps, props);
 
-  /* Set container props */
+  /* --- Set container props --- */
   const containerStyles = styles.container;
   const { className: containerClassName, ...restContainerProps } = containerProps;
 
@@ -40,7 +41,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, containerRef)
     containerClassName
   );
 
-  /* Set bar props */
+  /* --- Set bar props --- */
   const barStyles = styles.bar;
 
   const setBarRef = (element: HTMLDivElement): void => {

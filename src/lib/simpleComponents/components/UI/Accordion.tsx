@@ -13,12 +13,15 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
+  /* --- Set default props --- */
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.accordion;
   const { onToggle, open, duration, disabled, className, ...restProps } = mergeProps(defaultProps, props);
 
+  /* --- Set states --- */
   const [isOpen, setIsOpen] = useState(false);
 
+  /* --- Set previous values  --- */
   const prevOpen = usePrevious(open);
 
   useEffect(() => {
@@ -27,6 +30,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
     }
   }, [open]);
 
+  /* --- Set context --- */
   const context: AccordionContext = useMemo(
     () => ({
       open: open ?? isOpen,

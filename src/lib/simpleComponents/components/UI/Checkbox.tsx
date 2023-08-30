@@ -27,6 +27,7 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, containerRef) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.checkbox;
   const {
@@ -44,15 +45,14 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, containe
     children: inputChildren,
     ...restInputProps
   } = mergeProps(defaultProps, inputProps);
-  let iconNode: ReactNode;
 
-  /* Set container props */
+  /* --- Set container props --- */
   const containerStyles = styles.container;
   const { className: containerClassName, ...restContainerProps } = containerProps;
 
   const mergedContainerClassName = mergeClasses(containerStyles.base, containerClassName);
 
-  /* Set input props */
+  /* --- Set input props --- */
   const inputStyles = styles.input;
   const mergedInputClassName = mergeClasses(
     inputStyles.base,
@@ -69,7 +69,9 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, containe
     }
   };
 
-  /* Set icon props */
+  /* --- Set icon props --- */
+  let iconNode: ReactNode;
+
   if (icon === undefined) {
     const iconStyles = styles.icon;
     const { className: iconClassName, ...restIconProps } = iconProps;

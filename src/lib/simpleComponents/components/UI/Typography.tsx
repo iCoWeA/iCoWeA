@@ -11,11 +11,12 @@ export interface TypographyProps extends BaseHTMLAttributes<HTMLParagraphElement
 }
 
 const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, TypographyProps>((props, ref) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.typography;
   const { variant, align, color, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant], styles.aligns[align], styles.colors[theme][color], className);
 
   if (variant === 'h1') {

@@ -28,28 +28,37 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
-  const componentRef = useRef<HTMLDivElement>(null);
-
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
-
+  /* --- Set default props --- */
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.collapse;
   const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, children, ...restProps } = mergeProps(defaultProps, props);
   const mergedTransitionConfig = mergeProps(defaultProps.transitionConfig, transitionConfig);
 
-  const { state: transitionState, enterState, exitState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
+  /* --- Set refs --- */
+  const componentRef = useRef<HTMLDivElement>(null);
 
+  /* --- Set imperative handler --- */
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
+
+  /* --- Set states --- */
+  const { state: transitionState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
+  const transitionEntering =
+    transitionState === TransitionStates.ENTER || transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED;
+  const transitionExiting =
+    transitionState === TransitionStates.EXIT || transitionState === TransitionStates.EXITING || transitionState === TransitionStates.EXITED;
+
+  /* --- Set open state --- */
   useEffect(() => {
-    if (open && exitState) {
+    if (open && transitionExiting) {
       enter();
     }
 
-    if (!open && enterState) {
+    if (!open && transitionEntering) {
       exit();
     }
-  }, [open, exitState, enterState]);
+  }, [open, transitionEntering, transitionExiting]);
 
-  /* Set props */
+  /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
     if (transitionState === TransitionStates.ENTERING && event.target === componentRef.current) {
       enter(true);

@@ -13,11 +13,12 @@ export interface LinkProps extends BaseLinkProps {
 }
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.link;
   const { underline, color, fullwidth, disabled, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
     styles.underlines[underline],

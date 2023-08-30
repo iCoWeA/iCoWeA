@@ -9,11 +9,12 @@ export interface ListProps extends BaseHTMLAttributes<HTMLUListElement> {
 }
 
 const List = forwardRef<HTMLUListElement, ListProps>((props, ref) => {
+  /* --- Set default props --- */
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.list;
   const { row, disableGap, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, row && styles.row, disableGap && styles.disableGap, className);
 
   return (

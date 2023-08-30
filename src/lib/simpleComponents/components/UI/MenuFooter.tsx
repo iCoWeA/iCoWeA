@@ -9,11 +9,12 @@ export interface MenuFooterProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const MenuFooter = forwardRef<HTMLDivElement, MenuFooterProps>((props, ref) => {
+  /* --- Set default props --- */
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.menuFooter;
   const { columns, fullwidht, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, columns && styles.columns, fullwidht && styles.fullwidth, className);
 
   return (

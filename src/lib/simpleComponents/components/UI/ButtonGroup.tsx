@@ -15,6 +15,7 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((containerProps, containerRef) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.buttonGroup;
   const {
@@ -29,11 +30,11 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((containerProps
     ...restContainerProps
   } = mergeProps(defaultProps, containerProps);
 
-  /* Set container props */
+  /* --- Set container props --- */
   const containerStyles = styles.container;
   const mergedContainerClassName = mergeClasses(containerStyles.base, fullwidth && containerStyles.fullwidth, containerClassName);
 
-  /* Set buttons props */
+  /* --- Set buttons props --- */
   const buttonNodes: ReactNode[] = [];
   const childrenNodes = Array.isArray(containerChildren) ? [...containerChildren] : [containerChildren];
 

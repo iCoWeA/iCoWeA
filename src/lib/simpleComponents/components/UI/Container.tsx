@@ -9,11 +9,12 @@ export interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
+  /* --- Set default props --- */
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.container;
   const { variant, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant], className);
 
   return (

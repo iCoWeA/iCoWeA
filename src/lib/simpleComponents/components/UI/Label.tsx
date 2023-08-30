@@ -8,11 +8,12 @@ export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 }
 
 const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.label;
   const { color, className, ...restProps } = mergeProps(defaultProps, props);
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
 
   return (
