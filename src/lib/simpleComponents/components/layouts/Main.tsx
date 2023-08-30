@@ -8,10 +8,12 @@ export interface MainProps extends BaseHTMLAttributes<HTMLElement> {
 }
 
 const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.main;
   const { color, className, ...restProps } = mergeProps(defaultProps, props);
 
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
 
   return (

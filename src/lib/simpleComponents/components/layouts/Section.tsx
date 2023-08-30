@@ -8,10 +8,12 @@ export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
 }
 
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
+  /* --- Set default props --- */
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.section;
   const { color, className, ...restProps } = mergeProps(defaultProps, props);
 
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
 
   return (
