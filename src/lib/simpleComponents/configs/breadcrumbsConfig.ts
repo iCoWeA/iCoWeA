@@ -11,7 +11,7 @@ export interface BreadcrumbsConfig {
     children?: ReactNode;
   };
   styles: {
-    root: {
+    list: {
       base: Record<string, string>;
       fullwidth: Record<string, string>;
     },
@@ -35,7 +35,7 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
     className: ''
   },
   styles: {
-    root: {
+    list: {
       base: {
         display: 'flex',
         flexWrap: 'flex-wrap',

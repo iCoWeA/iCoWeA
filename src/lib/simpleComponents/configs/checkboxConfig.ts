@@ -6,7 +6,7 @@ export interface CheckboxConfig {
     valid: boolean;
     invalid: boolean;
     icon?: ReactNode;
-    rootProps: BaseHTMLAttributes<HTMLDivElement>;
+    containerProps: BaseHTMLAttributes<HTMLDivElement>;
     iconProps: SVGAttributes<SVGSVGElement>;
     inputRef?: MutableRefObject<HTMLInputElement> | null;
     checked: boolean;
@@ -16,7 +16,7 @@ export interface CheckboxConfig {
     children?: ReactNode;
   };
   styles: {
-    root: {
+    container: {
       base: Record<string, string>;
     },
     input: {
@@ -38,7 +38,7 @@ const checkboxConfig: CheckboxConfig = {
     color: 'primary',
     valid: false,
     invalid: false,
-    rootProps: {},
+    containerProps: {},
     iconProps: {},
     checked: false,
     disabled: false,
@@ -46,7 +46,7 @@ const checkboxConfig: CheckboxConfig = {
     className: ''
   },
   styles: {
-    root: {
+    container: {
       base: {
         position: 'relative',
         display: 'inline-block',

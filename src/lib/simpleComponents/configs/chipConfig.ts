@@ -17,7 +17,7 @@ export interface ChipConfig {
     children?: ReactNode;
   };
   styles: {
-    root: {
+    container: {
       base: Record<string, string>;
       invisible: Record<string, string>;
       sizes: Record<Sizes, Record<string, string>>;
@@ -48,7 +48,7 @@ const chipConfig: ChipConfig = {
     className: ''
   },
   styles: {
-    root: {
+    container: {
       base: {
         display: 'flex',
         alignItems: 'items-center',

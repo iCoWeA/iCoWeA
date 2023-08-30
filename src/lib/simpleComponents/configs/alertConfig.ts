@@ -18,7 +18,7 @@ export interface AlertConfig {
     children?: ReactNode;
   };
   styles: {
-    root: {
+    container: {
       base: Record<string, string>;
       invisible: Record<string, string>;
       variants: Record<AlertVariants, Record<string, Record<Colors, Record<string, string>>>>
@@ -51,7 +51,7 @@ const alertConfig: AlertConfig = {
     className: ''
   },
   styles: {
-    root: {
+    container: {
       base: {
         display: 'flex',
         alignItems: 'items-start',

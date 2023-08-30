@@ -18,7 +18,7 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
+const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.alert;
   const {
@@ -32,17 +32,22 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
     bodyProps,
     buttonContainerProps,
     buttonProps,
-    className: rootClassName,
-    children: rootChildren,
-    ...restRootProps
-  } = mergeProps(defaultProps, rootProps);
+    className: containerClassName,
+    children: containerChildren,
+    ...restContainerProps
+  } = mergeProps(defaultProps, containerProps);
   let iconContainerNode: ReactNode;
   let buttonContainerNode: ReactNode;
   let buttonNode: ReactNode;
 
-  /* Set root props */
-  const rootStyles = styles.root;
-  const mergedRootClassName = mergeClasses(rootStyles.base, rootStyles.variants[variant][theme][color], invisible && rootStyles.invisible, rootClassName);
+  /* Set container props */
+  const containerStyles = styles.container;
+  const mergedContainerClassName = mergeClasses(
+    containerStyles.base,
+    containerStyles.variants[variant][theme][color],
+    invisible && containerStyles.invisible,
+    containerClassName
+  );
 
   /* Set icon container props */
   if (icon !== undefined) {
@@ -114,16 +119,16 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((rootProps, rootRef) => {
 
   return (
     <div
-      className={mergedRootClassName}
-      ref={rootRef}
-      {...restRootProps}
+      className={mergedContainerClassName}
+      ref={containerRef}
+      {...restContainerProps}
     >
       {iconContainerNode}
       <div
         className={mergedBodyClassName}
         {...restBodyProps}
       >
-        {rootChildren}
+        {containerChildren}
       </div>
       {buttonContainerNode}
     </div>

@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes, type ReactNode, type ButtonHTMLAttributes } from 'react';
+import React, { forwardRef, useContext, type BaseHTMLAttributes, type ReactNode } from 'react';
 import { type ButtonGroupVariants } from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
 import { isLast, mergeClasses, mergeProps } from '../../utils/propsHelper';
@@ -10,12 +10,11 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   elevated?: boolean;
   fullwidth?: boolean;
   type?: 'submit' | 'reset' | 'button';
-  buttonProps?: Record<number, ButtonHTMLAttributes<HTMLButtonElement>>;
   className?: string;
   children?: ReactNode;
 }
 
-const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, rootRef) => {
+const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((containerProps, containerRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.buttonGroup;
   const {
@@ -25,28 +24,22 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, roo
     elevated,
     fullwidth,
     type,
-    buttonProps,
-    className: rootClassName,
-    children: rootChildren,
-    ...restRootProps
-  } = mergeProps(defaultProps, rootProps);
+    className: containerClassName,
+    children: containerChildren,
+    ...restContainerProps
+  } = mergeProps(defaultProps, containerProps);
 
-  /* Set root props */
-  const rootStyles = styles.root;
-  const mergedRootClassName = mergeClasses(rootStyles.base, fullwidth && rootStyles.fullwidth, rootClassName);
+  /* Set container props */
+  const containerStyles = styles.container;
+  const mergedContainerClassName = mergeClasses(containerStyles.base, fullwidth && containerStyles.fullwidth, containerClassName);
 
   /* Set buttons props */
   const buttonNodes: ReactNode[] = [];
-  const childrenNodes = Array.isArray(rootChildren) ? [...rootChildren] : [rootChildren];
+  const childrenNodes = Array.isArray(containerChildren) ? [...containerChildren] : [containerChildren];
 
   for (let i = 0; i < childrenNodes.length; i++) {
     const buttonStyles = styles.button;
-    const {
-      className: buttonClassName,
-      children: buttonChildren = childrenNodes[i].props.children,
-      type: buttonType = type,
-      ...restButtonProps
-    } = buttonProps[i] ?? {};
+    const { className: buttonClassName, type: buttonType = type, children: buttonChildren, ...restButtonProps } = childrenNodes[i].props;
 
     const mergedButtonClassName = mergeClasses(
       buttonStyles.base,
@@ -63,6 +56,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, roo
         key={i}
         className={mergedButtonClassName}
         type={buttonType}
+        ref={childrenNodes[i].ref}
         {...restButtonProps}
       >
         {buttonChildren}
@@ -72,9 +66,9 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((rootProps, roo
 
   return (
     <div
-      className={mergedRootClassName}
-      ref={rootRef}
-      {...restRootProps}
+      className={mergedContainerClassName}
+      ref={containerRef}
+      {...restContainerProps}
     >
       {buttonNodes}
     </div>

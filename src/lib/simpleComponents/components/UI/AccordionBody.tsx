@@ -5,30 +5,29 @@ import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
 export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
-  rootProps?: CollapseProps;
+  collapseProps?: CollapseProps;
   className?: string;
 }
 
-const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((bodyProps, rootRef) => {
+const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((bodyProps, collapseRef) => {
   const { open, duration } = useContext(accordionContext);
   const { config } = useContext(themeContext);
   const { defaultProps, styles } = config.accordionBody;
-  const { rootProps, className: bodyClassName, ...restBodyProps } = mergeProps(defaultProps, bodyProps);
+  const { collapseProps, className: bodyClassName, ...restBodyProps } = mergeProps(defaultProps, bodyProps);
 
-  /* Set root props */
-  const { open: rootOpen = open, transitionConfig: rootTransitionConfig, ...restRootProps } = rootProps;
-  const mergedRootTransitionConfig = mergeProps({ enterDuration: duration, exitDuration: duration }, rootTransitionConfig ?? {});
+  /* Set collapse props */
+  const { open: collapseOpen = open, transitionConfig: collapseTransitionConfig, ...restCollapseProps } = collapseProps;
+  const mergedCollapseTransitionConfig = mergeProps({ enterDuration: duration, exitDuration: duration }, collapseTransitionConfig ?? {});
 
   /* Set body props */
-  const bodyStyles = styles.body;
-  const mergedBodyClassName = mergeClasses(bodyStyles.base, bodyClassName);
+  const mergedBodyClassName = mergeClasses(styles.base, bodyClassName);
 
   return (
     <Collapse
-      open={rootOpen}
-      transitionConfig={mergedRootTransitionConfig}
-      ref={rootRef}
-      {...restRootProps}
+      open={collapseOpen}
+      transitionConfig={mergedCollapseTransitionConfig}
+      ref={collapseRef}
+      {...restCollapseProps}
     >
       <div
         className={mergedBodyClassName}

@@ -17,7 +17,7 @@ export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
+const Chip = forwardRef<HTMLDivElement, ChipProps>((containerProps, containerRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.chip;
   const {
@@ -30,21 +30,21 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
     bodyProps,
     buttonContainerProps,
     buttonProps,
-    className: rootClassName,
-    children: rootChildren,
-    ...restRootProps
-  } = mergeProps(defaultProps, rootProps);
+    className: containerClassName,
+    children: containerChildren,
+    ...restContainerProps
+  } = mergeProps(defaultProps, containerProps);
   let buttonContainerNode: ReactNode;
   let buttonNode: ReactNode;
 
-  /* Set root props */
-  const rootStyles = styles.root;
-  const mergedRootClassName = mergeClasses(
-    rootStyles.base,
-    rootStyles.variants[variant][theme][color],
-    rootStyles.sizes[size],
-    invisible && rootStyles.invisible,
-    rootClassName
+  /* Set container props */
+  const containerStyles = styles.container;
+  const mergedContainerClassName = mergeClasses(
+    containerStyles.base,
+    containerStyles.variants[variant][theme][color],
+    containerStyles.sizes[size],
+    invisible && containerStyles.invisible,
+    containerClassName
   );
 
   /* Set body props */
@@ -102,15 +102,15 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((rootProps, rootRef) => {
 
   return (
     <div
-      className={mergedRootClassName}
-      ref={rootRef}
-      {...restRootProps}
+      className={mergedContainerClassName}
+      ref={containerRef}
+      {...restContainerProps}
     >
       <div
         className={mergedBodyClassName}
         {...restBodyProps}
       >
-        {rootChildren}
+        {containerChildren}
       </div>
       {buttonContainerNode}
     </div>

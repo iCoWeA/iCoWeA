@@ -12,7 +12,7 @@ export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLUListElement> {
   children?: ReactNode;
 }
 
-const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((rootProps, rootRef) => {
+const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((listProps, listRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.breadcrumbs;
   const {
@@ -21,18 +21,18 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((rootProps, r
     fullwidth,
     itemsProps,
     separatorsProps,
-    className: rootClassName,
-    children: rootChildren,
-    ...restRootProps
-  } = mergeProps(defaultProps, rootProps);
+    className: listClassName,
+    children: listChildren,
+    ...restListProps
+  } = mergeProps(defaultProps, listProps);
 
-  /* Set root props */
-  const rootStyles = styles.root;
-  const mergedRootClassName = mergeClasses(rootStyles.base, fullwidth && rootStyles.fullwidth, rootClassName);
+  /* Set list props */
+  const listStyles = styles.list;
+  const mergedListClassName = mergeClasses(listStyles.base, fullwidth && listStyles.fullwidth, listClassName);
 
   /* Set items props */
   const itemNodes: ReactNode[] = [];
-  const childrenNodes = Array.isArray(rootChildren) ? [...rootChildren] : [rootChildren];
+  const childrenNodes = Array.isArray(listChildren) ? [...listChildren] : [listChildren];
 
   for (let i = 0; i < childrenNodes.length; i++) {
     let separatorNode: ReactNode;
@@ -74,9 +74,9 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((rootProps, r
 
   return (
     <ul
-      className={mergedRootClassName}
-      ref={rootRef}
-      {...restRootProps}
+      className={mergedListClassName}
+      ref={listRef}
+      {...restListProps}
     >
       {itemNodes}
     </ul>

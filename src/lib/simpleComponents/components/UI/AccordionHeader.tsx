@@ -13,7 +13,7 @@ export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonEle
   children?: ReactNode;
 }
 
-const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((rootProps, rootRef) => {
+const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((buttonProps, buttonRef) => {
   const { open, disabled, duration, onClick } = useContext(accordionContext);
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.accordionHeader;
@@ -21,25 +21,25 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((roo
     color,
     icon,
     iconProps,
-    onClick: onRootClick,
-    disabled: rootDisabled,
-    className: rootClassName,
-    children: rootChildren,
-    ...restRootProps
-  } = mergeProps({ ...defaultProps, disabled }, rootProps);
+    onClick: onButtonClick,
+    disabled: buttonDisabled,
+    className: buttonClassName,
+    children: buttonChildren,
+    ...restButtonProps
+  } = mergeProps({ ...defaultProps, disabled }, buttonProps);
   let iconNode: ReactNode;
 
-  /* Set root props */
-  const rootStyles = styles.root;
-  const clickRootHandler = (event: MouseEvent<HTMLButtonElement>): void => {
+  /* Set button props */
+  const buttonStyles = styles.button;
+  const clickButtonHandler = (event: MouseEvent<HTMLButtonElement>): void => {
     onClick();
 
-    if (onRootClick !== undefined) {
-      onRootClick(event);
+    if (onButtonClick !== undefined) {
+      onButtonClick(event);
     }
   };
 
-  const mergedRootClassName = mergeClasses(rootStyles.base, rootStyles.colors[theme][color], rootClassName);
+  const mergedButtonClassName = mergeClasses(buttonStyles.base, buttonStyles.colors[theme][color], buttonClassName);
 
   /* Set icon props */
   if (icon) {
@@ -63,13 +63,13 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((roo
 
   return (
     <button
-      onClick={clickRootHandler}
-      disabled={rootDisabled}
-      className={mergedRootClassName}
-      ref={rootRef}
-      {...restRootProps}
+      onClick={clickButtonHandler}
+      disabled={buttonDisabled}
+      className={mergedButtonClassName}
+      ref={buttonRef}
+      {...restButtonProps}
     >
-      {rootChildren}
+      {buttonChildren}
       {iconNode}
     </button>
   );

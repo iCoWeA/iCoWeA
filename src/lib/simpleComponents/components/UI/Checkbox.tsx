@@ -16,7 +16,7 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   valid?: boolean;
   invalid?: boolean;
   icon?: ReactNode;
-  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+  containerProps?: BaseHTMLAttributes<HTMLDivElement>;
   iconProps?: SVGAttributes<SVGSVGElement>;
   inputRef?: MutableRefObject<HTMLInputElement> | null;
   checked?: boolean;
@@ -26,7 +26,7 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   children?: ReactNode;
 }
 
-const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef) => {
+const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, containerRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.checkbox;
   const {
@@ -34,7 +34,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef)
     valid,
     invalid,
     icon,
-    rootProps,
+    containerProps,
     iconProps,
     inputRef,
     checked: inputChecked,
@@ -46,11 +46,11 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef)
   } = mergeProps(defaultProps, inputProps);
   let iconNode: ReactNode;
 
-  /* Set root props */
-  const rootStyles = styles.root;
-  const { className: rootClassName, ...restRootProps } = rootProps;
+  /* Set container props */
+  const containerStyles = styles.container;
+  const { className: containerClassName, ...restContainerProps } = containerProps;
 
-  const mergedRootClassName = mergeClasses(rootStyles.base, rootClassName);
+  const mergedContainerClassName = mergeClasses(containerStyles.base, containerClassName);
 
   /* Set input props */
   const inputStyles = styles.input;
@@ -89,9 +89,9 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((inputProps, rootRef)
 
   return (
     <div
-      className={mergedRootClassName}
-      ref={rootRef}
-      {...restRootProps}
+      className={mergedContainerClassName}
+      ref={containerRef}
+      {...restContainerProps}
     >
       <input
         checked={inputChecked}

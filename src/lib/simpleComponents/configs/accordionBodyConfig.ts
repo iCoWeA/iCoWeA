@@ -2,32 +2,26 @@ import { type CollapseProps } from '../components/UI/Collapse';
 
 export interface AccordionBodyConfig {
   defaultProps: {
-    rootProps: CollapseProps;
+    collapseProps: CollapseProps;
     className: string;
   };
   styles: {
-    root: Record<string, string>,
-    body: {
-      base: Record<string, string>;
-    }
+    base: Record<string, string>;
   }
 }
 
 const accordionBodyConfig: AccordionBodyConfig = {
   defaultProps: {
-    rootProps: {},
+    collapseProps: {},
     className: ''
   },
   styles: {
-    root: {},
-    body: {
-      base: {
-        display: 'flex',
-        flexDirection: 'flex-col',
-        gap: 'gap-4',
-        padding: 'py-4',
-        focus: 'focus:outline-0'
-      }
+    base: {
+      display: 'flex',
+      flexDirection: 'flex-col',
+      gap: 'gap-4',
+      padding: 'py-4',
+      focus: 'focus:outline-0'
     }
   }
 };

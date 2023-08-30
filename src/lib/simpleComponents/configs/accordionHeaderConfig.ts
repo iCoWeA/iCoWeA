@@ -11,7 +11,7 @@ export interface AccordionHeaderConfig {
     children?: ReactNode;
   };
   styles: {
-    root: {
+    button: {
       base: Record<string, string>;
       colors: Record<string, Record<Colors, Record<string, string>>>
     },
@@ -31,7 +31,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
     className: ''
   },
   styles: {
-    root: {
+    button: {
       base: {
         display: 'flex',
         gap: 'gap-2',
