@@ -13,7 +13,7 @@ import React, {
   useCallback,
   type ReactElement,
   cloneElement,
-  type MouseEvent,
+  type MouseEvent as ReactMouseEvent,
   type ReactNode
 } from 'react';
 import { createPortal } from 'react-dom';
@@ -95,9 +95,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
     }
   }, [position, gap, responsive]);
 
+  const outsideClickHandler = useCallback((event: MouseEvent) => {
+    if (!(componentsRef.current.root?.contains(event.currentTarget as Node) ?? true)) {
+      exit();
+    }
+  }, []);
+
   useOutsideClick(
-    componentsRef.current.root,
-    exit,
+    outsideClickHandler,
     (transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && !backdrop && !disableOutsideClick
   );
 
@@ -129,7 +134,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
 
   /* Set handler props */
   if (handler !== undefined) {
-    const onHandlerClick = (event: MouseEvent<HTMLElement>): void => {
+    const onHandlerClick = (event: ReactMouseEvent<HTMLElement>): void => {
       if (open === undefined && enterState) {
         exit();
       }
