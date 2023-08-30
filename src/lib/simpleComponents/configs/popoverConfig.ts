@@ -9,7 +9,7 @@ export interface PopoverConfig {
     gap: number;
     responsive: boolean;
     overlayRef: Element | null;
-    disableScrolling: boolean;
+    lockScroll: boolean;
     disableOutsideClick: boolean;
     unmountOnExit: boolean;
     transitionConfig: {
@@ -38,7 +38,7 @@ const popoverConfig: PopoverConfig = {
     gap: 1,
     responsive: true,
     overlayRef: null,
-    disableScrolling: false,
+    lockScroll: false,
     disableOutsideClick: false,
     unmountOnExit: true,
     transitionConfig: {

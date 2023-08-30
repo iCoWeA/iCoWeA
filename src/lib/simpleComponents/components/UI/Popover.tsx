@@ -33,7 +33,7 @@ export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   gap?: number;
   responsive?: boolean;
   overlayRef?: Element | null;
-  disableScrolling?: boolean;
+  lockScroll?: boolean;
   disableOutsideClick?: boolean;
   unmountOnExit?: boolean;
   transitionConfig?: TransitionConfig;
@@ -56,7 +56,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
     gap,
     responsive,
     overlayRef,
-    disableScrolling,
+    lockScroll,
     disableOutsideClick,
     unmountOnExit,
     transitionConfig,
@@ -116,14 +116,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
   }, [open, exitState, enterState]);
 
   useEffect(() => {
-    if (disableScrolling && enterState) {
+    if (lockScroll && enterState) {
       document.body.style.overflow = 'hidden';
     }
 
-    if (disableScrolling && exitState) {
+    if (lockScroll && exitState) {
       document.body.style.overflow = 'scroll';
     }
-  }, [disableScrolling, enterState, exitState]);
+  }, [lockScroll, enterState, exitState]);
 
   resize();
 
