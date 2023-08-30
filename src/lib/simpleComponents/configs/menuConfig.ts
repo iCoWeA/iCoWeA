@@ -11,7 +11,7 @@ export interface MenuConfig {
     overlayRef: Element | null;
     lockScroll: boolean;
     handler?: ReactElement;
-    rootProps: PopoverProps;
+    popoverProps: PopoverProps;
     className: string;
   };
   styles: {
@@ -28,7 +28,7 @@ const menuConfig: MenuConfig = {
     position: 'bottom',
     overlayRef: null,
     lockScroll: false,
-    rootProps: {},
+    popoverProps: {},
     className: ''
   },
   styles: {

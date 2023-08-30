@@ -7,14 +7,14 @@ export interface ProgressConfig {
     value: number | string;
     size: Sizes;
     color: Colors;
-    rootProps: BaseHTMLAttributes<HTMLDivElement>;
+    containerProps: BaseHTMLAttributes<HTMLDivElement>;
     barRef?: MutableRefObject<HTMLDivElement> | null;
     style: CSSProperties;
     className: string;
     children?: ReactNode
   };
   styles: {
-    root: {
+    container: {
       base: Record<string, string>;
       sizes: Record<ProgressSizeVariants, Record<Sizes, Record<string, string>>>;
       color: Record<string, Record<string, string>>;
@@ -31,12 +31,12 @@ const progressConfig: ProgressConfig = {
     value: 0,
     size: 'md',
     color: 'primary',
-    rootProps: {},
+    containerProps: {},
     style: {},
     className: ''
   },
   styles: {
-    root: {
+    container: {
       base: {
         display: 'flex',
         width: 'w-full',

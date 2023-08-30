@@ -24,7 +24,7 @@ export interface TooltipConfig {
     children?: ReactNode;
   };
   styles: {
-    root: {
+    container: {
       base: Record<string, string>;
       colors: Record<string, Record<Colors, Record<string, string>>>
     },
@@ -54,7 +54,7 @@ const tooltipConfig: TooltipConfig = {
     className: ''
   },
   styles: {
-    root: {
+    container: {
       base: {
         position: 'absolute',
         display: 'block',

@@ -9,8 +9,8 @@ export interface TextAreaConfig {
     valid: boolean;
     invalid: boolean;
     label?: ReactNode;
-    rootProps: BaseHTMLAttributes<HTMLDivElement>;
-    containerProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+    containerProps: BaseHTMLAttributes<HTMLDivElement>;
+    fieldsetProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
     legendProps: BaseHTMLAttributes<HTMLLegendElement>;
     labelProps: LabelHTMLAttributes<HTMLLabelElement>;
     textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
@@ -21,12 +21,12 @@ export interface TextAreaConfig {
     className: string;
   };
   styles: {
-    root: {
+    container: {
       base: Record<string, string>;
       focused: Record<string, string>;
       shifted: Record<string, string>;
     },
-    container: {
+    fieldset: {
       base: Record<string, string>;
       valid: Record<TextAreaVariants, Record<string, Record<string, string>>>;
       invalid: Record<TextAreaVariants, Record<string, Record<string, string>>>;
@@ -58,8 +58,8 @@ const textAreaConfig: TextAreaConfig = {
     color: 'primary',
     valid: false,
     invalid: false,
-    rootProps: {},
     containerProps: {},
+    fieldsetProps: {},
     legendProps: {},
     labelProps: {},
     autoFocus: false,
@@ -68,7 +68,7 @@ const textAreaConfig: TextAreaConfig = {
     className: ''
   },
   styles: {
-    root: {
+    container: {
       base: {
         position: 'relative',
         display: 'flex',
@@ -144,7 +144,7 @@ const textAreaConfig: TextAreaConfig = {
         }
       }
     },
-    container: {
+    fieldset: {
       base: {
         position: 'absolute',
         top: 'top-0',

@@ -6,21 +6,21 @@ export interface ProgressProps extends BaseHTMLAttributes<HTMLDivElement> {
   value?: number | string;
   size?: Sizes;
   color?: Colors;
-  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
+  containerProps?: BaseHTMLAttributes<HTMLDivElement>;
   barRef?: MutableRefObject<HTMLDivElement> | null;
   style?: CSSProperties;
   className?: string;
   children?: ReactNode;
 }
 
-const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, rootRef) => {
+const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, containerRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.progress;
   const {
     value,
     size,
     color,
-    rootProps,
+    containerProps,
     barRef,
     style: barStyle,
     className: barClassName,
@@ -28,16 +28,16 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, rootRef) => {
     ...restBarProps
   } = mergeProps(defaultProps, props);
 
-  /* Set root props */
-  const rootStyles = styles.root;
-  const { className: rootClassName, ...restRootProps } = rootProps;
+  /* Set container props */
+  const containerStyles = styles.container;
+  const { className: containerClassName, ...restContainerProps } = containerProps;
 
-  const mergedRootClassName = mergeClasses(
-    rootStyles.base,
-    barChildren === undefined && rootStyles.sizes.default[size],
-    barChildren !== undefined && rootStyles.sizes.label[size],
-    rootStyles.color[theme],
-    rootClassName
+  const mergedContainerClassName = mergeClasses(
+    containerStyles.base,
+    barChildren === undefined && containerStyles.sizes.default[size],
+    barChildren !== undefined && containerStyles.sizes.label[size],
+    containerStyles.color[theme],
+    containerClassName
   );
 
   /* Set bar props */
@@ -55,9 +55,9 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, rootRef) => {
 
   return (
     <div
-      className={mergedRootClassName}
-      ref={rootRef}
-      {...restRootProps}
+      className={mergedContainerClassName}
+      ref={containerRef}
+      {...restContainerProps}
     >
       <div
         style={mergedBarStyle}

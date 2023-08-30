@@ -28,8 +28,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: ReactNode;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
-  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
-  containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+  containerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  fieldsetProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
   legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
   inputRef?: MutableRefObject<HTMLInputElement> | null;
@@ -40,7 +40,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
+const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, containerRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.input;
   const {
@@ -51,8 +51,8 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
     label,
     startAdornment,
     endAdornment,
-    rootProps,
     containerProps,
+    fieldsetProps,
     legendProps,
     labelProps,
     inputRef,
@@ -65,19 +65,15 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   } = mergeProps(defaultProps, inputProps);
   let labelNode: ReactNode;
 
-  const componentsRef = useRef<{ root: HTMLDivElement | null; input: HTMLInputElement | null }>({ root: null, input: null });
+  const componentsRef = useRef<{ container: HTMLDivElement | null; input: HTMLInputElement | null }>({ container: null, input: null });
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRef.current.root, []);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(containerRef, () => componentsRef.current.container, []);
 
   const [isShifted, setIsShifted] = useState(inputValue !== '' || (inputAutoFocus && !inputDisabled));
   const [isFocused, setIsFocused] = useState(inputAutoFocus && !inputDisabled);
 
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    if (componentsRef.current.root === null) {
-      return;
-    }
-
-    if (componentsRef.current.root.contains(event.currentTarget as Node)) {
+    if (componentsRef.current.container?.contains(event.target as Node) ?? false) {
       componentsRef.current.input?.focus();
     } else {
       if (componentsRef.current.input?.value === '') {
@@ -106,15 +102,20 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
     }
   }, [inputValue, isFocused, inputAutoFocus]);
 
-  /* Set root props */
-  const rootStyles = styles.root;
-  const { className: rootClassName, ...restRootProps } = rootProps;
+  /* Set container props */
+  const containerStyles = styles.container;
+  const { className: containerClassName, ...restContainerProps } = containerProps;
 
-  const setRootRef = (element: HTMLDivElement): void => {
-    componentsRef.current.root = element;
+  const setContainerRef = (element: HTMLDivElement): void => {
+    componentsRef.current.container = element;
   };
 
-  const mergedRootClassName = mergeClasses(rootStyles.base, isFocused && rootStyles.focused, isShifted && rootStyles.shifted, rootClassName);
+  const mergedContainerClassName = mergeClasses(
+    containerStyles.base,
+    isFocused && containerStyles.focused,
+    isShifted && containerStyles.shifted,
+    containerClassName
+  );
 
   /* Set input props */
   const inputStyles = styles.input;
@@ -144,16 +145,16 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
     inputClassName
   );
 
-  /* Set container props */
-  const containerStyles = styles.container;
-  const { disabled: containerDisabled = inputDisabled, className: containerClassName, ...restContainerProps } = containerProps;
+  /* Set fieldset props */
+  const fieldsetStyles = styles.fieldset;
+  const { disabled: fieldsetDisabled = inputDisabled, className: fieldsetClassName, ...restFieldsetProps } = fieldsetProps;
 
-  const mergedContainerClassName = mergeClasses(
-    containerStyles.base,
-    !valid && !invalid && containerStyles.variants[variant][theme][color],
-    valid && containerStyles.valid[variant][theme],
-    invalid && containerStyles.invalid[variant][theme],
-    containerClassName
+  const mergedFieldsetClassName = mergeClasses(
+    fieldsetStyles.base,
+    !valid && !invalid && fieldsetStyles.variants[variant][theme][color],
+    valid && fieldsetStyles.valid[variant][theme],
+    invalid && fieldsetStyles.invalid[variant][theme],
+    fieldsetClassName
   );
 
   /* Set label props */
@@ -203,9 +204,9 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
 
   return (
     <div
-      className={mergedRootClassName}
-      ref={setRootRef}
-      {...restRootProps}
+      className={mergedContainerClassName}
+      ref={setContainerRef}
+      {...restContainerProps}
     >
       {startAdornment}
       <input
@@ -218,9 +219,9 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
         {...restInputProps}
       />
       <fieldset
-        disabled={containerDisabled}
-        className={mergedContainerClassName}
-        {...restContainerProps}
+        disabled={fieldsetDisabled}
+        className={mergedFieldsetClassName}
+        {...restFieldsetProps}
       >
         {labelNode}
       </fieldset>

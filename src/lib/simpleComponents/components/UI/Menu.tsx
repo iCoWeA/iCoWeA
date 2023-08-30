@@ -12,11 +12,11 @@ export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
   overlayRef?: Element | null;
   lockScroll?: boolean;
   handler?: ReactElement;
-  rootProps?: PopoverProps;
+  popoverProps?: PopoverProps;
   className?: string;
 }
 
-const Menu = forwardRef<HTMLDivElement, MenuProps>((props, rootRef) => {
+const Menu = forwardRef<HTMLDivElement, MenuProps>((props, popoverRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.menu;
   const {
@@ -27,33 +27,33 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, rootRef) => {
     overlayRef,
     lockScroll,
     handler,
-    rootProps,
+    popoverProps,
     className: containerClassName,
     ...restContainerProps
   } = mergeProps(defaultProps, props);
 
-  /* Set root props */
+  /* Set popover props */
   const {
-    open: rootOpen = open,
-    position: rootPosition = position,
-    overlayRef: rootOverlayRef = overlayRef,
-    lockScroll: lockRootScroll = lockScroll,
-    handler: rootHandler = handler,
-    ...restRootProps
-  } = rootProps;
+    open: popoverOpen = open,
+    position: popoverPosition = position,
+    overlayRef: popoverOverlayRef = overlayRef,
+    lockScroll: lockPopoverScroll = lockScroll,
+    handler: popoverHandler = handler,
+    ...restPopoverProps
+  } = popoverProps;
 
   /* Set contianer props */
   const mergedContainerClassName = mergeClasses(styles.base, styles.colors[theme][color], elevated && styles.elevated[theme], containerClassName);
 
   return (
     <Popover
-      open={rootOpen}
-      position={rootPosition}
-      overlayRef={rootOverlayRef}
-      lockScroll={lockRootScroll}
-      handler={rootHandler}
-      ref={rootRef}
-      {...restRootProps}
+      open={popoverOpen}
+      position={popoverPosition}
+      overlayRef={popoverOverlayRef}
+      lockScroll={lockPopoverScroll}
+      handler={popoverHandler}
+      ref={popoverRef}
+      {...restPopoverProps}
     >
       <div
         className={mergedContainerClassName}

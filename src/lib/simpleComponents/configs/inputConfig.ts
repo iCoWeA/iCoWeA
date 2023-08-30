@@ -11,8 +11,8 @@ export interface InputConfig {
     label?: ReactNode;
     startAdornment?: ReactNode;
     endAdornment?: ReactNode;
-    rootProps: BaseHTMLAttributes<HTMLDivElement>;
-    containerProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+    containerProps: BaseHTMLAttributes<HTMLDivElement>;
+    fieldsetProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
     legendProps: BaseHTMLAttributes<HTMLLegendElement>;
     labelProps: LabelHTMLAttributes<HTMLLabelElement>;
     inputRef?: MutableRefObject<HTMLInputElement> | null;
@@ -23,12 +23,12 @@ export interface InputConfig {
     className: string;
   };
   styles: {
-    root: {
+    container: {
       base: Record<string, string>;
       focused: Record<string, string>;
       shifted: Record<string, string>;
     },
-    container: {
+    fieldset: {
       base: Record<string, string>;
       valid: Record<InputVariants, Record<string, Record<string, string>>>;
       invalid: Record<InputVariants, Record<string, Record<string, string>>>;
@@ -61,8 +61,8 @@ const inputConfig: InputConfig = {
     color: 'primary',
     valid: false,
     invalid: false,
-    rootProps: {},
     containerProps: {},
+    fieldsetProps: {},
     legendProps: {},
     labelProps: {},
     autoFocus: false,
@@ -71,7 +71,7 @@ const inputConfig: InputConfig = {
     className: ''
   },
   styles: {
-    root: {
+    container: {
       base: {
         position: 'relative',
         display: 'flex',
@@ -147,7 +147,7 @@ const inputConfig: InputConfig = {
         }
       }
     },
-    container: {
+    fieldset: {
       base: {
         position: 'absolute',
         top: 'top-0',

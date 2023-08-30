@@ -26,8 +26,8 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   valid?: boolean;
   invalid?: boolean;
   label?: ReactNode;
-  rootProps?: BaseHTMLAttributes<HTMLDivElement>;
-  containerProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
+  containerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  fieldsetProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
   legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
   textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
@@ -38,7 +38,7 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   className?: string;
 }
 
-const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootRef) => {
+const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, containerRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.textArea;
   const {
@@ -47,8 +47,8 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
     valid,
     invalid,
     label,
-    rootProps,
     containerProps,
+    fieldsetProps,
     legendProps,
     labelProps,
     textAreaRef,
@@ -61,19 +61,15 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
   } = mergeProps(defaultProps, textAreaProps);
   let labelNode: ReactNode;
 
-  const componentsRef = useRef<{ root: HTMLDivElement | null; textArea: HTMLTextAreaElement | null }>({ root: null, textArea: null });
+  const componentsRef = useRef<{ container: HTMLDivElement | null; textArea: HTMLTextAreaElement | null }>({ container: null, textArea: null });
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRef.current.root, []);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(containerRef, () => componentsRef.current.container, []);
 
   const [isShifted, setIsShifted] = useState(textAreaValue !== '' || (textAreaAutoFocus && !textAreaDisabled));
   const [isFocused, setIsFocused] = useState(textAreaAutoFocus && !textAreaDisabled);
 
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    if (componentsRef.current.root === null) {
-      return;
-    }
-
-    if (componentsRef.current.root.contains(event.currentTarget as Node)) {
+    if (componentsRef.current.container?.contains(event.target as Node) ?? false) {
       componentsRef.current.textArea?.focus();
     } else {
       if (componentsRef.current.textArea?.value === '') {
@@ -102,15 +98,20 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
     }
   }, [textAreaValue, isFocused, textAreaAutoFocus]);
 
-  /* Set root props */
-  const rootStyles = styles.root;
-  const { className: rootClassName, ...restRootProps } = rootProps;
+  /* Set container props */
+  const containerStyles = styles.container;
+  const { className: containerClassName, ...restContainerProps } = containerProps;
 
-  const setRootRef = (element: HTMLDivElement): void => {
-    componentsRef.current.root = element;
+  const setContainerRef = (element: HTMLDivElement): void => {
+    componentsRef.current.container = element;
   };
 
-  const mergedRootClassName = mergeClasses(rootStyles.base, isFocused && rootStyles.focused, isShifted && rootStyles.shifted, rootClassName);
+  const mergedContainerClassName = mergeClasses(
+    containerStyles.base,
+    isFocused && containerStyles.focused,
+    isShifted && containerStyles.shifted,
+    containerClassName
+  );
 
   /* Set textArea props */
   const textAreaStyles = styles.textArea;
@@ -140,16 +141,16 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
     textAreaClassName
   );
 
-  /* Set container props */
-  const containerStyles = styles.container;
-  const { disabled: containerDisabled = textAreaDisabled, className: containerClassName, ...restContainerProps } = containerProps;
+  /* Set fieldset props */
+  const fieldsetStyles = styles.fieldset;
+  const { disabled: fieldsetDisabled = textAreaDisabled, className: fieldsetClassName, ...restFieldsetProps } = fieldsetProps;
 
-  const mergedContainerClassName = mergeClasses(
-    containerStyles.base,
-    !valid && !invalid && containerStyles.variants[variant][theme][color],
-    valid && containerStyles.valid[variant][theme],
-    invalid && containerStyles.invalid[variant][theme],
-    containerClassName
+  const mergedFieldsetClassName = mergeClasses(
+    fieldsetStyles.base,
+    !valid && !invalid && fieldsetStyles.variants[variant][theme][color],
+    valid && fieldsetStyles.valid[variant][theme],
+    invalid && fieldsetStyles.invalid[variant][theme],
+    fieldsetClassName
   );
 
   /* Set label props */
@@ -198,9 +199,9 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
 
   return (
     <div
-      className={mergedRootClassName}
-      ref={setRootRef}
-      {...restRootProps}
+      className={mergedContainerClassName}
+      ref={setContainerRef}
+      {...restContainerProps}
     >
       <textarea
         onFocus={focusTextAreaHandler}
@@ -212,9 +213,9 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
         {...restTextAreaProps}
       />
       <fieldset
-        disabled={containerDisabled}
-        className={mergedContainerClassName}
-        {...restContainerProps}
+        disabled={fieldsetDisabled}
+        className={mergedFieldsetClassName}
+        {...restFieldsetProps}
       >
         {labelNode}
       </fieldset>
