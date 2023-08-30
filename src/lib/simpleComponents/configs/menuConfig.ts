@@ -9,7 +9,7 @@ export interface MenuConfig {
     open?: boolean;
     position: PopoverPositions;
     overlayRef: Element | null;
-    disableScrolling: boolean;
+    lockScroll: boolean;
     handler?: ReactElement;
     rootProps: PopoverProps;
     className: string;
@@ -27,7 +27,7 @@ const menuConfig: MenuConfig = {
     elevated: false,
     position: 'bottom',
     overlayRef: null,
-    disableScrolling: false,
+    lockScroll: false,
     rootProps: {},
     className: ''
   },

@@ -10,7 +10,7 @@ export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
   position?: PopoverPositions;
   overlayRef?: Element | null;
-  disableScrolling?: boolean;
+  lockScroll?: boolean;
   handler?: ReactElement;
   rootProps?: PopoverProps;
   className?: string;
@@ -25,7 +25,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, rootRef) => {
     open,
     position,
     overlayRef,
-    disableScrolling,
+    lockScroll,
     handler,
     rootProps,
     className: containerClassName,
@@ -37,7 +37,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, rootRef) => {
     open: rootOpen = open,
     position: rootPosition = position,
     overlayRef: rootOverlayRef = overlayRef,
-    disableScrolling: disableRootScrolling = disableScrolling,
+    lockScroll: lockRootScroll = lockScroll,
     handler: rootHandler = handler,
     ...restRootProps
   } = rootProps;
@@ -50,7 +50,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, rootRef) => {
       open={rootOpen}
       position={rootPosition}
       overlayRef={rootOverlayRef}
-      disableScrolling={disableRootScrolling}
+      lockScroll={lockRootScroll}
       handler={rootHandler}
       ref={rootRef}
       {...restRootProps}
