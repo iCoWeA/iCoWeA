@@ -69,6 +69,19 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
   const [isShifted, setIsShifted] = useState(textAreaValue !== '' || (textAreaAutoFocus && !textAreaDisabled));
   const [isFocused, setIsFocused] = useState(textAreaAutoFocus && !textAreaDisabled);
 
+  const outsideClickHandler = useCallback((event: MouseEvent) => {
+    if (!(componentsRef.current.root?.contains(event.currentTarget as Node) ?? true)) {
+      if (componentsRef.current.textArea?.value === '') {
+        setIsShifted(false);
+        setIsFocused(false);
+      } else {
+        setIsFocused(false);
+      }
+    }
+  }, []);
+
+  useOutsideClick(outsideClickHandler);
+
   useEffect(() => {
     if (textAreaValue !== '') {
       setIsShifted(true);
@@ -95,19 +108,6 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
       onRootClick(event);
     }
   };
-
-  const outsideRootClickHandler = useCallback((event: MouseEvent) => {
-    if (!(componentsRef.current.root?.contains(event.currentTarget as Node) ?? true)) {
-      if (componentsRef.current.textArea?.value === '') {
-        setIsShifted(false);
-        setIsFocused(false);
-      } else {
-        setIsFocused(false);
-      }
-    }
-  }, []);
-
-  useOutsideClick(outsideRootClickHandler);
 
   const setRootRef = (element: HTMLDivElement): void => {
     componentsRef.current.root = element;

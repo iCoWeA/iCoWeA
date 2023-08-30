@@ -73,6 +73,19 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   const [isShifted, setIsShifted] = useState(inputValue !== '' || (inputAutoFocus && !inputDisabled));
   const [isFocused, setIsFocused] = useState(inputAutoFocus && !inputDisabled);
 
+  const outsideClickHandler = useCallback((event: MouseEvent) => {
+    if (!(componentsRef.current.root?.contains(event.currentTarget as Node) ?? true)) {
+      if (componentsRef.current.input?.value === '') {
+        setIsShifted(false);
+        setIsFocused(false);
+      } else {
+        setIsFocused(false);
+      }
+    }
+  }, []);
+
+  useOutsideClick(outsideClickHandler);
+
   useEffect(() => {
     if (inputValue !== '') {
       setIsShifted(true);
@@ -99,19 +112,6 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
       onRootClick(event);
     }
   };
-
-  const outsideRootClickHandler = useCallback((event: MouseEvent) => {
-    if (!(componentsRef.current.root?.contains(event.currentTarget as Node) ?? true)) {
-      if (componentsRef.current.input?.value === '') {
-        setIsShifted(false);
-        setIsFocused(false);
-      } else {
-        setIsFocused(false);
-      }
-    }
-  }, []);
-
-  useOutsideClick(outsideRootClickHandler);
 
   const setRootRef = (element: HTMLDivElement): void => {
     componentsRef.current.root = element;
