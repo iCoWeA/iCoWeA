@@ -213,13 +213,21 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) =>
       }
     };
 
-    if ((handler as Record<string, any>)?.ref === undefined || (handler as Record<string, any>).ref === null) {
+    if (
+      (handler as Record<string, any>)?.ref === undefined ||
+      (handler as Record<string, any>).ref === null ||
+      typeof (handler as Record<string, any>).ref === 'function'
+    ) {
       handlerNode = cloneElement(handler, {
         onMouseEnter: onHandlerMouseEnter,
         onMouseLeave: onHandlerMouseLeave,
         onMouseMove: onHandlerMouseMove,
         ref: (element: HTMLElement) => {
           componentsRef.current.handler = element;
+
+          if (typeof (handler as Record<string, any>).ref === 'function') {
+            (handler as Record<string, any>).ref(element);
+          }
         }
       });
     } else {
