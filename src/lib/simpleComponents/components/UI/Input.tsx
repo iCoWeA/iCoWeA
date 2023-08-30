@@ -13,7 +13,7 @@ import React, {
   type FocusEventHandler,
   type LabelHTMLAttributes,
   type MutableRefObject,
-  type MouseEvent,
+  type MouseEvent as ReactMouseEvent,
   useEffect
 } from 'react';
 import { type InputVariants } from '../../configs/inputConfig';
@@ -92,7 +92,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   const rootStyles = styles.root;
   const { onClick: onRootClick, className: rootClassName, ...restRootProps } = rootProps;
 
-  const clickRootHandler = (event: MouseEvent<HTMLDivElement>): void => {
+  const clickRootHandler = (event: ReactMouseEvent<HTMLDivElement>): void => {
     componentsRef.current.input?.focus();
 
     if (onRootClick !== undefined) {
@@ -100,16 +100,18 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
     }
   };
 
-  const outsideRootClickHandler = useCallback(() => {
-    if (componentsRef.current.input?.value === '') {
-      setIsShifted(false);
-      setIsFocused(false);
-    } else {
-      setIsFocused(false);
+  const outsideRootClickHandler = useCallback((event: MouseEvent) => {
+    if (!(componentsRef.current.root?.contains(event.currentTarget as Node) ?? true)) {
+      if (componentsRef.current.input?.value === '') {
+        setIsShifted(false);
+        setIsFocused(false);
+      } else {
+        setIsFocused(false);
+      }
     }
   }, []);
 
-  useOutsideClick(componentsRef.current.root, outsideRootClickHandler);
+  useOutsideClick(outsideRootClickHandler);
 
   const setRootRef = (element: HTMLDivElement): void => {
     componentsRef.current.root = element;
@@ -154,7 +156,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
     !valid && !invalid && containerStyles.variants[variant][theme][color],
     valid && containerStyles.valid[variant][theme],
     invalid && containerStyles.invalid[variant][theme],
-    rootClassName
+    containerClassName
   );
 
   /* Set label props */
