@@ -143,11 +143,19 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((rootProps, rootRef) =>
       }
     };
 
-    if ((handler as Record<string, any>)?.ref === undefined || (handler as Record<string, any>).ref === null) {
+    if (
+      (handler as Record<string, any>)?.ref === undefined ||
+      (handler as Record<string, any>).ref === null ||
+      typeof (handler as Record<string, any>).ref === 'function'
+    ) {
       handlerNode = cloneElement(handler, {
         onClick: onHandlerClick,
         ref: (element: HTMLElement) => {
           componentsRef.current.handler = element;
+
+          if (typeof (handler as Record<string, any>).ref === 'function') {
+            (handler as Record<string, any>).ref(element);
+          }
         }
       });
     } else {
