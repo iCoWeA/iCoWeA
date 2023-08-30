@@ -20,9 +20,12 @@ const DashboardAvatar: FC = () => {
         />
       }
     >
-      <MenuBody>
+      <MenuBody fullwidht>
         <List>
-          <ListItemButton color="dark">
+          <ListItemButton
+            color="dark"
+            fullwidth
+          >
             <Link
               to="/admin/settings"
               color="dark"
@@ -30,7 +33,10 @@ const DashboardAvatar: FC = () => {
               Settings
             </Link>
           </ListItemButton>
-          <ListItemButton color="dark">
+          <ListItemButton
+            color="dark"
+            fullwidth
+          >
             <Link
               to="/logout"
               color="dark"
