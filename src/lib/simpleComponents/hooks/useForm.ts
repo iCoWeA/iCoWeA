@@ -155,20 +155,20 @@ const useForm = (inputsConfig: Record<string, InputConfig>, debounceDelay: numbe
     initializer
   );
 
-  const change = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(actions.change(currentTarget, inputsConfig[currentTarget.name].pattern, inputsConfig[currentTarget.name].errorMessage));
+  const change = useCallback(({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    dispatch(actions.change(target, inputsConfig[target.name].pattern, inputsConfig[target.name].errorMessage));
   }, []);
 
-  const debouncedChange = useCallback(({ currentTarget }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const debouncedChange = useCallback(({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const timerId = window.setTimeout(() => {
-      dispatch(actions.revalid(currentTarget, inputsConfig[currentTarget.name].pattern, inputsConfig[currentTarget.name].errorMessage));
-    }, inputsConfig[currentTarget.name].debounceDelay ?? debounceDelay);
+      dispatch(actions.revalid(target, inputsConfig[target.name].pattern, inputsConfig[target.name].errorMessage));
+    }, inputsConfig[target.name].debounceDelay ?? debounceDelay);
 
-    dispatch(actions.debouncedChange(currentTarget, timerId, inputsConfig[currentTarget.name].pattern, inputsConfig[currentTarget.name].errorMessage));
+    dispatch(actions.debouncedChange(target, timerId, inputsConfig[target.name].pattern, inputsConfig[target.name].errorMessage));
   }, []);
 
-  const blur = useCallback(({ currentTarget }: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(actions.blur(currentTarget, inputsConfig[currentTarget.name].pattern, inputsConfig[currentTarget.name].errorMessage));
+  const blur = useCallback(({ target }: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    dispatch(actions.blur(target, inputsConfig[target.name].pattern, inputsConfig[target.name].errorMessage));
   }, []);
 
   const reset = useCallback((inputName: string): void => {
