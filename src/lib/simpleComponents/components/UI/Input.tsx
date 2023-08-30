@@ -13,7 +13,6 @@ import React, {
   type FocusEventHandler,
   type LabelHTMLAttributes,
   type MutableRefObject,
-  type MouseEvent as ReactMouseEvent,
   useEffect
 } from 'react';
 import { type InputVariants } from '../../configs/inputConfig';
@@ -74,7 +73,13 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
   const [isFocused, setIsFocused] = useState(inputAutoFocus && !inputDisabled);
 
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    if (!(componentsRef.current.root?.contains(event.currentTarget as Node) ?? true)) {
+    if (componentsRef.current.root === null) {
+      return;
+    }
+
+    if (componentsRef.current.root.contains(event.currentTarget as Node)) {
+      componentsRef.current.input?.focus();
+    } else {
       if (componentsRef.current.input?.value === '') {
         setIsShifted(false);
         setIsFocused(false);
@@ -103,15 +108,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
 
   /* Set root props */
   const rootStyles = styles.root;
-  const { onClick: onRootClick, className: rootClassName, ...restRootProps } = rootProps;
-
-  const clickRootHandler = (event: ReactMouseEvent<HTMLDivElement>): void => {
-    componentsRef.current.input?.focus();
-
-    if (onRootClick !== undefined) {
-      onRootClick(event);
-    }
-  };
+  const { className: rootClassName, ...restRootProps } = rootProps;
 
   const setRootRef = (element: HTMLDivElement): void => {
     componentsRef.current.root = element;
@@ -206,7 +203,6 @@ const Input = forwardRef<HTMLDivElement, InputProps>((inputProps, rootRef) => {
 
   return (
     <div
-      onClick={clickRootHandler}
       className={mergedRootClassName}
       ref={setRootRef}
       {...restRootProps}

@@ -13,7 +13,6 @@ import React, {
   type FocusEventHandler,
   type LabelHTMLAttributes,
   type MutableRefObject,
-  type MouseEvent as ReactMouseEvent,
   useEffect
 } from 'react';
 import { type TextAreaVariants } from '../../configs/textAreaConfig';
@@ -70,7 +69,13 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
   const [isFocused, setIsFocused] = useState(textAreaAutoFocus && !textAreaDisabled);
 
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    if (!(componentsRef.current.root?.contains(event.currentTarget as Node) ?? true)) {
+    if (componentsRef.current.root === null) {
+      return;
+    }
+
+    if (componentsRef.current.root.contains(event.currentTarget as Node)) {
+      componentsRef.current.textArea?.focus();
+    } else {
       if (componentsRef.current.textArea?.value === '') {
         setIsShifted(false);
         setIsFocused(false);
@@ -99,15 +104,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
 
   /* Set root props */
   const rootStyles = styles.root;
-  const { onClick: onRootClick, className: rootClassName, ...restRootProps } = rootProps;
-
-  const clickRootHandler = (event: ReactMouseEvent<HTMLDivElement>): void => {
-    componentsRef.current.textArea?.focus();
-
-    if (onRootClick !== undefined) {
-      onRootClick(event);
-    }
-  };
+  const { className: rootClassName, ...restRootProps } = rootProps;
 
   const setRootRef = (element: HTMLDivElement): void => {
     componentsRef.current.root = element;
@@ -201,7 +198,6 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((textAreaProps, rootR
 
   return (
     <div
-      onClick={clickRootHandler}
       className={mergedRootClassName}
       ref={setRootRef}
       {...restRootProps}
