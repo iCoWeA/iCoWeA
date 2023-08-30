@@ -20,11 +20,13 @@ const defaultProps = {
 };
 
 const PasswordInput = forwardRef<HTMLDivElement, PasswordInputProps>((rootProps, rootRef) => {
+  /* --- Set default props --- */
   const { show, icon, buttonProps, color: rootColor, endAdornment: rootEndAdornment, type, ...restRootProps } = mergeProps(defaultProps, rootProps);
-  let rootEndAdornmentNode = rootEndAdornment;
 
+  /* --- Set states --- */
   const [isShow, setIsShow] = useState(show ?? false);
 
+  /* --- Set previous values  --- */
   const prevShow = usePrevious(show);
 
   useEffect(() => {
@@ -33,14 +35,16 @@ const PasswordInput = forwardRef<HTMLDivElement, PasswordInputProps>((rootProps,
     }
   }, [show]);
 
-  /* Set root props */
+  /* --- Set root props --- */
   let rootType = type;
 
   if (rootType === undefined) {
     rootType = isShow ? 'text' : 'password';
   }
 
-  /* Set button props */
+  /* --- Set button props --- */
+  let rootEndAdornmentNode = rootEndAdornment;
+
   if (rootEndAdornment === undefined) {
     const { variant: buttonVariant = 'text', color: buttonColor = 'default', onClick: onButtonClick, ...restButtonProps } = buttonProps;
 
@@ -55,9 +59,9 @@ const PasswordInput = forwardRef<HTMLDivElement, PasswordInputProps>((rootProps,
       }
     };
 
+    /* --- Set icon props --- */
     let buttonChildrenNode = icon;
 
-    /* Set icon props */
     if (icon === undefined) {
       buttonChildrenNode = isShow
         ? (
