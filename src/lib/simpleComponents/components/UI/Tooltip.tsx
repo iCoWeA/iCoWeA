@@ -81,7 +81,7 @@ const setArrowPosition = (element: HTMLElement | null, position: Positions): voi
   }
 };
 
-const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) => {
+const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((containerProps, containerRef) => {
   const { theme, config } = useContext(themeContext);
   const { defaultProps, styles } = config.tooltip;
   const {
@@ -97,36 +97,36 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) =>
     handler,
     arrow,
     arrowProps,
-    onTransitionEnd: onRootTransitionEnd,
-    onAnimationEnd: onRootAnimationEnd,
-    style: rootStyle,
-    className: rootClassName,
-    children: rootChildren,
-    ...restRootProps
-  } = mergeProps(defaultProps, rootProps);
+    onTransitionEnd: onContainerTransitionEnd,
+    onAnimationEnd: onContainerAnimationEnd,
+    style: containerStyle,
+    className: containerClassName,
+    children: containerChildren,
+    ...restContainerProps
+  } = mergeProps(defaultProps, containerProps);
   const mergedTransitionConfig = mergeProps(defaultProps.transitionConfig, transitionConfig);
   let handlerNode: ReactNode;
   let arrowNode: ReactNode;
 
-  const componentsRef = useRef<{ root: HTMLDivElement | null; handler: HTMLElement | null; arrow: HTMLDivElement | null }>({
-    root: null,
+  const componentsRef = useRef<{ container: HTMLDivElement | null; handler: HTMLElement | null; arrow: HTMLDivElement | null }>({
+    container: null,
     handler: null,
     arrow: null
   });
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(rootRef, () => componentsRef.current.root, []);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(containerRef, () => componentsRef.current.container, []);
 
   const [cursorY, setCursorY] = useState(-1);
   const [cursorX, setCursorX] = useState(-1);
   const { state: transitionState, enterState, exitState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
 
   const resize = useCallback((): void => {
-    if (componentsRef.current.root !== null && componentsRef.current.handler !== null) {
+    if (componentsRef.current.container !== null && componentsRef.current.handler !== null) {
       let newPosition: Positions;
 
       if (!followCursor) {
         newPosition = setElementPosition(
-          componentsRef.current.root,
+          componentsRef.current.container,
           position,
           componentsRef.current.handler.offsetTop,
           componentsRef.current.handler.offsetLeft,
@@ -137,7 +137,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) =>
         );
       } else {
         newPosition = setElementPosition(
-          componentsRef.current.root,
+          componentsRef.current.container,
           position,
           cursorY + document.documentElement.scrollTop,
           cursorX + document.documentElement.scrollLeft,
@@ -261,79 +261,79 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((rootProps, rootRef) =>
     );
   }
 
-  /* Set root props */
-  const rootStyles = styles.root;
+  /* Set container props */
+  const containerStyles = styles.container;
 
-  const transitionEndRootHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING && event.target === componentsRef.current.root) {
+  const transitionEndContainerHandler = (event: TransitionEvent<HTMLDivElement>): void => {
+    if (transitionState === TransitionStates.ENTERING && event.target === componentsRef.current.container) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING && event.target === componentsRef.current.root) {
+    if (transitionState === TransitionStates.EXITING && event.target === componentsRef.current.container) {
       exit(true);
     }
 
-    if (onRootTransitionEnd !== undefined) {
-      onRootTransitionEnd(event);
+    if (onContainerTransitionEnd !== undefined) {
+      onContainerTransitionEnd(event);
     }
   };
 
-  const animationEndRootHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING && event.target === componentsRef.current.root) {
+  const animationEndContainerHandler = (event: AnimationEvent<HTMLDivElement>): void => {
+    if (transitionState === TransitionStates.ENTERING && event.target === componentsRef.current.container) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING && event.target === componentsRef.current.root) {
+    if (transitionState === TransitionStates.EXITING && event.target === componentsRef.current.container) {
       exit(true);
     }
 
-    if (onRootAnimationEnd !== undefined) {
-      onRootAnimationEnd(event);
+    if (onContainerAnimationEnd !== undefined) {
+      onContainerAnimationEnd(event);
     }
   };
 
-  const setRootRef = (element: HTMLDivElement): void => {
-    componentsRef.current.root = element;
+  const setContainerRef = (element: HTMLDivElement): void => {
+    componentsRef.current.container = element;
   };
 
-  const mergedRootStyle = mergeStyles(
+  const mergedContainerStyle = mergeStyles(
     {
       opacity: `${transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED ? 100 : 0}`,
       transitionDuration: `${enterState ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`
     },
-    rootStyle
+    containerStyle
   );
 
-  const mergedRootClassName = mergeClasses(rootStyles.base, rootStyles.colors[theme][color], rootClassName, transitionClassName);
+  const mergedContainerClassName = mergeClasses(containerStyles.base, containerStyles.colors[theme][color], containerClassName, transitionClassName);
 
-  const rootChildrenNode = componentsRef.current.root !== null &&
+  const containerChildrenNode = componentsRef.current.container !== null &&
     componentsRef.current.handler !== null &&
     (!unmountOnExit || (unmountOnExit && transitionState !== TransitionStates.EXITED)) && (
       <>
         {arrowNode}
-        {rootChildren}
+        {containerChildren}
       </>
   );
 
-  let rootNode = (
+  let containerNode = (
     <div
-      onTransitionEnd={transitionEndRootHandler}
-      onAnimationEnd={animationEndRootHandler}
-      style={mergedRootStyle}
-      className={mergedRootClassName}
-      ref={setRootRef}
-      {...restRootProps}
+      onTransitionEnd={transitionEndContainerHandler}
+      onAnimationEnd={animationEndContainerHandler}
+      style={mergedContainerStyle}
+      className={mergedContainerClassName}
+      ref={setContainerRef}
+      {...restContainerProps}
     >
-      {rootChildrenNode}
+      {containerChildrenNode}
     </div>
   );
 
-  rootNode = overlayRef === null ? rootNode : createPortal(rootNode, overlayRef);
+  containerNode = overlayRef === null ? containerNode : createPortal(containerNode, overlayRef);
 
   return (
     <>
       {handlerNode}
-      {rootNode}
+      {containerNode}
     </>
   );
 });
