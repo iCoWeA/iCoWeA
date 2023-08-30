@@ -29,10 +29,16 @@ export interface TransitionConfig {
 }
 
 interface Return {
-  state: TransitionStates;
+  state: {
+    current: TransitionStates;
+    enter: boolean;
+    enterDelay: boolean;
+    entering: boolean;
+    exit: boolean;
+    exitDelay: boolean;
+    exiting: boolean;
+  };
   className: string;
-  enterState: boolean;
-  exitState: boolean;
   enter: (instant?: boolean) => void;
   exit: (instant?: boolean) => void;
 }
@@ -124,10 +130,16 @@ const useTransition = ({ enterDelay = 0, exitDelay = 0, enterDuration = 0, exitD
   }, [exitDuration, exitDelay]);
 
   return {
-    state,
+    state: {
+      current: state,
+      enter: state === TransitionStates.ENTER || state === TransitionStates.ENTERING || state === TransitionStates.ENTERED,
+      enterDelay: state === TransitionStates.ENTER,
+      entering: state === TransitionStates.ENTERING || state === TransitionStates.ENTERED,
+      exit: state === TransitionStates.EXIT || state === TransitionStates.EXITING || state === TransitionStates.EXITED,
+      exitDelay: state === TransitionStates.EXIT,
+      exiting: state === TransitionStates.EXITING || state === TransitionStates.EXITED
+    },
     className: classNames[state],
-    enterState: (state === TransitionStates.ENTER || state === TransitionStates.ENTERING || state === TransitionStates.ENTERED),
-    exitState: (state === TransitionStates.EXIT || state === TransitionStates.EXITING || state === TransitionStates.EXITED),
     enter,
     exit
   };
