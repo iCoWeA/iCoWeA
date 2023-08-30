@@ -104,7 +104,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((containerProps, contai
 
   useOutsideClick(
     outsideClickHandler,
-    (transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && !backdrop && !disableOutsideClick
+    (transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED) && !disableOutsideClick && !backdrop
   );
 
   useScroll(resize, enterState);
