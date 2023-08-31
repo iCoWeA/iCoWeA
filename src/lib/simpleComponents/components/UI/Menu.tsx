@@ -34,27 +34,15 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, popoverRef) => {
   } = mergeProps(defaultProps, props);
 
   /* --- Set popover props --- */
-  const {
-    open: popoverOpen = open,
-    position: popoverPosition = position,
-    overlayRef: popoverOverlayRef = overlayRef,
-    lockScroll: lockPopoverScroll = lockScroll,
-    handler: popoverHandler = handler,
-    ...restPopoverProps
-  } = popoverProps;
+  const mergedPopoverProps = mergeProps({ open, position, overlayRef, lockScroll, handler }, popoverProps);
 
   /* --- Set contianer props --- */
   const mergedContainerClassName = mergeClasses(styles.base, styles.colors[theme][color], elevated && styles.elevated[theme], containerClassName);
 
   return (
     <Popover
-      open={popoverOpen}
-      position={popoverPosition}
-      overlayRef={popoverOverlayRef}
-      lockScroll={lockPopoverScroll}
-      handler={popoverHandler}
+      {...mergedPopoverProps}
       ref={popoverRef}
-      {...restPopoverProps}
     >
       <div
         className={mergedContainerClassName}
