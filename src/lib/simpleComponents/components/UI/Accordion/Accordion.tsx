@@ -7,7 +7,7 @@ import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   onToggle?: (open?: boolean) => void;
   open?: boolean;
-  duration?: number;
+  transitionDuration?: number;
   disabled?: boolean;
   clasName?: string;
 }
@@ -15,7 +15,7 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
   const { defaultProps, styles } = accordionConfig;
-  const { onToggle, open, duration, disabled, className, ...restProps } = mergeProps(defaultProps, props);
+  const { onToggle, open, transitionDuration, disabled, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* --- Set states --- */
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +33,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   const context: AccordionContext = useMemo(
     () => ({
       isOpen: open ?? isOpen,
-      duration,
+      transitionDuration,
       isDisabled: disabled,
       onClick: () => {
         if (onToggle !== undefined) {
@@ -45,7 +45,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
         }
       }
     }),
-    [open, isOpen, duration, disabled, onToggle]
+    [open, isOpen, transitionDuration, disabled, onToggle]
   );
 
   /* Set props */
