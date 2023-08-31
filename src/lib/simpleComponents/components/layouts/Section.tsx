@@ -5,7 +5,6 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
   color?: Colors;
-  className?: string;
 }
 
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {

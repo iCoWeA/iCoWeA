@@ -7,7 +7,6 @@ export interface TypographyProps extends BaseHTMLAttributes<HTMLParagraphElement
   variant?: TypographyVariants;
   align?: Aligns;
   color?: Colors;
-  className?: string;
 }
 
 const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, TypographyProps>((props, ref) => {

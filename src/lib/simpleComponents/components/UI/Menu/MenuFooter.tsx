@@ -5,7 +5,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 export interface MenuFooterProps extends BaseHTMLAttributes<HTMLDivElement> {
   columns?: boolean;
   fullwidht?: boolean;
-  className?: string;
 }
 
 const MenuFooter = forwardRef<HTMLDivElement, MenuFooterProps>((props, ref) => {

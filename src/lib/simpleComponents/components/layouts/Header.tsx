@@ -5,7 +5,6 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
   color?: Colors;
-  className?: string;
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
