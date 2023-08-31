@@ -1,8 +1,16 @@
-import React, { type ButtonHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type MouseEventHandler } from 'react';
+import React, {
+  type ButtonHTMLAttributes,
+  forwardRef,
+  useContext,
+  type ReactNode,
+  type MouseEvent,
+  type MouseEventHandler,
+  type BaseHTMLAttributes
+} from 'react';
 import Icon, { type IconProps } from '../Icon/Icon';
-import AccordionHeaderIconContainer, { type AccordionHeaderIconContainerProps } from './AccordionHeaderIconContainer';
 import accordionContext from '../../../contexts/accordion';
 import themeContext from '../../../contexts/theme';
+import AccordionHeaderIconContainer from './AccordionHeaderIconContainer';
 import { mergeClasses } from '../../../utils/propsHelper';
 import accordionHeaderConfig from '../../../configs/accordionHeaderConfig';
 
@@ -10,7 +18,7 @@ export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonEle
   color?: Colors;
   icon?: ReactNode;
   iconProps?: IconProps;
-  iconContainerProps?: AccordionHeaderIconContainerProps;
+  iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   className?: string;

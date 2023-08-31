@@ -21,6 +21,7 @@ const AccordionHeaderIconContainer = forwardRef<HTMLDivElement, AccordionHeaderI
       <div
         style={mergedStyle}
         className={mergedClassName}
+        ref={ref}
         {...restProps}
       >
         {children}
