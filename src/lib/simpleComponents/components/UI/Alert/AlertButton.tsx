@@ -1,4 +1,4 @@
-import React, { type ReactNode, forwardRef, type ButtonHTMLAttributes, type MouseEvent, useContext } from 'react';
+import React, { forwardRef, type ButtonHTMLAttributes, type MouseEvent, useContext } from 'react';
 import alertConfig, { type AlertVariants } from '../../../configs/alertConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
@@ -7,10 +7,9 @@ interface AlertButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClose: () => void;
   variant: AlertVariants;
   color: Colors;
-  children: ReactNode;
 }
 
-const AlertButton = forwardRef<HTMLButtonElement, AlertButtonProps>(({ onClose, variant, color, onClick, className, children, ...restProps }, ref) => {
+const AlertButton = forwardRef<HTMLButtonElement, AlertButtonProps>(({ onClose, variant, color, onClick, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -34,9 +33,7 @@ const AlertButton = forwardRef<HTMLButtonElement, AlertButtonProps>(({ onClose, 
       className={mergedClassName}
       ref={ref}
       {...restProps}
-    >
-      {children}
-    </button>
+    />
   );
 });
 

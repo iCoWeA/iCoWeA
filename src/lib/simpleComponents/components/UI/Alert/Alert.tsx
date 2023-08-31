@@ -44,13 +44,13 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     buttonProps,
     buttonIconProps,
     buttonContainerProps,
-    className: containerClassName,
-    children: containerChildren,
+    className,
+    children,
     ...restProps
   } = { ...alertConfig.defaultProps, ...props };
 
   /* --- Set container props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], invisible && styles.invisible, containerClassName);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], invisible && styles.invisible, className);
 
   /* --- Set icon container props --- */
   let iconContainerNode: ReactNode;
@@ -99,7 +99,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
       {...restProps}
     >
       {iconContainerNode}
-      <AlertBodyContainer>{containerChildren}</AlertBodyContainer>
+      <AlertBodyContainer>{children}</AlertBodyContainer>
       {buttonContainerNode}
     </div>
   );

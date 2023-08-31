@@ -14,21 +14,21 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref
   const { isOpen, transitionDuration } = useContext(accordionContext);
 
   /* --- Set default props --- */
-  const { collapseProps, className: containerClassName, ...restContainerProps } = { ...accordionBodyConfig.defaultProps, ...props };
+  const { collapseProps, className, ...restContainerProps } = { ...accordionBodyConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const { open, transitionConfig, ...restProps } = { open: isOpen, ...collapseProps };
+  const { transitionConfig, ...restProps } = collapseProps;
   const mergedTransitionConfig = { enterDuration: transitionDuration, exitDuration: transitionDuration, ...(transitionConfig ?? {}) };
 
   return (
     <Collapse
-      open={open}
+      open={isOpen}
       transitionConfig={mergedTransitionConfig}
       ref={ref}
       {...restProps}
     >
       <AccordionBodyContainer
-        className={containerClassName}
+        className={className}
         {...restContainerProps}
       />
     </Collapse>

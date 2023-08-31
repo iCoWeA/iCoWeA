@@ -1,12 +1,10 @@
-import React, { type BaseHTMLAttributes, type ReactNode, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import alertConfig from '../../../configs/alertConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
-interface AlertButtonContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-}
+interface AlertButtonContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
-const AlertButtonContainer = forwardRef<HTMLDivElement, AlertButtonContainerProps>(({ className, children, ...restProps }, ref) => {
+const AlertButtonContainer = forwardRef<HTMLDivElement, AlertButtonContainerProps>(({ className, ...restProps }, ref) => {
   /* --- Set default props --- */
   const styles = alertConfig.styles.buttonContainer;
 
@@ -18,9 +16,7 @@ const AlertButtonContainer = forwardRef<HTMLDivElement, AlertButtonContainerProp
       className={mergedClassName}
       ref={ref}
       {...restProps}
-    >
-      {children}
-    </div>
+    />
   );
 });
 
