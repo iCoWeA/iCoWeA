@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ReactElement } from 'react';
 
 export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
 
@@ -11,7 +11,7 @@ export interface ButtonGroupConfig {
     fullwidth: boolean;
     type: 'submit' | 'reset' | 'button';
     className: string;
-    children?: ReactNode;
+    children: ReactElement[];
   };
   styles: {
     container: {
@@ -38,7 +38,8 @@ const buttonGroupConfig: ButtonGroupConfig = {
     elevated: false,
     fullwidth: false,
     type: 'button',
-    className: ''
+    className: '',
+    children: []
   },
   styles: {
     container: {

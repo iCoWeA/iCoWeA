@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes, type ReactNode } from 'react';
+import React, { forwardRef, useContext, type BaseHTMLAttributes, type ReactElement, type ReactNode, cloneElement } from 'react';
 import { type ButtonGroupVariants } from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
 import { isLast, mergeClasses, mergeProps } from '../../utils/propsHelper';
@@ -11,7 +11,7 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   fullwidth?: boolean;
   type?: 'submit' | 'reset' | 'button';
   className?: string;
-  children?: ReactNode;
+  children?: ReactElement[];
 }
 
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((containerProps, containerRef) => {
@@ -36,11 +36,9 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((containerProps
 
   /* --- Set buttons props --- */
   const buttonNodes: ReactNode[] = [];
-  const childrenNodes = Array.isArray(containerChildren) ? [...containerChildren] : [containerChildren];
 
-  for (let i = 0; i < childrenNodes.length; i++) {
+  for (let i = 0; i < containerChildren.length; i++) {
     const buttonStyles = styles.button;
-    const { className: buttonClassName, type: buttonType = type, children: buttonChildren, ...restButtonProps } = childrenNodes[i].props;
 
     const mergedButtonClassName = mergeClasses(
       buttonStyles.base,
@@ -48,21 +46,13 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((containerProps
       buttonStyles.sizes[size],
       elevated && buttonStyles.elevated[theme],
       i === 0 && buttonStyles.first,
-      isLast(childrenNodes, i) && buttonStyles.last[variant],
-      buttonClassName
+      isLast(containerChildren, i) && buttonStyles.last[variant],
+      containerChildren[i].props.clasName
     );
 
-    buttonNodes[i] = (
-      <button
-        key={i}
-        className={mergedButtonClassName}
-        type={buttonType}
-        ref={childrenNodes[i].ref}
-        {...restButtonProps}
-      >
-        {buttonChildren}
-      </button>
-    );
+    const buttonType = containerChildren[i].props.type ?? type;
+
+    buttonNodes[i] = cloneElement(containerChildren[i], { className: mergedButtonClassName, key: i, type: buttonType });
   }
 
   return (
