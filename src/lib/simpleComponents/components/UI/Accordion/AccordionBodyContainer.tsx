@@ -7,9 +7,10 @@ interface AccordionBodyContainerProps extends BaseHTMLAttributes<HTMLDivElement>
 }
 
 const AccordionBodyContainer = forwardRef<HTMLDivElement, AccordionBodyContainerProps>(({ className, ...restProps }, ref) => {
-  /* --- Set props --- */
+  /* --- Set default props --- */
   const styles = accordionBodyConfig.styles;
 
+  /* --- Set props --- */
   const mergedBodyClassName = mergeClasses(styles.base, className);
 
   return (

@@ -2,7 +2,7 @@ import React, { forwardRef, type BaseHTMLAttributes, useMemo, useState, useEffec
 import accordionConfig from '../../../configs/accordionConfig';
 import usePrevious from '../../../hooks/usePrevious';
 import accordionContext, { type AccordionContext } from '../../../contexts/accordion';
-import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   onToggle?: (open?: boolean) => void;
@@ -14,8 +14,8 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
-  const { defaultProps, styles } = accordionConfig;
-  const { onToggle, open, transitionDuration, disabled, className, ...restProps } = mergeProps(defaultProps, props);
+  const styles = accordionConfig.styles;
+  const { onToggle, open, transitionDuration, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
 
   /* --- Set states --- */
   const [isOpen, setIsOpen] = useState(false);
