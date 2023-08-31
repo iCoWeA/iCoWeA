@@ -10,8 +10,10 @@ export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref) => {
-  /* --- Set default props --- */
+  /* --- Set context props --- */
   const { open: isOpen, duration } = useContext(accordionContext);
+
+  /* --- Set default props --- */
   const { collapseProps, className: containerClassName, ...restContainerProps } = mergeProps(accordionBodyConfig.defaultProps, props);
 
   /* --- Set props --- */
