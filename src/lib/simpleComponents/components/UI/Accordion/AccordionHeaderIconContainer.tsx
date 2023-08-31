@@ -1,15 +1,14 @@
-import React, { type BaseHTMLAttributes, forwardRef, type ReactNode } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import accordionHeaderConfig from '../../../configs/accordionHeaderConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AccordionHeaderIconContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   open: boolean;
   transitionDuration: number;
-  children: ReactNode;
 }
 
 const AccordionHeaderIconContainer = forwardRef<HTMLDivElement, AccordionHeaderIconContainerProps>(
-  ({ open, transitionDuration, style, className, children, ...restProps }, ref) => {
+  ({ open, transitionDuration, style, className, ...restProps }, ref) => {
     /* --- Set default props --- */
     const styles = accordionHeaderConfig.styles.iconContainer;
 
@@ -24,9 +23,7 @@ const AccordionHeaderIconContainer = forwardRef<HTMLDivElement, AccordionHeaderI
         className={mergedClassName}
         ref={ref}
         {...restProps}
-      >
-        {children}
-      </div>
+      />
     );
   }
 );
