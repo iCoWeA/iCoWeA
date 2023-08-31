@@ -9,7 +9,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
-  className?: string;
   type?: 'submit' | 'reset' | 'button';
 }
 

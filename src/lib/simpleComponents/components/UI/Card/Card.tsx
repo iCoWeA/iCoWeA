@@ -6,7 +6,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 export interface CardProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   elevated?: boolean;
-  className?: string;
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {

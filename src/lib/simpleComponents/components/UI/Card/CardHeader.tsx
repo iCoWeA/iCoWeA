@@ -5,7 +5,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 export interface CardHeaderProps extends BaseHTMLAttributes<HTMLDivElement> {
   columns?: boolean;
   fullwidht?: boolean;
-  className?: string;
 }
 
 const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>((props, ref) => {

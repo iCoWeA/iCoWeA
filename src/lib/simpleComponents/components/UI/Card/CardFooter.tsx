@@ -5,7 +5,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 export interface CardFooterProps extends BaseHTMLAttributes<HTMLDivElement> {
   columns?: boolean;
   fullwidht?: boolean;
-  className?: string;
 }
 
 const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>((props, ref) => {

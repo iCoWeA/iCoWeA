@@ -9,7 +9,6 @@ export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
   withBorder?: boolean;
   borderColor?: Colors;
   invisible?: boolean;
-  className?: string;
 }
 
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>((props, ref) => {
