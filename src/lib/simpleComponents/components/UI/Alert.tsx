@@ -1,5 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type ButtonHTMLAttributes } from 'react';
 import { type AlertVariants } from '../../configs/alertConfig';
+import Icon, { type IconProps } from './Icon';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeProps } from '../../utils/propsHelper';
 
@@ -9,11 +10,12 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   invisible?: boolean;
   icon?: ReactNode;
-  action?: ReactNode;
+  button?: ReactNode;
   iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  buttonIconProps: IconProps;
+  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   className?: string;
   children?: ReactNode;
 }
@@ -28,11 +30,12 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerR
     color,
     invisible,
     icon,
-    action,
+    button,
     iconContainerProps,
     bodyProps,
-    buttonContainerProps,
     buttonProps,
+    buttonIconProps,
+    buttonContainerProps,
     className: containerClassName,
     children: containerChildren,
     ...restContainerProps
@@ -75,7 +78,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerR
   /* --- Set button props --- */
   let buttonNode: ReactNode;
 
-  if (action === undefined && onClose !== undefined) {
+  if (button === undefined && onClose !== undefined) {
     const buttonStyles = styles.button;
     const { onClick: onButtonClick, className: buttonClassName, ...restButtonProps } = buttonProps;
 
@@ -95,9 +98,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerR
         className={mergedButtonClassName}
         {...restButtonProps}
       >
-        <svg viewBox="0 0 24 24">
+        <Icon {...buttonIconProps}>
           <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-        </svg>
+        </Icon>
       </button>
     );
   }
@@ -105,7 +108,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((containerProps, containerR
   /* --- Set button container props --- */
   let buttonContainerNode: ReactNode;
 
-  if (action !== undefined || onClose !== undefined) {
+  if (button !== undefined || onClose !== undefined) {
     const buttonContainerStyles = styles.buttonContainer;
     const { className: buttonContainerClassName, ...restButtonContainerProps } = buttonContainerProps;
 
