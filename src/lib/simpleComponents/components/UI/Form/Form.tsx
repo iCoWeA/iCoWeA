@@ -1,7 +1,7 @@
-import React, { forwardRef, useContext } from 'react';
+import React, { forwardRef } from 'react';
 import { Form as BaseForm, type FormProps as BaseFormProps } from 'react-router-dom';
-import themeContext from '../../contexts/theme';
-import { mergeClasses, mergeProps } from '../../utils/propsHelper';
+import formConfig from '../../../configs/formConfig';
+import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
 
 export interface FormProps extends BaseFormProps {
   columns?: boolean;
@@ -10,8 +10,7 @@ export interface FormProps extends BaseFormProps {
 
 const Form = forwardRef<HTMLFormElement, FormProps>((props, ref) => {
   /* --- Set default props --- */
-  const { config } = useContext(themeContext);
-  const { defaultProps, styles } = config.form;
+  const { defaultProps, styles } = formConfig;
   const { columns, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* --- Set props --- */
