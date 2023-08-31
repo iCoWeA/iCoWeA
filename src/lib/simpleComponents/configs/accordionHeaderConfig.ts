@@ -1,5 +1,5 @@
 import { type BaseHTMLAttributes, type MouseEventHandler, type ReactNode } from 'react';
-import { type IconProps } from '../components/UI/Icon';
+import { type IconProps } from '../components/UI/Icon/Icon';
 
 export interface AccordionHeaderConfig {
   defaultProps: {

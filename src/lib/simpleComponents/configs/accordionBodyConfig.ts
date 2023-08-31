@@ -1,4 +1,4 @@
-import { type CollapseProps } from '../components/UI/Collapse';
+import { type CollapseProps } from '../components/UI/Collapse/Collapse';
 
 export interface AccordionBodyConfig {
   defaultProps: {

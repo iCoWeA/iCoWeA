@@ -2,7 +2,7 @@ export interface AccordionConfig {
   defaultProps: {
     onToggle?: (open?: boolean) => void;
     open?: boolean;
-    duration: number;
+    transitionDuration: number;
     disabled: boolean;
     className: string;
   };
@@ -14,7 +14,7 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
-    duration: 500,
+    transitionDuration: 500,
     disabled: false,
     className: ''
   },
