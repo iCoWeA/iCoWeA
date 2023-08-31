@@ -1,6 +1,5 @@
 import React, {
   forwardRef,
-  useContext,
   type BaseHTMLAttributes,
   type TransitionEvent,
   type AnimationEvent,
@@ -12,9 +11,9 @@ import React, {
   type ReactNode,
   useEffect
 } from 'react';
-import themeContext from '../../contexts/theme';
-import useTransition, { type TransitionConfig, TransitionStates } from '../../hooks/useTransition';
-import { mergeClasses, mergeProps, mergeStyles } from '../../utils/propsHelper';
+import collapseConfig from '../../../configs/collapseConfig';
+import useTransition, { type TransitionConfig, TransitionStates } from '../../../hooks/useTransition';
+import { mergeClasses, mergeProps, mergeStyles } from '../../../utils/propsHelper';
 
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
@@ -29,8 +28,7 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
 
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
-  const { config } = useContext(themeContext);
-  const { defaultProps, styles } = config.collapse;
+  const { defaultProps, styles } = collapseConfig;
   const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, children, ...restProps } = mergeProps(defaultProps, props);
   const mergedTransitionConfig = mergeProps(defaultProps.transitionConfig, transitionConfig);
 
@@ -85,7 +83,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   const mergedStyle = mergeStyles(
     {
-      height: `${!open || componentRef.current === null ? 0 : componentRef.current.scrollHeight}px`,
+      height: `${open ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
       transitionDuration: `${open ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`
     },
     style
