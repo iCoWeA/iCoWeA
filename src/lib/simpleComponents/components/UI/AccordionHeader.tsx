@@ -5,18 +5,17 @@ import React, {
   type ReactNode,
   type MouseEvent,
   type MouseEventHandler,
-  type SVGAttributes,
   type BaseHTMLAttributes
 } from 'react';
+import Icon, { type IconProps } from './Icon';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
-import Icon from './Icon';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: Colors;
   icon?: ReactNode;
-  iconProps?: SVGAttributes<SVGSVGElement>;
+  iconProps?: IconProps;
   iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
@@ -58,7 +57,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((but
 
   if (icon === undefined) {
     iconNode = (
-      <Icon>
+      <Icon {...iconProps}>
         <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
       </Icon>
     );

@@ -1,10 +1,11 @@
-import { type BaseHTMLAttributes, type MouseEventHandler, type ReactNode, type SVGAttributes } from 'react';
+import { type BaseHTMLAttributes, type MouseEventHandler, type ReactNode } from 'react';
+import { type IconProps } from '../components/UI/Icon';
 
 export interface AccordionHeaderConfig {
   defaultProps: {
     color: Colors;
     icon?: ReactNode;
-    iconProps: SVGAttributes<SVGSVGElement>;
+    iconProps: IconProps;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     disabled: boolean;
