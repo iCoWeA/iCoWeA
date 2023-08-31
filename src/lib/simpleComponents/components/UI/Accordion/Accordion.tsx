@@ -1,8 +1,8 @@
 import React, { forwardRef, type BaseHTMLAttributes, useContext, useMemo, useState, useEffect } from 'react';
-import accordionContext, { type AccordionContext } from '../../contexts/accordion';
-import themeContext from '../../contexts/theme';
-import usePrevious from '../../hooks/usePrevious';
-import { mergeClasses, mergeProps } from '../../utils/propsHelper';
+import accordionContext, { type AccordionContext } from '../../../contexts/accordion';
+import themeContext from '../../../contexts/theme';
+import usePrevious from '../../../hooks/usePrevious';
+import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   onToggle?: (open?: boolean) => void;
