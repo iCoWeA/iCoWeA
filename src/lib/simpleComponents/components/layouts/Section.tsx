@@ -1,5 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import themeContext from '../../contexts/theme';
+import sectionConfig from '../../configs/sectionConfig';
 import { mergeProps, mergeClasses } from '../../utils/propsHelper';
 
 export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
@@ -8,9 +9,11 @@ export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
 }
 
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
+  /* --- Set context props --- */
+  const { theme } = useContext(themeContext);
+
   /* --- Set default props --- */
-  const { theme, config } = useContext(themeContext);
-  const { defaultProps, styles } = config.section;
+  const { defaultProps, styles } = sectionConfig;
   const { color, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* --- Set props --- */

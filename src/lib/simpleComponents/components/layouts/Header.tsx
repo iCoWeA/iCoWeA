@@ -1,5 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import themeContext from '../../contexts/theme';
+import headerConfig from '../../configs/headerConfig';
 import { mergeProps, mergeClasses } from '../../utils/propsHelper';
 
 export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
@@ -8,9 +9,11 @@ export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
+  /* --- Set context props --- */
+  const { theme } = useContext(themeContext);
+
   /* --- Set default props --- */
-  const { theme, config } = useContext(themeContext);
-  const { defaultProps, styles } = config.header;
+  const { defaultProps, styles } = headerConfig;
   const { color, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* --- Set props --- */
