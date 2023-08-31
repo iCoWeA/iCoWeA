@@ -18,7 +18,7 @@ const AccordionBodyContainer = forwardRef<HTMLDivElement, AccordionBodyContainer
       className={mergedBodyClassName}
       ref={ref}
       {...restProps}
-    ></div>
+    />
   );
 });
 

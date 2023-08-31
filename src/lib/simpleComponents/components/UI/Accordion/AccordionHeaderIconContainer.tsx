@@ -1,10 +1,11 @@
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, type ReactNode } from 'react';
 import accordionHeaderConfig from '../../../configs/accordionHeaderConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AccordionHeaderIconContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   open: boolean;
   transitionDuration: number;
+  children: ReactNode;
 }
 
 const AccordionHeaderIconContainer = forwardRef<HTMLDivElement, AccordionHeaderIconContainerProps>(
