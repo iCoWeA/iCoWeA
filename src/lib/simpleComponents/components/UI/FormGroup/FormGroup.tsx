@@ -1,6 +1,6 @@
 import React, { forwardRef, type BaseHTMLAttributes } from 'react';
 import formGroupConfig from '../../../configs/formGroupConfig';
-import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface FormGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   row?: boolean;
@@ -9,8 +9,8 @@ export interface FormGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
 
 const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>((props, ref) => {
   /* --- Set default props --- */
-  const { defaultProps, styles } = formGroupConfig;
-  const { row, className, ...restProps } = mergeProps(defaultProps, props);
+  const styles = formGroupConfig.styles;
+  const { row, className, ...restProps } = { ...formGroupConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, row && styles.row, className);

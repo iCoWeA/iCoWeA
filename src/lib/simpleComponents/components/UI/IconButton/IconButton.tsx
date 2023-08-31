@@ -1,7 +1,7 @@
 import React, { forwardRef, type ButtonHTMLAttributes, useContext } from 'react';
 import iconButtonConfig, { type IconButtonVariants } from '../../../configs/iconButtonConfig';
 import themeContext from '../../../contexts/theme';
-import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: IconButtonVariants;
@@ -14,11 +14,11 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
   /* --- Set context props --- */
-  const { theme } = useContext(themeContext);
+  const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const { defaultProps, styles } = iconButtonConfig;
-  const { variant, size, color, elevated, className, type, ...restProps } = mergeProps(defaultProps, props);
+  const styles = iconButtonConfig.styles;
+  const { variant, size, color, elevated, className, type, ...restProps } = { ...iconButtonConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.sizes[size], elevated && styles.elevated[theme], className);

@@ -1,6 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import cardFooterConfig from '../../../configs/cardFooterConfig';
-import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface CardFooterProps extends BaseHTMLAttributes<HTMLDivElement> {
   columns?: boolean;
@@ -11,7 +11,7 @@ export interface CardFooterProps extends BaseHTMLAttributes<HTMLDivElement> {
 const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>((props, ref) => {
   /* --- Set default props --- */
   const { defaultProps, styles } = cardFooterConfig;
-  const { columns, fullwidht, className, ...restProps } = mergeProps(defaultProps, props);
+  const { columns, fullwidht, className, ...restProps } = { ...defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, columns && styles.columns, fullwidht && styles.fullwidth, className);

@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
 import themeContext from '../../../contexts/theme';
 import labelConfig from '../../../configs/labelConfig';
-import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   color?: Colors;
@@ -10,11 +10,11 @@ export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 
 const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
   /* --- Set context props --- */
-  const { theme } = useContext(themeContext);
+  const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const { defaultProps, styles } = labelConfig;
-  const { color, className, ...restProps } = mergeProps(defaultProps, props);
+  const styles = labelConfig.styles;
+  const { color, className, ...restProps } = { ...labelConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);

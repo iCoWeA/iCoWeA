@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import themeContext from '../../contexts/theme';
 import mainConfig from '../../configs/mainConfig';
-import { mergeProps, mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/propsHelper';
 
 export interface MainProps extends BaseHTMLAttributes<HTMLElement> {
   color?: Colors;
@@ -10,11 +10,11 @@ export interface MainProps extends BaseHTMLAttributes<HTMLElement> {
 
 const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
   /* --- Set context props --- */
-  const { theme } = useContext(themeContext);
+  const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const { defaultProps, styles } = mainConfig;
-  const { color, className, ...restProps } = mergeProps(defaultProps, props);
+  const styles = mainConfig.styles;
+  const { color, className, ...restProps } = { ...mainConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);

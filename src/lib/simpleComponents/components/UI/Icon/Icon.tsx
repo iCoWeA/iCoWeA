@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext, type SVGAttributes } from 'react';
 import iconConfig, { type IconSizes } from '../../../configs/iconConfig';
 import themeContext from '../../../contexts/theme';
-import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface IconProps extends SVGAttributes<SVGSVGElement> {
   size?: IconSizes;
@@ -12,11 +12,11 @@ export interface IconProps extends SVGAttributes<SVGSVGElement> {
 
 const Icon = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   /* --- Set context props --- */
-  const { theme } = useContext(themeContext);
+  const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const { defaultProps, styles } = iconConfig;
-  const { size, color, viewBox, className, ...restProps } = mergeProps(defaultProps, props);
+  const styles = iconConfig.styles;
+  const { size, color, viewBox, className, ...restProps } = { ...iconConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.sizes[size], styles.colors[theme][color], className);

@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { Form as BaseForm, type FormProps as BaseFormProps } from 'react-router-dom';
 import formConfig from '../../../configs/formConfig';
-import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface FormProps extends BaseFormProps {
   columns?: boolean;
@@ -10,8 +10,8 @@ export interface FormProps extends BaseFormProps {
 
 const Form = forwardRef<HTMLFormElement, FormProps>((props, ref) => {
   /* --- Set default props --- */
-  const { defaultProps, styles } = formConfig;
-  const { columns, className, ...restProps } = mergeProps(defaultProps, props);
+  const styles = formConfig.styles;
+  const { columns, className, ...restProps } = { ...formConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, columns && styles.columns, className);
