@@ -2,9 +2,7 @@ import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import accordionBodyConfig from '../../../configs/accordionBodyConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
-interface AccordionBodyContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
-  className: string;
-}
+interface AccordionBodyContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
 const AccordionBodyContainer = forwardRef<HTMLDivElement, AccordionBodyContainerProps>(({ className, ...restProps }, ref) => {
   /* --- Set default props --- */

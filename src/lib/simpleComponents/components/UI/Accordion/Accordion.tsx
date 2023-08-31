@@ -8,8 +8,6 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   onToggle?: (open?: boolean) => void;
   open?: boolean;
   transitionDuration?: number;
-  disabled?: boolean;
-  clasName?: string;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
