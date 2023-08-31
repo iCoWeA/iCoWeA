@@ -24,15 +24,15 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
   /* --- Set props --- */
   let clickHandler = onClick;
 
-  if (onClose !== undefined) {
-    clickHandler = (event) => {
+  clickHandler = (event) => {
+    if (onClose !== undefined) {
       onClose();
+    }
 
-      if (onClick !== undefined) {
-        onClick(event);
-      }
-    };
-  }
+    if (onClick !== undefined) {
+      onClick(event);
+    }
+  };
 
   const mergedClassName = mergeClasses(styles.base, styles.color[theme], open && styles.open, invisible && styles.invisible, className);
 
