@@ -11,8 +11,10 @@ export interface IconProps extends SVGAttributes<SVGSVGElement> {
 }
 
 const Icon = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
-  /* --- Set default props --- */
+  /* --- Set context props --- */
   const { theme } = useContext(themeContext);
+
+  /* --- Set default props --- */
   const { defaultProps, styles } = iconConfig;
   const { size, color, viewBox, className, ...restProps } = mergeProps(defaultProps, props);
 

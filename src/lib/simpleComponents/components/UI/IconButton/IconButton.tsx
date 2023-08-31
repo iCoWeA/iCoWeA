@@ -1,7 +1,7 @@
 import React, { forwardRef, type ButtonHTMLAttributes, useContext } from 'react';
-import { type IconButtonVariants } from '../../configs/iconButtonConfig';
-import themeContext from '../../contexts/theme';
-import { mergeClasses, mergeProps } from '../../utils/propsHelper';
+import iconButtonConfig, { type IconButtonVariants } from '../../../configs/iconButtonConfig';
+import themeContext from '../../../contexts/theme';
+import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: IconButtonVariants;
@@ -13,9 +13,11 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
+  /* --- Set context props --- */
+  const { theme } = useContext(themeContext);
+
   /* --- Set default props --- */
-  const { theme, config } = useContext(themeContext);
-  const { defaultProps, styles } = config.iconButton;
+  const { defaultProps, styles } = iconButtonConfig;
   const { variant, size, color, elevated, className, type, ...restProps } = mergeProps(defaultProps, props);
 
   /* --- Set props --- */
