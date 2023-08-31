@@ -14,7 +14,7 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bodyProps?: BaseHTMLAttributes<HTMLDivElement>;
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
-  buttonIconProps: IconProps;
+  buttonIconProps?: IconProps;
   buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   className?: string;
   children?: ReactNode;
