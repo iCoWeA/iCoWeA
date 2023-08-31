@@ -8,7 +8,6 @@ export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   size?: AvatarSizes;
   color?: Colors;
   withBorder?: boolean;
-  className?: string;
 }
 
 const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {

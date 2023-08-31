@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes, type MouseEventHandler } from 'react';
+import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
 import themeContext from '../../../contexts/theme';
 import backdropConfig from '../../../configs/backdropConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
@@ -9,8 +9,6 @@ export interface BackdropProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
   invisible?: boolean;
   overlayRef?: Element | null;
-  onClick?: MouseEventHandler;
-  className?: string;
 }
 
 const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
