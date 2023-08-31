@@ -1,5 +1,5 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import Collapse, { type CollapseProps } from '../Collapse';
+import Collapse, { type CollapseProps } from '../Collapse/Collapse';
 import accordionContext from '../../../contexts/accordion';
 import accordionBodyConfig from '../../../configs/accordionBodyConfig';
 import { mergeProps } from '../../../utils/propsHelper';
