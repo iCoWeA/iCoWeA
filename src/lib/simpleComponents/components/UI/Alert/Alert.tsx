@@ -21,8 +21,6 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
   buttonIconProps?: IconProps;
   buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  className?: string;
-  children?: ReactNode;
 }
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
