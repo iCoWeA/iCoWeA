@@ -4,7 +4,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface FormGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   row?: boolean;
-  className?: string;
 }
 
 const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>((props, ref) => {

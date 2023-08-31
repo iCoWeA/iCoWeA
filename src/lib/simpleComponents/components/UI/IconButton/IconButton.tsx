@@ -8,7 +8,6 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   size?: Sizes;
   color?: Colors;
   elevated?: boolean;
-  className?: string;
   type?: 'submit' | 'reset' | 'button';
 }
 

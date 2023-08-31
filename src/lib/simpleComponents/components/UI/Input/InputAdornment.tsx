@@ -5,7 +5,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface InputAdornmentProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
-  className?: string;
 }
 
 const InputAdornment = forwardRef<HTMLDivElement, InputAdornmentProps>((props, ref) => {

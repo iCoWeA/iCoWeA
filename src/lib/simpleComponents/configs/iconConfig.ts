@@ -5,7 +5,6 @@ export interface IconConfig {
     size: IconSizes;
     color: Colors;
     viewBox: string;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -18,8 +17,7 @@ const iconConfig: IconConfig = {
   defaultProps: {
     size: 'full',
     color: 'none',
-    viewBox: '0 0 24 24',
-    className: ''
+    viewBox: '0 0 24 24'
   },
   styles: {
     base: {

@@ -1,7 +1,6 @@
 export interface FormConfig {
   defaultProps: {
     columns: boolean;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -11,8 +10,7 @@ export interface FormConfig {
 
 const formConfig: FormConfig = {
   defaultProps: {
-    columns: false,
-    className: ''
+    columns: false
   },
   styles: {
     base: {

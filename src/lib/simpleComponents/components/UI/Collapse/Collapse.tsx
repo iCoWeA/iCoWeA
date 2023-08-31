@@ -1,16 +1,4 @@
-import React, {
-  forwardRef,
-  type BaseHTMLAttributes,
-  type TransitionEvent,
-  type AnimationEvent,
-  useRef,
-  useImperativeHandle,
-  type CSSProperties,
-  type AnimationEventHandler,
-  type TransitionEventHandler,
-  type ReactNode,
-  useEffect
-} from 'react';
+import React, { forwardRef, type BaseHTMLAttributes, type TransitionEvent, type AnimationEvent, useRef, useImperativeHandle, useEffect } from 'react';
 import collapseConfig from '../../../configs/collapseConfig';
 import useTransition, { type TransitionConfig, TransitionStates } from '../../../hooks/useTransition';
 import { mergeClasses } from '../../../utils/propsHelper';
@@ -19,11 +7,6 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
   unmountOnExit?: boolean;
   transitionConfig?: TransitionConfig;
-  onTransitionEnd?: TransitionEventHandler;
-  onAnimationEnd?: AnimationEventHandler;
-  style?: CSSProperties;
-  className?: string;
-  children?: ReactNode;
 }
 
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {

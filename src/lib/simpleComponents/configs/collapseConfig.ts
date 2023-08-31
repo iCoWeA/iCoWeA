@@ -1,5 +1,3 @@
-import { type TransitionEventHandler, type AnimationEventHandler, type CSSProperties, type ReactNode } from 'react';
-
 export interface CollapseConfig {
   defaultProps: {
     open: boolean;
@@ -8,11 +6,6 @@ export interface CollapseConfig {
       enterDuration: number,
       exitDuration: number
     };
-    onTransitionEnd?: TransitionEventHandler;
-    onAnimationEnd?: AnimationEventHandler;
-    style: CSSProperties;
-    className: string;
-    children?: ReactNode
   };
   styles: {
     base: Record<string, string>;
@@ -26,9 +19,7 @@ const collapseConfig: CollapseConfig = {
     transitionConfig: {
       enterDuration: 500,
       exitDuration: 500
-    },
-    style: {},
-    className: ''
+    }
   },
   styles: {
     base: {

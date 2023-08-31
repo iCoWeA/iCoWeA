@@ -4,7 +4,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ContainerVariants;
-  className?: string;
 }
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {

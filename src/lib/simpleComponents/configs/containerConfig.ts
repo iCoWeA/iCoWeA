@@ -3,7 +3,6 @@ export type ContainerVariants = 'flex' | 'flex-col' | 'grid' | 'column' | 'defau
 export interface ContainerConfig {
   defaultProps: {
     variant: ContainerVariants;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -13,8 +12,7 @@ export interface ContainerConfig {
 
 const containerConfig: ContainerConfig = {
   defaultProps: {
-    variant: 'flex',
-    className: ''
+    variant: 'flex'
   },
   styles: {
     base: {

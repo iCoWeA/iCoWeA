@@ -9,7 +9,6 @@ export interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
   color?: Colors;
   fullwidth?: boolean;
   selected?: boolean;
-  className?: string;
   type?: 'submit' | 'reset' | 'button';
 }
 

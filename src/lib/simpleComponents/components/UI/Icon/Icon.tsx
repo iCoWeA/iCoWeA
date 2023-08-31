@@ -7,7 +7,6 @@ export interface IconProps extends SVGAttributes<SVGSVGElement> {
   size?: IconSizes;
   color?: Colors;
   viewBox?: string;
-  className?: string;
 }
 
 const Icon = forwardRef<SVGSVGElement, IconProps>((props, ref) => {

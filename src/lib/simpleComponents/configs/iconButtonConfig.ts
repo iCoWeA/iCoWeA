@@ -6,7 +6,6 @@ export interface IconButtonConfig {
     size: Sizes;
     color: Colors;
     elevated: boolean;
-    className: string;
     type: 'submit' | 'reset' | 'button';
   };
   styles: {
@@ -23,7 +22,6 @@ const iconButtonConfig: IconButtonConfig = {
     size: 'md',
     color: 'primary',
     elevated: false,
-    className: '',
     type: 'button'
   },
   styles: {

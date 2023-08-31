@@ -1,7 +1,6 @@
 export interface FormGroupConfig {
   defaultProps: {
     row: boolean;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -11,8 +10,7 @@ export interface FormGroupConfig {
 
 const formGroupConfig: FormGroupConfig = {
   defaultProps: {
-    row: false,
-    className: ''
+    row: false
   },
   styles: {
     base: {

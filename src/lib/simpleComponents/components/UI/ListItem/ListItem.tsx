@@ -7,7 +7,6 @@ export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
   size?: Sizes;
   color?: Colors;
   disablePadding?: boolean;
-  className?: string;
 }
 
 const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {

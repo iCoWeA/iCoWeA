@@ -1,7 +1,6 @@
 export interface LabelConfig {
   defaultProps: {
     color: Colors;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -11,8 +10,7 @@ export interface LabelConfig {
 
 const labelConfig: LabelConfig = {
   defaultProps: {
-    color: 'default',
-    className: ''
+    color: 'default'
   },
   styles: {
     base: {

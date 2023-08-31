@@ -5,7 +5,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface FormProps extends BaseFormProps {
   columns?: boolean;
-  className?: string;
 }
 
 const Form = forwardRef<HTMLFormElement, FormProps>((props, ref) => {

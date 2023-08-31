@@ -7,7 +7,6 @@ export interface ListItemButtonConfig {
     color: Colors;
     fullwidth: boolean;
     selected: boolean;
-    className: string;
     type: 'submit' | 'reset' | 'button';
   };
   styles: {
@@ -26,7 +25,6 @@ const listItemButtonConfig: ListItemButtonConfig = {
     color: 'default',
     fullwidth: false,
     selected: false,
-    className: '',
     type: 'button'
   },
   styles: {

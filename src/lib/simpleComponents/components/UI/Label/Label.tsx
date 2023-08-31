@@ -5,7 +5,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   color?: Colors;
-  className?: string;
 }
 
 const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {

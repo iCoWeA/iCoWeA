@@ -2,7 +2,6 @@ export interface ListConfig {
   defaultProps: {
     row: boolean;
     disableGap: boolean;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -14,8 +13,7 @@ export interface ListConfig {
 const listConfig: ListConfig = {
   defaultProps: {
     row: false,
-    disableGap: false,
-    className: ''
+    disableGap: false
   },
   styles: {
     base: {
