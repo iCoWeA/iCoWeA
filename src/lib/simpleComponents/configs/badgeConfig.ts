@@ -1,11 +1,15 @@
+export interface BadgePosition {
+  vertical: 'top' | 'bottom';
+  horizontal: 'left' | 'right'
+}
+
 export interface BadgeConfig {
   defaultProps: {
-    position: { vertical: 'top' | 'bottom'; horizontal: 'left' | 'right' };
+    position: BadgePosition;
     color: Colors;
     withBorder: boolean;
     borderColor: Colors;
     invisible: boolean;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -23,8 +27,7 @@ const badgeConfig: BadgeConfig = {
     color: 'primary',
     withBorder: false,
     borderColor: 'default',
-    invisible: false,
-    className: ''
+    invisible: false
   },
   styles: {
     base: {
