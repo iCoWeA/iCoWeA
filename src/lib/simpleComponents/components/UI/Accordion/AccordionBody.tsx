@@ -6,6 +6,7 @@ import AccordionBodyContainer from './AccordionBodyContainer';
 
 export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
   collapseProps?: CollapseProps;
+  className?: string;
 }
 
 const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref) => {
