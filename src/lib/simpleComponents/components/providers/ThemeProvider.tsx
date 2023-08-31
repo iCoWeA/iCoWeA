@@ -1,4 +1,4 @@
-import React, { useState, type FC, type ReactNode } from 'react';
+import React, { useState, type FC, type ReactNode, useMemo } from 'react';
 import themeContext, { initialState } from '../../contexts/theme';
 
 interface Props {
@@ -6,17 +6,17 @@ interface Props {
 }
 
 const ThemeProvider: FC<Props> = ({ children }) => {
-  const [{ theme, config }, setTheme] = useState(initialState);
+  const [{ theme }, setTheme] = useState(initialState);
 
-  const context = {
-    theme,
-    config,
-    setTheme
-  };
-
-  return (
-    <themeContext.Provider value={context}>{children}</themeContext.Provider>
+  const context = useMemo(
+    () => ({
+      theme,
+      setTheme
+    }),
+    [theme]
   );
+
+  return <themeContext.Provider value={context}>{children}</themeContext.Provider>;
 };
 
 export default ThemeProvider;
