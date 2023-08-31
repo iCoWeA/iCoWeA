@@ -3,7 +3,6 @@ import { type CollapseProps } from '../components/UI/Collapse/Collapse';
 export interface AccordionBodyConfig {
   defaultProps: {
     collapseProps: CollapseProps;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -12,8 +11,7 @@ export interface AccordionBodyConfig {
 
 const accordionBodyConfig: AccordionBodyConfig = {
   defaultProps: {
-    collapseProps: {},
-    className: ''
+    collapseProps: {}
   },
   styles: {
     base: {

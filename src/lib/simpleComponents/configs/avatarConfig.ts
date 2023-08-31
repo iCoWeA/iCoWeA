@@ -7,7 +7,6 @@ export interface AvatarConfig {
     size: AvatarSizes;
     color: Colors;
     withBorder: boolean;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -23,8 +22,7 @@ const avatarConfig: AvatarConfig = {
     variant: 'circular',
     size: 'none',
     color: 'default',
-    withBorder: false,
-    className: ''
+    withBorder: false
   },
   styles: {
     base: {

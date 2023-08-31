@@ -1,13 +1,8 @@
-import { type MouseEventHandler } from 'react';
-
 export interface BackdropConfig {
   defaultProps: {
-    onClose?: () => void;
     open: boolean;
     invisible: boolean;
     overlayRef: Element | null;
-    onClick?: MouseEventHandler;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -21,8 +16,7 @@ const backdropConfig: BackdropConfig = {
   defaultProps: {
     open: false,
     invisible: false,
-    overlayRef: null,
-    className: ''
+    overlayRef: null
   },
   styles: {
     base: {

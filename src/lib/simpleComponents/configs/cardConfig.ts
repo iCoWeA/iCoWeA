@@ -2,7 +2,6 @@ export interface CardConfig {
   defaultProps: {
     color: Colors;
     elevated: boolean;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -14,8 +13,7 @@ export interface CardConfig {
 const cardConfig: CardConfig = {
   defaultProps: {
     color: 'light',
-    elevated: false,
-    className: ''
+    elevated: false
   },
   styles: {
     base: {

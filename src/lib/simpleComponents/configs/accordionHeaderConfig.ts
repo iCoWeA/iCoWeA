@@ -1,16 +1,11 @@
-import { type BaseHTMLAttributes, type MouseEventHandler, type ReactNode } from 'react';
+import { type BaseHTMLAttributes } from 'react';
 import { type IconProps } from '../components/UI/Icon/Icon';
 
 export interface AccordionHeaderConfig {
   defaultProps: {
     color: Colors;
-    icon?: ReactNode;
     iconProps: IconProps;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
-    onClick?: MouseEventHandler<HTMLButtonElement>;
-    disabled: boolean;
-    className: string;
-    children?: ReactNode;
   };
   styles: {
     button: {
@@ -28,9 +23,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
   defaultProps: {
     color: 'default',
     iconProps: {},
-    iconContainerProps: {},
-    disabled: false,
-    className: ''
+    iconContainerProps: { className: '' }
   },
   styles: {
     button: {

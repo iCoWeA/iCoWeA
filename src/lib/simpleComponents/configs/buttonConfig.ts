@@ -7,7 +7,6 @@ export interface ButtonConfig {
     color: Colors;
     elevated: boolean;
     fullwidth: boolean;
-    className: string;
     type: 'submit' | 'reset' | 'button';
   };
   styles: {
@@ -26,7 +25,6 @@ const buttonConfig: ButtonConfig = {
     color: 'primary',
     elevated: false,
     fullwidth: false,
-    className: '',
     type: 'button'
   },
   styles: {

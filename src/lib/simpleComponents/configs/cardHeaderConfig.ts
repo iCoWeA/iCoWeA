@@ -2,7 +2,6 @@ export interface CardHeaderConfig {
   defaultProps: {
     columns: boolean;
     fullwidht: boolean;
-    className: string;
   }
   styles: {
     base: Record<string, string>;
@@ -14,8 +13,7 @@ export interface CardHeaderConfig {
 const cardHeaderConfig: CardHeaderConfig = {
   defaultProps: {
     columns: false,
-    fullwidht: false,
-    className: ''
+    fullwidht: false
   },
   styles: {
     base: {
