@@ -5,7 +5,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 export interface ListProps extends BaseHTMLAttributes<HTMLUListElement> {
   row?: boolean;
   disableGap?: boolean;
-  className?: string;
 }
 
 const List = forwardRef<HTMLUListElement, ListProps>((props, ref) => {
