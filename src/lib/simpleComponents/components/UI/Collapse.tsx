@@ -42,29 +42,25 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   /* --- Set states --- */
   const { state: transitionState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
-  const transitionEntering =
-    transitionState === TransitionStates.ENTER || transitionState === TransitionStates.ENTERING || transitionState === TransitionStates.ENTERED;
-  const transitionExiting =
-    transitionState === TransitionStates.EXIT || transitionState === TransitionStates.EXITING || transitionState === TransitionStates.EXITED;
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (open && transitionExiting) {
+    if (open && transitionState.exit) {
       enter();
     }
 
-    if (!open && transitionEntering) {
+    if (!open && transitionState.enter) {
       exit();
     }
-  }, [open, transitionEntering, transitionExiting]);
+  }, [open, transitionState.enter, transitionState.exit]);
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING && event.target === componentRef.current) {
+    if (transitionState.current === TransitionStates.ENTERING && event.target === componentRef.current) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING && event.target === componentRef.current) {
+    if (transitionState.current === TransitionStates.EXITING && event.target === componentRef.current) {
       exit(true);
     }
 
@@ -74,11 +70,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (transitionState === TransitionStates.ENTERING && event.target === componentRef.current) {
+    if (transitionState.current === TransitionStates.ENTERING && event.target === componentRef.current) {
       enter(true);
     }
 
-    if (transitionState === TransitionStates.EXITING && event.target === componentRef.current) {
+    if (transitionState.current === TransitionStates.EXITING && event.target === componentRef.current) {
       exit(true);
     }
 
@@ -97,7 +93,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
 
-  const childrenNode = (!unmountOnExit || (unmountOnExit && transitionState !== TransitionStates.EXITED)) && children;
+  const childrenNode = (!unmountOnExit || (unmountOnExit && transitionState.current !== TransitionStates.EXITED)) && children;
 
   return (
     <div
