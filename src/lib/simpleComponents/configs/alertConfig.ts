@@ -1,21 +1,18 @@
-import { type ReactNode, type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
+import { type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
+import { type IconProps } from '../components/UI/Icon/Icon';
 
 export type AlertVariants = 'filled' | 'outlined' | 'ghost';
 
 export interface AlertConfig {
   defaultProps: {
-    onClose?: () => void;
     variant: AlertVariants;
     color: Colors;
     invisible: boolean;
-    icon?: ReactNode;
-    action?: ReactNode;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
-    bodyProps: BaseHTMLAttributes<HTMLDivElement>;
-    buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
-    className: string;
-    children?: ReactNode;
+    buttonIconProps: IconProps;
+    buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
   };
   styles: {
     container: {
@@ -26,7 +23,7 @@ export interface AlertConfig {
     iconContainer: {
       base: Record<string, string>;
     }
-    body: {
+    bodyContainer: {
       base: Record<string, string>;
     },
     buttonContainer: {
@@ -45,10 +42,10 @@ const alertConfig: AlertConfig = {
     color: 'primary',
     invisible: false,
     iconContainerProps: {},
-    bodyProps: {},
-    buttonContainerProps: {},
+    bodyContainerProps: {},
     buttonProps: {},
-    className: ''
+    buttonIconProps: {},
+    buttonContainerProps: {}
   },
   styles: {
     container: {
@@ -208,7 +205,7 @@ const alertConfig: AlertConfig = {
         focus: 'focus:outline-0'
       }
     },
-    body: {
+    bodyContainer: {
       base: {
         display: 'flex',
         flexDirection: 'flex-col',
