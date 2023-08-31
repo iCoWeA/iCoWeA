@@ -7,7 +7,7 @@ export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLUListElement> {
   color?: Colors;
   fullwidth?: boolean;
   itemsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
-  separatorsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
+  separatorsProps?: Record<number, BaseHTMLAttributes<HTMLSpanElement>>;
   className?: string;
   children?: ReactNode;
 }
@@ -36,12 +36,6 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((listProps, l
   const childrenNodes = Array.isArray(listChildren) ? [...listChildren] : [listChildren];
 
   for (let i = 0; i < childrenNodes.length; i++) {
-    /* --- Set item props --- */
-    const itemStyles = styles.item;
-    const { className: itemClassName, ...restItemProps } = itemsProps[i] ?? {};
-
-    const mergedItemClassName = mergeClasses(itemStyles.base, itemClassName);
-
     /* --- Set separator props --- */
     let separatorNode: ReactNode;
 
@@ -60,6 +54,12 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((listProps, l
         </span>
       );
     }
+
+    /* --- Set item props --- */
+    const itemStyles = styles.item;
+    const { className: itemClassName, ...restItemProps } = itemsProps[i] ?? {};
+
+    const mergedItemClassName = mergeClasses(itemStyles.base, itemClassName);
 
     itemNodes[i] = (
       <li
