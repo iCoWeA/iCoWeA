@@ -2,7 +2,6 @@ export interface MenuHeaderConfig {
   defaultProps: {
     columns: boolean;
     fullwidht: boolean;
-    className: string;
   }
   styles: {
     base: Record<string, string>;
@@ -14,8 +13,7 @@ export interface MenuHeaderConfig {
 const menuHeaderConfig: MenuHeaderConfig = {
   defaultProps: {
     columns: false,
-    fullwidht: false,
-    className: ''
+    fullwidht: false
   },
   styles: {
     base: {

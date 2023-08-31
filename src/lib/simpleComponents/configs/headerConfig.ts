@@ -1,7 +1,6 @@
 export interface HeaderConfig {
   defaultProps: {
     color: Colors;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -11,8 +10,7 @@ export interface HeaderConfig {
 
 const headerConfig: HeaderConfig = {
   defaultProps: {
-    color: 'none',
-    className: ''
+    color: 'none'
   },
   styles: {
     base: {

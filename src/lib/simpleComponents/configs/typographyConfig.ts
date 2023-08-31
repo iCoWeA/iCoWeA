@@ -14,7 +14,6 @@ export interface TypographyConfig {
     variant: TypographyVariants;
     align: Aligns;
     color: Colors;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -28,8 +27,7 @@ const typographyConfig: TypographyConfig = {
   defaultProps: {
     variant: 'paragraph',
     align: 'start',
-    color: 'default',
-    className: ''
+    color: 'default'
   },
   styles: {
     base: {
