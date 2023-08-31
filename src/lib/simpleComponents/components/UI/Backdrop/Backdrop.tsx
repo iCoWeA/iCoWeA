@@ -1,6 +1,7 @@
 import React, { forwardRef, useContext, type BaseHTMLAttributes, type MouseEventHandler } from 'react';
-import themeContext from '../../contexts/theme';
-import { mergeClasses, mergeProps } from '../../utils/propsHelper';
+import themeContext from '../../../contexts/theme';
+import backdropConfig from '../../../configs/backdropConfig';
+import { mergeClasses, mergeProps } from '../../../utils/propsHelper';
 import { createPortal } from 'react-dom';
 
 export interface BackdropProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -13,9 +14,11 @@ export interface BackdropProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
+  /* --- Set context props --- */
+  const { theme } = useContext(themeContext);
+
   /* --- Set default props --- */
-  const { theme, config } = useContext(themeContext);
-  const { defaultProps, styles } = config.backdrop;
+  const { defaultProps, styles } = backdropConfig;
   const { onClose, open, invisible, overlayRef, onClick, className, ...restProps } = mergeProps(defaultProps, props);
 
   /* --- Set props --- */
