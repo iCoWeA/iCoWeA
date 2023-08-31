@@ -1,10 +1,11 @@
-import { type MouseEventHandler, type ReactNode, type SVGAttributes } from 'react';
+import { type BaseHTMLAttributes, type MouseEventHandler, type ReactNode, type SVGAttributes } from 'react';
 
 export interface AccordionHeaderConfig {
   defaultProps: {
     color: Colors;
-    icon: boolean;
+    icon?: ReactNode;
     iconProps: SVGAttributes<SVGSVGElement>;
+    iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     disabled: boolean;
     className: string;
@@ -15,7 +16,7 @@ export interface AccordionHeaderConfig {
       base: Record<string, string>;
       colors: Record<string, Record<Colors, Record<string, string>>>
     },
-    icon: {
+    iconContainer: {
       base: Record<string, string>;
       open: Record<string, string>;
     }
@@ -25,8 +26,8 @@ export interface AccordionHeaderConfig {
 const accordionHeaderConfig: AccordionHeaderConfig = {
   defaultProps: {
     color: 'default',
-    icon: true,
     iconProps: {},
+    iconContainerProps: {},
     disabled: false,
     className: ''
   },
@@ -96,12 +97,11 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         }
       }
     },
-    icon: {
+    iconContainer: {
       base: {
-        display: 'inline-block',
+        display: 'flex',
         margin: 'ml-auto',
         width: 'w-6',
-        aspectRatio: 'aspect-square',
         transition: 'transition-transform',
         focus: 'focus:outline-0'
       },

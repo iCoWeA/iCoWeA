@@ -1,12 +1,23 @@
-import React, { type ButtonHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent, type MouseEventHandler, type SVGAttributes } from 'react';
+import React, {
+  type ButtonHTMLAttributes,
+  forwardRef,
+  useContext,
+  type ReactNode,
+  type MouseEvent,
+  type MouseEventHandler,
+  type SVGAttributes,
+  type BaseHTMLAttributes
+} from 'react';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, mergeStyles, mergeProps } from '../../utils/propsHelper';
+import Icon from './Icon';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: Colors;
-  icon?: boolean;
+  icon?: ReactNode;
   iconProps?: SVGAttributes<SVGSVGElement>;
+  iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   className?: string;
@@ -22,6 +33,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((but
     color,
     icon,
     iconProps,
+    iconContainerProps,
     onClick: onButtonClick,
     disabled: buttonDisabled,
     className: buttonClassName,
@@ -42,24 +54,35 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((but
   const mergedButtonClassName = mergeClasses(buttonStyles.base, buttonStyles.colors[theme][color], buttonClassName);
 
   /* --- Set icon props --- */
-  let iconNode: ReactNode;
+  let iconNode = icon;
 
-  if (icon) {
-    const iconStyles = styles.icon;
-    const { style: iconStyle, className: iconClassName, ...restIconProps } = iconProps;
-
-    const mergedIconStyle = mergeStyles({ transitionDuration: `${duration}ms` }, iconStyle);
-
-    const mergedIconClassName = mergeClasses(iconStyles.base, open && iconStyles.open, iconClassName);
-
+  if (icon === undefined) {
     iconNode = (
-      <svg
-        style={mergedIconStyle}
-        className={mergedIconClassName}
-        {...restIconProps}
-      >
+      <Icon>
         <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
-      </svg>
+      </Icon>
+    );
+  }
+
+  /* Set icon container props --- */
+  let iconContainerNode: ReactNode;
+
+  if (icon !== null) {
+    const iconContainerStyles = styles.iconContainer;
+    const { style: iconContainerStyle, className: iconContainerClassName, ...restIconContainerProps } = iconContainerProps;
+
+    const mergedIconContainerStyle = mergeStyles({ transitionDuration: `${duration}ms` }, iconContainerStyle);
+
+    const mergedIconContainerClassName = mergeClasses(iconContainerStyles.base, open && iconContainerStyles.open, iconContainerClassName);
+
+    iconContainerNode = (
+      <div
+        style={mergedIconContainerStyle}
+        className={mergedIconContainerClassName}
+        {...restIconContainerProps}
+      >
+        {iconNode}
+      </div>
     );
   }
 
@@ -72,7 +95,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((but
       {...restButtonProps}
     >
       {buttonChildren}
-      {iconNode}
+      {iconContainerNode}
     </button>
   );
 });
