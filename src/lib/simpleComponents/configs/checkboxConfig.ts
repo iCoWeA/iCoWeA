@@ -1,4 +1,5 @@
-import { type BaseHTMLAttributes, type SVGAttributes, type HTMLInputTypeAttribute, type MutableRefObject, type ReactNode } from 'react';
+import { type BaseHTMLAttributes, type HTMLInputTypeAttribute, type MutableRefObject, type ReactNode } from 'react';
+import { type IconProps } from '../components/UI/Icon';
 
 export interface CheckboxConfig {
   defaultProps: {
@@ -7,7 +8,7 @@ export interface CheckboxConfig {
     invalid: boolean;
     icon?: ReactNode;
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
-    iconProps: SVGAttributes<SVGSVGElement>;
+    iconProps: IconProps;
     inputRef?: MutableRefObject<HTMLInputElement> | null;
     checked: boolean;
     disabled: boolean;
