@@ -1,11 +1,11 @@
 import React, { useState, type FC, type ReactNode, useMemo } from 'react';
 import themeContext, { initialState } from '../../contexts/theme';
 
-interface Props {
+interface ThemeProviderProps {
   children: ReactNode;
 }
 
-const ThemeProvider: FC<Props> = ({ children }) => {
+const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const [{ theme }, setTheme] = useState(initialState);
 
   const context = useMemo(
