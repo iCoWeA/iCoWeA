@@ -28,7 +28,6 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
     buttonNodes[i] = (
       <ButtonGroupButton
         key={i}
-        element={children[i]}
         isFirst={i === 0}
         isLast={isLast(children, i)}
         variant={variant}
@@ -37,7 +36,9 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
         elevated={elevated}
         type={children[i].props.type ?? type}
         className={children[i].props.className}
-      />
+      >
+        {children[i]}
+      </ButtonGroupButton>
     );
   }
 
