@@ -27,8 +27,8 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
   for (let i = 0; i < children.length; i++) {
     buttonNodes[i] = (
       <ButtonGroupButton
-        element={children[i]}
         key={i}
+        element={children[i]}
         isFirst={i === 0}
         isLast={isLast(children, i)}
         variant={variant}
@@ -36,7 +36,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
         color={color}
         elevated={elevated}
         type={children[i].props.type ?? type}
-        className={children[i].props.clasName}
+        className={children[i].props.className}
       />
     );
   }

@@ -1,11 +1,10 @@
-import { useContext, cloneElement, type ReactElement, type FC } from 'react';
+import React, { useContext, cloneElement, type ReactElement, type FC } from 'react';
 import buttonGroupConfig, { type ButtonGroupVariants } from '../../../configs/buttonGroupConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface ButtonGroupButtonProps {
   element: ReactElement;
-  key: number;
   isFirst: boolean;
   isLast: boolean;
   variant: ButtonGroupVariants;
@@ -16,7 +15,7 @@ interface ButtonGroupButtonProps {
   className: string;
 }
 
-const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({ element, key, isFirst, isLast, variant, color, size, elevated, type, className }) => {
+const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({ element, isFirst, isLast, variant, color, size, elevated, type, className }) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -34,7 +33,7 @@ const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({ element, key, isFirst, 
     className
   );
 
-  return cloneElement(element, { className: mergedClassName, key, type });
+  return <>{cloneElement(element, { className: mergedClassName, type })}</>;
 };
 
 ButtonGroupButton.displayName = 'ButtonGroupButton';
