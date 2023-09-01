@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes } from 'react';
+import React, { forwardRef, useContext, type BaseHTMLAttributes, type MouseEvent } from 'react';
 import themeContext from '../../../contexts/theme';
 import backdropConfig from '../../../configs/backdropConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
@@ -20,9 +20,7 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
   const { onClose, open, invisible, overlayRef, onClick, className, ...restProps } = { ...backdropConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  let clickHandler = onClick;
-
-  clickHandler = (event) => {
+  const clickHandler = (event: MouseEvent<HTMLDivElement>): void => {
     if (onClose !== undefined) {
       onClose();
     }
