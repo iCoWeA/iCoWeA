@@ -18,9 +18,9 @@ import tooltipConfig from '../../../configs/tooltipConfig';
 import { setElementPosition } from '../../../utils/positiontHelper';
 import useScroll from '../../../hooks/useScroll';
 import useResize from '../../../hooks/useResize';
-import { mergeClasses } from '../../../utils/propsHelper';
 import TooltipHandler from './TooltipHandler';
 import TooltipArrow, { setArrowPosition } from './TooltipArrow';
+import { mergeClasses } from '../../../utils/propsHelper';
 import { createPortal } from 'react-dom';
 
 export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -30,15 +30,15 @@ export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
   gap?: number;
   responsive?: boolean;
   followCursor?: boolean;
-  overlayRef?: Element | null;
   unmountOnExit?: boolean;
-  transitionConfig?: TransitionConfig;
-  handler: ReactElement;
   arrow?: boolean;
+  transitionConfig?: TransitionConfig;
+  overlayRef?: Element | null;
+  handler: ReactElement;
   arrowProps?: BaseHTMLAttributes<HTMLDivElement>;
 }
 
-export interface TooltipRefs {
+interface TooltipRefs {
   container: HTMLDivElement | null;
   handler: HTMLElement | null;
   arrow: HTMLDivElement | null;
@@ -99,8 +99,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     }
   }, [open, transitionState.enter, transitionState.exit]);
 
-  /* --- Set resize action --- */
-  const resize = useCallback((): void => {
+  /* --- Set position --- */
+  const setPosition = useCallback((): void => {
     let newPosition: Positions;
 
     if (!followCursor) {
@@ -132,11 +132,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     }
   }, [followCursor, position, gap, responsive, cursorY, cursorX]);
 
-  useScroll(resize, transitionState.entering);
+  useScroll(setPosition, transitionState.entering);
 
-  useResize(resize, transitionState.entering);
+  useResize(setPosition, transitionState.entering);
 
-  resize();
+  setPosition();
 
   /* --- Set handler props --- */
   const setHandlerRef = (element: HTMLElement): void => {
@@ -220,7 +220,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
 
   const mergedStyle = {
     opacity: `${transitionState.entering ? 100 : 0}`,
-    transitionDuration: `${transitionState.enter ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`,
+    transitionDuration: `${transitionState.entering ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`,
     ...style
   };
 
