@@ -2,11 +2,11 @@ import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode,
 import alertConfig, { type AlertVariants } from '../../../configs/alertConfig';
 import Icon, { type IconProps } from '../Icon/Icon';
 import themeContext from '../../../contexts/theme';
-import { mergeClasses } from '../../../utils/propsHelper';
 import AlertIconContainer from './AlertIconContainer';
 import AlertBodyContainer from './AlertBodyContainer';
-import AlertButtonContainer from './AlertButtonContainer';
 import AlertButton from './AlertButton';
+import AlertButtonContainer from './AlertButtonContainer';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
@@ -77,6 +77,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
         onClose={onClose}
         variant={variant}
         color={color}
+        {...buttonProps}
       >
         {buttonIconNode}
       </AlertButton>
@@ -97,7 +98,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
       {...restProps}
     >
       {iconContainerNode}
-      <AlertBodyContainer>{children}</AlertBodyContainer>
+      <AlertBodyContainer {...bodyContainerProps}>{children}</AlertBodyContainer>
       {buttonContainerNode}
     </div>
   );
