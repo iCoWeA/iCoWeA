@@ -1,7 +1,6 @@
 export interface MainConfig {
   defaultProps: {
     color: Colors;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -11,8 +10,7 @@ export interface MainConfig {
 
 const mainConfig: MainConfig = {
   defaultProps: {
-    color: 'none',
-    className: ''
+    color: 'none'
   },
   styles: {
     base: {

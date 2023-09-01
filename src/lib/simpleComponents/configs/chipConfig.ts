@@ -1,20 +1,16 @@
-import { type ReactNode, type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
+import { type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
 
 export type ChipVariants = 'filled' | 'outlined' | 'ghost';
 
 export interface ChipConfig {
   defaultProps: {
-    onClose?: () => void;
     variant: ChipVariants;
     size: Sizes;
     color: Colors;
     invisible: boolean;
-    action?: ReactNode;
     bodyProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
-    className: string;
-    children?: ReactNode;
   };
   styles: {
     container: {
@@ -23,7 +19,7 @@ export interface ChipConfig {
       sizes: Record<Sizes, Record<string, string>>;
       variants: Record<ChipVariants, Record<string, Record<Colors, Record<string, string>>>>
     },
-    body: {
+    bodyContainer: {
       base: Record<string, string>;
     },
     buttonContainer: {
@@ -44,8 +40,7 @@ const chipConfig: ChipConfig = {
     invisible: false,
     bodyProps: {},
     buttonContainerProps: {},
-    buttonProps: {},
-    className: ''
+    buttonProps: {}
   },
   styles: {
     container: {
@@ -205,7 +200,7 @@ const chipConfig: ChipConfig = {
         }
       }
     },
-    body: {
+    bodyContainer: {
       base: {
         display: 'flex',
         flexDirection: 'flex-col',

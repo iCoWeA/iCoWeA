@@ -1,18 +1,14 @@
-import { type ReactElement } from 'react';
-import { type PopoverProps } from '../components/UI/Popover';
+import { type PopoverProps } from '../components/UI/refactor/Popover';
 import { type PopoverPositions } from './popoverConfig';
 
 export interface MenuConfig {
   defaultProps: {
     color: Colors;
     elevated: boolean;
-    open?: boolean;
     position: PopoverPositions;
     overlayRef: Element | null;
     lockScroll: boolean;
-    handler?: ReactElement;
     popoverProps: PopoverProps;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -28,8 +24,7 @@ const menuConfig: MenuConfig = {
     position: 'bottom',
     overlayRef: null,
     lockScroll: false,
-    popoverProps: {},
-    className: ''
+    popoverProps: {}
   },
   styles: {
     base: {

@@ -7,8 +7,6 @@ export interface BreadcrumbsConfig {
     fullwidth: boolean;
     itemsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
     separatorsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
-    className: string;
-    children?: ReactNode;
   };
   styles: {
     list: {
@@ -31,8 +29,7 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
     color: 'default',
     fullwidth: false,
     itemsProps: {},
-    separatorsProps: {},
-    className: ''
+    separatorsProps: {}
   },
   styles: {
     list: {

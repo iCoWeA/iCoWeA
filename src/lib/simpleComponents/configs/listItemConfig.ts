@@ -3,7 +3,6 @@ export interface ListItemConfig {
     size: Sizes;
     color: Colors;
     disablePadding: boolean;
-    className: string;
   };
   styles: {
     base: Record<string, string>;
@@ -17,8 +16,7 @@ const listItemConfig: ListItemConfig = {
   defaultProps: {
     size: 'md',
     color: 'default',
-    disablePadding: false,
-    className: ''
+    disablePadding: false
   },
   styles: {
     base: {

@@ -1,20 +1,16 @@
-import { type BaseHTMLAttributes, type HTMLInputTypeAttribute, type MutableRefObject, type ReactNode } from 'react';
-import { type IconProps } from '../components/UI/Icon';
+import { type BaseHTMLAttributes, type HTMLInputTypeAttribute } from 'react';
+import { type IconProps } from '../components/UI/Icon/Icon';
 
 export interface CheckboxConfig {
   defaultProps: {
     color: Colors;
     valid: boolean;
     invalid: boolean;
-    icon?: ReactNode;
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
     iconProps: IconProps;
-    inputRef?: MutableRefObject<HTMLInputElement> | null;
     checked: boolean;
     disabled: boolean;
-    type: HTMLInputTypeAttribute
-    className: string;
-    children?: ReactNode;
+    type: HTMLInputTypeAttribute;
   };
   styles: {
     container: {
@@ -43,8 +39,7 @@ const checkboxConfig: CheckboxConfig = {
     iconProps: {},
     checked: false,
     disabled: false,
-    type: 'checkbox',
-    className: ''
+    type: 'checkbox'
   },
   styles: {
     container: {
