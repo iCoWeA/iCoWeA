@@ -1,5 +1,4 @@
 import React, { type BaseHTMLAttributes, forwardRef, type ReactElement } from 'react';
-import { type PopoverPositions } from '../../../configs/popoverConfig';
 import Popover, { type PopoverProps } from '../Popover/Popover';
 import menuConfig from '../../../configs/menuConfig';
 import MenuContainer from './MenuContainer';
@@ -8,7 +7,7 @@ export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   elevated?: boolean;
   open?: boolean;
-  position?: PopoverPositions;
+  position?: Positions;
   overlayRef?: Element | null;
   lockScroll?: boolean;
   handler?: ReactElement;
