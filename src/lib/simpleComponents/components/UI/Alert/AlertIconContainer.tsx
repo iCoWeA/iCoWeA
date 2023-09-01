@@ -4,7 +4,7 @@ import { mergeClasses } from '../../../utils/propsHelper';
 
 interface AlertIconContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
-const AlertIconContainer = forwardRef<HTMLDivElement, AlertIconContainerProps>(({ className, children, ...restProps }, ref) => {
+const AlertIconContainer = forwardRef<HTMLDivElement, AlertIconContainerProps>(({ className, ...restProps }, ref) => {
   /* --- Set default props --- */
   const styles = alertConfig.styles.iconContainer;
 
