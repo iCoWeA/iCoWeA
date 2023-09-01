@@ -1,6 +1,6 @@
 import React, { forwardRef, type BaseHTMLAttributes, type ReactNode, type LiHTMLAttributes } from 'react';
-import { mergeClasses } from '../../../utils/propsHelper';
 import breadcrumbsConfig from '../../../configs/breadcrumbsConfig';
+import { mergeClasses } from '../../../utils/propsHelper';
 import BreadcrumbsSeparator from './BreadcrumbsSeparator';
 import BreadcrumbsItem from './BreadcrumbsItem';
 
