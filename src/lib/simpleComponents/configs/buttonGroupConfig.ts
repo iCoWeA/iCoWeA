@@ -10,7 +10,6 @@ export interface ButtonGroupConfig {
     elevated: boolean;
     fullwidth: boolean;
     type: 'submit' | 'reset' | 'button';
-    className: string;
     children: ReactElement[];
   };
   styles: {
@@ -38,7 +37,6 @@ const buttonGroupConfig: ButtonGroupConfig = {
     elevated: false,
     fullwidth: false,
     type: 'button',
-    className: '',
     children: []
   },
   styles: {

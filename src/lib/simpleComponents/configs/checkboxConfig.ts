@@ -163,7 +163,7 @@ const checkboxConfig: CheckboxConfig = {
             peer: 'peer-checked:fill-default-light'
           },
           success: {
-            peer: 'peer-checked:fill-defasult-light'
+            peer: 'peer-checked:fill-default-light'
           },
           warning: {
             peer: 'peer-checked:fill-default-dark'
