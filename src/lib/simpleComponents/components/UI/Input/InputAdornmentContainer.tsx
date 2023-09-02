@@ -1,24 +1,49 @@
-import React, { forwardRef, type BaseHTMLAttributes } from 'react';
-import inputConfig from '../../../configs/inputConfig';
+import React, { forwardRef, type BaseHTMLAttributes, useContext } from 'react';
+import inputConfig, { type InputVariants } from '../../../configs/inputConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
-export interface InputAdornmentContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
+export interface InputAdornmentContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
+  position: 'start' | 'end';
+  variant: InputVariants;
+  color: Colors;
+  valid: boolean;
+  invalid: boolean;
+}
 
-const InputAdornmentContainer = forwardRef<HTMLDivElement, InputAdornmentContainerProps>(({ className, ...restProps }, ref) => {
-  /* --- Set default props --- */
-  const styles = inputConfig.styles.adornment;
+const InputAdornmentContainer = forwardRef<HTMLDivElement, InputAdornmentContainerProps>(
+  ({ position, variant, color, valid, invalid, className, children, ...restProps }, ref) => {
+    /* --- Set context props --- */
+    const theme = useContext(themeContext).theme;
 
-  /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, className);
+    /* --- Set default props --- */
+    const styles = inputConfig.styles.adornment;
 
-  return (
-    <div
-      className={mergedClassName}
-      ref={ref}
-      {...restProps}
-    />
-  );
-});
+    /* --- Set props --- */
+    const mergedClassName = mergeClasses(
+      styles.base,
+      styles.sizeVariants[variant],
+      !valid && !invalid && styles.variants[variant][theme][color],
+      valid && styles.valid[variant][theme],
+      invalid && styles.invalid[variant][theme],
+      position === 'start' && styles.start,
+      position === 'end' && styles.end,
+      position === 'start' && children !== undefined && styles.rightGap,
+      position === 'end' && children !== undefined && styles.leftGap,
+      className
+    );
+
+    return (
+      <div
+        className={mergedClassName}
+        ref={ref}
+        {...restProps}
+      >
+        {children}
+      </div>
+    );
+  }
+);
 
 InputAdornmentContainer.displayName = 'InputAdornmentContainer';
 
