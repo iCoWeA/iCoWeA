@@ -8,15 +8,15 @@ export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
   elevated?: boolean;
   open?: boolean;
   position?: Positions;
-  overlayRef?: Element | null;
   lockScroll?: boolean;
+  overlayRef?: Element | null;
   handler?: ReactElement;
   popoverProps?: PopoverProps;
 }
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
   /* --- Set default props --- */
-  const { color, elevated, open, position, overlayRef, lockScroll, handler, popoverProps, ...restContainerProps } = {
+  const { color, elevated, open, position, lockScroll, overlayRef, handler, popoverProps, ...restContainerProps } = {
     ...menuConfig.defaultProps,
     ...props
   };
@@ -25,8 +25,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     <Popover
       open={open}
       position={position}
-      overlayRef={overlayRef}
       lockScroll={lockScroll}
+      overlayRef={overlayRef}
       handler={handler}
       {...popoverProps}
       ref={ref}
