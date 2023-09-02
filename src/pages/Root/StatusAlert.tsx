@@ -1,15 +1,18 @@
 import React, { useRef, type FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import statusAlert, { selectState } from '../../store/Slices/statusAlert';
-import Popover from '../../lib/simpleComponents/components/UI/Popover';
-import Alert from '../../lib/simpleComponents/components/UI/Alert';
+import Popover from '../../lib/simpleComponents/components/UI/Popover/Popover';
+import Alert from '../../lib/simpleComponents/components/UI/Alert/Alert';
 
 const StatusAlert: FC = () => {
+  /* --- Set default props --- */
   const { open, closable, timer, props: alertProps } = useSelector(selectState);
   const dispatch = useDispatch();
 
+  /* --- Set refs --- */
   const timerId = useRef(-1);
 
+  /* --- Set timer --- */
   useEffect(() => {
     if (open && timer >= 0) {
       timerId.current = window.setTimeout(() => {
@@ -22,19 +25,16 @@ const StatusAlert: FC = () => {
     }
   }, [open, timer]);
 
-  /* Set root props */
-  const rootOverlayRef = document.getElementById('overlay');
-
-  /* Set alert props */
-  const { onClose: onAlertClose, ...restAlertProps } = alertProps;
-  let closeAlertHandler = onAlertClose;
+  /* --- Set props --- */
+  const { onClose, ...restProps } = alertProps;
+  let closeHandler = onClose;
 
   if (closable) {
-    closeAlertHandler = () => {
+    closeHandler = () => {
       dispatch(statusAlert.actions.hide());
 
-      if (onAlertClose !== undefined) {
-        onAlertClose();
+      if (onClose !== undefined) {
+        onClose();
       }
     };
   }
@@ -42,14 +42,13 @@ const StatusAlert: FC = () => {
   return (
     <Popover
       open={open}
-      overlayRef={rootOverlayRef}
-      disableOutsideClick
+      overlayRef={document.getElementById('overlay')}
       unmountOnExit
       className="fixed bottom-4 w-full px-[16px] md:px-[32px]"
     >
       <Alert
-        onClose={closeAlertHandler}
-        {...restAlertProps}
+        onClose={closeHandler}
+        {...restProps}
       />
     </Popover>
   );
