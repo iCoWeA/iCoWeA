@@ -2,7 +2,7 @@ import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import Collapse, { type CollapseProps } from '../Collapse/Collapse';
 import accordionContext from '../../../contexts/accordion';
 import accordionBodyConfig from '../../../configs/accordionBodyConfig';
-import AccordionBodyContainer from './AccordionBodyContainer';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
   collapseProps?: CollapseProps;
@@ -13,20 +13,27 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref
   const { isOpen, transitionDuration } = useContext(accordionContext);
 
   /* --- Set default props --- */
-  const { collapseProps, className, ...restContainerProps } = { ...accordionBodyConfig.defaultProps, ...props };
+  const styles = accordionBodyConfig.styles;
+  const { collapseProps, className, ...restProps } = { ...accordionBodyConfig.defaultProps, ...props };
+
+  /* --- Set collapse props --- */
+  const { transitionConfig, ...restCollapseProps } = collapseProps;
+  const mergedTransitionConfig = { enterDuration: transitionDuration, exitDuration: transitionDuration, ...(transitionConfig ?? {}) };
 
   /* --- Set props --- */
-  const { transitionConfig, ...restProps } = collapseProps;
-  const mergedTransitionConfig = { enterDuration: transitionDuration, exitDuration: transitionDuration, ...(transitionConfig ?? {}) };
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <Collapse
       open={isOpen}
       transitionConfig={mergedTransitionConfig}
       ref={ref}
-      {...restProps}
+      {...restCollapseProps}
     >
-      <AccordionBodyContainer {...restContainerProps} />
+      <div
+        className={mergedClassName}
+        {...restProps}
+      />
     </Collapse>
   );
 });
