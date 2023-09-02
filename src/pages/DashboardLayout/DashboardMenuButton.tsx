@@ -1,12 +1,14 @@
 import React, { type FC } from 'react';
 import { useDispatch } from 'react-redux';
 import navMenu from '../../store/Slices/navMenu';
-import IconButton from '../../lib/simpleComponents/components/UI/IconButton';
-import Icon from '../../lib/simpleComponents/components/UI/Icon';
+import IconButton from '../../lib/simpleComponents/components/UI/IconButton/IconButton';
+import Icon from '../../lib/simpleComponents/components/UI/Icon/Icon';
 
 const DashboardMenuButton: FC = () => {
+  /* --- Set default props --- */
   const dispatch = useDispatch();
 
+  /* --- Set props --- */
   const clickHandler = (): void => {
     dispatch(navMenu.actions.toggle());
   };
