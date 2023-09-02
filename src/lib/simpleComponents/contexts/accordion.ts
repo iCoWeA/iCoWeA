@@ -1,16 +1,16 @@
 import { createContext } from 'react';
 
 export interface AccordionContext {
-  isOpen: boolean;
+  open: boolean;
   transitionDuration: number;
-  isDisabled: boolean;
+  disabled: boolean;
   onClick: () => void;
 }
 
 export const initialState: AccordionContext = {
-  isOpen: false,
+  open: false,
   transitionDuration: 500,
-  isDisabled: false,
+  disabled: false,
   onClick: () => {}
 };
 

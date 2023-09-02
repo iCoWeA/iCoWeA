@@ -30,9 +30,9 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set context --- */
   const context: AccordionContext = useMemo(
     () => ({
-      isOpen: open ?? isOpen,
+      open: open ?? isOpen,
       transitionDuration,
-      isDisabled: disabled,
+      disabled,
       onClick: () => {
         if (onToggle !== undefined) {
           onToggle();

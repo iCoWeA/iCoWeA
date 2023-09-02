@@ -15,14 +15,19 @@ export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonEle
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((props, ref) => {
   /* --- Set context props --- */
-  const { isOpen, isDisabled, transitionDuration, onClick: onAccordionClick } = useContext(accordionContext);
+  const {
+    open: isAccordionOpen,
+    disabled: isAccordionDisabled,
+    transitionDuration: accordionTransitionDuration,
+    onClick: onAccordionClick
+  } = useContext(accordionContext);
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
   const styles = accordionHeaderConfig.styles.button;
   const { color, icon, iconProps, iconContainerProps, onClick, disabled, className, children, ...restProps } = {
     ...accordionHeaderConfig.defaultProps,
-    disabled: isDisabled,
+    disabled: isAccordionDisabled,
     ...props
   };
 
@@ -54,8 +59,8 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   if (iconNode !== null) {
     iconContainerNode = (
       <AccordionHeaderIconContainer
-        open={isOpen}
-        transitionDuration={transitionDuration}
+        open={isAccordionOpen}
+        transitionDuration={accordionTransitionDuration}
         {...iconContainerProps}
       >
         {iconNode}
