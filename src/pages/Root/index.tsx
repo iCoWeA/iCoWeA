@@ -7,6 +7,7 @@ const Component: FC = () => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
+  /* --- Set background --- */
   useEffect(() => {
     if (theme === 'default') {
       document.body.classList.add('bg-default-background');
