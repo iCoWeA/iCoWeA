@@ -15,4 +15,4 @@ const navMenu = createSlice({
 
 export default navMenu;
 
-export const selectState = ({ navMenu }: StoreState): boolean => navMenu;
+export const selectNavMenuState = ({ navMenu }: StoreState): boolean => navMenu;
