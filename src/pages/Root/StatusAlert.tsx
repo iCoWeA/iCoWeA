@@ -1,12 +1,12 @@
 import React, { useRef, type FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import statusAlert, { selectState } from '../../store/Slices/statusAlert';
+import statusAlert, { selectStatusAlertState } from '../../store/Slices/statusAlert';
 import Popover from '../../lib/simpleComponents/components/UI/Popover/Popover';
 import Alert from '../../lib/simpleComponents/components/UI/Alert/Alert';
 
 const StatusAlert: FC = () => {
   /* --- Set default props --- */
-  const { open: isAlertOpen, closable: isAlertClosable, timer: alertTimer, props: alertProps } = useSelector(selectState);
+  const { open: isAlertOpen, closable: isAlertClosable, timer: alertTimer, props: alertProps } = useSelector(selectStatusAlertState);
   const dispatch = useDispatch();
 
   /* --- Set refs --- */
