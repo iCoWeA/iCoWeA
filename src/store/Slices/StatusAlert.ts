@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { ALERT_TIMER } from '../../data/constants';
-import { type AlertProps } from '../../lib/simpleComponents/components/UI/Alert';
+import { type AlertProps } from '../../lib/simpleComponents/components/UI/Alert/Alert';
 import { type StoreState } from '..';
 
 interface State {
@@ -29,4 +29,4 @@ const statusAlert = createSlice({
 
 export default statusAlert;
 
-export const selectState = ({ statusAlert }: StoreState): State => statusAlert;
+export const selectStatusAlertState = ({ statusAlert }: StoreState): State => statusAlert;
