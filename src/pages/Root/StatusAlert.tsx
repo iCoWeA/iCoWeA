@@ -6,7 +6,7 @@ import Alert from '../../lib/simpleComponents/components/UI/Alert/Alert';
 
 const StatusAlert: FC = () => {
   /* --- Set default props --- */
-  const { open, closable, timer, props: alertProps } = useSelector(selectState);
+  const { open: isAlertOpen, closable: isAlertClosable, timer: alertTimer, props: alertProps } = useSelector(selectState);
   const dispatch = useDispatch();
 
   /* --- Set refs --- */
@@ -14,22 +14,22 @@ const StatusAlert: FC = () => {
 
   /* --- Set timer --- */
   useEffect(() => {
-    if (open && timer >= 0) {
+    if (isAlertOpen && alertTimer >= 0) {
       timerId.current = window.setTimeout(() => {
         dispatch(statusAlert.actions.hide());
-      }, timer);
+      }, alertTimer);
     }
 
-    if (!open) {
+    if (!isAlertOpen) {
       clearTimeout(timerId.current);
     }
-  }, [open, timer]);
+  }, [isAlertOpen, alertTimer]);
 
   /* --- Set props --- */
   const { onClose, ...restProps } = alertProps;
   let closeHandler = onClose;
 
-  if (closable) {
+  if (isAlertClosable) {
     closeHandler = () => {
       dispatch(statusAlert.actions.hide());
 
@@ -41,7 +41,7 @@ const StatusAlert: FC = () => {
 
   return (
     <Popover
-      open={open}
+      open={isAlertOpen}
       overlayRef={document.getElementById('overlay')}
       unmountOnExit
       className="fixed bottom-4 w-full px-[16px] md:px-[32px]"
