@@ -1,12 +1,13 @@
 import React, { type FC } from 'react';
 import useBreakpoint, { Breakpoints } from '../../lib/simpleComponents/hooks/useBreakpoint';
 import Header from '../../lib/simpleComponents/components/layouts/Header';
-import Container from '../../lib/simpleComponents/components/UI/Container';
+import Container from '../../lib/simpleComponents/components/UI/Container/Container';
 import DashboardMenuButton from './DashboardMenuButton';
 import DashboardLogo from './DashboardLogo';
 import DashboardAvatar from './DashboardAvatar';
 
 const DashboardHeader: FC = () => {
+  /* --- Set default props --- */
   const breakpoint = useBreakpoint();
 
   if (breakpoint === Breakpoints.SM) {
