@@ -1,4 +1,4 @@
-import { type CSSProperties, type BaseHTMLAttributes, type MutableRefObject, type ReactNode } from 'react';
+import { type BaseHTMLAttributes } from 'react';
 
 export type ProgressSizeVariants = 'default' | 'label';
 
@@ -8,10 +8,6 @@ export interface ProgressConfig {
     size: Sizes;
     color: Colors;
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
-    barRef?: MutableRefObject<HTMLDivElement> | null;
-    style: CSSProperties;
-    className: string;
-    children?: ReactNode
   };
   styles: {
     container: {
@@ -31,9 +27,7 @@ const progressConfig: ProgressConfig = {
     value: 0,
     size: 'md',
     color: 'primary',
-    containerProps: {},
-    style: {},
-    className: ''
+    containerProps: {}
   },
   styles: {
     container: {
