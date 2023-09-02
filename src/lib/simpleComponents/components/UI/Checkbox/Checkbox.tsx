@@ -37,12 +37,6 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
     className
   );
 
-  const setInputRef = (element: HTMLInputElement): void => {
-    if (inputRef !== undefined && inputRef !== null) {
-      inputRef.current = element;
-    }
-  };
-
   /* --- Set icon props --- */
   let iconNode = icon;
 
@@ -67,7 +61,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
         disabled={disabled}
         type={type}
         className={mergedClassName}
-        ref={setInputRef}
+        ref={inputRef}
         {...restProps}
       />
       {iconNode}
