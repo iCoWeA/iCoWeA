@@ -1,30 +1,19 @@
-import { type TransitionEventHandler, type AnimationEventHandler, type CSSProperties, type ReactNode, type ReactElement } from 'react';
-
-export type PopoverPositions = Positions;
-
 export interface PopoverConfig {
   defaultProps: {
-    open?: boolean;
-    position: PopoverPositions;
+    position: Positions;
     gap: number;
     responsive: boolean;
-    overlayRef: Element | null;
     lockScroll: boolean;
     unmountOnExit: boolean;
+    backdrop: boolean;
     transitionConfig: {
       enterDuration: number,
       exitDuration: number
     };
-    handler?: ReactElement;
-    backdrop: boolean;
+    overlayRef: Element | null;
     backdropProps: {
       invisible: boolean;
     }
-    onTransitionEnd?: TransitionEventHandler;
-    onAnimationEnd?: AnimationEventHandler;
-    style: CSSProperties;
-    className: string;
-    children?: ReactNode;
   };
   styles: {
     base: Record<string, string>;
@@ -46,9 +35,7 @@ const popoverConfig: PopoverConfig = {
     backdrop: false,
     backdropProps: {
       invisible: true
-    },
-    style: {},
-    className: ''
+    }
   },
   styles: {
     base: {

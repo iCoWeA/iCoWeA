@@ -1,13 +1,12 @@
-import { type PopoverProps } from '../components/UI/refactor/Popover';
-import { type PopoverPositions } from './popoverConfig';
+import { type PopoverProps } from '../components/UI/Popover/Popover';
 
 export interface MenuConfig {
   defaultProps: {
     color: Colors;
     elevated: boolean;
-    position: PopoverPositions;
-    overlayRef: Element | null;
+    position: Positions;
     lockScroll: boolean;
+    overlayRef: Element | null;
     popoverProps: PopoverProps;
   };
   styles: {
@@ -22,8 +21,8 @@ const menuConfig: MenuConfig = {
     color: 'light',
     elevated: false,
     position: 'bottom',
-    overlayRef: null,
     lockScroll: false,
+    overlayRef: null,
     popoverProps: {}
   },
   styles: {

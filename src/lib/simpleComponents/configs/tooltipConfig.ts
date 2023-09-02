@@ -1,27 +1,20 @@
-import { type ReactElement, type TransitionEventHandler, type AnimationEventHandler, type CSSProperties, type ReactNode, type BaseHTMLAttributes } from 'react';
+import { type BaseHTMLAttributes } from 'react';
 
 export interface TooltipConfig {
   defaultProps: {
-    open?: boolean;
     color: Colors;
     position: Positions;
     gap: number;
     responsive: boolean;
     followCursor: boolean;
-    overlayRef: Element | null;
     unmountOnExit: boolean;
+    arrow: boolean;
     transitionConfig: {
       enterDuration: number,
       exitDuration: number
     };
-    handler?: ReactElement;
-    arrow: boolean;
+    overlayRef: Element | null;
     arrowProps: BaseHTMLAttributes<HTMLDivElement>
-    onTransitionEnd?: TransitionEventHandler;
-    onAnimationEnd?: AnimationEventHandler;
-    style: CSSProperties;
-    className: string;
-    children?: ReactNode;
   };
   styles: {
     container: {
@@ -42,16 +35,14 @@ const tooltipConfig: TooltipConfig = {
     gap: 1,
     responsive: true,
     followCursor: false,
-    overlayRef: null,
     unmountOnExit: true,
+    arrow: false,
     transitionConfig: {
       enterDuration: 500,
       exitDuration: 500
     },
-    arrow: false,
-    arrowProps: {},
-    style: {},
-    className: ''
+    overlayRef: null,
+    arrowProps: {}
   },
   styles: {
     container: {

@@ -9,6 +9,16 @@ export enum TransitionStates {
   EXITED
 }
 
+export interface TransitionState {
+  current: TransitionStates;
+  enter: boolean;
+  enterDelay: boolean;
+  entering: boolean;
+  exit: boolean;
+  exitDelay: boolean;
+  exiting: boolean;
+}
+
 export interface TransitionConfig {
   enterDelay?: number;
   exitDelay?: number;
@@ -29,15 +39,7 @@ export interface TransitionConfig {
 }
 
 interface Return {
-  state: {
-    current: TransitionStates;
-    enter: boolean;
-    enterDelay: boolean;
-    entering: boolean;
-    exit: boolean;
-    exitDelay: boolean;
-    exiting: boolean;
-  };
+  state: TransitionState;
   className: string;
   enter: (instant?: boolean) => void;
   exit: (instant?: boolean) => void;
