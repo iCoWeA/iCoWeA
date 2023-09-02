@@ -1,16 +1,16 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext, type FieldsetHTMLAttributes } from 'react';
 import inputConfig, { type InputVariants } from '../../../configs/inputConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
-interface InputFieldsetProps extends BaseHTMLAttributes<HTMLDivElement> {
+interface InputFieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
   variant: InputVariants;
   color: Colors;
   valid: boolean;
   invalid: boolean;
 }
 
-const InputFieldset = forwardRef<HTMLDivElement, InputFieldsetProps>(({ variant, color, valid, invalid, className, ...restProps }, ref) => {
+const InputFieldset = forwardRef<HTMLFieldSetElement, InputFieldsetProps>(({ variant, color, valid, invalid, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -20,6 +20,7 @@ const InputFieldset = forwardRef<HTMLDivElement, InputFieldsetProps>(({ variant,
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
+    styles.sizeVariants[variant],
     !valid && !invalid && styles.variants[variant][theme][color],
     valid && styles.valid[variant][theme],
     invalid && styles.invalid[variant][theme],
@@ -27,7 +28,7 @@ const InputFieldset = forwardRef<HTMLDivElement, InputFieldsetProps>(({ variant,
   );
 
   return (
-    <div
+    <fieldset
       className={mergedClassName}
       ref={ref}
       {...restProps}
