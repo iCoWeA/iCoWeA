@@ -1,27 +1,29 @@
 import React, { useEffect, type FC } from 'react';
 import { redirect, useActionData, useNavigation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import statusAlert, { selectState } from '../../store/Slices/statusAlert';
+import statusAlert, { selectStatusAlertState } from '../../store/Slices/statusAlert';
 import Main from '../../lib/simpleComponents/components/layouts/Main';
 import LoginForm from './LoginForm';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 
 export const Component: FC = () => {
+  /* --- Set default props --- */
   const navigation = useNavigation();
   const error = useActionData();
   const dispatch = useDispatch();
-  const { open } = useSelector(selectState);
+  const { open: isAlertOpen } = useSelector(selectStatusAlertState);
 
+  /* --- Set error --- */
   useEffect(() => {
     if (navigation.state === 'idle' && error !== undefined) {
       dispatch(statusAlert.actions.show({ props: { color: 'error', children: typeof error === 'string' ? error : '' } }));
     } else {
-      if (open) {
+      if (isAlertOpen) {
         dispatch(statusAlert.actions.hide());
       }
     }
-  }, [navigation.state, error, open]);
+  }, [navigation.state, error, isAlertOpen]);
 
   return (
     <Main
