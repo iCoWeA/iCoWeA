@@ -15,7 +15,7 @@ export interface IconConfig {
 
 const iconConfig: IconConfig = {
   defaultProps: {
-    size: 'full',
+    size: 'md',
     color: 'none',
     viewBox: '0 0 24 24'
   },
