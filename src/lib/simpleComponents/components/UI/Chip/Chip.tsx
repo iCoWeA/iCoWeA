@@ -2,10 +2,10 @@ import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode,
 import chipConfig, { type ChipVariants } from '../../../configs/chipConfig';
 import Icon, { type IconProps } from '../Icon/Icon';
 import themeContext from '../../../contexts/theme';
+import { mergeClasses } from '../../../utils/propsHelper';
 import ChipBodyContainer from './ChipBodyContainer';
 import ChipButton from './ChipButton';
 import ChipButtonContainer from './ChipButtonContainer';
-import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
