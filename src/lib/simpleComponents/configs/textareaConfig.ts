@@ -129,7 +129,7 @@ const textareaConfig: TextareaConfig = {
           padding: 'pt-0.5'
         },
         filled: {
-          padding: 'pt-5'
+          padding: 'pt-[1.125rem]'
         },
         outlined: {
           padding: 'py-0'
@@ -384,7 +384,7 @@ const textareaConfig: TextareaConfig = {
           padding: 'pt-0.5'
         },
         filled: {
-          padding: 'pt-5'
+          padding: 'pt-[1.125rem]'
         },
         outlined: {
           padding: 'pt-0'
@@ -685,8 +685,8 @@ const textareaConfig: TextareaConfig = {
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4'
         },
         filled: {
-          top: 'top-[1.625rem]',
-          group: 'group-[.shifted]:top-1'
+          top: 'top-6',
+          group: 'group-[.shifted]:top-0.5'
         },
         outlined: {
           top: 'top-1.5',
