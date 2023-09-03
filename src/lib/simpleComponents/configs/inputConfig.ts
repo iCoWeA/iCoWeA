@@ -105,10 +105,10 @@ const inputConfig: InputConfig = {
         focus: 'focus:outline-0'
       },
       leftGap: {
-        padding: 'pl-4'
+        padding: 'pl-3'
       },
       rightGap: {
-        padding: 'pr-4'
+        padding: 'pr-3'
       },
       start: {
         margin: 'mr-0',
