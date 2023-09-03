@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, type ReactElement } from 'react';
 import Popover, { type PopoverProps } from '../Popover/Popover';
 import menuConfig from '../../../configs/menuConfig';
-import MenuContainer from './MenuContainer';
+import Dropdown from '../Dropdown/Dropdown';
 
 export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
@@ -16,7 +16,7 @@ export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
   /* --- Set default props --- */
-  const { color, elevated, open, position, lockScroll, overlayRef, handler, popoverProps, ...restContainerProps } = {
+  const { color, elevated, open, position, lockScroll, overlayRef, handler, popoverProps, ...restProps } = {
     ...menuConfig.defaultProps,
     ...props
   };
@@ -31,10 +31,10 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
       {...popoverProps}
       ref={ref}
     >
-      <MenuContainer
+      <Dropdown
         color={color}
         elevated={elevated}
-        {...restContainerProps}
+        {...restProps}
       />
     </Popover>
   );
