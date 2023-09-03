@@ -1,8 +1,8 @@
-export interface MenuFooterConfig {
+export interface DropdownHeaderConfig {
   defaultProps: {
     columns: boolean;
     fullwidht: boolean;
-  };
+  }
   styles: {
     base: Record<string, string>;
     columns: Record<string, string>;
@@ -10,7 +10,7 @@ export interface MenuFooterConfig {
   }
 }
 
-const menuFooterConfig: MenuFooterConfig = {
+const dropdownHeaderConfig: DropdownHeaderConfig = {
   defaultProps: {
     columns: false,
     fullwidht: false
@@ -19,9 +19,9 @@ const menuFooterConfig: MenuFooterConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      gap: 'gap-4',
+      gap: 'gap-2',
       width: 'w-full',
-      padding: 'pb-2 px-2',
+      padding: 'pt-2 px-2',
       focus: 'focus:outline-0'
     },
     columns: {
@@ -36,4 +36,4 @@ const menuFooterConfig: MenuFooterConfig = {
   }
 };
 
-export default menuFooterConfig;
+export default dropdownHeaderConfig;

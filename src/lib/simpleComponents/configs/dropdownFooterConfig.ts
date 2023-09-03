@@ -1,4 +1,4 @@
-export interface MenuBodyConfig {
+export interface DropdownFooterConfig {
   defaultProps: {
     columns: boolean;
     fullwidht: boolean;
@@ -10,7 +10,7 @@ export interface MenuBodyConfig {
   }
 }
 
-const menuBodyConfig: MenuBodyConfig = {
+const dropdownFooterConfig: DropdownFooterConfig = {
   defaultProps: {
     columns: false,
     fullwidht: false
@@ -19,10 +19,9 @@ const menuBodyConfig: MenuBodyConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      gap: 'gap-4',
-      height: 'h-full',
+      gap: 'gap-2',
       width: 'w-full',
-      padding: 'p-2',
+      padding: 'pb-2 px-2',
       focus: 'focus:outline-0'
     },
     columns: {
@@ -37,4 +36,4 @@ const menuBodyConfig: MenuBodyConfig = {
   }
 };
 
-export default menuBodyConfig;
+export default dropdownFooterConfig;
