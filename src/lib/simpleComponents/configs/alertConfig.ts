@@ -198,10 +198,9 @@ const alertConfig: AlertConfig = {
     iconContainer: {
       base: {
         display: 'flex',
-        gap: 'gap-2',
+        gap: 'gap-3',
         alignItems: 'items-center',
-        height: 'h-10',
-        padding: 'pl-2',
+        padding: 'py-2 pl-2 pr-1',
         focus: 'focus:outline-0'
       }
     },
@@ -217,10 +216,10 @@ const alertConfig: AlertConfig = {
     buttonContainer: {
       base: {
         display: 'flex',
-        gap: 'gap-2',
+        gap: 'gap-3',
         alignItems: 'items-center',
         margin: 'ml-auto',
-        height: 'h-10',
+        padding: 'pl-1',
         focus: 'focus:outline-0'
       }
     },
@@ -229,8 +228,9 @@ const alertConfig: AlertConfig = {
         display: 'flex',
         alignItems: 'items-center',
         justifyContent: 'justify-center',
-        width: 'w-10',
         aspectRatio: 'aspect-square',
+        height: 'h-fit',
+        width: 'w-fit',
         padding: 'p-2',
         borderRadius: 'rounded-full',
         transition: 'transition-colors',
