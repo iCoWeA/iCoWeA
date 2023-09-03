@@ -124,7 +124,7 @@ const textareaConfig: TextareaConfig = {
         borderRadius: 'rounded-l-none',
         group: 'group-[.focused]:border-l-0'
       },
-      size: {
+      sizes: {
         standard: {
           padding: 'pt-0.5'
         },
@@ -379,7 +379,7 @@ const textareaConfig: TextareaConfig = {
         focus: 'focus:outline-0',
         disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
       },
-      size: {
+      sizes: {
         standard: {
           padding: 'pt-0.5'
         },
@@ -679,7 +679,7 @@ const textareaConfig: TextareaConfig = {
           color: 'text-default-error'
         }
       },
-      size: {
+      sizes: {
         standard: {
           top: 'top-2',
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4'
