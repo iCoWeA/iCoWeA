@@ -25,14 +25,14 @@ const popoverConfig: PopoverConfig = {
     position: 'bottom',
     gap: 1,
     responsive: true,
-    overlayRef: null,
     lockScroll: false,
     unmountOnExit: true,
+    backdrop: false,
     transitionConfig: {
       enterDuration: 500,
       exitDuration: 500
     },
-    backdrop: false,
+    overlayRef: null,
     backdropProps: {
       invisible: true
     }
