@@ -1,7 +1,6 @@
 import React, {
   type BaseHTMLAttributes,
   type FieldsetHTMLAttributes,
-  type FocusEventHandler,
   type TextareaHTMLAttributes,
   type LabelHTMLAttributes,
   type MutableRefObject,
@@ -52,11 +51,6 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
   textareaRef?: MutableRefObject<HTMLTextAreaElement> | null;
-  onFocus?: FocusEventHandler<HTMLTextAreaElement>;
-  autoFocus?: boolean;
-  disabled?: boolean;
-  value?: string;
-  className?: string;
 }
 
 interface TextareaRefs {

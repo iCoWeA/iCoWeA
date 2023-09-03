@@ -30,14 +30,14 @@ export interface TextareaConfig {
       rightGap: Record<string, string>;
       start: Record<string, string>;
       end: Record<string, string>;
-      sizeVariants: Record<string, Record<string, string>>;
+      sizes: Record<string, Record<string, string>>;
       valid: Record<TextareaVariants, Record<string, Record<string, string>>>;
       invalid: Record<TextareaVariants, Record<string, Record<string, string>>>;
       variants: Record<TextareaVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
     fieldset: {
       base: Record<string, string>;
-      sizeVariants: Record<string, Record<string, string>>;
+      sizes: Record<string, Record<string, string>>;
       valid: Record<TextareaVariants, Record<string, Record<string, string>>>;
       invalid: Record<TextareaVariants, Record<string, Record<string, string>>>;
       variants: Record<TextareaVariants, Record<string, Record<Colors, Record<string, string>>>>;
@@ -55,7 +55,7 @@ export interface TextareaConfig {
       base: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      sizeVariants: Record<TextareaVariants, Record<string, string>>;
+      sizes: Record<TextareaVariants, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>;
     },
   }
@@ -124,7 +124,7 @@ const textareaConfig: TextareaConfig = {
         borderRadius: 'rounded-l-none',
         group: 'group-[.focused]:border-l-0'
       },
-      sizeVariants: {
+      size: {
         standard: {
           padding: 'pt-0.5'
         },
@@ -379,7 +379,7 @@ const textareaConfig: TextareaConfig = {
         focus: 'focus:outline-0',
         disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
       },
-      sizeVariants: {
+      size: {
         standard: {
           padding: 'pt-0.5'
         },
@@ -679,7 +679,7 @@ const textareaConfig: TextareaConfig = {
           color: 'text-default-error'
         }
       },
-      sizeVariants: {
+      size: {
         standard: {
           top: 'top-2',
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4'

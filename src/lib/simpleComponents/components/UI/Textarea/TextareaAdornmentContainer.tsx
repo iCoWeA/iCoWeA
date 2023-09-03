@@ -22,7 +22,7 @@ const TextareaAdornmentContainer = forwardRef<HTMLDivElement, TextareaAdornmentC
     /* --- Set props --- */
     const mergedClassName = mergeClasses(
       styles.base,
-      styles.sizeVariants[variant],
+      styles.sizes[variant],
       !valid && !invalid && styles.variants[variant][theme][color],
       valid && styles.valid[variant][theme],
       invalid && styles.invalid[variant][theme],
