@@ -1,7 +1,8 @@
-import React, { forwardRef, useContext, type ButtonHTMLAttributes } from 'react';
+import React, { forwardRef, useContext, type ButtonHTMLAttributes, type LiHTMLAttributes, type MutableRefObject } from 'react';
 import listItemButtonConfig, { type ListItemButtonVariant } from '../../../configs/listItemButtonConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
+import ListItemButtonContainer from './ListItemButtonContainer';
 
 export interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ListItemButtonVariant;
@@ -9,16 +10,17 @@ export interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
   color?: Colors;
   fullwidth?: boolean;
   selected?: boolean;
-  type?: 'submit' | 'reset' | 'button';
+  itemProps?: LiHTMLAttributes<HTMLLIElement>;
+  buttonRef?: MutableRefObject<HTMLButtonElement> | null;
 }
 
-const ListItemButton = forwardRef<HTMLButtonElement, ListItemButtonProps>((props, ref) => {
+const ListItemButton = forwardRef<HTMLLIElement, ListItemButtonProps>((props, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = listItemButtonConfig.styles;
-  const { variant, size, color, fullwidth, selected, className, type, ...restProps } = { ...listItemButtonConfig.defaultProps, ...props };
+  const styles = listItemButtonConfig.styles.button;
+  const { variant, size, color, fullwidth, selected, itemProps, buttonRef, className, type, ...restProps } = { ...listItemButtonConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
@@ -31,12 +33,17 @@ const ListItemButton = forwardRef<HTMLButtonElement, ListItemButtonProps>((props
   );
 
   return (
-    <button
-      className={mergedClassName}
-      type={type}
+    <ListItemButtonContainer
+      {...itemProps}
       ref={ref}
-      {...restProps}
-    />
+    >
+      <button
+        className={mergedClassName}
+        type={type}
+        ref={buttonRef}
+        {...restProps}
+      />
+    </ListItemButtonContainer>
   );
 });
 

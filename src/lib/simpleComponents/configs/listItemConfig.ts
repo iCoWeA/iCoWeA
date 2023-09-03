@@ -5,7 +5,6 @@ export interface ListItemConfig {
   };
   styles: {
     base: Record<string, string>;
-    disablePadding: Record<string, string>;
     sizes: Record<Sizes, Record<string, string>>;
     colors: Record<string, Record<Colors, Record<string, string>>>;
   }
@@ -24,9 +23,6 @@ const listItemConfig: ListItemConfig = {
       width: 'w-full',
       font: 'antialiased font-normal text-base font-sans',
       focus: 'focus:outline-0'
-    },
-    disablePadding: {
-      padding: 'p-0'
     },
     sizes: {
       sm: {
