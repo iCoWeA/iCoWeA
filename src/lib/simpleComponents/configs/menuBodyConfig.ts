@@ -17,7 +17,8 @@ const menuBodyConfig: MenuBodyConfig = {
   },
   styles: {
     base: {
-      display: 'grid',
+      display: 'flex',
+      flexDirection: 'flex-col',
       gap: 'gap-4',
       height: 'h-full',
       width: 'w-full',

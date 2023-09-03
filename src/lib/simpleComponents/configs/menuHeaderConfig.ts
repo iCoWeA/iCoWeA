@@ -17,7 +17,8 @@ const menuHeaderConfig: MenuHeaderConfig = {
   },
   styles: {
     base: {
-      display: 'grid',
+      display: 'flex',
+      flexDirection: 'flex-col',
       gap: 'gap-4',
       width: 'w-full',
       padding: 'pt-2 px-2',

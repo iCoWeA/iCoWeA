@@ -17,7 +17,8 @@ const menuFooterConfig: MenuFooterConfig = {
   },
   styles: {
     base: {
-      display: 'grid',
+      display: 'flex',
+      flexDirection: 'flex-col',
       gap: 'gap-4',
       width: 'w-full',
       padding: 'pb-2 px-2',
