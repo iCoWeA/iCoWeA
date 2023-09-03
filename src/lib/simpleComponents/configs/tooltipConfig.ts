@@ -48,11 +48,11 @@ const tooltipConfig: TooltipConfig = {
     container: {
       base: {
         position: 'absolute',
-        display: 'block',
+        display: 'flex',
         gap: 'gap-2',
         alignItems: 'items-center',
         padding: 'py-1.5 px-3',
-        borderRadius: 'rounded-xl',
+        borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-sm font-sans',
         transition: 'transition-[opacity]',
         focus: 'focus:outline-0'
@@ -105,6 +105,7 @@ const tooltipConfig: TooltipConfig = {
     arrow: {
       base: {
         pisition: 'absolute',
+        display: 'block',
         height: 'h-0',
         width: 'w-0',
         border: 'border-l-[0.25rem] border-l-transparent border-r-[0.25rem] border-r-transparent border-b-[0.5rem]',
