@@ -11,6 +11,7 @@ export interface SelectConfig {
     invalid: boolean;
     position: Positions;
     lockScroll: boolean;
+    overlayRef: Element | null;
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
     startAdornmentContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     fieldsetProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
@@ -18,7 +19,6 @@ export interface SelectConfig {
     legendProps: BaseHTMLAttributes<HTMLLegendElement>;
     labelProps: LabelHTMLAttributes<HTMLLabelElement>;
     popoverProps: PopoverProps;
-    overlayRef: Element | null;
     autoFocus: boolean;
     disabled: boolean;
     readonly: boolean;
@@ -75,6 +75,7 @@ const selectConfig: SelectConfig = {
     invalid: false,
     position: 'bottom',
     lockScroll: false,
+    overlayRef: null,
     containerProps: {},
     startAdornmentContainerProps: {},
     fieldsetProps: {},
@@ -82,7 +83,6 @@ const selectConfig: SelectConfig = {
     legendProps: {},
     labelProps: {},
     popoverProps: {},
-    overlayRef: null,
     autoFocus: false,
     disabled: false,
     readonly: true,
