@@ -49,7 +49,7 @@ const tooltipConfig: TooltipConfig = {
       base: {
         position: 'absolute',
         display: 'flex',
-        gap: 'gap-2',
+        gap: 'gap-3',
         alignItems: 'items-center',
         padding: 'py-1.5 px-3',
         borderRadius: 'rounded-full',
