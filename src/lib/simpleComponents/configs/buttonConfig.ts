@@ -12,7 +12,7 @@ export interface ButtonConfig {
   styles: {
     base: Record<string, string>;
     fullwidth: Record<string, string>;
-    sizes: Record<Sizes, Record<string, string>>;
+    sizes: Record<Sizes, Record<ButtonVariants, Record<string, string>>>;
     elevated: Record<string, Record<string, string>>;
     variants: Record<ButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
   }
@@ -46,13 +46,37 @@ const buttonConfig: ButtonConfig = {
     },
     sizes: {
       sm: {
-        padding: 'py-1.5 px-3'
+        filled: {
+          padding: 'py-1.5 px-3'
+        },
+        outlined: {
+          padding: 'py-[0.3125rem] px-[0.6875rem]'
+        },
+        text: {
+          padding: 'py-1.5 px-3'
+        }
       },
       md: {
-        padding: 'py-2 px-4'
+        filled: {
+          padding: 'py-2 px-4'
+        },
+        outlined: {
+          padding: 'py-[0.4375rem] px-[0.9375rem]'
+        },
+        text: {
+          padding: 'py-2 px-4'
+        }
       },
       lg: {
-        padding: 'py-2.5 px-5'
+        filled: {
+          padding: 'py-2.5 px-5'
+        },
+        outlined: {
+          padding: 'py-[0.5625rem] px-[1.1875rem]'
+        },
+        text: {
+          padding: 'py-2.5 px-5'
+        }
       }
     },
     elevated: {
