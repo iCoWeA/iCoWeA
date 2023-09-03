@@ -33,7 +33,7 @@ const badgeConfig: BadgeConfig = {
     base: {
       position: 'absolute',
       display: 'flex',
-      gap: 'gap-2',
+      gap: 'gap-1.5',
       alignItems: 'items-center',
       height: 'min-h-[8px]',
       width: 'min-w-[8px]',

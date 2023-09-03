@@ -36,7 +36,7 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
       base: {
         display: 'flex',
         flexWrap: 'flex-wrap',
-        gap: 'gap-2',
+        gap: 'gap-3',
         alignItems: 'items-center',
         width: 'w-fit',
         focus: 'focus:outline-0'
@@ -49,7 +49,7 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
     item: {
       base: {
         display: 'flex',
-        gap: 'gap-2',
+        gap: 'gap-3',
         alignItems: 'items-center',
         font: 'antialiased font-normal text-base font-sans',
         focus: 'focus:outline-0'

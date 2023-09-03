@@ -30,7 +30,7 @@ const buttonConfig: ButtonConfig = {
   styles: {
     base: {
       display: 'flex',
-      gap: 'gap-2',
+      gap: 'gap-3',
       alignItems: 'items-center',
       height: 'h-fit',
       width: 'w-fit',

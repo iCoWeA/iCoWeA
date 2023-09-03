@@ -96,7 +96,7 @@ const inputConfig: InputConfig = {
       base: {
         boxSizing: 'box-content',
         position: 'flex',
-        gap: 'gap-2',
+        gap: 'gap-3',
         alignItems: 'items-center',
         height: 'h-9',
         transition: 'transition-colors',
