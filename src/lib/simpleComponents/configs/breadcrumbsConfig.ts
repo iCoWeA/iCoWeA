@@ -57,9 +57,7 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
     },
     separator: {
       base: {
-        display: 'flex',
-        alignItems: 'items-center',
-        justifyContent: 'justify-center',
+        display: 'block',
         font: 'antialiased font-normal text-sm font-sans',
         userSelect: 'select-none',
         focus: 'focus:outline-0'
