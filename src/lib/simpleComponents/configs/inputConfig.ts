@@ -30,14 +30,14 @@ export interface InputConfig {
       rightGap: Record<string, string>;
       start: Record<string, string>;
       end: Record<string, string>;
-      sizeVariants: Record<string, Record<string, string>>;
+      sizes: Record<string, Record<string, string>>;
       valid: Record<InputVariants, Record<string, Record<string, string>>>;
       invalid: Record<InputVariants, Record<string, Record<string, string>>>;
       variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
     fieldset: {
       base: Record<string, string>;
-      sizeVariants: Record<string, Record<string, string>>;
+      sizes: Record<string, Record<string, string>>;
       valid: Record<InputVariants, Record<string, Record<string, string>>>;
       invalid: Record<InputVariants, Record<string, Record<string, string>>>;
       variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
@@ -55,7 +55,7 @@ export interface InputConfig {
       base: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      sizeVariants: Record<InputVariants, Record<string, string>>;
+      sizes: Record<InputVariants, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>;
     },
   }
@@ -124,7 +124,7 @@ const inputConfig: InputConfig = {
         borderRadius: 'rounded-l-none',
         group: 'group-[.focused]:border-l-0'
       },
-      sizeVariants: {
+      sizes: {
         standard: {
           padding: 'pt-0.5'
         },
@@ -379,7 +379,7 @@ const inputConfig: InputConfig = {
         focus: 'focus:outline-0',
         disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
       },
-      sizeVariants: {
+      sizes: {
         standard: {
           padding: 'pt-0.5'
         },
@@ -678,7 +678,7 @@ const inputConfig: InputConfig = {
           color: 'text-default-error'
         }
       },
-      sizeVariants: {
+      sizes: {
         standard: {
           top: 'top-2',
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4'

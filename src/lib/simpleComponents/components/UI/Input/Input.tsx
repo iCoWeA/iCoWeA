@@ -1,7 +1,6 @@
 import React, {
   type BaseHTMLAttributes,
   type FieldsetHTMLAttributes,
-  type FocusEventHandler,
   type InputHTMLAttributes,
   type LabelHTMLAttributes,
   type MutableRefObject,
@@ -52,11 +51,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
   inputRef?: MutableRefObject<HTMLInputElement> | null;
-  onFocus?: FocusEventHandler<HTMLInputElement>;
-  autoFocus?: boolean;
-  disabled?: boolean;
-  value?: string;
-  className?: string;
 }
 
 interface InputRefs {
