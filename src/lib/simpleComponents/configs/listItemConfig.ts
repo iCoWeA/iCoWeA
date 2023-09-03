@@ -19,7 +19,7 @@ const listItemConfig: ListItemConfig = {
   styles: {
     base: {
       display: 'flex',
-      gap: 'gap-2',
+      gap: 'gap-3',
       alignItems: 'items-center',
       width: 'w-full',
       font: 'antialiased font-normal text-base font-sans',
