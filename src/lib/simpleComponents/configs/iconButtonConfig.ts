@@ -10,7 +10,7 @@ export interface IconButtonConfig {
   };
   styles: {
     base: Record<string, string>;
-    sizes: Record<Sizes, Record<string, string>>;
+    sizes: Record<Sizes, Record<IconButtonVariants, Record<string, string>>>;
     elevated: Record<string, Record<string, string>>;
     variants: Record<IconButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
   }
@@ -30,6 +30,8 @@ const iconButtonConfig: IconButtonConfig = {
       alignItems: 'items-center',
       justifyContent: 'justify-center',
       aspectRatio: 'aspect-square',
+      height: 'h-fit',
+      width: 'w-fit',
       borderRadius: 'rounded-full',
       transition: 'transition-all',
       focus: 'focus:outline-0',
@@ -37,16 +39,37 @@ const iconButtonConfig: IconButtonConfig = {
     },
     sizes: {
       sm: {
-        width: 'w-9',
-        padding: 'p-1.5'
+        filled: {
+          padding: 'p-1.5'
+        },
+        outlined: {
+          padding: 'p-[0.3125rem]'
+        },
+        text: {
+          padding: 'p-1.5'
+        }
       },
       md: {
-        width: 'w-10',
-        padding: 'p-2'
+        filled: {
+          padding: 'p-2'
+        },
+        outlined: {
+          padding: 'p-[0.4375rem]'
+        },
+        text: {
+          padding: 'p-2'
+        }
       },
       lg: {
-        width: 'w-11',
-        padding: 'p-2.5'
+        filled: {
+          padding: 'p-2.5'
+        },
+        outlined: {
+          padding: 'p-[0.5625rem]'
+        },
+        text: {
+          padding: 'p-2.5'
+        }
       }
     },
     elevated: {
