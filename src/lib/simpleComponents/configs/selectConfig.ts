@@ -36,14 +36,14 @@ export interface SelectConfig {
       rightGap: Record<string, string>;
       start: Record<string, string>;
       end: Record<string, string>;
-      sizeVariants: Record<string, Record<string, string>>;
+      sizes: Record<string, Record<string, string>>;
       valid: Record<SelectVariants, Record<string, Record<string, string>>>;
       invalid: Record<SelectVariants, Record<string, Record<string, string>>>;
       variants: Record<SelectVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
     fieldset: {
       base: Record<string, string>;
-      sizeVariants: Record<string, Record<string, string>>;
+      sizes: Record<string, Record<string, string>>;
       valid: Record<SelectVariants, Record<string, Record<string, string>>>;
       invalid: Record<SelectVariants, Record<string, Record<string, string>>>;
       variants: Record<SelectVariants, Record<string, Record<Colors, Record<string, string>>>>;
@@ -61,7 +61,7 @@ export interface SelectConfig {
       base: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      sizeVariants: Record<SelectVariants, Record<string, string>>;
+      sizes: Record<SelectVariants, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>;
     },
   }
@@ -135,7 +135,7 @@ const selectConfig: SelectConfig = {
         borderRadius: 'rounded-l-none',
         group: 'group-[.focused]:border-l-0'
       },
-      sizeVariants: {
+      sizes: {
         standard: {
           padding: 'pt-0.5'
         },
@@ -390,7 +390,7 @@ const selectConfig: SelectConfig = {
         focus: 'focus:outline-0',
         disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
       },
-      sizeVariants: {
+      sizes: {
         standard: {
           padding: 'pt-0.5'
         },
@@ -689,7 +689,7 @@ const selectConfig: SelectConfig = {
           color: 'text-default-error'
         }
       },
-      sizeVariants: {
+      sizes: {
         standard: {
           top: 'top-2',
           group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4'

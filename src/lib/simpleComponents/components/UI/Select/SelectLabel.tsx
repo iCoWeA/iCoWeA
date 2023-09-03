@@ -20,7 +20,7 @@ const SelectLabel = forwardRef<HTMLLabelElement, SelectLabelProps>(({ variant, c
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.sizeVariants[variant],
+    styles.sizes[variant],
     !valid && !invalid && styles.colors[theme][color],
     valid && styles.valid[theme],
     invalid && styles.invalid[theme],
