@@ -10,7 +10,6 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   color?: Colors;
   valid?: boolean;
   invalid?: boolean;
-  icon?: ReactNode;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
   iconProps?: IconProps;
   inputRef?: MutableRefObject<HTMLInputElement> | null;
@@ -22,7 +21,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = checkboxConfig.styles.input;
-  const { color, valid, invalid, icon, containerProps, iconProps, inputRef, checked, disabled, type, className, ...restProps } = {
+  const { color, valid, invalid, containerProps, iconProps, inputRef, checked, disabled, type, className, ...restProps } = {
     ...checkboxConfig.defaultProps,
     ...props
   };
@@ -38,7 +37,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   );
 
   /* --- Set icon props --- */
-  let iconNode = icon;
+  let iconNode: ReactNode;
 
   if (iconNode === undefined) {
     iconNode = (
