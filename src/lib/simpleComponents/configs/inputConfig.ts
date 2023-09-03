@@ -83,6 +83,7 @@ const inputConfig: InputConfig = {
     container: {
       base: {
         display: 'flex',
+        width: 'w-fit',
         focus: 'focus:outline-0',
         group: 'group'
       },
@@ -371,7 +372,9 @@ const inputConfig: InputConfig = {
       base: {
         boxSizing: 'box-content',
         position: 'relative',
-        display: 'block',
+        display: 'flex',
+        alignItems: 'items-center',
+        height: 'h-9',
         transition: 'transition-colors',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
@@ -380,13 +383,13 @@ const inputConfig: InputConfig = {
       },
       sizeVariants: {
         standard: {
-          padding: 'pt-2 pb-1.5'
+          padding: 'pt-0.5'
         },
         filled: {
-          padding: 'pt-[1.625rem] pb-1.5'
+          padding: 'pt-5'
         },
         outlined: {
-          padding: 'py-1.5'
+          padding: 'pt-0'
         }
       },
       valid: {

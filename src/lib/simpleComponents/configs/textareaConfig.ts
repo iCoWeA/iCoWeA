@@ -83,6 +83,7 @@ const textareaConfig: TextareaConfig = {
     container: {
       base: {
         display: 'flex',
+        width: 'w-fit',
         focus: 'focus:outline-0',
         group: 'group'
       },
@@ -99,7 +100,7 @@ const textareaConfig: TextareaConfig = {
         position: 'flex',
         gap: 'gap-2',
         alignItems: 'items-center',
-        height: 'h-9',
+        height: 'h-[3.75rem]',
         transition: 'transition-colors',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
@@ -371,7 +372,9 @@ const textareaConfig: TextareaConfig = {
       base: {
         boxSizing: 'box-content',
         position: 'relative',
-        display: 'block',
+        display: 'flex',
+        alignItems: 'items-center',
+        height: 'h-[3.75rem]',
         transition: 'transition-colors',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
@@ -380,13 +383,13 @@ const textareaConfig: TextareaConfig = {
       },
       sizeVariants: {
         standard: {
-          padding: 'pt-2 pb-1.5'
+          padding: 'pt-0.5'
         },
         filled: {
-          padding: 'pt-[1.625rem] pb-1.5'
+          padding: 'pt-5'
         },
         outlined: {
-          padding: 'py-1.5'
+          padding: 'pt-0'
         }
       },
       valid: {
