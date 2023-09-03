@@ -1,21 +1,27 @@
 import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes } from 'react';
+import { type PopoverProps } from '../components/UI/Popover/Popover';
 
-export type InputVariants = 'outlined' | 'filled' | 'standard';
+export type SelectVariants = 'outlined' | 'filled' | 'standard';
 
-export interface InputConfig {
+export interface SelectConfig {
   defaultProps: {
-    variant: InputVariants;
+    variant: SelectVariants;
     color: Colors;
     valid: boolean;
     invalid: boolean;
+    position: Positions;
+    lockScroll: boolean;
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
     startAdornmentContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     fieldsetProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
     endAdornmentContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     legendProps: BaseHTMLAttributes<HTMLLegendElement>;
     labelProps: LabelHTMLAttributes<HTMLLabelElement>;
+    popoverProps: PopoverProps;
+    overlayRef: Element | null;
     autoFocus: boolean;
     disabled: boolean;
+    readonly: boolean;
     value: string;
   };
   styles: {
@@ -31,16 +37,16 @@ export interface InputConfig {
       start: Record<string, string>;
       end: Record<string, string>;
       sizeVariants: Record<string, Record<string, string>>;
-      valid: Record<InputVariants, Record<string, Record<string, string>>>;
-      invalid: Record<InputVariants, Record<string, Record<string, string>>>;
-      variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      valid: Record<SelectVariants, Record<string, Record<string, string>>>;
+      invalid: Record<SelectVariants, Record<string, Record<string, string>>>;
+      variants: Record<SelectVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
     fieldset: {
       base: Record<string, string>;
       sizeVariants: Record<string, Record<string, string>>;
-      valid: Record<InputVariants, Record<string, Record<string, string>>>;
-      invalid: Record<InputVariants, Record<string, Record<string, string>>>;
-      variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      valid: Record<SelectVariants, Record<string, Record<string, string>>>;
+      invalid: Record<SelectVariants, Record<string, Record<string, string>>>;
+      variants: Record<SelectVariants, Record<string, Record<Colors, Record<string, string>>>>;
     },
     input: {
       base: Record<string, string>;
@@ -55,26 +61,31 @@ export interface InputConfig {
       base: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      sizeVariants: Record<InputVariants, Record<string, string>>;
+      sizeVariants: Record<SelectVariants, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>;
     },
   }
 }
 
-const inputConfig: InputConfig = {
+const selectConfig: SelectConfig = {
   defaultProps: {
     variant: 'outlined',
     color: 'primary',
     valid: false,
     invalid: false,
+    position: 'bottom',
+    lockScroll: false,
     containerProps: {},
     startAdornmentContainerProps: {},
     fieldsetProps: {},
     endAdornmentContainerProps: {},
     legendProps: {},
     labelProps: {},
+    popoverProps: {},
+    overlayRef: null,
     autoFocus: false,
     disabled: false,
+    readonly: true,
     value: ''
   },
   styles: {
@@ -732,4 +743,4 @@ const inputConfig: InputConfig = {
   }
 };
 
-export default inputConfig;
+export default selectConfig;

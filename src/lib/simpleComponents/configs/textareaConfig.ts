@@ -17,7 +17,6 @@ export interface TextareaConfig {
     autoFocus: boolean;
     disabled: boolean;
     value: string;
-    className: string;
   };
   styles: {
     container: {
@@ -76,8 +75,7 @@ const textareaConfig: TextareaConfig = {
     labelProps: {},
     autoFocus: false,
     disabled: false,
-    value: '',
-    className: ''
+    value: ''
   },
   styles: {
     container: {
@@ -107,10 +105,10 @@ const textareaConfig: TextareaConfig = {
         focus: 'focus:outline-0'
       },
       leftGap: {
-        padding: 'pl-2'
+        padding: 'pl-4'
       },
       rightGap: {
-        padding: 'pr-2'
+        padding: 'pr-4'
       },
       start: {
         margin: 'mr-0',
