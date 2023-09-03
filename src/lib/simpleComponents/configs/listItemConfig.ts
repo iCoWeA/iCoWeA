@@ -2,7 +2,6 @@ export interface ListItemConfig {
   defaultProps: {
     size: Sizes;
     color: Colors;
-    disablePadding: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -15,8 +14,7 @@ export interface ListItemConfig {
 const listItemConfig: ListItemConfig = {
   defaultProps: {
     size: 'md',
-    color: 'default',
-    disablePadding: false
+    color: 'default'
   },
   styles: {
     base: {

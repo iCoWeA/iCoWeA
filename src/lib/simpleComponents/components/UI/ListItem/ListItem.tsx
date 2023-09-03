@@ -6,7 +6,6 @@ import { mergeClasses } from '../../../utils/propsHelper';
 export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
   size?: Sizes;
   color?: Colors;
-  disablePadding?: boolean;
 }
 
 const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
@@ -15,10 +14,10 @@ const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = listItemConfig.styles;
-  const { size, color, disablePadding, className, ...restProps } = { ...listItemConfig.defaultProps, ...props };
+  const { size, color, className, ...restProps } = { ...listItemConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.sizes[size], styles.colors[theme][color], disablePadding && styles.disablePadding, className);
+  const mergedClassName = mergeClasses(styles.base, styles.sizes[size], styles.colors[theme][color], className);
 
   return (
     <li
