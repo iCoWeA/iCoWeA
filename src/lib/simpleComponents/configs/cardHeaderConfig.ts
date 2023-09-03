@@ -17,7 +17,8 @@ const cardHeaderConfig: CardHeaderConfig = {
   },
   styles: {
     base: {
-      display: 'grid',
+      display: 'flex',
+      flexDirection: 'flex-col',
       gap: 'gap-4',
       width: 'w-full',
       padding: 'pt-4 px-4',
