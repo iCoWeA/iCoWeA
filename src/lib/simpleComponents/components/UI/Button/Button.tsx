@@ -9,7 +9,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
-  type?: 'submit' | 'reset' | 'button';
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
@@ -24,7 +23,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
-    styles.sizes[size],
+    styles.sizes[size][variant],
     elevated && styles.elevated[theme],
     fullwidth && styles.fullwidth,
     className
