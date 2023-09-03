@@ -13,8 +13,6 @@ export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   size?: Sizes;
   color?: Colors;
   invisible?: boolean;
-  button?: ReactNode;
-  buttonIcon?: ReactNode;
   bodyContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
   buttonIconProps?: IconProps;
@@ -33,8 +31,6 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
     size,
     color,
     invisible,
-    button,
-    buttonIcon,
     bodyContainerProps,
     buttonProps,
     buttonIconProps,
@@ -48,11 +44,14 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.sizes[size], invisible && styles.invisible, className);
 
   /* --- Set button icon props --- */
-  let buttonIconNode = buttonIcon;
+  let buttonIconNode: ReactNode;
 
-  if (button === undefined && onClose !== undefined && buttonIconNode === undefined) {
+  if (onClose !== undefined) {
     buttonIconNode = (
-      <Icon {...buttonIconProps}>
+      <Icon
+        size="xs"
+        {...buttonIconProps}
+      >
         <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
       </Icon>
     );
@@ -61,7 +60,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
   /* --- Set button props --- */
   let buttonNode: ReactNode;
 
-  if (button === undefined && onClose !== undefined) {
+  if (onClose !== undefined) {
     buttonNode = (
       <ChipButton
         onClose={onClose}

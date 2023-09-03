@@ -14,8 +14,6 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   invisible?: boolean;
   icon?: ReactNode;
-  button?: ReactNode;
-  buttonIcon?: ReactNode;
   iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bodyContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
@@ -35,8 +33,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     color,
     invisible,
     icon,
-    button,
-    buttonIcon,
     iconContainerProps,
     bodyContainerProps,
     buttonProps,
@@ -58,9 +54,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   }
 
   /* --- Set button icon props --- */
-  let buttonIconNode = buttonIcon;
+  let buttonIconNode: ReactNode;
 
-  if (button === undefined && onClose !== undefined && buttonIconNode === undefined) {
+  if (onClose !== undefined) {
     buttonIconNode = (
       <Icon {...buttonIconProps}>
         <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
@@ -71,7 +67,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   /* --- Set button props --- */
   let buttonNode: ReactNode;
 
-  if (button === undefined && onClose !== undefined) {
+  if (onClose !== undefined) {
     buttonNode = (
       <AlertButton
         onClose={onClose}

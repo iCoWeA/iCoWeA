@@ -1,4 +1,5 @@
 import { type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
+import { type IconProps } from '../components/UI/Icon/Icon';
 
 export type ChipVariants = 'filled' | 'outlined' | 'ghost';
 
@@ -8,9 +9,10 @@ export interface ChipConfig {
     size: Sizes;
     color: Colors;
     invisible: boolean;
-    bodyProps: BaseHTMLAttributes<HTMLDivElement>;
-    buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
+    buttonIconProps: IconProps;
+    buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
   };
   styles: {
     container: {
@@ -38,16 +40,18 @@ const chipConfig: ChipConfig = {
     size: 'md',
     color: 'primary',
     invisible: false,
-    bodyProps: {},
-    buttonContainerProps: {},
-    buttonProps: {}
+    bodyContainerProps: {},
+    buttonProps: {},
+    buttonIconProps: {},
+    buttonContainerProps: {}
   },
   styles: {
     container: {
       base: {
         display: 'flex',
         alignItems: 'items-center',
-        width: 'w-full',
+        height: 'h-fit',
+        width: 'w-fit',
         borderRadius: 'rounded-2xl',
         focus: 'focus:outline-0'
       },
@@ -56,13 +60,13 @@ const chipConfig: ChipConfig = {
       },
       sizes: {
         sm: {
-          padding: 'py-0.5 px-2 pr-1.5'
+          padding: 'py-0.5 pl-2 pr-1.5'
         },
         md: {
-          padding: 'py-1 px-3 pr-2.5'
+          padding: 'py-1 pl-3 pr-2.5'
         },
         lg: {
-          padding: 'py-1.5 px-4 pr-3.5'
+          padding: 'py-1.5 pl-4 pr-3.5'
         }
       },
       variants: {
@@ -204,7 +208,7 @@ const chipConfig: ChipConfig = {
       base: {
         display: 'flex',
         flexDirection: 'flex-col',
-        gap: 'gap-4',
+        gap: 'gap-2',
         padding: 'py-0.5 pr-0.5',
         font: 'antialiased font-bold text-xs font-sans',
         focus: 'focus:outline-0'
@@ -213,10 +217,10 @@ const chipConfig: ChipConfig = {
     buttonContainer: {
       base: {
         display: 'flex',
-        gap: 'gap-2',
+        gap: 'gap-1.5',
         alignItems: 'items-center',
         margin: 'ml-auto',
-        padding: 'pl-1.5',
+        padding: 'pl-1',
         focus: 'focus:outline-0'
       }
     },
@@ -225,9 +229,8 @@ const chipConfig: ChipConfig = {
         display: 'flex',
         alignItems: 'items-center',
         justifyContent: 'justify-center',
-        width: 'w-5',
-        aspectRatio: 'aspect-square',
         padding: 'p-0.5',
+        aspectRatio: 'aspect-square',
         borderRadius: 'rounded-full',
         transition: 'transition-colors',
         focus: 'focus:outline-0',
