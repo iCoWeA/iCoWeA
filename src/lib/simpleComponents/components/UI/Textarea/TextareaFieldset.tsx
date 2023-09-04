@@ -1,10 +1,10 @@
 import React, { forwardRef, useContext, type FieldsetHTMLAttributes } from 'react';
-import textareaConfig, { type TextareaVariants } from '../../../configs/textareaConfig';
+import textareaConfig from '../../../configs/textareaConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface TextareaFieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  variant: TextareaVariants;
+  variant: InputVariants;
   color: Colors;
   valid: boolean;
   invalid: boolean;

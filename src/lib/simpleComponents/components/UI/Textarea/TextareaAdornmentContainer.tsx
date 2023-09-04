@@ -1,11 +1,11 @@
 import React, { forwardRef, type BaseHTMLAttributes, useContext } from 'react';
-import textareaConfig, { type TextareaVariants } from '../../../configs/textareaConfig';
+import textareaConfig from '../../../configs/textareaConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface TextareaAdornmentContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   position: 'start' | 'end';
-  variant: TextareaVariants;
+  variant: InputVariants;
   color: Colors;
   valid: boolean;
   invalid: boolean;
