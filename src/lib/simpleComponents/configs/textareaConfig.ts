@@ -97,7 +97,7 @@ const textareaConfig: TextareaConfig = {
         gap: 'gap-3',
         alignItems: 'items-center',
         height: 'h-[3.75rem]',
-        transition: 'transition-all',
+        transition: 'transition-colors',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
         focus: 'focus:outline-0'
@@ -371,7 +371,7 @@ const textareaConfig: TextareaConfig = {
         display: 'flex',
         alignItems: 'items-center',
         height: 'h-[3.75rem]',
-        transition: 'transition-all',
+        transition: 'transition-colors',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
         focus: 'focus:outline-0',

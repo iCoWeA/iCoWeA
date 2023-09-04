@@ -125,7 +125,7 @@ const selectConfig: SelectConfig = {
         gap: 'gap-3',
         alignItems: 'items-center',
         height: 'h-9',
-        transition: 'transition-all',
+        transition: 'transition-colors',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
         focus: 'focus:outline-0'
@@ -399,7 +399,7 @@ const selectConfig: SelectConfig = {
         display: 'flex',
         alignItems: 'items-center',
         height: 'h-9',
-        transition: 'transition-all',
+        transition: 'transition-colors',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
         focus: 'focus:outline-0',
