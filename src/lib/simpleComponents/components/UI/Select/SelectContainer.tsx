@@ -3,16 +3,16 @@ import selectConfig from '../../../configs/selectConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface SelectContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
-  shifted: boolean;
-  focused: boolean;
+  open: boolean;
+  value: string | number | readonly string[];
 }
 
-const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ shifted, focused, className, ...restProps }, ref) => {
+const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ open, value, className, ...restProps }, ref) => {
   /* --- Set default props --- */
   const styles = selectConfig.styles.container;
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, shifted && styles.shifted, focused && styles.focused, className);
+  const mergedClassName = mergeClasses(styles.base, value !== '' && styles.shifted, open && styles.focused, className);
 
   return (
     <div
