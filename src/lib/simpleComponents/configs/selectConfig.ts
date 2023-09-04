@@ -10,6 +10,10 @@ export interface SelectConfig {
     position: Positions;
     lockScroll: boolean;
     overlayRef: Element | null;
+    transitionConfig: {
+      enterDuration: number,
+      exitDuration: number
+    };
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
     startAdornmentContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     fieldsetProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
@@ -74,6 +78,7 @@ const selectConfig: SelectConfig = {
     position: 'bottom',
     lockScroll: false,
     overlayRef: null,
+    transitionConfig: { enterDuration: 500, exitDuration: 500 },
     containerProps: {},
     startAdornmentContainerProps: {},
     fieldsetProps: {},
@@ -108,7 +113,7 @@ const selectConfig: SelectConfig = {
         gap: 'gap-3',
         alignItems: 'items-center',
         height: 'h-9',
-        transition: 'transition-colors',
+        transition: 'transition-all',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
         focus: 'focus:outline-0'
