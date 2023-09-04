@@ -79,7 +79,7 @@ const inputConfig: InputConfig = {
     container: {
       base: {
         display: 'flex',
-        width: 'w-fit',
+        width: 'w-full',
         focus: 'focus:outline-0',
         group: 'group'
       },
@@ -98,7 +98,6 @@ const inputConfig: InputConfig = {
         alignItems: 'items-center',
         height: 'h-9',
         transition: 'transition-colors',
-        pointer: 'pointer-events-none',
         userSelect: 'select-none',
         focus: 'focus:outline-0'
       },
@@ -371,6 +370,7 @@ const inputConfig: InputConfig = {
         display: 'flex',
         alignItems: 'items-center',
         height: 'h-9',
+        width: 'w-full',
         transition: 'transition-colors',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
@@ -602,6 +602,7 @@ const inputConfig: InputConfig = {
     input: {
       base: {
         display: 'block',
+        width: 'w-full',
         font: 'antialiased font-normal text-base font-sans',
         background: 'bg-transparent',
         focus: 'focus:outline-0'
