@@ -1,6 +1,6 @@
 import React, { forwardRef, type BaseHTMLAttributes, useContext } from 'react';
-import inputConfig from '../../../configs/inputConfig';
 import themeContext from '../../../contexts/theme';
+import inputConfig from '../../../configs/inputConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface InputAdornmentContainerProps extends BaseHTMLAttributes<HTMLDivElement> {

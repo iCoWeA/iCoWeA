@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext, type FieldsetHTMLAttributes } from 'react';
-import textareaConfig from '../../../configs/textareaConfig';
 import themeContext from '../../../contexts/theme';
+import textareaConfig from '../../../configs/textareaConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface TextareaFieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {

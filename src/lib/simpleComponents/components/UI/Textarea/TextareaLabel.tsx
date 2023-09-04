@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
-import textareaConfig from '../../../configs/textareaConfig';
 import themeContext from '../../../contexts/theme';
+import textareaConfig from '../../../configs/textareaConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface TextareaLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
@@ -10,7 +10,7 @@ interface TextareaLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   invalid: boolean;
 }
 
-const TextareaLabel = forwardRef<HTMLLabelElement, TextareaLabelProps>(({ variant, color, valid, invalid, style, className, ...restProps }, ref) => {
+const TextareaLabel = forwardRef<HTMLLabelElement, TextareaLabelProps>(({ variant, color, valid, invalid, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 

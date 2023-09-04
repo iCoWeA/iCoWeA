@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
-import selectConfig from '../../../configs/selectConfig';
 import themeContext from '../../../contexts/theme';
+import selectConfig from '../../../configs/selectConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface SelectLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
@@ -10,7 +10,7 @@ interface SelectLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   invalid: boolean;
 }
 
-const SelectLabel = forwardRef<HTMLLabelElement, SelectLabelProps>(({ variant, color, valid, invalid, style, className, ...restProps }, ref) => {
+const SelectLabel = forwardRef<HTMLLabelElement, SelectLabelProps>(({ variant, color, valid, invalid, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 

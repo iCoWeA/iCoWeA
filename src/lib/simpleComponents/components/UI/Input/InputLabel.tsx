@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
-import inputConfig from '../../../configs/inputConfig';
 import themeContext from '../../../contexts/theme';
+import inputConfig from '../../../configs/inputConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface InputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
@@ -10,7 +10,7 @@ interface InputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   invalid: boolean;
 }
 
-const InputLabel = forwardRef<HTMLLabelElement, InputLabelProps>(({ variant, color, valid, invalid, style, className, ...restProps }, ref) => {
+const InputLabel = forwardRef<HTMLLabelElement, InputLabelProps>(({ variant, color, valid, invalid, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
