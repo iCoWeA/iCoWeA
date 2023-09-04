@@ -51,10 +51,10 @@ const progressConfig: ProgressConfig = {
         },
         label: {
           sm: {
-            height: 'h-4'
+            height: 'h-3'
           },
           md: {
-            height: 'h-4.5'
+            height: 'h-4'
           },
           lg: {
             heiight: 'h-5'
