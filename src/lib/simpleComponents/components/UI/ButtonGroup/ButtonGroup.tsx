@@ -1,16 +1,15 @@
 import React, { forwardRef, type BaseHTMLAttributes, type ReactElement, type ReactNode } from 'react';
-import buttonGroupConfig, { type ButtonGroupVariants } from '../../../configs/buttonGroupConfig';
+import buttonGroupConfig from '../../../configs/buttonGroupConfig';
 import ButtonGroupButton from './ButtonGroupButton';
 import { isLast, mergeClasses } from '../../../utils/propsHelper';
 
 export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: ButtonGroupVariants;
+  variant?: ButtonVariants;
   size?: Sizes;
   color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
-  type?: 'submit' | 'reset' | 'button';
-  children?: ReactElement[];
+  children: ReactElement | ReactElement[];
 }
 
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) => {
@@ -22,22 +21,23 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
   const mergedClassName = mergeClasses(styles.base, fullwidth && styles.fullwidth, className);
 
   /* --- Set buttons props --- */
+  const childrenNode: ReactElement[] = Array.isArray(children) ? children : [children];
   const buttonNodes: ReactNode[] = [];
 
-  for (let i = 0; i < children.length; i++) {
+  for (let i = 0; i < childrenNode.length; i++) {
     buttonNodes[i] = (
       <ButtonGroupButton
         key={i}
         isFirst={i === 0}
-        isLast={isLast(children, i)}
+        isLast={isLast(childrenNode, i)}
         variant={variant}
         size={size}
         color={color}
         elevated={elevated}
-        type={children[i].props.type ?? type}
-        className={children[i].props.className}
+        type={childrenNode[i].props.type ?? type}
+        className={childrenNode[i].props.className}
       >
-        {children[i]}
+        {childrenNode[i]}
       </ButtonGroupButton>
     );
   }

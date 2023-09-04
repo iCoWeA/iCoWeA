@@ -1,12 +1,12 @@
 import React, { useContext, cloneElement, type ReactElement, type FC } from 'react';
-import buttonGroupConfig, { type ButtonGroupVariants } from '../../../configs/buttonGroupConfig';
+import buttonGroupConfig from '../../../configs/buttonGroupConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface ButtonGroupButtonProps {
   isFirst: boolean;
   isLast: boolean;
-  variant: ButtonGroupVariants;
+  variant: ButtonVariants;
   color: Colors;
   size: Sizes;
   elevated: boolean;
@@ -26,7 +26,7 @@ const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({ isFirst, isLast, varian
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
-    styles.sizes[size],
+    styles.sizes[size][variant],
     elevated && styles.elevated[theme],
     isFirst && styles.first,
     isLast && styles.last[variant],

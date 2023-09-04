@@ -1,16 +1,11 @@
-import { type ReactElement } from 'react';
-
-export type ButtonGroupVariants = 'filled' | 'outlined' | 'text';
-
 export interface ButtonGroupConfig {
   defaultProps: {
-    variant: ButtonGroupVariants;
+    variant: ButtonVariants;
     size: Sizes;
     color: Colors;
     elevated: boolean;
     fullwidth: boolean;
     type: 'submit' | 'reset' | 'button';
-    children: ReactElement[];
   };
   styles: {
     container: {
@@ -20,11 +15,11 @@ export interface ButtonGroupConfig {
     button: {
       base: Record<string, string>;
       first: Record<string, string>;
-      last: Record<ButtonGroupVariants, Record<string, string>>;
+      last: Record<ButtonVariants, Record<string, string>>;
       fullwidth: Record<string, string>;
-      sizes: Record<Sizes, Record<string, string>>;
       elevated: Record<string, Record<string, string>>;
-      variants: Record<ButtonGroupVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      sizes: Record<Sizes, Record<ButtonVariants, Record<string, string>>>;
+      variants: Record<ButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
   }
 }
@@ -36,8 +31,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
     color: 'primary',
     elevated: false,
     fullwidth: false,
-    type: 'button',
-    children: []
+    type: 'button'
   },
   styles: {
     container: {
@@ -54,10 +48,8 @@ const buttonGroupConfig: ButtonGroupConfig = {
     button: {
       base: {
         display: 'flex',
-        gap: 'gap-2',
+        gap: 'gap-3',
         alignItems: 'items-center',
-        height: 'h-fit',
-        width: 'w-fit',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition-all',
         focus: 'focus:outline-0',
@@ -86,13 +78,37 @@ const buttonGroupConfig: ButtonGroupConfig = {
       },
       sizes: {
         sm: {
-          padding: 'py-1.5 px-3'
+          filled: {
+            padding: 'py-1.5 px-3'
+          },
+          outlined: {
+            padding: 'py-[0.3125rem] px-[0.6875rem]'
+          },
+          text: {
+            padding: 'py-1.5 px-3'
+          }
         },
         md: {
-          padding: 'py-2 px-4'
+          filled: {
+            padding: 'py-2 px-4'
+          },
+          outlined: {
+            padding: 'py-[0.4375rem] px-[0.9375rem]'
+          },
+          text: {
+            padding: 'py-2 px-4'
+          }
         },
         lg: {
-          padding: 'py-2.5 px-5'
+          filled: {
+            padding: 'py-2.5 px-5'
+          },
+          outlined: {
+            padding: 'py-[0.5625rem] px-[1.1875rem]'
+          },
+          text: {
+            padding: 'py-2.5 px-5'
+          }
         }
       },
       elevated: {
@@ -108,64 +124,64 @@ const buttonGroupConfig: ButtonGroupConfig = {
           default: {
             default: {
               border: 'border-r border-black/[0.15]',
-              fill: 'fill-default-text-dark',
-              color: 'text-default-text-dark',
+              fill: 'fill-default-dark',
+              color: 'text-default-dark',
               background: 'bg-default-default',
               hover: 'hover:bg-default-default/90',
               active: 'active:bg-default-default/80'
             },
             primary: {
               border: 'border-r border-black/[0.15]',
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
               background: 'bg-default-primary',
               hover: 'hover:bg-default-primary/90',
               active: 'active:bg-default-primary/80'
             },
             secondary: {
               border: 'border-r border-black/[0.15]',
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
               background: 'bg-default-secondary',
               hover: 'hover:bg-default-secondary/90',
               active: 'active:bg-default-secondary/80'
             },
             success: {
               border: 'border-r border-black/[0.15]',
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
               background: 'bg-default-success',
               hover: 'hover:bg-default-success/90',
               active: 'active:bg-default-success/80'
             },
             warning: {
               border: 'border-r border-black/[0.15]',
-              fill: 'fill-default-text-dark',
-              color: 'text-default-text-dark',
+              fill: 'fill-default-dark',
+              color: 'text-default-dark',
               background: 'bg-default-warning',
               hover: 'hover:bg-default-warning/90',
               active: 'active:bg-default-warning/80'
             },
             error: {
               border: 'border-r border-black/[0.15]',
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
               background: 'bg-default-error',
               hover: 'hover:bg-default-error/90',
               active: 'active:bg-default-error/80'
             },
             light: {
               border: 'border-r border-black/[0.15]',
-              fill: 'fill-default-text-dark',
-              color: 'text-default-text-dark',
+              fill: 'fill-default-dark',
+              color: 'text-default-dark',
               background: 'bg-default-light',
               hover: 'hover:bg-default-light/90',
               active: 'active:bg-default-light/80'
             },
             dark: {
               border: 'border-r border-black/[0.15]',
-              fill: 'fill-default-text-light',
-              color: 'text-default-text-light',
+              fill: 'fill-default-light',
+              color: 'text-default-light',
               background: 'bg-default-dark',
               hover: 'hover:bg-default-dark/90',
               active: 'active:bg-default-dark/80'
@@ -235,7 +251,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
         text: {
           default: {
             default: {
-              border: 'border-r border-default',
+              border: 'border-r border-default-default',
               fill: 'fill-default-default',
               color: 'text-default-default',
               hover: 'hover:bg-default-default/10',
