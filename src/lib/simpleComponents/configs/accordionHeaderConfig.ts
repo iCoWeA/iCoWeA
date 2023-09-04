@@ -31,7 +31,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
     button: {
       base: {
         display: 'flex',
-        gap: 'gap-2',
+        gap: 'gap-3',
         alignItems: 'items-center',
         width: 'w-full',
         padding: 'py-4',
@@ -96,6 +96,8 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
     iconContainer: {
       base: {
         display: 'flex',
+        gap: 'gap-3',
+        alignItems: 'items-center',
         margin: 'ml-auto',
         transition: 'transition-transform',
         focus: 'focus:outline-0'
