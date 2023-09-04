@@ -19,7 +19,7 @@ export interface MenuConfig {
 const menuConfig: MenuConfig = {
   defaultProps: {
     color: 'light',
-    elevated: false,
+    elevated: true,
     position: 'bottom',
     lockScroll: false,
     overlayRef: null,

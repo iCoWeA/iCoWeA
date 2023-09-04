@@ -13,7 +13,7 @@ export interface DropdownConfig {
 const dropdownConfig: DropdownConfig = {
   defaultProps: {
     color: 'light',
-    elevated: false
+    elevated: true
   },
   styles: {
     base: {
