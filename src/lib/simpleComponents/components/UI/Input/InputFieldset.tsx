@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext, type FieldsetHTMLAttributes } from 'react';
-import inputConfig, { type InputVariants } from '../../../configs/inputConfig';
+import inputConfig from '../../../configs/inputConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
