@@ -88,7 +88,11 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   const outsideClickHandler = useCallback((event: MouseEvent) => {
     const isClickedInside = componentsRef.current.container?.contains(event.target as Node) ?? false;
 
-    setIsFocused(isClickedInside);
+    if (isClickedInside) {
+      componentsRef.current.input?.focus();
+    } else {
+      setIsFocused(false);
+    }
   }, []);
 
   useOutsideClick(outsideClickHandler, !disabled);
