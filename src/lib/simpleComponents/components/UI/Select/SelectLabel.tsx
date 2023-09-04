@@ -1,10 +1,10 @@
 import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
-import selectConfig, { type SelectVariants } from '../../../configs/selectConfig';
+import selectConfig from '../../../configs/selectConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface SelectLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
-  variant: SelectVariants;
+  variant: InputVariants;
   color: Colors;
   valid: boolean;
   invalid: boolean;

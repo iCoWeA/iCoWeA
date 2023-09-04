@@ -1,10 +1,10 @@
 import React, { forwardRef, useContext, type FieldsetHTMLAttributes } from 'react';
-import selectConfig, { type SelectVariants } from '../../../configs/selectConfig';
+import selectConfig from '../../../configs/selectConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface SelectFieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  variant: SelectVariants;
+  variant: InputVariants;
   color: Colors;
   valid: boolean;
   invalid: boolean;

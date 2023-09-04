@@ -1,11 +1,11 @@
 import React, { forwardRef, type BaseHTMLAttributes, useContext } from 'react';
-import selectConfig, { type SelectVariants } from '../../../configs/selectConfig';
+import selectConfig from '../../../configs/selectConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface SelectAdornmentContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   position: 'start' | 'end';
-  variant: SelectVariants;
+  variant: InputVariants;
   color: Colors;
   valid: boolean;
   invalid: boolean;
