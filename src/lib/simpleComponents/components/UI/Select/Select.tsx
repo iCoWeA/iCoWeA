@@ -293,7 +293,12 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
       {...popoverProps}
     >
       <selectContext.Provider value={context}>
-        <Dropdown {...dropdownProps}>{children}</Dropdown>
+        <Dropdown
+          elevated
+          {...dropdownProps}
+        >
+          {children}
+        </Dropdown>
       </selectContext.Provider>
     </Popover>
   );
