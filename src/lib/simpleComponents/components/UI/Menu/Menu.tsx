@@ -1,9 +1,9 @@
-import React, { type BaseHTMLAttributes, forwardRef, type ReactElement } from 'react';
+import React, { forwardRef, type ReactElement } from 'react';
+import Dropdown, { type DropdownProps } from '../Dropdown/Dropdown';
 import Popover, { type PopoverProps } from '../Popover/Popover';
 import menuConfig from '../../../configs/menuConfig';
-import Dropdown from '../Dropdown/Dropdown';
 
-export interface MenuProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface MenuProps extends DropdownProps {
   color?: Colors;
   elevated?: boolean;
   open?: boolean;
