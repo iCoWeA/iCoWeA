@@ -1,5 +1,5 @@
 import React, { forwardRef, type ButtonHTMLAttributes, useContext } from 'react';
-import buttonConfig, { type ButtonVariants } from '../../../configs/buttonConfig';
+import buttonConfig from '../../../configs/buttonConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 

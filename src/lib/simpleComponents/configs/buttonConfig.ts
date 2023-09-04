@@ -1,5 +1,3 @@
-export type ButtonVariants = 'filled' | 'outlined' | 'text';
-
 export interface ButtonConfig {
   defaultProps: {
     variant: ButtonVariants;

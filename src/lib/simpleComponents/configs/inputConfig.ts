@@ -1,7 +1,5 @@
 import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes } from 'react';
 
-export type InputVariants = 'outlined' | 'filled' | 'standard';
-
 export interface InputConfig {
   defaultProps: {
     variant: InputVariants;

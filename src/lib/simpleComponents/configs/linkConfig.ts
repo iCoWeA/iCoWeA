@@ -26,8 +26,8 @@ const linkConfig: LinkConfig = {
   styles: {
     base: {
       display: 'inline-flex',
-      alignItems: 'items-center',
       gap: 'gap-3',
+      alignItems: 'items-center',
       height: 'h-fit',
       width: 'w-fit',
       font: 'antialiased font-normal text-base font-sans',

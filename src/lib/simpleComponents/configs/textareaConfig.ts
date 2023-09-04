@@ -1,10 +1,8 @@
 import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes } from 'react';
 
-export type TextareaVariants = 'outlined' | 'filled' | 'standard';
-
 export interface TextareaConfig {
   defaultProps: {
-    variant: TextareaVariants;
+    variant: InputVariants;
     color: Colors;
     valid: boolean;
     invalid: boolean;
@@ -31,16 +29,16 @@ export interface TextareaConfig {
       start: Record<string, string>;
       end: Record<string, string>;
       sizes: Record<string, Record<string, string>>;
-      valid: Record<TextareaVariants, Record<string, Record<string, string>>>;
-      invalid: Record<TextareaVariants, Record<string, Record<string, string>>>;
-      variants: Record<TextareaVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      valid: Record<InputVariants, Record<string, Record<string, string>>>;
+      invalid: Record<InputVariants, Record<string, Record<string, string>>>;
+      variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
     fieldset: {
       base: Record<string, string>;
       sizes: Record<string, Record<string, string>>;
-      valid: Record<TextareaVariants, Record<string, Record<string, string>>>;
-      invalid: Record<TextareaVariants, Record<string, Record<string, string>>>;
-      variants: Record<TextareaVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      valid: Record<InputVariants, Record<string, Record<string, string>>>;
+      invalid: Record<InputVariants, Record<string, Record<string, string>>>;
+      variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
     },
     textarea: {
       base: Record<string, string>;
@@ -55,7 +53,7 @@ export interface TextareaConfig {
       base: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      sizes: Record<TextareaVariants, Record<string, string>>;
+      sizes: Record<InputVariants, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>;
     },
   }

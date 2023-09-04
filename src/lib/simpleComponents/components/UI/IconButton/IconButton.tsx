@@ -1,10 +1,10 @@
 import React, { forwardRef, type ButtonHTMLAttributes, useContext } from 'react';
-import iconButtonConfig, { type IconButtonVariants } from '../../../configs/iconButtonConfig';
+import iconButtonConfig from '../../../configs/iconButtonConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: IconButtonVariants;
+  variant?: ButtonVariants;
   size?: Sizes;
   color?: Colors;
   elevated?: boolean;

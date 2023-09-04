@@ -1,11 +1,9 @@
 import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes } from 'react';
 import { type PopoverProps } from '../components/UI/Popover/Popover';
 
-export type SelectVariants = 'outlined' | 'filled' | 'standard';
-
 export interface SelectConfig {
   defaultProps: {
-    variant: SelectVariants;
+    variant: InputVariants;
     color: Colors;
     valid: boolean;
     invalid: boolean;
@@ -37,16 +35,16 @@ export interface SelectConfig {
       start: Record<string, string>;
       end: Record<string, string>;
       sizes: Record<string, Record<string, string>>;
-      valid: Record<SelectVariants, Record<string, Record<string, string>>>;
-      invalid: Record<SelectVariants, Record<string, Record<string, string>>>;
-      variants: Record<SelectVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      valid: Record<InputVariants, Record<string, Record<string, string>>>;
+      invalid: Record<InputVariants, Record<string, Record<string, string>>>;
+      variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
     fieldset: {
       base: Record<string, string>;
       sizes: Record<string, Record<string, string>>;
-      valid: Record<SelectVariants, Record<string, Record<string, string>>>;
-      invalid: Record<SelectVariants, Record<string, Record<string, string>>>;
-      variants: Record<SelectVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      valid: Record<InputVariants, Record<string, Record<string, string>>>;
+      invalid: Record<InputVariants, Record<string, Record<string, string>>>;
+      variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
     },
     input: {
       base: Record<string, string>;
@@ -61,7 +59,7 @@ export interface SelectConfig {
       base: Record<string, string>;
       valid: Record<string, Record<string, string>>;
       invalid: Record<string, Record<string, string>>;
-      sizes: Record<SelectVariants, Record<string, string>>;
+      sizes: Record<InputVariants, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>;
     },
   }

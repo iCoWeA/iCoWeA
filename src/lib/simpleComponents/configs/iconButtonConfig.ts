@@ -1,8 +1,6 @@
-export type IconButtonVariants = 'filled' | 'outlined' | 'text';
-
 export interface IconButtonConfig {
   defaultProps: {
-    variant: IconButtonVariants;
+    variant: ButtonVariants;
     size: Sizes;
     color: Colors;
     elevated: boolean;
@@ -10,9 +8,9 @@ export interface IconButtonConfig {
   };
   styles: {
     base: Record<string, string>;
-    sizes: Record<Sizes, Record<IconButtonVariants, Record<string, string>>>;
+    sizes: Record<Sizes, Record<ButtonVariants, Record<string, string>>>;
     elevated: Record<string, Record<string, string>>;
-    variants: Record<IconButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
+    variants: Record<ButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
   }
 }
 

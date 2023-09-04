@@ -14,7 +14,7 @@ import React, {
   useEffect,
   type FocusEvent
 } from 'react';
-import textareaConfig, { type TextareaVariants } from '../../../configs/textareaConfig';
+import textareaConfig from '../../../configs/textareaConfig';
 import { deepClone, mergeClasses } from '../../../utils/propsHelper';
 import themeContext from '../../../contexts/theme';
 import useOutsideClick from '../../../hooks/useOutsideClick';
@@ -37,7 +37,7 @@ interface Action {
 }
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  variant?: TextareaVariants;
+  variant?: InputVariants;
   color?: Colors;
   valid?: boolean;
   invalid?: boolean;

@@ -14,7 +14,7 @@ import React, {
   useEffect,
   type FocusEvent
 } from 'react';
-import inputConfig, { type InputVariants } from '../../../configs/inputConfig';
+import inputConfig from '../../../configs/inputConfig';
 import { deepClone, mergeClasses } from '../../../utils/propsHelper';
 import themeContext from '../../../contexts/theme';
 import useOutsideClick from '../../../hooks/useOutsideClick';
