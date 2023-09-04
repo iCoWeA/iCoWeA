@@ -1,7 +1,7 @@
-import { type ReactNode, createContext } from 'react';
+import { createContext } from 'react';
 
 export interface SelectContext {
-  onClose: (value: ReactNode) => void;
+  onClose: (value: string) => void;
 }
 
 export const initialState: SelectContext = {

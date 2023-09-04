@@ -215,10 +215,12 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
   if (labelNode !== undefined) {
     labelNode = (
       <SelectLabel
+        open={open ?? isFocused}
         variant={variant}
         color={color}
         valid={valid}
         invalid={invalid}
+        transitionConfig={mergedTransitionConfig}
         {...labelProps}
       >
         {label}
