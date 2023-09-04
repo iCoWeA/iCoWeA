@@ -387,7 +387,7 @@ const selectConfig: SelectConfig = {
         display: 'flex',
         alignItems: 'items-center',
         height: 'h-9',
-        transition: 'transition-colors',
+        transition: 'transition-all',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
         focus: 'focus:outline-0',
