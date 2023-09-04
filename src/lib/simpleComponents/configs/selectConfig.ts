@@ -1,5 +1,7 @@
 import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes } from 'react';
 import { type PopoverProps } from '../components/UI/Popover/Popover';
+import { type DropdownProps } from '../components/UI/Dropdown/Dropdown';
+import { type IconProps } from '../components/UI/Icon/Icon';
 
 export interface SelectConfig {
   defaultProps: {
@@ -7,6 +9,7 @@ export interface SelectConfig {
     color: Colors;
     valid: boolean;
     invalid: boolean;
+    arrow: boolean;
     position: Positions;
     lockScroll: boolean;
     overlayRef: Element | null;
@@ -14,13 +17,15 @@ export interface SelectConfig {
       enterDuration: number,
       exitDuration: number
     };
+    popoverProps: PopoverProps;
+    dropdownProps: DropdownProps;
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
     startAdornmentContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     fieldsetProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
     endAdornmentContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    arrowProps: IconProps;
     legendProps: BaseHTMLAttributes<HTMLLegendElement>;
     labelProps: LabelHTMLAttributes<HTMLLabelElement>;
-    popoverProps: PopoverProps;
     autoFocus: boolean;
     disabled: boolean;
     readonly: boolean;
@@ -56,6 +61,10 @@ export interface SelectConfig {
       invalid: Record<string, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>;
     },
+    arrow: {
+      base: Record<string, string>;
+      open: Record<string, string>;
+    }
     legend: {
       base: Record<string, string>;
     },
@@ -75,17 +84,20 @@ const selectConfig: SelectConfig = {
     color: 'primary',
     valid: false,
     invalid: false,
+    arrow: true,
     position: 'bottom',
     lockScroll: false,
     overlayRef: null,
     transitionConfig: { enterDuration: 500, exitDuration: 500 },
+    popoverProps: {},
+    dropdownProps: {},
     containerProps: {},
     startAdornmentContainerProps: {},
     fieldsetProps: {},
     endAdornmentContainerProps: {},
+    arrowProps: {},
     legendProps: {},
     labelProps: {},
-    popoverProps: {},
     autoFocus: false,
     disabled: false,
     readonly: true,
@@ -659,6 +671,15 @@ const selectConfig: SelectConfig = {
             color: 'text-default-dark'
           }
         }
+      }
+    },
+    arrow: {
+      base: {
+        transition: 'transition-transform',
+        focus: 'focus:outline-0'
+      },
+      open: {
+        transform: 'rotate-180'
       }
     },
     legend: {
