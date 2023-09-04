@@ -27,7 +27,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, ref) => {
 
   return (
     <ProgressContainer
-      barChildren={children !== undefined}
+      label={children !== undefined}
       size={size}
       ref={ref}
       {...containerProps}
