@@ -38,7 +38,7 @@ const backdropConfig: BackdropConfig = {
     },
     color: {
       default: {
-        background: 'bg-default-bg-dark/70'
+        background: 'bg-default-dark/70'
       }
     }
   }

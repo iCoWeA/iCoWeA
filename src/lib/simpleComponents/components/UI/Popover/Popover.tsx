@@ -162,6 +162,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   let backdropNode: ReactNode;
 
   if (backdrop) {
+    const mergedBackdropProps = { ...popoverConfig.defaultProps.backdropProps, ...backdropProps };
+
     backdropNode = (
       <PopoverBackdrop
         exit={exit}
@@ -169,7 +171,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
         transitionState={transitionState}
         enterDuration={mergedTransitionConfig.enterDuration}
         exitDuration={mergedTransitionConfig.exitDuration}
-        {...backdropProps}
+        {...mergedBackdropProps}
       />
     );
   }
