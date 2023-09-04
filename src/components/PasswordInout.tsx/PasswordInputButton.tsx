@@ -21,6 +21,8 @@ const PasswordInputButton = forwardRef<HTMLButtonElement, PasswordInputButtonPro
   return (
     <IconButton
       variant="text"
+      color="dark"
+      size="sm"
       onClick={clickHandler}
       ref={ref}
       {...restProps}

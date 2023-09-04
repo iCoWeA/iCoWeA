@@ -17,7 +17,6 @@ const PasswordInputButton = forwardRef<SVGSVGElement, PasswordInputIconProps>(({
 
   return (
     <Icon
-      color="dark"
       ref={ref}
       {...restProps}
     >
