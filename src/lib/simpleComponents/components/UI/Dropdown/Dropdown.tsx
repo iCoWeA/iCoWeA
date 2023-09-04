@@ -3,7 +3,7 @@ import themeContext from '../../../contexts/theme';
 import dropdownConfig from '../../../configs/dropdownConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
-interface DropdownProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface DropdownProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   elevated?: boolean;
 }
