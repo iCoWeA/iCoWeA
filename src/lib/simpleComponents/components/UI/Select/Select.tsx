@@ -32,7 +32,7 @@ import SelectLabel from './SelectLabel';
 import SelectLegend from './SelectLegend';
 
 export interface SelectProps extends InputHTMLAttributes<HTMLInputElement> {
-  onSelectChange?: (value: ReactNode) => void;
+  onSelectChange?: (value: string) => void;
   variant?: InputVariants;
   color?: Colors;
   valid?: boolean;
@@ -117,8 +117,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
   /* --- Set context --- */
   const context: SelectContext = useMemo(
     () => ({
-      onClose: (value: ReactNode) => {
-        if (open !== undefined) {
+      onClose: (value: string) => {
+        if (open === undefined) {
           setIsFocused(false);
         }
 
@@ -141,10 +141,16 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
 
   /* --- Set outside click action --- */
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isClickedInside =
-      (componentsRef.current.popover?.contains(event.target as Node) ?? false) || (componentsRef.current.container?.contains(event.target as Node) ?? false);
+    const isInputClicked = componentsRef.current.container?.contains(event.target as Node) ?? false;
+    const isPopoverClicked = componentsRef.current.popover?.contains(event.target as Node) ?? false;
 
-    setIsFocused(isClickedInside);
+    if (!isInputClicked && !isPopoverClicked) {
+      setIsFocused(false);
+    }
+
+    if (isInputClicked) {
+      setIsFocused(true);
+    }
   }, []);
 
   useOutsideClick(outsideClickHandler, open === undefined && !disabled && !(popoverProps.backdrop === true));
