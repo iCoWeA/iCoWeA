@@ -9,13 +9,13 @@ import React, {
   useContext,
   useRef,
   useImperativeHandle,
-  useReducer,
   useCallback,
   useEffect,
-  type FocusEvent
+  type FocusEvent,
+  useState
 } from 'react';
 import textareaConfig from '../../../configs/textareaConfig';
-import { deepClone, mergeClasses } from '../../../utils/propsHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
 import themeContext from '../../../contexts/theme';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import TextareaContainer from './TextareaContainer';
@@ -23,18 +23,6 @@ import TextareaAdornmentContainer from './TextareaAdornmentContainer';
 import TextareaFieldset from './TextareaFieldset';
 import TextareaLabel from './TextareaLabel';
 import TextareaLegend from './TextareaLegend';
-
-interface State {
-  isShifted: boolean;
-  isFocused: boolean;
-}
-
-interface Action {
-  payload: {
-    isShifted?: boolean;
-    isFocused?: boolean;
-  };
-}
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: InputVariants;
@@ -57,15 +45,6 @@ interface TextareaRefs {
   container: HTMLDivElement | null;
   textarea: HTMLTextAreaElement | null;
 }
-
-const reducer = (prevState: State, { payload: { isShifted, isFocused } }: Action): State => {
-  const state = deepClone(prevState);
-
-  state.isShifted = isShifted ?? state.isShifted;
-  state.isFocused = isFocused ?? state.isFocused;
-
-  return state;
-};
 
 const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, ref) => {
   /* --- Set context props --- */
@@ -103,62 +82,30 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, ref) => {
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentsRef.current.container, []);
 
   /* --- Set states --- */
-  const initialState = {
-    isShifted: value !== '' || (!disabled && autoFocus),
-    isFocused: !disabled && autoFocus
-  };
-  const [{ isShifted, isFocused }, dispatch] = useReducer(reducer, initialState);
+  const [isFocused, setIsFocused] = useState(!disabled && autoFocus);
 
   /* --- Set outside click action --- */
-  const outsideClickHandler = useCallback(
-    (event: MouseEvent) => {
-      const isClickedInside = componentsRef.current.container?.contains(event.target as Node) ?? false;
+  const outsideClickHandler = useCallback((event: MouseEvent) => {
+    const isClickedInside = componentsRef.current.container?.contains(event.target as Node) ?? false;
 
-      if (isClickedInside) {
-        componentsRef.current.textarea?.focus();
-      }
-
-      if (!isClickedInside && value === '' && (isShifted || isFocused)) {
-        dispatch({ payload: { isShifted: false, isFocused: false } });
-      }
-
-      if (!isClickedInside && value !== '' && isFocused) {
-        dispatch({ payload: { isFocused: false } });
-      }
-    },
-    [value, isShifted, isFocused]
-  );
+    setIsFocused(isClickedInside);
+  }, []);
 
   useOutsideClick(outsideClickHandler, !disabled);
 
   /* -- Set autofocus state --- */
   useEffect(() => {
     if (autoFocus && !disabled) {
-      dispatch({ payload: { isShifted: true, isFocused: true } });
+      setIsFocused(true);
     }
   }, [autoFocus, disabled]);
 
   /* -- Set disabled state --- */
   useEffect(() => {
-    if (disabled && value === '' && (isShifted || isFocused)) {
-      dispatch({ payload: { isShifted: false, isFocused: false } });
+    if (disabled) {
+      setIsFocused(false);
     }
-
-    if (disabled && value !== '' && isFocused) {
-      dispatch({ payload: { isFocused: false } });
-    }
-  }, [disabled, value, isShifted, isFocused]);
-
-  /* -- Set value state --- */
-  useEffect(() => {
-    if (value === '' && isShifted && !isFocused) {
-      dispatch({ payload: { isShifted: false } });
-    }
-
-    if (value !== '' && !isShifted) {
-      dispatch({ payload: { isShifted: true } });
-    }
-  }, [value, isShifted, isFocused]);
+  }, [disabled]);
 
   /* --- Set container props --- */
   const setContainerRef = (element: HTMLDivElement): void => {
@@ -167,9 +114,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, ref) => {
 
   /* --- Set props --- */
   const focusHandler = (event: FocusEvent<HTMLTextAreaElement>): void => {
-    if (!isShifted || !isFocused) {
-      dispatch({ payload: { isShifted: true, isFocused: true } });
-    }
+    setIsFocused(true);
 
     if (onFocus !== undefined) {
       onFocus(event);
@@ -218,8 +163,8 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, ref) => {
 
   return (
     <TextareaContainer
-      shifted={isShifted}
-      focused={isFocused}
+      open={isFocused}
+      value={value}
       ref={setContainerRef}
       {...containerProps}
     >
