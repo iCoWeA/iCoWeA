@@ -2,13 +2,13 @@ import React, { type ButtonHTMLAttributes, forwardRef, useContext, type ReactNod
 import Icon, { type IconProps } from '../Icon/Icon';
 import accordionContext from '../../../contexts/accordion';
 import themeContext from '../../../contexts/theme';
-import AccordionHeaderIconContainer from './AccordionHeaderIconContainer';
-import { mergeClasses } from '../../../utils/propsHelper';
 import accordionHeaderConfig from '../../../configs/accordionHeaderConfig';
+import { mergeClasses } from '../../../utils/propsHelper';
+import AccordionHeaderIconContainer from './AccordionHeaderIconContainer';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: Colors;
-  icon?: ReactNode;
+  disableIcon?: boolean;
   iconProps?: IconProps;
   iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
 }
@@ -25,7 +25,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
 
   /* --- Set default props --- */
   const styles = accordionHeaderConfig.styles.button;
-  const { color, icon, iconProps, iconContainerProps, onClick, disabled, className, children, ...restProps } = {
+  const { color, disableIcon, iconProps, iconContainerProps, onClick, disabled, className, children, ...restProps } = {
     ...accordionHeaderConfig.defaultProps,
     disabled: isAccordionDisabled,
     ...props
@@ -43,9 +43,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
 
   /* --- Set icon --- */
-  let iconNode = icon;
+  let iconNode: ReactNode;
 
-  if (iconNode === undefined) {
+  if (!disableIcon) {
     iconNode = (
       <Icon {...iconProps}>
         <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
@@ -53,10 +53,10 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
     );
   }
 
-  /* Set icon container --- */
-  let iconContainerNode = icon;
+  /* --- Set icon container --- */
+  let iconContainerNode: ReactNode;
 
-  if (iconNode !== null) {
+  if (!disableIcon) {
     iconContainerNode = (
       <AccordionHeaderIconContainer
         open={isAccordionOpen}

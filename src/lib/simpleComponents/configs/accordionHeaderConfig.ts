@@ -4,6 +4,7 @@ import { type IconProps } from '../components/UI/Icon/Icon';
 export interface AccordionHeaderConfig {
   defaultProps: {
     color: Colors;
+    disableIcon: boolean;
     iconProps: IconProps;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
   };
@@ -22,8 +23,9 @@ export interface AccordionHeaderConfig {
 const accordionHeaderConfig: AccordionHeaderConfig = {
   defaultProps: {
     color: 'default',
+    disableIcon: false,
     iconProps: {},
-    iconContainerProps: { className: '' }
+    iconContainerProps: {}
   },
   styles: {
     button: {
@@ -95,7 +97,6 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       base: {
         display: 'flex',
         margin: 'ml-auto',
-        width: 'w-6',
         transition: 'transition-transform',
         focus: 'focus:outline-0'
       },
