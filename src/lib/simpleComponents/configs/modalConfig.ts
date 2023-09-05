@@ -31,6 +31,9 @@ const modalConfig: ModalConfig = {
     modal: {
       base: {
         position: 'fixed',
+        top: 'top-2/4',
+        left: 'left-2/4',
+        transform: '-translate-y-2/4 -translate-x-2/4',
         zIndex: 'z-[60]',
         display: 'flex',
         flexDirection: 'flex-col',
