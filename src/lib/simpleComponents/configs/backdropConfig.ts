@@ -23,6 +23,7 @@ const backdropConfig: BackdropConfig = {
       position: 'fixed',
       top: 'top-0',
       left: 'left-0',
+      zIndex: 'z-10',
       display: 'block',
       height: 'h-screen',
       width: 'w-screen',
