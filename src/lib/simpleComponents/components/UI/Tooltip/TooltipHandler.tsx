@@ -1,9 +1,8 @@
-import { type Dispatch, type MouseEvent, forwardRef, type ReactElement, cloneElement } from 'react';
+import { type Dispatch, type MouseEvent, forwardRef, type ReactElement, cloneElement, type SetStateAction } from 'react';
 import { type TransitionState } from '../../../hooks/useTransition';
 
 interface TooltipHandlerProps {
-  enter: () => void;
-  exit: () => void;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
   setCursorY: Dispatch<React.SetStateAction<number>>;
   setCursorX: Dispatch<React.SetStateAction<number>>;
   open?: boolean;
@@ -13,7 +12,7 @@ interface TooltipHandlerProps {
 }
 
 const TooltipHandler = forwardRef<HTMLElement, TooltipHandlerProps>(
-  ({ enter, exit, setCursorY, setCursorX, open, transitionState, followCursor, children }, ref) => {
+  ({ setIsOpen, setCursorY, setCursorX, open, transitionState, followCursor, children }, ref) => {
     /* --- Set props --- */
     const onMouseEnter = (event: MouseEvent<HTMLElement>): void => {
       if (followCursor) {
@@ -22,7 +21,7 @@ const TooltipHandler = forwardRef<HTMLElement, TooltipHandlerProps>(
       }
 
       if (open === undefined && transitionState.exit) {
-        enter();
+        setIsOpen(true);
       }
 
       if (children.props.onMouseEnter !== undefined) {
@@ -31,13 +30,8 @@ const TooltipHandler = forwardRef<HTMLElement, TooltipHandlerProps>(
     };
 
     const onMouseLeave = (event: MouseEvent<HTMLElement>): void => {
-      if (followCursor) {
-        setCursorY(event.clientY);
-        setCursorX(event.clientX);
-      }
-
       if (open === undefined && transitionState.enter) {
-        exit();
+        setIsOpen(false);
       }
 
       if (children.props.onMouseLeave !== undefined) {

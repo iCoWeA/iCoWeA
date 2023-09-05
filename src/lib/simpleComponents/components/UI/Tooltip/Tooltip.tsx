@@ -85,19 +85,29 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   /* --- Set states --- */
   const [cursorY, setCursorY] = useState(-1);
   const [cursorX, setCursorX] = useState(-1);
-
+  const [isOpen, setIsOpen] = useState(false);
   const { state: transitionState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
 
   /* -- Set open state --- */
   useEffect(() => {
-    if (open === true && transitionState.exit) {
-      enter();
-    }
+    if (open === undefined) {
+      if (isOpen && transitionState.exit) {
+        enter();
+      }
 
-    if (open === false && transitionState.enter) {
-      exit();
+      if (!isOpen && transitionState.enter) {
+        exit();
+      }
+    } else {
+      if (open && transitionState.exit) {
+        enter();
+      }
+
+      if (!open && transitionState.enter) {
+        exit();
+      }
     }
-  }, [open, transitionState.enter, transitionState.exit]);
+  }, [open, isOpen, transitionState.enter, transitionState.exit]);
 
   /* --- Set position --- */
   const setPosition = useCallback((): void => {
@@ -155,8 +165,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
 
   const handlerNode = (
     <TooltipHandler
-      enter={enter}
-      exit={exit}
+      setIsOpen={setIsOpen}
       setCursorY={setCursorY}
       setCursorX={setCursorX}
       open={open}
@@ -167,6 +176,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
       {handler}
     </TooltipHandler>
   );
+
+  /* --- Unmount --- */
+  if (unmountOnExit && transitionState.current === TransitionStates.EXITED && !(open ?? isOpen)) {
+    return <>{handlerNode}</>;
+  }
 
   /* --- Set arrow props --- */
   let arrowNode: ReactNode;
@@ -226,15 +240,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className, transitionClassName);
 
-  const childrenNode = componentsRef.current.container !== null &&
-    componentsRef.current.handler !== null &&
-    (!unmountOnExit || (unmountOnExit && transitionState.current !== TransitionStates.EXITED)) && (
-      <>
-        {arrowNode}
-        {children}
-      </>
-  );
-
   let node = (
     <div
       onTransitionEnd={transitionEndHandler}
@@ -244,7 +249,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
       ref={setRef}
       {...restProps}
     >
-      {childrenNode}
+      {arrowNode}
+      {children}
     </div>
   );
 
