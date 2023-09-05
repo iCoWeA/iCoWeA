@@ -16,8 +16,13 @@ export interface PopoverConfig {
     }
   };
   styles: {
-    base: Record<string, string>;
-    open: Record<string, string>;
+    popover: {
+      base: Record<string, string>;
+      open: Record<string, string>;
+    },
+    backdrop: {
+      base: Record<string, string>;
+    }
   }
 }
 
@@ -39,15 +44,22 @@ const popoverConfig: PopoverConfig = {
     }
   },
   styles: {
-    base: {
-      position: 'absolute',
-      zIndex: 'z-90',
-      display: 'block',
-      opacity: 'opacity-0',
-      transition: 'transition-[opacity]'
+    popover: {
+      base: {
+        position: 'absolute',
+        zIndex: 'z-[80]',
+        display: 'block',
+        opacity: 'opacity-0',
+        transition: 'transition-[opacity]'
+      },
+      open: {
+        opacity: 'opacity-100'
+      }
     },
-    open: {
-      opacity: 'opacity-100'
+    backdrop: {
+      base: {
+        zIndex: 'z-[70]'
+      }
     }
   }
 };

@@ -17,12 +17,12 @@ export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   /* --- Set default props --- */
-  const { defaultProps, styles } = modalConfig;
+  const styles = modalConfig.styles.modal;
   const { onClose, open, lockScroll, transitionConfig, overlayRef, backdropProps, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = {
-    ...defaultProps,
+    ...modalConfig.defaultProps,
     ...props
   };
-  const mergedTransitionConfig = { ...defaultProps.transitionConfig, ...transitionConfig };
+  const mergedTransitionConfig = { ...modalConfig.defaultProps.transitionConfig, ...transitionConfig };
 
   /* --- Set refs --- */
   const componentRef = useRef<HTMLDivElement>(null);
@@ -61,7 +61,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   }
 
   /* --- Set backdrop props --- */
-  const mergedBackdropProps = { ...defaultProps.backdropProps, ...backdropProps };
+  const mergedBackdropProps = { ...modalConfig.defaultProps.backdropProps, ...backdropProps };
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {

@@ -13,10 +13,15 @@ export interface DrawerConfig {
     backdropProps: BackdropProps;
   };
   styles: {
-    base: Record<string, string>;
-    positions: Record<DrawerPositions, Record<string, string>>;
-    open: Record<DrawerPositions, Record<string, string>>;
-    colors: Record<string, Record<Colors, Record<string, string>>>;
+    drawer: {
+      base: Record<string, string>;
+      positions: Record<DrawerPositions, Record<string, string>>;
+      open: Record<DrawerPositions, Record<string, string>>;
+      colors: Record<string, Record<Colors, Record<string, string>>>;
+    },
+    backdrop: {
+      base: Record<string, string>;
+    }
   }
 }
 
@@ -31,79 +36,86 @@ const drawerConfig: DrawerConfig = {
     backdropProps: {}
   },
   styles: {
-    base: {
-      position: 'fixed',
-      zIndex: 'z-60',
-      display: 'flex',
-      flexDirection: 'flex-col',
-      transition: 'transition-[transform]'
-    },
-    positions: {
-      top: {
-        top: 'top-0',
-        left: 'left-0',
-        width: 'w-screen',
-        translate: '-translate-y-full'
+    drawer: {
+      base: {
+        position: 'fixed',
+        zIndex: 'z-40',
+        display: 'flex',
+        flexDirection: 'flex-col',
+        transition: 'transition-[transform]'
       },
-      bottom: {
-        bottom: 'bottom-0',
-        left: 'left-0',
-        width: 'w-screen',
-        translate: 'translate-y-full'
-      },
-      left: {
-        top: 'top-0',
-        left: 'left-0',
-        height: 'h-screen',
-        translate: '-translate-x-full'
-      },
-      right: {
-        top: 'top-0',
-        right: 'right-0',
-        height: 'h-screen',
-        translate: '-translate-x-full'
-      }
-    },
-    open: {
-      top: {
-        translate: 'translate-y-0'
-      },
-      bottom: {
-        translate: 'translate-y-0'
-      },
-      left: {
-        translate: 'translate-x-0'
-      },
-      right: {
-        translate: 'translate-x-0'
-      }
-    },
-    colors: {
-      default: {
-        default: {
-          background: 'bg-default-default'
+      positions: {
+        top: {
+          top: 'top-0',
+          left: 'left-0',
+          width: 'w-screen',
+          translate: '-translate-y-full'
         },
-        primary: {
-          background: 'bg-default-primary'
+        bottom: {
+          bottom: 'bottom-0',
+          left: 'left-0',
+          width: 'w-screen',
+          translate: 'translate-y-full'
         },
-        secondary: {
-          background: 'bg-default-secondary'
+        left: {
+          top: 'top-0',
+          left: 'left-0',
+          height: 'h-screen',
+          translate: '-translate-x-full'
         },
-        success: {
-          background: 'bg-default-success'
-        },
-        warning: {
-          background: 'bg-default-warning'
-        },
-        error: {
-          background: 'bg-default-error'
-        },
-        light: {
-          background: 'bg-default-light'
-        },
-        dark: {
-          background: 'bg-default-dark'
+        right: {
+          top: 'top-0',
+          right: 'right-0',
+          height: 'h-screen',
+          translate: '-translate-x-full'
         }
+      },
+      open: {
+        top: {
+          translate: 'translate-y-0'
+        },
+        bottom: {
+          translate: 'translate-y-0'
+        },
+        left: {
+          translate: 'translate-x-0'
+        },
+        right: {
+          translate: 'translate-x-0'
+        }
+      },
+      colors: {
+        default: {
+          default: {
+            background: 'bg-default-default'
+          },
+          primary: {
+            background: 'bg-default-primary'
+          },
+          secondary: {
+            background: 'bg-default-secondary'
+          },
+          success: {
+            background: 'bg-default-success'
+          },
+          warning: {
+            background: 'bg-default-warning'
+          },
+          error: {
+            background: 'bg-default-error'
+          },
+          light: {
+            background: 'bg-default-light'
+          },
+          dark: {
+            background: 'bg-default-dark'
+          }
+        }
+      }
+    },
+    backdrop: {
+      base: {
+        zIndex: 'z-30'
       }
     }
   }

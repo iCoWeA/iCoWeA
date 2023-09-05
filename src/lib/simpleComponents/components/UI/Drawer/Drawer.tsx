@@ -32,7 +32,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const { defaultProps, styles } = drawerConfig;
+  const styles = drawerConfig.styles.drawer;
   const {
     onClose,
     open,
@@ -48,10 +48,10 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     className,
     ...restProps
   } = {
-    ...defaultProps,
+    ...drawerConfig.defaultProps,
     ...props
   };
-  const mergedTransitionConfig = { ...defaultProps.transitionConfig, ...transitionConfig };
+  const mergedTransitionConfig = { ...drawerConfig.defaultProps.transitionConfig, ...transitionConfig };
 
   /* --- Set refs --- */
   const componentRef = useRef<HTMLDivElement>(null);
@@ -90,7 +90,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   }
 
   /* --- Set backdrop props --- */
-  const mergedBackdropProps = { ...defaultProps.backdropProps, ...backdropProps };
+  const mergedBackdropProps = { ...drawerConfig.defaultProps.backdropProps, ...backdropProps };
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {

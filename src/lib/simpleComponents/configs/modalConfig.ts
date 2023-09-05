@@ -9,8 +9,13 @@ export interface ModalConfig {
     backdropProps: BackdropProps;
   };
   styles: {
-    base: Record<string, string>;
-    open: Record<string, string>;
+    modal: {
+      base: Record<string, string>;
+      open: Record<string, string>;
+    },
+    backdrop: {
+      base: Record<string, string>;
+    }
   }
 }
 
@@ -23,16 +28,23 @@ const modalConfig: ModalConfig = {
     backdropProps: {}
   },
   styles: {
-    base: {
-      position: 'fixed',
-      zIndex: 'z-70',
-      display: 'flex',
-      flexDirection: 'flex-col',
-      opacity: 'opacity-0',
-      transition: 'transition-[opacity]'
+    modal: {
+      base: {
+        position: 'fixed',
+        zIndex: 'z-[60]',
+        display: 'flex',
+        flexDirection: 'flex-col',
+        opacity: 'opacity-0',
+        transition: 'transition-[opacity]'
+      },
+      open: {
+        opacity: 'opacity-100'
+      }
     },
-    open: {
-      opacity: 'opacity-100'
+    backdrop: {
+      base: {
+        zIndex: 'z-50'
+      }
     }
   }
 };

@@ -49,6 +49,7 @@ const tooltipConfig: TooltipConfig = {
     container: {
       base: {
         position: 'absolute',
+        zIndex: 'z-[90]',
         display: 'flex',
         gap: 'gap-3',
         alignItems: 'items-center',

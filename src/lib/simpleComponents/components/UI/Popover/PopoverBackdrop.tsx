@@ -1,6 +1,8 @@
 import React, { type Dispatch, type SetStateAction, forwardRef } from 'react';
 import { type TransitionState } from '../../../hooks/useTransition';
+import popoverConfig from '../../../configs/popoverConfig';
 import Backdrop, { type BackdropProps } from '../Backdrop/Backdrop';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 interface PopoverBackdropProps extends BackdropProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -10,7 +12,10 @@ interface PopoverBackdropProps extends BackdropProps {
 }
 
 const PopoverBackdrop = forwardRef<HTMLDivElement, PopoverBackdropProps>(
-  ({ setIsOpen, transitionState, enterDuration, exitDuration, onClose, open, style, ...restProps }, ref) => {
+  ({ setIsOpen, transitionState, enterDuration, exitDuration, onClose, open, style, className, ...restProps }, ref) => {
+    /* --- Set default props --- */
+    const styles = popoverConfig.styles.popover;
+
     /* --- Set props --- */
     let closeHandler = onClose;
 
@@ -29,11 +34,14 @@ const PopoverBackdrop = forwardRef<HTMLDivElement, PopoverBackdropProps>(
       ...style
     };
 
+    const mergedClassName = mergeClasses(styles.base, className);
+
     return (
       <Backdrop
         onClose={closeHandler}
         open={transitionState.entering}
         style={mergedStyle}
+        className={mergedClassName}
         ref={ref}
         {...restProps}
       />

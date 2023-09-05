@@ -45,7 +45,7 @@ interface PopoverRefs {
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   /* --- Set default props --- */
-  const styles = popoverConfig.styles;
+  const styles = popoverConfig.styles.popover;
   const {
     open,
     position,
