@@ -77,7 +77,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   useEffect(() => {
     if (lockScroll) {
       if (transitionState.current === TransitionStates.EXITED) {
-        document.body.style.overflow = 'scroll';
+        document.body.style.overflow = 'auto';
       } else {
         document.body.style.overflow = 'hidden';
       }
