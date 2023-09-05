@@ -7,24 +7,16 @@ import React, {
   type ReactNode,
   forwardRef,
   useContext,
-  useRef,
-  useImperativeHandle,
-  useCallback,
-  useEffect,
-  type FocusEvent,
-  useState
+  useRef
 } from 'react';
-import textareaConfig from '../../../configs/textareaConfig';
+import textAreaConfig from '../../../configs/textAreaConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 import themeContext from '../../../contexts/theme';
-import useOutsideClick from '../../../hooks/useOutsideClick';
-import TextareaContainer from './TextareaContainer';
-import TextareaAdornmentContainer from './TextareaAdornmentContainer';
-import TextareaFieldset from './TextareaFieldset';
-import TextareaLabel from './TextareaLabel';
-import TextareaLegend from './TextareaLegend';
+import TextAreaFieldset from './TextAreaFieldset';
+import TextAreaLabel from './TextAreaLabel';
+import TextAreaLegend from './TextAreaLegend';
 
-export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: InputVariants;
   color?: Colors;
   valid?: boolean;
@@ -33,25 +25,18 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  startAdornmentContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   fieldsetProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
-  endAdornmentContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
-  textareaRef?: MutableRefObject<HTMLTextAreaElement> | null;
+  textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
 }
 
-interface TextareaRefs {
-  container: HTMLDivElement | null;
-  textarea: HTMLTextAreaElement | null;
-}
-
-const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, ref) => {
+const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((props, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = textareaConfig.styles.textarea;
+  const styles = textAreaConfig.styles.textArea;
   const {
     variant,
     color,
@@ -61,75 +46,25 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, ref) => {
     startAdornment,
     endAdornment,
     containerProps,
-    startAdornmentContainerProps,
     fieldsetProps,
-    endAdornmentContainerProps,
     legendProps,
     labelProps,
-    textareaRef,
-    onFocus,
-    autoFocus,
+    textAreaRef,
     disabled,
     value,
     className,
     ...restProps
-  } = { ...textareaConfig.defaultProps, ...props };
+  } = { ...textAreaConfig.defaultProps, ...props };
 
   /* --- Set refs --- */
-  const componentsRef = useRef<TextareaRefs>({ container: null, textarea: null });
-
-  /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentsRef.current.container, []);
-
-  /* --- Set states --- */
-  const [isFocused, setIsFocused] = useState(!disabled && autoFocus);
-
-  /* --- Set outside click action --- */
-  const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isClickedInside = componentsRef.current.container?.contains(event.target as Node) ?? false;
-
-    if (isClickedInside) {
-      componentsRef.current.textarea?.focus();
-    } else {
-      setIsFocused(false);
-    }
-  }, []);
-
-  useOutsideClick(outsideClickHandler, !disabled);
-
-  /* -- Set autofocus state --- */
-  useEffect(() => {
-    if (autoFocus && !disabled) {
-      setIsFocused(true);
-    }
-  }, [autoFocus, disabled]);
-
-  /* -- Set disabled state --- */
-  useEffect(() => {
-    if (disabled) {
-      setIsFocused(false);
-    }
-  }, [disabled]);
-
-  /* --- Set container props --- */
-  const setContainerRef = (element: HTMLDivElement): void => {
-    componentsRef.current.container = element;
-  };
+  const componentRef = useRef<HTMLTextAreaElement | null>(null);
 
   /* --- Set props --- */
-  const focusHandler = (event: FocusEvent<HTMLTextAreaElement>): void => {
-    setIsFocused(true);
+  const setTextAreaRef = (element: HTMLTextAreaElement): void => {
+    componentRef.current = element;
 
-    if (onFocus !== undefined) {
-      onFocus(event);
-    }
-  };
-
-  const setTextareaRef = (element: HTMLTextAreaElement): void => {
-    componentsRef.current.textarea = element;
-
-    if (textareaRef !== undefined && textareaRef !== null) {
-      textareaRef.current = element;
+    if (textAreaRef !== undefined && textAreaRef !== null) {
+      textAreaRef.current = element;
     }
   };
 
@@ -146,7 +81,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, ref) => {
 
   if (labelNode !== undefined) {
     labelNode = (
-      <TextareaLabel
+      <TextAreaLabel
         variant={variant}
         color={color}
         valid={valid}
@@ -154,7 +89,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, ref) => {
         {...labelProps}
       >
         {label}
-      </TextareaLabel>
+      </TextAreaLabel>
     );
   }
 
@@ -162,60 +97,32 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, ref) => {
   let legendNode: ReactNode;
 
   if (labelNode !== undefined && variant === 'outlined') {
-    legendNode = <TextareaLegend {...legendProps}>{label}</TextareaLegend>;
+    legendNode = <TextAreaLegend {...legendProps}>{label}</TextAreaLegend>;
   }
 
   return (
-    <TextareaContainer
-      open={isFocused}
-      value={value}
-      ref={setContainerRef}
-      {...containerProps}
+    <TextAreaFieldset
+      variant={variant}
+      color={color}
+      valid={valid}
+      invalid={invalid}
+      textAreaRef={componentRef}
+      disabled={disabled}
+      {...fieldsetProps}
     >
-      <TextareaAdornmentContainer
-        position="start"
-        variant={variant}
-        color={color}
-        valid={valid}
-        invalid={invalid}
-        {...startAdornmentContainerProps}
-      >
-        {startAdornment}
-      </TextareaAdornmentContainer>
-      <TextareaFieldset
-        variant={variant}
-        color={color}
-        valid={valid}
-        invalid={invalid}
+      <textarea
         disabled={disabled}
-        {...fieldsetProps}
-      >
-        <textarea
-          onFocus={focusHandler}
-          autoFocus={autoFocus}
-          disabled={disabled}
-          value={value}
-          className={mergedClassName}
-          ref={setTextareaRef}
-          {...restProps}
-        />
-        {labelNode}
-        {legendNode}
-      </TextareaFieldset>
-      <TextareaAdornmentContainer
-        position="end"
-        variant={variant}
-        color={color}
-        valid={valid}
-        invalid={invalid}
-        {...startAdornmentContainerProps}
-      >
-        {endAdornment}
-      </TextareaAdornmentContainer>
-    </TextareaContainer>
+        value={value}
+        className={mergedClassName}
+        ref={setTextAreaRef}
+        {...restProps}
+      />
+      {labelNode}
+      {legendNode}
+    </TextAreaFieldset>
   );
 });
 
-Textarea.displayName = 'Textarea';
+TextArea.displayName = 'TextArea';
 
-export default Textarea;
+export default TextArea;

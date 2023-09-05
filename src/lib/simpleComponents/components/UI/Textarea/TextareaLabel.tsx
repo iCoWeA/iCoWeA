@@ -1,21 +1,21 @@
 import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
 import themeContext from '../../../contexts/theme';
-import textareaConfig from '../../../configs/textareaConfig';
+import textAreaConfig from '../../../configs/textAreaConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
-interface TextareaLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+interface TextAreaLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   variant: InputVariants;
   color: Colors;
   valid: boolean;
   invalid: boolean;
 }
 
-const TextareaLabel = forwardRef<HTMLLabelElement, TextareaLabelProps>(({ variant, color, valid, invalid, className, ...restProps }, ref) => {
+const TextAreaLabel = forwardRef<HTMLLabelElement, TextAreaLabelProps>(({ variant, color, valid, invalid, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = textareaConfig.styles.label;
+  const styles = textAreaConfig.styles.label;
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
@@ -36,6 +36,6 @@ const TextareaLabel = forwardRef<HTMLLabelElement, TextareaLabelProps>(({ varian
   );
 });
 
-TextareaLabel.displayName = 'TextareaLabel';
+TextAreaLabel.displayName = 'TextAreaLabel';
 
-export default TextareaLabel;
+export default TextAreaLabel;

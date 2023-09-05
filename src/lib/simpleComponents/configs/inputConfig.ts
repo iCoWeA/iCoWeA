@@ -19,7 +19,6 @@ export interface InputConfig {
     container: {
       base: Record<string, string>;
       shift: Record<string, string>;
-      variants: Record<InputVariants, Record<string, string>>;
       colors: Record<string, Record<string, string>>;
       disabled: Record<string, string>;
       disabledColors: Record<string, Record<string, string>>;
@@ -80,25 +79,15 @@ const inputConfig: InputConfig = {
     container: {
       base: {
         display: 'flex',
+        height: 'h-fit',
         width: 'w-full',
+        borderRadius: 'rounded-t-2xl',
         transition: 'transition-colors',
         focus: 'focus:outline-0',
         group: 'group'
       },
       shift: {
         group: 'shift'
-      },
-      variants: {
-        standard: {
-          height: 'h-10'
-        },
-        filled: {
-          height: 'h-14',
-          borderRadius: 'rounded-t-2xl'
-        },
-        outlined: {
-          height: 'h-10'
-        }
       },
       colors: {
         default: {
@@ -127,44 +116,41 @@ const inputConfig: InputConfig = {
         userSelect: 'select-none'
       },
       leftGap: {
-        padding: 'pl-3'
+        padding: 'pl-3',
+        group: 'group-focus-within:pl-3'
       },
       rightGap: {
-        padding: 'pr-3'
+        padding: 'pr-3',
+        group: 'group-focus-within:pr-3'
       },
       start: {
-        margin: 'mr-0',
-        padding: 'pl-4',
+        padding: 'pr-0',
         border: 'border-r-0',
         borderRadius: 'rounded-r-none',
         group: 'group-focus-within:border-r-0'
       },
       end: {
-        margin: 'ml-0',
-        padding: 'pr-4',
+        padding: 'px-4 pl-0',
         border: 'border-l-0',
         borderRadius: 'rounded-l-none',
         group: 'group-focus-within:border-l-0'
       },
       variants: {
         standard: {
-          margin: 'mb-px',
-          padding: 'pt-0.5',
+          padding: 'pt-0.5 pb-px px-4',
           border: 'border-b',
-          group: 'group-focus-within:mb-0 group-focus-within:border-b-2'
+          group: 'group-focus-within:pb-0 group-focus-within:border-b-2'
         },
         filled: {
-          margin: 'mb-px',
-          padding: 'pt-[1.125rem]',
+          padding: 'pt-[1.125rem] pb-px px-4',
           border: 'border-b',
-          group: 'group-focus-within:mb-0 group-focus-within:border-b-2'
+          group: 'group-focus-within:pb-0 group-focus-within:border-b-2'
         },
         outlined: {
-          margin: 'm-px',
-          padding: 'py-0',
+          padding: 'py-px px-[0.9375rem]',
           border: 'border',
           borderRadius: 'rounded-2xl',
-          group: 'group-focus-within:m-0 group-focus-within:border-2'
+          group: 'group-focus-within:py-0 group-focus-within:px-3.5 group-focus-within:border-2'
         }
       },
       valid: {
@@ -220,7 +206,6 @@ const inputConfig: InputConfig = {
       base: {
         position: 'relative',
         display: 'flex',
-        alignItems: 'items-center',
         width: 'w-full',
         transition: 'transition-colors',
         pointer: 'pointer-events-none',
@@ -228,22 +213,19 @@ const inputConfig: InputConfig = {
       },
       variants: {
         standard: {
-          margin: 'mb-px',
-          padding: 'pt-0.5',
+          padding: 'pt-2 pb-[0.4375rem]',
           border: 'border-b',
-          group: 'group-focus-within:mb-0 group-focus-within:border-b-2'
+          group: 'group-focus-within:pb-1.5 group-focus-within:border-b-2'
         },
         filled: {
-          margin: 'mb-px',
-          padding: 'pt-[1.125rem]',
+          padding: 'pt-6 pb-[0.4375rem]',
           border: 'border-b',
-          group: 'group-focus-within:mb-0 group-focus-within:border-b-2'
+          group: 'group-focus-within:pb-1.5 group-focus-within:border-b-2'
         },
         outlined: {
-          margin: 'my-px',
-          padding: 'pt-0',
+          padding: 'py-[0.4375rem]',
           border: 'border-y',
-          group: 'group-focus-within:my-0 group-focus-within:border-y-2'
+          group: 'group-focus-within:py-1.5 group-focus-within:border-y-2'
         }
       },
       valid: {
@@ -298,6 +280,7 @@ const inputConfig: InputConfig = {
     input: {
       base: {
         display: 'block',
+        height: 'h-6',
         width: 'w-full',
         font: 'antialiased font-normal text-base font-sans',
         background: 'bg-transparent',
@@ -381,7 +364,7 @@ const inputConfig: InputConfig = {
           group: 'group-[.shift]:top-0.5 group-focus-within:top-0.5'
         },
         outlined: {
-          top: 'top-1.5',
+          top: 'top-[0.4375rem]',
           group: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4 group-focus-within:-top-px group-focus-within:-translate-y-2/4'
         }
       },

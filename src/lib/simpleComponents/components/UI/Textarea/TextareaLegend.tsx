@@ -1,12 +1,12 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
-import textareaConfig from '../../../configs/textareaConfig';
+import textAreaConfig from '../../../configs/textAreaConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
-interface TextareaLegendProps extends BaseHTMLAttributes<HTMLLegendElement> {}
+interface TextAreaLegendProps extends BaseHTMLAttributes<HTMLLegendElement> {}
 
-const TextareaLegend = forwardRef<HTMLLegendElement, TextareaLegendProps>(({ className, ...restProps }, ref) => {
+const TextAreaLegend = forwardRef<HTMLLegendElement, TextAreaLegendProps>(({ className, ...restProps }, ref) => {
   /* --- Set default props --- */
-  const styles = textareaConfig.styles.legend;
+  const styles = textAreaConfig.styles.legend;
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, className);
@@ -20,6 +20,6 @@ const TextareaLegend = forwardRef<HTMLLegendElement, TextareaLegendProps>(({ cla
   );
 });
 
-TextareaLegend.displayName = 'TextareaLegend';
+TextAreaLegend.displayName = 'TextAreaLegend';
 
-export default TextareaLegend;
+export default TextAreaLegend;

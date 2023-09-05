@@ -29,7 +29,6 @@ const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(({ varian
   const mergedClassName = mergeClasses(
     styles.base,
     shift && styles.shift,
-    styles.variants[variant],
     variant === 'filled' && styles.colors[theme],
     disabled && styles.disabled,
     disabled && styles.disabledColors[theme],
