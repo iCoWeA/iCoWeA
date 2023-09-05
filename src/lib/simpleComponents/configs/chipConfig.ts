@@ -52,8 +52,7 @@ const chipConfig: ChipConfig = {
         alignItems: 'items-center',
         height: 'h-fit',
         width: 'w-fit',
-        borderRadius: 'rounded-2xl',
-        focus: 'focus:outline-0'
+        borderRadius: 'rounded-2xl'
       },
       invisible: {
         display: 'hidden'
@@ -210,8 +209,7 @@ const chipConfig: ChipConfig = {
         flexDirection: 'flex-col',
         gap: 'gap-2',
         padding: 'py-0.5 pr-0.5',
-        font: 'antialiased font-bold text-xs font-sans',
-        focus: 'focus:outline-0'
+        font: 'antialiased font-bold text-xs font-sans'
       }
     },
     buttonContainer: {
@@ -220,8 +218,7 @@ const chipConfig: ChipConfig = {
         gap: 'gap-1.5',
         alignItems: 'items-center',
         margin: 'ml-auto',
-        padding: 'pl-1',
-        focus: 'focus:outline-0'
+        padding: 'pl-1'
       }
     },
     button: {

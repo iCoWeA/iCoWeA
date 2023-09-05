@@ -27,8 +27,7 @@ const avatarConfig: AvatarConfig = {
     base: {
       display: 'inline-block',
       width: 'max-w-none',
-      aspectRatio: 'aspect-square',
-      focus: 'focus:outline-0'
+      aspectRatio: 'aspect-square'
     },
     withBorder: {
       default: {

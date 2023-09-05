@@ -22,8 +22,7 @@ const cardBodyConfig: CardBodyConfig = {
       gap: 'gap-4',
       height: 'h-full',
       width: 'w-full',
-      padding: 'p-4',
-      focus: 'focus:outline-0'
+      padding: 'p-4'
     },
     columns: {
       display: 'grid',

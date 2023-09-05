@@ -21,8 +21,7 @@ const iconConfig: IconConfig = {
   },
   styles: {
     base: {
-      display: 'inline-block',
-      focus: 'focus:outline-0'
+      display: 'inline-block'
     },
     sizes: {
       xs: {

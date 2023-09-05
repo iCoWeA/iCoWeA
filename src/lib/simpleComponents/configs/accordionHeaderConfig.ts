@@ -99,8 +99,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         gap: 'gap-3',
         alignItems: 'items-center',
         margin: 'ml-auto',
-        transition: 'transition-transform',
-        focus: 'focus:outline-0'
+        transition: 'transition-transform'
       },
       open: {
         transform: 'rotate-180'

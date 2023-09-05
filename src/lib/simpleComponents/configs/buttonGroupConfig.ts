@@ -38,8 +38,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
       base: {
         display: 'flex',
         height: 'h-fit',
-        width: 'w-fit',
-        focus: 'focus:outline-0'
+        width: 'w-fit'
       },
       fullwidth: {
         width: 'w-full'

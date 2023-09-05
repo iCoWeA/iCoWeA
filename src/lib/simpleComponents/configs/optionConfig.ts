@@ -41,8 +41,7 @@ const optionConfig: OptionConfig = {
         gap: 'gap-3',
         alignItems: 'items-center',
         height: 'h-full',
-        width: 'w-full',
-        focus: 'focus:outline-0'
+        width: 'w-full'
       }
     },
     button: {

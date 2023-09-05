@@ -18,8 +18,7 @@ const accordionConfig: AccordionConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      width: 'w-full',
-      focus: 'focus:outline-0'
+      width: 'w-full'
     },
     disabled: {
       opacity: 'opacity-50',

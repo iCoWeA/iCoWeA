@@ -17,8 +17,7 @@ const formGroupConfig: FormGroupConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       gap: 'gap-4',
-      width: 'w-full',
-      focus: 'focus:outline-0'
+      width: 'w-full'
     },
     row: {
       flexDirection: 'flex-row'

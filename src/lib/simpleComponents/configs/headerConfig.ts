@@ -18,8 +18,7 @@ const headerConfig: HeaderConfig = {
       gap: 'gap-6',
       alignItems: 'items-center',
       width: 'w-full',
-      padding: 'py-2',
-      focus: 'focus:outline-0'
+      padding: 'py-2'
     },
     colors: {
       default: {

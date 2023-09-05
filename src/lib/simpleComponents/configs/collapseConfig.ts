@@ -25,8 +25,7 @@ const collapseConfig: CollapseConfig = {
     base: {
       display: 'block',
       overflow: 'overflow-hidden',
-      transition: 'transition-[height]',
-      focus: 'focus:outline-0'
+      transition: 'transition-[height]'
     }
   }
 };

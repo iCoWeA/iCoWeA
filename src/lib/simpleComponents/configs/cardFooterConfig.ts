@@ -21,8 +21,7 @@ const cardFooterConfig: CardFooterConfig = {
       flexDirection: 'flex-col',
       gap: 'gap-4',
       width: 'w-full',
-      padding: 'pb-4 px-4',
-      focus: 'focus:outline-0'
+      padding: 'pb-4 px-4'
     },
     columns: {
       display: 'grid',

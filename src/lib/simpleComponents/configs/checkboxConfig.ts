@@ -47,8 +47,7 @@ const checkboxConfig: CheckboxConfig = {
         position: 'relative',
         display: 'inline-block',
         width: 'w-10',
-        aspectRatio: 'aspect-square',
-        focus: 'focus:outline-0'
+        aspectRatio: 'aspect-square'
       }
     },
     input: {
@@ -158,8 +157,7 @@ const checkboxConfig: CheckboxConfig = {
         padding: 'p-0.5',
         fill: 'fill-transparent',
         pointer: 'pointer-events-none',
-        userSelect: 'select-none',
-        focus: 'focus:outline-0'
+        userSelect: 'select-none'
       },
       colors: {
         default: {

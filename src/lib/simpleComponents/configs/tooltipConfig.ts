@@ -54,8 +54,7 @@ const tooltipConfig: TooltipConfig = {
         padding: 'py-1.5 px-3',
         borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-sm font-sans',
-        transition: 'transition-[opacity]',
-        focus: 'focus:outline-0'
+        transition: 'transition-[opacity]'
       },
       colors: {
         default: {
@@ -108,8 +107,7 @@ const tooltipConfig: TooltipConfig = {
         display: 'block',
         height: 'h-0',
         width: 'w-0',
-        border: 'border-l-[0.25rem] border-l-transparent border-r-[0.25rem] border-r-transparent border-b-[0.5rem]',
-        focus: 'focus:outline-0'
+        border: 'border-l-[0.25rem] border-l-transparent border-r-[0.25rem] border-r-transparent border-b-[0.5rem]'
       },
       colors: {
         default: {

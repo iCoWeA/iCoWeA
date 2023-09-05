@@ -31,8 +31,7 @@ const typographyConfig: TypographyConfig = {
   },
   styles: {
     base: {
-      font: 'antialiased font-normal font-sans',
-      focus: 'focus:outline-0'
+      font: 'antialiased font-normal font-sans'
     },
     aligns: {
       start: {

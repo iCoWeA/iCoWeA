@@ -21,8 +21,7 @@ const cardHeaderConfig: CardHeaderConfig = {
       flexDirection: 'flex-col',
       gap: 'gap-4',
       width: 'w-full',
-      padding: 'pt-4 px-4',
-      focus: 'focus:outline-0'
+      padding: 'pt-4 px-4'
     },
     columns: {
       display: 'grid',

@@ -34,8 +34,7 @@ const progressConfig: ProgressConfig = {
       base: {
         display: 'flex',
         width: 'w-full',
-        borderRadius: 'rounded-full',
-        focus: 'focus:outline-0'
+        borderRadius: 'rounded-full'
       },
       sizes: {
         default: {
@@ -77,8 +76,7 @@ const progressConfig: ProgressConfig = {
         borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-xs font-sans',
         transition: 'transition-all',
-        textOverflow: 'text-clip',
-        focus: 'focus:outline-0'
+        textOverflow: 'text-clip'
       },
       colors: {
         default: {

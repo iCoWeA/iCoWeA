@@ -39,8 +39,7 @@ const badgeConfig: BadgeConfig = {
       width: 'min-w-[8px]',
       padding: 'p-1',
       borderRadius: 'rounded-full',
-      font: 'antialiased font-normal text-xs font-sans',
-      focus: 'focus:outline-0'
+      font: 'antialiased font-normal text-xs font-sans'
     },
     invisible: {
       display: 'hidden'

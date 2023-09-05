@@ -38,8 +38,7 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
         flexWrap: 'flex-wrap',
         gap: 'gap-3',
         alignItems: 'items-center',
-        width: 'w-fit',
-        focus: 'focus:outline-0'
+        width: 'w-fit'
       },
       fullwidth: {
         width: 'w-full',
@@ -51,16 +50,14 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
         display: 'flex',
         gap: 'gap-3',
         alignItems: 'items-center',
-        font: 'antialiased font-normal text-base font-sans',
-        focus: 'focus:outline-0'
+        font: 'antialiased font-normal text-base font-sans'
       }
     },
     separator: {
       base: {
         display: 'block',
         font: 'antialiased font-normal text-sm font-sans',
-        userSelect: 'select-none',
-        focus: 'focus:outline-0'
+        userSelect: 'select-none'
       },
       colors: {
         default: {

@@ -42,8 +42,7 @@ const popoverConfig: PopoverConfig = {
       position: 'absolute',
       zIndex: 'z-90',
       display: 'block',
-      transition: 'transition-[opacity]',
-      focus: 'focus:outline-0'
+      transition: 'transition-[opacity]'
     }
   }
 };

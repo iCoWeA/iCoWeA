@@ -21,8 +21,7 @@ const listItemConfig: ListItemConfig = {
       gap: 'gap-3',
       alignItems: 'items-center',
       width: 'w-full',
-      font: 'antialiased font-normal text-base font-sans',
-      focus: 'focus:outline-0'
+      font: 'antialiased font-normal text-base font-sans'
     },
     sizes: {
       sm: {

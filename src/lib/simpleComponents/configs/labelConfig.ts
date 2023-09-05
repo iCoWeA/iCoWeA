@@ -15,8 +15,7 @@ const labelConfig: LabelConfig = {
   styles: {
     base: {
       display: 'inline-block',
-      font: 'antialiased font-normal text-base font-sans',
-      focus: 'focus:outline-0'
+      font: 'antialiased font-normal text-base font-sans'
     },
     colors: {
       default: {

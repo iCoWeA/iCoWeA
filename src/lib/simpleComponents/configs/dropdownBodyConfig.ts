@@ -22,8 +22,7 @@ const dropdownBodyConfig: DropdownBodyConfig = {
       gap: 'gap-2',
       height: 'h-full',
       width: 'w-full',
-      padding: 'p-2',
-      focus: 'focus:outline-0'
+      padding: 'p-2'
     },
     columns: {
       display: 'grid',

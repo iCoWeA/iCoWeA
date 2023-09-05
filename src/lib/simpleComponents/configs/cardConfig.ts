@@ -20,8 +20,7 @@ const cardConfig: CardConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       borderRadius: 'rounded-2xl',
-      overflow: 'overflow-hidden',
-      focus: 'focus:outline-0'
+      overflow: 'overflow-hidden'
     },
     elevated: {
       default: {

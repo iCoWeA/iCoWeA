@@ -16,8 +16,7 @@ const formConfig: FormConfig = {
     base: {
       display: 'grid',
       gap: 'gap-6',
-      width: 'w-full',
-      focus: 'focus:outline-0'
+      width: 'w-full'
     },
     columns: {
       gridTemplateColumns: 'grid-cols-4',

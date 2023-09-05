@@ -16,7 +16,6 @@ const containerConfig: ContainerConfig = {
   },
   styles: {
     base: {
-      focus: 'focus:outline-0'
     },
     variants: {
       flex: {

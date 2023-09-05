@@ -19,8 +19,7 @@ const listConfig: ListConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      gap: 'gap-2',
-      focus: 'focus:outline-0'
+      gap: 'gap-2'
     },
     row: {
       flexDirection: 'flex-row'

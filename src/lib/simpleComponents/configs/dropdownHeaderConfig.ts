@@ -21,8 +21,7 @@ const dropdownHeaderConfig: DropdownHeaderConfig = {
       flexDirection: 'flex-col',
       gap: 'gap-2',
       width: 'w-full',
-      padding: 'pt-2 px-2',
-      focus: 'focus:outline-0'
+      padding: 'pt-2 px-2'
     },
     columns: {
       display: 'grid',

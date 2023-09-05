@@ -54,8 +54,7 @@ const alertConfig: AlertConfig = {
         alignItems: 'items-start',
         width: 'w-full',
         padding: 'p-2',
-        borderRadius: 'rounded-2xl',
-        focus: 'focus:outline-0'
+        borderRadius: 'rounded-2xl'
       },
       invisible: {
         display: 'hidden'
@@ -200,8 +199,7 @@ const alertConfig: AlertConfig = {
         display: 'flex',
         gap: 'gap-3',
         alignItems: 'items-center',
-        padding: 'py-2 pl-2 pr-1',
-        focus: 'focus:outline-0'
+        padding: 'py-2 pl-2 pr-1'
       }
     },
     bodyContainer: {
@@ -209,8 +207,7 @@ const alertConfig: AlertConfig = {
         display: 'flex',
         flexDirection: 'flex-col',
         gap: 'gap-4',
-        padding: 'p-2',
-        focus: 'focus:outline-0'
+        padding: 'p-2'
       }
     },
     buttonContainer: {
@@ -219,8 +216,7 @@ const alertConfig: AlertConfig = {
         gap: 'gap-3',
         alignItems: 'items-center',
         margin: 'ml-auto',
-        padding: 'pl-1',
-        focus: 'focus:outline-0'
+        padding: 'pl-1'
       }
     },
     button: {
