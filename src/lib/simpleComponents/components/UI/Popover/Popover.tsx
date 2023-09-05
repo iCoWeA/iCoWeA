@@ -235,12 +235,11 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   };
 
   const mergedStyle = {
-    opacity: `${transitionState.entering ? 100 : 0}`,
     transitionDuration: `${transitionState.entering ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`,
     ...style
   };
 
-  const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
+  const mergedClassName = mergeClasses(styles.base, transitionState.entering && styles.open, className, transitionClassName);
 
   let node = (
     <div
