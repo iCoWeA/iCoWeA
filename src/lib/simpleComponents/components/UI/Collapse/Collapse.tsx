@@ -73,8 +73,8 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const mergedStyle = {
-    height: `${open ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
-    transitionDuration: `${open ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`,
+    height: `${transitionState.entering ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
+    transitionDuration: `${transitionState.entering ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`,
     ...style
   };
 
