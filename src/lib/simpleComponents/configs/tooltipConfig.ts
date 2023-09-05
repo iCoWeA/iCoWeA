@@ -19,6 +19,7 @@ export interface TooltipConfig {
   styles: {
     container: {
       base: Record<string, string>;
+      open: Record<string, string>;
       colors: Record<string, Record<Colors, Record<string, string>>>
     },
     arrow: {
@@ -54,7 +55,11 @@ const tooltipConfig: TooltipConfig = {
         padding: 'py-1.5 px-3',
         borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-sm font-sans',
+        opacity: 'opacity-0',
         transition: 'transition-[opacity]'
+      },
+      open: {
+        opacity: 'opacity-100'
       },
       colors: {
         default: {

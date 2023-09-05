@@ -17,6 +17,7 @@ export interface PopoverConfig {
   };
   styles: {
     base: Record<string, string>;
+    open: Record<string, string>;
   }
 }
 
@@ -42,7 +43,11 @@ const popoverConfig: PopoverConfig = {
       position: 'absolute',
       zIndex: 'z-90',
       display: 'block',
+      opacity: 'opacity-0',
       transition: 'transition-[opacity]'
+    },
+    open: {
+      opacity: 'opacity-100'
     }
   }
 };
