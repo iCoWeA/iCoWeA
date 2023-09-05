@@ -33,7 +33,7 @@ const drawerConfig: DrawerConfig = {
   styles: {
     base: {
       position: 'fixed',
-      zIndex: 'z-70',
+      zIndex: 'z-60',
       display: 'flex',
       flexDirection: 'flex-col',
       transition: 'transition-[transform]'
