@@ -1,18 +1,24 @@
-import React, { forwardRef, type BaseHTMLAttributes, type TransitionEvent, type AnimationEvent, useRef, useImperativeHandle, useEffect } from 'react';
-import useTransition, { type TransitionConfig, TransitionStates } from '../../../hooks/useTransition';
-import collapseConfig from '../../../configs/collapseConfig';
+import React, { type BaseHTMLAttributes, forwardRef, useEffect, type TransitionEvent, type AnimationEvent, useRef, useImperativeHandle } from 'react';
+import modalConfig from '../../../configs/modalConfig';
+import useTransition, { TransitionStates, type TransitionConfig } from '../../../hooks/useTransition';
+import { type BackdropProps } from '../Backdrop/Backdrop';
+import ModalBackdrop from './ModalBackdrop';
 import { mergeClasses } from '../../../utils/propsHelper';
+import { createPortal } from 'react-dom';
 
-export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
+  onClose?: () => void;
   open?: boolean;
-  unmountOnExit?: boolean;
+  lockScroll?: boolean;
   transitionConfig?: TransitionConfig;
+  overlayRef?: Element | null;
+  backdropProps?: BackdropProps;
 }
 
-const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
+const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   /* --- Set default props --- */
-  const { defaultProps, styles } = collapseConfig;
-  const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = {
+  const { defaultProps, styles } = modalConfig;
+  const { onClose, open, lockScroll, transitionConfig, overlayRef, backdropProps, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = {
     ...defaultProps,
     ...props
   };
@@ -38,10 +44,24 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     }
   }, [open, transitionState.enter, transitionState.exit]);
 
+  /* --- Set lockScroll state --- */
+  useEffect(() => {
+    if (lockScroll) {
+      if (transitionState.current === TransitionStates.EXITED) {
+        document.body.style.overflow = 'auto';
+      } else {
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  }, [lockScroll, transitionState.entering]);
+
   /* --- Unmount --- */
-  if (unmountOnExit && transitionState.current === TransitionStates.EXITED && !open) {
+  if (transitionState.current === TransitionStates.EXITED && !open) {
     return <></>;
   }
+
+  /* --- Set backdrop props --- */
+  const mergedBackdropProps = { ...defaultProps.backdropProps, ...backdropProps };
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
@@ -73,14 +93,13 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const mergedStyle = {
-    height: `${transitionState.entering ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
     transitionDuration: `${transitionState.entering ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`,
     ...style
   };
 
-  const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
+  const mergedClassName = mergeClasses(styles.base, transitionState.entering && styles.open, className, transitionClassName);
 
-  return (
+  let node = (
     <div
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
@@ -90,8 +109,25 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
       {...restProps}
     />
   );
+
+  if (overlayRef !== null) {
+    node = createPortal(node, overlayRef);
+  }
+
+  return (
+    <>
+      <ModalBackdrop
+        onClose={onClose}
+        transitionState={transitionState}
+        enterDuration={mergedTransitionConfig.enterDuration}
+        exitDuration={mergedTransitionConfig.exitDuration}
+        {...mergedBackdropProps}
+      />
+      {node}
+    </>
+  );
 });
 
-Collapse.displayName = 'Collapse';
+Modal.displayName = 'Modal';
 
-export default Collapse;
+export default Modal;
