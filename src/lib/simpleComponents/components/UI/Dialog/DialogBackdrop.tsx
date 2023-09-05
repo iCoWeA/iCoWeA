@@ -1,19 +1,19 @@
 import React, { forwardRef } from 'react';
 import { type TransitionState } from '../../../hooks/useTransition';
-import modalConfig from '../../../configs/modalConfig';
+import dialogConfig from '../../../configs/dialogConfig';
 import Backdrop, { type BackdropProps } from '../Backdrop/Backdrop';
 import { mergeClasses } from '../../../utils/propsHelper';
 
-interface DrawerBackdropProps extends BackdropProps {
+interface DialogBackdropProps extends BackdropProps {
   transitionState: TransitionState;
   enterDuration: number;
   exitDuration: number;
 }
 
-const DrawerBackdrop = forwardRef<HTMLDivElement, DrawerBackdropProps>(
+const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(
   ({ transitionState, enterDuration, exitDuration, style, className, ...restProps }, ref) => {
     /* --- Set default props --- */
-    const styles = modalConfig.styles.backdrop;
+    const styles = dialogConfig.styles.backdrop;
 
     /* --- Set props --- */
     const mergedStyle = {
@@ -35,6 +35,6 @@ const DrawerBackdrop = forwardRef<HTMLDivElement, DrawerBackdropProps>(
   }
 );
 
-DrawerBackdrop.displayName = 'DrawerBackdrop';
+DialogBackdrop.displayName = 'DialogBackdrop';
 
-export default DrawerBackdrop;
+export default DialogBackdrop;

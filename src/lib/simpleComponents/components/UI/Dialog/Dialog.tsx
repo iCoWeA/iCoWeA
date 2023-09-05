@@ -1,13 +1,25 @@
-import React, { type BaseHTMLAttributes, forwardRef, useEffect, type TransitionEvent, type AnimationEvent, useRef, useImperativeHandle } from 'react';
+import React, {
+  type BaseHTMLAttributes,
+  forwardRef,
+  useEffect,
+  type TransitionEvent,
+  type AnimationEvent,
+  useRef,
+  useImperativeHandle,
+  useContext
+} from 'react';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../../hooks/useTransition';
 import { type BackdropProps } from '../Backdrop/Backdrop';
-import modalConfig from '../../../configs/modalConfig';
+import dialogConfig from '../../../configs/dialogConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 import { createPortal } from 'react-dom';
-import ModalBackdrop from './ModalBackdrop';
+import DialogBackdrop from './DialogBackdrop';
+import themeContext from '../../../contexts/theme';
 
-export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface DialogProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
+  color?: Colors;
+  elevated?: boolean;
   open?: boolean;
   lockScroll?: boolean;
   transitionConfig?: TransitionConfig;
@@ -15,14 +27,31 @@ export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
   backdropProps?: BackdropProps;
 }
 
-const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
+const Dialog = forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
-  const styles = modalConfig.styles.modal;
-  const { onClose, open, lockScroll, transitionConfig, overlayRef, backdropProps, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = {
-    ...modalConfig.defaultProps,
+  const styles = dialogConfig.styles.dialog;
+  const {
+    onClose,
+    open,
+    color,
+    elevated,
+    lockScroll,
+    transitionConfig,
+    overlayRef,
+    backdropProps,
+    onTransitionEnd,
+    onAnimationEnd,
+    style,
+    className,
+    ...restProps
+  } = {
+    ...dialogConfig.defaultProps,
     ...props
   };
-  const mergedTransitionConfig = { ...modalConfig.defaultProps.transitionConfig, ...transitionConfig };
+  const mergedTransitionConfig = { ...dialogConfig.defaultProps.transitionConfig, ...transitionConfig };
 
   /* --- Set refs --- */
   const componentRef = useRef<HTMLDivElement>(null);
@@ -61,7 +90,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   }
 
   /* --- Set backdrop props --- */
-  const mergedBackdropProps = { ...modalConfig.defaultProps.backdropProps, ...backdropProps };
+  const mergedBackdropProps = { ...dialogConfig.defaultProps.backdropProps, ...backdropProps };
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
@@ -97,7 +126,14 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
     ...style
   };
 
-  const mergedClassName = mergeClasses(styles.base, transitionState.entering && styles.open, className, transitionClassName);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.colors[theme][color],
+    elevated && styles.elevated[theme],
+    transitionState.entering && styles.open,
+    className,
+    transitionClassName
+  );
 
   let node = (
     <div
@@ -116,7 +152,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
 
   return (
     <>
-      <ModalBackdrop
+      <DialogBackdrop
         onClose={onClose}
         transitionState={transitionState}
         enterDuration={mergedTransitionConfig.enterDuration}
@@ -128,6 +164,6 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   );
 });
 
-Modal.displayName = 'Modal';
+Dialog.displayName = 'Dialog';
 
-export default Modal;
+export default Dialog;
