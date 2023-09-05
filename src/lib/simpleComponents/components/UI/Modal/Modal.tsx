@@ -1,10 +1,10 @@
 import React, { type BaseHTMLAttributes, forwardRef, useEffect, type TransitionEvent, type AnimationEvent, useRef, useImperativeHandle } from 'react';
-import modalConfig from '../../../configs/modalConfig';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../../hooks/useTransition';
 import { type BackdropProps } from '../Backdrop/Backdrop';
-import ModalBackdrop from './ModalBackdrop';
+import modalConfig from '../../../configs/modalConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 import { createPortal } from 'react-dom';
+import ModalBackdrop from './ModalBackdrop';
 
 export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
@@ -53,7 +53,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
         document.body.style.overflow = 'hidden';
       }
     }
-  }, [lockScroll, transitionState.entering]);
+  }, [lockScroll, transitionState.current]);
 
   /* --- Unmount --- */
   if (transitionState.current === TransitionStates.EXITED && !open) {

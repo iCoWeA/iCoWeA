@@ -12,9 +12,9 @@ import drawerConfig, { type DrawerPositions } from '../../../configs/drawerConfi
 import useTransition, { TransitionStates, type TransitionConfig } from '../../../hooks/useTransition';
 import { type BackdropProps } from '../Backdrop/Backdrop';
 import themeContext from '../../../contexts/theme';
-import DrawerBackdrop from './DrawerBackdrop';
 import { mergeClasses } from '../../../utils/propsHelper';
 import { createPortal } from 'react-dom';
+import DrawerBackdrop from './DrawerBackdrop';
 
 export interface DrawerProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
@@ -82,7 +82,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
         document.body.style.overflow = 'hidden';
       }
     }
-  }, [lockScroll, transitionState.entering]);
+  }, [lockScroll, transitionState.current]);
 
   /* --- Unmount --- */
   if (transitionState.current === TransitionStates.EXITED && !open) {

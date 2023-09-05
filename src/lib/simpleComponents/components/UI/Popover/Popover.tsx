@@ -146,7 +146,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
         document.body.style.overflow = 'hidden';
       }
     }
-  }, [lockScroll, transitionState.entering]);
+  }, [lockScroll, transitionState.current]);
 
   /* --- Set handler props --- */
   let handlerNode: ReactNode;
