@@ -8,13 +8,15 @@ import React, {
   useEffect,
   useCallback,
   type ReactElement,
-  type ReactNode
+  type ReactNode,
+  useState
 } from 'react';
 import useTransition, { TransitionStates, type TransitionConfig } from '../../../hooks/useTransition';
 import { type BackdropProps } from '../Backdrop/Backdrop';
 import popoverConfig from '../../../configs/popoverConfig';
-import { setElementPosition } from '../../../utils/positiontHelper';
+import usePrevious from '../../../hooks/usePrevious';
 import useOutsideClick from '../../../hooks/useOutsideClick';
+import { setElementPosition } from '../../../utils/positiontHelper';
 import useScroll from '../../../hooks/useScroll';
 import useResize from '../../../hooks/useResize';
 import PopoverHandler from './PopoverHandler';
@@ -60,7 +62,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     onAnimationEnd,
     style,
     className,
-    children,
     ...restProps
   } = { ...popoverConfig.defaultProps, ...props };
   const mergedTransitionConfig = { ...popoverConfig.defaultProps.transitionConfig, ...transitionConfig };
@@ -72,25 +73,45 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentsRef.current.container, []);
 
   /* --- Set states --- */
+  const [isOpen, setIsOpen] = useState(false);
   const { state: transitionState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
+
+  /* --- Set previous values  --- */
+  const prevOpen = usePrevious(open);
+
+  useEffect(() => {
+    if (prevOpen !== undefined && open === undefined) {
+      setIsOpen(prevOpen);
+    }
+  }, [open]);
 
   /* -- Set open state --- */
   useEffect(() => {
-    if (open === true && transitionState.exit) {
-      enter();
-    }
+    if (open === undefined) {
+      if (isOpen && transitionState.exit) {
+        enter();
+      }
 
-    if (open === false && transitionState.enter) {
-      exit();
+      if (!isOpen && transitionState.enter) {
+        exit();
+      }
+    } else {
+      if (open && transitionState.exit) {
+        enter();
+      }
+
+      if (!open && transitionState.enter) {
+        exit();
+      }
     }
-  }, [open, transitionState.enter, transitionState.exit]);
+  }, [open, isOpen, transitionState.enter, transitionState.exit]);
 
   /* --- Set outside click action --- */
   const outsideClickHandler = useCallback((event: MouseEvent) => {
     if (
       !((componentsRef.current.container?.contains(event.target as Node) ?? false) && (componentsRef.current.handler?.contains(event.target as Node) ?? false))
     ) {
-      exit();
+      setIsOpen(false);
     }
   }, []);
 
@@ -119,10 +140,10 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   /* --- Set lockScroll state --- */
   useEffect(() => {
     if (lockScroll) {
-      if (transitionState.entering) {
-        document.body.style.overflow = 'hidden';
+      if (transitionState.current === TransitionStates.EXITED) {
+        document.body.style.overflow = 'auto';
       } else {
-        document.body.style.overflow = 'scroll';
+        document.body.style.overflow = 'hidden';
       }
     }
   }, [lockScroll, transitionState.entering]);
@@ -147,8 +168,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
     handlerNode = (
       <PopoverHandler
-        enter={enter}
-        exit={exit}
+        setIsOpen={setIsOpen}
         open={open}
         transitionState={transitionState}
         ref={setHandlerRef}
@@ -156,6 +176,11 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
         {handler}
       </PopoverHandler>
     );
+  }
+
+  /* --- Unmount --- */
+  if (unmountOnExit && transitionState.current === TransitionStates.EXITED && !(open ?? isOpen)) {
+    return <>{handlerNode}</>;
   }
 
   /* --- Set backdrop --- */
@@ -166,11 +191,11 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
     backdropNode = (
       <PopoverBackdrop
-        exit={exit}
-        open={open ?? transitionState.entering}
+        setIsOpen={setIsOpen}
         transitionState={transitionState}
         enterDuration={mergedTransitionConfig.enterDuration}
         exitDuration={mergedTransitionConfig.exitDuration}
+        open={open}
         {...mergedBackdropProps}
       />
     );
@@ -217,14 +242,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
 
-  const childrenNode = componentsRef.current.container !== null &&
-    (!unmountOnExit || (unmountOnExit && transitionState.current !== TransitionStates.EXITED)) && (
-      <>
-        {backdropNode}
-        {children}
-      </>
-  );
-
   let node = (
     <div
       onTransitionEnd={transitionEndHandler}
@@ -233,9 +250,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
       className={mergedClassName}
       ref={setRef}
       {...restProps}
-    >
-      {childrenNode}
-    </div>
+    />
   );
 
   if (overlayRef !== null) {
@@ -244,6 +259,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   return (
     <>
+      {backdropNode}
       {handlerNode}
       {node}
     </>

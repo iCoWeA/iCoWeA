@@ -40,6 +40,7 @@ const popoverConfig: PopoverConfig = {
   styles: {
     base: {
       position: 'absolute',
+      zIndex: 'z-90',
       display: 'block',
       transition: 'transition-[opacity]',
       focus: 'focus:outline-0'

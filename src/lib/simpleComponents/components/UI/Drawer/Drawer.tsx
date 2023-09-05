@@ -154,7 +154,6 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     <>
       <DrawerBackdrop
         onClose={onClose}
-        open={transitionState.entering}
         transitionState={transitionState}
         enterDuration={mergedTransitionConfig.enterDuration}
         exitDuration={mergedTransitionConfig.exitDuration}

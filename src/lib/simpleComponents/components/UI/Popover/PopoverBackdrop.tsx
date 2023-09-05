@@ -1,23 +1,22 @@
-import React, { forwardRef } from 'react';
+import React, { type Dispatch, type SetStateAction, forwardRef } from 'react';
 import { type TransitionState } from '../../../hooks/useTransition';
 import Backdrop, { type BackdropProps } from '../Backdrop/Backdrop';
 
 interface PopoverBackdropProps extends BackdropProps {
-  exit: () => void;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
   transitionState: TransitionState;
   enterDuration: number;
   exitDuration: number;
-  open: boolean;
 }
 
 const PopoverBackdrop = forwardRef<HTMLDivElement, PopoverBackdropProps>(
-  ({ exit, transitionState, enterDuration, exitDuration, open, onClose, style, ...restProps }, ref) => {
+  ({ setIsOpen, transitionState, enterDuration, exitDuration, onClose, open, style, ...restProps }, ref) => {
     /* --- Set props --- */
     let closeHandler = onClose;
 
     if (open === undefined) {
       closeHandler = () => {
-        exit();
+        setIsOpen(false);
 
         if (onClose !== undefined) {
           onClose();
@@ -33,7 +32,7 @@ const PopoverBackdrop = forwardRef<HTMLDivElement, PopoverBackdropProps>(
     return (
       <Backdrop
         onClose={closeHandler}
-        open={open}
+        open={transitionState.entering}
         style={mergedStyle}
         ref={ref}
         {...restProps}
