@@ -12,7 +12,7 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const { defaultProps, styles } = collapseConfig;
-  const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, children, ...restProps } = {
+  const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = {
     ...defaultProps,
     ...props
   };
@@ -37,6 +37,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
       exit();
     }
   }, [open, transitionState.enter, transitionState.exit]);
+
+  /* --- Unmount --- */
+  if (unmountOnExit && transitionState.current === TransitionStates.EXITED && !open) {
+    return <></>;
+  }
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
@@ -75,8 +80,6 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
 
-  const childrenNode = (!unmountOnExit || (unmountOnExit && transitionState.current !== TransitionStates.EXITED)) && children;
-
   return (
     <div
       onTransitionEnd={transitionEndHandler}
@@ -85,9 +88,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
       className={mergedClassName}
       ref={componentRef}
       {...restProps}
-    >
-      {childrenNode}
-    </div>
+    />
   );
 });
 
