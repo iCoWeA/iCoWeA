@@ -6,9 +6,10 @@ import { mergeClasses } from '../../../utils/propsHelper';
 interface InputContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant: InputVariants;
   inputRef: MutableRefObject<HTMLInputElement | null>;
+  disabled: boolean;
 }
 
-const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(({ variant, inputRef, onClick, className, ...restProps }, ref) => {
+const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(({ variant, inputRef, onClick, disabled, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -25,7 +26,15 @@ const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(({ varian
     }
   };
 
-  const mergedClassName = mergeClasses(styles.base, shift && styles.shift, styles.variants[variant], variant === 'filled' && styles.colors[theme], className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    shift && styles.shift,
+    styles.variants[variant],
+    variant === 'filled' && styles.colors[theme],
+    disabled && styles.disabled,
+    disabled && styles.disabledColors[theme],
+    className
+  );
 
   return (
     <div

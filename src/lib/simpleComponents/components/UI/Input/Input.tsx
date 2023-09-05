@@ -110,6 +110,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
     <InputContainer
       variant={variant}
       inputRef={componentRef}
+      disabled={disabled}
       {...containerProps}
     >
       <InputAdornmentContainer

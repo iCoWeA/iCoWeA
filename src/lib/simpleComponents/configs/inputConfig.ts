@@ -12,7 +12,6 @@ export interface InputConfig {
     endAdornmentContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     legendProps: BaseHTMLAttributes<HTMLLegendElement>;
     labelProps: LabelHTMLAttributes<HTMLLabelElement>;
-    autoFocus: boolean;
     disabled: boolean;
     value: string;
   };
@@ -22,6 +21,8 @@ export interface InputConfig {
       shift: Record<string, string>;
       variants: Record<InputVariants, Record<string, string>>;
       colors: Record<string, Record<string, string>>;
+      disabled: Record<string, string>;
+      disabledColors: Record<string, Record<string, string>>;
     },
     adornmentContainer: {
       base: Record<string, string>;
@@ -72,7 +73,6 @@ const inputConfig: InputConfig = {
     endAdornmentContainerProps: {},
     legendProps: {},
     labelProps: {},
-    autoFocus: false,
     disabled: false,
     value: ''
   },
@@ -105,6 +105,16 @@ const inputConfig: InputConfig = {
           background: 'bg-default-default/10',
           hover: 'hover:bg-default-default/20',
           focusWithin: 'focus-within:hover:bg-default-default/10'
+        }
+      },
+      disabled: {
+        opacity: 'opacity-50',
+        pointer: 'pointer-events-none',
+        userSelect: 'select-none'
+      },
+      disabledColors: {
+        default: {
+          background: 'bg-default-default/10'
         }
       }
     },
