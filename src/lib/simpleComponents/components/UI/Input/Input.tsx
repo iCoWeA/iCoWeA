@@ -7,17 +7,11 @@ import React, {
   type ReactNode,
   forwardRef,
   useContext,
-  useRef,
-  useImperativeHandle,
-  useCallback,
-  useEffect,
-  type FocusEvent,
-  useState
+  useRef
 } from 'react';
 import inputConfig from '../../../configs/inputConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 import themeContext from '../../../contexts/theme';
-import useOutsideClick from '../../../hooks/useOutsideClick';
 import InputContainer from './InputContainer';
 import InputAdornmentContainer from './InputAdornmentContainer';
 import InputFieldset from './InputFieldset';
@@ -41,11 +35,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputRef?: MutableRefObject<HTMLInputElement> | null;
 }
 
-interface InputRefs {
-  container: HTMLDivElement | null;
-  input: HTMLInputElement | null;
-}
-
 const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
@@ -67,8 +56,6 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
     legendProps,
     labelProps,
     inputRef,
-    onFocus,
-    autoFocus,
     disabled,
     value,
     className,
@@ -76,57 +63,11 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   } = { ...inputConfig.defaultProps, ...props };
 
   /* --- Set refs --- */
-  const componentsRef = useRef<InputRefs>({ container: null, input: null });
-
-  /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentsRef.current.container, []);
-
-  /* --- Set states --- */
-  const [isFocused, setIsFocused] = useState(!disabled && autoFocus);
-
-  /* --- Set outside click action --- */
-  const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isClickedInside = componentsRef.current.container?.contains(event.target as Node) ?? false;
-
-    if (isClickedInside) {
-      componentsRef.current.input?.focus();
-    } else {
-      setIsFocused(false);
-    }
-  }, []);
-
-  useOutsideClick(outsideClickHandler, !disabled);
-
-  /* -- Set autofocus state --- */
-  useEffect(() => {
-    if (autoFocus && !disabled) {
-      setIsFocused(true);
-    }
-  }, [autoFocus, disabled]);
-
-  /* -- Set disabled state --- */
-  useEffect(() => {
-    if (disabled) {
-      setIsFocused(false);
-    }
-  }, [disabled]);
-
-  /* --- Set container props --- */
-  const setContainerRef = (element: HTMLDivElement): void => {
-    componentsRef.current.container = element;
-  };
+  const componentRef = useRef<HTMLInputElement | null>(null);
 
   /* --- Set props --- */
-  const focusHandler = (event: FocusEvent<HTMLInputElement>): void => {
-    setIsFocused(true);
-
-    if (onFocus !== undefined) {
-      onFocus(event);
-    }
-  };
-
   const setInputRef = (element: HTMLInputElement): void => {
-    componentsRef.current.input = element;
+    componentRef.current = element;
 
     if (inputRef !== undefined && inputRef !== null) {
       inputRef.current = element;
@@ -167,9 +108,8 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
 
   return (
     <InputContainer
-      open={isFocused}
-      value={value}
-      ref={setContainerRef}
+      variant={variant}
+      inputRef={componentRef}
       {...containerProps}
     >
       <InputAdornmentContainer
@@ -191,8 +131,6 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
         {...fieldsetProps}
       >
         <input
-          onFocus={focusHandler}
-          autoFocus={autoFocus}
           disabled={disabled}
           value={value}
           className={mergedClassName}

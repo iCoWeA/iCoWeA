@@ -19,26 +19,27 @@ export interface InputConfig {
   styles: {
     container: {
       base: Record<string, string>;
-      focused: Record<string, string>;
-      shifted: Record<string, string>;
+      shift: Record<string, string>;
+      variants: Record<InputVariants, Record<string, string>>;
+      colors: Record<string, Record<string, string>>;
     },
-    adornment: {
+    adornmentContainer: {
       base: Record<string, string>;
       leftGap: Record<string, string>;
       rightGap: Record<string, string>;
       start: Record<string, string>;
       end: Record<string, string>;
-      sizes: Record<string, Record<string, string>>;
-      valid: Record<InputVariants, Record<string, Record<string, string>>>;
-      invalid: Record<InputVariants, Record<string, Record<string, string>>>;
-      variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      variants: Record<InputVariants, Record<string, string>>;
+      valid: Record<string, Record<string, string>>;
+      invalid: Record<string, Record<string, string>>;
+      colors: Record<string, Record<Colors, Record<string, string>>>;
     }
     fieldset: {
       base: Record<string, string>;
-      sizes: Record<string, Record<string, string>>;
-      valid: Record<InputVariants, Record<string, Record<string, string>>>;
-      invalid: Record<InputVariants, Record<string, Record<string, string>>>;
-      variants: Record<InputVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      variants: Record<InputVariants, Record<string, string>>;
+      valid: Record<string, Record<string, string>>;
+      invalid: Record<string, Record<string, string>>;
+      colors: Record<string, Record<Colors, Record<string, string>>>;
     },
     input: {
       base: Record<string, string>;
@@ -80,26 +81,41 @@ const inputConfig: InputConfig = {
       base: {
         display: 'flex',
         width: 'w-full',
+        transition: 'transition-colors',
         focus: 'focus:outline-0',
         group: 'group'
       },
-      focused: {
-        group: 'focused'
+      shift: {
+        group: 'shift'
       },
-      shifted: {
-        group: 'shifted'
+      variants: {
+        standard: {
+          height: 'h-10'
+        },
+        filled: {
+          height: 'h-14',
+          borderRadius: 'rounded-t-2xl'
+        },
+        outlined: {
+          height: 'h-10'
+        }
+      },
+      colors: {
+        default: {
+          background: 'bg-default-default/10',
+          hover: 'hover:bg-default-default/20',
+          focusWithin: 'focus-within:hover:bg-default-default/10'
+        }
       }
     },
-    adornment: {
+    adornmentContainer: {
       base: {
-        boxSizing: 'box-content',
         position: 'flex',
         gap: 'gap-3',
         alignItems: 'items-center',
-        height: 'h-9',
         transition: 'transition-colors',
-        userSelect: 'select-none',
-        focus: 'focus:outline-0'
+        pointer: 'pointer-events-none',
+        userSelect: 'select-none'
       },
       leftGap: {
         padding: 'pl-3'
@@ -111,490 +127,158 @@ const inputConfig: InputConfig = {
         margin: 'mr-0',
         padding: 'pl-4',
         border: 'border-r-0',
-        borderRadius: 'rounded-r-none',
-        group: 'group-[.focused]:border-r-0'
+        group: 'group-focus-within:border-r-0'
       },
       end: {
         margin: 'ml-0',
         padding: 'pr-4',
         border: 'border-l-0',
-        borderRadius: 'rounded-l-none',
-        group: 'group-[.focused]:border-l-0'
-      },
-      sizes: {
-        standard: {
-          padding: 'pt-0.5'
-        },
-        filled: {
-          padding: 'pt-[1.125rem]'
-        },
-        outlined: {
-          padding: 'py-0'
-        }
-      },
-      valid: {
-        standard: {
-          default: {
-            margin: 'mb-px',
-            border: 'border-y border-default-success',
-            group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success'
-          }
-        },
-        filled: {
-          default: {
-            margin: 'mb-px',
-            border: 'border-b border-default-success',
-            borderRadius: 'rounded-t-2xl',
-            background: 'bg-default-success/10',
-            hover: 'hover:bg-default-success/20',
-            focused: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success',
-            groupHover: 'group-[.focused]:hover:bg-default-success/10'
-          }
-        },
-        outlined: {
-          default: {
-            margin: 'm-px',
-            border: 'border border-default-success',
-            borderRadius: 'rounded-2xl',
-            group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-success'
-          }
-        }
-      },
-      invalid: {
-        standard: {
-          default: {
-            margin: 'mb-px',
-            border: 'border-b border-default-error',
-            group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error'
-          }
-        },
-        filled: {
-          default: {
-            margin: 'mb-px',
-            border: 'border-b border-default-error',
-            borderRadius: 'rounded-t-2xl',
-            background: 'bg-default-error/10',
-            hover: 'hover:bg-default-error/20',
-            group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error',
-            groupHover: 'group-[.focused]:hover:bg-default-error/10'
-          }
-        },
-        outlined: {
-          default: {
-            margin: 'm-px',
-            border: 'border border-default-error',
-            borderRadius: 'rounded-2xl',
-            group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-error'
-          }
-        }
+        group: 'group-focus-within:border-l-0'
       },
       variants: {
         standard: {
-          default: {
-            default: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-default'
-            },
-            primary: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-primary'
-            },
-            secondary: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-secondary'
-            },
-            success: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success'
-            },
-            warning: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-warning'
-            },
-            error: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error'
-            },
-            light: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-light'
-            },
-            dark: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-dark'
-            }
-          }
+          margin: 'mb-px',
+          padding: 'pt-0.5',
+          border: 'border-b',
+          group: 'group-focus-within:mb-0 group-focus-within:border-b-2'
         },
         filled: {
-          default: {
-            default: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-default',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            primary: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-primary',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            secondary: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-secondary',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            success: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            warning: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-warning',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            error: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            light: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-light',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            dark: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              borderRadius: 'rounded-t-2xl',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-dark',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            }
-          }
+          margin: 'mb-px',
+          padding: 'pt-[1.125rem]',
+          border: 'border-b',
+          group: 'group-focus-within:mb-0 group-focus-within:border-b-2'
         },
         outlined: {
+          margin: 'my-px',
+          padding: 'py-0',
+          border: 'border-y ',
+          group: 'group-focus-within:my-0 group-focus-within:border-y-2'
+        }
+      },
+      valid: {
+        default: {
+          border: 'border-default-success',
+          group: 'group-focus-within:border-default-success'
+        }
+      },
+      invalid: {
+        default: {
+          border: 'border-default-error',
+          group: 'group-focus-within:border-default-error'
+        }
+      },
+      colors: {
+        default: {
           default: {
-            default: {
-              margin: 'm-px',
-              border: 'border border-default-divider',
-              borderRadius: 'rounded-2xl',
-              group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-default'
-            },
-            primary: {
-              margin: 'm-px',
-              border: 'border border-default-divider',
-              borderRadius: 'rounded-2xl',
-              group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-primary'
-            },
-            secondary: {
-              margin: 'm-px',
-              border: 'border border-default-divider',
-              borderRadius: 'rounded-2xl',
-              group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-secondary'
-            },
-            success: {
-              margin: 'm-px',
-              border: 'border border-default-divider',
-              borderRadius: 'rounded-2xl',
-              group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-success'
-            },
-            warning: {
-              margin: 'm-px',
-              border: 'border border-default-divider',
-              borderRadius: 'rounded-2xl',
-              group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-warning'
-            },
-            error: {
-              margin: 'm-px',
-              border: 'border border-default-divider',
-              borderRadius: 'rounded-2xl',
-              group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-error'
-            },
-            light: {
-              margin: 'm-px',
-              border: 'border border-default-divider',
-              borderRadius: 'rounded-2xl',
-              group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-light'
-            },
-            dark: {
-              margin: 'm-px',
-              border: 'border border-default-divider',
-              borderRadius: 'rounded-2xl',
-              group: 'group-[.focused]:m-0 group-[.focused]:border-2 group-[.focused]:border-default-dark'
-            }
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-default'
+          },
+          primary: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-primary'
+          },
+          secondary: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-secondary'
+          },
+          success: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-success'
+          },
+          warning: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-warning'
+          },
+          error: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-error'
+          },
+          light: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-light'
+          },
+          dark: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-dark'
           }
         }
       }
     },
     fieldset: {
       base: {
-        boxSizing: 'box-content',
         position: 'relative',
         display: 'flex',
         alignItems: 'items-center',
-        height: 'h-9',
         width: 'w-full',
         transition: 'transition-colors',
         pointer: 'pointer-events-none',
-        userSelect: 'select-none',
-        focus: 'focus:outline-0',
-        disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
-      },
-      sizes: {
-        standard: {
-          padding: 'pt-0.5'
-        },
-        filled: {
-          padding: 'pt-[1.125rem]'
-        },
-        outlined: {
-          padding: 'pt-0'
-        }
-      },
-      valid: {
-        standard: {
-          default: {
-            margin: 'mb-px',
-            border: 'border-y border-default-success',
-            group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success'
-          }
-        },
-        filled: {
-          default: {
-            margin: 'mb-px',
-            border: 'border-b border-default-success',
-            background: 'bg-default-success/10',
-            hover: 'hover:bg-default-success/20',
-            focused: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success',
-            groupHover: 'group-[.focused]:hover:bg-default-success/10'
-          }
-        },
-        outlined: {
-          default: {
-            margin: 'my-px',
-            border: 'border-y border-default-success',
-            group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-success'
-          }
-        }
-      },
-      invalid: {
-        standard: {
-          default: {
-            margin: 'mb-px',
-            border: 'border-b border-default-error',
-            group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error'
-          }
-        },
-        filled: {
-          default: {
-            margin: 'mb-px',
-            border: 'border-b border-default-error',
-            background: 'bg-default-error/10',
-            hover: 'hover:bg-default-error/20',
-            group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error',
-            groupHover: 'group-[.focused]:hover:bg-default-error/10'
-          }
-        },
-        outlined: {
-          default: {
-            margin: 'my-px',
-            border: 'border-y border-default-error',
-            group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-error'
-          }
-        }
+        userSelect: 'select-none'
       },
       variants: {
         standard: {
-          default: {
-            default: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-default'
-            },
-            primary: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-primary'
-            },
-            secondary: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-secondary'
-            },
-            success: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success'
-            },
-            warning: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-warning'
-            },
-            error: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error'
-            },
-            light: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-light'
-            },
-            dark: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-dark'
-            }
-          }
+          margin: 'mb-px',
+          padding: 'pt-0.5',
+          border: 'border-b',
+          group: 'group-focus-within:mb-0 group-focus-within:border-b-2'
         },
         filled: {
-          default: {
-            default: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-default',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            primary: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-primary',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            secondary: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-secondary',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            success: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-success',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            warning: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-warning',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            error: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-error',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            light: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-light',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            },
-            dark: {
-              margin: 'mb-px',
-              border: 'border-b border-default-divider',
-              background: 'bg-default-default/10',
-              hover: 'hover:bg-default-default/20',
-              group: 'group-[.focused]:mb-0 group-[.focused]:border-b-2 group-[.focused]:border-default-dark',
-              groupHover: 'group-[.focused]:hover:bg-default-default/10'
-            }
-          }
+          margin: 'mb-px',
+          padding: 'pt-[1.125rem]',
+          border: 'border-b',
+          group: 'group-focus-within:mb-0 group-focus-within:border-b-2'
         },
         outlined: {
+          margin: 'my-px',
+          padding: 'pt-0',
+          border: 'border-y ',
+          group: 'group-focus-within:my-0 group-focus-within:border-y-2'
+        }
+      },
+      valid: {
+        default: {
+          border: 'border-default-success',
+          group: 'group-focus-within:border-default-success'
+        }
+      },
+      invalid: {
+        default: {
+          border: 'border-default-error',
+          group: 'group-focus-within:border-default-error'
+        }
+      },
+      colors: {
+        default: {
           default: {
-            default: {
-              margin: 'my-px',
-              border: 'border-y border-default-divider',
-              group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-default'
-            },
-            primary: {
-              margin: 'my-px',
-              border: 'border-y border-default-divider',
-              group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-primary'
-            },
-            secondary: {
-              margin: 'my-px',
-              border: 'border-y border-default-divider',
-              group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-secondary'
-            },
-            success: {
-              margin: 'my-px',
-              border: 'border-y border-default-divider',
-              group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-success'
-            },
-            warning: {
-              margin: 'my-px',
-              border: 'border-y border-default-divider',
-              group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-warning'
-            },
-            error: {
-              margin: 'my-px',
-              border: 'border-y border-default-divider',
-              group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-error'
-            },
-            light: {
-              margin: 'my-px',
-              border: 'border-y border-default-divider',
-              group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-light'
-            },
-            dark: {
-              margin: 'my-px',
-              border: 'border-y border-default-divider',
-              group: 'group-[.focused]:my-0 group-[.focused]:border-y-2 group-[.focused]:border-default-dark'
-            }
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-default'
+          },
+          primary: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-primary'
+          },
+          secondary: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-secondary'
+          },
+          success: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-success'
+          },
+          warning: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-warning'
+          },
+          error: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-error'
+          },
+          light: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-light'
+          },
+          dark: {
+            border: 'border-default-divider',
+            group: 'group-focus-within:border-default-dark'
           }
         }
       }
@@ -652,8 +336,7 @@ const inputConfig: InputConfig = {
         font: 'antialiased font-normal text-sm font-sans text-transparent',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
-        focus: 'focus:outline-0',
-        group: 'group-[.shifted]:block group-[.shifted]:h-0 group-[.shifted]:px-1'
+        group: 'group-[.shift]:block group-[.shift]:h-0 group-[.shift]:px-1 group-focus-within:block group-focus-within:h-0 group-focus-within:px-1'
       }
     },
     label: {
@@ -664,8 +347,7 @@ const inputConfig: InputConfig = {
         transition: 'transition-all',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
-        focus: 'focus:outline-0',
-        group: 'group-[.shifted]:text-sm group-[.shifted]:px-1'
+        group: 'group-[.shift]:text-sm group-[.shift]:px-1 group-focus-within:text-sm group-focus-within:px-1'
       },
       valid: {
         default: {
@@ -680,50 +362,50 @@ const inputConfig: InputConfig = {
       sizes: {
         standard: {
           top: 'top-2',
-          group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4'
+          group: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4 group-focus-within:-top-px group-focus-within:-translate-y-2/4'
         },
         filled: {
           top: 'top-6',
-          group: 'group-[.shifted]:top-0.5'
+          group: 'group-[.shift]:top-0.5 group-focus-within:top-0.5'
         },
         outlined: {
           top: 'top-1.5',
-          group: 'group-[.shifted]:-top-px group-[.shifted]:-translate-y-2/4'
+          group: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4 group-focus-within:-top-px group-focus-within:-translate-y-2/4'
         }
       },
       colors: {
         default: {
           default: {
             color: 'text-default-default',
-            group: 'group-[.shifted]:text-default-default group-[.focused]:group-[.shifted]:text-default-default'
+            group: 'group-focus-within:text-default-default'
           },
           primary: {
             color: 'text-default-default',
-            group: 'group-[.shifted]:text-default-default group-[.focused]:group-[.shifted]:text-default-primary'
+            group: 'group-focus-within:text-default-primary'
           },
           secondary: {
             color: 'text-default-default',
-            group: 'group-[.shifted]:text-default-default group-[.focused]:group-[.shifted]:text-default-secondary'
+            group: 'group-focus-within:text-default-secondary'
           },
           success: {
             color: 'text-default-default',
-            group: 'group-[.shifted]:text-default-default group-[.focused]:group-[.shifted]:text-default-success'
+            group: 'group-focus-within:text-default-success'
           },
           warning: {
             color: 'text-default-default',
-            group: 'group-[.shifted]:text-default-default group-[.focused]:group-[.shifted]:text-default-warning'
+            group: 'group-focus-within:text-default-warning'
           },
           error: {
             color: 'text-default-default',
-            group: 'group-[.shifted]:text-default-default group-[.focused]:group-[.shifted]:text-default-error'
+            group: 'group-focus-within:text-default-error'
           },
           light: {
             color: 'text-default-default',
-            group: 'group-[.shifted]:text-default-default group-[.focused]:group-[.shifted]:text-default-light'
+            group: 'group-focus-within:text-default-light'
           },
           dark: {
             color: 'text-default-default',
-            group: 'group-[.shifted]:text-default-default group-[.focused]:group-[.shifted]:text-default-dark'
+            group: 'group-focus-within:text-default-dark'
           }
         }
       }

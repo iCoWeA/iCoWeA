@@ -17,15 +17,15 @@ const InputAdornmentContainer = forwardRef<HTMLDivElement, InputAdornmentContain
     const theme = useContext(themeContext).theme;
 
     /* --- Set default props --- */
-    const styles = inputConfig.styles.adornment;
+    const styles = inputConfig.styles.adornmentContainer;
 
     /* --- Set props --- */
     const mergedClassName = mergeClasses(
       styles.base,
-      styles.sizes[variant],
-      !valid && !invalid && styles.variants[variant][theme][color],
-      valid && styles.valid[variant][theme],
-      invalid && styles.invalid[variant][theme],
+      styles.variants[variant],
+      !valid && !invalid && styles.colors[theme][color],
+      valid && styles.valid[theme],
+      invalid && styles.invalid[theme],
       position === 'start' && styles.start,
       position === 'end' && styles.end,
       position === 'start' && children !== undefined && styles.rightGap,
