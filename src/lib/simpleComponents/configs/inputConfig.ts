@@ -114,7 +114,6 @@ const inputConfig: InputConfig = {
         gap: 'gap-3',
         alignItems: 'items-center',
         transition: 'transition-colors',
-        pointer: 'pointer-events-none',
         userSelect: 'select-none'
       },
       leftGap: {
@@ -127,12 +126,14 @@ const inputConfig: InputConfig = {
         margin: 'mr-0',
         padding: 'pl-4',
         border: 'border-r-0',
+        borderRadius: 'rounded-r-none',
         group: 'group-focus-within:border-r-0'
       },
       end: {
         margin: 'ml-0',
         padding: 'pr-4',
         border: 'border-l-0',
+        borderRadius: 'rounded-l-none',
         group: 'group-focus-within:border-l-0'
       },
       variants: {
@@ -149,10 +150,11 @@ const inputConfig: InputConfig = {
           group: 'group-focus-within:mb-0 group-focus-within:border-b-2'
         },
         outlined: {
-          margin: 'my-px',
+          margin: 'm-px',
           padding: 'py-0',
-          border: 'border-y ',
-          group: 'group-focus-within:my-0 group-focus-within:border-y-2'
+          border: 'border',
+          borderRadius: 'rounded-2xl',
+          group: 'group-focus-within:m-0 group-focus-within:border-2'
         }
       },
       valid: {
@@ -230,7 +232,7 @@ const inputConfig: InputConfig = {
         outlined: {
           margin: 'my-px',
           padding: 'pt-0',
-          border: 'border-y ',
+          border: 'border-y',
           group: 'group-focus-within:my-0 group-focus-within:border-y-2'
         }
       },
