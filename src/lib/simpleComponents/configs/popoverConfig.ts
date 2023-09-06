@@ -1,3 +1,5 @@
+import { type BackdropProps } from '../components/UI/Backdrop/Backdrop';
+
 export interface PopoverConfig {
   defaultProps: {
     position: Positions;
@@ -6,14 +8,8 @@ export interface PopoverConfig {
     lockScroll: boolean;
     unmountOnExit: boolean;
     backdrop: boolean;
-    transitionConfig: {
-      enterDuration: number,
-      exitDuration: number
-    };
     overlayRef: Element | null;
-    backdropProps: {
-      invisible: boolean;
-    }
+    backdropProps: BackdropProps;
   };
   styles: {
     popover: {
@@ -34,14 +30,8 @@ const popoverConfig: PopoverConfig = {
     lockScroll: false,
     unmountOnExit: true,
     backdrop: false,
-    transitionConfig: {
-      enterDuration: 500,
-      exitDuration: 500
-    },
     overlayRef: null,
-    backdropProps: {
-      invisible: true
-    }
+    backdropProps: {}
   },
   styles: {
     popover: {
