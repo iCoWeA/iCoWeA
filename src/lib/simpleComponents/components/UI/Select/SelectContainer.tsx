@@ -4,12 +4,13 @@ import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface SelectContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
+  focused: boolean;
   variant: InputVariants;
   inputRef: MutableRefObject<HTMLInputElement | null>;
   disabled: boolean;
 }
 
-const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ variant, inputRef, disabled, className, ...restProps }, ref) => {
+const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ focused, variant, inputRef, disabled, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -18,12 +19,9 @@ const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ vari
   const shift = typeof inputRef.current?.value === 'string' && inputRef.current?.value !== '';
 
   /* --- Set props --- */
-  const clickHandler = (): void => {
-    inputRef.current?.focus();
-  };
-
   const mergedClassName = mergeClasses(
     styles.base,
+    focused && styles.focus,
     shift && styles.shift,
     variant === 'filled' && styles.colors[theme],
     disabled && styles.disabled,
@@ -33,7 +31,6 @@ const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ vari
 
   return (
     <div
-      onClick={clickHandler}
       tabIndex={1}
       className={mergedClassName}
       ref={ref}
