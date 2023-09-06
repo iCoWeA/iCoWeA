@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { type StoreState } from '..';
 import { ALERT_TIMER } from '../../data/constants';
 import { type AlertProps } from '../../lib/simpleComponents/components/UI/Alert/Alert';
-import { type StoreState } from '..';
 
 interface State {
   open: boolean;
