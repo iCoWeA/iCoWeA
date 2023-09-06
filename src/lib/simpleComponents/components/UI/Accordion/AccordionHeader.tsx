@@ -1,4 +1,4 @@
-import React, { type ButtonHTMLAttributes, type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type MouseEvent } from 'react';
+import React, { type ButtonHTMLAttributes, type BaseHTMLAttributes, forwardRef, useContext, type ReactNode } from 'react';
 import accordionHeaderConfig from '../../../configs/accordionHeaderConfig';
 import accordionContext from '../../../contexts/accordion';
 import themeContext from '../../../contexts/theme';
@@ -20,21 +20,13 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
 
   /* --- Set default props --- */
   const styles = accordionHeaderConfig.styles.button;
-  const { color, disableIcon, iconProps, iconContainerProps, onClick, disabled, className, children, ...restProps } = {
+  const { color, disableIcon, iconProps, iconContainerProps, disabled, className, children, ...restProps } = {
     ...accordionHeaderConfig.defaultProps,
     disabled: isAccordionDisabled,
     ...props
   };
 
   /* --- Set props --- */
-  const clickHandler = (event: MouseEvent<HTMLButtonElement>): void => {
-    onAccordionClick();
-
-    if (onClick !== undefined) {
-      onClick(event);
-    }
-  };
-
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
 
   /* --- Set icon --- */
@@ -64,7 +56,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
 
   return (
     <button
-      onClick={clickHandler}
+      onClick={onAccordionClick}
       disabled={disabled}
       className={mergedClassName}
       ref={ref}
