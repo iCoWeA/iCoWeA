@@ -13,7 +13,8 @@ import drawerConfig, { type DrawerPositions } from '../../../configs/drawerConfi
 import themeContext from '../../../contexts/theme';
 import useAnimation, { AnimationStates } from '../../../hooks/useAnimation';
 import { mergeClasses } from '../../../utils/propsHelper';
-import Backdrop, { type BackdropProps } from '../Backdrop/Backdrop';
+import { type BackdropProps } from '../Backdrop/Backdrop';
+import DrawerBackdrop from './DrawerBackdrop';
 
 export interface DrawerProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEntering?: () => void;
@@ -121,7 +122,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
 
   return (
     <>
-      <Backdrop
+      <DrawerBackdrop
         onClose={onClose}
         open={animationState.enter}
         {...backdropProps}
