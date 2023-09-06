@@ -1,6 +1,6 @@
-import React, { forwardRef, type BaseHTMLAttributes, type TransitionEvent, type AnimationEvent, useRef, useImperativeHandle, useEffect } from 'react';
-import useAnimation, { AnimationStates } from '../../../hooks/useAnimation';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type TransitionEvent, type AnimationEvent } from 'react';
 import collapseConfig from '../../../configs/collapseConfig';
+import useAnimation, { AnimationStates } from '../../../hooks/useAnimation';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {

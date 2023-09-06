@@ -1,8 +1,8 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type ButtonHTMLAttributes } from 'react';
+import React, { type BaseHTMLAttributes, type ButtonHTMLAttributes, forwardRef, useContext, type ReactNode } from 'react';
 import chipConfig, { type ChipVariants } from '../../../configs/chipConfig';
-import Icon, { type IconProps } from '../Icon/Icon';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
+import Icon, { type IconProps } from '../Icon/Icon';
 import ChipBodyContainer from './ChipBodyContainer';
 import ChipButton from './ChipButton';
 import ChipButtonContainer from './ChipButtonContainer';
