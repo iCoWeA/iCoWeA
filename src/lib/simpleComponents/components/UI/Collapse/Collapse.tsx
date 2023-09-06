@@ -1,5 +1,5 @@
 import React, { forwardRef, type BaseHTMLAttributes, type TransitionEvent, type AnimationEvent, useRef, useImperativeHandle, useEffect } from 'react';
-import useTransition, { TransitionStates } from '../../../hooks/useTransition';
+import useAnimation, { AnimationStates } from '../../../hooks/useAnimation';
 import collapseConfig from '../../../configs/collapseConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
@@ -27,31 +27,31 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
 
   /* --- Set states --- */
-  const { state: transitionState, enter, stopEntering, exit, stopExiting } = useTransition();
+  const { state: animationState, enter, stopEntering, exit, stopExiting } = useAnimation();
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (open && transitionState.exit) {
+    if (open && animationState.exit) {
       enter(onEntering);
     }
 
-    if (!open && transitionState.enter) {
+    if (!open && animationState.enter) {
       exit(onExiting);
     }
-  }, [open, transitionState.enter, transitionState.exit]);
+  }, [open, animationState.enter, animationState.exit]);
 
   /* --- Unmount --- */
-  if (unmountOnExit && !open && transitionState.current === TransitionStates.EXITED) {
+  if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (transitionState.current === TransitionStates.ENTERING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.ENTERING && event.target === componentRef.current) {
       stopEntering(onEnter);
     }
 
-    if (transitionState.current === TransitionStates.EXITING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
       stopExiting(onExit);
     }
 
@@ -61,11 +61,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (transitionState.current === TransitionStates.ENTERING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.ENTERING && event.target === componentRef.current) {
       stopEntering(onEnter);
     }
 
-    if (transitionState.current === TransitionStates.EXITING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
       stopExiting(onExit);
     }
 
@@ -75,7 +75,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const mergedStyle = {
-    height: `${transitionState.enter ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
+    height: `${animationState.enter ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
     ...style
   };
 
