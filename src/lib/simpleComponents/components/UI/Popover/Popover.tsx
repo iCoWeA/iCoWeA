@@ -9,8 +9,8 @@ import React, {
   useCallback,
   type ReactNode,
   cloneElement,
-  type TransitionEvent,
-  type AnimationEvent
+  type AnimationEvent,
+  type TransitionEvent
 } from 'react';
 import { createPortal } from 'react-dom';
 import popoverConfig from '../../../configs/popoverConfig';
@@ -40,12 +40,6 @@ export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   backdropProps?: BackdropProps;
 }
 
-interface PopoverRefs {
-  container: HTMLDivElement | null;
-  handler: HTMLElement | null;
-  backdrop: HTMLDivElement | null;
-}
-
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = popoverConfig.styles.popover;
@@ -69,12 +63,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     className,
     ...restProps
   } = { ...popoverConfig.defaultProps, ...props };
+  const isControlled = open !== undefined;
 
   /* --- Set refs --- */
-  const componentsRef = useRef<PopoverRefs>({ container: null, handler: null, backdrop: null });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const handlerRef = useRef<HTMLElement | null>(null);
 
   /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentsRef.current.container, []);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => containerRef.current, []);
 
   /* --- Set states --- */
   const [isOpen, setIsOpen] = useState(false);
@@ -102,34 +98,29 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   /* --- Set outside click action --- */
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isClickedContainer = componentsRef.current.container?.contains(event.target as Node) ?? false;
-    const isClickedHandler = componentsRef.current.handler?.contains(event.target as Node) ?? false;
-    const isClickedBackdrop = componentsRef.current.backdrop?.contains(event.target as Node) ?? false;
+    const isClickedContainer = containerRef.current?.contains(event.target as Node) ?? false;
+    const isClickedHandler = handlerRef.current?.contains(event.target as Node) ?? false;
 
     if (isClickedHandler) {
       setIsOpen((isOpen) => !isOpen);
     }
 
-    if (isClickedBackdrop) {
-      setIsOpen(false);
-    }
-
-    if (!isClickedContainer && !isClickedHandler && !isClickedBackdrop) {
+    if (!isClickedContainer && !isClickedHandler) {
       setIsOpen(false);
     }
   }, []);
 
-  useOutsideClick(outsideClickHandler, open === undefined);
+  useOutsideClick(outsideClickHandler, !isControlled);
 
   /* --- Set position --- */
   const setPosition = useCallback((): void => {
     setElementPosition(
-      componentsRef.current.container,
+      containerRef.current,
       position,
-      componentsRef.current.handler?.offsetTop,
-      componentsRef.current.handler?.offsetLeft,
-      componentsRef.current.handler?.offsetHeight,
-      componentsRef.current.handler?.offsetWidth,
+      handlerRef.current?.offsetTop,
+      handlerRef.current?.offsetLeft,
+      handlerRef.current?.offsetHeight,
+      handlerRef.current?.offsetWidth,
       gap,
       responsive
     );
@@ -160,19 +151,19 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
     if (ref === undefined || ref === null) {
       const setRef = (element: HTMLElement): void => {
-        componentsRef.current.handler = element;
+        handlerRef.current = element;
       };
 
       handlerNode = cloneElement(handler, { ref: setRef });
     } else if (typeof ref === 'function') {
       const setRef = (element: HTMLElement): void => {
-        componentsRef.current.handler = element;
+        handlerRef.current = element;
         ref(element);
       };
 
       handlerNode = cloneElement(handler, { ref: setRef });
     } else {
-      componentsRef.current.handler = ref.current;
+      handlerRef.current = ref.current;
       handlerNode = handler;
     }
   }
@@ -197,11 +188,11 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (animationState.current === AnimationStates.ENTERING && event.target === componentsRef.current.container) {
+    if (animationState.current === AnimationStates.ENTERING && event.target === containerRef.current) {
       stopEntering(onEnter);
     }
 
-    if (animationState.current === AnimationStates.EXITING && event.target === componentsRef.current.container) {
+    if (animationState.current === AnimationStates.EXITING && event.target === containerRef.current) {
       stopExiting(onExit);
     }
 
@@ -211,21 +202,17 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (animationState.current === AnimationStates.ENTERING && event.target === componentsRef.current.container) {
+    if (animationState.current === AnimationStates.ENTERING && event.target === containerRef.current) {
       stopEntering(onEnter);
     }
 
-    if (animationState.current === AnimationStates.EXITING && event.target === componentsRef.current.container) {
+    if (animationState.current === AnimationStates.EXITING && event.target === containerRef.current) {
       stopExiting(onExit);
     }
 
     if (onAnimationEnd !== undefined) {
       onAnimationEnd(event);
     }
-  };
-
-  const setRef = (element: HTMLDivElement): void => {
-    componentsRef.current.container = element;
   };
 
   const mergedClassName = mergeClasses(styles.base, animationState.enter && styles.open, className);
@@ -235,7 +222,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
       className={mergedClassName}
-      ref={setRef}
+      ref={containerRef}
       {...restProps}
     />
   );
