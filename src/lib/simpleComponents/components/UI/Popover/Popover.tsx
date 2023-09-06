@@ -1,30 +1,33 @@
 import React, {
   type BaseHTMLAttributes,
+  type ReactElement,
   forwardRef,
-  type TransitionEvent,
-  useImperativeHandle,
   useRef,
-  type AnimationEvent,
+  useImperativeHandle,
+  useState,
   useEffect,
   useCallback,
-  type ReactElement,
   type ReactNode,
-  useState
+  cloneElement,
+  type TransitionEvent,
+  type AnimationEvent
 } from 'react';
-import useTransition, { TransitionStates, type TransitionConfig } from '../../../hooks/useTransition';
-import { type BackdropProps } from '../Backdrop/Backdrop';
-import popoverConfig from '../../../configs/popoverConfig';
-import usePrevious from '../../../hooks/usePrevious';
-import useOutsideClick from '../../../hooks/useOutsideClick';
-import { setElementPosition } from '../../../utils/positiontHelper';
-import useScroll from '../../../hooks/useScroll';
-import useResize from '../../../hooks/useResize';
-import PopoverHandler from './PopoverHandler';
-import PopoverBackdrop from './PopoverBackdrop';
-import { mergeClasses } from '../../../utils/propsHelper';
 import { createPortal } from 'react-dom';
+import popoverConfig from '../../../configs/popoverConfig';
+import useAnimation, { AnimationStates } from '../../../hooks/useAnimation';
+import useOutsideClick from '../../../hooks/useOutsideClick';
+import usePrevious from '../../../hooks/usePrevious';
+import useResize from '../../../hooks/useResize';
+import useScroll from '../../../hooks/useScroll';
+import { setElementPosition } from '../../../utils/positiontHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
+import Backdrop, { type BackdropProps } from '../Backdrop/Backdrop';
 
 export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
+  onEntering?: () => void;
+  onExiting?: () => void;
+  onEnter?: () => void;
+  onExit?: () => void;
   open?: boolean;
   position?: Positions;
   gap?: number;
@@ -32,7 +35,6 @@ export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   lockScroll?: boolean;
   unmountOnExit?: boolean;
   backdrop?: boolean;
-  transitionConfig?: TransitionConfig;
   overlayRef?: Element | null;
   handler?: ReactElement;
   backdropProps?: BackdropProps;
@@ -41,12 +43,17 @@ export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
 interface PopoverRefs {
   container: HTMLDivElement | null;
   handler: HTMLElement | null;
+  backdrop: HTMLDivElement | null;
 }
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = popoverConfig.styles.popover;
   const {
+    onEntering,
+    onExiting,
+    onEnter,
+    onExit,
     open,
     position,
     gap,
@@ -54,27 +61,24 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     lockScroll,
     unmountOnExit,
     backdrop,
-    transitionConfig,
     overlayRef,
     handler,
     backdropProps,
     onTransitionEnd,
     onAnimationEnd,
-    style,
     className,
     ...restProps
   } = { ...popoverConfig.defaultProps, ...props };
-  const mergedTransitionConfig = { ...popoverConfig.defaultProps.transitionConfig, ...transitionConfig };
 
   /* --- Set refs --- */
-  const componentsRef = useRef<PopoverRefs>({ container: null, handler: null });
+  const componentsRef = useRef<PopoverRefs>({ container: null, handler: null, backdrop: null });
 
   /* --- Set imperative handler --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentsRef.current.container, []);
 
   /* --- Set states --- */
   const [isOpen, setIsOpen] = useState(false);
-  const { state: transitionState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
+  const { state: animationState, enter, stopEntering, exit, stopExiting } = useAnimation();
 
   /* --- Set previous values  --- */
   const prevOpen = usePrevious(open);
@@ -87,35 +91,35 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   /* -- Set open state --- */
   useEffect(() => {
-    if (open === undefined) {
-      if (isOpen && transitionState.exit) {
-        enter();
-      }
-
-      if (!isOpen && transitionState.enter) {
-        exit();
-      }
-    } else {
-      if (open && transitionState.exit) {
-        enter();
-      }
-
-      if (!open && transitionState.enter) {
-        exit();
-      }
+    if ((open ?? isOpen) && animationState.exit) {
+      enter(onEntering);
     }
-  }, [open, isOpen, transitionState.enter, transitionState.exit]);
+
+    if (!(open ?? isOpen) && animationState.enter) {
+      exit(onExiting);
+    }
+  }, [open, isOpen, animationState.enter, animationState.exit]);
 
   /* --- Set outside click action --- */
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    if (
-      !((componentsRef.current.container?.contains(event.target as Node) ?? false) && (componentsRef.current.handler?.contains(event.target as Node) ?? false))
-    ) {
+    const isClickedContainer = componentsRef.current.container?.contains(event.target as Node) ?? false;
+    const isClickedHandler = componentsRef.current.handler?.contains(event.target as Node) ?? false;
+    const isClickedBackdrop = componentsRef.current.backdrop?.contains(event.target as Node) ?? false;
+
+    if (isClickedHandler) {
+      setIsOpen((isOpen) => !isOpen);
+    }
+
+    if (isClickedBackdrop) {
+      setIsOpen(false);
+    }
+
+    if (!isClickedContainer && !isClickedHandler && !isClickedBackdrop) {
       setIsOpen(false);
     }
   }, []);
 
-  useOutsideClick(outsideClickHandler, transitionState.entering && open === undefined && !backdrop);
+  useOutsideClick(outsideClickHandler, open === undefined);
 
   /* --- Set position --- */
   const setPosition = useCallback((): void => {
@@ -131,55 +135,50 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     );
   }, [position, gap, responsive]);
 
-  useScroll(setPosition, transitionState.entering);
+  useScroll(setPosition, animationState.current !== AnimationStates.EXITED);
 
-  useResize(setPosition, transitionState.entering);
+  useResize(setPosition, animationState.current !== AnimationStates.EXITED);
 
   setPosition();
 
   /* --- Set lockScroll state --- */
   useEffect(() => {
     if (lockScroll) {
-      if (transitionState.current === TransitionStates.EXITED) {
+      if (animationState.current === AnimationStates.EXITED) {
         document.body.style.overflow = 'auto';
       } else {
         document.body.style.overflow = 'hidden';
       }
     }
-  }, [lockScroll, transitionState.current]);
+  }, [lockScroll, animationState.current]);
 
   /* --- Set handler props --- */
   let handlerNode: ReactNode;
 
   if (handler !== undefined) {
-    const setHandlerRef = (element: HTMLElement): void => {
-      const ref = (handler as any).ref;
+    const ref = (handler as any).ref;
 
-      if (ref === undefined || ref === null) {
+    if (ref === undefined || ref === null) {
+      const setRef = (element: HTMLElement): void => {
         componentsRef.current.handler = element;
-      } else if (typeof ref === 'function') {
+      };
+
+      handlerNode = cloneElement(handler, { ref: setRef });
+    } else if (typeof ref === 'function') {
+      const setRef = (element: HTMLElement): void => {
         componentsRef.current.handler = element;
         ref(element);
-      } else {
-        componentsRef.current.handler = element;
-        ref.current = element;
-      }
-    };
+      };
 
-    handlerNode = (
-      <PopoverHandler
-        setIsOpen={setIsOpen}
-        open={open}
-        transitionState={transitionState}
-        ref={setHandlerRef}
-      >
-        {handler}
-      </PopoverHandler>
-    );
+      handlerNode = cloneElement(handler, { ref: setRef });
+    } else {
+      componentsRef.current.handler = ref.current;
+      handlerNode = handler;
+    }
   }
 
   /* --- Unmount --- */
-  if (unmountOnExit && transitionState.current === TransitionStates.EXITED && !(open ?? isOpen)) {
+  if (unmountOnExit && !(open ?? isOpen) && animationState.current === AnimationStates.EXITED) {
     return <>{handlerNode}</>;
   }
 
@@ -187,28 +186,23 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   let backdropNode: ReactNode;
 
   if (backdrop) {
-    const mergedBackdropProps = { ...popoverConfig.defaultProps.backdropProps, ...backdropProps };
-
     backdropNode = (
-      <PopoverBackdrop
-        setIsOpen={setIsOpen}
-        transitionState={transitionState}
-        enterDuration={mergedTransitionConfig.enterDuration}
-        exitDuration={mergedTransitionConfig.exitDuration}
-        open={open}
-        {...mergedBackdropProps}
+      <Backdrop
+        open={animationState.enter}
+        invisible
+        {...backdropProps}
       />
     );
   }
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (transitionState.current === TransitionStates.ENTERING && event.target === componentsRef.current.container) {
-      enter(true);
+    if (animationState.current === AnimationStates.ENTERING && event.target === componentsRef.current.container) {
+      stopEntering(onEnter);
     }
 
-    if (transitionState.current === TransitionStates.EXITING && event.target === componentsRef.current.container) {
-      exit(true);
+    if (animationState.current === AnimationStates.EXITING && event.target === componentsRef.current.container) {
+      stopExiting(onExit);
     }
 
     if (onTransitionEnd !== undefined) {
@@ -217,12 +211,12 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (transitionState.current === TransitionStates.ENTERING && event.target === componentsRef.current.container) {
-      enter(true);
+    if (animationState.current === AnimationStates.ENTERING && event.target === componentsRef.current.container) {
+      stopEntering(onEnter);
     }
 
-    if (transitionState.current === TransitionStates.EXITING && event.target === componentsRef.current.container) {
-      exit(true);
+    if (animationState.current === AnimationStates.EXITING && event.target === componentsRef.current.container) {
+      stopExiting(onExit);
     }
 
     if (onAnimationEnd !== undefined) {
@@ -234,18 +228,12 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     componentsRef.current.container = element;
   };
 
-  const mergedStyle = {
-    transitionDuration: `${transitionState.entering ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`,
-    ...style
-  };
-
-  const mergedClassName = mergeClasses(styles.base, transitionState.entering && styles.open, className, transitionClassName);
+  const mergedClassName = mergeClasses(styles.base, animationState.enter && styles.open, className);
 
   let node = (
     <div
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
-      style={mergedStyle}
       className={mergedClassName}
       ref={setRef}
       {...restProps}
