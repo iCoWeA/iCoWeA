@@ -1,8 +1,8 @@
 import React, { forwardRef, useContext } from 'react';
-import Icon, { type IconProps } from '../Icon/Icon';
-import themeContext from '../../../contexts/theme';
 import checkboxConfig from '../../../configs/checkboxConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
+import Icon, { type IconProps } from '../Icon/Icon';
 
 interface CheckboxProps extends IconProps {
   color: Colors;

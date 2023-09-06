@@ -1,10 +1,10 @@
-import React, { forwardRef, useContext, type InputHTMLAttributes, type ReactNode, type BaseHTMLAttributes, type MutableRefObject } from 'react';
-import { type IconProps } from '../Icon/Icon';
-import themeContext from '../../../contexts/theme';
+import React, { type InputHTMLAttributes, type BaseHTMLAttributes, type MutableRefObject, forwardRef, useContext, type ReactNode } from 'react';
 import checkboxConfig from '../../../configs/checkboxConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
-import CheckboxIcon from './CheckboxIcon';
+import { type IconProps } from '../Icon/Icon';
 import CheckboxContainer from './CheckboxContainer';
+import CheckboxIcon from './CheckboxIcon';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   color?: Colors;

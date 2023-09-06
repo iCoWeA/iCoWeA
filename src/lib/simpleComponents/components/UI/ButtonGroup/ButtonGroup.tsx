@@ -1,7 +1,7 @@
-import React, { forwardRef, type BaseHTMLAttributes, type ReactElement, type ReactNode } from 'react';
+import React, { type BaseHTMLAttributes, type ReactElement, forwardRef, type ReactNode } from 'react';
 import buttonGroupConfig from '../../../configs/buttonGroupConfig';
+import { mergeClasses, isLast } from '../../../utils/propsHelper';
 import ButtonGroupButton from './ButtonGroupButton';
-import { isLast, mergeClasses } from '../../../utils/propsHelper';
 
 export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ButtonVariants;
