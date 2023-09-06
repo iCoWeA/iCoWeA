@@ -1,6 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import themeContext from '../../contexts/theme';
 import sectionConfig from '../../configs/sectionConfig';
+import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
 export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
