@@ -6,17 +6,17 @@ import { mergeClasses } from '../../../utils/propsHelper';
 interface SelectContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   focused: boolean;
   variant: InputVariants;
-  inputRef: MutableRefObject<HTMLInputElement | null>;
+  selectRef: MutableRefObject<HTMLInputElement | null>;
   disabled: boolean;
 }
 
-const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ focused, variant, inputRef, disabled, className, ...restProps }, ref) => {
+const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ focused, variant, selectRef, disabled, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
   const styles = selectConfig.styles.container;
-  const shift = typeof inputRef.current?.value === 'string' && inputRef.current?.value !== '';
+  const shift = typeof selectRef.current?.value === 'string' && selectRef.current?.value !== '';
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(

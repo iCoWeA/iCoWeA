@@ -1,35 +1,31 @@
 import React, {
+  type InputHTMLAttributes,
+  type ReactNode,
   type BaseHTMLAttributes,
   type FieldsetHTMLAttributes,
-  type InputHTMLAttributes,
   type LabelHTMLAttributes,
   type MutableRefObject,
-  type ReactNode,
   forwardRef,
   useContext,
   useRef,
-  useImperativeHandle,
+  useState,
   useCallback,
-  useEffect,
-  useMemo,
-  useState
+  useMemo
 } from 'react';
-import Popover, { type PopoverProps } from '../Popover/Popover';
-import Dropdown, { type DropdownProps } from '../Dropdown/Dropdown';
-import { type IconProps } from '../Icon/Icon';
 import selectConfig from '../../../configs/selectConfig';
-import { type TransitionConfig } from '../../../hooks/useTransition';
-import { mergeClasses } from '../../../utils/propsHelper';
-import themeContext from '../../../contexts/theme';
 import selectContext, { type SelectContext } from '../../../contexts/select';
-import usePrevious from '../../../hooks/usePrevious';
+import themeContext from '../../../contexts/theme';
 import useOutsideClick from '../../../hooks/useOutsideClick';
-import SelectContainer from './SelectContainer';
+import { mergeClasses } from '../../../utils/propsHelper';
+import { type IconProps } from '../Icon/Icon';
+import { type MenuProps } from '../Menu/Menu';
 import SelectAdornmentContainer from './SelectAdornmentContainer';
-import SelectFieldset from './SelectFieldset';
 import SelectArrow from './SelectArrow';
+import SelectContainer from './SelectContainer';
+import SelectFieldset from './SelectFieldset';
 import SelectLabel from './SelectLabel';
 import SelectLegend from './SelectLegend';
+import SelectMenu from './SelectMenu';
 
 export interface SelectProps extends InputHTMLAttributes<HTMLInputElement> {
   onSelectChange?: (value: string) => void;
@@ -38,16 +34,13 @@ export interface SelectProps extends InputHTMLAttributes<HTMLInputElement> {
   valid?: boolean;
   invalid?: boolean;
   arrow?: boolean;
-  open?: boolean;
   position?: Positions;
   lockScroll?: boolean;
   overlayRef?: Element | null;
-  transitionConfig?: TransitionConfig;
   label?: ReactNode;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
-  popoverProps?: PopoverProps;
-  dropdownProps?: DropdownProps;
+  menuProps?: MenuProps;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
   startAdornmentContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   fieldsetProps?: FieldsetHTMLAttributes<HTMLFieldSetElement>;
@@ -56,12 +49,6 @@ export interface SelectProps extends InputHTMLAttributes<HTMLInputElement> {
   legendProps?: BaseHTMLAttributes<HTMLLegendElement>;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
   inputRef?: MutableRefObject<HTMLInputElement> | null;
-}
-
-interface SelectRefs {
-  container: HTMLDivElement | null;
-  input: HTMLInputElement | null;
-  popover: HTMLDivElement | null;
 }
 
 const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
@@ -77,16 +64,13 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
     valid,
     invalid,
     arrow,
-    open,
     position,
     lockScroll,
     overlayRef,
-    transitionConfig,
     label,
     startAdornment,
     endAdornment,
-    popoverProps,
-    dropdownProps,
+    menuProps,
     containerProps,
     startAdornmentContainerProps,
     fieldsetProps,
@@ -95,7 +79,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
     legendProps,
     labelProps,
     inputRef,
-    autoFocus,
     disabled,
     readonly,
     value,
@@ -103,85 +86,49 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
     children,
     ...restProps
   } = { ...selectConfig.defaultProps, ...props };
-  const mergedTransitionConfig = { ...selectConfig.defaultProps.transitionConfig, ...transitionConfig };
 
   /* --- Set refs --- */
-  const componentsRef = useRef<SelectRefs>({ container: null, input: null, popover: null });
+  const menuRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const selectRef = useRef<HTMLInputElement | null>(null);
 
-  /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentsRef.current.container, []);
+  /* --- Set state --- */
+  const [isFocused, setIsFocused] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  /* --- Set states --- */
-  const [isFocused, setIsFocused] = useState(open === true || (!disabled && autoFocus));
+  /* --- Set outside click action --- */
+  const outsideClickHandler = useCallback((event: MouseEvent) => {
+    const isClickedMenu = menuRef.current?.contains(event.target as Node) ?? false;
+    const isClickedContainer = containerRef.current?.contains(event.target as Node) ?? false;
+
+    if (isClickedContainer) {
+      setIsOpen((isOpen) => !isOpen);
+    }
+
+    if (!isClickedMenu && !isClickedContainer) {
+      setIsOpen(false);
+    }
+  }, []);
+
+  useOutsideClick(outsideClickHandler);
 
   /* --- Set context --- */
   const context: SelectContext = useMemo(
     () => ({
       onClose: (value: string) => {
-        if (open === undefined) {
-          setIsFocused(false);
-        }
+        setIsOpen(false);
 
         if (onSelectChange !== undefined) {
           onSelectChange(value);
         }
       }
     }),
-    [open]
+    [document.activeElement]
   );
-
-  /* --- Set previous values  --- */
-  const prevOpen = usePrevious(open);
-
-  useEffect(() => {
-    if (prevOpen !== undefined && open === undefined) {
-      setIsFocused(prevOpen);
-    }
-  }, [open]);
-
-  /* --- Set outside click action --- */
-  const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isInputClicked = componentsRef.current.container?.contains(event.target as Node) ?? false;
-    const isPopoverClicked = componentsRef.current.popover?.contains(event.target as Node) ?? false;
-
-    if (!isInputClicked && !isPopoverClicked) {
-      setIsFocused(false);
-    }
-
-    if (isInputClicked) {
-      setIsFocused(true);
-    }
-  }, []);
-
-  useOutsideClick(outsideClickHandler, open === undefined && !disabled && !(popoverProps.backdrop === true));
-
-  /* -- Set autofocus state --- */
-  useEffect(() => {
-    if (open === undefined && autoFocus && !disabled) {
-      setIsFocused(true);
-    }
-  }, [open, autoFocus, disabled]);
-
-  /* -- Set disabled state --- */
-  useEffect(() => {
-    if (open === undefined && disabled) {
-      setIsFocused(false);
-    }
-  }, [open, disabled]);
-
-  /* --- Set popover props --- */
-  const setPopoverRef = (element: HTMLDivElement): void => {
-    componentsRef.current.popover = element;
-  };
-
-  /* --- Set container props --- */
-  const setContainerRef = (element: HTMLDivElement): void => {
-    componentsRef.current.container = element;
-  };
 
   /* --- Set props --- */
   const setSelectRef = (element: HTMLInputElement): void => {
-    componentsRef.current.input = element;
+    selectRef.current = element;
 
     if (inputRef !== undefined && inputRef !== null) {
       inputRef.current = element;
@@ -202,8 +149,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
   if (endAdornment === undefined && arrow) {
     arrowNode = (
       <SelectArrow
-        open={open ?? isFocused}
-        transitionConfig={mergedTransitionConfig}
+        open={isFocused}
         {...arrowProps}
       />
     );
@@ -215,12 +161,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
   if (labelNode !== undefined) {
     labelNode = (
       <SelectLabel
-        open={open ?? isFocused}
         variant={variant}
         color={color}
         valid={valid}
         invalid={invalid}
-        transitionConfig={mergedTransitionConfig}
         {...labelProps}
       >
         {label}
@@ -236,45 +180,40 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
   }
 
   return (
-    <Popover
-      open={open ?? isFocused}
+    <SelectMenu
+      setIsFocused={setIsFocused}
+      open={isOpen}
       position={position}
       lockScroll={lockScroll}
       overlayRef={overlayRef}
-      transitionConfig={mergedTransitionConfig}
       handler={
         <SelectContainer
-          open={open ?? isFocused}
-          value={value}
-          ref={setContainerRef}
+          focused={isFocused}
+          variant={variant}
+          selectRef={selectRef}
+          disabled={disabled}
           {...containerProps}
         >
           <SelectAdornmentContainer
-            open={open ?? isFocused}
             position="start"
             variant={variant}
             color={color}
             valid={valid}
             invalid={invalid}
-            transitionConfig={mergedTransitionConfig}
             {...startAdornmentContainerProps}
           >
             {startAdornment}
           </SelectAdornmentContainer>
           <SelectFieldset
-            open={open ?? isFocused}
             variant={variant}
             color={color}
             valid={valid}
             invalid={invalid}
             disabled={disabled}
-            transitionConfig={mergedTransitionConfig}
             {...fieldsetProps}
           >
             <input
-              autoFocus={autoFocus}
               disabled={disabled}
-              readOnly={readonly}
               value={value}
               className={mergedClassName}
               ref={setSelectRef}
@@ -284,31 +223,22 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
             {legendNode}
           </SelectFieldset>
           <SelectAdornmentContainer
-            open={open ?? isFocused}
             position="end"
             variant={variant}
             color={color}
             valid={valid}
             invalid={invalid}
-            transitionConfig={mergedTransitionConfig}
             {...startAdornmentContainerProps}
           >
             {arrowNode}
           </SelectAdornmentContainer>
         </SelectContainer>
       }
-      ref={setPopoverRef}
-      {...popoverProps}
+      ref={menuRef}
+      {...menuProps}
     >
-      <selectContext.Provider value={context}>
-        <Dropdown
-          elevated
-          {...dropdownProps}
-        >
-          {children}
-        </Dropdown>
-      </selectContext.Provider>
-    </Popover>
+      <selectContext.Provider value={context}>{children}</selectContext.Provider>
+    </SelectMenu>
   );
 });
 
