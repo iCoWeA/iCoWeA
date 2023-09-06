@@ -1,47 +1,40 @@
-import React, { forwardRef, useContext, type FieldsetHTMLAttributes } from 'react';
-import themeContext from '../../../contexts/theme';
+import React, { type FieldsetHTMLAttributes, forwardRef, useContext } from 'react';
 import selectConfig from '../../../configs/selectConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface SelectFieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  open: boolean;
   variant: InputVariants;
   color: Colors;
   valid: boolean;
   invalid: boolean;
-  transitionConfig: { enterDuration: number; exitDuration: number };
 }
 
-const SelectFieldset = forwardRef<HTMLFieldSetElement, SelectFieldsetProps>(
-  ({ open, variant, color, valid, invalid, transitionConfig, style, className, ...restProps }, ref) => {
-    /* --- Set context props --- */
-    const theme = useContext(themeContext).theme;
+const SelectFieldset = forwardRef<HTMLFieldSetElement, SelectFieldsetProps>(({ variant, color, valid, invalid, className, ...restProps }, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
 
-    /* --- Set default props --- */
-    const styles = selectConfig.styles.fieldset;
+  /* --- Set default props --- */
+  const styles = selectConfig.styles.fieldset;
 
-    /* --- Set props --- */
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.sizes[variant],
-      !valid && !invalid && styles.variants[variant][theme][color],
-      valid && styles.valid[variant][theme],
-      invalid && styles.invalid[variant][theme],
-      className
-    );
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.variants[variant],
+    !valid && !invalid && styles.colors[theme][color],
+    valid && styles.valid[variant][theme],
+    invalid && styles.invalid[variant][theme],
+    className
+  );
 
-    const mergedStyle = { transitionDuration: `${open ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`, ...style };
-
-    return (
-      <fieldset
-        style={mergedStyle}
-        className={mergedClassName}
-        ref={ref}
-        {...restProps}
-      />
-    );
-  }
-);
+  return (
+    <fieldset
+      className={mergedClassName}
+      ref={ref}
+      {...restProps}
+    />
+  );
+});
 
 SelectFieldset.displayName = 'SelectFieldset';
 
