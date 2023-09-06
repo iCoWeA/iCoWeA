@@ -1,12 +1,12 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode, type ButtonHTMLAttributes } from 'react';
+import React, { type BaseHTMLAttributes, type ReactNode, type ButtonHTMLAttributes, forwardRef, useContext } from 'react';
 import alertConfig, { type AlertVariants } from '../../../configs/alertConfig';
-import Icon, { type IconProps } from '../Icon/Icon';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
-import AlertIconContainer from './AlertIconContainer';
+import Icon, { type IconProps } from '../Icon/Icon';
 import AlertBodyContainer from './AlertBodyContainer';
 import AlertButton from './AlertButton';
 import AlertButtonContainer from './AlertButtonContainer';
+import AlertIconContainer from './AlertIconContainer';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
