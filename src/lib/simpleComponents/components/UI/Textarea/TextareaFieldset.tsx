@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, type FieldsetHTMLAttributes, type MutableRefObject, type MouseEvent } from 'react';
+import React, { forwardRef, useContext, type FieldsetHTMLAttributes, type MutableRefObject } from 'react';
 import themeContext from '../../../contexts/theme';
 import textAreaConfig from '../../../configs/textAreaConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
@@ -13,7 +13,7 @@ interface TextAreaFieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetEleme
 }
 
 const TextAreaFieldset = forwardRef<HTMLFieldSetElement, TextAreaFieldsetProps>(
-  ({ variant, color, valid, invalid, textAreaRef, onClick, disabled, className, ...restProps }, ref) => {
+  ({ variant, color, valid, invalid, textAreaRef, disabled, className, ...restProps }, ref) => {
     /* --- Set context props --- */
     const theme = useContext(themeContext).theme;
 
@@ -22,12 +22,8 @@ const TextAreaFieldset = forwardRef<HTMLFieldSetElement, TextAreaFieldsetProps>(
     const shift = typeof textAreaRef.current?.value === 'string' && textAreaRef.current?.value !== '';
 
     /* --- Set props --- */
-    const clickHandler = (event: MouseEvent<HTMLFieldSetElement>): void => {
+    const clickHandler = (): void => {
       textAreaRef.current?.focus();
-
-      if (onClick !== undefined) {
-        onClick(event);
-      }
     };
 
     const mergedClassName = mergeClasses(

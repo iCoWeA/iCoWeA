@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, type MutableRefObject, forwardRef, useContext, type MouseEvent } from 'react';
+import React, { type BaseHTMLAttributes, type MutableRefObject, forwardRef, useContext } from 'react';
 import inputConfig from '../../../configs/inputConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
@@ -9,7 +9,7 @@ interface InputContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   disabled: boolean;
 }
 
-const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(({ variant, inputRef, onClick, disabled, className, ...restProps }, ref) => {
+const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(({ variant, inputRef, disabled, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -18,12 +18,8 @@ const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(({ varian
   const shift = typeof inputRef.current?.value === 'string' && inputRef.current?.value !== '';
 
   /* --- Set props --- */
-  const clickHandler = (event: MouseEvent<HTMLDivElement>): void => {
+  const clickHandler = (): void => {
     inputRef.current?.focus();
-
-    if (onClick !== undefined) {
-      onClick(event);
-    }
   };
 
   const mergedClassName = mergeClasses(
