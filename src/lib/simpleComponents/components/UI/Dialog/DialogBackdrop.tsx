@@ -1,39 +1,25 @@
 import React, { forwardRef } from 'react';
-import { type TransitionState } from '../../../hooks/useTransition';
 import dialogConfig from '../../../configs/dialogConfig';
-import Backdrop, { type BackdropProps } from '../Backdrop/Backdrop';
 import { mergeClasses } from '../../../utils/propsHelper';
+import Backdrop, { type BackdropProps } from '../Backdrop/Backdrop';
 
-interface DialogBackdropProps extends BackdropProps {
-  transitionState: TransitionState;
-  enterDuration: number;
-  exitDuration: number;
-}
+interface DialogBackdropProps extends BackdropProps {}
 
-const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(
-  ({ transitionState, enterDuration, exitDuration, style, className, ...restProps }, ref) => {
-    /* --- Set default props --- */
-    const styles = dialogConfig.styles.backdrop;
+const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(({ className, ...restProps }, ref) => {
+  /* --- Set default props --- */
+  const styles = dialogConfig.styles.backdrop;
 
-    /* --- Set props --- */
-    const mergedStyle = {
-      transitionDuration: `${transitionState.entering ? enterDuration : exitDuration}ms`,
-      ...style
-    };
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(styles.base, className);
 
-    const mergedClassName = mergeClasses(styles.base, className);
-
-    return (
-      <Backdrop
-        open={transitionState.entering}
-        style={mergedStyle}
-        className={mergedClassName}
-        ref={ref}
-        {...restProps}
-      />
-    );
-  }
-);
+  return (
+    <Backdrop
+      className={mergedClassName}
+      ref={ref}
+      {...restProps}
+    />
+  );
+});
 
 DialogBackdrop.displayName = 'DialogBackdrop';
 
