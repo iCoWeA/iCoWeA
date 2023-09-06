@@ -20,7 +20,6 @@ const TooltipHandler = forwardRef<HTMLElement, TooltipHandlerProps>(
       }
 
       if (!isControlled && !isAnimationEnter) {
-        console.log('enter');
         setIsOpen(true);
       }
 
@@ -31,7 +30,6 @@ const TooltipHandler = forwardRef<HTMLElement, TooltipHandlerProps>(
 
     const onMouseLeave = (event: MouseEvent<HTMLElement>): void => {
       if (!isControlled && isAnimationEnter) {
-        console.log('leave');
         setIsOpen(false);
       }
 
