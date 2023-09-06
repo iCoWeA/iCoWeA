@@ -1,7 +1,7 @@
-import React, { forwardRef, type ReactElement } from 'react';
+import React, { type ReactElement, forwardRef } from 'react';
+import menuConfig from '../../../configs/menuConfig';
 import Dropdown, { type DropdownProps } from '../Dropdown/Dropdown';
 import Popover, { type PopoverProps } from '../Popover/Popover';
-import menuConfig from '../../../configs/menuConfig';
 
 export interface MenuProps extends DropdownProps {
   color?: Colors;
