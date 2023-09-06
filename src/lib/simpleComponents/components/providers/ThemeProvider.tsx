@@ -1,4 +1,4 @@
-import React, { useState, type FC, type ReactNode, useMemo } from 'react';
+import React, { type ReactNode, type FC, useState, useMemo } from 'react';
 import themeContext, { initialState } from '../../contexts/theme';
 
 interface ThemeProviderProps {
