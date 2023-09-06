@@ -9,8 +9,8 @@ import React, {
   useCallback,
   type ReactNode,
   cloneElement,
-  type AnimationEvent,
-  type TransitionEvent
+  type TransitionEvent,
+  type AnimationEvent
 } from 'react';
 import { createPortal } from 'react-dom';
 import popoverConfig from '../../../configs/popoverConfig';
@@ -21,7 +21,8 @@ import useResize from '../../../hooks/useResize';
 import useScroll from '../../../hooks/useScroll';
 import { setElementPosition } from '../../../utils/positiontHelper';
 import { mergeClasses } from '../../../utils/propsHelper';
-import Backdrop, { type BackdropProps } from '../Backdrop/Backdrop';
+import { type BackdropProps } from '../Backdrop/Backdrop';
+import PopoverBackdrop from './PopoverBackdrop';
 
 export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEntering?: () => void;
@@ -176,7 +177,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   if (backdrop) {
     backdropNode = (
-      <Backdrop
+      <PopoverBackdrop
         open={animationState.enter}
         invisible
         {...backdropProps}
