@@ -58,8 +58,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     overlayRef,
     handler,
     backdropProps,
-    onTransitionEnd,
-    onAnimationEnd,
     className,
     ...restProps
   } = { ...popoverConfig.defaultProps, ...props };
@@ -195,10 +193,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     if (animationState.current === AnimationStates.EXITING && event.target === containerRef.current) {
       stopExiting(onExit);
     }
-
-    if (onTransitionEnd !== undefined) {
-      onTransitionEnd(event);
-    }
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
@@ -208,10 +202,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
     if (animationState.current === AnimationStates.EXITING && event.target === containerRef.current) {
       stopExiting(onExit);
-    }
-
-    if (onAnimationEnd !== undefined) {
-      onAnimationEnd(event);
     }
   };
 

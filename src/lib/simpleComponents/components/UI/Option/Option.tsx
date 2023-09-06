@@ -1,4 +1,4 @@
-import React, { type OptionHTMLAttributes, type LiHTMLAttributes, type MutableRefObject, forwardRef, useContext, type MouseEvent } from 'react';
+import React, { type OptionHTMLAttributes, type LiHTMLAttributes, type MutableRefObject, forwardRef, useContext } from 'react';
 import optionConfig, { type OptionVariant } from '../../../configs/optionConfig';
 import selectContext from '../../../contexts/select';
 import themeContext from '../../../contexts/theme';
@@ -23,18 +23,14 @@ const Option = forwardRef<HTMLLIElement, OptionProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = optionConfig.styles.button;
-  const { value, variant, size, color, fullwidth, selected, itemProps, optionRef, onClick, className, ...restProps } = {
+  const { value, variant, size, color, fullwidth, selected, itemProps, optionRef, className, ...restProps } = {
     ...optionConfig.defaultProps,
     ...props
   };
 
   /* --- Set props --- */
-  const clickHandler = (event: MouseEvent<HTMLOptionElement>): void => {
+  const clickHandler = (): void => {
     onClose(value);
-
-    if (onClick !== undefined) {
-      onClick(event);
-    }
   };
 
   const mergedClassName = mergeClasses(

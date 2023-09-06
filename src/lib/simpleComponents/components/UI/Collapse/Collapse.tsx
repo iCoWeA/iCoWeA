@@ -15,7 +15,7 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const { defaultProps, styles } = collapseConfig;
-  const { onEntering, onExiting, onEnter, onExit, open, unmountOnExit, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = {
+  const { onEntering, onExiting, onEnter, onExit, open, unmountOnExit, style, className, ...restProps } = {
     ...defaultProps,
     ...props
   };
@@ -54,10 +54,6 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
       stopExiting(onExit);
     }
-
-    if (onTransitionEnd !== undefined) {
-      onTransitionEnd(event);
-    }
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
@@ -67,10 +63,6 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
     if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
       stopExiting(onExit);
-    }
-
-    if (onAnimationEnd !== undefined) {
-      onAnimationEnd(event);
     }
   };
 
