@@ -1,6 +1,5 @@
 export interface AccordionConfig {
   defaultProps: {
-    transitionDuration: number;
     disabled: boolean;
   };
   styles: {
@@ -11,7 +10,6 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
-    transitionDuration: 500,
     disabled: false
   },
   styles: {
