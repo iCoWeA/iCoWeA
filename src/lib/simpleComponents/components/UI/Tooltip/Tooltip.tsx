@@ -1,29 +1,33 @@
 import React, {
   type BaseHTMLAttributes,
+  type ReactElement,
   forwardRef,
   useContext,
-  type TransitionEvent,
-  useImperativeHandle,
   useRef,
-  type AnimationEvent,
+  useImperativeHandle,
+  useState,
   useEffect,
   useCallback,
-  type ReactElement,
   type ReactNode,
-  useState
+  type AnimationEvent,
+  type TransitionEvent
 } from 'react';
-import useTransition, { TransitionStates, type TransitionConfig } from '../../../hooks/useTransition';
-import themeContext from '../../../contexts/theme';
-import tooltipConfig from '../../../configs/tooltipConfig';
-import { setElementPosition } from '../../../utils/positiontHelper';
-import useScroll from '../../../hooks/useScroll';
-import useResize from '../../../hooks/useResize';
-import TooltipHandler from './TooltipHandler';
-import TooltipArrow, { setArrowPosition } from './TooltipArrow';
-import { mergeClasses } from '../../../utils/propsHelper';
 import { createPortal } from 'react-dom';
+import tooltipConfig from '../../../configs/tooltipConfig';
+import themeContext from '../../../contexts/theme';
+import useAnimation, { AnimationStates } from '../../../hooks/useAnimation';
+import useResize from '../../../hooks/useResize';
+import useScroll from '../../../hooks/useScroll';
+import { setElementPosition } from '../../../utils/positiontHelper';
+import { mergeClasses } from '../../../utils/propsHelper';
+import TooltipArrow, { setArrowPosition } from './TooltipArrow';
+import TooltipHandler from './TooltipHandler';
 
 export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
+  onEntering?: () => void;
+  onExiting?: () => void;
+  onEnter?: () => void;
+  onExit?: () => void;
   open?: boolean;
   color?: Colors;
   position?: Positions;
@@ -32,16 +36,9 @@ export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
   followCursor?: boolean;
   unmountOnExit?: boolean;
   arrow?: boolean;
-  transitionConfig?: TransitionConfig;
   overlayRef?: Element | null;
   handler: ReactElement;
   arrowProps?: BaseHTMLAttributes<HTMLDivElement>;
-}
-
-interface TooltipRefs {
-  container: HTMLDivElement | null;
-  handler: HTMLElement | null;
-  arrow: HTMLDivElement | null;
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
@@ -51,6 +48,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = tooltipConfig.styles.container;
   const {
+    onEntering,
+    onExiting,
+    onEnter,
+    onExit,
     open,
     color,
     position,
@@ -59,55 +60,41 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     followCursor,
     unmountOnExit,
     arrow,
-    transitionConfig,
     overlayRef,
     handler,
     arrowProps,
     onTransitionEnd,
     onAnimationEnd,
-    style,
     className,
     children,
     ...restProps
   } = { ...tooltipConfig.defaultProps, ...props };
-  const mergedTransitionConfig = { ...tooltipConfig.defaultProps.transitionConfig, ...transitionConfig };
+  const isControlled = open !== undefined;
 
   /* --- Set refs --- */
-  const componentsRef = useRef<TooltipRefs>({
-    container: null,
-    handler: null,
-    arrow: null
-  });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const handlerRef = useRef<HTMLElement | null>(null);
+  const arrowRef = useRef<HTMLDivElement>(null);
 
   /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentsRef.current.container, []);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => containerRef.current, []);
 
   /* --- Set states --- */
   const [cursorY, setCursorY] = useState(-1);
   const [cursorX, setCursorX] = useState(-1);
   const [isOpen, setIsOpen] = useState(false);
-  const { state: transitionState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
+  const { state: animationState, enter, stopEntering, exit, stopExiting } = useAnimation();
 
   /* -- Set open state --- */
   useEffect(() => {
-    if (open === undefined) {
-      if (isOpen && transitionState.exit) {
-        enter();
-      }
-
-      if (!isOpen && transitionState.enter) {
-        exit();
-      }
-    } else {
-      if (open && transitionState.exit) {
-        enter();
-      }
-
-      if (!open && transitionState.enter) {
-        exit();
-      }
+    if ((open ?? isOpen) && animationState.exit) {
+      enter(onEntering);
     }
-  }, [open, isOpen, transitionState.enter, transitionState.exit]);
+
+    if (!(open ?? isOpen) && animationState.enter) {
+      exit(onExiting);
+    }
+  }, [open, isOpen, animationState.enter, animationState.exit]);
 
   /* --- Set position --- */
   const setPosition = useCallback((): void => {
@@ -115,18 +102,18 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
 
     if (!followCursor) {
       newPosition = setElementPosition(
-        componentsRef.current.container,
+        containerRef.current,
         position,
-        componentsRef.current.handler?.offsetTop,
-        componentsRef.current.handler?.offsetLeft,
-        componentsRef.current.handler?.offsetHeight,
-        componentsRef.current.handler?.offsetWidth,
+        handlerRef.current?.offsetTop,
+        handlerRef.current?.offsetLeft,
+        handlerRef.current?.offsetHeight,
+        handlerRef.current?.offsetWidth,
         gap,
         responsive
       );
     } else {
       newPosition = setElementPosition(
-        componentsRef.current.container,
+        containerRef.current,
         position,
         cursorY + document.documentElement.scrollTop,
         cursorX + document.documentElement.scrollLeft,
@@ -138,13 +125,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     }
 
     if (arrow) {
-      setArrowPosition(componentsRef.current.arrow, newPosition);
+      setArrowPosition(arrowRef.current, newPosition);
     }
   }, [followCursor, position, gap, responsive, cursorY, cursorX]);
 
-  useScroll(setPosition, transitionState.entering);
+  useScroll(setPosition, animationState.current !== AnimationStates.EXITED);
 
-  useResize(setPosition, transitionState.entering);
+  useResize(setPosition, animationState.current !== AnimationStates.EXITED);
 
   setPosition();
 
@@ -153,12 +140,12 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     const ref = (handler as any).ref;
 
     if (ref === undefined || ref === null) {
-      componentsRef.current.handler = element;
+      handlerRef.current = element;
     } else if (typeof ref === 'function') {
-      componentsRef.current.handler = element;
+      handlerRef.current = element;
       ref(element);
     } else {
-      componentsRef.current.handler = element;
+      handlerRef.current = element;
       ref.current = element;
     }
   };
@@ -168,8 +155,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
       setIsOpen={setIsOpen}
       setCursorY={setCursorY}
       setCursorX={setCursorX}
-      open={open}
-      transitionState={transitionState}
+      isControlled={isControlled}
+      isAnimationEnter={animationState.enter}
       followCursor={followCursor}
       ref={setHandlerRef}
     >
@@ -178,7 +165,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   );
 
   /* --- Unmount --- */
-  if (unmountOnExit && transitionState.current === TransitionStates.EXITED && !(open ?? isOpen)) {
+  if (unmountOnExit && !(open ?? isOpen) && animationState.current === AnimationStates.EXITED) {
     return <>{handlerNode}</>;
   }
 
@@ -186,14 +173,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   let arrowNode: ReactNode;
 
   if (arrow) {
-    const setArrowRef = (element: HTMLDivElement): void => {
-      componentsRef.current.arrow = element;
-    };
-
     arrowNode = (
       <TooltipArrow
         color={color}
-        ref={setArrowRef}
+        ref={arrowRef}
         {...arrowProps}
       />
     );
@@ -201,12 +184,12 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (transitionState.current === TransitionStates.ENTERING && event.target === componentsRef.current.container) {
-      enter(true);
+    if (animationState.current === AnimationStates.ENTERING && event.target === containerRef.current) {
+      stopEntering(onEnter);
     }
 
-    if (transitionState.current === TransitionStates.EXITING && event.target === componentsRef.current.container) {
-      exit(true);
+    if (animationState.current === AnimationStates.EXITING && event.target === containerRef.current) {
+      stopExiting(onExit);
     }
 
     if (onTransitionEnd !== undefined) {
@@ -215,12 +198,12 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (transitionState.current === TransitionStates.ENTERING && event.target === componentsRef.current.container) {
-      enter(true);
+    if (animationState.current === AnimationStates.ENTERING && event.target === containerRef.current) {
+      stopEntering(onEnter);
     }
 
-    if (transitionState.current === TransitionStates.EXITING && event.target === componentsRef.current.container) {
-      exit(true);
+    if (animationState.current === AnimationStates.EXITING && event.target === containerRef.current) {
+      stopExiting(onExit);
     }
 
     if (onAnimationEnd !== undefined) {
@@ -228,24 +211,14 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     }
   };
 
-  const setRef = (element: HTMLDivElement): void => {
-    componentsRef.current.container = element;
-  };
-
-  const mergedStyle = {
-    transitionDuration: `${transitionState.entering ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`,
-    ...style
-  };
-
-  const mergedClassName = mergeClasses(styles.base, transitionState.entering && styles.open, styles.colors[theme][color], className, transitionClassName);
+  const mergedClassName = mergeClasses(styles.base, animationState.enter && styles.open, styles.colors[theme][color], className);
 
   let node = (
     <div
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
-      style={mergedStyle}
       className={mergedClassName}
-      ref={setRef}
+      ref={containerRef}
       {...restProps}
     >
       {arrowNode}

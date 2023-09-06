@@ -1,18 +1,17 @@
-import { type Dispatch, type MouseEvent, forwardRef, type ReactElement, cloneElement, type SetStateAction } from 'react';
-import { type TransitionState } from '../../../hooks/useTransition';
+import { type Dispatch, type SetStateAction, type ReactElement, forwardRef, cloneElement, type MouseEvent } from 'react';
 
 interface TooltipHandlerProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   setCursorY: Dispatch<React.SetStateAction<number>>;
   setCursorX: Dispatch<React.SetStateAction<number>>;
-  open?: boolean;
-  transitionState: TransitionState;
+  isControlled: boolean;
+  isAnimationEnter: boolean;
   followCursor: boolean;
   children: ReactElement;
 }
 
 const TooltipHandler = forwardRef<HTMLElement, TooltipHandlerProps>(
-  ({ setIsOpen, setCursorY, setCursorX, open, transitionState, followCursor, children }, ref) => {
+  ({ setIsOpen, setCursorY, setCursorX, isControlled, isAnimationEnter, followCursor, children }, ref) => {
     /* --- Set props --- */
     const onMouseEnter = (event: MouseEvent<HTMLElement>): void => {
       if (followCursor) {
@@ -20,7 +19,8 @@ const TooltipHandler = forwardRef<HTMLElement, TooltipHandlerProps>(
         setCursorX(event.clientX);
       }
 
-      if (open === undefined && transitionState.exit) {
+      if (!isControlled && !isAnimationEnter) {
+        console.log('enter');
         setIsOpen(true);
       }
 
@@ -30,7 +30,8 @@ const TooltipHandler = forwardRef<HTMLElement, TooltipHandlerProps>(
     };
 
     const onMouseLeave = (event: MouseEvent<HTMLElement>): void => {
-      if (open === undefined && transitionState.enter) {
+      if (!isControlled && isAnimationEnter) {
+        console.log('leave');
         setIsOpen(false);
       }
 

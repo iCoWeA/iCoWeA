@@ -1,6 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import themeContext from '../../../contexts/theme';
 import tooltipConfig from '../../../configs/tooltipConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface TooltipArrowProps extends BaseHTMLAttributes<HTMLDivElement> {
