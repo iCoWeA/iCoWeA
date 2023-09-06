@@ -1,33 +1,31 @@
-import React, { forwardRef, type BaseHTMLAttributes, useContext } from 'react';
-import themeContext from '../../../contexts/theme';
+import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import selectConfig from '../../../configs/selectConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface SelectAdornmentContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
-  open: boolean;
   position: 'start' | 'end';
   variant: InputVariants;
   color: Colors;
   valid: boolean;
   invalid: boolean;
-  transitionConfig: { enterDuration: number; exitDuration: number };
 }
 
 const SelectAdornmentContainer = forwardRef<HTMLDivElement, SelectAdornmentContainerProps>(
-  ({ open, position, variant, color, valid, invalid, transitionConfig, style, className, children, ...restProps }, ref) => {
+  ({ position, variant, color, valid, invalid, className, children, ...restProps }, ref) => {
     /* --- Set context props --- */
     const theme = useContext(themeContext).theme;
 
     /* --- Set default props --- */
-    const styles = selectConfig.styles.adornment;
+    const styles = selectConfig.styles.adornmentContainer;
 
     /* --- Set props --- */
     const mergedClassName = mergeClasses(
       styles.base,
-      styles.sizes[variant],
-      !valid && !invalid && styles.variants[variant][theme][color],
-      valid && styles.valid[variant][theme],
-      invalid && styles.invalid[variant][theme],
+      styles.variants[variant],
+      !valid && !invalid && styles.colors[theme][color],
+      valid && styles.valid[theme],
+      invalid && styles.invalid[theme],
       position === 'start' && styles.start,
       position === 'end' && styles.end,
       position === 'start' && children !== undefined && styles.rightGap,
@@ -35,11 +33,8 @@ const SelectAdornmentContainer = forwardRef<HTMLDivElement, SelectAdornmentConta
       className
     );
 
-    const mergedStyle = { transitionDuration: `${open ? transitionConfig.enterDuration : transitionConfig.exitDuration}ms`, ...style };
-
     return (
       <div
-        style={mergedStyle}
         className={mergedClassName}
         ref={ref}
         {...restProps}
