@@ -1,7 +1,7 @@
 import React, { forwardRef, useState, useEffect } from 'react';
-import Input, { type InputProps } from '../../lib/simpleComponents/components/UI/Input/Input';
-import { type IconButtonProps } from '../../lib/simpleComponents/components/UI/IconButton/IconButton';
 import { type IconProps } from '../../lib/simpleComponents/components/UI/Icon/Icon';
+import { type IconButtonProps } from '../../lib/simpleComponents/components/UI/IconButton/IconButton';
+import Input, { type InputProps } from '../../lib/simpleComponents/components/UI/Input/Input';
 import usePrevious from '../../lib/simpleComponents/hooks/usePrevious';
 import PasswordInputButton from './PasswordInputButton';
 import PasswordInputIcon from './PasswordInputIcon';
