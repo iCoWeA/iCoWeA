@@ -2,11 +2,10 @@ import { type BackdropProps } from '../components/UI/Backdrop/Backdrop';
 
 export interface DialogConfig {
   defaultProps: {
-    open: boolean;
     color: Colors;
     elevated: boolean;
+    open: boolean;
     lockScroll: boolean;
-    transitionConfig: { enterDuration: number, exitDuration: number }
     overlayRef: Element | null;
     backdropProps: BackdropProps;
   };
@@ -25,11 +24,10 @@ export interface DialogConfig {
 
 const dialogConfig: DialogConfig = {
   defaultProps: {
-    open: false,
     color: 'light',
     elevated: false,
+    open: false,
     lockScroll: true,
-    transitionConfig: { enterDuration: 500, exitDuration: 500 },
     overlayRef: null,
     backdropProps: {}
   },
