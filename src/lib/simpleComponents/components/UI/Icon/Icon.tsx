@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, type SVGAttributes } from 'react';
+import React, { type SVGAttributes, forwardRef, useContext } from 'react';
 import iconConfig, { type IconSizes } from '../../../configs/iconConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';

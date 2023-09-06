@@ -1,6 +1,6 @@
-import React, { forwardRef, useContext, type FieldsetHTMLAttributes } from 'react';
-import themeContext from '../../../contexts/theme';
+import React, { type FieldsetHTMLAttributes, forwardRef, useContext } from 'react';
 import inputConfig from '../../../configs/inputConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface InputFieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {

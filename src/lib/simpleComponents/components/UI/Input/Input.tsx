@@ -1,19 +1,19 @@
 import React, {
+  type InputHTMLAttributes,
+  type ReactNode,
   type BaseHTMLAttributes,
   type FieldsetHTMLAttributes,
-  type InputHTMLAttributes,
   type LabelHTMLAttributes,
   type MutableRefObject,
-  type ReactNode,
   forwardRef,
   useContext,
   useRef
 } from 'react';
 import inputConfig from '../../../configs/inputConfig';
-import { mergeClasses } from '../../../utils/propsHelper';
 import themeContext from '../../../contexts/theme';
-import InputContainer from './InputContainer';
+import { mergeClasses } from '../../../utils/propsHelper';
 import InputAdornmentContainer from './InputAdornmentContainer';
+import InputContainer from './InputContainer';
 import InputFieldset from './InputFieldset';
 import InputLabel from './InputLabel';
 import InputLegend from './InputLegend';

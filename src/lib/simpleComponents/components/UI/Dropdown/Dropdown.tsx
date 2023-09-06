@@ -1,6 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import themeContext from '../../../contexts/theme';
 import dropdownConfig from '../../../configs/dropdownConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface DropdownProps extends BaseHTMLAttributes<HTMLDivElement> {

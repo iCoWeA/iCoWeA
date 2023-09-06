@@ -1,4 +1,4 @@
-import React, { forwardRef, type ButtonHTMLAttributes, useContext } from 'react';
+import React, { type ButtonHTMLAttributes, forwardRef, useContext } from 'react';
 import iconButtonConfig from '../../../configs/iconButtonConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';

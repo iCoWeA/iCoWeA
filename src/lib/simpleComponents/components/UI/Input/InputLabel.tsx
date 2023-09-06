@@ -1,6 +1,6 @@
-import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
-import themeContext from '../../../contexts/theme';
+import React, { type LabelHTMLAttributes, forwardRef, useContext } from 'react';
 import inputConfig from '../../../configs/inputConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface InputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {

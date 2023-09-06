@@ -1,4 +1,4 @@
-import React, { forwardRef, type BaseHTMLAttributes } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import formGroupConfig from '../../../configs/formGroupConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
