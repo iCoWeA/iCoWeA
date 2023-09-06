@@ -1,7 +1,4 @@
-import { type CSSProperties } from 'react';
 import { twMerge } from 'tailwind-merge';
-
-export const mergeStyles = (...styles: Array<CSSProperties | undefined>): CSSProperties => Object.assign({}, ...styles);
 
 export const mergeClasses = (...classNames: Array<Record<string, string> | undefined | null | boolean | string>): string => twMerge(classNames.filter((className) => typeof className === 'string' || (typeof className === 'object' && className !== null)).map((className) => {
   if (typeof className === 'object' && className !== null) {
@@ -22,5 +19,3 @@ export const deepClone = <T>(object: T): T => {
 
   return newObject as T;
 };
-
-export const mergeProps = <T extends object, V extends object>(defaultProps: T, props: V): T & V => ({ ...defaultProps, ...props });
