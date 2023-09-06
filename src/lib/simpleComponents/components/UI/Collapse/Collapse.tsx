@@ -1,22 +1,24 @@
 import React, { forwardRef, type BaseHTMLAttributes, type TransitionEvent, type AnimationEvent, useRef, useImperativeHandle, useEffect } from 'react';
-import useTransition, { type TransitionConfig, TransitionStates } from '../../../hooks/useTransition';
+import useTransition, { TransitionStates } from '../../../hooks/useTransition';
 import collapseConfig from '../../../configs/collapseConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
+  onEntering?: () => void;
+  onExiting?: () => void;
+  onEnter?: () => void;
+  onExit?: () => void;
   open?: boolean;
   unmountOnExit?: boolean;
-  transitionConfig?: TransitionConfig;
 }
 
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const { defaultProps, styles } = collapseConfig;
-  const { open, unmountOnExit, transitionConfig, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = {
+  const { onEntering, onExiting, onEnter, onExit, open, unmountOnExit, onTransitionEnd, onAnimationEnd, style, className, ...restProps } = {
     ...defaultProps,
     ...props
   };
-  const mergedTransitionConfig = { ...defaultProps.transitionConfig, ...transitionConfig };
 
   /* --- Set refs --- */
   const componentRef = useRef<HTMLDivElement>(null);
@@ -25,32 +27,32 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
 
   /* --- Set states --- */
-  const { state: transitionState, className: transitionClassName, enter, exit } = useTransition(mergedTransitionConfig);
+  const { state, enter, stopEntering, exit, stopExiting } = useTransition();
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (open && transitionState.exit) {
-      enter();
+    if (open && state.exit) {
+      enter(onEntering);
     }
 
-    if (!open && transitionState.enter) {
-      exit();
+    if (!open && state.enter) {
+      exit(onExiting);
     }
-  }, [open, transitionState.enter, transitionState.exit]);
+  }, [open, state.enter, state.exit]);
 
   /* --- Unmount --- */
-  if (unmountOnExit && transitionState.current === TransitionStates.EXITED && !open) {
+  if (unmountOnExit && !open && state.current === TransitionStates.EXITED) {
     return <></>;
   }
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (transitionState.current === TransitionStates.ENTERING && event.target === componentRef.current) {
-      enter(true);
+    if (state.current === TransitionStates.ENTERING && event.target === componentRef.current) {
+      stopEntering(onEnter);
     }
 
-    if (transitionState.current === TransitionStates.EXITING && event.target === componentRef.current) {
-      exit(true);
+    if (state.current === TransitionStates.EXITING && event.target === componentRef.current) {
+      stopExiting(onExit);
     }
 
     if (onTransitionEnd !== undefined) {
@@ -59,12 +61,12 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (transitionState.current === TransitionStates.ENTERING && event.target === componentRef.current) {
-      enter(true);
+    if (state.current === TransitionStates.ENTERING && event.target === componentRef.current) {
+      stopEntering(onEnter);
     }
 
-    if (transitionState.current === TransitionStates.EXITING && event.target === componentRef.current) {
-      exit(true);
+    if (state.current === TransitionStates.EXITING && event.target === componentRef.current) {
+      stopExiting(onExit);
     }
 
     if (onAnimationEnd !== undefined) {
@@ -73,12 +75,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const mergedStyle = {
-    height: `${transitionState.entering ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
-    transitionDuration: `${transitionState.entering ? mergedTransitionConfig.enterDuration : mergedTransitionConfig.exitDuration}ms`,
+    height: `${state.enter ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
     ...style
   };
 
-  const mergedClassName = mergeClasses(styles.base, className, transitionClassName);
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <div
