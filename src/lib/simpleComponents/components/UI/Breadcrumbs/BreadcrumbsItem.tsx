@@ -1,4 +1,4 @@
-import React, { forwardRef, type LiHTMLAttributes } from 'react';
+import React, { type LiHTMLAttributes, forwardRef } from 'react';
 import breadcrumbsConfig from '../../../configs/breadcrumbsConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 

@@ -1,6 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import themeContext from '../../../contexts/theme';
 import badgeConfig, { type BadgePosition } from '../../../configs/badgeConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {

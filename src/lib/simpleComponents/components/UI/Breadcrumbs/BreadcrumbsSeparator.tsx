@@ -1,6 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import themeContext from '../../../contexts/theme';
 import breadcrumbsConfig from '../../../configs/breadcrumbsConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface BreacrumbsSeparatorProps extends BaseHTMLAttributes<HTMLSpanElement> {

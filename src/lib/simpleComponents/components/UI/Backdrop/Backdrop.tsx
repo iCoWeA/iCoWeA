@@ -1,8 +1,8 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes, type MouseEvent } from 'react';
-import themeContext from '../../../contexts/theme';
-import backdropConfig from '../../../configs/backdropConfig';
-import { mergeClasses } from '../../../utils/propsHelper';
+import React, { type BaseHTMLAttributes, forwardRef, useContext, type MouseEvent } from 'react';
 import { createPortal } from 'react-dom';
+import backdropConfig from '../../../configs/backdropConfig';
+import themeContext from '../../../contexts/theme';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface BackdropProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;

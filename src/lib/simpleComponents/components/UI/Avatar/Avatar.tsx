@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, type ImgHTMLAttributes } from 'react';
+import React, { type ImgHTMLAttributes, forwardRef, useContext } from 'react';
 import avatarConfig, { type AvatarVariants } from '../../../configs/avatarConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';

@@ -1,8 +1,8 @@
-import React, { forwardRef, type BaseHTMLAttributes, type ReactNode, type LiHTMLAttributes } from 'react';
+import React, { type BaseHTMLAttributes, type ReactNode, type LiHTMLAttributes, forwardRef } from 'react';
 import breadcrumbsConfig from '../../../configs/breadcrumbsConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
-import BreadcrumbsSeparator from './BreadcrumbsSeparator';
 import BreadcrumbsItem from './BreadcrumbsItem';
+import BreadcrumbsSeparator from './BreadcrumbsSeparator';
 
 export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLUListElement> {
   separator?: ReactNode;
