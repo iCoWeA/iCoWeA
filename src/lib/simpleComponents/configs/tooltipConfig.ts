@@ -3,16 +3,13 @@ import { type BaseHTMLAttributes } from 'react';
 export interface TooltipConfig {
   defaultProps: {
     color: Colors;
+    elevated: boolean;
     position: Positions;
     gap: number;
     responsive: boolean;
     followCursor: boolean;
     unmountOnExit: boolean;
     arrow: boolean;
-    transitionConfig: {
-      enterDuration: number,
-      exitDuration: number
-    };
     overlayRef: Element | null;
     arrowProps: BaseHTMLAttributes<HTMLDivElement>
   };
@@ -20,6 +17,7 @@ export interface TooltipConfig {
     container: {
       base: Record<string, string>;
       open: Record<string, string>;
+      elevated: Record<string, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>
     },
     arrow: {
@@ -32,16 +30,13 @@ export interface TooltipConfig {
 const tooltipConfig: TooltipConfig = {
   defaultProps: {
     color: 'default',
+    elevated: false,
     position: 'bottom',
     gap: 1,
     responsive: true,
     followCursor: false,
     unmountOnExit: true,
     arrow: false,
-    transitionConfig: {
-      enterDuration: 500,
-      exitDuration: 500
-    },
     overlayRef: null,
     arrowProps: {}
   },
@@ -62,47 +57,52 @@ const tooltipConfig: TooltipConfig = {
       open: {
         opacity: 'opacity-100'
       },
+      elevated: {
+        default: {
+          shadow: 'shadow-md shadow-default-default/80'
+        }
+      },
       colors: {
         default: {
           default: {
             fill: 'fill-default-dark',
             color: 'text-default-dark',
-            background: 'bg-default-default/90'
+            background: 'bg-default-default'
           },
           primary: {
             fill: 'fill-default-light',
             color: 'text-default-light',
-            background: 'bg-default-primary/90'
+            background: 'bg-default-primary'
           },
           secondary: {
             fill: 'fill-default-light',
             color: 'text-default-light',
-            background: 'bg-default-secondary/90'
+            background: 'bg-default-secondary'
           },
           success: {
             fill: 'fill-default-light',
             color: 'text-default-light',
-            background: 'bg-default-success/90'
+            background: 'bg-default-success'
           },
           warning: {
             fill: 'fill-default-dark',
             color: 'text-default-dark',
-            background: 'bg-default-warning/90'
+            background: 'bg-default-warning'
           },
           error: {
             fill: 'fill-default-light',
             color: 'text-default-light',
-            background: 'bg-default-error/90'
+            background: 'bg-default-error'
           },
           light: {
             fill: 'fill-default-dark',
             color: 'text-default-dark',
-            background: 'bg-default-light/90'
+            background: 'bg-default-light'
           },
           dark: {
             fill: 'fill-default-light',
             color: 'text-default-light',
-            background: 'bg-default-dark/90'
+            background: 'bg-default-dark'
           }
         }
       }

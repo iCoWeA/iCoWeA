@@ -30,6 +30,7 @@ export interface TooltipProps extends BaseHTMLAttributes<HTMLDivElement> {
   onExit?: () => void;
   open?: boolean;
   color?: Colors;
+  elevated?: boolean;
   position?: Positions;
   gap?: number;
   responsive?: boolean;
@@ -54,6 +55,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     onExit,
     open,
     color,
+    elevated,
     position,
     gap,
     responsive,
@@ -211,7 +213,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     }
   };
 
-  const mergedClassName = mergeClasses(styles.base, animationState.enter && styles.open, styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    animationState.enter && styles.open,
+    styles.colors[theme][color],
+    elevated && styles.elevated[theme],
+    className
+  );
 
   let node = (
     <div
