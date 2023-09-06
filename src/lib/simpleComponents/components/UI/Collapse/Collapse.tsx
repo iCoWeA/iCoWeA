@@ -27,31 +27,31 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
 
   /* --- Set states --- */
-  const { state, enter, stopEntering, exit, stopExiting } = useTransition();
+  const { state: transitionState, enter, stopEntering, exit, stopExiting } = useTransition();
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (open && state.exit) {
+    if (open && transitionState.exit) {
       enter(onEntering);
     }
 
-    if (!open && state.enter) {
+    if (!open && transitionState.enter) {
       exit(onExiting);
     }
-  }, [open, state.enter, state.exit]);
+  }, [open, transitionState.enter, transitionState.exit]);
 
   /* --- Unmount --- */
-  if (unmountOnExit && !open && state.current === TransitionStates.EXITED) {
+  if (unmountOnExit && !open && transitionState.current === TransitionStates.EXITED) {
     return <></>;
   }
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (state.current === TransitionStates.ENTERING && event.target === componentRef.current) {
+    if (transitionState.current === TransitionStates.ENTERING && event.target === componentRef.current) {
       stopEntering(onEnter);
     }
 
-    if (state.current === TransitionStates.EXITING && event.target === componentRef.current) {
+    if (transitionState.current === TransitionStates.EXITING && event.target === componentRef.current) {
       stopExiting(onExit);
     }
 
@@ -61,11 +61,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (state.current === TransitionStates.ENTERING && event.target === componentRef.current) {
+    if (transitionState.current === TransitionStates.ENTERING && event.target === componentRef.current) {
       stopEntering(onEnter);
     }
 
-    if (state.current === TransitionStates.EXITING && event.target === componentRef.current) {
+    if (transitionState.current === TransitionStates.EXITING && event.target === componentRef.current) {
       stopExiting(onExit);
     }
 
@@ -75,7 +75,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   };
 
   const mergedStyle = {
-    height: `${state.enter ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
+    height: `${transitionState.enter ? componentRef.current?.scrollHeight ?? 0 : 0}px`,
     ...style
   };
 
