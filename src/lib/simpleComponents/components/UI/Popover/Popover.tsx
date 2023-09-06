@@ -8,7 +8,6 @@ import React, {
   useEffect,
   useCallback,
   type ReactNode,
-  cloneElement,
   type TransitionEvent,
   type AnimationEvent
 } from 'react';
@@ -23,6 +22,7 @@ import { setElementPosition } from '../../../utils/positiontHelper';
 import { mergeClasses } from '../../../utils/propsHelper';
 import { type BackdropProps } from '../Backdrop/Backdrop';
 import PopoverBackdrop from './PopoverBackdrop';
+import PopoverHandler from './PopoverHandler';
 
 export interface PopoverProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEntering?: () => void;
@@ -60,6 +60,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     handler,
     backdropProps,
     className,
+    children,
     ...restProps
   } = { ...popoverConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
@@ -146,30 +147,21 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   let handlerNode: ReactNode;
 
   if (handler !== undefined) {
-    const ref = (handler as any).ref;
+    const setHandlerRef = (element: HTMLElement): void => {
+      const ref = (handler as any).ref;
 
-    if (ref === undefined || ref === null) {
-      const setRef = (element: HTMLElement): void => {
+      if (ref === undefined || ref === null) {
         handlerRef.current = element;
-      };
-
-      handlerNode = cloneElement(handler, { ref: setRef });
-    } else if (typeof ref === 'function') {
-      const setRef = (element: HTMLElement): void => {
+      } else if (typeof ref === 'function') {
         handlerRef.current = element;
         ref(element);
-      };
+      } else {
+        handlerRef.current = element;
+        ref.current = element;
+      }
+    };
 
-      handlerNode = cloneElement(handler, { ref: setRef });
-    } else {
-      handlerRef.current = ref.current;
-      handlerNode = handler;
-    }
-  }
-
-  /* --- Unmount --- */
-  if (unmountOnExit && !(open ?? isOpen) && animationState.current === AnimationStates.EXITED) {
-    return <>{handlerNode}</>;
+    handlerNode = <PopoverHandler ref={setHandlerRef}>{handler}</PopoverHandler>;
   }
 
   /* --- Set backdrop --- */
@@ -208,23 +200,29 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(styles.base, animationState.enter && styles.open, className);
 
-  let node = (
-    <div
-      onTransitionEnd={transitionEndHandler}
-      onAnimationEnd={animationEndHandler}
-      className={mergedClassName}
-      ref={containerRef}
-      {...restProps}
-    />
-  );
+  let node: ReactNode;
 
-  if (overlayRef !== null) {
-    node = createPortal(node, overlayRef);
+  if (!unmountOnExit || !(unmountOnExit && !(open ?? isOpen) && animationState.current === AnimationStates.EXITED)) {
+    node = (
+      <div
+        onTransitionEnd={transitionEndHandler}
+        onAnimationEnd={animationEndHandler}
+        className={mergedClassName}
+        ref={containerRef}
+        {...restProps}
+      >
+        {backdropNode}
+        {children}
+      </div>
+    );
+
+    if (overlayRef !== null) {
+      node = createPortal(node, overlayRef);
+    }
   }
 
   return (
     <>
-      {backdropNode}
       {handlerNode}
       {node}
     </>

@@ -1,4 +1,4 @@
-import { forwardRef, cloneElement, type ReactElement } from 'react';
+import { type ReactElement, forwardRef, cloneElement } from 'react';
 
 interface PopoverHandlerProps {
   children: ReactElement;

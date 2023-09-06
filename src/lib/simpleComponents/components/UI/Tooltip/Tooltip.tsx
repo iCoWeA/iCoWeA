@@ -9,8 +9,8 @@ import React, {
   useEffect,
   useCallback,
   type ReactNode,
-  type AnimationEvent,
-  type TransitionEvent
+  type TransitionEvent,
+  type AnimationEvent
 } from 'react';
 import { createPortal } from 'react-dom';
 import tooltipConfig from '../../../configs/tooltipConfig';
@@ -164,11 +164,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     </TooltipHandler>
   );
 
-  /* --- Unmount --- */
-  if (unmountOnExit && !(open ?? isOpen) && animationState.current === AnimationStates.EXITED) {
-    return <>{handlerNode}</>;
-  }
-
   /* --- Set arrow props --- */
   let arrowNode: ReactNode;
 
@@ -211,21 +206,25 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     className
   );
 
-  let node = (
-    <div
-      onTransitionEnd={transitionEndHandler}
-      onAnimationEnd={animationEndHandler}
-      className={mergedClassName}
-      ref={containerRef}
-      {...restProps}
-    >
-      {arrowNode}
-      {children}
-    </div>
-  );
+  let node: ReactNode;
 
-  if (overlayRef !== null) {
-    node = createPortal(node, overlayRef);
+  if (!unmountOnExit || !(unmountOnExit && !(open ?? isOpen) && animationState.current === AnimationStates.EXITED)) {
+    node = (
+      <div
+        onTransitionEnd={transitionEndHandler}
+        onAnimationEnd={animationEndHandler}
+        className={mergedClassName}
+        ref={containerRef}
+        {...restProps}
+      >
+        {arrowNode}
+        {children}
+      </div>
+    );
+
+    if (overlayRef !== null) {
+      node = createPortal(node, overlayRef);
+    }
   }
 
   return (
