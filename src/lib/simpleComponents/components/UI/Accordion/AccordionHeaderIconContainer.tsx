@@ -4,29 +4,23 @@ import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AccordionHeaderIconContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   open: boolean;
-  transitionDuration: number;
 }
 
-const AccordionHeaderIconContainer = forwardRef<HTMLDivElement, AccordionHeaderIconContainerProps>(
-  ({ open, transitionDuration, style, className, ...restProps }, ref) => {
-    /* --- Set default props --- */
-    const styles = accordionHeaderConfig.styles.iconContainer;
+const AccordionHeaderIconContainer = forwardRef<HTMLDivElement, AccordionHeaderIconContainerProps>(({ open, className, ...restProps }, ref) => {
+  /* --- Set default props --- */
+  const styles = accordionHeaderConfig.styles.iconContainer;
 
-    /* --- Set props --- */
-    const mergedStyle = { transitionDuration: `${transitionDuration}ms`, ...style };
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(styles.base, open && styles.open, className);
 
-    const mergedClassName = mergeClasses(styles.base, open && styles.open, className);
-
-    return (
-      <div
-        style={mergedStyle}
-        className={mergedClassName}
-        ref={ref}
-        {...restProps}
-      />
-    );
-  }
-);
+  return (
+    <div
+      className={mergedClassName}
+      ref={ref}
+      {...restProps}
+    />
+  );
+});
 
 AccordionHeaderIconContainer.displayName = 'AccordionHeaderIconContainer';
 

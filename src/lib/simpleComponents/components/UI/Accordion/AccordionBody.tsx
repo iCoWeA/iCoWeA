@@ -10,15 +10,11 @@ export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
 
 const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref) => {
   /* --- Set context props --- */
-  const { open: isAccordionOpen, transitionDuration: accordionTransitionDuration } = useContext(accordionContext);
+  const { open: isAccordionOpen } = useContext(accordionContext);
 
   /* --- Set default props --- */
   const styles = accordionBodyConfig.styles;
   const { collapseProps, className, ...restProps } = { ...accordionBodyConfig.defaultProps, ...props };
-
-  /* --- Set collapse props --- */
-  const { transitionConfig, ...restCollapseProps } = collapseProps;
-  const mergedTransitionConfig = { enterDuration: accordionTransitionDuration, exitDuration: accordionTransitionDuration, ...(transitionConfig ?? {}) };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, className);
@@ -26,9 +22,8 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref
   return (
     <Collapse
       open={isAccordionOpen}
-      transitionConfig={mergedTransitionConfig}
       ref={ref}
-      {...restCollapseProps}
+      {...collapseProps}
     >
       <div
         className={mergedClassName}

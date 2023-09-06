@@ -15,12 +15,7 @@ export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonEle
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((props, ref) => {
   /* --- Set context props --- */
-  const {
-    open: isAccordionOpen,
-    disabled: isAccordionDisabled,
-    transitionDuration: accordionTransitionDuration,
-    onClick: onAccordionClick
-  } = useContext(accordionContext);
+  const { open: isAccordionOpen, disabled: isAccordionDisabled, onClick: onAccordionClick } = useContext(accordionContext);
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
@@ -60,7 +55,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
     iconContainerNode = (
       <AccordionHeaderIconContainer
         open={isAccordionOpen}
-        transitionDuration={accordionTransitionDuration}
         {...iconContainerProps}
       >
         {iconNode}
