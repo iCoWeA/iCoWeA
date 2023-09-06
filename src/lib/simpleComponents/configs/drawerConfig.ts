@@ -8,7 +8,6 @@ export interface DrawerConfig {
     position: DrawerPositions;
     color: Colors;
     lockScroll: boolean;
-    transitionConfig: { enterDuration: number, exitDuration: number }
     overlayRef: Element | null;
     backdropProps: BackdropProps;
   };
@@ -31,7 +30,6 @@ const drawerConfig: DrawerConfig = {
     position: 'left',
     color: 'primary',
     lockScroll: true,
-    transitionConfig: { enterDuration: 500, exitDuration: 500 },
     overlayRef: null,
     backdropProps: {}
   },
