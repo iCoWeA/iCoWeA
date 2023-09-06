@@ -1,4 +1,4 @@
-import { type LiHTMLAttributes, type ReactNode } from 'react';
+import { type ReactNode, type LiHTMLAttributes } from 'react';
 
 export interface BreadcrumbsConfig {
   defaultProps: {

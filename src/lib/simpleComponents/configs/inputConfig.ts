@@ -56,7 +56,7 @@ export interface InputConfig {
       invalid: Record<string, Record<string, string>>;
       sizes: Record<InputVariants, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>;
-    },
+    }
   }
 }
 
