@@ -35,23 +35,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = drawerConfig.styles.drawer;
-  const {
-    onEntering,
-    onExiting,
-    onEnter,
-    onExit,
-    onClose,
-    open,
-    position,
-    color,
-    lockScroll,
-    overlayRef,
-    backdropProps,
-    onTransitionEnd,
-    onAnimationEnd,
-    className,
-    ...restProps
-  } = {
+  const { onEntering, onExiting, onEnter, onExit, onClose, open, position, color, lockScroll, overlayRef, backdropProps, className, ...restProps } = {
     ...drawerConfig.defaultProps,
     ...props
   };
@@ -101,10 +85,6 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
       stopExiting(onExit);
     }
-
-    if (onTransitionEnd !== undefined) {
-      onTransitionEnd(event);
-    }
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
@@ -114,10 +94,6 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
 
     if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
       stopExiting(onExit);
-    }
-
-    if (onAnimationEnd !== undefined) {
-      onAnimationEnd(event);
     }
   };
 
