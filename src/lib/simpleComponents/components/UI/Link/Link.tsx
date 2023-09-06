@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from 'react';
-import linkConfig, { type LinkUnderlines } from '../../../configs/linkConfig';
 import { type LinkProps as BaseLinkProps, Link as BaseLink } from 'react-router-dom';
+import linkConfig, { type LinkUnderlines } from '../../../configs/linkConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 

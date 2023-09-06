@@ -1,6 +1,6 @@
 import React, { type LiHTMLAttributes, forwardRef, useContext } from 'react';
-import themeContext from '../../../contexts/theme';
 import listItemConfig from '../../../configs/listItemConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {

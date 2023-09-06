@@ -1,6 +1,6 @@
-import React, { forwardRef, useContext, type LabelHTMLAttributes } from 'react';
-import themeContext from '../../../contexts/theme';
+import React, { type LabelHTMLAttributes, forwardRef, useContext } from 'react';
 import labelConfig from '../../../configs/labelConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {

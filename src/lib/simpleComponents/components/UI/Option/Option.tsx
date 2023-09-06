@@ -1,9 +1,9 @@
-import React, { forwardRef, useContext, type OptionHTMLAttributes, type LiHTMLAttributes, type MutableRefObject, type MouseEvent } from 'react';
+import React, { type OptionHTMLAttributes, type LiHTMLAttributes, type MutableRefObject, forwardRef, useContext, type MouseEvent } from 'react';
 import optionConfig, { type OptionVariant } from '../../../configs/optionConfig';
+import selectContext from '../../../contexts/select';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 import OptionContainer from './OptionContainer';
-import selectContext from '../../../contexts/select';
 
 export interface OptionProps extends OptionHTMLAttributes<HTMLOptionElement> {
   value: string;

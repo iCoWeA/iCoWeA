@@ -1,6 +1,6 @@
-import React, { forwardRef, useContext, type BaseHTMLAttributes, type MutableRefObject } from 'react';
-import themeContext from '../../../contexts/theme';
+import React, { type BaseHTMLAttributes, type MutableRefObject, forwardRef, useContext } from 'react';
 import progressConfig from '../../../configs/progressConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 import ProgressContainer from './ProgressContainer';
 
