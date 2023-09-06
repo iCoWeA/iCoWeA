@@ -35,22 +35,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = dialogConfig.styles.dialog;
-  const {
-    onEntering,
-    onExiting,
-    onEnter,
-    onExit,
-    onClose,
-    open,
-    color,
-    elevated,
-    lockScroll,
-    transitionConfig,
-    overlayRef,
-    backdropProps,
-    className,
-    ...restProps
-  } = {
+  const { onEntering, onExiting, onEnter, onExit, onClose, color, elevated, open, lockScroll, overlayRef, backdropProps, className, ...restProps } = {
     ...dialogConfig.defaultProps,
     ...props
   };
