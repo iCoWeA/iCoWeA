@@ -1,22 +1,40 @@
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, type MutableRefObject, forwardRef, useContext } from 'react';
 import selectConfig from '../../../configs/selectConfig';
+import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 interface SelectContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
-  open: boolean;
-  value: string | number | readonly string[];
+  variant: InputVariants;
+  inputRef: MutableRefObject<HTMLInputElement | null>;
+  disabled: boolean;
 }
 
-const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ open, value, className, ...restProps }, ref) => {
+const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ variant, inputRef, disabled, className, ...restProps }, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
   const styles = selectConfig.styles.container;
-  const isShifted = open ? true : value !== '';
+  const shift = typeof inputRef.current?.value === 'string' && inputRef.current?.value !== '';
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, isShifted && styles.shifted, open && styles.focused, className);
+  const clickHandler = (): void => {
+    inputRef.current?.focus();
+  };
+
+  const mergedClassName = mergeClasses(
+    styles.base,
+    shift && styles.shift,
+    variant === 'filled' && styles.colors[theme],
+    disabled && styles.disabled,
+    disabled && styles.disabledColors[theme],
+    className
+  );
 
   return (
     <div
+      onClick={clickHandler}
+      tabIndex={1}
       className={mergedClassName}
       ref={ref}
       {...restProps}
