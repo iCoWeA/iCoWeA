@@ -7,13 +7,14 @@ import { mergeClasses } from '../../../utils/propsHelper';
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
   defaultOpen?: boolean;
+  id?: string;
   icon?: ReactNode;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = accordionConfig.styles;
-  const { open, defaultOpen, icon, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
+  const { open, defaultOpen, id, icon, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
 
   /* --- Set states --- */
@@ -33,6 +34,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
     () => ({
       open: open ?? isOpen,
       disabled,
+      id,
       icon,
       onToggle: () => {
         if (!isControlled) {
@@ -40,7 +42,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
         }
       }
     }),
-    [open, isOpen, disabled, icon, isControlled]
+    [open, isOpen, disabled, id, icon, isControlled]
   );
 
   /* Set props */
