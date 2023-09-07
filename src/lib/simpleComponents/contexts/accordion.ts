@@ -1,15 +1,17 @@
-import { createContext } from 'react';
+import { type ReactNode, createContext } from 'react';
 
 export interface AccordionContext {
   open: boolean;
   disabled: boolean;
-  onClick: () => void;
+  icon?: ReactNode;
+  id?: string;
+  onToggle: () => void;
 }
 
 export const initialState: AccordionContext = {
   open: false,
   disabled: false,
-  onClick: () => {}
+  onToggle: () => {}
 };
 
 const accordionContext = createContext(initialState);
