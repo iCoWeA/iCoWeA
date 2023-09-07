@@ -65,16 +65,20 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   } = { ...popoverConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
 
+  /* --- Set states --- */
+  const [isOpen, setIsOpen] = useState(false);
+  const { state: animationState, enter, stopEntering, exit, stopExiting } = useAnimation();
+
   /* --- Set refs --- */
   const containerRef = useRef<HTMLDivElement>(null);
   const handlerRef = useRef<HTMLElement | null>(null);
 
   /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => containerRef.current, []);
-
-  /* --- Set states --- */
-  const [isOpen, setIsOpen] = useState(false);
-  const { state: animationState, enter, stopEntering, exit, stopExiting } = useAnimation();
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => containerRef.current, [
+    unmountOnExit,
+    open ?? isOpen,
+    animationState.current === AnimationStates.EXITED
+  ]);
 
   /* --- Set previous values  --- */
   const prevOpen = usePrevious(open);
@@ -98,14 +102,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   /* --- Set outside click action --- */
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isClickedContainer = containerRef.current?.contains(event.target as Node) ?? false;
-    const isClickedHandler = handlerRef.current?.contains(event.target as Node) ?? false;
+    const isContainerClicked = containerRef.current?.contains(event.target as Node) ?? false;
+    const isHandlerClicked = handlerRef.current?.contains(event.target as Node) ?? false;
 
-    if (isClickedHandler) {
+    if (isHandlerClicked) {
       setIsOpen((isOpen) => !isOpen);
     }
 
-    if (!isClickedContainer && !isClickedHandler) {
+    if (!isContainerClicked && !isHandlerClicked) {
       setIsOpen(false);
     }
   }, []);
