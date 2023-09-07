@@ -2,16 +2,16 @@ import React, { type Dispatch, type SetStateAction, forwardRef } from 'react';
 import Menu, { type MenuProps } from '../Menu/Menu';
 
 export interface SelectMenuProps extends MenuProps {
-  setIsFocused: Dispatch<SetStateAction<boolean>>;
+  setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(({ setIsFocused, popoverProps = {}, ...restProps }, ref) => {
+const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(({ setIsMenuOpen, popoverProps = {}, ...restProps }, ref) => {
   popoverProps.onEntering = () => {
-    setIsFocused(true);
+    setIsMenuOpen(true);
   };
 
   popoverProps.onExiting = () => {
-    setIsFocused(false);
+    setIsMenuOpen(false);
   };
 
   return (
