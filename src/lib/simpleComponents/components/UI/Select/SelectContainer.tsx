@@ -16,7 +16,7 @@ const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ focu
 
   /* --- Set default props --- */
   const styles = selectConfig.styles.container;
-  const shift = typeof selectRef.current?.value === 'string' && selectRef.current?.value !== '';
+  const shift = focused || (typeof selectRef.current?.value === 'string' && selectRef.current?.value !== '');
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
@@ -31,7 +31,6 @@ const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(({ focu
 
   return (
     <div
-      tabIndex={1}
       className={mergedClassName}
       ref={ref}
       {...restProps}
