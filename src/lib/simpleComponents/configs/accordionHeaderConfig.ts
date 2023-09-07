@@ -32,7 +32,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         gap: 'gap-3',
         alignItems: 'items-center',
         width: 'w-full',
-        padding: 'py-4',
+        padding: 'py-3',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition-colors',
         focus: 'focus:outline-0',
