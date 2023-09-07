@@ -8,18 +8,25 @@ export interface TransitionState {
   exit: boolean;
 }
 
+export interface TransitionConfig {
+  onEntering?: () => void;
+  onExiting?: () => void;
+  onEnter?: () => void;
+  onExit?: () => void;
+}
+
 interface Return<T> {
   state: TransitionState;
-  enter: (onEntering: () => void) => void;
-  exit: (onExiting: () => void) => void;
+  enter: (onEntering?: () => void) => void;
+  exit: (onExiting?: () => void) => void;
   transitionEndHandler: TransitionEventHandler<T>,
   animationEndHandler: AnimationEventHandler<T>
 }
 
-const useTransition = <T extends HTMLElement>(element: T | null, isEntered: boolean = false, onEnter: () => void, onExit: () => void): Return<T> => {
+const useTransition = <T extends HTMLElement>(element: T | null, isEntered: boolean = false, onEnter?: () => void, onExit?: () => void): Return<T> => {
   const [state, setState] = useState<TransitionStates>(isEntered ? TransitionStates.ENTERED : TransitionStates.EXITED);
 
-  const enter = useCallback((onEntering: () => void) => {
+  const enter = useCallback((onEntering?: () => void) => {
     if (onEntering !== undefined) {
       onEntering();
     }
@@ -27,7 +34,7 @@ const useTransition = <T extends HTMLElement>(element: T | null, isEntered: bool
     setState(TransitionStates.ENTERING);
   }, []);
 
-  const exit = useCallback((onExiting: () => void) => {
+  const exit = useCallback((onExiting?: () => void) => {
     if (onExiting !== undefined) {
       onExiting();
     }
