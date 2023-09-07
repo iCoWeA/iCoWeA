@@ -17,7 +17,7 @@ export interface AlertConfig {
   styles: {
     container: {
       base: Record<string, string>;
-      invisible: Record<string, string>;
+      open: Record<string, string>;
       variants: Record<AlertVariants, Record<string, Record<Colors, Record<string, string>>>>
     },
     iconContainer: {
@@ -56,7 +56,7 @@ const alertConfig: AlertConfig = {
         padding: 'p-2',
         borderRadius: 'rounded-2xl'
       },
-      invisible: {
+      open: {
         display: 'hidden'
       },
       variants: {

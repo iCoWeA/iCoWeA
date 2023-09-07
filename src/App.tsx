@@ -1,14 +1,14 @@
 import React, { type FC } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import RootComponent from './pages/Root';
 import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ThemeProvider from './lib/simpleComponents/components/providers/ThemeProvider';
 import store from './store';
+import Root from './pages/Root';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootComponent />,
+    element: <Root />,
     children: [
       {
         path: '',
@@ -17,6 +17,22 @@ const router = createBrowserRouter([
           {
             path: 'login',
             lazy: async () => await import('./pages/Login')
+          }
+        ]
+      },
+      {
+        path: '',
+        lazy: async () => await import('./pages/DashboardLayout'),
+        children: [
+          {
+            path: 'admin',
+            lazy: async () => await import('./pages/Admin'),
+            children: [
+              {
+                path: 'messages',
+                lazy: async () => await import('./pages/AdminMessages')
+              }
+            ]
           }
         ]
       }

@@ -105,7 +105,6 @@ const selectConfig: SelectConfig = {
         borderRadius: 'rounded-t-2xl',
         transition: 'transition-colors',
         focus: 'focus:outline-0',
-        focusWithin: 'focus-within:focus',
         group: 'group'
       },
       focus: {
@@ -118,7 +117,7 @@ const selectConfig: SelectConfig = {
         default: {
           background: 'bg-default-default/10',
           hover: 'hover:bg-default-default/20',
-          focusWithin: 'focus-within:hover:bg-default-default/10'
+          group: 'group-[.focus]:hover:bg-default-default/10'
         }
       },
       disabled: {
@@ -142,87 +141,89 @@ const selectConfig: SelectConfig = {
       },
       leftGap: {
         padding: 'pl-3',
-        group: 'group-[.focus]:pl-3'
+        groupFocus: 'group-[.focus]:pl-3'
       },
       rightGap: {
         padding: 'pr-3',
-        group: 'group-[.focus]:pr-3'
+        groupFocus: 'group-[.focus]:pr-3'
       },
       start: {
         padding: 'pr-0',
         border: 'border-r-0',
         borderRadius: 'rounded-r-none',
-        group: 'group-[.focus]:border-r-0'
+        groupFocus: 'group-[.focus]:border-r-0 group-[.focus]:pr-0'
       },
       end: {
-        padding: 'px-4 pl-0',
+        padding: 'pl-0',
         border: 'border-l-0',
         borderRadius: 'rounded-l-none',
-        group: 'group-[.focus]:border-l-0'
+        groupFocus: 'group-[.focus]:border-l-0 group-[.focus]:pl-0'
       },
       variants: {
         standard: {
           padding: 'pt-0.5 pb-px px-4',
           border: 'border-b',
-          group: 'group-[.focus]:pb-0 group-[.focus]:border-b-2'
+          groupFocus: 'group-[.focus]:pb-0 group-[.focus]:border-b-2'
         },
         filled: {
           padding: 'pt-[1.125rem] pb-px px-4',
           border: 'border-b',
-          group: 'group-[.focus]:pb-0 group-[.focus]:border-b-2'
+          groupFocus: 'group-[.focus]:pb-0 group-[.focus]:border-b-2'
         },
         outlined: {
           padding: 'py-px px-[0.9375rem]',
           border: 'border',
           borderRadius: 'rounded-2xl',
-          group: 'group-[.focus]:py-0 group-[.focus]:px-3.5 group-[.focus]:border-2'
+          groupFocus: 'group-[.focus]:py-0 group-[.focus]:px-3.5 group-[.focus]:border-2'
         }
       },
       valid: {
         default: {
           border: 'border-default-success',
-          group: 'group-[.focus]:border-default-success'
+
+          groupFocus: 'group-[.focus]:border-default-success'
         }
       },
       invalid: {
         default: {
           border: 'border-default-error',
-          group: 'group-[.focus]:border-default-error'
+
+          groupFocus: 'group-[.focus]:border-default-error'
         }
       },
       colors: {
         default: {
           default: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-default'
+            groupFocus: 'group-[.focus]:border-default-default'
           },
           primary: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-primary'
+            groupFocus: 'group-[.focus]:border-default-primary'
           },
           secondary: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-secondary'
+            groupFocus: 'group-[.focus]:border-default-secondary'
           },
           success: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-success'
+            groupFocus: 'group-[.focus]:border-default-success'
           },
           warning: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-warning'
+            groupFocus: 'group-[.focus]:border-default-warning'
           },
           error: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-error'
+            groupFocus: 'group-[.focus]:border-default-error'
           },
           light: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-light'
+            groupFocus: 'group-[.focus]:border-default-light'
           },
           dark: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-dark'
+            groupFocus: 'group-[.focus]:border-default-dark'
           }
         }
       }
@@ -240,64 +241,64 @@ const selectConfig: SelectConfig = {
         standard: {
           padding: 'pt-2 pb-[0.4375rem]',
           border: 'border-b',
-          group: 'group-[.focus]:pb-1.5 group-[.focus]:border-b-2'
+          groupFocus: 'group-[.focus]:pb-1.5 group-[.focus]:border-b-2'
         },
         filled: {
           padding: 'pt-6 pb-[0.4375rem]',
           border: 'border-b',
-          group: 'group-[.focus]:pb-1.5 group-[.focus]:border-b-2'
+          groupFocus: 'group-[.focus]:pb-1.5 group-[.focus]:border-b-2'
         },
         outlined: {
           padding: 'py-[0.4375rem]',
           border: 'border-y',
-          group: 'group-[.focus]:py-1.5 group-[.focus]:border-y-2'
+          groupFocus: 'group-[.focus]:py-1.5 group-[.focus]:border-y-2'
         }
       },
       valid: {
         default: {
           border: 'border-default-success',
-          group: 'group-[.focus]:border-default-success'
+          groupFocus: 'group-[.focus]:border-default-success'
         }
       },
       invalid: {
         default: {
           border: 'border-default-error',
-          group: 'group-[.focus]:border-default-error'
+          groupFocus: 'group-[.focus]:border-default-error'
         }
       },
       colors: {
         default: {
           default: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-default'
+            groupFocus: 'group-[.focus]:border-default-default'
           },
           primary: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-primary'
+            groupFocus: 'group-[.focus]:border-default-primary'
           },
           secondary: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-secondary'
+            groupFocus: 'group-[.focus]:border-default-secondary'
           },
           success: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-success'
+            groupFocus: 'group-[.focus]:border-default-success'
           },
           warning: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-warning'
+            groupFocus: 'group-[.focus]:border-default-warning'
           },
           error: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-error'
+            groupFocus: 'group-[.focus]:border-default-error'
           },
           light: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-light'
+            groupFocus: 'group-[.focus]:border-default-light'
           },
           dark: {
             border: 'border-default-divider',
-            group: 'group-[.focus]:border-default-dark'
+            groupFocus: 'group-[.focus]:border-default-dark'
           }
         }
       }
@@ -356,7 +357,7 @@ const selectConfig: SelectConfig = {
         font: 'antialiased font-normal text-sm font-sans text-transparent',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
-        group: 'group-[.shift]:block group-[.shift]:h-0 group-[.shift]:px-1 group-[.focus]:block group-[.focus]:h-0 group-[.focus]:px-1'
+        groupShift: 'group-[.shift]:block group-[.shift]:h-0 group-[.shift]:px-1'
       }
     },
     label: {
@@ -367,7 +368,7 @@ const selectConfig: SelectConfig = {
         transition: 'transition-all',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
-        group: 'group-[.shift]:text-sm group-[.shift]:px-1 group-[.focus]:text-sm group-[.focus]:px-1'
+        groupShift: 'group-[.shift]:text-sm group-[.shift]:px-1'
       },
       valid: {
         default: {
@@ -382,15 +383,15 @@ const selectConfig: SelectConfig = {
       sizes: {
         standard: {
           top: 'top-2',
-          group: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4 group-[.focus]:-top-px group-[.focus]:-translate-y-2/4'
+          groupShift: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4'
         },
         filled: {
           top: 'top-6',
-          group: 'group-[.shift]:top-0.5 group-[.focus]:top-0.5'
+          groupShift: 'group-[.shift]:top-0.5'
         },
         outlined: {
           top: 'top-[0.4375rem]',
-          group: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4 group-[.focus]:-top-px group-[.focus]:-translate-y-2/4'
+          groupShift: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4'
         }
       },
       colors: {

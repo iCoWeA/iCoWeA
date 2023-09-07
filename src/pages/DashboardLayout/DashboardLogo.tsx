@@ -9,6 +9,7 @@ const DashboardLogo: FC = () => (
     <img
       src={require('../../assets/images/logo.png')}
       alt="logo"
+      className='h-full'
     />
   </Link>
 );

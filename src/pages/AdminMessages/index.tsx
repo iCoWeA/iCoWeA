@@ -7,7 +7,7 @@ import { child, get, ref } from 'firebase/database';
 import { database } from '../../firebase';
 
 export const Component: FC = () => (
-  <Main>
+  <Main className='h-[5000px]'>
     <Messages />
   </Main>
 );

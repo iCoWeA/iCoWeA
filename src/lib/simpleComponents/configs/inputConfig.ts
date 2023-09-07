@@ -117,87 +117,87 @@ const inputConfig: InputConfig = {
       },
       leftGap: {
         padding: 'pl-3',
-        group: 'group-focus-within:pl-3'
+        groupFocusWithin: 'group-focus-within:pl-3'
       },
       rightGap: {
         padding: 'pr-3',
-        group: 'group-focus-within:pr-3'
+        groupFocusWithin: 'group-focus-within:pr-3'
       },
       start: {
         padding: 'pr-0',
         border: 'border-r-0',
         borderRadius: 'rounded-r-none',
-        group: 'group-focus-within:border-r-0'
+        groupFocusWithin: 'group-focus-within:border-r-0'
       },
       end: {
         padding: 'px-4 pl-0',
         border: 'border-l-0',
         borderRadius: 'rounded-l-none',
-        group: 'group-focus-within:border-l-0'
+        groupFocusWithin: 'group-focus-within:border-l-0'
       },
       variants: {
         standard: {
           padding: 'pt-0.5 pb-px px-4',
           border: 'border-b',
-          group: 'group-focus-within:pb-0 group-focus-within:border-b-2'
+          groupFocusWithin: 'group-focus-within:pb-0 group-focus-within:border-b-2'
         },
         filled: {
           padding: 'pt-[1.125rem] pb-px px-4',
           border: 'border-b',
-          group: 'group-focus-within:pb-0 group-focus-within:border-b-2'
+          groupFocusWithin: 'group-focus-within:pb-0 group-focus-within:border-b-2'
         },
         outlined: {
           padding: 'py-px px-[0.9375rem]',
           border: 'border',
           borderRadius: 'rounded-2xl',
-          group: 'group-focus-within:py-0 group-focus-within:px-3.5 group-focus-within:border-2'
+          groupFocusWithin: 'group-focus-within:py-0 group-focus-within:px-3.5 group-focus-within:border-2'
         }
       },
       valid: {
         default: {
           border: 'border-default-success',
-          group: 'group-focus-within:border-default-success'
+          groupFocusWithin: 'group-focus-within:border-default-success'
         }
       },
       invalid: {
         default: {
           border: 'border-default-error',
-          group: 'group-focus-within:border-default-error'
+          groupFocusWithin: 'group-focus-within:border-default-error'
         }
       },
       colors: {
         default: {
           default: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-default'
+            groupFocusWithin: 'group-focus-within:border-default-default'
           },
           primary: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-primary'
+            groupFocusWithin: 'group-focus-within:border-default-primary'
           },
           secondary: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-secondary'
+            groupFocusWithin: 'group-focus-within:border-default-secondary'
           },
           success: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-success'
+            groupFocusWithin: 'group-focus-within:border-default-success'
           },
           warning: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-warning'
+            groupFocusWithin: 'group-focus-within:border-default-warning'
           },
           error: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-error'
+            groupFocusWithin: 'group-focus-within:border-default-error'
           },
           light: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-light'
+            groupFocusWithin: 'group-focus-within:border-default-light'
           },
           dark: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-dark'
+            groupFocusWithin: 'group-focus-within:border-default-dark'
           }
         }
       }
@@ -215,64 +215,64 @@ const inputConfig: InputConfig = {
         standard: {
           padding: 'pt-2 pb-[0.4375rem]',
           border: 'border-b',
-          group: 'group-focus-within:pb-1.5 group-focus-within:border-b-2'
+          groupFocusWithin: 'group-focus-within:pb-1.5 group-focus-within:border-b-2'
         },
         filled: {
           padding: 'pt-6 pb-[0.4375rem]',
           border: 'border-b',
-          group: 'group-focus-within:pb-1.5 group-focus-within:border-b-2'
+          groupFocusWithin: 'group-focus-within:pb-1.5 group-focus-within:border-b-2'
         },
         outlined: {
           padding: 'py-[0.4375rem]',
           border: 'border-y',
-          group: 'group-focus-within:py-1.5 group-focus-within:border-y-2'
+          groupFocusWithin: 'group-focus-within:py-1.5 group-focus-within:border-y-2'
         }
       },
       valid: {
         default: {
           border: 'border-default-success',
-          group: 'group-focus-within:border-default-success'
+          groupFocusWithin: 'group-focus-within:border-default-success'
         }
       },
       invalid: {
         default: {
           border: 'border-default-error',
-          group: 'group-focus-within:border-default-error'
+          groupFocusWithin: 'group-focus-within:border-default-error'
         }
       },
       colors: {
         default: {
           default: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-default'
+            groupFocusWithin: 'group-focus-within:border-default-default'
           },
           primary: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-primary'
+            groupFocusWithin: 'group-focus-within:border-default-primary'
           },
           secondary: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-secondary'
+            groupFocusWithin: 'group-focus-within:border-default-secondary'
           },
           success: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-success'
+            groupFocusWithin: 'group-focus-within:border-default-success'
           },
           warning: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-warning'
+            groupFocusWithin: 'group-focus-within:border-default-warning'
           },
           error: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-error'
+            groupFocusWithin: 'group-focus-within:border-default-error'
           },
           light: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-light'
+            groupFocusWithin: 'group-focus-within:border-default-light'
           },
           dark: {
             border: 'border-default-divider',
-            group: 'group-focus-within:border-default-dark'
+            groupFocusWithin: 'group-focus-within:border-default-dark'
           }
         }
       }
@@ -331,7 +331,8 @@ const inputConfig: InputConfig = {
         font: 'antialiased font-normal text-sm font-sans text-transparent',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
-        group: 'group-[.shift]:block group-[.shift]:h-0 group-[.shift]:px-1 group-focus-within:block group-focus-within:h-0 group-focus-within:px-1'
+        groupShift: 'group-[.shift]:block group-[.shift]:h-0 group-[.shift]:px-1',
+        groupfocusWithin: 'group-focus-within:block group-focus-within:h-0 group-focus-within:px-1'
       }
     },
     label: {
@@ -342,7 +343,8 @@ const inputConfig: InputConfig = {
         transition: 'transition-all',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
-        group: 'group-[.shift]:text-sm group-[.shift]:px-1 group-focus-within:text-sm group-focus-within:px-1'
+        groupShift: 'group-[.shift]:text-sm group-[.shift]:px-1',
+        groupfocusWithin: 'group-focus-within:text-sm group-focus-within:px-1'
       },
       valid: {
         default: {
@@ -357,50 +359,53 @@ const inputConfig: InputConfig = {
       sizes: {
         standard: {
           top: 'top-2',
-          group: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4 group-focus-within:-top-px group-focus-within:-translate-y-2/4'
+          groupShift: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4',
+          groupFocusWithin: 'group-focus-within:-top-px group-focus-within:-translate-y-2/4'
         },
         filled: {
           top: 'top-6',
-          group: 'group-[.shift]:top-0.5 group-focus-within:top-0.5'
+          groupShift: 'group-[.shift]:top-0.5',
+          groupFocusWithin: 'group-focus-within:top-0.5'
         },
         outlined: {
           top: 'top-[0.4375rem]',
-          group: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4 group-focus-within:-top-px group-focus-within:-translate-y-2/4'
+          groupShift: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4',
+          groupFocusWithin: 'group-focus-within:-top-px group-focus-within:-translate-y-2/4'
         }
       },
       colors: {
         default: {
           default: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-default'
+            groupFocusWithin: 'group-focus-within:text-default-default'
           },
           primary: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-primary'
+            groupFocusWithin: 'group-focus-within:text-default-primary'
           },
           secondary: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-secondary'
+            groupFocusWithin: 'group-focus-within:text-default-secondary'
           },
           success: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-success'
+            groupFocusWithin: 'group-focus-within:text-default-success'
           },
           warning: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-warning'
+            groupFocusWithin: 'group-focus-within:text-default-warning'
           },
           error: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-error'
+            groupFocusWithin: 'group-focus-within:text-default-error'
           },
           light: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-light'
+            groupFocusWithin: 'group-focus-within:text-default-light'
           },
           dark: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-dark'
+            groupFocusWithin: 'group-focus-within:text-default-dark'
           }
         }
       }

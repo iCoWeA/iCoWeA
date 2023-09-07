@@ -46,7 +46,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   const ariaContarols = accordionId === undefined ? undefined : `acd-body-${accordionId}`;
   const id = accordionId === undefined ? undefined : `acd-header-${accordionId}`;
 
-  const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.divider[theme], styles.colors[theme][color], className);
 
   return (
     <button

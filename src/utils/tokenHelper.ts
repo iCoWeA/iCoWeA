@@ -1,6 +1,6 @@
 import { type IdTokenResult } from 'firebase/auth';
+import { EXPIRATION_DURATION } from '../data/constants';
 import { auth } from '../firebase';
-import { expirationDuration } from '../data/constants';
 
 export const getTokenDuration = (token: IdTokenResult | null): number => {
   if (token === null) {
@@ -10,7 +10,7 @@ export const getTokenDuration = (token: IdTokenResult | null): number => {
   const expiration = new Date(token.authTime);
 
   // expiration.setHours(expiration.getHours() + 1);
-  expiration.setSeconds(expiration.getSeconds() + expirationDuration);
+  expiration.setSeconds(expiration.getSeconds() + EXPIRATION_DURATION);
 
   return expiration.getTime() - new Date().getTime();
 };
@@ -23,7 +23,7 @@ export const isTokenExpired = (token: IdTokenResult | null): boolean => {
   const expiration = new Date(token.authTime);
 
   // expiration.setHours(expiration.getHours() + 1);
-  expiration.setSeconds(expiration.getSeconds() + expirationDuration);
+  expiration.setSeconds(expiration.getSeconds() + EXPIRATION_DURATION);
 
   return (new Date()).getTime() > expiration.getTime();
 };

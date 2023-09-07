@@ -1,7 +1,7 @@
 import React, { useRef, type FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import statusAlert, { selectStatusAlertState } from '../../store/Slices/statusAlert';
-import Popover from '../../lib/simpleComponents/components/UI/Popover/Popover';
+// import Popover from '../../lib/simpleComponents/components/UI/Popover/Popover';
 import Alert from '../../lib/simpleComponents/components/UI/Alert/Alert';
 
 const StatusAlert: FC = () => {
@@ -40,6 +40,16 @@ const StatusAlert: FC = () => {
   }
 
   return (
+    <Alert
+      onClose={closeHandler}
+      {...restProps}
+    />
+  );
+};
+
+export default StatusAlert;
+
+/*
     <Popover
       open={isAlertOpen}
       overlayRef={document.getElementById('overlay')}
@@ -50,8 +60,4 @@ const StatusAlert: FC = () => {
         onClose={closeHandler}
         {...restProps}
       />
-    </Popover>
-  );
-};
-
-export default StatusAlert;
+    </Popover> */

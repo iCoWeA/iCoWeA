@@ -18,7 +18,7 @@ const accordionBodyConfig: AccordionBodyConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       gap: 'gap-4',
-      padding: 'py-4'
+      padding: 'py-4 px-6'
     }
   }
 };

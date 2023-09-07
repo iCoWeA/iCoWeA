@@ -75,30 +75,30 @@ const textAreaConfig: TextAreaConfig = {
         standard: {
           padding: 'pt-2 pb-[0.4375rem] px-4',
           border: 'border-b',
-          group: 'focus-within:pb-1.5 focus-within:border-b-2'
+          focusWithin: 'focus-within:pb-1.5 focus-within:border-b-2'
         },
         filled: {
           padding: 'pt-6 pb-[0.4375rem] px-4',
           border: 'border-b',
-          group: 'focus-within:pb-1.5 focus-within:border-b-2'
+          focusWithin: 'focus-within:pb-1.5 focus-within:border-b-2'
         },
         outlined: {
           padding: 'py-[0.4375rem] px-[0.9375rem]',
           border: 'border',
           borderRadius: 'rounded-2xl',
-          group: 'focus-within:py-1.5 focus-within:px-3.5 focus-within:border-2'
+          focusWithin: 'focus-within:py-1.5 focus-within:px-3.5 focus-within:border-2'
         }
       },
       valid: {
         default: {
           border: 'border-default-success',
-          group: 'focus-within:border-default-success'
+          focusWithin: 'focus-within:border-default-success'
         }
       },
       invalid: {
         default: {
           border: 'border-default-error',
-          group: 'focus-within:border-default-error'
+          focusWithin: 'focus-within:border-default-error'
         }
       },
       bgColors: {
@@ -117,35 +117,35 @@ const textAreaConfig: TextAreaConfig = {
         default: {
           default: {
             border: 'border-default-divider',
-            group: 'focus-within:border-default-default'
+            focusWithin: 'focus-within:border-default-default'
           },
           primary: {
             border: 'border-default-divider',
-            group: 'focus-within:border-default-primary'
+            focusWithin: 'focus-within:border-default-primary'
           },
           secondary: {
             border: 'border-default-divider',
-            group: 'focus-within:border-default-secondary'
+            focusWithin: 'focus-within:border-default-secondary'
           },
           success: {
             border: 'border-default-divider',
-            group: 'focus-within:border-default-success'
+            focusWithin: 'focus-within:border-default-success'
           },
           warning: {
             border: 'border-default-divider',
-            group: 'focus-within:border-default-warning'
+            focusWithin: 'focus-within:border-default-warning'
           },
           error: {
             border: 'border-default-divider',
-            group: 'focus-within:border-default-error'
+            focusWithin: 'focus-within:border-default-error'
           },
           light: {
             border: 'border-default-divider',
-            group: 'focus-within:border-default-light'
+            focusWithin: 'focus-within:border-default-light'
           },
           dark: {
             border: 'border-default-divider',
-            group: 'focus-within:border-default-dark'
+            focusWithin: 'focus-within:border-default-dark'
           }
         }
       }
@@ -205,7 +205,8 @@ const textAreaConfig: TextAreaConfig = {
         font: 'antialiased font-normal text-sm font-sans text-transparent',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
-        group: 'group-[.shift]:block group-[.shift]:h-0 group-[.shift]:px-1 group-focus-within:block group-focus-within:h-0 group-focus-within:px-1'
+        groupShift: 'group-[.shift]:block group-[.shift]:h-0 group-[.shift]:px-1',
+        groupFocusWithin: 'group-focus-within:block group-focus-within:h-0 group-focus-within:px-1'
       }
     },
     label: {
@@ -216,7 +217,8 @@ const textAreaConfig: TextAreaConfig = {
         transition: 'transition-all',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
-        group: 'group-[.shift]:text-sm group-[.shift]:px-1 group-focus-within:text-sm group-focus-within:px-1'
+        groupShift: 'group-[.shift]:text-sm group-[.shift]:px-1',
+        groupFocusWithin: 'group-focus-within:text-sm group-focus-within:px-1'
       },
       valid: {
         default: {
@@ -231,50 +233,53 @@ const textAreaConfig: TextAreaConfig = {
       sizes: {
         standard: {
           top: 'top-2',
-          group: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4 group-focus-within:-top-px group-focus-within:-translate-y-2/4'
+          groupShift: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4',
+          groupFocusWithin: 'group-focus-within:-top-px group-focus-within:-translate-y-2/4'
         },
         filled: {
           top: 'top-6',
-          group: 'group-[.shift]:top-0.5 group-focus-within:top-0.5'
+          groupShift: 'group-[.shift]:top-0.5',
+          groupFocusWithin: 'group-focus-within:top-0.5'
         },
         outlined: {
           top: 'top-[0.4375rem]',
-          group: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4 group-focus-within:-top-px group-focus-within:-translate-y-2/4'
+          groupShift: 'group-[.shift]:-top-px group-[.shift]:-translate-y-2/4',
+          groupFocusWithin: 'group-focus-within:-top-px group-focus-within:-translate-y-2/4'
         }
       },
       colors: {
         default: {
           default: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-default'
+            groupFocusWithin: 'group-focus-within:text-default-default'
           },
           primary: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-primary'
+            groupFocusWithin: 'group-focus-within:text-default-primary'
           },
           secondary: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-secondary'
+            groupFocusWithin: 'group-focus-within:text-default-secondary'
           },
           success: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-success'
+            groupFocusWithin: 'group-focus-within:text-default-success'
           },
           warning: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-warning'
+            groupFocusWithin: 'group-focus-within:text-default-warning'
           },
           error: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-error'
+            groupFocusWithin: 'group-focus-within:text-default-error'
           },
           light: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-light'
+            groupFocusWithin: 'group-focus-within:text-default-light'
           },
           dark: {
             color: 'text-default-default',
-            group: 'group-focus-within:text-default-dark'
+            groupFocusWithin: 'group-focus-within:text-default-dark'
           }
         }
       }

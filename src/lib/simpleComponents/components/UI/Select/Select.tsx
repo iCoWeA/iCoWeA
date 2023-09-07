@@ -4,17 +4,19 @@ import React, {
   type BaseHTMLAttributes,
   type FieldsetHTMLAttributes,
   type LabelHTMLAttributes,
-  type MutableRefObject,
   forwardRef,
   useContext,
   useRef,
+  useImperativeHandle,
   useState,
   useCallback,
-  useMemo
+  useMemo,
+  type MutableRefObject
 } from 'react';
 import selectConfig from '../../../configs/selectConfig';
 import selectContext, { type SelectContext } from '../../../contexts/select';
 import themeContext from '../../../contexts/theme';
+import useFocusin from '../../../hooks/useFocusin';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { mergeClasses } from '../../../utils/propsHelper';
 import { type IconProps } from '../Icon/Icon';
@@ -78,7 +80,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
     arrowProps,
     legendProps,
     labelProps,
-    inputRef,
     disabled,
     readonly,
     value,
@@ -92,25 +93,47 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const selectRef = useRef<HTMLInputElement | null>(null);
 
+  /* --- Set imperative handler --- */
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => menuRef.current, []);
+
   /* --- Set state --- */
-  const [isFocused, setIsFocused] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   /* --- Set outside click action --- */
   const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isClickedMenu = menuRef.current?.contains(event.target as Node) ?? false;
-    const isClickedContainer = containerRef.current?.contains(event.target as Node) ?? false;
+    const isMenuClicked = menuRef.current?.contains(event.target as Node) ?? false;
+    const isContainerClicked = containerRef.current?.contains(event.target as Node) ?? false;
 
-    if (isClickedContainer) {
+    if (isContainerClicked) {
       setIsOpen((isOpen) => !isOpen);
+      setIsFocused(true);
+      selectRef.current?.focus();
     }
 
-    if (!isClickedMenu && !isClickedContainer) {
+    if (!isMenuClicked && !isContainerClicked) {
       setIsOpen(false);
+      setIsFocused(false);
     }
   }, []);
 
   useOutsideClick(outsideClickHandler);
+
+  /* --- Set focusin action --- */
+  const focusinHandler = useCallback((event: FocusEvent) => {
+    const isMenuFocused = menuRef.current?.contains(event.target as Node) ?? false;
+    const isContainerFocused = containerRef.current?.contains(event.target as Node) ?? false;
+
+    if (isMenuFocused || isContainerFocused) {
+      setIsFocused(true);
+    } else {
+      setIsFocused(false);
+      setIsOpen(false);
+    }
+  }, []);
+
+  useFocusin(focusinHandler);
 
   /* --- Set context --- */
   const context: SelectContext = useMemo(
@@ -127,14 +150,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
   );
 
   /* --- Set props --- */
-  const setSelectRef = (element: HTMLInputElement): void => {
-    selectRef.current = element;
-
-    if (inputRef !== undefined && inputRef !== null) {
-      inputRef.current = element;
-    }
-  };
-
   const mergedClassName = mergeClasses(
     styles.base,
     !valid && !invalid && styles.colors[theme][color],
@@ -149,7 +164,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
   if (endAdornment === undefined && arrow) {
     arrowNode = (
       <SelectArrow
-        open={isFocused}
+        open={isMenuOpen}
         {...arrowProps}
       />
     );
@@ -181,7 +196,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
 
   return (
     <SelectMenu
-      setIsFocused={setIsFocused}
+      setIsMenuOpen={setIsMenuOpen}
       open={isOpen}
       position={position}
       lockScroll={lockScroll}
@@ -192,6 +207,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
           variant={variant}
           selectRef={selectRef}
           disabled={disabled}
+          ref={containerRef}
           {...containerProps}
         >
           <SelectAdornmentContainer
@@ -201,9 +217,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
             valid={valid}
             invalid={invalid}
             {...startAdornmentContainerProps}
-          >
-            {startAdornment}
-          </SelectAdornmentContainer>
+          ></SelectAdornmentContainer>
           <SelectFieldset
             variant={variant}
             color={color}
@@ -213,10 +227,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, ref) => {
             {...fieldsetProps}
           >
             <input
+              readOnly={readonly}
               disabled={disabled}
               value={value}
               className={mergedClassName}
-              ref={setSelectRef}
               {...restProps}
             />
             {labelNode}

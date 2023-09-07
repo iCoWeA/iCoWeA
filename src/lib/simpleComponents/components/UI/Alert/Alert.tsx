@@ -10,9 +10,9 @@ import AlertIconContainer from './AlertIconContainer';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
+  open?: boolean;
   variant?: AlertVariants;
   color?: Colors;
-  invisible?: boolean;
   icon?: ReactNode;
   iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bodyContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
@@ -29,9 +29,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   const styles = alertConfig.styles.container;
   const {
     onClose,
+    open,
     variant,
     color,
-    invisible,
     icon,
     iconContainerProps,
     bodyContainerProps,
@@ -44,7 +44,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   } = { ...alertConfig.defaultProps, ...props };
 
   /* --- Set container props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], invisible && styles.invisible, className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], open && styles.open, className);
 
   /* --- Set icon container props --- */
   let iconContainerNode: ReactNode;
