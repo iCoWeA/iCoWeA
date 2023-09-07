@@ -93,7 +93,8 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
     icon: {
       base: {
         margin: 'ml-auto',
-        transition: 'transition-transform'
+        transition: 'transition-transform',
+        transitionDuration: 'duration-500'
       },
       open: {
         transform: 'rotate-180'
