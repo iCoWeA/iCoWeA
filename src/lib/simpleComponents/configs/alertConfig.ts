@@ -1,5 +1,6 @@
 import { type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
 import { type IconProps } from '../components/UI/Icon/Icon';
+import { type TransitionConfig } from '../hooks/useTransition';
 
 export type AlertVariants = 'filled' | 'outlined' | 'ghost';
 
@@ -10,9 +11,10 @@ export interface AlertConfig {
     color: Colors;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    actionContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
     buttonIconProps: IconProps;
-    buttonContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    transitionConfig: TransitionConfig;
   };
   styles: {
     container: {
@@ -25,13 +27,11 @@ export interface AlertConfig {
     }
     bodyContainer: {
       base: Record<string, string>;
+      icon: Record<string, string>;
+      action: Record<string, string>;
     },
-    buttonContainer: {
+    actionContainer: {
       base: Record<string, string>;
-    },
-    button: {
-      base: Record<string, string>;
-      variants: Record<AlertVariants, Record<string, Record<Colors, Record<string, string>>>>;
     }
   }
 }
@@ -43,21 +43,19 @@ const alertConfig: AlertConfig = {
     color: 'primary',
     iconContainerProps: {},
     bodyContainerProps: {},
+    actionContainerProps: {},
     buttonProps: {},
     buttonIconProps: {},
-    buttonContainerProps: {}
+    transitionConfig: {}
   },
   styles: {
     container: {
       base: {
         display: 'flex',
-        alignItems: 'items-start',
         width: 'w-full',
-        padding: 'p-2',
-        borderRadius: 'rounded-2xl'
+        borderRadius: 'rounded-xl'
       },
       open: {
-        display: 'hidden'
       },
       variants: {
         filled: {
@@ -153,42 +151,42 @@ const alertConfig: AlertConfig = {
             default: {
               fill: 'fill-default-default',
               color: 'text-default-default',
-              background: 'bg-default-default/20'
+              background: 'bg-default-default/50'
             },
             primary: {
               fill: 'fill-default-primary',
               color: 'text-default-primary',
-              background: 'bg-default-primary/20'
+              background: 'bg-default-primary/50'
             },
             secondary: {
               fill: 'fill-default-secondary',
               color: 'text-default-secondary',
-              background: 'bg-default-secondary/20'
+              background: 'bg-default-secondary/50'
             },
             success: {
               fill: 'fill-default-success',
               color: 'text-default-success',
-              background: 'bg-default-success/20'
+              background: 'bg-default-success/50'
             },
             warning: {
               fill: 'fill-default-warning',
               color: 'text-default-warning',
-              background: 'bg-default-warning/20'
+              background: 'bg-default-warning/50'
             },
             error: {
               fill: 'fill-default-error',
               color: 'text-default-error',
-              background: 'bg-default-error/20'
+              background: 'bg-default-error/50'
             },
             light: {
               fill: 'fill-default-light',
               color: 'text-default-light',
-              background: 'bg-default-light/20'
+              background: 'bg-default-light/50'
             },
             dark: {
               fill: 'fill-default-dark',
               color: 'text-default-dark',
-              background: 'bg-default-dark/20'
+              background: 'bg-default-dark/50'
             }
           }
         }
@@ -197,9 +195,7 @@ const alertConfig: AlertConfig = {
     iconContainer: {
       base: {
         display: 'flex',
-        gap: 'gap-3',
-        alignItems: 'items-center',
-        padding: 'py-2 pl-2 pr-1'
+        padding: 'py-3 pl-4 pr-3'
       }
     },
     bodyContainer: {
@@ -207,165 +203,22 @@ const alertConfig: AlertConfig = {
         display: 'flex',
         flexDirection: 'flex-col',
         gap: 'gap-4',
-        padding: 'p-2'
+        padding: 'py-3 px-4'
+      },
+      icon: {
+        padding: 'pl-0'
+      },
+      action: {
+        padding: 'pr-0'
       }
     },
-    buttonContainer: {
+    actionContainer: {
       base: {
         display: 'flex',
         gap: 'gap-3',
         alignItems: 'items-center',
         margin: 'ml-auto',
-        padding: 'pl-1'
-      }
-    },
-    button: {
-      base: {
-        display: 'flex',
-        alignItems: 'items-center',
-        justifyContent: 'justify-center',
-        aspectRatio: 'aspect-square',
-        height: 'h-fit',
-        width: 'w-fit',
-        padding: 'p-2',
-        borderRadius: 'rounded-full',
-        transition: 'transition-colors',
-        focus: 'focus:outline-0',
-        disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
-      },
-      variants: {
-        filled: {
-          default: {
-            default: {
-              fill: 'fill-default-dark',
-              hover: 'hover:bg-default-dark/10',
-              active: 'active:bg-default-dark/20'
-            },
-            primary: {
-              fill: 'fill-default-light',
-              hover: 'hover:bg-default-light/10',
-              active: 'active:bg-default-light/20'
-            },
-            secondary: {
-              fill: 'fill-default-light',
-              hover: 'hover:bg-default-light/10',
-              active: 'active:bg-default-light/20'
-            },
-            success: {
-              fill: 'fill-default-light',
-              hover: 'hover:bg-default-light/10',
-              active: 'active:bg-default-light/20'
-            },
-            warning: {
-              fill: 'fill-default-dark',
-              hover: 'hover:bg-default-dark-dark/10',
-              active: 'active:bg-default-dark-dark/20'
-            },
-            error: {
-              fill: 'fill-default-light',
-              hover: 'hover:bg-default-light/10',
-              active: 'active:bg-default-light/20'
-            },
-            light: {
-              fill: 'fill-default-dark',
-              hover: 'hover:bg-default-dark/10',
-              active: 'active:bg-default-dark/20'
-            },
-            dark: {
-              fill: 'fill-default-light',
-              hover: 'hover:bg-default-light/10',
-              active: 'active:bg-default-light/20'
-            }
-          }
-        },
-        outlined: {
-          default: {
-            default: {
-              fill: 'fill-default-default',
-              hover: 'hover:bg-default-default/10',
-              active: 'active:bg-default-default/20'
-            },
-            primary: {
-              fill: 'fill-default-primary',
-              hover: 'hover:bg-default-primary/10',
-              active: 'active:bg-default-primary/20'
-            },
-            secondary: {
-              fill: 'fill-default-secondary',
-              hover: 'hover:bg-default-secondary/10',
-              active: 'active:bg-default-secondary/20'
-            },
-            success: {
-              fill: 'fill-default-success',
-              hover: 'hover:bg-default-success/10',
-              active: 'active:bg-default-success/20'
-            },
-            warning: {
-              fill: 'fill-default-warning',
-              hover: 'hover:bg-default-warning/10',
-              active: 'active:bg-default-warning/20'
-            },
-            error: {
-              fill: 'fill-default-error',
-              hover: 'hover:bg-default-error/10',
-              active: 'active:bg-default-error/20'
-            },
-            light: {
-              fill: 'fill-default-light',
-              hover: 'hover:bg-default-light/10',
-              active: 'active:bg-default-light/20'
-            },
-            dark: {
-              fill: 'fill-default-dark',
-              hover: 'hover:bg-default-dark/10',
-              active: 'active:bg-default-dark/20'
-            }
-          }
-        },
-        ghost: {
-          default: {
-            default: {
-              fill: 'fill-default-default',
-              hover: 'hover:bg-default-default/10',
-              active: 'active:bg-default-default/20'
-            },
-            primary: {
-              fill: 'fill-default-primary',
-              hover: 'hover:bg-default-primary/10',
-              active: 'active:bg-default-primary/20'
-            },
-            secondary: {
-              fill: 'fill-default-secondary',
-              hover: 'hover:bg-default-secondary/10',
-              active: 'active:bg-default-secondary/20'
-            },
-            success: {
-              fill: 'fill-default-success',
-              hover: 'hover:bg-default-success/10',
-              active: 'active:bg-default-success/20'
-            },
-            warning: {
-              fill: 'fill-default-warning',
-              hover: 'hover:bg-default-warning/10',
-              active: 'active:bg-default-warning/20'
-            },
-            error: {
-              fill: 'fill-default-error',
-              hover: 'hover:bg-default-error/10',
-              active: 'active:bg-default-error/20'
-            },
-            light: {
-              fill: 'fill-default-light',
-              hover: 'hover:bg-default-light/10',
-              active: 'active:bg-default-light/20'
-            },
-            dark: {
-              fill: 'fill-default-dark',
-              hover: 'hover:bg-default-dark/10',
-              active: 'active:bg-default-dark/20'
-            }
-          }
-        }
+        padding: 'pl-3 pr-2'
       }
     }
   }
