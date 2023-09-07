@@ -33,6 +33,7 @@ export interface AlertConfig {
     },
     actionContainer: {
       base: Record<string, string>;
+      button: Record<string, string>;
     },
     button: {
       variants: Record<AlertVariants, Record<string, string>>;
@@ -211,6 +212,7 @@ const alertConfig: AlertConfig = {
         display: 'flex',
         flexDirection: 'flex-col',
         gap: 'gap-4',
+        width: 'w-full',
         padding: 'py-3 px-4'
       },
       icon: {
@@ -223,10 +225,11 @@ const alertConfig: AlertConfig = {
     actionContainer: {
       base: {
         display: 'flex',
-        gap: 'gap-3',
-        alignItems: 'items-center',
-        margin: 'ml-auto',
-        padding: 'pl-3 pr-2'
+        gap: 'gap-1',
+        padding: 'py-2 pl-3 pr-2'
+      },
+      button: {
+        padding: 'pr-3'
       }
     },
     button: {

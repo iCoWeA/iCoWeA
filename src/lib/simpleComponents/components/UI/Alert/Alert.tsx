@@ -117,7 +117,10 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
   if (action !== undefined || buttonNode !== undefined) {
     actionContainerNode = (
-      <AlertActionContainer {...actionContainerProps}>
+      <AlertActionContainer
+        button={buttonNode !== undefined}
+        {...actionContainerProps}
+      >
         {action}
         {buttonNode}
       </AlertActionContainer>
