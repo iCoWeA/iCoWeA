@@ -28,7 +28,8 @@ const backdropConfig: BackdropConfig = {
       height: 'h-screen',
       width: 'w-screen',
       opacity: 'opacity-0',
-      transition: 'transition-[opacity]'
+      transition: 'transition-[opacity]',
+      transitionDuration: 'duration-500'
     },
     open: {
       opacity: 'opacity-100'
