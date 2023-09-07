@@ -33,17 +33,17 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set context --- */
   const context: AccordionContext = useMemo(
     () => ({
-      open: open ?? isOpen,
-      disabled,
-      id,
-      icon,
       onToggle: () => {
         if (!isControlled) {
           setIsOpen((isOpen) => !isOpen);
         }
-      }
+      },
+      open: open ?? isOpen,
+      icon,
+      id,
+      disabled
     }),
-    [open, isOpen, disabled, id, icon, isControlled]
+    [isControlled, open, isOpen, icon, id, disabled]
   );
 
   /* Set props */
