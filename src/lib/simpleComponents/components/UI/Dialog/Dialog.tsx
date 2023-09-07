@@ -40,14 +40,14 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
     ...props
   };
 
-  /* --- Set refs --- */
-  const componentRef = useRef<HTMLDivElement>(null);
-
-  /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
-
   /* --- Set states --- */
   const { state: animationState, enter, stopEntering, exit, stopExiting } = useAnimation();
+
+  /* --- Set refs --- */
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  /* --- Set imperative handler --- */
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => dialogRef.current, [open, animationState.current === AnimationStates.EXITED]);
 
   /* --- Set open state --- */
   useEffect(() => {
@@ -78,21 +78,21 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (animationState.current === AnimationStates.ENTERING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.ENTERING && event.target === dialogRef.current) {
       stopEntering(onEnter);
     }
 
-    if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.EXITING && event.target === dialogRef.current) {
       stopExiting(onExit);
     }
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (animationState.current === AnimationStates.ENTERING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.ENTERING && event.target === dialogRef.current) {
       stopEntering(onEnter);
     }
 
-    if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.EXITING && event.target === dialogRef.current) {
       stopExiting(onExit);
     }
   };
@@ -110,7 +110,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
       className={mergedClassName}
-      ref={componentRef}
+      ref={dialogRef}
       {...restProps}
     />
   );
