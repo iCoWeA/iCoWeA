@@ -41,20 +41,20 @@ const containerConfig: ContainerConfig = {
       default: {
         display: 'grid',
         height: 'min-h-screen',
-        width: 'w-screen'
+        width: 'w-full'
       },
       standard: {
         display: 'grid',
         gridTemplateRows: 'grid-rows-layout',
         height: 'min-h-screen',
-        width: 'w-screen'
+        width: 'w-full'
       },
       dashboard: {
         display: 'grid',
         gridTemplateRows: 'grid-rows-layout',
         gridTemplateCols: 'grid-rows-layout',
         height: 'min-h-screen',
-        width: 'w-screen'
+        width: 'w-full'
       },
       fluid: {
         display: 'grid',
