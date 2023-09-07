@@ -71,19 +71,23 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   } = { ...tooltipConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
 
+  /* --- Set states --- */
+  const [cursorY, setCursorY] = useState(-1);
+  const [cursorX, setCursorX] = useState(-1);
+  const [isOpen, setIsOpen] = useState(false);
+  const { state: animationState, enter, stopEntering, exit, stopExiting } = useAnimation();
+
   /* --- Set refs --- */
   const containerRef = useRef<HTMLDivElement>(null);
   const handlerRef = useRef<HTMLElement | null>(null);
   const arrowRef = useRef<HTMLDivElement>(null);
 
   /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => containerRef.current, []);
-
-  /* --- Set states --- */
-  const [cursorY, setCursorY] = useState(-1);
-  const [cursorX, setCursorX] = useState(-1);
-  const [isOpen, setIsOpen] = useState(false);
-  const { state: animationState, enter, stopEntering, exit, stopExiting } = useAnimation();
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => containerRef.current, [
+    unmountOnExit,
+    open ?? isOpen,
+    animationState.current === AnimationStates.EXITED
+  ]);
 
   /* -- Set open state --- */
   useEffect(() => {
