@@ -1,5 +1,6 @@
-import { type BaseHTMLAttributes, type ButtonHTMLAttributes } from 'react';
+import { type BaseHTMLAttributes } from 'react';
 import { type IconProps } from '../components/UI/Icon/Icon';
+import { type IconButtonProps } from '../components/UI/IconButton/IconButton';
 import { type TransitionConfig } from '../hooks/useTransition';
 
 export type AlertVariants = 'filled' | 'outlined' | 'ghost';
@@ -12,7 +13,7 @@ export interface AlertConfig {
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     actionContainerProps: BaseHTMLAttributes<HTMLDivElement>;
-    buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
+    buttonProps: IconButtonProps;
     buttonIconProps: IconProps;
     transitionConfig: TransitionConfig;
   };
@@ -32,6 +33,9 @@ export interface AlertConfig {
     },
     actionContainer: {
       base: Record<string, string>;
+    },
+    button: {
+      variants: Record<AlertVariants, Record<string, string>>;
     }
   }
 }
@@ -53,9 +57,13 @@ const alertConfig: AlertConfig = {
       base: {
         display: 'flex',
         width: 'w-full',
-        borderRadius: 'rounded-xl'
+        borderRadius: 'rounded-xl',
+        opacity: 'opacity-0',
+        transition: 'transition-[opacity]',
+        transitionDuration: 'duration-500'
       },
       open: {
+        opacity: 'opacity-100'
       },
       variants: {
         filled: {
@@ -219,6 +227,40 @@ const alertConfig: AlertConfig = {
         alignItems: 'items-center',
         margin: 'ml-auto',
         padding: 'pl-3 pr-2'
+      }
+    },
+    button: {
+      variants: {
+        filled: {
+          default: 'dark',
+          primary: 'light',
+          secondary: 'light',
+          success: 'light',
+          warning: 'dark',
+          error: 'light',
+          light: 'dark',
+          dark: 'light'
+        },
+        outlined: {
+          default: 'default',
+          primary: 'primary',
+          secondary: 'secondary',
+          success: 'success',
+          warning: 'warning',
+          error: 'error',
+          light: 'light',
+          dark: 'dark'
+        },
+        ghost: {
+          default: 'dark',
+          primary: 'light',
+          secondary: 'light',
+          success: 'light',
+          warning: 'dark',
+          error: 'light',
+          light: 'dark',
+          dark: 'light'
+        }
       }
     }
   }
