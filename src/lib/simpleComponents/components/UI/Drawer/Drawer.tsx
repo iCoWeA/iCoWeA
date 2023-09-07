@@ -41,14 +41,14 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     ...props
   };
 
-  /* --- Set refs --- */
-  const componentRef = useRef<HTMLDivElement>(null);
-
-  /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => componentRef.current, []);
-
   /* --- Set states --- */
   const { state: animationState, enter, stopEntering, exit, stopExiting } = useAnimation();
+
+  /* --- Set refs --- */
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  /* --- Set imperative handler --- */
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => drawerRef.current, [open, animationState.current === AnimationStates.EXITED]);
 
   /* --- Set open state --- */
   useEffect(() => {
@@ -79,21 +79,21 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
 
   /* --- Set props --- */
   const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (animationState.current === AnimationStates.ENTERING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.ENTERING && event.target === drawerRef.current) {
       stopEntering(onEnter);
     }
 
-    if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.EXITING && event.target === drawerRef.current) {
       stopExiting(onExit);
     }
   };
 
   const animationEndHandler = (event: AnimationEvent<HTMLDivElement>): void => {
-    if (animationState.current === AnimationStates.ENTERING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.ENTERING && event.target === drawerRef.current) {
       stopEntering(onEnter);
     }
 
-    if (animationState.current === AnimationStates.EXITING && event.target === componentRef.current) {
+    if (animationState.current === AnimationStates.EXITING && event.target === drawerRef.current) {
       stopExiting(onExit);
     }
   };
@@ -111,7 +111,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
       className={mergedClassName}
-      ref={componentRef}
+      ref={drawerRef}
       {...restProps}
     />
   );
