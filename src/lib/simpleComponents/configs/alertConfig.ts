@@ -5,9 +5,9 @@ export type AlertVariants = 'filled' | 'outlined' | 'ghost';
 
 export interface AlertConfig {
   defaultProps: {
+    open: boolean;
     variant: AlertVariants;
     color: Colors;
-    invisible: boolean;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     buttonProps: ButtonHTMLAttributes<HTMLButtonElement>;
@@ -38,9 +38,9 @@ export interface AlertConfig {
 
 const alertConfig: AlertConfig = {
   defaultProps: {
+    open: true,
     variant: 'filled',
     color: 'primary',
-    invisible: false,
     iconContainerProps: {},
     bodyContainerProps: {},
     buttonProps: {},
