@@ -1,5 +1,6 @@
 export interface AccordionConfig {
   defaultProps: {
+    defaultOpen: boolean;
     disabled: boolean;
   };
   styles: {
@@ -10,6 +11,7 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
+    defaultOpen: false,
     disabled: false
   },
   styles: {
