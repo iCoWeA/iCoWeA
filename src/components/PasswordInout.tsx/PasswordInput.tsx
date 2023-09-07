@@ -12,7 +12,7 @@ export interface PasswordInputProps extends InputProps {
   iconProps?: IconProps;
 }
 
-const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(({ show, buttonProps = {}, iconProps = {}, ...restProps }, ref) => {
+const PasswordInput = forwardRef<HTMLDivElement, PasswordInputProps>(({ show, buttonProps = {}, iconProps = {}, ...restProps }, ref) => {
   /* --- Set states --- */
   const [isShow, setIsShow] = useState(show ?? false);
 
