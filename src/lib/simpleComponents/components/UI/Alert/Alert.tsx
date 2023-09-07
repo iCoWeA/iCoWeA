@@ -1,11 +1,12 @@
-import React, { type BaseHTMLAttributes, type ReactNode, type ButtonHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { type BaseHTMLAttributes, type ReactNode, forwardRef, useContext, useRef, useImperativeHandle, useEffect } from 'react';
 import alertConfig, { type AlertVariants } from '../../../configs/alertConfig';
 import themeContext from '../../../contexts/theme';
+import useTransition, { type TransitionConfig } from '../../../hooks/useTransition';
 import { mergeClasses } from '../../../utils/propsHelper';
 import Icon, { type IconProps } from '../Icon/Icon';
+import IconButton, { type IconButtonProps } from '../IconButton/IconButton';
+import AlertActionContainer from './AlertActionContainer';
 import AlertBodyContainer from './AlertBodyContainer';
-import AlertButton from './AlertButton';
-import AlertButtonContainer from './AlertButtonContainer';
 import AlertIconContainer from './AlertIconContainer';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -14,11 +15,13 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: AlertVariants;
   color?: Colors;
   icon?: ReactNode;
+  action?: ReactNode;
   iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bodyContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  actionContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  buttonProps?: IconButtonProps;
   buttonIconProps?: IconProps;
-  buttonContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  transitionConfig?: TransitionConfig;
 }
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
@@ -33,18 +36,46 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     variant,
     color,
     icon,
+    action,
     iconContainerProps,
     bodyContainerProps,
+    actionContainerProps,
     buttonProps,
     buttonIconProps,
-    buttonContainerProps,
+    transitionConfig,
     className,
     children,
     ...restProps
   } = { ...alertConfig.defaultProps, ...props };
 
+  /* --- Set refs --- */
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  /* --- Set states --- */
+  const {
+    state: transitionState,
+    enter,
+    exit,
+    transitionEndHandler,
+    animationEndHandler
+  } = useTransition<HTMLDivElement>(containerRef.current, open, transitionConfig.onEnter, transitionConfig.onExit);
+
+  /* --- Set imperative handler --- */
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => containerRef.current, []);
+
+  /* --- Set open state --- */
+  useEffect(() => {
+    if (open && transitionState.exit) {
+      enter(transitionConfig.onEntering);
+    }
+
+    if (!open && transitionState.enter) {
+      exit(transitionConfig.onExiting);
+    }
+  }, [open, transitionState.enter, transitionState.exit, transitionConfig.onEntering, transitionConfig.onExiting]);
+
   /* --- Set container props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], open && styles.open, className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], transitionState.enter && styles.open, className);
 
   /* --- Set icon container props --- */
   let iconContainerNode: ReactNode;
@@ -69,33 +100,47 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
   if (onClose !== undefined) {
     buttonNode = (
-      <AlertButton
-        onClose={onClose}
-        variant={variant}
-        color={color}
+      <IconButton
+        color={alertConfig.styles.button.variants[variant][color]}
+        variant="outlined"
+        onClick={onClose}
         {...buttonProps}
       >
         {buttonIconNode}
-      </AlertButton>
+      </IconButton>
     );
   }
 
   /* --- Set button container props --- */
-  let buttonContainerNode: ReactNode;
+  let actionContainerNode: ReactNode;
 
-  if (buttonNode !== undefined) {
-    buttonContainerNode = <AlertButtonContainer {...buttonContainerProps}>{buttonNode}</AlertButtonContainer>;
+  if (action !== undefined || buttonNode !== undefined) {
+    actionContainerNode = (
+      <AlertActionContainer {...actionContainerProps}>
+        {action}
+        {buttonNode}
+      </AlertActionContainer>
+    );
   }
 
   return (
     <div
+      onTransitionEnd={transitionEndHandler}
+      onAnimationEnd={animationEndHandler}
+      role="alert"
       className={mergedClassName}
-      ref={ref}
+      ref={containerRef}
       {...restProps}
     >
       {iconContainerNode}
-      <AlertBodyContainer {...bodyContainerProps}>{children}</AlertBodyContainer>
-      {buttonContainerNode}
+      <AlertBodyContainer
+        icon={icon !== undefined}
+        action={action !== undefined || buttonNode !== undefined}
+        {...bodyContainerProps}
+      >
+        {children}
+      </AlertBodyContainer>
+      {actionContainerNode}
     </div>
   );
 });
