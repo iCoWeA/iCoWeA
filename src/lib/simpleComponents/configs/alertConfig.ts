@@ -71,7 +71,7 @@ const alertConfig: AlertConfig = {
       },
       shadow: {
         default: {
-          shadow: 'shadow-md shadow-default-default/80'
+          shadow: 'shadow-md shadow-default-shadow'
         }
       },
       variants: {
