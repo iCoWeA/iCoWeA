@@ -29,10 +29,10 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
     button: {
       base: {
         display: 'flex',
-        gap: 'gap-4',
+        gap: 'gap-3',
         alignItems: 'items-center',
         width: 'w-full',
-        padding: 'py-3 px-6',
+        padding: 'py-2',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition-colors',
         focus: 'focus:outline-0',
