@@ -31,7 +31,7 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   textAreaRef?: MutableRefObject<HTMLTextAreaElement> | null;
 }
 
-const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((props, ref) => {
+const TextArea = forwardRef<HTMLFieldSetElement, TextAreaProps>((props, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -60,7 +60,7 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((props, ref) => {
   const componentRef = useRef<HTMLTextAreaElement | null>(null);
 
   /* --- Set props --- */
-  const setTextAreaRef = (element: HTMLTextAreaElement): void => {
+  const setRef = (element: HTMLTextAreaElement): void => {
     componentRef.current = element;
 
     if (textAreaRef !== undefined && textAreaRef !== null) {
@@ -108,13 +108,14 @@ const TextArea = forwardRef<HTMLDivElement, TextAreaProps>((props, ref) => {
       invalid={invalid}
       textAreaRef={componentRef}
       disabled={disabled}
+      ref={ref}
       {...fieldsetProps}
     >
       <textarea
         disabled={disabled}
         value={value}
         className={mergedClassName}
-        ref={setTextAreaRef}
+        ref={setRef}
         {...restProps}
       />
       {labelNode}
