@@ -7,14 +7,15 @@ import { mergeClasses } from '../../../utils/propsHelper';
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
   defaultOpen?: boolean;
-  id?: string;
   icon?: ReactNode;
+  id?: string;
+  disabled?: boolean;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = accordionConfig.styles;
-  const { open, defaultOpen, id, icon, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
+  const { open, defaultOpen, icon, id, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
 
   /* --- Set states --- */
