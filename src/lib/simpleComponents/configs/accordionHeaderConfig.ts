@@ -9,6 +9,7 @@ export interface AccordionHeaderConfig {
   styles: {
     button: {
       base: Record<string, string>;
+      divider: Record<string, Record<string, string>>;
       colors: Record<string, Record<Colors, Record<string, string>>>
     },
     icon: {
@@ -30,13 +31,17 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         display: 'flex',
         gap: 'gap-4',
         alignItems: 'items-center',
-        height: 'h-12',
         width: 'w-full',
-        padding: 'px-6',
+        padding: 'py-3 px-6',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition-colors',
         focus: 'focus:outline-0',
         disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
+      },
+      divider: {
+        default: {
+          border: 'border-b border-default-divider'
+        }
       },
       colors: {
         default: {
