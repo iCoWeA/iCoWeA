@@ -102,7 +102,8 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     buttonNode = (
       <IconButton
         color={alertConfig.styles.button.variants[variant][color]}
-        variant="outlined"
+        variant="text"
+        size="sm"
         onClick={onClose}
         {...buttonProps}
       >
