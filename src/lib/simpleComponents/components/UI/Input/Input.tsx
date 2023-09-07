@@ -66,7 +66,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   const componentRef = useRef<HTMLInputElement | null>(null);
 
   /* --- Set props --- */
-  const setInputRef = (element: HTMLInputElement): void => {
+  const setRef = (element: HTMLInputElement): void => {
     componentRef.current = element;
 
     if (inputRef !== undefined && inputRef !== null) {
@@ -111,6 +111,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
       variant={variant}
       inputRef={componentRef}
       disabled={disabled}
+      ref={ref}
       {...containerProps}
     >
       <InputAdornmentContainer
@@ -135,7 +136,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
           disabled={disabled}
           value={value}
           className={mergedClassName}
-          ref={setInputRef}
+          ref={setRef}
           {...restProps}
         />
         {labelNode}
