@@ -6,17 +6,18 @@ import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
+  defaultOpen?: boolean;
   icon?: ReactNode;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = accordionConfig.styles;
-  const { open, icon, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
+  const { open, defaultOpen, icon, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
 
   /* --- Set states --- */
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(defaultOpen);
 
   /* --- Set previous values  --- */
   const prevOpen = usePrevious(open);
