@@ -13,7 +13,13 @@ export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonEle
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((props, ref) => {
   /* --- Set context props --- */
-  const { open: isAccordionOpen, disabled: isAccordionDisabled, icon: accordionIcon, onToggle: onAccordionToggle } = useContext(accordionContext);
+  const {
+    onToggle: onAccordionToggle,
+    open: isAccordionOpen,
+    icon: accordionIcon,
+    id: accordionId,
+    disabled: isAccordionDisabled
+  } = useContext(accordionContext);
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
@@ -37,10 +43,16 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   }
 
   /* --- Set props --- */
+  const ariaContarols = accordionId === undefined ? undefined : `acd-body-${accordionId}`;
+  const id = accordionId === undefined ? undefined : `acd-header-${accordionId}`;
+
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
 
   return (
     <button
+      aria-expanded={isAccordionOpen}
+      aria-controls={ariaContarols}
+      id={id}
       onClick={onAccordionToggle}
       disabled={disabled}
       type={type}
