@@ -63,7 +63,7 @@ const alertConfig: AlertConfig = {
         width: 'w-full',
         borderRadius: 'rounded-xl',
         opacity: 'opacity-0',
-        transition: 'transition-[opacity]',
+        transition: 'transition',
         transitionDuration: 'duration-500'
       },
       open: {
