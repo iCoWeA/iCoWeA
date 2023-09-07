@@ -1,19 +1,17 @@
-import { type BaseHTMLAttributes } from 'react';
 import { type IconProps } from '../components/UI/Icon/Icon';
 
 export interface AccordionHeaderConfig {
   defaultProps: {
     color: Colors;
-    disableIcon: boolean;
     iconProps: IconProps;
-    iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    type: 'button';
   };
   styles: {
     button: {
       base: Record<string, string>;
       colors: Record<string, Record<Colors, Record<string, string>>>
     },
-    iconContainer: {
+    icon: {
       base: Record<string, string>;
       open: Record<string, string>;
     }
@@ -22,10 +20,9 @@ export interface AccordionHeaderConfig {
 
 const accordionHeaderConfig: AccordionHeaderConfig = {
   defaultProps: {
-    color: 'default',
-    disableIcon: false,
+    color: 'dark',
     iconProps: {},
-    iconContainerProps: {}
+    type: 'button'
   },
   styles: {
     button: {
@@ -93,11 +90,8 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         }
       }
     },
-    iconContainer: {
+    icon: {
       base: {
-        display: 'flex',
-        gap: 'gap-3',
-        alignItems: 'items-center',
         margin: 'ml-auto',
         transition: 'transition-transform'
       },
