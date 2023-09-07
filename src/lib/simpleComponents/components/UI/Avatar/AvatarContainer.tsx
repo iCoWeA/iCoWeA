@@ -16,7 +16,7 @@ const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ vari
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = avatarConfig.styles.contanier;
+  const styles = avatarConfig.styles.container;
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(

@@ -7,7 +7,7 @@ export interface AvatarConfig {
     borderColor: Colors;
   };
   styles: {
-    contanier: {
+    container: {
       base: Record<string, string>;
       withBorder: Record<string, string>;
       sizes: Record<Sizes, Record<string, string>>;
@@ -30,7 +30,7 @@ const avatarConfig: AvatarConfig = {
     borderColor: 'light'
   },
   styles: {
-    contanier: {
+    container: {
       base: {
         display: 'inline-flex',
         alignItems: 'items-center',
