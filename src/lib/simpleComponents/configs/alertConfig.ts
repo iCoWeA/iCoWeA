@@ -10,6 +10,7 @@ export interface AlertConfig {
     open: boolean;
     variant: AlertVariants;
     color: Colors;
+    shadow: boolean;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     actionContainerProps: BaseHTMLAttributes<HTMLDivElement>;
@@ -21,6 +22,7 @@ export interface AlertConfig {
     container: {
       base: Record<string, string>;
       open: Record<string, string>;
+      shadow: Record<string, Record<string, string>>;
       variants: Record<AlertVariants, Record<string, Record<Colors, Record<string, string>>>>
     },
     iconContainer: {
@@ -46,6 +48,7 @@ const alertConfig: AlertConfig = {
     open: true,
     variant: 'filled',
     color: 'primary',
+    shadow: true,
     iconContainerProps: {},
     bodyContainerProps: {},
     actionContainerProps: {},
@@ -65,6 +68,11 @@ const alertConfig: AlertConfig = {
       },
       open: {
         opacity: 'opacity-100'
+      },
+      shadow: {
+        default: {
+          shadow: 'shadow-md shadow-default-default/80'
+        }
       },
       variants: {
         filled: {

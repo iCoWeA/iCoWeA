@@ -14,6 +14,7 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
   variant?: AlertVariants;
   color?: Colors;
+  shadow?: boolean;
   icon?: ReactNode;
   action?: ReactNode;
   iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
@@ -35,6 +36,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     open,
     variant,
     color,
+    shadow,
     icon,
     action,
     iconContainerProps,
@@ -75,7 +77,13 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   }, [open, transitionState.enter, transitionState.exit, transitionConfig.onEntering, transitionConfig.onExiting]);
 
   /* --- Set container props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], transitionState.enter && styles.open, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.variants[variant][theme][color],
+    transitionState.enter && styles.open,
+    shadow && styles.shadow[theme],
+    className
+  );
 
   /* --- Set icon container props --- */
   let iconContainerNode: ReactNode;
