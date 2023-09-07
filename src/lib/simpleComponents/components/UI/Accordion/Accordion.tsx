@@ -15,7 +15,7 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = accordionConfig.styles;
-  const { open, defaultOpen, icon, id, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
+  const { open, defaultOpen, icon, id, disabled, className, children, ...restProps } = { ...accordionConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
 
   /* --- Set states --- */
@@ -50,13 +50,13 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   const mergedClassName = mergeClasses(styles.base, disabled && styles.disabled, className);
 
   return (
-    <accordionContext.Provider value={context}>
-      <div
-        className={mergedClassName}
-        ref={ref}
-        {...restProps}
-      />
-    </accordionContext.Provider>
+    <div
+      className={mergedClassName}
+      ref={ref}
+      {...restProps}
+    >
+      <accordionContext.Provider value={context}>{children}</accordionContext.Provider>
+    </div>
   );
 });
 
