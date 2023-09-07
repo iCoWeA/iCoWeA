@@ -70,43 +70,43 @@ const avatarConfig: AvatarConfig = {
       colors: {
         default: {
           default: {
-            color: 'text-default-dark',
             fill: 'fill-default-dark',
+            color: 'text-default-dark',
             background: 'bg-default-default'
           },
           primary: {
-            color: 'text-default-light',
             fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-primary'
           },
           secondary: {
-            color: 'text-default-light',
             fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-secondary'
           },
           success: {
-            color: 'text-default-light',
             fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-success'
           },
           warning: {
-            color: 'text-default-dark',
             fill: 'fill-default-dark',
+            color: 'text-default-dark',
             background: 'bg-default-warning'
           },
           error: {
-            color: 'text-default-light',
             fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-error'
           },
           light: {
-            color: 'text-default-light',
             fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-light'
           },
           dark: {
-            color: 'text-default-light',
             fill: 'fill-default-light',
+            color: 'text-default-light',
             background: 'bg-default-dark'
           }
         }
