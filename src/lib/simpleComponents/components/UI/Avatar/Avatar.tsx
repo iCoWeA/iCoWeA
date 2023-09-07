@@ -1,39 +1,46 @@
-import React, { type ImgHTMLAttributes, forwardRef, useContext } from 'react';
-import avatarConfig, { type AvatarVariants } from '../../../configs/avatarConfig';
-import themeContext from '../../../contexts/theme';
+import React, { type ImgHTMLAttributes, forwardRef } from 'react';
+import avatarConfig from '../../../configs/avatarConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
+import AvatarContainer from './AvatarContainer';
 
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
-  variant?: AvatarVariants;
+  variant?: Borders;
   size?: Sizes;
   color?: Colors;
   withBorder?: boolean;
+  borderColor?: Colors;
 }
 
-const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
+const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   /* --- Set default props --- */
-  const styles = avatarConfig.styles;
-  const { variant, size, color, withBorder, className, ...restProps } = { ...avatarConfig.defaultProps, ...props };
+  const styles = avatarConfig.styles.image;
+  const { variant, size, color, withBorder, borderColor, className, children, ...restProps } = { ...avatarConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant],
-    styles.sizes[size],
-    styles.colors[theme][color],
-    withBorder && styles.withBorder[theme],
-    className
-  );
+  let childrenNode = children;
+
+  if (childrenNode === undefined) {
+    const mergedClassName = mergeClasses(styles.base, className);
+
+    childrenNode = (
+      <img
+        className={mergedClassName}
+        {...restProps}
+      />
+    );
+  }
 
   return (
-    <img
-      className={mergedClassName}
+    <AvatarContainer
+      variant={variant}
+      size={size}
+      color={color}
+      withBorder={withBorder}
+      borderColor={borderColor}
       ref={ref}
-      {...restProps}
-    />
+    >
+      {childrenNode}
+    </AvatarContainer>
   );
 });
 
