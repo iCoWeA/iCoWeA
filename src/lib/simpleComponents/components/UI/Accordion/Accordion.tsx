@@ -1,18 +1,19 @@
-import React, { type BaseHTMLAttributes, forwardRef, useState, useEffect, useMemo } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useState, useEffect, useMemo, type ReactNode } from 'react';
 import accordionConfig from '../../../configs/accordionConfig';
 import accordionContext, { type AccordionContext } from '../../../contexts/accordion';
 import usePrevious from '../../../hooks/usePrevious';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
-  onToggle?: (open?: boolean) => void;
   open?: boolean;
+  icon?: ReactNode;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = accordionConfig.styles;
-  const { onToggle, open, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
+  const { open, icon, disabled, className, ...restProps } = { ...accordionConfig.defaultProps, ...props };
+  const isControlled = open !== undefined;
 
   /* --- Set states --- */
   const [isOpen, setIsOpen] = useState(false);
@@ -31,17 +32,14 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
     () => ({
       open: open ?? isOpen,
       disabled,
-      onClick: () => {
-        if (onToggle !== undefined) {
-          onToggle();
-        }
-
-        if (open === undefined) {
+      icon,
+      onToggle: () => {
+        if (!isControlled) {
           setIsOpen((isOpen) => !isOpen);
         }
       }
     }),
-    [open, isOpen, disabled, onToggle]
+    [open, isOpen, disabled, icon, isControlled]
   );
 
   /* Set props */
