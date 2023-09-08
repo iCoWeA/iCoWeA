@@ -8,10 +8,9 @@ interface AvatarContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   size: Sizes;
   color: Colors;
   withBorder: boolean;
-  borderColor: Colors;
 }
 
-const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ variant, size, color, withBorder, borderColor, className, ...restProps }, ref) => {
+const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ variant, size, color, withBorder, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -24,8 +23,7 @@ const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ vari
     styles.variants[variant],
     styles.sizes[size],
     styles.colors[theme][color],
-    withBorder && styles.withBorder[theme],
-    withBorder && styles.borderColors[theme][borderColor],
+    withBorder && styles.withBorder,
     className
   );
 

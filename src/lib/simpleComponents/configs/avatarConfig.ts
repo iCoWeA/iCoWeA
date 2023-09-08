@@ -4,9 +4,8 @@ export interface AvatarConfig {
   defaultProps: {
     variant: Borders;
     size: Sizes;
-    color: Colors;
+    color: ContainerColors;
     withBorder: boolean;
-    borderColor: Colors;
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
   };
   styles: {
@@ -15,8 +14,7 @@ export interface AvatarConfig {
       withBorder: Record<string, string>;
       sizes: Record<Sizes, Record<string, string>>;
       variants: Record<Borders, Record<string, string>>;
-      colors: Record<string, Record<Colors, Record<string, string>>>;
-      borderColors: Record<string, Record<Colors, Record<string, string>>>;
+      colors: Record<Themes, Record<ContainerColors, Record<string, string>>>;
     },
     image: {
       base: Record<string, string>;
@@ -30,7 +28,6 @@ const avatarConfig: AvatarConfig = {
     size: 'md',
     color: 'primary',
     withBorder: false,
-    borderColor: 'light',
     containerProps: {}
   },
   styles: {
@@ -72,74 +69,41 @@ const avatarConfig: AvatarConfig = {
         }
       },
       colors: {
-        default: {
-          default: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-default'
-          },
+        light: {
           primary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-primary'
+            fill: 'fill-light-primary-text',
+            color: 'text-light-primary-text',
+            background: 'bg-light-primary-container'
           },
           secondary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-secondary'
+            fill: 'fill-light-secondary-text',
+            color: 'text-light-secondary-text',
+            background: 'bg-light-secondary-container'
           },
           success: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-success'
+            fill: 'fill-light-success-text',
+            color: 'text-light-success-text',
+            background: 'bg-light-success-container'
           },
           warning: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-warning'
+            fill: 'fill-light-warning-text',
+            color: 'text-light-warning-text',
+            background: 'bg-light-warning-container'
           },
           error: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-error'
+            fill: 'fill-light-error-text',
+            color: 'text-light-error-text',
+            background: 'bg-light-error-container'
           },
           light: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-light'
+            fill: 'fill-light-light-text',
+            color: 'text-light-light-text',
+            background: 'bg-light-light-container'
           },
           dark: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-dark'
-          }
-        }
-      },
-      borderColors: {
-        default: {
-          default: {
-            border: 'border-default-default'
-          },
-          primary: {
-            border: 'border-default-primary'
-          },
-          secondary: {
-            border: 'border-default-secondary'
-          },
-          success: {
-            border: 'border-default-success'
-          },
-          warning: {
-            border: 'border-default-warning'
-          },
-          error: {
-            border: 'border-default-error'
-          },
-          light: {
-            border: 'border-default-light'
-          },
-          dark: {
-            border: 'border-default-dark'
+            fill: 'fill-light-light',
+            color: 'text-light-light',
+            background: 'bg-light-dark-container'
           }
         }
       }
