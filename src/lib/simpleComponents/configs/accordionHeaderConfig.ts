@@ -21,7 +21,7 @@ export interface AccordionHeaderConfig {
 
 const accordionHeaderConfig: AccordionHeaderConfig = {
   defaultProps: {
-    color: 'dark',
+    color: 'default',
     iconProps: {},
     type: 'button'
   },
@@ -34,9 +34,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         width: 'w-full',
         padding: 'py-3',
         font: 'antialiased font-normal text-base font-sans',
-        transition: 'transition-colors',
-        focus: 'focus:outline-0',
-        disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
+        focus: 'focus:outline-0'
       },
       divider: {
         default: {
@@ -46,52 +44,36 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       colors: {
         default: {
           default: {
-            fill: 'fill-default-default/70',
-            color: 'text-default-default/70',
-            hover: 'hover:text-default-default hover:fill-default-default',
-            disabled: 'disabled:fill-default-default disabled:text-default-default'
+            fill: 'fill-default-default',
+            color: 'text-default-default'
           },
           primary: {
-            fill: 'fill-default-primary/70',
-            color: 'text-default-primary/70',
-            hover: 'hover:text-default-primary hover:fill-default-primary',
-            disabled: 'disabled:fill-default-primary disabled:text-default-primary'
+            fill: 'fill-default-primary',
+            color: 'text-default-primary'
           },
           secondary: {
-            fill: 'fill-default-secondary/70',
-            color: 'text-default-secondary/70',
-            hover: 'hover:text-default-secondary hover:fill-default-secondary',
-            disabled: 'disabled:fill-default-secondary disabled:text-default-secondary'
+            fill: 'fill-default-secondary',
+            color: 'text-default-secondary'
           },
           success: {
-            fill: 'fill-default-success/70',
-            color: 'text-default-success/70',
-            hover: 'hover:text-default-success hover:fill-default-success',
-            disabled: 'disabled:fill-default-success disabled:text-default-success'
+            fill: 'fill-default-success',
+            color: 'text-default-success'
           },
           warning: {
-            fill: 'fill-default-warning/70',
-            color: 'text-default-warning/70',
-            hover: 'hover:text-default-warning hover:fill-default-warning',
-            disabled: 'disabled:fill-default-warning disabled:text-default-warning'
+            fill: 'fill-default-warning',
+            color: 'text-default-warning'
           },
           error: {
-            fill: 'fill-default-error/70',
-            color: 'text-default-error/70',
-            hover: 'hover:text-default-error hover:fill-default-error',
-            disabled: 'disabled:fill-default-error disabled:text-default-error'
+            fill: 'fill-default-error',
+            color: 'text-default-error'
           },
           light: {
-            fill: 'fill-default-light/70',
-            color: 'text-default-light/70',
-            hover: 'hover:text-default-light hover:fill-default-light',
-            disabled: 'disabled:fill-default-light disabled:text-default-light'
+            fill: 'fill-default-light',
+            color: 'text-default-light'
           },
           dark: {
-            fill: 'fill-default-dark/70',
-            color: 'text-default-dark/70',
-            hover: 'hover:text-default-dark hover:fill-default-dark',
-            disabled: 'disabled:fill-default-dark disabled:text-default-dark'
+            fill: 'fill-default-dark',
+            color: 'text-default-dark'
           }
         }
       }
