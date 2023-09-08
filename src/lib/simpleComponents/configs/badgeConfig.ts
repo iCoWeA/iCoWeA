@@ -3,9 +3,8 @@ import { type BaseHTMLAttributes } from 'react';
 export interface BadgeConfig {
   defaultProps: {
     position: CornerPositions;
-    color: Colors;
+    color: ContainerColors;
     withBorder: boolean;
-    borderColor: Colors;
     invisible: boolean;
     containerProps?: BaseHTMLAttributes<HTMLDivElement>;
   };
@@ -19,8 +18,8 @@ export interface BadgeConfig {
       withBorder: Record<string, string>;
       invisible: Record<string, string>;
       positions: Record<CornerPositions, Record<string, string>>;
-      colors: Record<string, Record<Colors, Record<string, string>>>;
-      borderColors: Record<string, Record<Colors, Record<string, string>>>;
+      translate: Record<CornerPositions, Record<string, string>>;
+      colors: Record<Themes, Record<ContainerColors, Record<string, string>>>;
     }
   }
 }
@@ -30,7 +29,6 @@ const badgeConfig: BadgeConfig = {
     position: 'top-right',
     color: 'error',
     withBorder: false,
-    borderColor: 'default',
     invisible: false,
     containerProps: {}
   },
@@ -48,13 +46,16 @@ const badgeConfig: BadgeConfig = {
         position: 'absolute',
         display: 'flex',
         alignItems: 'items-center',
+        justifyContent: 'justify-center',
+        minWidth: 'min-w-[1.5rem]',
         padding: 'p-1',
         borderRadius: 'rounded-full',
-        font: 'antialiased font-normal text-[0.5rem] leading-[0.5rem] font-sans'
+        font: 'antialiased font-normal text-xs font-sans'
       },
       empty: {
         height: 'h-1.5',
         width: 'w-1.5',
+        minWidth: 'min-w-0',
         padding: 'p-0'
       },
       withBorder: {
@@ -66,94 +67,71 @@ const badgeConfig: BadgeConfig = {
       positions: {
         'top-left': {
           top: 'top-0',
-          left: 'left-0',
-          translate: '-translate-y-2/4 -translate-x-2/4'
+          left: 'left-0'
         },
         'top-right': {
           top: 'top-0',
-          right: 'right-0',
-          translate: '-translate-y-2/4 translate-x-2/4'
+          right: 'right-0'
         },
         'bottom-left': {
           bottom: 'bottom-0',
-          left: 'left-0',
-          translate: 'translate-y-2/4 -translate-x-2/4'
+          left: 'left-0'
         },
         'bottom-right': {
           bottom: 'bottom-0',
-          right: 'right-0',
-          translate: 'translate-y-2/4 translate-x-2/4'
+          right: 'right-0'
+        }
+      },
+      translate: {
+        'top-left': {
+          translate: '-translate-y-[calc(100%-0.75rem)] -translate-x-[calc(100%-0.75rem)]'
+        },
+        'top-right': {
+          translate: '-translate-y-[calc(100%-0.75rem)] translate-x-[calc(100%-0.75rem)]'
+        },
+        'bottom-left': {
+          translate: 'translate-y-[calc(100%-0.75rem)] -translate-x-[calc(100%-0.75rem)]'
+        },
+        'bottom-right': {
+          translate: 'translate-y-[calc(100%-0.75rem)] translate-x-[calc(100%-0.75rem)]'
         }
       },
       colors: {
-        default: {
-          default: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-default'
-          },
+        light: {
           primary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-primary'
+            fill: 'fill-light-primary-text',
+            color: 'text-light-primary-text',
+            background: 'bg-light-primary-container'
           },
           secondary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-secondary'
+            fill: 'fill-light-secondary-text',
+            color: 'text-light-secondary-text',
+            background: 'bg-light-secondary-container'
           },
           success: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-success'
+            fill: 'fill-light-success-text',
+            color: 'text-light-success-text',
+            background: 'bg-light-success-container'
           },
           warning: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-warning'
+            fill: 'fill-light-warning-text',
+            color: 'text-light-warning-text',
+            background: 'bg-light-warning-container'
           },
           error: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-error'
+            fill: 'fill-light-error-text',
+            color: 'text-light-error-text',
+            background: 'bg-light-error-container'
           },
           light: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-light'
+            fill: 'fill-light-light-text',
+            color: 'text-light-light-text',
+            background: 'bg-light-light-container'
           },
           dark: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-dark'
-          }
-        }
-      },
-      borderColors: {
-        default: {
-          default: {
-            border: 'border-default-default'
-          },
-          primary: {
-            border: 'border-default-primary'
-          },
-          secondary: {
-            border: 'border-default-secondary'
-          },
-          success: {
-            border: 'border-default-success'
-          },
-          warning: {
-            border: 'border-default-warning'
-          },
-          error: {
-            border: 'border-default-error'
-          },
-          light: {
-            border: 'border-default-light'
-          },
-          dark: {
-            border: 'border-default-dark'
+            fill: 'fill-light-dark-text',
+            color: 'text-light-dark-text',
+            background: 'bg-light-dark-container'
           }
         }
       }

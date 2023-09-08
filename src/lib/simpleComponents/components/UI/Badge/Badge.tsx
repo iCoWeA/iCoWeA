@@ -7,9 +7,8 @@ import BadgeContainer from './BadgeContainer';
 export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
   badgeContent?: ReactNode;
   position?: CornerPositions;
-  color?: Colors;
+  color?: ContainerColors;
   withBorder?: boolean;
-  borderColor?: Colors;
   invisible?: boolean;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
 }
@@ -20,7 +19,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = badgeConfig.styles.badge;
-  const { badgeContent, position, color, withBorder, borderColor, invisible, containerProps, className, children, ...restProps } = {
+  const { badgeContent, position, color, withBorder, invisible, containerProps, className, children, ...restProps } = {
     ...badgeConfig.defaultProps,
     ...props
   };
@@ -31,8 +30,8 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     styles.positions[position],
     styles.colors[theme][color],
     badgeContent === undefined && styles.empty,
+    badgeContent !== undefined && styles.translate[position],
     withBorder && styles.withBorder,
-    withBorder && styles.borderColors[theme][borderColor],
     invisible && styles.invisible,
     className
   );
