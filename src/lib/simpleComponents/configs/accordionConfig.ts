@@ -5,7 +5,6 @@ export interface AccordionConfig {
   };
   styles: {
     base: Record<string, string>;
-    disabled: Record<string, string>;
   }
 }
 
@@ -19,11 +18,6 @@ const accordionConfig: AccordionConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       width: 'w-full'
-    },
-    disabled: {
-      opacity: 'opacity-50',
-      pointer: 'pointer-events-none',
-      userSelect: 'select-none'
     }
   }
 };

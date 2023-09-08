@@ -9,8 +9,8 @@ export interface AccordionHeaderConfig {
   styles: {
     button: {
       base: Record<string, string>;
-      divider: Record<string, Record<string, string>>;
-      colors: Record<string, Record<ContainerColors, Record<string, string>>>
+      divider: Record<Themes, Record<string, string>>;
+      colors: Record<Themes, Record<ContainerColors, Record<string, string>>>
     },
     icon: {
       base: Record<string, string>;
@@ -37,43 +37,43 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         focus: 'focus:outline-0'
       },
       divider: {
-        default: {
-          border: 'border-b border-default-divider'
+        light: {
+          border: 'border-b border-light-divider'
         }
       },
       colors: {
-        default: {
+        light: {
           default: {
-            fill: 'fill-default-dark-container',
-            color: 'text-default-dark-container'
+            fill: 'fill-light-dark-container',
+            color: 'text-light-dark-container'
           },
           primary: {
-            fill: 'fill-default-primary-container',
-            color: 'text-default-primary-container'
+            fill: 'fill-light-primary-container',
+            color: 'text-light-primary-container'
           },
           secondary: {
-            fill: 'fill-default-secondary-container',
-            color: 'text-default-secondary-container'
+            fill: 'fill-light-secondary-container',
+            color: 'text-light-secondary-container'
           },
           success: {
-            fill: 'fill-default-success-container',
-            color: 'text-default-success-container'
+            fill: 'fill-light-success-container',
+            color: 'text-light-success-container'
           },
           warning: {
-            fill: 'fill-default-warning-container',
-            color: 'text-default-warning-container'
+            fill: 'fill-light-warning-container',
+            color: 'text-light-warning-container'
           },
           error: {
-            fill: 'fill-default-error-container',
-            color: 'text-default-error-container'
+            fill: 'fill-light-error-container',
+            color: 'text-light-error-container'
           },
           dark: {
-            fill: 'fill-default-dark-container',
-            color: 'text-default-dark-container'
+            fill: 'fill-light-dark-container',
+            color: 'text-light-dark-container'
           },
           light: {
-            fill: 'fill-default-light-container',
-            color: 'text-default-light-container'
+            fill: 'fill-light-light-container',
+            color: 'text-light-light-container'
           }
         }
       }
