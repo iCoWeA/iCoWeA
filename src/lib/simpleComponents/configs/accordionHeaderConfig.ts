@@ -2,7 +2,7 @@ import { type IconProps } from '../components/UI/Icon/Icon';
 
 export interface AccordionHeaderConfig {
   defaultProps: {
-    color: Colors;
+    color: ContainerColors;
     iconProps: IconProps;
     type: 'button';
   };
@@ -10,7 +10,7 @@ export interface AccordionHeaderConfig {
     button: {
       base: Record<string, string>;
       divider: Record<string, Record<string, string>>;
-      colors: Record<string, Record<Colors, Record<string, string>>>
+      colors: Record<string, Record<ContainerColors, Record<string, string>>>
     },
     icon: {
       base: Record<string, string>;
@@ -44,36 +44,36 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       colors: {
         default: {
           default: {
-            fill: 'fill-default-default',
-            color: 'text-default-default'
+            fill: 'fill-default-dark-container',
+            color: 'text-default-dark-container'
           },
           primary: {
-            fill: 'fill-default-primary',
-            color: 'text-default-primary'
+            fill: 'fill-default-primary-container',
+            color: 'text-default-primary-container'
           },
           secondary: {
-            fill: 'fill-default-secondary',
-            color: 'text-default-secondary'
+            fill: 'fill-default-secondary-container',
+            color: 'text-default-secondary-container'
           },
           success: {
-            fill: 'fill-default-success',
-            color: 'text-default-success'
+            fill: 'fill-default-success-container',
+            color: 'text-default-success-container'
           },
           warning: {
-            fill: 'fill-default-warning',
-            color: 'text-default-warning'
+            fill: 'fill-default-warning-container',
+            color: 'text-default-warning-container'
           },
           error: {
-            fill: 'fill-default-error',
-            color: 'text-default-error'
-          },
-          light: {
-            fill: 'fill-default-light',
-            color: 'text-default-light'
+            fill: 'fill-default-error-container',
+            color: 'text-default-error-container'
           },
           dark: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark'
+            fill: 'fill-default-dark-container',
+            color: 'text-default-dark-container'
+          },
+          light: {
+            fill: 'fill-default-light-container',
+            color: 'text-default-light-container'
           }
         }
       }
