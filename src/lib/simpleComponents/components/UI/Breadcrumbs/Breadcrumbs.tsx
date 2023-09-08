@@ -1,21 +1,25 @@
-import React, { type BaseHTMLAttributes, type ReactNode, type LiHTMLAttributes, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, type ReactNode, type OlHTMLAttributes, type LiHTMLAttributes, forwardRef } from 'react';
 import breadcrumbsConfig from '../../../configs/breadcrumbsConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 import BreadcrumbsItem from './BreadcrumbsItem';
 import BreadcrumbsSeparator from './BreadcrumbsSeparator';
 
-export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLUListElement> {
+export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLElement> {
   separator?: ReactNode;
   color?: Colors;
   fullwidth?: boolean;
+  listProps?: OlHTMLAttributes<HTMLOListElement>;
   itemsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
   separatorsProps?: Record<number, BaseHTMLAttributes<HTMLSpanElement>>;
 }
 
-const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((props, ref) => {
+const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
   /* --- Set default props --- */
-  const styles = breadcrumbsConfig.styles.list;
-  const { separator, color, fullwidth, itemsProps, separatorsProps, className, children, ...restProps } = { ...breadcrumbsConfig.defaultProps, ...props };
+  const styles = breadcrumbsConfig.styles.container;
+  const { separator, color, fullwidth, listProps, itemsProps, separatorsProps, className, children, ...restProps } = {
+    ...breadcrumbsConfig.defaultProps,
+    ...props
+  };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, fullwidth && styles.fullwidth, className);
@@ -52,13 +56,13 @@ const Breadcrumbs = forwardRef<HTMLUListElement, BreadcrumbsProps>((props, ref) 
   }
 
   return (
-    <ul
+    <nav
       className={mergedClassName}
       ref={ref}
       {...restProps}
     >
-      {itemNodes}
-    </ul>
+      <ul {...listProps}>{itemNodes}</ul>
+    </nav>
   );
 });
 

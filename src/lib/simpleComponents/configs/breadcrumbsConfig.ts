@@ -1,17 +1,21 @@
-import { type ReactNode, type LiHTMLAttributes } from 'react';
+import { type ReactNode, type OlHTMLAttributes, type LiHTMLAttributes } from 'react';
 
 export interface BreadcrumbsConfig {
   defaultProps: {
     separator: ReactNode;
     color: Colors;
     fullwidth: boolean;
+    listProps: OlHTMLAttributes<HTMLOListElement>;
     itemsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
     separatorsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
   };
   styles: {
-    list: {
+    container: {
       base: Record<string, string>;
       fullwidth: Record<string, string>;
+    },
+    list: {
+      base: Record<string, string>;
     },
     item: {
       base: Record<string, string>;
@@ -28,10 +32,22 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
     separator: '/',
     color: 'default',
     fullwidth: false,
+    listProps: {},
     itemsProps: {},
     separatorsProps: {}
   },
   styles: {
+    container: {
+      base: {
+        display: 'flex',
+        height: 'h-fit',
+        width: 'w-fit'
+      },
+      fullwidth: {
+        width: 'w-full',
+        justifyContent: 'justify-center'
+      }
+    },
     list: {
       base: {
         display: 'flex',
@@ -39,10 +55,6 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
         gap: 'gap-3',
         alignItems: 'items-center',
         width: 'w-fit'
-      },
-      fullwidth: {
-        width: 'w-full',
-        justifyContent: 'justify-center'
       }
     },
     item: {
@@ -62,36 +74,36 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
       colors: {
         default: {
           default: {
-            fill: 'fill-default-default/70',
-            color: 'text-default-default/70'
+            fill: 'fill-default-default',
+            color: 'text-default-default'
           },
           primary: {
-            fill: 'fill-default-primary/70',
-            color: 'text-default-primary/70'
+            fill: 'fill-default-primary',
+            color: 'text-default-primary'
           },
           secondary: {
-            fill: 'fill-default-secondary/70',
-            color: 'text-default-secondary/70'
+            fill: 'fill-default-secondary',
+            color: 'text-default-secondary'
           },
           success: {
-            fill: 'fill-default-success/70',
-            color: 'text-default-success/70'
+            fill: 'fill-default-success',
+            color: 'text-default-success'
           },
           warning: {
-            fill: 'fill-default-warning/70',
-            color: 'text-default-warning/70'
+            fill: 'fill-default-warning',
+            color: 'text-default-warning'
           },
           error: {
-            fill: 'fill-default-error/70',
-            color: 'text-default-error/70'
+            fill: 'fill-default-error',
+            color: 'text-default-error'
           },
           light: {
-            fill: 'fill-default-light/70',
-            color: 'text-default-light/70'
+            fill: 'fill-default-light',
+            color: 'text-default-light'
           },
           dark: {
-            fill: 'fill-default-dark/70',
-            color: 'text-default-dark/70'
+            fill: 'fill-default-dark',
+            color: 'text-default-dark'
           }
         }
       }
