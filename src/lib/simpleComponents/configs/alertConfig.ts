@@ -218,7 +218,7 @@ const alertConfig: AlertConfig = {
     actionContainer: {
       base: {
         display: 'flex',
-        gap: 'gap-1',
+        gap: 'gap-3',
         padding: 'py-2 pl-3 pr-2'
       },
       button: {
