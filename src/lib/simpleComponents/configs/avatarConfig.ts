@@ -41,7 +41,7 @@ const avatarConfig: AvatarConfig = {
         overflow: 'overflow-hidden'
       },
       withBorder: {
-        border: 'border-2'
+        border: 'border-2 border-transparent'
       },
       sizes: {
         xs: {

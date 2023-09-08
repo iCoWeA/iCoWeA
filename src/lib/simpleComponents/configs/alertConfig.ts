@@ -22,7 +22,7 @@ export interface AlertConfig {
     container: {
       base: Record<string, string>;
       open: Record<string, string>;
-      shadow: Record<string, Record<string, string>>;
+      shadow: Record<Themes, Record<string, string>>;
       variants: Record<AlertVariants, Record<Themes, Record<ContainerColors, Record<string, string>>>>
     },
     iconContainer: {
