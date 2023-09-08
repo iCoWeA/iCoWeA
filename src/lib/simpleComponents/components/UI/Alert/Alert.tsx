@@ -13,7 +13,7 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   open?: boolean;
   variant?: AlertVariants;
-  color?: Colors;
+  color?: ContainerColors;
   shadow?: boolean;
   icon?: ReactNode;
   action?: ReactNode;

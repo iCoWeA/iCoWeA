@@ -116,11 +116,6 @@ const alertConfig: AlertConfig = {
         },
         outlined: {
           light: {
-            default: {
-              border: 'border border-light-default-container',
-              fill: 'fill-light-default-container',
-              color: 'text-light-default-container'
-            },
             primary: {
               border: 'border border-light-primary-container',
               fill: 'fill-light-primary-container',
@@ -160,11 +155,6 @@ const alertConfig: AlertConfig = {
         },
         tonal: {
           light: {
-            default: {
-              fill: 'fill-light-default-container',
-              color: 'text-light-default-container',
-              background: 'bg-light-default-tonal-container'
-            },
             primary: {
               fill: 'fill-light-primary-container',
               color: 'text-light-primary-container',
@@ -238,7 +228,6 @@ const alertConfig: AlertConfig = {
     button: {
       variants: {
         filled: {
-          default: 'dark',
           primary: 'light',
           secondary: 'light',
           success: 'light',
@@ -248,7 +237,6 @@ const alertConfig: AlertConfig = {
           dark: 'light'
         },
         outlined: {
-          default: 'default',
           primary: 'primary',
           secondary: 'secondary',
           success: 'success',
@@ -258,7 +246,6 @@ const alertConfig: AlertConfig = {
           dark: 'dark'
         },
         tonal: {
-          default: 'dark',
           primary: 'light',
           secondary: 'light',
           success: 'light',
