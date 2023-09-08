@@ -1,30 +1,36 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import badgeConfig, { type BadgePosition } from '../../../configs/badgeConfig';
+import React, { type BaseHTMLAttributes, type ReactNode, forwardRef, useContext } from 'react';
+import badgeConfig from '../../../configs/badgeConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
+import BadgeContainer from './BadgeContainer';
 
 export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
-  position?: BadgePosition;
+  badgeContent?: ReactNode;
+  position?: CornerPositions;
   color?: Colors;
   withBorder?: boolean;
   borderColor?: Colors;
   invisible?: boolean;
+  containerProps?: BaseHTMLAttributes<HTMLDivElement>;
 }
 
-const Badge = forwardRef<HTMLSpanElement, BadgeProps>((props, ref) => {
+const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = badgeConfig.styles;
-  const { position, color, withBorder, borderColor, invisible, className, ...restProps } = { ...badgeConfig.defaultProps, ...props };
+  const styles = badgeConfig.styles.badge;
+  const { badgeContent, position, color, withBorder, borderColor, invisible, containerProps, className, children, ...restProps } = {
+    ...badgeConfig.defaultProps,
+    ...props
+  };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.positions[position.horizontal],
-    styles.positions[position.vertical],
+    styles.positions[position],
     styles.colors[theme][color],
+    badgeContent === undefined && styles.empty,
     withBorder && styles.withBorder,
     withBorder && styles.borderColors[theme][borderColor],
     invisible && styles.invisible,
@@ -32,11 +38,18 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>((props, ref) => {
   );
 
   return (
-    <span
-      className={mergedClassName}
+    <BadgeContainer
       ref={ref}
-      {...restProps}
-    />
+      {...containerProps}
+    >
+      {children}
+      <span
+        className={mergedClassName}
+        {...restProps}
+      >
+        {badgeContent}
+      </span>
+    </BadgeContainer>
   );
 });
 
