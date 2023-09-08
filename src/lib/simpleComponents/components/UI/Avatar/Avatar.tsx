@@ -1,4 +1,4 @@
-import React, { type ImgHTMLAttributes, forwardRef } from 'react';
+import React, { type ImgHTMLAttributes, type BaseHTMLAttributes, forwardRef } from 'react';
 import avatarConfig from '../../../configs/avatarConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 import AvatarContainer from './AvatarContainer';
@@ -9,12 +9,13 @@ export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   color?: Colors;
   withBorder?: boolean;
   borderColor?: Colors;
+  containerProps?: BaseHTMLAttributes<HTMLDivElement>;
 }
 
 const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = avatarConfig.styles.image;
-  const { variant, size, color, withBorder, borderColor, className, children, ...restProps } = { ...avatarConfig.defaultProps, ...props };
+  const { variant, size, color, withBorder, borderColor, containerProps, className, children, ...restProps } = { ...avatarConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   let childrenNode = children;
@@ -38,6 +39,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
       withBorder={withBorder}
       borderColor={borderColor}
       ref={ref}
+      {...containerProps}
     >
       {childrenNode}
     </AvatarContainer>
