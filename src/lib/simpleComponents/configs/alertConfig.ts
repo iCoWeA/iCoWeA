@@ -70,7 +70,7 @@ const alertConfig: AlertConfig = {
         opacity: 'opacity-100'
       },
       shadow: {
-        default: {
+        light: {
           shadow: 'shadow-md shadow-light-shadow'
         }
       },
