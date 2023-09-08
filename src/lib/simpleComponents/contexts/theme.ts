@@ -6,7 +6,7 @@ export interface ThemeContext {
 }
 
 export const initialState: ThemeContext = {
-  theme: 'default',
+  theme: 'light',
   setTheme: () => {}
 };
 
