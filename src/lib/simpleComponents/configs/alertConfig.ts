@@ -61,7 +61,7 @@ const alertConfig: AlertConfig = {
       base: {
         display: 'flex',
         width: 'w-full',
-        borderRadius: 'rounded-xl',
+        borderRadius: 'rounded',
         opacity: 'opacity-0',
         transition: 'transition',
         transitionDuration: 'duration-500'
