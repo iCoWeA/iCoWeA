@@ -20,7 +20,7 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
   const { onClose, open, invisible, overlayRef, className, ...restProps } = { ...backdropConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.color[theme], open && styles.open, invisible && styles.invisible, className);
+  const mergedClassName = mergeClasses(styles.base, !invisible && styles.color[theme], open && styles.open, className);
 
   const node = (
     <div
