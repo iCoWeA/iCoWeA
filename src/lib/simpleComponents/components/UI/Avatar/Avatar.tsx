@@ -6,16 +6,15 @@ import AvatarContainer from './AvatarContainer';
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   variant?: Borders;
   size?: Sizes;
-  color?: Colors;
+  color?: ContainerColors;
   withBorder?: boolean;
-  borderColor?: Colors;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
 }
 
 const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = avatarConfig.styles.image;
-  const { variant, size, color, withBorder, borderColor, containerProps, className, children, ...restProps } = { ...avatarConfig.defaultProps, ...props };
+  const { variant, size, color, withBorder, containerProps, className, children, ...restProps } = { ...avatarConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   let childrenNode = children;
@@ -37,7 +36,6 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
       size={size}
       color={color}
       withBorder={withBorder}
-      borderColor={borderColor}
       ref={ref}
       {...containerProps}
     >
