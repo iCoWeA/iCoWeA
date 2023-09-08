@@ -7,7 +7,7 @@ import { type IconProps } from '../Icon/Icon';
 import AccordionIcon from './AccordionIcon';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: Colors;
+  color?: ContainerColors;
   iconProps?: IconProps;
 }
 
