@@ -7,7 +7,6 @@ import BreadcrumbsSeparator from './BreadcrumbsSeparator';
 
 export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLElement> {
   separator?: ReactNode;
-  color?: ContainerColors;
   fullwidth?: boolean;
   listProps?: OlHTMLAttributes<HTMLOListElement>;
   itemsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
@@ -34,14 +33,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
     let separatorNode: ReactNode;
 
     if (i !== childrenNodes.length - 1) {
-      separatorNode = (
-        <BreadcrumbsSeparator
-          color={color}
-          {...(separatorsProps[i] ?? {})}
-        >
-          {separator}
-        </BreadcrumbsSeparator>
-      );
+      separatorNode = <BreadcrumbsSeparator {...(separatorsProps[i] ?? {})}>{separator}</BreadcrumbsSeparator>;
     }
 
     /* --- Set item props --- */

@@ -3,7 +3,6 @@ import { type ReactNode, type OlHTMLAttributes, type LiHTMLAttributes } from 're
 export interface BreadcrumbsConfig {
   defaultProps: {
     separator: ReactNode;
-    color: ContainerColors;
     fullwidth: boolean;
     listProps: OlHTMLAttributes<HTMLOListElement>;
     itemsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
@@ -22,7 +21,7 @@ export interface BreadcrumbsConfig {
     },
     separator: {
       base: Record<string, string>;
-      colors: Record<Themes, Record<ContainerColors, Record<string, string>>>;
+      colors: Record<Themes, Record<string, string>>;
     }
   }
 }
@@ -30,7 +29,6 @@ export interface BreadcrumbsConfig {
 const breadcrumbsConfig: BreadcrumbsConfig = {
   defaultProps: {
     separator: '/',
-    color: 'default',
     fullwidth: false,
     listProps: {},
     itemsProps: {},
@@ -73,38 +71,8 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
       },
       colors: {
         light: {
-          default: {
-            fill: 'fill-light-default-container',
-            color: 'text-light-default-container'
-          },
-          primary: {
-            fill: 'fill-light-primary-container',
-            color: 'text-light-primary-container'
-          },
-          secondary: {
-            fill: 'fill-light-secondary-container',
-            color: 'text-light-secondary-container'
-          },
-          success: {
-            fill: 'fill-light-success-container',
-            color: 'text-light-success-container'
-          },
-          warning: {
-            fill: 'fill-light-warning-container',
-            color: 'text-light-warning-container'
-          },
-          error: {
-            fill: 'fill-light-error-container',
-            color: 'text-light-error-container'
-          },
-          light: {
-            fill: 'fill-light-light-container',
-            color: 'text-light-light-container'
-          },
-          dark: {
-            fill: 'fill-light-dark-container',
-            color: 'text-light-dark-container'
-          }
+          fill: 'fill-light-on-surface-variant',
+          color: 'text-light-on-surface-variant'
         }
       }
     }

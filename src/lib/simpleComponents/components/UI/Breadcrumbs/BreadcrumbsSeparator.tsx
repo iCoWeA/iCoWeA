@@ -3,9 +3,7 @@ import breadcrumbsConfig from '../../../configs/breadcrumbsConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
-export interface BreacrumbsSeparatorProps extends BaseHTMLAttributes<HTMLSpanElement> {
-  color: Colors;
-}
+export interface BreacrumbsSeparatorProps extends BaseHTMLAttributes<HTMLSpanElement> {}
 
 const BreadcrumbsSeparator = forwardRef<HTMLSpanElement, BreacrumbsSeparatorProps>(({ color, className, ...restProps }, ref) => {
   /* --- Set context props --- */
@@ -15,7 +13,7 @@ const BreadcrumbsSeparator = forwardRef<HTMLSpanElement, BreacrumbsSeparatorProp
   const styles = breadcrumbsConfig.styles.separator;
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.colors[theme], className);
 
   return (
     <span
