@@ -136,29 +136,29 @@ const alertConfig: AlertConfig = {
         tonal: {
           light: {
             primary: {
-              fill: 'fill-light-on-primary-coantiner',
+              fill: 'fill-light-on-primary-container',
               color: 'text-light-on-primary-container',
               background: 'bg-light-primary-container'
             },
             secondary: {
-              fill: 'fill-light-on-secondary-coantiner',
+              fill: 'fill-light-on-secondary-container',
               color: 'text-light-on-secondary-container',
-              background: 'bg-light-secondarcontainer'
+              background: 'bg-light-secondary-container'
             },
             success: {
-              fill: 'fill-light-on-success-coantiner',
+              fill: 'fill-light-on-success-container',
               color: 'text-light-on-success-container',
               background: 'bg-light-success-container'
             },
             warning: {
-              fill: 'fill-light-on-warning-coantiner',
+              fill: 'fill-light-on-warning-container',
               color: 'text-light-on-warning-container',
               background: 'bg-light-warning-container'
             },
             error: {
-              fill: 'fill-light-on-error-coantiner',
+              fill: 'fill-light-on-error-container',
               color: 'text-light-on-error-container',
-              background: 'bg-light-error-tocontainer'
+              background: 'bg-light-error-container'
             }
           }
         }
