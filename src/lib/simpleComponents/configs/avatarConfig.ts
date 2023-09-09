@@ -4,7 +4,7 @@ export interface AvatarConfig {
   defaultProps: {
     variant: Borders;
     size: Sizes;
-    color: ContainerColors;
+    color: Colors;
     withBorder: boolean;
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
   };
@@ -14,7 +14,7 @@ export interface AvatarConfig {
       withBorder: Record<string, string>;
       sizes: Record<Sizes, Record<string, string>>;
       variants: Record<Borders, Record<string, string>>;
-      colors: Record<Themes, Record<ContainerColors, Record<string, string>>>;
+      colors: Record<Themes, Record<Colors, Record<string, string>>>;
     },
     image: {
       base: Record<string, string>;
@@ -71,39 +71,29 @@ const avatarConfig: AvatarConfig = {
       colors: {
         light: {
           primary: {
-            fill: 'fill-light-primary-text',
-            color: 'text-light-primary-text',
-            background: 'bg-light-primary-container'
+            fill: 'fill-light-on-primary',
+            color: 'text-light-on-primary',
+            background: 'bg-light-primary'
           },
           secondary: {
-            fill: 'fill-light-secondary-text',
-            color: 'text-light-secondary-text',
-            background: 'bg-light-secondary-container'
+            fill: 'fill-light-on-secondary',
+            color: 'text-light-on-secondary',
+            background: 'bg-light-secondary'
           },
           success: {
-            fill: 'fill-light-success-text',
-            color: 'text-light-success-text',
-            background: 'bg-light-success-container'
+            fill: 'fill-light-on-success',
+            color: 'text-light-on-success',
+            background: 'bg-light-success'
           },
           warning: {
-            fill: 'fill-light-warning-text',
-            color: 'text-light-warning-text',
-            background: 'bg-light-warning-container'
+            fill: 'fill-light-on-warning',
+            color: 'text-light-on-warning',
+            background: 'bg-light-warning'
           },
           error: {
-            fill: 'fill-light-error-text',
-            color: 'text-light-error-text',
-            background: 'bg-light-error-container'
-          },
-          light: {
-            fill: 'fill-light-light-text',
-            color: 'text-light-light-text',
-            background: 'bg-light-light-container'
-          },
-          dark: {
-            fill: 'fill-light-light',
-            color: 'text-light-light',
-            background: 'bg-light-dark-container'
+            fill: 'fill-light-on-error',
+            color: 'text-light-on-error',
+            background: 'bg-light-error'
           }
         }
       }

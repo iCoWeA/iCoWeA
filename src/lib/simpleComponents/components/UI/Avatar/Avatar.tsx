@@ -6,7 +6,7 @@ import AvatarContainer from './AvatarContainer';
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   variant?: Borders;
   size?: Sizes;
-  color?: ContainerColors;
+  color?: Colors;
   withBorder?: boolean;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
 }
