@@ -40,10 +40,10 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       },
       colors: {
         light: {
-          fill: 'fill-light-text',
-          color: 'text-light-text',
-          hover: 'hover:fill-light-dark-container hover:text-light-dark-container',
-          focus: 'focus:fill-light-dark-container hover:text-light-dark-container'
+          fill: 'fill-light-on-surface-variant',
+          color: 'text-light-on-surface-variant',
+          hover: 'hover:fill-light-on-surface hover:text-light-on-surface',
+          focus: 'focus:fill-light-on-surface focus:text-light-on-surface'
         }
       }
     },
