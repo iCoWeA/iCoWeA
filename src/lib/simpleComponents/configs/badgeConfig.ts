@@ -47,6 +47,7 @@ const badgeConfig: BadgeConfig = {
         display: 'flex',
         alignItems: 'items-center',
         justifyContent: 'justify-center',
+        gap: 'gap-2',
         minWidth: 'min-w-[1.5rem]',
         padding: 'p-1',
         borderRadius: 'rounded-full',
@@ -59,7 +60,7 @@ const badgeConfig: BadgeConfig = {
         padding: 'p-0'
       },
       withBorder: {
-        border: 'border-2'
+        border: 'border-2 border-transparent'
       },
       invisible: {
         display: 'hidden'
