@@ -35,7 +35,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       },
       divider: {
         light: {
-          border: 'border-b border-light-divider'
+          border: 'border-b border-light-outline-variant'
         }
       },
       colors: {
