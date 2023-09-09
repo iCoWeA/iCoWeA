@@ -7,7 +7,7 @@ export interface BackdropConfig {
   styles: {
     base: Record<string, string>;
     open: Record<string, string>;
-    color: Record<Themes, Record<string, string>>;
+    invisible: Record<string, string>;
   }
 }
 
@@ -26,7 +26,7 @@ const backdropConfig: BackdropConfig = {
       display: 'block',
       height: 'h-screen',
       width: 'w-screen',
-      background: 'bg-transparent',
+      background: 'bg-black/50',
       opacity: 'opacity-0',
       transition: 'transition-[opacity]',
       transitionDuration: 'duration-500'
@@ -34,10 +34,8 @@ const backdropConfig: BackdropConfig = {
     open: {
       opacity: 'opacity-100'
     },
-    color: {
-      light: {
-        background: 'bg-light-dark-container/70'
-      }
+    invisible: {
+      background: 'bg-transparent'
     }
   }
 };
