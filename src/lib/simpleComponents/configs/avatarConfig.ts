@@ -36,6 +36,7 @@ const avatarConfig: AvatarConfig = {
         display: 'inline-flex',
         alignItems: 'items-center',
         justifyContent: 'justify-center',
+        gap: 'gap-2',
         aspectRatio: 'aspect-square',
         font: 'antialiased font-normal text-lg font-sans',
         overflow: 'overflow-hidden'
