@@ -24,7 +24,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
 
   /* --- Set default props --- */
   const styles = accordionHeaderConfig.styles.button;
-  const { color, iconProps, disabled, type, className, children, ...restProps } = {
+  const { color, iconProps, disabled, className, children, ...restProps } = {
     ...accordionHeaderConfig.defaultProps,
     disabled: isAccordionDisabled,
     ...props
@@ -55,7 +55,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
       id={id}
       onClick={onAccordionToggle}
       disabled={disabled}
-      type={type}
+      type="button"
       className={mergedClassName}
       ref={ref}
       {...restProps}

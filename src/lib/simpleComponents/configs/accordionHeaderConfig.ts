@@ -4,7 +4,6 @@ export interface AccordionHeaderConfig {
   defaultProps: {
     color: ContainerColors;
     iconProps: IconProps;
-    type: 'button';
   };
   styles: {
     button: {
@@ -22,8 +21,7 @@ export interface AccordionHeaderConfig {
 const accordionHeaderConfig: AccordionHeaderConfig = {
   defaultProps: {
     color: 'default',
-    iconProps: {},
-    type: 'button'
+    iconProps: {}
   },
   styles: {
     button: {
