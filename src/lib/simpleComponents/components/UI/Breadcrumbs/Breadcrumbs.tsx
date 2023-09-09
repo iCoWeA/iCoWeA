@@ -2,11 +2,12 @@ import React, { type BaseHTMLAttributes, type ReactNode, type OlHTMLAttributes, 
 import breadcrumbsConfig from '../../../configs/breadcrumbsConfig';
 import { mergeClasses } from '../../../utils/propsHelper';
 import BreadcrumbsItem from './BreadcrumbsItem';
+import BreadcrumbsList from './BreadcrumbsList';
 import BreadcrumbsSeparator from './BreadcrumbsSeparator';
 
 export interface BreadcrumbsProps extends BaseHTMLAttributes<HTMLElement> {
   separator?: ReactNode;
-  color?: Colors;
+  color?: ContainerColors;
   fullwidth?: boolean;
   listProps?: OlHTMLAttributes<HTMLOListElement>;
   itemsProps?: Record<number, LiHTMLAttributes<HTMLLIElement>>;
@@ -62,7 +63,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      <ul {...listProps}>{itemNodes}</ul>
+      <BreadcrumbsList {...listProps}>{itemNodes}</BreadcrumbsList>
     </nav>
   );
 });
