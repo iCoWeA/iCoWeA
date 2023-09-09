@@ -9,7 +9,7 @@ export interface AlertConfig {
   defaultProps: {
     open: boolean;
     variant: AlertVariants;
-    color: ContainerColors;
+    color: Colors;
     shadow: boolean;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
@@ -23,7 +23,7 @@ export interface AlertConfig {
       base: Record<string, string>;
       open: Record<string, string>;
       shadow: Record<Themes, Record<string, string>>;
-      variants: Record<AlertVariants, Record<Themes, Record<ContainerColors, Record<string, string>>>>
+      variants: Record<AlertVariants, Record<Themes, Record<Colors, Record<string, string>>>>
     },
     iconContainer: {
       base: Record<string, string>;
@@ -78,117 +78,87 @@ const alertConfig: AlertConfig = {
         filled: {
           light: {
             primary: {
-              fill: 'fill-light-primary-text',
-              color: 'text-light-primary-text',
-              background: 'bg-light-primary-container'
+              fill: 'fill-light-on-primary',
+              color: 'text-light-on-primary',
+              background: 'bg-light-primary'
             },
             secondary: {
-              fill: 'fill-light-secondary-text',
-              color: 'text-light-secondary-text',
-              background: 'bg-light-secondary-container'
+              fill: 'fill-light-on-secondary',
+              color: 'text-light-on-secondary',
+              background: 'bg-light-secondary'
             },
             success: {
-              fill: 'fill-light-success-text',
-              color: 'text-light-success-text',
-              background: 'bg-light-success-container'
+              fill: 'fill-light-on-success',
+              color: 'text-light-on-success',
+              background: 'bg-light-success'
             },
             warning: {
-              fill: 'fill-light-warning-text',
-              color: 'text-light-warning-text',
-              background: 'bg-light-warning-container'
+              fill: 'fill-light-on-warning',
+              color: 'text-light-on-warning',
+              background: 'bg-light-warning'
             },
             error: {
-              fill: 'fill-light-error-text',
-              color: 'text-light-error-text',
-              background: 'bg-light-error-container'
-            },
-            light: {
-              fill: 'fill-light-light-text',
-              color: 'text-light-light-text',
-              background: 'bg-light-light-container'
-            },
-            dark: {
-              fill: 'fill-light-dark-text',
-              color: 'text-light-dark-text',
-              background: 'bg-light-dark-container'
+              fill: 'fill-light-on-error',
+              color: 'text-light-on-error',
+              background: 'bg-light-error'
             }
           }
         },
         outlined: {
           light: {
             primary: {
-              border: 'border border-light-primary-container',
-              fill: 'fill-light-primary-container',
-              color: 'text-light-primary-container'
+              border: 'border border-light-primary',
+              fill: 'fill-light-primary',
+              color: 'text-light-primary'
             },
             secondary: {
-              border: 'border border-light-secondary-container',
-              fill: 'fill-light-secondary-container',
-              color: 'text-light-secondary-container'
+              border: 'border border-light-secondary',
+              fill: 'fill-light-secondary',
+              color: 'text-light-secondary'
             },
             success: {
-              border: 'border border-light-success-container',
-              fill: 'fill-light-success-container',
-              color: 'text-light-success-container'
+              border: 'border border-light-success',
+              fill: 'fill-light-success',
+              color: 'text-light-success'
             },
             warning: {
-              border: 'border border-light-warning-container',
-              fill: 'fill-light-warning-container',
-              color: 'text-light-warning-container'
+              border: 'border border-light-warning',
+              fill: 'fill-light-warning',
+              color: 'text-light-warning'
             },
             error: {
-              border: 'border border-light-error-container',
-              fill: 'fill-light-error-container',
-              color: 'text-light-error-container'
-            },
-            light: {
-              border: 'border border-light-light-container',
-              fill: 'fill-light-light-container',
-              color: 'text-light-light-container'
-            },
-            dark: {
-              border: 'border border-light-dark-container',
-              fill: 'fill-light-dark-container',
-              color: 'text-light-dark-container'
+              border: 'border border-light-error',
+              fill: 'fill-light-error',
+              color: 'text-light-error'
             }
           }
         },
         tonal: {
           light: {
             primary: {
-              fill: 'fill-light-primary-container',
-              color: 'text-light-primary-container',
-              background: 'bg-light-primary-tonal-container'
+              fill: 'fill-light-on-primary-coantiner',
+              color: 'text-light-on-primary-container',
+              background: 'bg-light-primary-container'
             },
             secondary: {
-              fill: 'fill-light-secondary-container',
-              color: 'text-light-secondary-container',
-              background: 'bg-light-secondary-tonal-container'
+              fill: 'fill-light-on-secondary-coantiner',
+              color: 'text-light-on-secondary-container',
+              background: 'bg-light-secondarcontainer'
             },
             success: {
-              fill: 'fill-light-success-container',
-              color: 'text-light-success-container',
-              background: 'bg-light-success-tonal-container'
+              fill: 'fill-light-on-success-coantiner',
+              color: 'text-light-on-success-container',
+              background: 'bg-light-success-container'
             },
             warning: {
-              fill: 'fill-light-warning-container',
-              color: 'text-light-warning-container',
-              background: 'bg-light-warning-tonal-container'
+              fill: 'fill-light-on-warning-coantiner',
+              color: 'text-light-on-warning-container',
+              background: 'bg-light-warning-container'
             },
             error: {
-              fill: 'fill-light-error-container',
-              color: 'text-light-error-container',
-              background: 'bg-light-error-tonal-container'
-            },
-            light: {
-              fill: 'fill-light-light-container',
-              color: 'text-light-light-container',
-              background: 'bg-light-light-tonal-container'
-            },
-            dark: {
-              fill: 'fill-light-dark-container',
-              color: 'text-light-dark-container',
-              background: 'bg-light-dark-tonal-container'
+              fill: 'fill-light-on-error-coantiner',
+              color: 'text-light-on-error-container',
+              background: 'bg-light-error-tocontainer'
             }
           }
         }
@@ -232,27 +202,21 @@ const alertConfig: AlertConfig = {
           secondary: 'light',
           success: 'light',
           warning: 'dark',
-          error: 'light',
-          light: 'dark',
-          dark: 'light'
+          error: 'light'
         },
         outlined: {
           primary: 'primary',
           secondary: 'secondary',
           success: 'success',
           warning: 'warning',
-          error: 'error',
-          light: 'light',
-          dark: 'dark'
+          error: 'error'
         },
         tonal: {
           primary: 'light',
           secondary: 'light',
           success: 'light',
           warning: 'dark',
-          error: 'light',
-          light: 'dark',
-          dark: 'light'
+          error: 'light'
         }
       }
     }
