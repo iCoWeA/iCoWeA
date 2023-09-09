@@ -2,14 +2,13 @@ import { type IconProps } from '../components/UI/Icon/Icon';
 
 export interface AccordionHeaderConfig {
   defaultProps: {
-    color: ContainerColors;
     iconProps: IconProps;
   };
   styles: {
     button: {
       base: Record<string, string>;
       divider: Record<Themes, Record<string, string>>;
-      colors: Record<Themes, Record<ContainerColors, Record<string, string>>>
+      colors: Record<Themes, Record<string, string>>;
     },
     icon: {
       base: Record<string, string>;
@@ -20,7 +19,6 @@ export interface AccordionHeaderConfig {
 
 const accordionHeaderConfig: AccordionHeaderConfig = {
   defaultProps: {
-    color: 'default',
     iconProps: {}
   },
   styles: {
@@ -32,6 +30,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         width: 'w-full',
         padding: 'py-3',
         font: 'antialiased font-normal text-base font-sans',
+        transition: 'transition-colors',
         focus: 'focus:outline-0'
       },
       divider: {
@@ -41,38 +40,10 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       },
       colors: {
         light: {
-          default: {
-            fill: 'fill-light-dark-container',
-            color: 'text-light-dark-container'
-          },
-          primary: {
-            fill: 'fill-light-primary-container',
-            color: 'text-light-primary-container'
-          },
-          secondary: {
-            fill: 'fill-light-secondary-container',
-            color: 'text-light-secondary-container'
-          },
-          success: {
-            fill: 'fill-light-success-container',
-            color: 'text-light-success-container'
-          },
-          warning: {
-            fill: 'fill-light-warning-container',
-            color: 'text-light-warning-container'
-          },
-          error: {
-            fill: 'fill-light-error-container',
-            color: 'text-light-error-container'
-          },
-          dark: {
-            fill: 'fill-light-dark-container',
-            color: 'text-light-dark-container'
-          },
-          light: {
-            fill: 'fill-light-light-container',
-            color: 'text-light-light-container'
-          }
+          fill: 'fill-light-text',
+          color: 'text-light-text',
+          hover: 'hover:fill-light-dark-container hover:text-light-dark-container',
+          focus: 'focus:fill-light-dark-container hover:text-light-dark-container'
         }
       }
     },

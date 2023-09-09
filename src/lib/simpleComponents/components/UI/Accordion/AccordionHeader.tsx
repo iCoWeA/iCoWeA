@@ -7,7 +7,6 @@ import { type IconProps } from '../Icon/Icon';
 import AccordionIcon from './AccordionIcon';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: ContainerColors;
   iconProps?: IconProps;
 }
 
@@ -24,7 +23,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
 
   /* --- Set default props --- */
   const styles = accordionHeaderConfig.styles.button;
-  const { color, iconProps, disabled, className, children, ...restProps } = {
+  const { iconProps, disabled, className, children, ...restProps } = {
     ...accordionHeaderConfig.defaultProps,
     disabled: isAccordionDisabled,
     ...props
@@ -46,7 +45,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   const ariaContarols = accordionId === undefined ? undefined : `acd-body-${accordionId}`;
   const id = accordionId === undefined ? undefined : `acd-header-${accordionId}`;
 
-  const mergedClassName = mergeClasses(styles.base, styles.divider[theme], styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.divider[theme], styles.colors[theme], className);
 
   return (
     <button
