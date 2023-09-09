@@ -7,7 +7,7 @@ import BadgeContainer from './BadgeContainer';
 export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
   badgeContent?: ReactNode;
   position?: CornerPositions;
-  color?: ContainerColors;
+  color?: Colors;
   withBorder?: boolean;
   invisible?: boolean;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
