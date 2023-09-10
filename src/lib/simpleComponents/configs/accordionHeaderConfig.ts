@@ -25,17 +25,17 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
     button: {
       base: {
         display: 'flex',
-        gap: 'gap-3',
+        gap: 'gap-4',
         alignItems: 'items-center',
+        height: 'h-12',
         width: 'w-full',
-        padding: 'py-3',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition-colors',
         focus: 'focus:outline-0'
       },
       divider: {
         light: {
-          border: 'border-b border-light-outline-variant'
+          border: 'border-y border-b-light-outline-variant'
         }
       },
       colors: {
