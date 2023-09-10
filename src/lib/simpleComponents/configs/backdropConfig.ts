@@ -26,7 +26,7 @@ const backdropConfig: BackdropConfig = {
       display: 'block',
       height: 'h-screen',
       width: 'w-screen',
-      background: 'bg-black/50',
+      background: 'bg-black/70',
       opacity: 'opacity-0',
       transition: 'transition-[opacity]',
       transitionDuration: 'duration-500'
