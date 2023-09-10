@@ -180,7 +180,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-primary',
             hover: 'hover:from-light-primary/10 hover:to-light-primary/10',
             active: 'active:from-light-primary/20 active:to-light-primary/20',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
+            disabled: 'disabled:border-light-on-surface/10 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           secondary: {
             border: 'border border-light-secondary',
@@ -188,7 +188,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-secondary',
             hover: 'hover:from-light-secondary/10 hover:to-light-secondary/10',
             active: 'active:from-light-secondary/20 active:to-light-secondary/20',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
+            disabled: 'disabled:border-light-on-surface/10 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           success: {
             border: 'border border-light-success',
@@ -196,7 +196,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-success',
             hover: 'hover:from-light-success/10 hover:to-light-success/10',
             active: 'active:from-light-success/20 active:to-light-success/20',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
+            disabled: 'disabled:border-light-on-surface/10 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           warning: {
             border: 'border border-light-warning',
@@ -204,7 +204,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-warning',
             hover: 'hover:from-light-warning/10 hover:to-light-warning/10',
             active: 'active:from-light-warning/20 active:to-light-warning/20',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
+            disabled: 'disabled:border-light-on-surface/10 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           error: {
             border: 'border border-light-error',
@@ -212,7 +212,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-error',
             hover: 'hover:from-light-error/10 hover:to-light-error/10',
             active: 'active:from-light-error/20 active:to-light-error/20',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
+            disabled: 'disabled:border-light-on-surface/10 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           }
         }
       },
@@ -223,35 +223,35 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-primary',
             hover: 'hover:from-light-primary/10 hover:to-light-primary/10',
             active: 'active:from-light-primary/20 active:to-light-primary/20',
-            disabled: 'disabled:text-light-primary/40 disabled:fill-light-primary/40'
+            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
           },
           secondary: {
             fill: 'fill-light-secondary',
             color: 'text-light-secondary',
             hover: 'hover:from-light-secondary/10 hover:to-light-secondary/10',
             active: 'active:from-light-secondary/20 active:to-light-secondary/20',
-            disabled: 'disabled:text-light-secondary/40 disabled:fill-light-secondary/40'
+            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
           },
           success: {
             fill: 'fill-light-success',
             color: 'text-light-success',
             hover: 'hover:from-light-success/10 hover:to-light-success/10',
             active: 'active:from-light-success/20 active:to-light-success/20',
-            disabled: 'disabled:text-light-success/40 disabled:fill-light-success/40'
+            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
           },
           warning: {
             fill: 'fill-light-warning',
             color: 'text-light-warning',
             hover: 'hover:from-light-warning/10 hover:to-light-warning/10',
             active: 'active:from-light-warning/20 active:to-light-warning/20',
-            disabled: 'disabled:text-light-warning/40 disabled:fill-light-warning/40'
+            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
           },
           error: {
             fill: 'fill-light-error',
             color: 'text-light-error',
             hover: 'hover:from-light-error/10 hover:to-light-error/10',
             active: 'active:from-light-error/20 active:to-light-error/20',
-            disabled: 'disabled:text-light-error/40 disabled:fill-light-error/40'
+            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
           }
         }
       }
