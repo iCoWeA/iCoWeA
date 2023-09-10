@@ -90,7 +90,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-primary',
             color: 'text-light-on-primary',
             background: 'bg-light-primary',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-primary/10 hover:to-light-on-primary/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-primary/10 hover:to-light-on-primary/10',
             active: 'active:shadow-none active:from-light-on-primary/20 active:to-light-on-primary/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
@@ -98,7 +98,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-secondary',
             color: 'text-light-on-secondary',
             background: 'bg-light-secondary',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-secondary/10 hover:to-light-on-secondary/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-secondary/10 hover:to-light-on-secondary/10',
             active: 'active:shadow-none active:from-light-on-secondary/20 active:to-light-on-secondary/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
@@ -106,7 +106,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-success',
             color: 'text-light-on-success',
             background: 'bg-light-success',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-success/10 hover:to-light-on-success/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-success/10 hover:to-light-on-success/10',
             active: 'active:shadow-none active:from-light-on-success/20 active:to-light-on-success/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
@@ -114,7 +114,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-warning',
             color: 'text-light-on-warning',
             background: 'bg-light-warning',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-warning/10 hover:to-light-on-warning/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-warning/10 hover:to-light-on-warning/10',
             active: 'active:shadow-none active:from-light-on-warning/20 active:to-light-on-warning/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
@@ -122,7 +122,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-error',
             color: 'text-light-on-error',
             background: 'bg-light-error',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-error/10 hover:to-light-on-error/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-error/10 hover:to-light-on-error/10',
             active: 'active:shadow-none active:from-light-on-error/20 active:to-light-on-error/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           }
@@ -134,7 +134,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-primary-container',
             color: 'text-light-on-primary-container',
             background: 'bg-light-primary-container',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-primary-container/10 hover:to-light-on-primary-container/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-primary-container/10 hover:to-light-on-primary-container/10',
             active: 'active:shadow-none active:from-light-on-primary-container/20 active:to-light-on-primary-container/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
@@ -142,7 +142,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-secondary-container',
             color: 'text-light-on-secondary-container',
             background: 'bg-light-secondary-container',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-secondary-container/10 hover:to-light-on-secondary-container/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-secondary-container/10 hover:to-light-on-secondary-container/10',
             active: 'active:shadow-none active:from-light-on-secondary-container/20 active:to-light-on-secondary-container/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
@@ -150,7 +150,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-success-container',
             color: 'text-light-on-success-container',
             background: 'bg-light-success-container',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-success-container/10 hover:to-light-on-success-container/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-success-container/10 hover:to-light-on-success-container/10',
             active: 'active:shadow-none active:from-light-on-success-container/20 active:to-light-on-success-container/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
@@ -158,7 +158,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-warning-container',
             color: 'text-light-on-warning-container',
             background: 'bg-light-warning-container',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-warning-container/10 hover:to-light-on-warning-container/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-warning-container/10 hover:to-light-on-warning-container/10',
             active: 'active:shadow-none active:from-light-on-warning-container/20 active:to-light-on-warning-container/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
@@ -166,7 +166,7 @@ const buttonConfig: ButtonConfig = {
             fill: 'fill-light-on-error-container',
             color: 'text-light-on-error-container',
             background: 'bg-light-error-container',
-            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-error-container/10 hover:to-light-on-error-container/10',
+            hover: 'hover:shadow-md hover:shadow-black/70 hover:from-light-on-error-container/10 hover:to-light-on-error-container/10',
             active: 'active:shadow-none active:from-light-on-error-container/20 active:to-light-on-error-container/20',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           }
