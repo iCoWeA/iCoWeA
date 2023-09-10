@@ -1,17 +1,14 @@
 export interface ButtonConfig {
   defaultProps: {
     variant: ButtonVariants;
-    size: Sizes;
+    size: ButtonSizes;
     color: Colors;
-    elevated: boolean;
     fullwidth: boolean;
-    type: 'submit' | 'reset' | 'button';
   };
   styles: {
     base: Record<string, string>;
     fullwidth: Record<string, string>;
-    sizes: Record<Sizes, Record<ButtonVariants, Record<string, string>>>;
-    elevated: Record<string, Record<string, string>>;
+    sizes: Record<ButtonSizes, Record<ButtonVariants, Record<string, string>>>;
     variants: Record<ButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
   }
 }
@@ -21,22 +18,22 @@ const buttonConfig: ButtonConfig = {
     variant: 'filled',
     size: 'md',
     color: 'primary',
-    elevated: false,
-    fullwidth: false,
-    type: 'button'
+    fullwidth: false
   },
   styles: {
     base: {
       display: 'flex',
-      gap: 'gap-3',
       alignItems: 'items-center',
       height: 'h-fit',
       width: 'w-fit',
+      gap: 'gap-2',
       borderRadius: 'rounded-full',
-      font: 'antialiased font-normal text-base font-sans',
-      transition: 'transition-all',
-      focus: 'focus:outline-0',
-      disabled: 'disabled:opacity-50 disabled:pointer-events-none disabled:select-none'
+      font: 'antialiased font-normal text-sm font-sans',
+      transition: 'transition',
+      hover: 'hover:bg-gradient-to-r',
+      active: 'hover:bg-gradient-to-r',
+      focus: 'focus:outline-0 focus:bg-gradient-to-r',
+      disabled: 'disabled:pointer-events-none disabled:select-none'
     },
     fullwidth: {
       width: 'w-full',
@@ -45,216 +42,216 @@ const buttonConfig: ButtonConfig = {
     sizes: {
       sm: {
         filled: {
-          padding: 'py-1.5 px-3'
+          padding: 'py-1.5 px-5'
+        },
+        tonal: {
+          padding: 'py-1.5 px-5'
         },
         outlined: {
-          padding: 'py-[0.3125rem] px-[0.6875rem]'
+          padding: 'py-[0.3125rem] px-[1.1875rem]'
         },
         text: {
-          padding: 'py-1.5 px-3'
+          padding: 'py-1.5 px-5'
         }
       },
       md: {
         filled: {
-          padding: 'py-2 px-4'
+          padding: 'py-2.5 px-6'
+        },
+        tonal: {
+          padding: 'py-2.5 px-6'
         },
         outlined: {
-          padding: 'py-[0.4375rem] px-[0.9375rem]'
+          padding: 'py-[0.5625rem] px-[1.4375rem]'
         },
         text: {
-          padding: 'py-2 px-4'
+          padding: 'py-2.5 px-6'
         }
       },
       lg: {
         filled: {
-          padding: 'py-2.5 px-5'
+          padding: 'py-3.5 px-7'
+        },
+        tonal: {
+          padding: 'py-3.5 px-7'
         },
         outlined: {
-          padding: 'py-[0.5625rem] px-[1.1875rem]'
+          padding: 'py-[0.8125rem] px-[1.6875rem]'
         },
         text: {
-          padding: 'py-2.5 px-5'
+          padding: 'py-3.5 px-7'
         }
-      }
-    },
-    elevated: {
-      default: {
-        shadow: 'shadow-md shadow-default-default/80',
-        hover: 'hover:shadow-lg hover:shadow-default-default',
-        active: 'active:shadow-none',
-        disabled: 'disabled:shadow-none'
       }
     },
     variants: {
       filled: {
-        default: {
-          default: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-default',
-            hover: 'hover:bg-default-default/90',
-            active: 'active:bg-default-default/80'
-          },
+        light: {
           primary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-primary',
-            hover: 'hover:bg-default-primary/90',
-            active: 'active:bg-default-primary/80'
+            fill: 'fill-light-on-primary',
+            color: 'text-light-on-primary',
+            background: 'bg-light-primary',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-primary/10 hover:to-light-on-primary/10',
+            active: 'active:shadow-none active:from-light-on-primary/20 active:to-light-on-primary/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
           secondary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-secondary',
-            hover: 'hover:bg-default-secondary/90',
-            active: 'active:bg-default-secondary/80'
+            fill: 'fill-light-on-secondary',
+            color: 'text-light-on-secondary',
+            background: 'bg-light-secondary',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-secondary/10 hover:to-light-on-secondary/10',
+            active: 'active:shadow-none active:from-light-on-secondary/20 active:to-light-on-secondary/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
           success: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-success',
-            hover: 'hover:bg-default-success/90',
-            active: 'active:bg-default-success/80'
+            fill: 'fill-light-on-success',
+            color: 'text-light-on-success',
+            background: 'bg-light-success',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-success/10 hover:to-light-on-success/10',
+            active: 'active:shadow-none active:from-light-on-success/20 active:to-light-on-success/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
           warning: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-warning',
-            hover: 'hover:bg-default-warning/90',
-            active: 'active:bg-default-warning/80'
+            fill: 'fill-light-on-warning',
+            color: 'text-light-on-warning',
+            background: 'bg-light-warning',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-warning/10 hover:to-light-on-warning/10',
+            active: 'active:shadow-none active:from-light-on-warning/20 active:to-light-on-warning/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
           error: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-error',
-            hover: 'hover:bg-default-error/90',
-            active: 'active:bg-default-error/80'
+            fill: 'fill-light-on-error',
+            color: 'text-light-on-error',
+            background: 'bg-light-error',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-error/10 hover:to-light-on-error/10',
+            active: 'active:shadow-none active:from-light-on-error/20 active:to-light-on-error/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
+          }
+        }
+      },
+      tonal: {
+        light: {
+          primary: {
+            fill: 'fill-light-on-primary-container',
+            color: 'text-light-on-primary-container',
+            background: 'bg-light-primary-container',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-primary-container/10 hover:to-light-on-primary-container/10',
+            active: 'active:shadow-none active:from-light-on-primary-container/20 active:to-light-on-primary-container/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
-          light: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-light',
-            hover: 'hover:bg-default-light/90',
-            active: 'active:bg-default-light/80'
+          secondary: {
+            fill: 'fill-light-on-secondary-container',
+            color: 'text-light-on-secondary-container',
+            background: 'bg-light-secondary-container',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-secondary-container/10 hover:to-light-on-secondary-container/10',
+            active: 'active:shadow-none active:from-light-on-secondary-container/20 active:to-light-on-secondary-container/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
-          dark: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-dark',
-            hover: 'hover:bg-default-dark/90',
-            active: 'active:bg-default-dark/80'
+          success: {
+            fill: 'fill-light-on-success-container',
+            color: 'text-light-on-success-container',
+            background: 'bg-light-success-container',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-success-container/10 hover:to-light-on-success-container/10',
+            active: 'active:shadow-none active:from-light-on-success-container/20 active:to-light-on-success-container/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
+          },
+          warning: {
+            fill: 'fill-light-on-warning-container',
+            color: 'text-light-on-warning-container',
+            background: 'bg-light-warning-container',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-warning-container/10 hover:to-light-on-warning-container/10',
+            active: 'active:shadow-none active:from-light-on-warning-container/20 active:to-light-on-warning-container/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
+          },
+          error: {
+            fill: 'fill-light-on-error-container',
+            color: 'text-light-on-error-container',
+            background: 'bg-light-error-container',
+            hover: 'hover:shadow-sm hover:shadow-black hover:from-light-on-error-container/10 hover:to-light-on-error-container/10',
+            active: 'active:shadow-none active:from-light-on-error-container/20 active:to-light-on-error-container/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           }
         }
       },
       outlined: {
-        default: {
-          default: {
-            border: 'border border-default-default',
-            fill: 'fill-default-default',
-            color: 'text-default-default',
-            hover: 'hover:bg-default-default/10',
-            active: 'active:bg-default-default/20'
-          },
+        light: {
           primary: {
-            border: 'border border-default-primary',
-            fill: 'fill-default-primary',
-            color: 'text-default-primary',
-            hover: 'hover:bg-default-primary/10',
-            active: 'active:bg-default-primary/20'
+            border: 'border border-light-primary',
+            fill: 'fill-light-primary',
+            color: 'text-light-primary',
+            hover: 'hover:from-light-primary/10 hover:to-light-primary/10',
+            active: 'active:from-light-primary/20 active:to-light-primary/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
           secondary: {
-            border: 'border border-default-secondary',
-            fill: 'fill-default-secondary',
-            color: 'text-default-secondary',
-            hover: 'hover:bg-default-secondary/10',
-            active: 'active:bg-default-secondary/20'
+            border: 'border border-light-secondary',
+            fill: 'fill-light-secondary',
+            color: 'text-light-secondary',
+            hover: 'hover:from-light-secondary/10 hover:to-light-secondary/10',
+            active: 'active:from-light-secondary/20 active:to-light-secondary/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
           success: {
-            border: 'border border-default-success',
-            fill: 'fill-default-success',
-            color: 'text-default-success',
-            hover: 'hover:bg-default-success/10',
-            active: 'active:bg-default-success/20'
+            border: 'border border-light-success',
+            fill: 'fill-light-success',
+            color: 'text-light-success',
+            hover: 'hover:from-light-success/10 hover:to-light-success/10',
+            active: 'active:from-light-success/20 active:to-light-success/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
           warning: {
-            border: 'border border-default-warning',
-            fill: 'fill-default-warning',
-            color: 'text-default-warning',
-            hover: 'hover:bg-default-warning/10',
-            active: 'active:bg-default-warning/20'
+            border: 'border border-light-warning',
+            fill: 'fill-light-warning',
+            color: 'text-light-warning',
+            hover: 'hover:from-light-warning/10 hover:to-light-warning/10',
+            active: 'active:from-light-warning/20 active:to-light-warning/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           },
           error: {
-            border: 'border border-default-error',
-            fill: 'fill-default-error',
-            color: 'text-default-error',
-            hover: 'hover:bg-default-error/10',
-            active: 'active:bg-default-error/20'
-          },
-          light: {
-            border: 'border border-default-light',
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            hover: 'hover:bg-default-light/10',
-            active: 'active:bg-default-light/20'
-          },
-          dark: {
-            border: 'border border-default-dark',
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            hover: 'hover:bg-default-dark/10',
-            active: 'active:bg-default-dark/20'
+            border: 'border border-light-error',
+            fill: 'fill-light-error',
+            color: 'text-light-error',
+            hover: 'hover:from-light-error/10 hover:to-light-error/10',
+            active: 'active:from-light-error/20 active:to-light-error/20',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/10'
           }
         }
       },
       text: {
-        default: {
-          default: {
-            fill: 'fill-default-default',
-            color: 'text-default-default',
-            hover: 'hover:bg-default-default/10',
-            active: 'active:bg-default-default/20'
-          },
+        light: {
           primary: {
-            fill: 'fill-default-primary',
-            color: 'text-default-primary',
-            hover: 'hover:bg-default-primary/10',
-            active: 'active:bg-default-primary/20'
+            fill: 'fill-light-primary',
+            color: 'text-light-primary',
+            hover: 'hover:from-light-primary/10 hover:to-light-primary/10',
+            active: 'active:from-light-primary/20 active:to-light-primary/20',
+            disabled: 'disabled:text-light-primary/40 disabled:fill-light-primary/40'
           },
           secondary: {
-            fill: 'fill-default-secondary',
-            color: 'text-default-secondary',
-            hover: 'hover:bg-default-secondary/10',
-            active: 'active:bg-default-secondary/20'
+            fill: 'fill-light-secondary',
+            color: 'text-light-secondary',
+            hover: 'hover:from-light-secondary/10 hover:to-light-secondary/10',
+            active: 'active:from-light-secondary/20 active:to-light-secondary/20',
+            disabled: 'disabled:text-light-secondary/40 disabled:fill-light-secondary/40'
           },
           success: {
-            fill: 'fill-default-success',
-            color: 'text-default-success',
-            hover: 'hover:bg-default-success/10',
-            active: 'active:bg-default-success/20'
+            fill: 'fill-light-success',
+            color: 'text-light-success',
+            hover: 'hover:from-light-success/10 hover:to-light-success/10',
+            active: 'active:from-light-success/20 active:to-light-success/20',
+            disabled: 'disabled:text-light-success/40 disabled:fill-light-success/40'
           },
           warning: {
-            fill: 'fill-default-warning',
-            color: 'text-default-warning',
-            hover: 'hover:bg-default-warning/10',
-            active: 'active:bg-default-warning/20'
+            fill: 'fill-light-warning',
+            color: 'text-light-warning',
+            hover: 'hover:from-light-warning/10 hover:to-light-warning/10',
+            active: 'active:from-light-warning/20 active:to-light-warning/20',
+            disabled: 'disabled:text-light-warning/40 disabled:fill-light-warning/40'
           },
           error: {
-            fill: 'fill-default-error',
-            color: 'text-default-error',
-            hover: 'hover:bg-default-error/10',
-            active: 'active:bg-default-error/20'
-          },
-          light: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            hover: 'hover:bg-default-light/10',
-            active: 'active:bg-default-light/20'
-          },
-          dark: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            hover: 'hover:bg-default-dark/10',
-            active: 'active:bg-default-dark/20'
+            fill: 'fill-light-error',
+            color: 'text-light-error',
+            hover: 'hover:from-light-error/10 hover:to-light-error/10',
+            active: 'active:from-light-error/20 active:to-light-error/20',
+            disabled: 'disabled:text-light-error/40 disabled:fill-light-error/40'
           }
         }
       }
