@@ -55,7 +55,7 @@ const avatarConfig: AvatarConfig = {
           width: 'w-10'
         },
         lg: {
-          width: 'w-11'
+          width: 'w-12'
         }
       },
       variants: {
@@ -102,7 +102,6 @@ const avatarConfig: AvatarConfig = {
     image: {
       base: {
         width: 'w-full',
-        aspectRatio: 'aspect-square',
         outline: 'outline-0'
       }
     }
