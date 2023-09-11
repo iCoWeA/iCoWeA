@@ -1,4 +1,4 @@
-import React, { type ButtonHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef, useContext } from 'react';
 import accordionHeaderConfig from '../../configs/accordionHeaderConfig';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
@@ -7,6 +7,8 @@ import { mergeClasses } from '../../utils/propsHelper';
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: Colors;
   divider?: boolean;
+  startDecoration?: ReactNode;
+  endDecoration?: ReactNode;
 }
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((props, ref) => {
@@ -16,7 +18,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
 
   /* --- Set default props --- */
   const styles = accordionHeaderConfig.styles;
-  const { color, divider, disabled, className, ...restProps } = {
+  const { color, divider, startDecoration, endDecoration, disabled, className, children, ...restProps } = {
     ...accordionHeaderConfig.defaultProps,
     disabled: isAccordionDisabled,
     ...props
@@ -49,7 +51,11 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
       className={mergedClassName}
       ref={ref}
       {...restProps}
-    />
+    >
+      {startDecoration}
+      {children}
+      {endDecoration}
+    </button>
   );
 });
 
