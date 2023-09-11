@@ -1,8 +1,8 @@
 import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef, useContext } from 'react';
-import accordionHeaderConfig from '../../../configs/accordionHeaderConfig';
-import accordionContext from '../../../contexts/accordion';
-import themeContext from '../../../contexts/theme';
-import { mergeClasses } from '../../../utils/propsHelper';
+import accordionHeaderConfig from '../../configs/accordionHeaderConfig';
+import accordionContext from '../../contexts/accordion';
+import themeContext from '../../contexts/theme';
+import { mergeClasses } from '../../utils/propsHelper';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: Colors;

@@ -1,8 +1,8 @@
 import React, { forwardRef, useContext } from 'react';
-import accordionIconConfig from '../../../configs/accordionIconConfig';
-import accordionContext from '../../../contexts/accordion';
-import { mergeClasses } from '../../../utils/propsHelper';
-import Icon, { type IconProps } from '../Icon/Icon';
+import accordionIconConfig from '../../configs/accordionIconConfig';
+import accordionContext from '../../contexts/accordion';
+import { mergeClasses } from '../../utils/propsHelper';
+import Icon, { type IconProps } from './Icon/Icon';
 
 export interface AccordionIconProps extends IconProps {
   position?: DecorationPosition;

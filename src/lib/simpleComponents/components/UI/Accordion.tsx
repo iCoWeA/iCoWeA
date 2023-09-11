@@ -1,8 +1,8 @@
 import React, { type BaseHTMLAttributes, forwardRef, useState, useEffect, useMemo } from 'react';
-import accordionConfig from '../../../configs/accordionConfig';
-import accordionContext, { type AccordionContext } from '../../../contexts/accordion';
-import usePrevious from '../../../hooks/usePrevious';
-import { mergeClasses } from '../../../utils/propsHelper';
+import accordionConfig from '../../configs/accordionConfig';
+import accordionContext, { type AccordionContext } from '../../contexts/accordion';
+import usePrevious from '../../hooks/usePrevious';
+import { mergeClasses } from '../../utils/propsHelper';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   open?: boolean;
