@@ -26,7 +26,7 @@ const avatarConfig: AvatarConfig = {
   defaultProps: {
     variant: 'circular',
     size: 'md',
-    color: 'primary',
+    color: 'default',
     withBorder: false,
     containerProps: {}
   },
@@ -71,6 +71,11 @@ const avatarConfig: AvatarConfig = {
       },
       colors: {
         light: {
+          default: {
+            fill: 'fill-light-surface-lowest',
+            color: 'text-light-surface-lowest',
+            background: 'bg-light-on-surface-variant'
+          },
           primary: {
             fill: 'fill-light-on-primary',
             color: 'text-light-on-primary',

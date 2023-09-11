@@ -106,8 +106,8 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       open: {
         light: {
           default: {
-            hover: 'hover:before:bg-light-on-surface/[0.08]',
-            active: 'active:before:bg-light-on-surface/[0.12]'
+            hover: 'hover:before:bg-light-on-surface-variant/[0.08]',
+            active: 'active:before:bg-light-on-surface-variant/[0.12]'
           },
           primary: {
             hover: 'hover:before:bg-light-on-primary-container/[0.08]',
