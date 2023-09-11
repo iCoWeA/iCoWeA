@@ -2,7 +2,6 @@ import { createContext } from 'react';
 
 export interface AccordionContext {
   onToggle: () => void;
-  size: Sizes;
   open: boolean;
   id?: string;
   disabled: boolean;
@@ -10,7 +9,6 @@ export interface AccordionContext {
 
 export const initialState: AccordionContext = {
   onToggle: () => {},
-  size: 'md',
   open: false,
   disabled: false
 };
