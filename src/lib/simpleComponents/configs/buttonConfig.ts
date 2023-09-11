@@ -9,7 +9,7 @@ export interface ButtonConfig {
     base: Record<string, string>;
     fullwidth: Record<string, string>;
     sizes: Record<ButtonSizes, Record<ButtonVariants, Record<string, string>>>;
-    variants: Record<ButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
+    variants: Record<ButtonVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
   }
 }
 

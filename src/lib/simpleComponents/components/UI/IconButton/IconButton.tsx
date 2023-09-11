@@ -5,9 +5,8 @@ import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariants;
-  size?: Sizes;
+  size?: ButtonSizes;
   color?: Colors;
-  elevated?: boolean;
 }
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
@@ -16,21 +15,16 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
 
   /* --- Set default props --- */
   const styles = iconButtonConfig.styles;
-  const { variant, size, color, elevated, className, type, ...restProps } = { ...iconButtonConfig.defaultProps, ...props };
+  const { variant, size, color, className, ...restProps } = { ...iconButtonConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant][theme][color],
-    styles.sizes[size][variant],
-    elevated && styles.elevated[theme],
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.sizes[size][variant], className);
 
   return (
     <button
+      tabIndex={0}
       className={mergedClassName}
-      type={type}
+      type="button"
       ref={ref}
       {...restProps}
     />
