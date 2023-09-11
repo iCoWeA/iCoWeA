@@ -100,9 +100,9 @@ const badgeConfig: BadgeConfig = {
       colors: {
         light: {
           default: {
-            fill: 'fill-light-surface-lowest',
-            color: 'text-light-surface-lowest',
-            background: 'bg-light-on-surface-variant'
+            fill: 'fill-light-surface-on-surface-variant',
+            color: 'text-light-surface-on-surface-variant',
+            background: 'bg-light-surface-surface'
           },
           primary: {
             fill: 'fill-light-on-primary',
