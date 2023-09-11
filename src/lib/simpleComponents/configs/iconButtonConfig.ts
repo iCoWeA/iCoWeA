@@ -20,8 +20,7 @@ const iconButtonConfig: IconButtonConfig = {
   styles: {
     base: {
       display: 'flex',
-      height: 'h-fit',
-      width: 'w-fit',
+      aspectRatio: 'aspect-square',
       borderRadius: 'rounded-full',
       transition: 'transition',
       hover: 'hover:bg-gradient-to-r',
@@ -32,44 +31,56 @@ const iconButtonConfig: IconButtonConfig = {
     sizes: {
       sm: {
         filled: {
-          padding: 'py-1.5'
+          height: 'h-8',
+          padding: 'p-1.5'
         },
         tonal: {
-          padding: 'py-1.5'
+          height: 'h-8',
+          padding: 'p-1.5'
         },
         outlined: {
-          padding: 'py-[0.3125rem]'
+          height: 'h-8',
+          padding: 'p-[0.3125rem]'
         },
         text: {
-          padding: 'py-1.5'
+          height: 'h-8',
+          padding: 'p-1.5'
         }
       },
       md: {
         filled: {
-          padding: 'py-2.5'
+          height: 'h-10',
+          padding: 'p-2.5'
         },
         tonal: {
-          padding: 'py-2.5'
+          height: 'h-10',
+          padding: 'p-2.5'
         },
         outlined: {
-          padding: 'py-[0.5625rem]'
+          height: 'h-10',
+          padding: 'p-[0.5625rem]'
         },
         text: {
-          padding: 'py-2.5'
+          height: 'h-10',
+          padding: 'p-2.5'
         }
       },
       lg: {
         filled: {
-          padding: 'py-3.5'
+          height: 'h-12',
+          padding: 'p-3.5'
         },
         tonal: {
-          padding: 'py-3.5'
+          height: 'h-12',
+          padding: 'p-3.5'
         },
         outlined: {
-          padding: 'py-[0.8125rem]'
+          height: 'h-12',
+          padding: 'p-[0.8125rem]'
         },
         text: {
-          padding: 'py-3.5'
+          height: 'h-12',
+          padding: 'p-3.5'
         }
       }
     },

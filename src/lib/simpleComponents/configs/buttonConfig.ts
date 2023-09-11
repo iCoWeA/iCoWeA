@@ -24,7 +24,6 @@ const buttonConfig: ButtonConfig = {
     base: {
       display: 'flex',
       alignItems: 'items-center',
-      height: 'h-fit',
       width: 'w-fit',
       gap: 'gap-2',
       borderRadius: 'rounded-full',
@@ -42,43 +41,55 @@ const buttonConfig: ButtonConfig = {
     sizes: {
       sm: {
         filled: {
+          height: 'h-8',
           padding: 'py-1.5 px-5'
         },
         tonal: {
+          height: 'h-8',
           padding: 'py-1.5 px-5'
         },
         outlined: {
+          height: 'h-8',
           padding: 'py-[0.3125rem] px-[1.1875rem]'
         },
         text: {
+          height: 'h-8',
           padding: 'py-1.5 px-5'
         }
       },
       md: {
         filled: {
+          height: 'h-10',
           padding: 'py-2.5 px-6'
         },
         tonal: {
+          height: 'h-10',
           padding: 'py-2.5 px-6'
         },
         outlined: {
+          height: 'h-10',
           padding: 'py-[0.5625rem] px-[1.4375rem]'
         },
         text: {
+          height: 'h-10',
           padding: 'py-2.5 px-6'
         }
       },
       lg: {
         filled: {
+          height: 'h-12',
           padding: 'py-3.5 px-7'
         },
         tonal: {
+          height: 'h-12',
           padding: 'py-3.5 px-7'
         },
         outlined: {
+          height: 'h-12',
           padding: 'py-[0.8125rem] px-[1.6875rem]'
         },
         text: {
+          height: 'h-12',
           padding: 'py-3.5 px-7'
         }
       }
