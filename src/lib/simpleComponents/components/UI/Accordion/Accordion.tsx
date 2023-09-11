@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, type ReactNode, forwardRef, useState, useEffect, useMemo } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useState, useEffect, useMemo } from 'react';
 import accordionConfig from '../../../configs/accordionConfig';
 import accordionContext, { type AccordionContext } from '../../../contexts/accordion';
 import usePrevious from '../../../hooks/usePrevious';
@@ -8,7 +8,6 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
   size?: Sizes;
   open?: boolean;
   defaultOpen?: boolean;
-  icon?: ReactNode;
   id?: string;
   disabled?: boolean;
 }
@@ -16,7 +15,7 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = accordionConfig.styles;
-  const { size, open, defaultOpen, icon, id, disabled, className, children, ...restProps } = { ...accordionConfig.defaultProps, ...props };
+  const { size, open, defaultOpen, id, disabled, className, children, ...restProps } = { ...accordionConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
 
   /* --- Set states --- */
@@ -41,11 +40,10 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
       },
       size,
       open: open ?? isOpen,
-      icon,
       id,
       disabled
     }),
-    [isControlled, size, open, isOpen, icon, id, disabled]
+    [isControlled, size, open, isOpen, id, disabled]
   );
 
   /* Set props */
