@@ -5,7 +5,7 @@ import usePrevious from '../../../hooks/usePrevious';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: ItemVariants;
+  variant?: CheckVariants;
   size?: Sizes;
   color?: Colors;
   open?: boolean;
