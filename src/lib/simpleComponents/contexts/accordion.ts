@@ -2,7 +2,7 @@ import { type ReactNode, createContext } from 'react';
 
 export interface AccordionContext {
   onToggle: () => void;
-  variant: ItemVariants;
+  variant: CheckVariants;
   size: Sizes;
   color: Colors;
   open: boolean;
