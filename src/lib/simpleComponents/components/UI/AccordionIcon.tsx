@@ -4,9 +4,7 @@ import accordionContext from '../../contexts/accordion';
 import { mergeClasses } from '../../utils/propsHelper';
 import Icon, { type IconProps } from './Icon/Icon';
 
-export interface AccordionIconProps extends IconProps {
-  position?: DecorationPosition;
-}
+export interface AccordionIconProps extends IconProps {}
 
 const AccordionIcon = forwardRef<SVGSVGElement, AccordionIconProps>((props, ref) => {
   /* --- Set context props --- */
@@ -14,10 +12,10 @@ const AccordionIcon = forwardRef<SVGSVGElement, AccordionIconProps>((props, ref)
 
   /* --- Set default props --- */
   const styles = accordionIconConfig.styles;
-  const { position, className, children, ...restProps } = { ...accordionIconConfig.defaultProps, ...props };
+  const { className, children, ...restProps } = { ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, position === 'end' && styles.end, isAccordionOpen && styles.open, className);
+  const mergedClassName = mergeClasses(styles.base, isAccordionOpen && styles.open, className);
 
   const childrenNode = children === undefined ? <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" /> : children;
 
