@@ -1,8 +1,27 @@
-import React, { type BaseHTMLAttributes, type ReactNode, forwardRef, useContext } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, type ReactNode, useContext } from 'react';
 import badgeConfig from '../../../configs/badgeConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
-import BadgeContainer from './BadgeContainer';
+
+interface BadgeContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
+
+const BadgeContainer = forwardRef<HTMLDivElement, BadgeContainerProps>(({ className, ...restProps }, ref) => {
+  /* --- Set default props --- */
+  const styles = badgeConfig.styles.container;
+
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(styles.base, className);
+
+  return (
+    <div
+      className={mergedClassName}
+      ref={ref}
+      {...restProps}
+    />
+  );
+});
+
+BadgeContainer.displayName = 'BadgeContainer';
 
 export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
   badgeContent?: ReactNode;
