@@ -6,6 +6,7 @@ export interface AccordionBodyConfig {
   };
   styles: {
     base: Record<string, string>;
+    sizes: Record<Sizes, Record<string, string>>;
   }
 }
 
@@ -16,8 +17,18 @@ const accordionBodyConfig: AccordionBodyConfig = {
   styles: {
     base: {
       display: 'flex',
-      flexDirection: 'flex-col',
-      padding: 'py-3'
+      flexDirection: 'flex-col'
+    },
+    sizes: {
+      sm: {
+        padding: 'py-2'
+      },
+      md: {
+        padding: 'py-3'
+      },
+      lg: {
+        padding: 'py-4'
+      }
     }
   }
 };
