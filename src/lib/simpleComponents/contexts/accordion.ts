@@ -1,10 +1,9 @@
-import { type ReactNode, createContext } from 'react';
+import { createContext } from 'react';
 
 export interface AccordionContext {
   onToggle: () => void;
   size: Sizes;
   open: boolean;
-  icon?: ReactNode;
   id?: string;
   disabled: boolean;
 }
