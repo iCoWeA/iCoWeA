@@ -1,7 +1,7 @@
-import React, { type ImgHTMLAttributes, type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useContext, type ImgHTMLAttributes } from 'react';
 import avatarConfig from '../../../configs/avatarConfig';
-import { mergeClasses } from '../../../utils/propsHelper';
 import themeContext from '../../../contexts/theme';
+import { mergeClasses } from '../../../utils/propsHelper';
 
 interface AvatarContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant: Borders;
