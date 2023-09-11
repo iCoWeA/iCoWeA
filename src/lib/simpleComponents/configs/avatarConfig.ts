@@ -45,9 +45,6 @@ const avatarConfig: AvatarConfig = {
         border: 'border-2 border-transparent'
       },
       sizes: {
-        xs: {
-          width: 'w-6'
-        },
         sm: {
           width: 'w-8'
         },
