@@ -1,6 +1,5 @@
 export interface AccordionConfig {
   defaultProps: {
-    size: Sizes;
     defaultOpen: boolean;
     disabled: boolean;
   };
@@ -11,7 +10,6 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
-    size: 'md',
     defaultOpen: false,
     disabled: false
   },

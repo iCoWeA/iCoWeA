@@ -5,7 +5,6 @@ import usePrevious from '../../../hooks/usePrevious';
 import { mergeClasses } from '../../../utils/propsHelper';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
-  size?: Sizes;
   open?: boolean;
   defaultOpen?: boolean;
   id?: string;
@@ -15,7 +14,7 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = accordionConfig.styles;
-  const { size, open, defaultOpen, id, disabled, className, children, ...restProps } = { ...accordionConfig.defaultProps, ...props };
+  const { open, defaultOpen, id, disabled, className, children, ...restProps } = { ...accordionConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
 
   /* --- Set states --- */
@@ -38,12 +37,11 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
           setIsOpen((isOpen) => !isOpen);
         }
       },
-      size,
       open: open ?? isOpen,
       id,
       disabled
     }),
-    [isControlled, size, open, isOpen, id, disabled]
+    [isControlled, open, isOpen, id, disabled]
   );
 
   /* Set props */
