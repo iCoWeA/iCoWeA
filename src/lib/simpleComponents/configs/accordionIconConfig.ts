@@ -1,4 +1,4 @@
-export interface AccordionBodyConfig {
+export interface AccordionIconConfig {
   defaultProps: {
     position: DecorationPosition;
   }
@@ -9,7 +9,7 @@ export interface AccordionBodyConfig {
   }
 }
 
-const accordionBodyConfig: AccordionBodyConfig = {
+const accordionIconConfig: AccordionIconConfig = {
   defaultProps: {
     position: 'end'
   },
@@ -27,4 +27,4 @@ const accordionBodyConfig: AccordionBodyConfig = {
   }
 };
 
-export default accordionBodyConfig;
+export default accordionIconConfig;

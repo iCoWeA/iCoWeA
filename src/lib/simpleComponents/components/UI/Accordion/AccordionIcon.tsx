@@ -1,18 +1,25 @@
-import React, { forwardRef } from 'react';
-import accordionHeaderConfig from '../../../configs/accordionHeaderConfig';
+import React, { forwardRef, useContext } from 'react';
+import accordionIconConfig from '../../../configs/accordionIconConfig';
+import accordionContext from '../../../contexts/accordion';
 import { mergeClasses } from '../../../utils/propsHelper';
 import Icon, { type IconProps } from '../Icon/Icon';
 
 export interface AccordionIconProps extends IconProps {
-  open: boolean;
+  position?: DecorationPosition;
 }
 
-const AccordionIcon = forwardRef<SVGSVGElement, AccordionIconProps>(({ open, className, ...restProps }, ref) => {
+const AccordionIcon = forwardRef<SVGSVGElement, AccordionIconProps>((props, ref) => {
+  /* --- Set context props --- */
+  const { open: isAccordionOpen } = useContext(accordionContext);
+
   /* --- Set default props --- */
-  const styles = accordionHeaderConfig.styles.icon;
+  const styles = accordionIconConfig.styles;
+  const { position, className, children, ...restProps } = { ...accordionIconConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, open && styles.open, className);
+  const mergedClassName = mergeClasses(styles.base, position === 'end' && styles.end, isAccordionOpen && styles.open, className);
+
+  const childrenNode = children === undefined ? <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" /> : children;
 
   return (
     <Icon
@@ -20,7 +27,7 @@ const AccordionIcon = forwardRef<SVGSVGElement, AccordionIconProps>(({ open, cla
       ref={ref}
       {...restProps}
     >
-      <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+      {childrenNode}
     </Icon>
   );
 });
