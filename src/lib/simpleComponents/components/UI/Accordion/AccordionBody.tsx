@@ -10,7 +10,7 @@ export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
 
 const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref) => {
   /* --- Set context props --- */
-  const { size: accordionSize, open: isAccordionOpen, id: accordionId } = useContext(accordionContext);
+  const { open: isAccordionOpen, id: accordionId } = useContext(accordionContext);
 
   /* --- Set default props --- */
   const styles = accordionBodyConfig.styles;
@@ -20,7 +20,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref
   const ariaLabelledBy = accordionId === undefined ? undefined : `acd-header-${accordionId}`;
   const id = accordionId === undefined ? undefined : `acd-body-${accordionId}`;
 
-  const mergedClassName = mergeClasses(styles.base, styles.sizes[accordionSize], className);
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <Collapse
