@@ -223,35 +223,35 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-primary',
             hover: 'hover:from-light-primary/10 hover:to-light-primary/10',
             active: 'active:from-light-primary/20 active:to-light-primary/20',
-            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           secondary: {
             fill: 'fill-light-secondary',
             color: 'text-light-secondary',
             hover: 'hover:from-light-secondary/10 hover:to-light-secondary/10',
             active: 'active:from-light-secondary/20 active:to-light-secondary/20',
-            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           success: {
             fill: 'fill-light-success',
             color: 'text-light-success',
             hover: 'hover:from-light-success/10 hover:to-light-success/10',
             active: 'active:from-light-success/20 active:to-light-success/20',
-            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           warning: {
             fill: 'fill-light-warning',
             color: 'text-light-warning',
             hover: 'hover:from-light-warning/10 hover:to-light-warning/10',
             active: 'active:from-light-warning/20 active:to-light-warning/20',
-            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           error: {
             fill: 'fill-light-error',
             color: 'text-light-error',
             hover: 'hover:from-light-error/10 hover:to-light-error/10',
             active: 'active:from-light-error/20 active:to-light-error/20',
-            disabled: 'disabled:text-light-on-surface/40 disabled:fill-light-on-surface/40'
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           }
         }
       }
