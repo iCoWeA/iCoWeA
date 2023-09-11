@@ -49,7 +49,7 @@ const badgeConfig: BadgeConfig = {
         justifyContent: 'justify-center',
         gap: 'gap-2',
         minWidth: 'min-w-[1.5rem]',
-        padding: 'p-1',
+        padding: 'px-1',
         borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-xs font-sans'
       },
@@ -85,16 +85,16 @@ const badgeConfig: BadgeConfig = {
       },
       translate: {
         'top-left': {
-          translate: '-translate-y-[calc(100%-0.75rem)] -translate-x-[calc(100%-0.75rem)]'
+          translate: '-translate-y-2/4 -translate-x-2/4'
         },
         'top-right': {
-          translate: '-translate-y-[calc(100%-0.75rem)] translate-x-[calc(100%-0.75rem)]'
+          translate: '-translate-y-2/4 translate-x-2/4'
         },
         'bottom-left': {
-          translate: 'translate-y-[calc(100%-0.75rem)] -translate-x-[calc(100%-0.75rem)]'
+          translate: 'translate-y-2/4 -translate-x-2/4'
         },
         'bottom-right': {
-          translate: 'translate-y-[calc(100%-0.75rem)] translate-x-[calc(100%-0.75rem)]'
+          translate: 'translate-y-2/4 translate-x-2/4'
         }
       },
       colors: {
