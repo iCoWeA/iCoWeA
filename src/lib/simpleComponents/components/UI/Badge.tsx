@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, type ReactNode, useContext } from 'react';
-import badgeConfig from '../../../configs/badgeConfig';
-import themeContext from '../../../contexts/theme';
-import { mergeClasses } from '../../../utils/propsHelper';
+import badgeConfig from '../../configs/badgeConfig';
+import themeContext from '../../contexts/theme';
+import { mergeClasses } from '../../utils/propsHelper';
 
 interface BadgeContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
 

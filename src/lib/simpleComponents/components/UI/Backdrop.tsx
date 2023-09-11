@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
-import backdropConfig from '../../../configs/backdropConfig';
-import { mergeClasses } from '../../../utils/propsHelper';
+import backdropConfig from '../../configs/backdropConfig';
+import { mergeClasses } from '../../utils/propsHelper';
 
 export interface BackdropProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
