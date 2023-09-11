@@ -1,6 +1,8 @@
 export interface AccordionConfig {
   defaultProps: {
+    variant: ItemVariants;
     size: Sizes;
+    color: Colors;
     defaultOpen: boolean;
     disabled: boolean;
   };
@@ -11,7 +13,9 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
+    variant: 'text',
     size: 'md',
+    color: 'default',
     defaultOpen: false,
     disabled: false
   },
