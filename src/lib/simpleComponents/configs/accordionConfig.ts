@@ -1,6 +1,6 @@
 export interface AccordionConfig {
   defaultProps: {
-    variant: ItemVariants;
+    variant: CheckVariants;
     size: Sizes;
     color: Colors;
     defaultOpen: boolean;
