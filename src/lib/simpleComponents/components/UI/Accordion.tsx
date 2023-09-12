@@ -44,7 +44,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
     [isControlled, open, isOpen, id, disabled]
   );
 
-  /* Set props */
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, className);
 
   return (
