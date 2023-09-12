@@ -3,6 +3,11 @@ import badgeConfig from '../../configs/badgeConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/********************************************************************************
+ *
+ *   Container
+ *
+ */
 interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>(({ className, ...restProps }, ref) => {
@@ -23,6 +28,11 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(({ className, ...re
 
 Container.displayName = 'Container';
 
+/********************************************************************************
+ *
+ *   Badge
+ *
+ */
 export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
   badgeContent?: ReactNode;
   position?: CornerPositions;

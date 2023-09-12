@@ -3,6 +3,11 @@ import avatarConfig from '../../configs/avatarConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/********************************************************************************
+ *
+ *   Container
+ *
+ */
 interface AvatarContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   size: Sizes;
   color: Colors;
@@ -30,6 +35,11 @@ const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ size
 
 AvatarContainer.displayName = 'AvatarContainer';
 
+/********************************************************************************
+ *
+ *   Avatar
+ *
+ */
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   size?: Sizes;
   color?: Colors;
