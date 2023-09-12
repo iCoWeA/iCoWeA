@@ -6,11 +6,8 @@ export interface AccordionHeaderConfig {
     },
     before: {
       base: Record<string, string>;
+      divider: Record<Themes, Record<string, string>>;
       colors: Record<Themes, Record<Colors, Record<string, string>>>;
-    },
-    divider: {
-      base: Record<string, string>;
-      colors: Record<Themes, Record<string, string>>;
     }
   }
 }
@@ -25,6 +22,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         alignItems: 'items-center',
         height: 'h-12',
         width: 'w-full',
+        padding: 'py-3',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition',
         focus: 'focus:outline-0',
@@ -73,7 +71,13 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         display: 'before:block',
         height: 'before:h-full',
         width: 'before:w-full',
+        border: 'before:border-b',
         transition: 'before:transition'
+      },
+      divider: {
+        light: {
+          border: 'before:border-light-divider-variant'
+        }
       },
       colors: {
         light: {
@@ -101,16 +105,6 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
             hover: 'hover:before:bg-light-error/10',
             active: 'active:before:bg-light-error/[0.15]'
           }
-        }
-      }
-    },
-    divider: {
-      base: {
-        border: 'border-y'
-      },
-      colors: {
-        light: {
-          border: 'border-t-transparent border-b-light-divider-variant'
         }
       }
     }

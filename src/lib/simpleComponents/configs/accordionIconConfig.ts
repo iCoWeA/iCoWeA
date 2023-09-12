@@ -16,7 +16,6 @@ const accordionIconConfig: AccordionIconConfig = {
   styles: {
     base: {
       margin: 'ml-auto',
-      height: 'h-6',
       transition: 'transition'
     },
     start: {

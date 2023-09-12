@@ -35,10 +35,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   const mergedClassName = mergeClasses(
     styles.button.base,
     styles.button.colors[theme][accordionColor],
-    accordionVariant === 'text' && styles.before.base,
+    styles.before.base,
+    styles.before.divider[theme],
     accordionVariant === 'text' && styles.before.colors[theme][accordionColor],
-    styles.divider.base,
-    styles.divider.colors[theme],
     className
   );
 
