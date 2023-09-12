@@ -2,6 +2,7 @@ import { type ReactNode, type OlHTMLAttributes, type LiHTMLAttributes } from 're
 
 export interface BreadcrumbsConfig {
   defaultProps: {
+    color: Colors;
     separator: ReactNode;
     fullwidth: boolean;
     listProps: OlHTMLAttributes<HTMLOListElement>;
@@ -21,13 +22,14 @@ export interface BreadcrumbsConfig {
     },
     separator: {
       base: Record<string, string>;
-      colors: Record<Themes, Record<string, string>>;
+      colors: Record<Themes, Record<Colors, Record<string, string>>>;
     }
   }
 }
 
 const breadcrumbsConfig: BreadcrumbsConfig = {
   defaultProps: {
+    color: 'default',
     separator: '/',
     fullwidth: false,
     listProps: {},
@@ -71,8 +73,30 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
       },
       colors: {
         light: {
-          fill: 'fill-light-on-surface-variant',
-          color: 'text-light-on-surface-variant'
+          default: {
+            fill: 'fill-light-on-surface-variant',
+            color: 'text-light-on-surface-variant'
+          },
+          primary: {
+            fill: 'fill-light-primary',
+            color: 'text-light-primary'
+          },
+          secondary: {
+            fill: 'fill-light-secondary',
+            color: 'text-light-secondary'
+          },
+          success: {
+            fill: 'fill-light-success',
+            color: 'text-light-success'
+          },
+          warning: {
+            fill: 'fill-light-warning',
+            color: 'text-light-warning'
+          },
+          error: {
+            fill: 'fill-light-error',
+            color: 'text-light-error'
+          }
         }
       }
     }
