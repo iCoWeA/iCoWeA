@@ -1,7 +1,9 @@
 import React, { type ButtonHTMLAttributes, forwardRef, useContext } from 'react';
-import buttonConfig from '../../../configs/buttonConfig';
-import themeContext from '../../../contexts/theme';
-import { mergeClasses } from '../../../utils/propsHelper';
+import buttonConfig from '../../configs/buttonConfig';
+import themeContext from '../../contexts/theme';
+import { mergeClasses } from '../../utils/propsHelper';
+
+export type ButtonVariants = 'plain' | 'text' | 'outlined' | 'soft' | 'solid';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariants;
