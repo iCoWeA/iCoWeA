@@ -3,9 +3,9 @@ import badgeConfig from '../../configs/badgeConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
-interface BadgeContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
+interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
-const BadgeContainer = forwardRef<HTMLDivElement, BadgeContainerProps>(({ className, ...restProps }, ref) => {
+const Container = forwardRef<HTMLDivElement, ContainerProps>(({ className, ...restProps }, ref) => {
   /* --- Set default props --- */
   const styles = badgeConfig.styles.container;
 
@@ -21,7 +21,7 @@ const BadgeContainer = forwardRef<HTMLDivElement, BadgeContainerProps>(({ classN
   );
 });
 
-BadgeContainer.displayName = 'BadgeContainer';
+Container.displayName = 'Container';
 
 export interface BadgeProps extends BaseHTMLAttributes<HTMLSpanElement> {
   badgeContent?: ReactNode;
@@ -56,7 +56,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   );
 
   return (
-    <BadgeContainer
+    <Container
       ref={ref}
       {...containerProps}
     >
@@ -67,7 +67,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       >
         {badgeContent}
       </span>
-    </BadgeContainer>
+    </Container>
   );
 });
 
