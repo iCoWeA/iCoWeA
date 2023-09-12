@@ -5,8 +5,8 @@ import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  startDecoration?: ReactNode;
-  endDecoration?: ReactNode;
+  startDecorator?: ReactNode;
+  endDecorator?: ReactNode;
 }
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((props, ref) => {
@@ -23,7 +23,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
 
   /* --- Set default props --- */
   const styles = accordionHeaderConfig.styles;
-  const { startDecoration, endDecoration, disabled, className, children, ...restProps } = {
+  const { startDecorator, endDecorator, disabled, className, children, ...restProps } = {
     disabled: isAccordionDisabled,
     ...props
   };
@@ -53,9 +53,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
       ref={ref}
       {...restProps}
     >
-      {startDecoration}
+      {startDecorator}
       {children}
-      {endDecoration}
+      {endDecorator}
     </button>
   );
 });
