@@ -48,10 +48,12 @@ const badgeConfig: BadgeConfig = {
         alignItems: 'items-center',
         justifyContent: 'justify-center',
         gap: 'gap-2',
-        minWidth: 'min-w-[1.5rem]',
+        minWidth: 'min-w-[1rem]',
         padding: 'px-1',
         borderRadius: 'rounded-full',
-        font: 'antialiased font-normal text-xs font-sans'
+        font: 'antialiased font-normal text-xs font-sans',
+        opacity: 'opacity-100',
+        transition: 'transition'
       },
       empty: {
         height: 'h-1.5',
@@ -60,10 +62,10 @@ const badgeConfig: BadgeConfig = {
         padding: 'p-0'
       },
       withBorder: {
-        border: 'border-2 border-transparent'
+        outline: 'outline outline-2 outline-transparent'
       },
       invisible: {
-        display: 'hidden'
+        opacity: 'opacity-0'
       },
       positions: {
         'top-left': {
@@ -99,11 +101,6 @@ const badgeConfig: BadgeConfig = {
       },
       colors: {
         light: {
-          default: {
-            fill: 'fill-light-on-surface',
-            color: 'text-light-on-surface',
-            background: 'bg-light-surface'
-          },
           primary: {
             fill: 'fill-light-on-primary',
             color: 'text-light-on-primary',
