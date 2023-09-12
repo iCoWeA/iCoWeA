@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 export interface AccordionContext {
   onToggle: () => void;
-  variant: ButtonVariants;
+  variant: ItemVariant;
   color: Colors;
   open: boolean;
   id?: string;
@@ -11,7 +11,7 @@ export interface AccordionContext {
 
 export const initialState: AccordionContext = {
   onToggle: () => {},
-  variant: 'text',
+  variant: 'plain',
   color: 'default',
   open: false,
   disabled: false
