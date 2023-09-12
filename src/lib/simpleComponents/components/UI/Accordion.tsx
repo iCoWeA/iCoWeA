@@ -4,7 +4,10 @@ import accordionContext, { type AccordionContext } from '../../contexts/accordio
 import usePrevious from '../../hooks/usePrevious';
 import { mergeClasses } from '../../utils/propsHelper';
 
+export type AccordionVariant = 'plain' | 'text';
+
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
+  variant?: AccordionVariant;
   color?: Colors;
   open?: boolean;
   defaultOpen?: boolean;
@@ -15,7 +18,7 @@ export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = accordionConfig.styles;
-  const { color, open, defaultOpen, id, disabled, className, children, ...restProps } = { ...accordionConfig.defaultProps, ...props };
+  const { variant, color, open, defaultOpen, id, disabled, className, children, ...restProps } = { ...accordionConfig.defaultProps, ...props };
   const isControlled = open !== undefined;
 
   /* --- Set states --- */
@@ -38,12 +41,13 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
           setIsOpen((isOpen) => !isOpen);
         }
       },
+      variant,
       color,
       open: open ?? isOpen,
       id,
       disabled
     }),
-    [isControlled, color, open, isOpen, id, disabled]
+    [isControlled, variant, color, open, isOpen, id, disabled]
   );
 
   /* --- Set props --- */
