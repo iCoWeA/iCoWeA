@@ -51,7 +51,7 @@ const alertConfig: AlertConfig = {
         transition: 'transition'
       },
       invisible: {
-        opacity: 'opacity-100'
+        opacity: 'opacity-0'
       },
       shadow: {
         light: {
@@ -196,7 +196,7 @@ const alertConfig: AlertConfig = {
         gap: 'gap-2',
         alignItems: 'items-center',
         height: 'h-12',
-        padding: 'py-1 pr-2'
+        padding: 'py-1 pr-4'
       },
       closable: {
         padding: 'pr-1.5'
