@@ -1,5 +1,7 @@
 export interface AccordionConfig {
   defaultProps: {
+    variant: ButtonVariants;
+    color: Colors;
     defaultOpen: boolean;
     disabled: boolean;
   };
@@ -10,6 +12,8 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
+    variant: 'text',
+    color: 'default',
     defaultOpen: false,
     disabled: false
   },

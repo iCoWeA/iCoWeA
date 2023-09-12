@@ -1,8 +1,4 @@
 export interface AccordionHeaderConfig {
-  defaultProps: {
-    color: Colors;
-    divider: boolean;
-  };
   styles: {
     button: {
       base: Record<string, string>;
@@ -22,10 +18,6 @@ export interface AccordionHeaderConfig {
 }
 
 const accordionHeaderConfig: AccordionHeaderConfig = {
-  defaultProps: {
-    color: 'default',
-    divider: true
-  },
   styles: {
     button: {
       base: {
