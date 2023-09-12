@@ -1,5 +1,5 @@
-import React, { type BaseHTMLAttributes, type ReactNode, forwardRef, useContext, type FC } from 'react';
-import alertConfig, { type AlertVariants } from '../../../configs/alertConfig';
+import React, { type BaseHTMLAttributes, type FC, type ReactNode, forwardRef, useContext } from 'react';
+import alertConfig from '../../../configs/alertConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
@@ -57,7 +57,7 @@ const ActionContainer: FC<ActionContainerProps> = ({ closable, className, ...res
 };
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: AlertVariants;
+  variant?: ButtonVariants;
   color?: Colors;
   invisible?: boolean;
   closable?: boolean;
