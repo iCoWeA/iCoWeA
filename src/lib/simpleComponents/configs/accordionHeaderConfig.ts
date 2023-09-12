@@ -38,13 +38,15 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         width: 'w-full',
         font: 'antialiased font-normal text-base font-sans',
         transition: 'transition',
-        focus: 'focus:outline-0'
+        focus: 'focus:outline-0',
+        disabled: 'disabled:pointer-events-none disabled:select-none'
       },
       colors: {
         light: {
           fill: 'fill-light-on-surface-variant',
           color: 'text-light-on-surface-variant',
-          hover: 'hover:fill-light-on-surface hover:text-light-on-surface'
+          hover: 'hover:fill-light-on-surface hover:text-light-on-surface',
+          disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
         }
       },
       open: {
