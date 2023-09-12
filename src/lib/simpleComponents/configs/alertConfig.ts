@@ -15,7 +15,6 @@ export interface AlertConfig {
     container: {
       base: Record<string, string>;
       invisible: Record<string, string>;
-      shadow: Record<Themes, Record<string, string>>;
       variants: Record<AlertVariant, Record<Themes, Record<Colors, Record<string, string>>>>
     },
     startDecoratorContainer: {
@@ -47,16 +46,12 @@ const alertConfig: AlertConfig = {
         display: 'flex',
         width: 'w-full',
         borderRadius: 'rounded-2xl',
+        shadow: 'shadow-md shadow-black/50',
         opacity: 'opacity-100',
         transition: 'transition'
       },
       invisible: {
         opacity: 'opacity-0'
-      },
-      shadow: {
-        light: {
-          shadow: 'shadow-md shadow-light-shadow'
-        }
       },
       variants: {
         solid: {
