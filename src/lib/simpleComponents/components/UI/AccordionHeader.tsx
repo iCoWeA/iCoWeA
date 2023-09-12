@@ -13,6 +13,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   /* --- Set context props --- */
   const {
     onToggle: onAccordionToggle,
+    variant: accordionVariant,
     color: accordionColor,
     open: isAccordionOpen,
     id: accordionId,
@@ -34,8 +35,8 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   const mergedClassName = mergeClasses(
     styles.button.base,
     styles.button.colors[theme][accordionColor],
-    styles.before.base,
-    styles.before.colors[theme][accordionColor],
+    accordionVariant === 'text' && styles.before.base,
+    accordionVariant === 'text' && styles.before.colors[theme][accordionColor],
     styles.divider.base,
     styles.divider.colors[theme],
     className
