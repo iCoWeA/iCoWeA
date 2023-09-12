@@ -2,13 +2,11 @@ export interface AccordionHeaderConfig {
   styles: {
     button: {
       base: Record<string, string>;
-      colors: Record<Themes, Record<string, string>>;
-      open: Record<Themes, Record<Colors, Record<string, string>>>;
+      colors: Record<Themes, Record<Colors, Record<string, string>>>;
     },
     before: {
       base: Record<string, string>;
-      colors: Record<Themes, Record<string, string>>;
-      open: Record<Themes, Record<Colors, Record<string, string>>>;
+      colors: Record<Themes, Record<Colors, Record<string, string>>>;
     },
     divider: {
       base: Record<string, string>;
@@ -35,49 +33,35 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       },
       colors: {
         light: {
-          fill: 'fill-light-on-surface-variant',
-          color: 'text-light-on-surface-variant',
-          hover: 'hover:fill-light-on-surface hover:text-light-on-surface',
-          disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
-        }
-      },
-      open: {
-        light: {
           default: {
             fill: 'fill-light-on-surface',
             color: 'text-light-on-surface',
-            background: 'bg-light-surface',
-            hover: 'hover:fill-light-on-surface hover:text-light-on-surface'
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           primary: {
-            fill: 'fill-light-on-primary-container',
-            color: 'text-light-on-primary-container',
-            background: 'bg-light-primary-container',
-            hover: 'hover:fill-light-on-primary-container hover:text-light-on-primary-container'
+            fill: 'fill-light-primary',
+            color: 'text-light-primary',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           secondary: {
-            fill: 'fill-light-on-secondary-container',
-            color: 'text-light-on-secondary-container',
-            background: 'bg-light-secondary-container',
-            hover: 'hover:fill-light-on-secondary-container hover:text-light-on-secondary-container'
+            fill: 'fill-light-secondary',
+            color: 'text-light-secondary',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           success: {
-            fill: 'fill-light-on-success-container',
-            color: 'text-light-on-success-container',
-            background: 'bg-light-success-container',
-            hover: 'hover:fill-light-on-success-container hover:text-light-on-success-container'
+            fill: 'fill-light-success',
+            color: 'text-light-success',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           warning: {
-            fill: 'fill-light-on-warning-container',
-            color: 'text-light-on-warning-container',
-            background: 'bg-light-warning-container',
-            hover: 'hover:fill-light-on-warning-container hover:text-light-on-warning-container'
+            fill: 'fill-light-warning',
+            color: 'text-light-warning',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           error: {
-            fill: 'fill-light-on-error-container',
-            color: 'text-light-on-error-container',
-            background: 'bg-light-error-container',
-            hover: 'hover:fill-light-on-error-container hover:text-light-on-error-container'
+            fill: 'fill-light-error',
+            color: 'text-light-error',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           }
         }
       }
@@ -94,35 +78,29 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       },
       colors: {
         light: {
-          hover: 'hover:before:bg-light-on-surface/[0.08]',
-          active: 'active:before:bg-light-on-surface/[0.12]'
-        }
-      },
-      open: {
-        light: {
           default: {
             hover: 'hover:before:bg-light-on-surface/[0.08]',
             active: 'active:before:bg-light-on-surface/[0.12]'
           },
           primary: {
-            hover: 'hover:before:bg-light-on-primary-container/[0.08]',
-            active: 'active:before:bg-light-on-primary-container/[0.12]'
+            hover: 'hover:before:bg-light-on-primary/[0.08]',
+            active: 'active:before:bg-light-on-primary/[0.12]'
           },
           secondary: {
-            hover: 'hover:before:bg-light-on-secondary-container/[0.08]',
-            active: 'active:before:bg-light-on-secondary-container/[0.12]'
+            hover: 'hover:before:bg-light-on-secondary/[0.08]',
+            active: 'active:before:bg-light-on-secondary/[0.12]'
           },
           success: {
-            hover: 'hover:before:bg-light-on-success-container/[0.08]',
-            active: 'active:before:bg-light-on-success-container/[0.12]'
+            hover: 'hover:before:bg-light-on-success/[0.08]',
+            active: 'active:before:bg-light-on-success/[0.12]'
           },
           warning: {
-            hover: 'hover:before:bg-light-on-warning-container/[0.08]',
-            active: 'active:before:bg-light-on-warning-container/[0.12]'
+            hover: 'hover:before:bg-light-on-warning/[0.08]',
+            active: 'active:before:bg-light-on-warning/[0.12]'
           },
           error: {
-            hover: 'hover:before:bg-light-on-error-container/[0.08]',
-            active: 'active:before:bg-light-on-error-container/[0.12]'
+            hover: 'hover:before:bg-light-on-error/[0.08]',
+            active: 'active:before:bg-light-on-error/[0.12]'
           }
         }
       }

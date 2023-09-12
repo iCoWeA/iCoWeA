@@ -5,21 +5,24 @@ import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: Colors;
-  divider?: boolean;
   startDecoration?: ReactNode;
   endDecoration?: ReactNode;
 }
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((props, ref) => {
   /* --- Set context props --- */
-  const { onToggle: onAccordionToggle, open: isAccordionOpen, id: accordionId, disabled: isAccordionDisabled } = useContext(accordionContext);
+  const {
+    onToggle: onAccordionToggle,
+    color: accordionColor,
+    open: isAccordionOpen,
+    id: accordionId,
+    disabled: isAccordionDisabled
+  } = useContext(accordionContext);
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
   const styles = accordionHeaderConfig.styles;
-  const { color, divider, startDecoration, endDecoration, disabled, className, children, ...restProps } = {
-    ...accordionHeaderConfig.defaultProps,
+  const { startDecoration, endDecoration, disabled, className, children, ...restProps } = {
     disabled: isAccordionDisabled,
     ...props
   };
@@ -30,13 +33,11 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
 
   const mergedClassName = mergeClasses(
     styles.button.base,
-    styles.button.colors[theme],
-    isAccordionOpen && styles.button.open[theme][color],
+    styles.button.colors[theme][accordionColor],
     styles.before.base,
-    styles.before.colors[theme],
-    isAccordionOpen && styles.before.open[theme][color],
-    divider && styles.divider.base,
-    divider && styles.divider.colors[theme],
+    styles.before.colors[theme][accordionColor],
+    styles.divider.base,
+    styles.divider.colors[theme],
     className
   );
 
