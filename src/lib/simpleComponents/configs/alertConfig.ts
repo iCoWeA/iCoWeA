@@ -32,7 +32,7 @@ export interface AlertConfig {
 const alertConfig: AlertConfig = {
   defaultProps: {
     variant: 'filled',
-    color: 'primary',
+    color: 'error',
     invisible: false,
     closable: false,
     iconContainerProps: {},
@@ -190,7 +190,7 @@ const alertConfig: AlertConfig = {
         gap: 'gap-2',
         alignItems: 'items-center',
         height: 'h-12',
-        padding: 'py-2 pr-2'
+        padding: 'py-1 pr-2'
       },
       closable: {
         padding: 'pr-1.5'
