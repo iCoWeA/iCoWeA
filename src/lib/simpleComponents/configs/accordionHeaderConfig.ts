@@ -23,7 +23,6 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         display: 'flex',
         gap: 'gap-4',
         alignItems: 'items-center',
-        justifyContent: 'justify-between',
         height: 'h-12',
         width: 'w-full',
         font: 'antialiased font-normal text-base font-sans',
