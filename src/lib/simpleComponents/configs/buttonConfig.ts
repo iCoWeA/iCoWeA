@@ -36,9 +36,9 @@ const buttonConfig: ButtonConfig = {
       base: {
         position: 'relative',
         display: 'flex',
+        gap: 'gap-2',
         alignItems: 'items-center',
         width: 'w-fit',
-        gap: 'gap-2',
         borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-sm font-sans',
         transition: 'transition',
