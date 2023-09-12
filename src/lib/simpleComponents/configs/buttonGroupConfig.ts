@@ -68,8 +68,8 @@ const buttonGroupConfig: ButtonGroupConfig = {
         display: 'flex',
         gap: 'gap-2',
         alignItems: 'items-center',
+        width: 'w-fit',
         font: 'antialiased font-normal text-sm font-sans',
-        borderRadius: 'rounded-none',
         transition: 'transition',
         focus: 'focus:outline-0',
         disabled: 'disabled:pointer-events-none disabled:select-none'
