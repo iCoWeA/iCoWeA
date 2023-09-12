@@ -5,14 +5,14 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 /********************************************************************************
  *
- *   Icon container
+ *   Start decorator container
  *
  */
-interface IconContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
+interface StartDecoratorContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
-const IconContainer: FC<IconContainerProps> = ({ className, ...restProps }) => {
+const StartDecoratorContainer: FC<StartDecoratorContainerProps> = ({ className, ...restProps }) => {
   /* --- Set default props --- */
-  const styles = alertConfig.styles.iconContainer;
+  const styles = alertConfig.styles.startDecoratorContainer;
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, className);
@@ -49,16 +49,16 @@ const BodyContainer: FC<BodyContainerProps> = ({ className, ...restProps }) => {
 
 /********************************************************************************
  *
- *   Action container
+ *   End decorator container
  *
  */
-interface ActionContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
+interface EndDecoratorContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   closable: boolean;
 }
 
-const ActionContainer: FC<ActionContainerProps> = ({ closable, className, ...restProps }) => {
+const EndDecoratorContainer: FC<EndDecoratorContainerProps> = ({ closable, className, ...restProps }) => {
   /* --- Set default props --- */
-  const styles = alertConfig.styles.actionContainer;
+  const styles = alertConfig.styles.endDecoratorContainer;
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, closable && styles.closable, className);
@@ -83,11 +83,11 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   invisible?: boolean;
   closable?: boolean;
-  icon?: ReactNode;
-  action?: ReactNode;
-  iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  startDecorator?: ReactNode;
+  endDecorator?: ReactNode;
+  startDecoratorContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bodyContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  actionContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
+  endDecoratorContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
 }
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
@@ -96,33 +96,45 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = alertConfig.styles.container;
-  const { variant, color, invisible, closable, icon, action, iconContainerProps, bodyContainerProps, actionContainerProps, className, children, ...restProps } =
-    {
-      ...alertConfig.defaultProps,
-      ...props
-    };
+  const {
+    variant,
+    color,
+    invisible,
+    closable,
+    startDecorator,
+    endDecorator,
+    startDecoratorContainerProps,
+    bodyContainerProps,
+    endDecoratorContainerProps,
+    className,
+    children,
+    ...restProps
+  } = {
+    ...alertConfig.defaultProps,
+    ...props
+  };
 
   /* --- Set container props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], invisible && styles.invisible, className);
 
-  /* --- Set icon container props --- */
-  let iconContainerNode: ReactNode;
+  /* --- Set startDecorator container props --- */
+  let startDecoratorContainerNode: ReactNode;
 
-  if (icon !== undefined) {
-    iconContainerNode = <IconContainer {...iconContainerProps}>{icon}</IconContainer>;
+  if (startDecorator !== undefined) {
+    startDecoratorContainerNode = <StartDecoratorContainer {...startDecoratorContainerProps}>{startDecorator}</StartDecoratorContainer>;
   }
 
   /* --- Set button container props --- */
-  let actionContainerNode: ReactNode;
+  let endDecoratorContainerNode: ReactNode;
 
-  if (action !== undefined) {
-    actionContainerNode = (
-      <ActionContainer
+  if (endDecorator !== undefined) {
+    endDecoratorContainerNode = (
+      <EndDecoratorContainer
         closable={closable}
-        {...actionContainerProps}
+        {...endDecoratorContainerProps}
       >
-        {action}
-      </ActionContainer>
+        {endDecorator}
+      </EndDecoratorContainer>
     );
   }
 
@@ -133,9 +145,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      {iconContainerNode}
+      {startDecoratorContainerNode}
       <BodyContainer {...bodyContainerProps}>{children}</BodyContainer>
-      {actionContainerNode}
+      {endDecoratorContainerNode}
     </div>
   );
 });

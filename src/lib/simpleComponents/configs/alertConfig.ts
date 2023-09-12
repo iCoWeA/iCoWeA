@@ -7,9 +7,9 @@ export interface AlertConfig {
     color: Colors;
     invisible: boolean;
     closable: boolean;
-    iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    startDecoratorContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
-    actionContainerProps: BaseHTMLAttributes<HTMLDivElement>;
+    endDecoratorContainerProps: BaseHTMLAttributes<HTMLDivElement>;
   };
   styles: {
     container: {
@@ -18,13 +18,13 @@ export interface AlertConfig {
       shadow: Record<Themes, Record<string, string>>;
       variants: Record<AlertVariant, Record<Themes, Record<Colors, Record<string, string>>>>
     },
-    iconContainer: {
+    startDecoratorContainer: {
       base: Record<string, string>;
     }
     bodyContainer: {
       base: Record<string, string>;
     },
-    actionContainer: {
+    endDecoratorContainer: {
       base: Record<string, string>;
       closable: Record<string, string>;
     }
@@ -37,9 +37,9 @@ const alertConfig: AlertConfig = {
     color: 'error',
     invisible: false,
     closable: false,
-    iconContainerProps: {},
+    startDecoratorContainerProps: {},
     bodyContainerProps: {},
-    actionContainerProps: {}
+    endDecoratorContainerProps: {}
   },
   styles: {
     container: {
@@ -172,7 +172,7 @@ const alertConfig: AlertConfig = {
         }
       }
     },
-    iconContainer: {
+    startDecoratorContainer: {
       base: {
         display: 'flex',
         gap: 'gap-4',
@@ -190,7 +190,7 @@ const alertConfig: AlertConfig = {
         font: 'antialiased font-normal text-sm font-sans'
       }
     },
-    actionContainer: {
+    endDecoratorContainer: {
       base: {
         display: 'flex',
         gap: 'gap-2',
