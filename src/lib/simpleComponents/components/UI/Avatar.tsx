@@ -4,13 +4,12 @@ import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
 interface AvatarContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant: Borders;
   size: Sizes;
   color: Colors;
   withBorder: boolean;
 }
 
-const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ variant, size, color, withBorder, className, ...restProps }, ref) => {
+const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ size, color, withBorder, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -18,14 +17,7 @@ const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ vari
   const styles = avatarConfig.styles.container;
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant],
-    styles.sizes[size],
-    styles.colors[theme][color],
-    withBorder && styles.withBorder,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, styles.sizes[size], styles.colors[theme][color], withBorder && styles.withBorder, className);
 
   return (
     <div
@@ -39,7 +31,6 @@ const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ vari
 AvatarContainer.displayName = 'AvatarContainer';
 
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
-  variant?: Borders;
   size?: Sizes;
   color?: Colors;
   withBorder?: boolean;
@@ -49,7 +40,7 @@ export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
 const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = avatarConfig.styles.image;
-  const { variant, size, color, withBorder, containerProps, className, children, ...restProps } = { ...avatarConfig.defaultProps, ...props };
+  const { size, color, withBorder, containerProps, className, children, ...restProps } = { ...avatarConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   let childrenNode = children;
@@ -73,7 +64,6 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
 
   return (
     <AvatarContainer
-      variant={variant}
       size={size}
       color={color}
       withBorder={withBorder}

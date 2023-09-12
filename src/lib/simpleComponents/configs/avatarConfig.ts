@@ -2,7 +2,6 @@ import { type BaseHTMLAttributes } from 'react';
 
 export interface AvatarConfig {
   defaultProps: {
-    variant: Borders;
     size: Sizes;
     color: Colors;
     withBorder: boolean;
@@ -13,7 +12,6 @@ export interface AvatarConfig {
       base: Record<string, string>;
       withBorder: Record<string, string>;
       sizes: Record<Sizes, Record<string, string>>;
-      variants: Record<Borders, Record<string, string>>;
       colors: Record<Themes, Record<Colors, Record<string, string>>>;
     },
     image: {
@@ -24,7 +22,6 @@ export interface AvatarConfig {
 
 const avatarConfig: AvatarConfig = {
   defaultProps: {
-    variant: 'circular',
     size: 'md',
     color: 'default',
     withBorder: false,
@@ -38,6 +35,7 @@ const avatarConfig: AvatarConfig = {
         justifyContent: 'justify-center',
         gap: 'gap-2',
         aspectRatio: 'aspect-square',
+        borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-lg font-sans',
         overflow: 'overflow-hidden'
       },
@@ -53,17 +51,6 @@ const avatarConfig: AvatarConfig = {
         },
         lg: {
           width: 'w-12'
-        }
-      },
-      variants: {
-        circular: {
-          borderRadius: 'rounded-full'
-        },
-        rounded: {
-          borderRadius: 'rounded-xl'
-        },
-        square: {
-          borderRadius: 'rounded-none'
         }
       },
       colors: {
