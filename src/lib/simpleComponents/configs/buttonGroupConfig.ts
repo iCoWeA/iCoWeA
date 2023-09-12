@@ -1,4 +1,4 @@
-import { type ButtonGroupVariants } from '../components/UI/ButtonGroup/ButtonGroup';
+import { type ButtonGroupVariants } from '../components/UI/ButtonGroup';
 
 export interface ButtonGroupConfig {
   defaultProps: {
