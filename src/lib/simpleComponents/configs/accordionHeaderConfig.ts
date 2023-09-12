@@ -24,7 +24,6 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         width: 'w-full',
         padding: 'py-3',
         font: 'antialiased font-normal text-base font-sans',
-        transition: 'transition',
         focus: 'focus:outline-0',
         disabled: 'disabled:pointer-events-none disabled:select-none'
       },
