@@ -31,7 +31,7 @@ const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ size
 AvatarContainer.displayName = 'AvatarContainer';
 
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
-  size?: Sizes;
+  size?: Size;
   color?: Colors;
   withBorder?: boolean;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;

@@ -43,14 +43,17 @@ const avatarConfig: AvatarConfig = {
         border: 'border-2 border-transparent'
       },
       sizes: {
+        xs: {
+          height: 'h-6'
+        },
         sm: {
-          width: 'w-8'
+          width: 'h-8'
         },
         md: {
-          width: 'w-10'
+          width: 'h-10'
         },
         lg: {
-          width: 'w-12'
+          width: 'h-12'
         }
       },
       colors: {
@@ -58,7 +61,7 @@ const avatarConfig: AvatarConfig = {
           default: {
             fill: 'fill-light-on-surface',
             color: 'text-light-on-surface',
-            background: 'bg-light-surface'
+            background: 'bg-light-surface-high'
           },
           primary: {
             fill: 'fill-light-on-primary',
@@ -91,7 +94,7 @@ const avatarConfig: AvatarConfig = {
     image: {
       base: {
         width: 'w-full',
-        outline: 'outline-0'
+        maxWidth: 'max-w-0'
       }
     }
   }
