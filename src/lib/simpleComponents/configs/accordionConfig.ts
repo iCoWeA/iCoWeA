@@ -2,7 +2,7 @@ import { type AccordionVariant } from '../components/UI/Accordion';
 
 export interface AccordionConfig {
   defaultProps: {
-    variant: AccordionVariant ;
+    variant: AccordionVariant;
     color: Colors;
     defaultOpen: boolean;
     disabled: boolean;
