@@ -1,5 +1,5 @@
 import { type BaseHTMLAttributes } from 'react';
-import { type AlertVariant } from '../components/UI/Alert/Alert';
+import { type AlertVariant } from '../components/UI/Alert';
 
 export interface AlertConfig {
   defaultProps: {
