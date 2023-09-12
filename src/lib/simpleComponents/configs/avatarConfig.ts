@@ -56,8 +56,8 @@ const avatarConfig: AvatarConfig = {
       colors: {
         light: {
           default: {
-            fill: 'fill-light-surface-on-surface',
-            color: 'text-light-surface-on-surface',
+            fill: 'fill-light-on-surface',
+            color: 'text-light-on-surface',
             background: 'bg-light-surface'
           },
           primary: {
