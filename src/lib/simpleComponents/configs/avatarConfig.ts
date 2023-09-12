@@ -40,7 +40,7 @@ const avatarConfig: AvatarConfig = {
         overflow: 'overflow-hidden'
       },
       withBorder: {
-        border: 'border-2 border-transparent'
+        outline: 'outline outline-2 outline-transparent'
       },
       sizes: {
         xs: {
@@ -93,8 +93,7 @@ const avatarConfig: AvatarConfig = {
     },
     image: {
       base: {
-        width: 'w-full',
-        maxWidth: 'max-w-0'
+        width: 'w-full'
       }
     }
   }
