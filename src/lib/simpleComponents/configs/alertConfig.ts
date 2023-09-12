@@ -1,70 +1,55 @@
 import { type BaseHTMLAttributes } from 'react';
-import { type IconProps } from '../components/UI/Icon/Icon';
-import { type IconButtonProps } from '../components/UI/IconButton/IconButton';
-import { type TransitionConfig } from '../hooks/useTransition';
-
-export type AlertVariants = 'filled' | 'outlined' | 'tonal';
 
 export interface AlertConfig {
   defaultProps: {
-    open: boolean;
-    variant: AlertVariants;
+    variant: ButtonVariants;
     color: Colors;
+    invisible: boolean;
+    closable: boolean;
     iconContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     actionContainerProps: BaseHTMLAttributes<HTMLDivElement>;
-    buttonProps: IconButtonProps;
-    buttonIconProps: IconProps;
-    transitionConfig: TransitionConfig;
   };
   styles: {
     container: {
       base: Record<string, string>;
-      open: Record<string, string>;
-      variants: Record<AlertVariants, Record<Themes, Record<Colors, Record<string, string>>>>
+      invisible: Record<string, string>;
+      variants: Record<ButtonVariants, Record<Themes, Record<Colors, Record<string, string>>>>
     },
     iconContainer: {
       base: Record<string, string>;
     }
     bodyContainer: {
       base: Record<string, string>;
-      icon: Record<string, string>;
-      action: Record<string, string>;
     },
     actionContainer: {
       base: Record<string, string>;
-      button: Record<string, string>;
-    },
-    button: {
-      variants: Record<AlertVariants, Record<string, string>>;
+      closable: Record<string, string>;
     }
   }
 }
 
 const alertConfig: AlertConfig = {
   defaultProps: {
-    open: true,
     variant: 'filled',
     color: 'primary',
+    invisible: false,
+    closable: false,
     iconContainerProps: {},
     bodyContainerProps: {},
-    actionContainerProps: {},
-    buttonProps: {},
-    buttonIconProps: {},
-    transitionConfig: {}
+    actionContainerProps: {}
   },
   styles: {
     container: {
       base: {
         display: 'flex',
         width: 'w-full',
-        borderRadius: 'rounded',
-        shadow: 'shadow-md shadow-black',
-        opacity: 'opacity-0',
-        transition: 'transition',
-        transitionDuration: 'duration-500'
+        borderRadius: 'rounded-2xl',
+        shadow: 'shadow-md shadow-black/70',
+        opacity: 'opacity-100',
+        transition: 'transition'
       },
-      open: {
+      invisible: {
         opacity: 'opacity-100'
       },
       variants: {
@@ -97,6 +82,35 @@ const alertConfig: AlertConfig = {
             }
           }
         },
+        tonal: {
+          light: {
+            primary: {
+              fill: 'fill-light-on-primary-container',
+              color: 'text-light-on-primary-container',
+              background: 'bg-light-primary-container'
+            },
+            secondary: {
+              fill: 'fill-light-on-secondary-container',
+              color: 'text-light-on-secondary-container',
+              background: 'bg-light-secondary-container'
+            },
+            success: {
+              fill: 'fill-light-on-success-container',
+              color: 'text-light-on-success-container',
+              background: 'bg-light-success-container'
+            },
+            warning: {
+              fill: 'fill-light-on-warning-container',
+              color: 'text-light-on-warning-container',
+              background: 'bg-light-warning-container'
+            },
+            error: {
+              fill: 'fill-light-on-error-container',
+              color: 'text-light-on-error-container',
+              background: 'bg-light-error-container'
+            }
+          }
+        },
         outlined: {
           light: {
             primary: {
@@ -126,32 +140,27 @@ const alertConfig: AlertConfig = {
             }
           }
         },
-        tonal: {
+        text: {
           light: {
             primary: {
-              fill: 'fill-light-on-primary-container',
-              color: 'text-light-on-primary-container',
-              background: 'bg-light-primary-container'
+              fill: 'fill-light-primary',
+              color: 'text-light-primary'
             },
             secondary: {
-              fill: 'fill-light-on-secondary-container',
-              color: 'text-light-on-secondary-container',
-              background: 'bg-light-secondary-container'
+              fill: 'fill-light-secondary',
+              color: 'text-light-secondary'
             },
             success: {
-              fill: 'fill-light-on-success-container',
-              color: 'text-light-on-success-container',
-              background: 'bg-light-success-container'
+              fill: 'fill-light-success',
+              color: 'text-light-success'
             },
             warning: {
-              fill: 'fill-light-on-warning-container',
-              color: 'text-light-on-warning-container',
-              background: 'bg-light-warning-container'
+              fill: 'fill-light-warning',
+              color: 'text-light-warning'
             },
             error: {
-              fill: 'fill-light-on-error-container',
-              color: 'text-light-on-error-container',
-              background: 'bg-light-error-container'
+              fill: 'fill-light-error',
+              color: 'text-light-error'
             }
           }
         }
@@ -160,57 +169,31 @@ const alertConfig: AlertConfig = {
     iconContainer: {
       base: {
         display: 'flex',
-        padding: 'py-3 pl-4 pr-3'
+        gap: 'gap-4',
+        alignItems: 'items-center',
+        height: 'h-12',
+        padding: 'py-3.5 pl-4'
       }
     },
     bodyContainer: {
       base: {
         display: 'flex',
         flexDirection: 'flex-col',
-        gap: 'gap-4',
         width: 'w-full',
-        padding: 'py-3 px-4'
-      },
-      icon: {
-        padding: 'pl-0'
-      },
-      action: {
-        padding: 'pr-0'
+        padding: 'py-3.5 px-4',
+        font: 'antialiased font-normal text-sm font-sans'
       }
     },
     actionContainer: {
       base: {
         display: 'flex',
-        gap: 'gap-3',
-        padding: 'py-2 pl-3 pr-2'
+        gap: 'gap-2',
+        alignItems: 'items-center',
+        height: 'h-12',
+        padding: 'py-2 pr-2'
       },
-      button: {
-        padding: 'pr-3'
-      }
-    },
-    button: {
-      variants: {
-        filled: {
-          primary: 'light',
-          secondary: 'light',
-          success: 'light',
-          warning: 'dark',
-          error: 'light'
-        },
-        outlined: {
-          primary: 'primary',
-          secondary: 'secondary',
-          success: 'success',
-          warning: 'warning',
-          error: 'error'
-        },
-        tonal: {
-          primary: 'light',
-          secondary: 'light',
-          success: 'light',
-          warning: 'dark',
-          error: 'light'
-        }
+      closable: {
+        padding: 'pr-1.5'
       }
     }
   }

@@ -1,27 +1,71 @@
-import React, { type BaseHTMLAttributes, type ReactNode, forwardRef, useContext, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { type BaseHTMLAttributes, type ReactNode, forwardRef, useContext, type FC } from 'react';
 import alertConfig, { type AlertVariants } from '../../../configs/alertConfig';
 import themeContext from '../../../contexts/theme';
-import useTransition, { type TransitionConfig } from '../../../hooks/useTransition';
 import { mergeClasses } from '../../../utils/propsHelper';
-import Icon, { type IconProps } from '../Icon/Icon';
-import IconButton, { type IconButtonProps } from '../IconButton/IconButton';
-import AlertActionContainer from './AlertActionContainer';
-import AlertBodyContainer from './AlertBodyContainer';
-import AlertIconContainer from './AlertIconContainer';
+
+interface IconContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
+
+const IconContainer: FC<IconContainerProps> = ({ className, ...restProps }) => {
+  /* --- Set default props --- */
+  const styles = alertConfig.styles.iconContainer;
+
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(styles.base, className);
+
+  return (
+    <div
+      className={mergedClassName}
+      {...restProps}
+    />
+  );
+};
+
+interface BodyContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
+
+const BodyContainer: FC<BodyContainerProps> = ({ className, ...restProps }) => {
+  /* --- Set default props --- */
+  const styles = alertConfig.styles.bodyContainer;
+
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(styles.base, className);
+
+  return (
+    <div
+      className={mergedClassName}
+      {...restProps}
+    />
+  );
+};
+
+interface ActionContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
+  closable: boolean;
+}
+
+const ActionContainer: FC<ActionContainerProps> = ({ closable, className, ...restProps }) => {
+  /* --- Set default props --- */
+  const styles = alertConfig.styles.actionContainer;
+
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(styles.base, closable && styles.closable, className);
+
+  return (
+    <div
+      className={mergedClassName}
+      {...restProps}
+    />
+  );
+};
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
-  onClose?: () => void;
-  open?: boolean;
   variant?: AlertVariants;
   color?: Colors;
+  invisible?: boolean;
+  closable?: boolean;
   icon?: ReactNode;
   action?: ReactNode;
   iconContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bodyContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   actionContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  buttonProps?: IconButtonProps;
-  buttonIconProps?: IconProps;
-  transitionConfig?: TransitionConfig;
 }
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
@@ -30,120 +74,45 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = alertConfig.styles.container;
-  const {
-    onClose,
-    open,
-    variant,
-    color,
-    icon,
-    action,
-    iconContainerProps,
-    bodyContainerProps,
-    actionContainerProps,
-    buttonProps,
-    buttonIconProps,
-    transitionConfig,
-    className,
-    children,
-    ...restProps
-  } = { ...alertConfig.defaultProps, ...props };
-
-  /* --- Set refs --- */
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  /* --- Set states --- */
-  const {
-    state: transitionState,
-    enter,
-    exit,
-    transitionEndHandler,
-    animationEndHandler
-  } = useTransition<HTMLDivElement>(containerRef.current, open, transitionConfig.onEnter, transitionConfig.onExit);
-
-  /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => containerRef.current, []);
-
-  /* --- Set open state --- */
-  useEffect(() => {
-    if (open && transitionState.exit) {
-      enter(transitionConfig.onEntering);
-    }
-
-    if (!open && transitionState.enter) {
-      exit(transitionConfig.onExiting);
-    }
-  }, [open, transitionState.enter, transitionState.exit, transitionConfig.onEntering, transitionConfig.onExiting]);
+  const { variant, color, invisible, closable, icon, action, iconContainerProps, bodyContainerProps, actionContainerProps, className, children, ...restProps } =
+    {
+      ...alertConfig.defaultProps,
+      ...props
+    };
 
   /* --- Set container props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], transitionState.enter && styles.open, className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], invisible && styles.invisible, className);
 
   /* --- Set icon container props --- */
   let iconContainerNode: ReactNode;
 
   if (icon !== undefined) {
-    iconContainerNode = <AlertIconContainer {...iconContainerProps}>{icon}</AlertIconContainer>;
-  }
-
-  /* --- Set button icon props --- */
-  let buttonIconNode: ReactNode;
-
-  if (onClose !== undefined) {
-    buttonIconNode = (
-      <Icon {...buttonIconProps}>
-        <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-      </Icon>
-    );
-  }
-
-  /* --- Set button props --- */
-  let buttonNode: ReactNode;
-
-  if (onClose !== undefined) {
-    buttonNode = (
-      <IconButton
-        color={alertConfig.styles.button.variants[variant][color]}
-        variant="text"
-        size="sm"
-        onClick={onClose}
-        {...buttonProps}
-      >
-        {buttonIconNode}
-      </IconButton>
-    );
+    iconContainerNode = <IconContainer {...iconContainerProps}>{icon}</IconContainer>;
   }
 
   /* --- Set button container props --- */
   let actionContainerNode: ReactNode;
 
-  if (action !== undefined || buttonNode !== undefined) {
+  if (action !== undefined) {
     actionContainerNode = (
-      <AlertActionContainer
-        button={buttonNode !== undefined}
+      <ActionContainer
+        closable={closable}
         {...actionContainerProps}
       >
         {action}
-        {buttonNode}
-      </AlertActionContainer>
+      </ActionContainer>
     );
   }
 
   return (
     <div
-      onTransitionEnd={transitionEndHandler}
-      onAnimationEnd={animationEndHandler}
       role="alert"
       className={mergedClassName}
-      ref={containerRef}
+      ref={ref}
       {...restProps}
     >
       {iconContainerNode}
-      <AlertBodyContainer
-        icon={icon !== undefined}
-        action={action !== undefined || buttonNode !== undefined}
-        {...bodyContainerProps}
-      >
-        {children}
-      </AlertBodyContainer>
+      <BodyContainer {...bodyContainerProps}>{children}</BodyContainer>
       {actionContainerNode}
     </div>
   );

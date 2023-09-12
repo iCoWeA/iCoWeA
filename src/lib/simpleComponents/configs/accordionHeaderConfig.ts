@@ -83,24 +83,24 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
             active: 'active:before:bg-light-on-surface/[0.12]'
           },
           primary: {
-            hover: 'hover:before:bg-light-on-primary/[0.08]',
-            active: 'active:before:bg-light-on-primary/[0.12]'
+            hover: 'hover:before:bg-light-primary/[0.08]',
+            active: 'active:before:bg-light-primary/[0.12]'
           },
           secondary: {
-            hover: 'hover:before:bg-light-on-secondary/[0.08]',
-            active: 'active:before:bg-light-on-secondary/[0.12]'
+            hover: 'hover:before:bg-light-secondary/[0.08]',
+            active: 'active:before:bg-light-secondary/[0.12]'
           },
           success: {
-            hover: 'hover:before:bg-light-on-success/[0.08]',
-            active: 'active:before:bg-light-on-success/[0.12]'
+            hover: 'hover:before:bg-light-success/[0.08]',
+            active: 'active:before:bg-light-success/[0.12]'
           },
           warning: {
-            hover: 'hover:before:bg-light-on-warning/[0.08]',
-            active: 'active:before:bg-light-on-warning/[0.12]'
+            hover: 'hover:before:bg-light-warning/[0.08]',
+            active: 'active:before:bg-light-warning/[0.12]'
           },
           error: {
-            hover: 'hover:before:bg-light-on-error/[0.08]',
-            active: 'active:before:bg-light-on-error/[0.12]'
+            hover: 'hover:before:bg-light-error/[0.08]',
+            active: 'active:before:bg-light-error/[0.12]'
           }
         }
       }
