@@ -34,7 +34,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     fullwidth && styles.button.fullwidth,
     styles.before.base,
     styles.before.variants[variant][theme][color],
-    elevated && styles.button.elevated[theme],
+    elevated && styles.button.elevated,
     className
   );
 
