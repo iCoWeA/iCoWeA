@@ -31,7 +31,7 @@ const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ size
 AvatarContainer.displayName = 'AvatarContainer';
 
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
-  size?: Size;
+  size?: Sizes;
   color?: Colors;
   withBorder?: boolean;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
@@ -48,7 +48,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   if (typeof childrenNode === 'string' && childrenNode !== '') {
     const string = childrenNode.toUpperCase().split(' ');
 
-    childrenNode = string.length === 1 ? string[0][0] + string[0][1] : string[0][0] + string[1][0];
+    childrenNode = string.length === 1 ? string[0].slice(0, 2) : string[0][0] + string[1][0];
   }
 
   if (childrenNode === undefined) {
