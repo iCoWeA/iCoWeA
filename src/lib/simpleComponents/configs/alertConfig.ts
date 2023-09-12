@@ -1,8 +1,9 @@
 import { type BaseHTMLAttributes } from 'react';
+import { type AlertVariant } from '../components/UI/Alert/Alert';
 
 export interface AlertConfig {
   defaultProps: {
-    variant: ButtonVariants;
+    variant: AlertVariant;
     color: Colors;
     invisible: boolean;
     closable: boolean;
@@ -14,7 +15,8 @@ export interface AlertConfig {
     container: {
       base: Record<string, string>;
       invisible: Record<string, string>;
-      variants: Record<ButtonVariants, Record<Themes, Record<Colors, Record<string, string>>>>
+      shadow: Record<Themes, Record<string, string>>;
+      variants: Record<AlertVariant, Record<Themes, Record<Colors, Record<string, string>>>>
     },
     iconContainer: {
       base: Record<string, string>;
@@ -31,7 +33,7 @@ export interface AlertConfig {
 
 const alertConfig: AlertConfig = {
   defaultProps: {
-    variant: 'filled',
+    variant: 'solid',
     color: 'error',
     invisible: false,
     closable: false,
@@ -45,15 +47,20 @@ const alertConfig: AlertConfig = {
         display: 'flex',
         width: 'w-full',
         borderRadius: 'rounded-2xl',
-        shadow: 'shadow-md shadow-black/70',
+        shadow: 'shadow-md',
         opacity: 'opacity-100',
         transition: 'transition'
       },
       invisible: {
         opacity: 'opacity-100'
       },
+      shadow: {
+        light: {
+          shadow: 'shadow-light-shadow'
+        }
+      },
       variants: {
-        filled: {
+        solid: {
           light: {
             primary: {
               fill: 'fill-light-on-primary',
@@ -82,32 +89,32 @@ const alertConfig: AlertConfig = {
             }
           }
         },
-        tonal: {
+        soft: {
           light: {
             primary: {
-              fill: 'fill-light-on-primary-container',
-              color: 'text-light-on-primary-container',
-              background: 'bg-light-primary-container'
+              fill: 'fill-light-primary',
+              color: 'text-light-primary',
+              background: 'bg-light-primary-soft'
             },
             secondary: {
-              fill: 'fill-light-on-secondary-container',
-              color: 'text-light-on-secondary-container',
-              background: 'bg-light-secondary-container'
+              fill: 'fill-light-secondary',
+              color: 'text-light-secondary',
+              background: 'bg-light-secondary-soft'
             },
             success: {
-              fill: 'fill-light-on-success-container',
-              color: 'text-light-on-success-container',
-              background: 'bg-light-success-container'
+              fill: 'fill-light-success',
+              color: 'text-light-success',
+              background: 'bg-light-success-soft'
             },
             warning: {
-              fill: 'fill-light-on-warning-container',
-              color: 'text-light-on-warning-container',
-              background: 'bg-light-warning-container'
+              fill: 'fill-light-warning',
+              color: 'text-light-warning',
+              background: 'bg-light-warning-soft'
             },
             error: {
-              fill: 'fill-light-on-error-container',
-              color: 'text-light-on-error-container',
-              background: 'bg-light-error-container'
+              fill: 'fill-light-error',
+              color: 'text-light-error',
+              background: 'bg-light-error-soft'
             }
           }
         },

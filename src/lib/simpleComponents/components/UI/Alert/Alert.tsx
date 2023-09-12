@@ -3,6 +3,11 @@ import alertConfig from '../../../configs/alertConfig';
 import themeContext from '../../../contexts/theme';
 import { mergeClasses } from '../../../utils/propsHelper';
 
+/********************************************************************************
+ *
+ *   Icon container
+ *
+ */
 interface IconContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
 const IconContainer: FC<IconContainerProps> = ({ className, ...restProps }) => {
@@ -20,6 +25,11 @@ const IconContainer: FC<IconContainerProps> = ({ className, ...restProps }) => {
   );
 };
 
+/********************************************************************************
+ *
+ *   Body container
+ *
+ */
 interface BodyContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
 const BodyContainer: FC<BodyContainerProps> = ({ className, ...restProps }) => {
@@ -37,6 +47,11 @@ const BodyContainer: FC<BodyContainerProps> = ({ className, ...restProps }) => {
   );
 };
 
+/********************************************************************************
+ *
+ *   Action container
+ *
+ */
 interface ActionContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   closable: boolean;
 }
@@ -56,8 +71,15 @@ const ActionContainer: FC<ActionContainerProps> = ({ closable, className, ...res
   );
 };
 
+/********************************************************************************
+ *
+ *   Alert
+ *
+ */
+export type AlertVariant = 'text' | 'solid' | 'soft' | 'outlined';
+
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: ButtonVariants;
+  variant?: AlertVariant;
   color?: Colors;
   invisible?: boolean;
   closable?: boolean;
