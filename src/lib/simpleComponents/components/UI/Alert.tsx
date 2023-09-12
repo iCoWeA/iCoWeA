@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, type FC, type ReactNode, forwardRef, useContext } from 'react';
-import alertConfig from '../../../configs/alertConfig';
-import themeContext from '../../../contexts/theme';
-import { mergeClasses } from '../../../utils/propsHelper';
+import alertConfig from '../../configs/alertConfig';
+import themeContext from '../../contexts/theme';
+import { mergeClasses } from '../../utils/propsHelper';
 
 /********************************************************************************
  *
