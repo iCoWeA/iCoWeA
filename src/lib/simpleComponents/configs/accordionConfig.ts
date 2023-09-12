@@ -1,6 +1,8 @@
+import { type AccordionVariant } from '../components/UI/Accordion';
+
 export interface AccordionConfig {
   defaultProps: {
-    variant: ButtonVariants;
+    variant: AccordionVariant ;
     color: Colors;
     defaultOpen: boolean;
     disabled: boolean;
@@ -12,7 +14,7 @@ export interface AccordionConfig {
 
 const accordionConfig: AccordionConfig = {
   defaultProps: {
-    variant: 'text',
+    variant: 'plain',
     color: 'default',
     defaultOpen: false,
     disabled: false
