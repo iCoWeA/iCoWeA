@@ -47,7 +47,6 @@ const alertConfig: AlertConfig = {
         display: 'flex',
         width: 'w-full',
         borderRadius: 'rounded-2xl',
-        shadow: 'shadow-md',
         opacity: 'opacity-100',
         transition: 'transition'
       },
@@ -56,7 +55,7 @@ const alertConfig: AlertConfig = {
       },
       shadow: {
         light: {
-          shadow: 'shadow-light-shadow'
+          shadow: 'shadow-md shadow-light-shadow'
         }
       },
       variants: {
