@@ -14,6 +14,7 @@ export interface ButtonConfig {
       fullwidth: Record<string, string>;
       elevated: Record<string, string>;
       sizes: Record<Sizes, Record<string, string>>;
+      outlineSizes: Record<Sizes, Record<string, string>>;
       variants: Record<ButtonVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
     }
   }
@@ -39,6 +40,7 @@ const buttonConfig: ButtonConfig = {
         font: 'antialiased font-normal text-sm font-sans',
         overflow: 'overflow-hidden',
         transition: 'transition',
+        userSelect: 'select-none',
         focus: 'focus:outline-0',
         disabled: 'disabled:pointer-events-none',
         group: 'group'
@@ -68,6 +70,20 @@ const buttonConfig: ButtonConfig = {
         lg: {
           height: 'h-12',
           padding: 'py-3.5 px-5'
+        }
+      },
+      outlineSizes: {
+        xs: {
+          padding: 'py-px px-[0.4375rem]'
+        },
+        sm: {
+          padding: 'py-[0.3125rem] px-[0.6875rem]'
+        },
+        md: {
+          padding: 'py-[0.5625rem] px-[0.9375rem]'
+        },
+        lg: {
+          padding: 'py-[0.8125rem] px-[1.1875rem]'
         }
       },
       variants: {
