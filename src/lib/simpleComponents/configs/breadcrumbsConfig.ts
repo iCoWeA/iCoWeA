@@ -53,16 +53,14 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
         display: 'flex',
         flexWrap: 'flex-wrap',
         gap: 'gap-2',
-        alignItems: 'items-center',
-        width: 'w-fit'
+        alignItems: 'items-center'
       }
     },
     item: {
       base: {
         display: 'flex',
         gap: 'gap-2',
-        alignItems: 'items-center',
-        font: 'antialiased font-normal text-base font-sans'
+        alignItems: 'items-center'
       }
     },
     separator: {

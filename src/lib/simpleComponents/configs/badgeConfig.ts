@@ -45,9 +45,9 @@ const badgeConfig: BadgeConfig = {
       base: {
         position: 'absolute',
         display: 'flex',
+        gap: 'gap-2',
         alignItems: 'items-center',
         justifyContent: 'justify-center',
-        gap: 'gap-2',
         minWidth: 'min-w-[1rem]',
         padding: 'px-1',
         borderRadius: 'rounded-full',

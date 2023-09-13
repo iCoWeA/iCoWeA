@@ -33,7 +33,6 @@ const avatarConfig: AvatarConfig = {
         display: 'inline-flex',
         alignItems: 'items-center',
         justifyContent: 'justify-center',
-        gap: 'gap-2',
         aspectRatio: 'aspect-square',
         borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-lg font-sans',
@@ -47,13 +46,13 @@ const avatarConfig: AvatarConfig = {
           height: 'h-6'
         },
         sm: {
-          width: 'h-8'
+          height: 'h-8'
         },
         md: {
-          width: 'h-10'
+          height: 'h-10'
         },
         lg: {
-          width: 'h-12'
+          height: 'h-12'
         }
       },
       colors: {
