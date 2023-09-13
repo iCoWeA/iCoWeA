@@ -125,8 +125,8 @@ const stateLayerConfig: StateLayerConfig = {
       filled: {
         light: {
           default: {
-            hover: 'group-hover:bg-light-on-surface-variant/10',
-            active: 'group-active:bg-light-on-surface-variant/[0.15]'
+            hover: 'group-hover:bg-light-on-surface/10',
+            active: 'group-active:bg-light-on-surface/[0.15]'
           },
           primary: {
             hover: 'group-hover:bg-light-on-primary/10',
