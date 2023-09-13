@@ -1,18 +1,20 @@
+import { type CardVariants } from '../components/UI/Card';
+
 export interface CardConfig {
   defaultProps: {
-    color: Colors;
+    variant: CardVariants;
     elevated: boolean;
   };
   styles: {
     base: Record<string, string>;
-    elevated: Record<string, Record<string, string>>;
-    colors: Record<string, Record<Colors, Record<string, string>>>;
+    elevated: Record<string, string>;
+    variants: Record<CardVariants, Record<Themes, Record<string, string>>>;
   }
 }
 
 const cardConfig: CardConfig = {
   defaultProps: {
-    color: 'light',
+    variant: 'plain',
     elevated: false
   },
   styles: {
@@ -23,35 +25,22 @@ const cardConfig: CardConfig = {
       overflow: 'overflow-hidden'
     },
     elevated: {
-      default: {
-        shadow: 'shadow-md shadow-default-default/80'
-      }
+      shadow: 'shadow-md shadow-black/50'
     },
-    colors: {
-      default: {
-        default: {
-          background: 'bg-default-default'
-        },
-        primary: {
-          background: 'bg-default-primary'
-        },
-        secondary: {
-          background: 'bg-default-secondary'
-        },
-        success: {
-          background: 'bg-default-success'
-        },
-        warning: {
-          background: 'bg-default-warning'
-        },
-        error: {
-          background: 'bg-default-error'
-        },
+    variants: {
+      plain: {
         light: {
-          background: 'bg-default-light'
-        },
-        dark: {
-          background: 'bg-default-dark'
+          background: 'bg-light-surface-light'
+        }
+      },
+      filled: {
+        light: {
+          background: 'bg-light-surface'
+        }
+      },
+      outlined: {
+        light: {
+          border: 'border border-light-divider'
         }
       }
     }
