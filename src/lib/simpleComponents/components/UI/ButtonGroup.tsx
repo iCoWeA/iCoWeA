@@ -1,44 +1,8 @@
-import React, { type BaseHTMLAttributes, type FC, useContext, type ReactElement, cloneElement, forwardRef, type ReactNode } from 'react';
+import React, { type BaseHTMLAttributes, type ReactElement, type FC, useContext, cloneElement, forwardRef, type ReactNode } from 'react';
 import buttonGroupConfig from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, isLast } from '../../utils/propsHelper';
-
-/********************************************************************************
- *
- *   Layer
- *
- */
-interface LayerProps extends BaseHTMLAttributes<HTMLSpanElement> {
-  isFirst: boolean;
-  isLast: boolean;
-  variant: ButtonGroupVariants;
-  color: Colors;
-}
-
-const Layer: FC<LayerProps> = ({ isFirst, isLast, variant, color, className, ...restProps }) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
-  /* --- Set default props --- */
-  const styles = buttonGroupConfig.styles.layer;
-
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant][theme][color],
-    isFirst && styles.first,
-    isLast && styles.last,
-    variant !== 'outlined' && isFirst && styles.firstBorder,
-    variant !== 'outlined' && isLast && styles.lastBorder,
-    className
-  );
-
-  return (
-    <span
-      className={mergedClassName}
-      {...restProps}
-    ></span>
-  );
-};
+import StateLayer from './StateLayer';
 
 /********************************************************************************
  *
@@ -52,7 +16,7 @@ interface ButtonProps {
   size: Sizes;
   color: Colors;
   fullwidth: boolean;
-  spanProps?: BaseHTMLAttributes<HTMLSpanElement>;
+  stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
   tabIndex: number;
   disabled: boolean;
   type: 'submit' | 'reset' | 'button';
@@ -60,7 +24,7 @@ interface ButtonProps {
   children: ReactElement;
 }
 
-const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, color, size, fullwidth, spanProps, tabIndex, disabled, type, className, children }) => {
+const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwidth, stateLayerProps, tabIndex, disabled, type, className, children }) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -72,21 +36,21 @@ const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, color, size, fullwi
     styles.base,
     styles.variants[variant][theme][color],
     styles.sizes[size],
+    variant === 'outlined' && styles.outlineSizes[size],
     fullwidth && styles.fullwidth,
     isFirst && styles.first,
     isLast && styles.last,
+    variant === 'outlined' && isLast && styles.lastOutline,
     className
   );
 
   const childrenNode = (
     <>
       {children.props.children}
-      <Layer
+      <StateLayer
         variant={variant}
         color={color}
-        isFirst={isFirst}
-        isLast={isLast}
-        {...spanProps}
+        {...stateLayerProps}
       />
     </>
   );
@@ -107,7 +71,7 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
-  spanProps?: Record<number, BaseHTMLAttributes<HTMLSpanElement>>;
+  stateLayerProps?: Record<number, BaseHTMLAttributes<HTMLSpanElement>>;
   tabIndex?: number;
   disabled?: boolean;
   type?: 'submit' | 'reset' | 'button';
@@ -117,7 +81,7 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = buttonGroupConfig.styles.container;
-  const { variant, size, color, elevated, fullwidth, spanProps, tabIndex, disabled, type, className, children, ...restProps } = {
+  const { variant, size, color, elevated, fullwidth, stateLayerProps, tabIndex, disabled, type, className, children, ...restProps } = {
     ...buttonGroupConfig.defaultProps,
     ...props
   };
@@ -138,7 +102,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
         variant={variant}
         size={size}
         color={color}
-        spanProps={spanProps?.[i]}
+        stateLayerProps={stateLayerProps?.[i]}
         fullwidth={fullwidth}
         tabIndex={childrenNode[i].props.tabIndex ?? tabIndex}
         disabled={childrenNode[i].props.disabled ?? disabled}
