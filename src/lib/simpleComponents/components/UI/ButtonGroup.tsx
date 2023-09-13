@@ -48,7 +48,7 @@ const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwi
     <>
       {children.props.children}
       <StateLayer
-        variant={variant}
+        state={`${variant}-click`}
         color={color}
         {...stateLayerProps}
       />

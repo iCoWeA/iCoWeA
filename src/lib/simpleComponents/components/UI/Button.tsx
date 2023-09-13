@@ -51,7 +51,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       {children}
       {endDecoration}
       <StateLayer
-        variant={variant}
+        state={`${variant}-click`}
         color={color}
         {...stateLayerProps}
       />

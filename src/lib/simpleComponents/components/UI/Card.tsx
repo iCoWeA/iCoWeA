@@ -1,7 +1,8 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode } from 'react';
 import cardConfig from '../../configs/cardConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
+import StateLayer from './StateLayer';
 
 export type CardVariants = 'plain' | 'filled' | 'outlined';
 
@@ -10,6 +11,7 @@ export interface CardProps extends BaseHTMLAttributes<HTMLDivElement> {
   elevated?: boolean;
   clickable?: boolean;
   grabed?: boolean;
+  stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
@@ -17,21 +19,25 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const { container: containerStyles, layer: layerStyles } = cardConfig.styles;
-  const { variant, elevated, clickable, grabed, className, ...restProps } = { ...cardConfig.defaultProps, ...props };
+  const styles = cardConfig.styles;
+  const { variant, elevated, clickable, grabed, stateLayerProps, className, children, ...restProps } = { ...cardConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const clickableProps = clickable ? { tabIndex: 0, role: 'button' } : {};
+  let clickableProps = clickable ? { tabIndex: 0, role: 'button' } : {};
+  let stateLayerNode: ReactNode;
 
-  const mergedClassName = mergeClasses(
-    containerStyles.base,
-    containerStyles.variants[variant][theme],
-    elevated && containerStyles.elevated,
-    layerStyles.base,
-    clickable && layerStyles.colors[theme],
-    grabed && layerStyles.grabed[theme],
-    className
-  );
+  if (clickable) {
+    clickableProps = { tabIndex: 0, role: 'button' };
+
+    stateLayerNode = (
+      <StateLayer
+        state="text-click"
+        {...stateLayerProps}
+      />
+    );
+  }
+
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], elevated && styles.elevated, className);
 
   return (
     <div
@@ -39,7 +45,10 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
       ref={ref}
       {...clickableProps}
       {...restProps}
-    />
+    >
+      {children}
+      {stateLayerNode}
+    </div>
   );
 });
 
