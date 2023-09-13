@@ -56,6 +56,11 @@ const alertConfig: AlertConfig = {
       variants: {
         solid: {
           light: {
+            default: {
+              fill: 'fill-light-on-surface',
+              color: 'text-light-on-surface',
+              background: 'bg-light-surface-dark'
+            },
             primary: {
               fill: 'fill-light-on-primary',
               color: 'text-light-on-primary',
@@ -85,6 +90,11 @@ const alertConfig: AlertConfig = {
         },
         soft: {
           light: {
+            default: {
+              fill: 'fill-light-on-surface',
+              color: 'text-light-on-surface',
+              background: 'bg-light-surface'
+            },
             primary: {
               fill: 'fill-light-primary',
               color: 'text-light-primary',
@@ -114,6 +124,11 @@ const alertConfig: AlertConfig = {
         },
         outlined: {
           light: {
+            default: {
+              border: 'border border-light-divider',
+              fill: 'fill-light-on-surface',
+              color: 'text-light-on-surface'
+            },
             primary: {
               border: 'border border-light-primary',
               fill: 'fill-light-primary',
@@ -143,6 +158,10 @@ const alertConfig: AlertConfig = {
         },
         text: {
           light: {
+            default: {
+              fill: 'fill-light-on-surface',
+              color: 'text-light-on-surface'
+            },
             primary: {
               fill: 'fill-light-primary',
               color: 'text-light-primary'
