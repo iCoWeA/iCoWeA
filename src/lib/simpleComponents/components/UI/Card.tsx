@@ -37,6 +37,15 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
     );
   }
 
+  if (grabed) {
+    stateLayerNode = (
+      <StateLayer
+        state="grab"
+        {...stateLayerProps}
+      />
+    );
+  }
+
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], elevated && styles.elevated, className);
 
   return (
