@@ -111,7 +111,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
       separatorNode = (
         <Separator
           color={color}
-          {...(separatorsProps[i] ?? {})}
+          {...(separatorsProps?.[i] ?? {})}
         >
           {separator}
         </Separator>
@@ -122,7 +122,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
     itemNodes[i] = (
       <Item
         key={i}
-        {...(itemsProps[i] ?? {})}
+        {...(itemsProps?.[i] ?? {})}
       >
         {childrenNodes[i]}
         {separatorNode}

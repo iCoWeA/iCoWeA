@@ -1,13 +1,10 @@
-import { type ReactNode, type OlHTMLAttributes, type LiHTMLAttributes } from 'react';
+import { type ReactNode } from 'react';
 
 export interface BreadcrumbsConfig {
   defaultProps: {
     color: Colors;
     separator: ReactNode;
     fullwidth: boolean;
-    listProps: OlHTMLAttributes<HTMLOListElement>;
-    itemsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
-    separatorsProps: Record<number, LiHTMLAttributes<HTMLLIElement>>;
   };
   styles: {
     container: {
@@ -31,10 +28,7 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
   defaultProps: {
     color: 'default',
     separator: '/',
-    fullwidth: false,
-    listProps: {},
-    itemsProps: {},
-    separatorsProps: {}
+    fullwidth: false
   },
   styles: {
     container: {
