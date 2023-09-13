@@ -1,12 +1,14 @@
-import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef, useContext } from 'react';
+import React, { type ButtonHTMLAttributes, type ReactNode, type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import accordionHeaderConfig from '../../configs/accordionHeaderConfig';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
+import StateLayer from './StateLayer';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   startDecorator?: ReactNode;
   endDecorator?: ReactNode;
+  stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
 }
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((props, ref) => {
@@ -22,24 +24,30 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const { button: buttonStyles, layer: layerStyles } = accordionHeaderConfig.styles;
-  const { startDecorator, endDecorator, disabled, className, children, ...restProps } = {
+  const styles = accordionHeaderConfig.styles;
+  const { startDecorator, endDecorator, stateLayerProps, disabled, className, children, ...restProps } = {
     disabled: isAccordionDisabled,
     ...props
   };
+
+  /* --- Set state props --- */
+  let stateLayerNode: ReactNode;
+
+  if (accordionVariant === 'filled') {
+    stateLayerNode = (
+      <StateLayer
+        state="text-click"
+        color={accordionColor}
+        {...stateLayerProps}
+      />
+    );
+  }
 
   /* --- Set props --- */
   const ariaContarols = accordionId === undefined ? undefined : `acd-body-${accordionId}`;
   const id = accordionId === undefined ? undefined : `acd-header-${accordionId}`;
 
-  const mergedClassName = mergeClasses(
-    buttonStyles.base,
-    buttonStyles.colors[theme][accordionColor],
-    layerStyles.base,
-    layerStyles.divider[theme],
-    accordionVariant === 'filled' && layerStyles.colors[theme][accordionColor],
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, styles.divider[theme], styles.colors[theme][accordionColor], className);
 
   return (
     <button
@@ -56,6 +64,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
       {startDecorator}
       {children}
       {endDecorator}
+      {stateLayerNode}
     </button>
   );
 });

@@ -22,8 +22,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const styles = cardConfig.styles;
   const { variant, elevated, clickable, grabed, stateLayerProps, className, children, ...restProps } = { ...cardConfig.defaultProps, ...props };
 
-  /* --- Set props --- */
-  let clickableProps = clickable ? { tabIndex: 0, role: 'button' } : {};
+  /* --- Set state props --- */
+  let clickableProps;
   let stateLayerNode: ReactNode;
 
   if (clickable) {
