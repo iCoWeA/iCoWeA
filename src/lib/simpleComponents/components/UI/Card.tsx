@@ -46,6 +46,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
     );
   }
 
+  /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], elevated && styles.elevated, className);
 
   return (
