@@ -1,11 +1,8 @@
-import { type BaseHTMLAttributes } from 'react';
-
 export interface AvatarConfig {
   defaultProps: {
     size: Sizes;
     color: Colors;
     withBorder: boolean;
-    containerProps: BaseHTMLAttributes<HTMLDivElement>;
   };
   styles: {
     container: {
@@ -24,8 +21,7 @@ const avatarConfig: AvatarConfig = {
   defaultProps: {
     size: 'md',
     color: 'default',
-    withBorder: false,
-    containerProps: {}
+    withBorder: false
   },
   styles: {
     container: {
