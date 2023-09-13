@@ -1,6 +1,7 @@
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import backdropConfig from '../../configs/backdropConfig';
+import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
 export interface BackdropProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -11,12 +12,15 @@ export interface BackdropProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
   const styles = backdropConfig.styles;
   const { onClose, open, invisible, overlayRef, className, ...restProps } = { ...backdropConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, invisible && styles.invisible, open && styles.open, className);
+  const mergedClassName = mergeClasses(styles.base, styles.colors[theme], invisible && styles.invisible, open && styles.open, className);
 
   const node = (
     <div
