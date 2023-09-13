@@ -21,7 +21,7 @@ const cardConfig: CardConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      borderRadius: 'rounded-2xl',
+      borderRadius: 'rounded-xl',
       overflow: 'overflow-hidden'
     },
     elevated: {
