@@ -193,7 +193,13 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], animationState.enter && styles.open, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.variants[variant][theme][color],
+    position !== undefined && styles.positions[position],
+    animationState.enter && styles.open,
+    className
+  );
 
   /* --- Set startDecorator container props --- */
   let startDecoratorContainerNode: ReactNode;

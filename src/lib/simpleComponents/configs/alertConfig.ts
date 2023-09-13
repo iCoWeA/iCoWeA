@@ -13,6 +13,7 @@ export interface AlertConfig {
     container: {
       base: Record<string, string>;
       open: Record<string, string>;
+      positions: Record<InnerPositions, Record<string, string>>;
       variants: Record<AlertVariant, Record<Themes, Record<Colors, Record<string, string>>>>
     },
     startDecoratorContainer: {
@@ -50,6 +51,52 @@ const alertConfig: AlertConfig = {
       },
       open: {
         opacity: 'opacity-100'
+      },
+      positions: {
+        top: {
+          position: 'fixed',
+          top: 'top-6',
+          left: 'left-2/4',
+          translate: '-translate-x-2/4'
+        },
+        'top-left': {
+          position: 'fixed',
+          top: 'top-6',
+          left: 'left-6'
+        },
+        'top-right': {
+          position: 'fixed',
+          top: 'top-6',
+          right: 'right-6'
+        },
+        bottom: {
+          position: 'fixed',
+          bottom: 'bottom-6',
+          left: 'left-2/4',
+          translate: '-translate-x-2/4'
+        },
+        'bottom-left': {
+          position: 'fixed',
+          bottom: 'bottom-6',
+          left: 'left-6'
+        },
+        'bottom-right': {
+          position: 'fixed',
+          bottom: 'bottom-6',
+          right: 'right-6'
+        },
+        left: {
+          position: 'fixed',
+          top: 'top-2/4',
+          left: 'left-6',
+          translate: '-translate-y-2/4'
+        },
+        right: {
+          position: 'fixed',
+          top: 'top-2/4',
+          right: 'right-6',
+          translate: '-translate-y-2/4'
+        }
       },
       variants: {
         filled: {
