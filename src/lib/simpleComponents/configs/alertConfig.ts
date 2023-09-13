@@ -125,7 +125,7 @@ const alertConfig: AlertConfig = {
         outlined: {
           light: {
             default: {
-              border: 'border border-light-divider',
+              border: 'border border-light-on-surface',
               fill: 'fill-light-on-surface',
               color: 'text-light-on-surface'
             },
