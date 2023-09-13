@@ -1,40 +1,9 @@
-import React, { type BaseHTMLAttributes, type FC, useContext, type ButtonHTMLAttributes, type ReactNode, forwardRef } from 'react';
+import React, { type ButtonHTMLAttributes, type ReactNode, type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import buttonConfig from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
+import StateLayer from './StateLayer';
 
-/********************************************************************************
- *
- *   Layer
- *
- */
-interface LayerProps extends BaseHTMLAttributes<HTMLSpanElement> {
-  variant: ButtonVariants;
-  color: Colors;
-}
-
-const Layer: FC<LayerProps> = ({ variant, color, className, ...restProps }) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
-  /* --- Set default props --- */
-  const styles = buttonConfig.styles.layer;
-
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
-
-  return (
-    <span
-      className={mergedClassName}
-      {...restProps}
-    ></span>
-  );
-};
-
-/********************************************************************************
- *
- *   Button
- *
- */
 export type ButtonVariants = 'plain' | 'text' | 'outlined' | 'filled';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -45,7 +14,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullwidth?: boolean;
   startDecoration?: ReactNode;
   endDecoration?: ReactNode;
-  layerProps?: BaseHTMLAttributes<HTMLSpanElement>;
+  stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
@@ -54,13 +23,21 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = buttonConfig.styles.button;
-  const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, layerProps, className, children, ...restProps } = {
+  const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, stateLayerProps, className, children, ...restProps } = {
     ...buttonConfig.defaultProps,
     ...props
   };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.sizes[size], fullwidth && styles.fullwidth, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.variants[variant][theme][color],
+    styles.sizes[size],
+    variant === 'outlined' && styles.outlineSizes[size],
+    elevated && styles.elevated,
+    fullwidth && styles.fullwidth,
+    className
+  );
 
   return (
     <button
@@ -73,10 +50,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       {startDecoration}
       {children}
       {endDecoration}
-      <Layer
+      <StateLayer
         variant={variant}
         color={color}
-        {...layerProps}
+        {...stateLayerProps}
       />
     </button>
   );
