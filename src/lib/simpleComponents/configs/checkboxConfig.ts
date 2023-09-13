@@ -1,14 +1,10 @@
-import { type BaseHTMLAttributes, type HTMLInputTypeAttribute } from 'react';
-import { type IconProps } from '../components/UI/Icon/Icon';
+import { type HTMLInputTypeAttribute } from 'react';
 
 export interface CheckboxConfig {
   defaultProps: {
     color: Colors;
     valid: boolean;
     invalid: boolean;
-    containerProps: BaseHTMLAttributes<HTMLDivElement>;
-    iconProps: IconProps;
-    layerProps: BaseHTMLAttributes<HTMLSpanElement>;
     checked: boolean;
     disabled: boolean;
     type: HTMLInputTypeAttribute;
@@ -43,9 +39,6 @@ const checkboxConfig: CheckboxConfig = {
     color: 'primary',
     valid: false,
     invalid: false,
-    containerProps: {},
-    iconProps: {},
-    layerProps: {},
     checked: false,
     disabled: false,
     type: 'checkbox'
