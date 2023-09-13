@@ -82,6 +82,8 @@ export type AlertVariant = 'text' | 'filled' | 'ghost' | 'outlined';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
+  onEnter?: () => void;
+  onExit?: () => void;
   variant?: AlertVariant;
   color?: Colors;
   closeButton?: boolean;
@@ -105,6 +107,8 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   const styles = alertConfig.styles.container;
   const {
     onClose,
+    onEnter,
+    onExit,
     variant,
     color,
     closeButton,
@@ -130,7 +134,13 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   const alertRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const { state: animationState, enter, exit, transitionEndHandler, animationEndHandler } = useAnimation<HTMLDivElement>(alertRef.current, open);
+  const {
+    state: animationState,
+    enter,
+    exit,
+    transitionEndHandler,
+    animationEndHandler
+  } = useAnimation<HTMLDivElement>(alertRef.current, open, onEnter, onExit);
 
   /* --- Set imperative handler --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => alertRef.current, [
@@ -141,54 +151,49 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (unmountOnExit && open && animationState.exit) {
+    if (open && animationState.exit) {
       enter();
     }
 
-    if (unmountOnExit && !open && animationState.enter) {
+    if (!open && animationState.enter) {
       exit();
     }
-  }, [unmountOnExit, open, animationState.enter, animationState.exit]);
+  }, [open, animationState.enter, animationState.exit]);
 
   /* --- Set outside click action --- */
   const outsideClickHandler = useCallback((event: MouseEvent) => {
     const isAlertClicked = alertRef.current?.contains(event.target as Node) ?? false;
 
-    if (isAlertClicked && onClose !== undefined) {
+    if (!isAlertClicked && onClose !== undefined) {
       onClose();
     }
   }, []);
 
-  useOutsideClick(outsideClickHandler, open && closeOnAwayClick && onClose !== undefined);
+  useOutsideClick(outsideClickHandler, animationState.enter && closeOnAwayClick && onClose !== undefined);
 
   /* --- Set timer action --- */
   useEffect(() => {
     let timerId: number;
 
-    if (open && closeDuration !== undefined && onClose !== undefined) {
+    if (animationState.current === AnimationStates.ENTERED && closeDuration !== undefined && onClose !== undefined) {
       timerId = window.setTimeout(() => {
         onClose();
       }, closeDuration);
     }
 
     return () => {
-      if (open && closeDuration !== undefined && onClose !== undefined) {
+      if (animationState.current === AnimationStates.ENTERED && closeDuration !== undefined && onClose !== undefined) {
         clearTimeout(timerId);
       }
     };
-  }, [open, closeDuration]);
+  }, [animationState.current, closeDuration]);
 
   if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant][theme][color],
-    ((!unmountOnExit && open) || (unmountOnExit && animationState.enter)) && styles.open,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], animationState.enter && styles.open, className);
 
   /* --- Set startDecorator container props --- */
   let startDecoratorContainerNode: ReactNode;
