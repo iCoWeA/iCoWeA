@@ -1,5 +1,5 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import stateLayerConfig from '../../configs/clickLayerConfig';
+import stateLayerConfig from '../../configs/stateLayerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
