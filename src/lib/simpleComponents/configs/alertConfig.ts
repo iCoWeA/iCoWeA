@@ -32,7 +32,7 @@ export interface AlertConfig {
 
 const alertConfig: AlertConfig = {
   defaultProps: {
-    variant: 'solid',
+    variant: 'filled',
     color: 'error',
     invisible: false,
     closable: false,
@@ -54,7 +54,7 @@ const alertConfig: AlertConfig = {
         opacity: 'opacity-0'
       },
       variants: {
-        solid: {
+        filled: {
           light: {
             default: {
               fill: 'fill-light-on-surface',
@@ -88,7 +88,7 @@ const alertConfig: AlertConfig = {
             }
           }
         },
-        soft: {
+        ghost: {
           light: {
             default: {
               fill: 'fill-light-on-surface',
