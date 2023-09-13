@@ -4,13 +4,14 @@ export interface AlertConfig {
   defaultProps: {
     variant: AlertVariant;
     color: Colors;
-    invisible: boolean;
     closable: boolean;
+    open: boolean;
+    unmountOnExit: boolean;
   };
   styles: {
     container: {
       base: Record<string, string>;
-      invisible: Record<string, string>;
+      open: Record<string, string>;
       variants: Record<AlertVariant, Record<Themes, Record<Colors, Record<string, string>>>>
     },
     startDecoratorContainer: {
@@ -30,8 +31,9 @@ const alertConfig: AlertConfig = {
   defaultProps: {
     variant: 'filled',
     color: 'error',
-    invisible: false,
-    closable: false
+    closable: false,
+    open: true,
+    unmountOnExit: false
   },
   styles: {
     container: {
@@ -40,11 +42,12 @@ const alertConfig: AlertConfig = {
         width: 'w-full',
         borderRadius: 'rounded-xl',
         shadow: 'shadow-md shadow-black/50',
-        opacity: 'opacity-100',
-        transition: 'transition'
+        opacity: 'opacity-0',
+        transition: 'transition',
+        transitionDuration: 'duration-500'
       },
-      invisible: {
-        opacity: 'opacity-0'
+      open: {
+        opacity: 'opacity-100'
       },
       variants: {
         filled: {

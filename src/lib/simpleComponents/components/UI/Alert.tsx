@@ -1,6 +1,7 @@
-import React, { type BaseHTMLAttributes, type FC, type ReactNode, forwardRef, useContext } from 'react';
+import React, { type BaseHTMLAttributes, type FC, type ReactNode, forwardRef, useContext, useRef, useImperativeHandle, useEffect } from 'react';
 import alertConfig from '../../configs/alertConfig';
 import themeContext from '../../contexts/theme';
+import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
 
 /********************************************************************************
@@ -81,8 +82,9 @@ export type AlertVariant = 'text' | 'filled' | 'ghost' | 'outlined';
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: AlertVariant;
   color?: Colors;
-  invisible?: boolean;
   closable?: boolean;
+  open?: boolean;
+  unmountOnExit?: boolean;
   startDecorator?: ReactNode;
   endDecorator?: ReactNode;
   startDecoratorContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
@@ -99,8 +101,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   const {
     variant,
     color,
-    invisible,
     closable,
+    open,
+    unmountOnExit,
     startDecorator,
     endDecorator,
     startDecoratorContainerProps,
@@ -114,8 +117,41 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     ...props
   };
 
-  /* --- Set container props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], invisible && styles.invisible, className);
+  /* --- Set refs --- */
+  const alertRef = useRef<HTMLDivElement>(null);
+
+  /* --- Set states --- */
+  const { state: animationState, enter, exit, transitionEndHandler, animationEndHandler } = useAnimation<HTMLDivElement>(alertRef.current, open);
+
+  /* --- Set imperative handler --- */
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => alertRef.current, [
+    unmountOnExit,
+    open,
+    animationState.current === AnimationStates.EXITED
+  ]);
+
+  /* --- Set open state --- */
+  useEffect(() => {
+    if (unmountOnExit && open && animationState.exit) {
+      enter();
+    }
+
+    if (unmountOnExit && !open && animationState.enter) {
+      exit();
+    }
+  }, [unmountOnExit, open, animationState.enter, animationState.exit]);
+
+  if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
+    return <></>;
+  }
+
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.variants[variant][theme][color],
+    ((!unmountOnExit && open) || (unmountOnExit && animationState.enter)) && styles.open,
+    className
+  );
 
   /* --- Set startDecorator container props --- */
   let startDecoratorContainerNode: ReactNode;
@@ -140,9 +176,11 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
   return (
     <div
+      onTransitionEnd={transitionEndHandler}
+      onAnimationEnd={animationEndHandler}
       role="alert"
       className={mergedClassName}
-      ref={ref}
+      ref={alertRef}
       {...restProps}
     >
       {startDecoratorContainerNode}
