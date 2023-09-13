@@ -88,27 +88,27 @@ const alertConfig: AlertConfig = {
             primary: {
               fill: 'fill-light-primary',
               color: 'text-light-primary',
-              background: 'bg-light-primary-soft'
+              background: 'bg-light-primary-light'
             },
             secondary: {
               fill: 'fill-light-secondary',
               color: 'text-light-secondary',
-              background: 'bg-light-secondary-soft'
+              background: 'bg-light-secondary-light'
             },
             success: {
               fill: 'fill-light-success',
               color: 'text-light-success',
-              background: 'bg-light-success-soft'
+              background: 'bg-light-success-light'
             },
             warning: {
               fill: 'fill-light-warning',
               color: 'text-light-warning',
-              background: 'bg-light-warning-soft'
+              background: 'bg-light-warning-light'
             },
             error: {
               fill: 'fill-light-error',
               color: 'text-light-error',
-              background: 'bg-light-error-soft'
+              background: 'bg-light-error-light'
             }
           }
         },
