@@ -261,184 +261,184 @@ const buttonGroupConfig: ButtonGroupConfig = {
     },
     layer: {
       base: {
-        position: 'before:absolute',
-        top: 'before:top-0',
-        left: 'before:left-0',
-        display: 'before:block',
-        height: 'before:h-full',
-        width: 'before:w-full',
-        transition: 'before:transition'
+        position: 'after:absolute',
+        top: 'after:top-0',
+        left: 'after:left-0',
+        display: 'after:block',
+        height: 'after:h-full',
+        width: 'after:w-full',
+        transition: 'after:transition'
       },
       firstBorder: {
-        border: 'before:border-l-0'
+        border: 'after:border-l-0'
       },
       lastBorder: {
-        border: 'before:border-r-0'
+        border: 'after:border-r-0'
       },
       first: {
-        borderRadius: 'before:rounded-l-full'
+        borderRadius: 'after:rounded-l-full'
       },
       last: {
-        borderRadius: 'before:rounded-r-full'
+        borderRadius: 'after:rounded-r-full'
       },
       variants: {
         plain: {
           light: {
             default: {
-              border: 'before:border-x before:border-light-on-surface-variant',
-              hover: 'hover:before:bg-light-on-surface-variant/10',
-              active: 'active:before:bg-light-on-surface-variant/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface-variant/40'
+              border: 'after:border-x after:border-light-on-surface-variant',
+              hover: 'hover:after:bg-light-on-surface-variant/10',
+              active: 'active:after:bg-light-on-surface-variant/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface-variant/40'
             },
             primary: {
-              border: 'before:border-x before:border-light-on-primary',
-              hover: 'hover:before:bg-light-on-primary/10',
-              active: 'active:before:bg-light-on-primary/[0.15]',
-              disabled: 'disabled:before:border-light-on-primary/40'
+              border: 'after:border-x after:border-light-on-primary',
+              hover: 'hover:after:bg-light-on-primary/10',
+              active: 'active:after:bg-light-on-primary/[0.15]',
+              disabled: 'disabled:after:border-light-on-primary/40'
             },
             secondary: {
-              border: 'before:border-x before:border-light-on-secondary',
-              hover: 'hover:before:bg-light-on-secondary/10',
-              active: 'active:before:bg-light-on-secondary/[0.15]',
-              disabled: 'disabled:before:border-light-on-secondary/40'
+              border: 'after:border-x after:border-light-on-secondary',
+              hover: 'hover:after:bg-light-on-secondary/10',
+              active: 'active:after:bg-light-on-secondary/[0.15]',
+              disabled: 'disabled:after:border-light-on-secondary/40'
             },
             success: {
-              border: 'before:border-x before:border-light-on-success',
-              hover: 'hover:before:bg-light-on-success/10',
-              active: 'active:before:bg-light-on-success/[0.15]',
-              disabled: 'disabled:before:border-light-on-success/40'
+              border: 'after:border-x after:border-light-on-success',
+              hover: 'hover:after:bg-light-on-success/10',
+              active: 'active:after:bg-light-on-success/[0.15]',
+              disabled: 'disabled:after:border-light-on-success/40'
             },
             warning: {
-              border: 'before:border-x before:border-light-on-success',
-              hover: 'hover:before:bg-light-on-warning/10',
-              active: 'active:before:bg-light-on-warning/[0.15]',
-              disabled: 'disabled:before:border-light-on-warning/40'
+              border: 'after:border-x after:border-light-on-success',
+              hover: 'hover:after:bg-light-on-warning/10',
+              active: 'active:after:bg-light-on-warning/[0.15]',
+              disabled: 'disabled:after:border-light-on-warning/40'
             },
             error: {
-              border: 'before:border-x before:border-light-on-success',
-              hover: 'hover:before:bg-light-on-error/10',
-              active: 'active:before:bg-light-on-error/[0.15]',
-              disabled: 'disabled:before:border-light-on-error/40'
+              border: 'after:border-x after:border-light-on-success',
+              hover: 'hover:after:bg-light-on-error/10',
+              active: 'active:after:bg-light-on-error/[0.15]',
+              disabled: 'disabled:after:border-light-on-error/40'
             }
           }
         },
         text: {
           light: {
             default: {
-              border: 'before:border-x before:border-light-on-surface',
-              hover: 'hover:before:bg-light-on-surface/10',
-              active: 'active:before:bg-light-on-surface/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-on-surface',
+              hover: 'hover:after:bg-light-on-surface/10',
+              active: 'active:after:bg-light-on-surface/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             primary: {
-              border: 'before:border-x before:border-light-primary',
-              hover: 'hover:before:bg-light-primary/10',
-              active: 'active:before:bg-light-primary/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-primary',
+              hover: 'hover:after:bg-light-primary/10',
+              active: 'active:after:bg-light-primary/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             secondary: {
-              border: 'before:border-x before:border-light-secondary',
-              hover: 'hover:before:bg-light-secondary/10',
-              active: 'active:before:bg-light-secondary/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-secondary',
+              hover: 'hover:after:bg-light-secondary/10',
+              active: 'active:after:bg-light-secondary/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             success: {
-              border: 'before:border-x before:border-light-success',
-              hover: 'hover:before:bg-light-success/10',
-              active: 'active:before:bg-light-success/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-success',
+              hover: 'hover:after:bg-light-success/10',
+              active: 'active:after:bg-light-success/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             warning: {
-              border: 'before:border-x before:border-light-warning',
-              hover: 'hover:before:bg-light-warning/10',
-              active: 'active:before:bg-light-warning/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-warning',
+              hover: 'hover:after:bg-light-warning/10',
+              active: 'active:after:bg-light-warning/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             error: {
-              border: 'before:border-x before:border-light-error',
-              hover: 'hover:before:bg-light-error/10',
-              active: 'active:before:bg-light-error/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-error',
+              hover: 'hover:after:bg-light-error/10',
+              active: 'active:after:bg-light-error/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             }
           }
         },
         outlined: {
           light: {
             default: {
-              border: 'before:border before:border-light-on-surface',
-              hover: 'hover:before:bg-light-on-surface/10',
-              active: 'active:before:bg-light-on-surface/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border after:border-light-on-surface',
+              hover: 'hover:after:bg-light-on-surface/10',
+              active: 'active:after:bg-light-on-surface/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             primary: {
-              border: 'before:border before:border-light-primary',
-              hover: 'hover:before:bg-light-primary/10',
-              active: 'active:before:bg-light-primary/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border after:border-light-primary',
+              hover: 'hover:after:bg-light-primary/10',
+              active: 'active:after:bg-light-primary/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             secondary: {
-              border: 'before:border before:border-light-secondary',
-              hover: 'hover:before:bg-light-secondary/10',
-              active: 'active:before:bg-light-secondary/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border after:border-light-secondary',
+              hover: 'hover:after:bg-light-secondary/10',
+              active: 'active:after:bg-light-secondary/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             success: {
-              border: 'before:border before:border-light-success',
-              hover: 'hover:before:bg-light-success/10',
-              active: 'active:before:bg-light-success/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border after:border-light-success',
+              hover: 'hover:after:bg-light-success/10',
+              active: 'active:after:bg-light-success/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             warning: {
-              border: 'before:border before:border-light-warning',
-              hover: 'hover:before:bg-light-warning/10',
-              active: 'active:before:bg-light-warning/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border after:border-light-warning',
+              hover: 'hover:after:bg-light-warning/10',
+              active: 'active:after:bg-light-warning/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             error: {
-              border: 'before:border before:border-light-error',
-              hover: 'hover:before:bg-light-error/10',
-              active: 'active:before:bg-light-error/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border after:border-light-error',
+              hover: 'hover:after:bg-light-error/10',
+              active: 'active:after:bg-light-error/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             }
           }
         },
         filled: {
           light: {
             default: {
-              border: 'before:border-x before:border-light-on-surface',
-              hover: 'hover:before:bg-light-on-surface/10',
-              active: 'active:before:bg-light-on-surface/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-on-surface',
+              hover: 'hover:after:bg-light-on-surface/10',
+              active: 'active:after:bg-light-on-surface/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             primary: {
-              border: 'before:border-x before:border-light-primary-dark',
-              hover: 'hover:before:bg-light-on-primary/10',
-              active: 'active:before:bg-light-on-primary/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-primary-dark',
+              hover: 'hover:after:bg-light-on-primary/10',
+              active: 'active:after:bg-light-on-primary/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             secondary: {
-              border: 'before:border-x before:border-light-secondary-dark',
-              hover: 'hover:before:bg-light-on-secondary/10',
-              active: 'active:before:bg-light-on-secondary/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-secondary-dark',
+              hover: 'hover:after:bg-light-on-secondary/10',
+              active: 'active:after:bg-light-on-secondary/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             success: {
-              border: 'before:border-x before:border-light-success-dark',
-              hover: 'hover:before:bg-light-on-success/10',
-              active: 'active:before:bg-light-on-success/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-success-dark',
+              hover: 'hover:after:bg-light-on-success/10',
+              active: 'active:after:bg-light-on-success/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             warning: {
-              border: 'before:border-x before:border-light-warning-dark',
-              hover: 'hover:before:bg-light-on-warning/10',
-              active: 'active:before:bg-light-on-warning/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-warning-dark',
+              hover: 'hover:after:bg-light-on-warning/10',
+              active: 'active:after:bg-light-on-warning/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             },
             error: {
-              border: 'before:border-x before:border-light-error-dark',
-              hover: 'hover:before:bg-light-on-error/10',
-              active: 'active:before:bg-light-on-error/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
+              border: 'after:border-x after:border-light-error-dark',
+              hover: 'hover:after:bg-light-on-error/10',
+              active: 'active:after:bg-light-on-error/[0.15]',
+              disabled: 'disabled:after:border-light-on-surface/40'
             }
           }
         }

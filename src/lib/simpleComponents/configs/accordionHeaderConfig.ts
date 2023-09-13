@@ -64,45 +64,45 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
     },
     layer: {
       base: {
-        position: 'before:absolute',
-        top: 'before:top-0',
-        left: 'before:left-0',
-        display: 'before:block',
-        height: 'before:h-full',
-        width: 'before:w-full',
-        border: 'before:border-b',
-        transition: 'before:transition'
+        position: 'after:absolute',
+        top: 'after:top-0',
+        left: 'after:left-0',
+        display: 'after:block',
+        height: 'after:h-full',
+        width: 'after:w-full',
+        border: 'after:border-b',
+        transition: 'after:transition'
       },
       divider: {
         light: {
-          border: 'before:border-light-divider'
+          border: 'after:border-light-divider'
         }
       },
       colors: {
         light: {
           default: {
-            hover: 'hover:before:bg-light-on-surface/10',
-            active: 'active:before:bg-light-on-surface/[0.15]'
+            hover: 'hover:after:bg-light-on-surface/10',
+            active: 'active:after:bg-light-on-surface/[0.15]'
           },
           primary: {
-            hover: 'hover:before:bg-light-primary/10',
-            active: 'active:before:bg-light-primary/[0.15]'
+            hover: 'hover:after:bg-light-primary/10',
+            active: 'active:after:bg-light-primary/[0.15]'
           },
           secondary: {
-            hover: 'hover:before:bg-light-secondary/10',
-            active: 'active:before:bg-light-secondary/[0.15]'
+            hover: 'hover:after:bg-light-secondary/10',
+            active: 'active:after:bg-light-secondary/[0.15]'
           },
           success: {
-            hover: 'hover:before:bg-light-success/10',
-            active: 'active:before:bg-light-success/[0.15]'
+            hover: 'hover:after:bg-light-success/10',
+            active: 'active:after:bg-light-success/[0.15]'
           },
           warning: {
-            hover: 'hover:before:bg-light-warning/10',
-            active: 'active:before:bg-light-warning/[0.15]'
+            hover: 'hover:after:bg-light-warning/10',
+            active: 'active:after:bg-light-warning/[0.15]'
           },
           error: {
-            hover: 'hover:before:bg-light-error/10',
-            active: 'active:before:bg-light-error/[0.15]'
+            hover: 'hover:after:bg-light-error/10',
+            active: 'active:after:bg-light-error/[0.15]'
           }
         }
       }

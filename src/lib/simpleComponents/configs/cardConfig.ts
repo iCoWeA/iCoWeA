@@ -60,23 +60,23 @@ const cardConfig: CardConfig = {
     },
     layer: {
       base: {
-        position: 'before:absolute',
-        top: 'before:top-0',
-        left: 'before:left-0',
-        display: 'before:block',
-        height: 'before:h-full',
-        width: 'before:w-full',
-        transition: 'before:transition'
+        position: 'after:absolute',
+        top: 'after:top-0',
+        left: 'after:left-0',
+        display: 'after:block',
+        height: 'after:h-full',
+        width: 'after:w-full',
+        transition: 'after:transition'
       },
       colors: {
         light: {
-          hover: 'hover:before:bg-light-on-surface/10',
-          active: 'active:before:bg-light-on-surface/[0.15]'
+          hover: 'hover:after:bg-light-on-surface/10',
+          active: 'active:after:bg-light-on-surface/[0.15]'
         }
       },
       grabed: {
         light: {
-          background: 'before:bg-light-on-surface/20'
+          background: 'after:bg-light-on-surface/20'
         }
       }
     }
