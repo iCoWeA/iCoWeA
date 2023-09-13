@@ -56,7 +56,7 @@ Button.displayName = 'Button';
  *   Button group
  *
  */
-export type ButtonGroupVariants = 'plain' | 'text' | 'outlined' | 'soft' | 'solid';
+export type ButtonGroupVariants = 'plain' | 'text' | 'outlined' | 'solid';
 
 export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ButtonGroupVariants;

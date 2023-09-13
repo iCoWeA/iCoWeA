@@ -105,6 +105,11 @@ const buttonGroupConfig: ButtonGroupConfig = {
       variants: {
         plain: {
           light: {
+            default: {
+              fill: 'fill-light-on-surface-variant',
+              color: 'text-light-on-surface-variant',
+              disabled: 'disabled:fill-light-on-surface-variant/40 disabled:text-light-on-surface-variant/40'
+            },
             primary: {
               fill: 'fill-light-on-primary',
               color: 'text-light-on-primary',
@@ -134,6 +139,11 @@ const buttonGroupConfig: ButtonGroupConfig = {
         },
         text: {
           light: {
+            default: {
+              fill: 'fill-light-on-surface',
+              color: 'text-light-on-surface',
+              disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            },
             primary: {
               fill: 'fill-light-primary',
               color: 'text-light-primary',
@@ -163,6 +173,11 @@ const buttonGroupConfig: ButtonGroupConfig = {
         },
         outlined: {
           light: {
+            default: {
+              fill: 'fill-light-on-surface',
+              color: 'text-light-on-surface',
+              disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            },
             primary: {
               fill: 'fill-light-primary',
               color: 'text-light-primary',
@@ -187,55 +202,19 @@ const buttonGroupConfig: ButtonGroupConfig = {
               fill: 'fill-light-error',
               color: 'text-light-error',
               disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
-            }
-          }
-        },
-        soft: {
-          light: {
-            primary: {
-              fill: 'fill-light-primary',
-              color: 'text-light-primary',
-              background: 'bg-light-primary-soft',
-              hover: 'hover:shadow-md hover:shadow-black/50',
-              active: 'active:shadow-none',
-              disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
-            },
-            secondary: {
-              fill: 'fill-light-secondary',
-              color: 'text-light-secondary',
-              background: 'bg-light-secondary-soft',
-              hover: 'hover:shadow-md hover:shadow-black/50',
-              active: 'active:shadow-none',
-              disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
-            },
-            success: {
-              fill: 'fill-light-success',
-              color: 'text-light-success',
-              background: 'bg-light-success-soft',
-              hover: 'hover:shadow-md hover:shadow-black/50',
-              active: 'active:shadow-none',
-              disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
-            },
-            warning: {
-              fill: 'fill-light-warning',
-              color: 'text-light-warning',
-              background: 'bg-light-warning-soft',
-              hover: 'hover:shadow-md hover:shadow-black/50',
-              active: 'active:shadow-none',
-              disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
-            },
-            error: {
-              fill: 'fill-light-error',
-              color: 'text-light-error',
-              background: 'bg-light-error-soft',
-              hover: 'hover:shadow-md hover:shadow-black/50',
-              active: 'active:shadow-none',
-              disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
             }
           }
         },
         solid: {
           light: {
+            default: {
+              fill: 'fill-light-on-surface',
+              color: 'text-light-on-surface',
+              background: 'bg-light-surface-dark',
+              hover: 'hover:shadow-md hover:shadow-black/50',
+              active: 'active:shadow-none',
+              disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            },
             primary: {
               fill: 'fill-light-on-primary',
               color: 'text-light-on-primary',
@@ -305,6 +284,12 @@ const buttonGroupConfig: ButtonGroupConfig = {
       variants: {
         plain: {
           light: {
+            default: {
+              border: 'before:border-x before:border-light-on-surface-variant',
+              hover: 'hover:before:bg-light-on-surface-variant/10',
+              active: 'active:before:bg-light-on-surface-variant/[0.15]',
+              disabled: 'disabled:before:border-light-on-surface-variant/40'
+            },
             primary: {
               border: 'before:border-x before:border-light-on-primary',
               hover: 'hover:before:bg-light-on-primary/10',
@@ -339,6 +324,12 @@ const buttonGroupConfig: ButtonGroupConfig = {
         },
         text: {
           light: {
+            default: {
+              border: 'before:border-x before:border-light-on-surface',
+              hover: 'hover:before:bg-light-on-surface/10',
+              active: 'active:before:bg-light-on-surface/[0.15]',
+              disabled: 'disabled:before:border-light-on-surface/40'
+            },
             primary: {
               border: 'before:border-x before:border-light-primary',
               hover: 'hover:before:bg-light-primary/10',
@@ -373,6 +364,12 @@ const buttonGroupConfig: ButtonGroupConfig = {
         },
         outlined: {
           light: {
+            default: {
+              border: 'before:border before:border-light-on-surface',
+              hover: 'hover:before:bg-light-on-surface/10',
+              active: 'active:before:bg-light-on-surface/[0.15]',
+              disabled: 'disabled:before:border-light-on-surface/40'
+            },
             primary: {
               border: 'before:border before:border-light-primary',
               hover: 'hover:before:bg-light-primary/10',
@@ -405,68 +402,40 @@ const buttonGroupConfig: ButtonGroupConfig = {
             }
           }
         },
-        soft: {
-          light: {
-            primary: {
-              border: 'before:border-x before:border-light-primary',
-              hover: 'hover:before:bg-light-primary/10',
-              active: 'active:before:bg-light-primary/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
-            },
-            secondary: {
-              border: 'before:border-x before:border-light-secondary',
-              hover: 'hover:before:bg-light-secondary/10',
-              active: 'active:before:bg-light-secondary/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
-            },
-            success: {
-              border: 'before:border-x before:border-light-success',
-              hover: 'hover:before:bg-light-success/10',
-              active: 'active:before:bg-light-success/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
-            },
-            warning: {
-              border: 'before:border-x before:border-light-warning',
-              hover: 'hover:before:bg-light-warning/10',
-              active: 'active:before:bg-light-warning/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
-            },
-            error: {
-              border: 'before:border-x before:border-light-error',
-              hover: 'hover:before:bg-light-error/10',
-              active: 'active:before:bg-light-error/[0.15]',
-              disabled: 'disabled:before:border-light-on-surface/40'
-            }
-          }
-        },
         solid: {
           light: {
+            default: {
+              border: 'before:border-x before:border-light-on-surface',
+              hover: 'hover:before:bg-light-on-surface/10',
+              active: 'active:before:bg-light-on-surface/[0.15]',
+              disabled: 'disabled:before:border-light-on-surface/40'
+            },
             primary: {
-              border: 'before:border-x before:border-light-primary-soft',
+              border: 'before:border-x before:border-light-primary-dark',
               hover: 'hover:before:bg-light-on-primary/10',
               active: 'active:before:bg-light-on-primary/[0.15]',
               disabled: 'disabled:before:border-light-on-surface/40'
             },
             secondary: {
-              border: 'before:border-x before:border-light-secondary-soft',
+              border: 'before:border-x before:border-light-secondary-dark',
               hover: 'hover:before:bg-light-on-secondary/10',
               active: 'active:before:bg-light-on-secondary/[0.15]',
               disabled: 'disabled:before:border-light-on-surface/40'
             },
             success: {
-              border: 'before:border-x before:border-light-success-soft',
+              border: 'before:border-x before:border-light-success-dark',
               hover: 'hover:before:bg-light-on-success/10',
               active: 'active:before:bg-light-on-success/[0.15]',
               disabled: 'disabled:before:border-light-on-surface/40'
             },
             warning: {
-              border: 'before:border-x before:border-light-warning-soft',
+              border: 'before:border-x before:border-light-warning-dark',
               hover: 'hover:before:bg-light-on-warning/10',
               active: 'active:before:bg-light-on-warning/[0.15]',
               disabled: 'disabled:before:border-light-on-surface/40'
             },
             error: {
-              border: 'before:border-x before:border-light-error-soft',
+              border: 'before:border-x before:border-light-error-dark',
               hover: 'hover:before:bg-light-on-error/10',
               active: 'active:before:bg-light-on-error/[0.15]',
               disabled: 'disabled:before:border-light-on-surface/40'

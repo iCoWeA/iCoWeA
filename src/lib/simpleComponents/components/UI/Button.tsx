@@ -3,7 +3,7 @@ import buttonConfig from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
-export type ButtonVariants = 'plain' | 'text' | 'outlined' | 'soft' | 'solid';
+export type ButtonVariants = 'plain' | 'text' | 'outlined' | 'solid';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariants;
