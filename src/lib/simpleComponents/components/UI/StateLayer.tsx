@@ -3,13 +3,11 @@ import stateLayerConfig from '../../configs/stateLayerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
-export type StateLayerVariants = 'plain' | 'text' | 'outlined' | 'filled' | 'checked' | 'unchecked';
+export type StateLayerStates = 'plain-click' | 'text-click' | 'outlined-click' | 'filled-click' | 'checked' | 'unchecked' | 'grab';
 
 export interface StateLayerProps extends BaseHTMLAttributes<HTMLSpanElement> {
-  variant?: StateLayerVariants;
+  state?: StateLayerStates;
   color?: Colors;
-  valid?: boolean;
-  invalid?: boolean;
 }
 
 const StateLayer = forwardRef<HTMLSpanElement, StateLayerProps>((props, ref) => {
@@ -18,12 +16,12 @@ const StateLayer = forwardRef<HTMLSpanElement, StateLayerProps>((props, ref) => 
 
   /* --- Set default props --- */
   const styles = stateLayerConfig.styles;
-  const { variant, color, valid, invalid, className, ...restProps } = {
+  const { state, color, className, ...restProps } = {
     ...stateLayerConfig.defaultProps,
     ...props
   };
 
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[state][theme][color], className);
 
   return (
     <span

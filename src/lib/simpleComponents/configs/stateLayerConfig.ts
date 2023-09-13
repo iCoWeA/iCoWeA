@@ -1,24 +1,20 @@
-import { type StateLayerVariants } from '../components/UI/StateLayer';
+import { type StateLayerStates } from '../components/UI/StateLayer';
 
 export interface StateLayerConfig {
   defaultProps: {
-    variant: StateLayerVariants;
+    state: StateLayerStates;
     color: Colors;
-    valid: boolean;
-    invalid: boolean;
   };
   styles: {
     base: Record<string, string>;
-    variants: Record<StateLayerVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
+    variants: Record<StateLayerStates, Record<Themes, Record<Colors, Record<string, string>>>>;
   }
 }
 
 const stateLayerConfig: StateLayerConfig = {
   defaultProps: {
-    variant: 'filled',
-    color: 'default',
-    valid: false,
-    invalid: false
+    state: 'filled-click',
+    color: 'default'
   },
   styles: {
     base: {
@@ -32,7 +28,7 @@ const stateLayerConfig: StateLayerConfig = {
       pointerEvent: 'pointer-events-none'
     },
     variants: {
-      plain: {
+      'plain-click': {
         light: {
           default: {
             hover: 'group-hover:bg-light-on-surface-variant/10',
@@ -60,7 +56,7 @@ const stateLayerConfig: StateLayerConfig = {
           }
         }
       },
-      text: {
+      'text-click': {
         light: {
           default: {
             hover: 'group-hover:bg-light-on-surface/10',
@@ -88,41 +84,35 @@ const stateLayerConfig: StateLayerConfig = {
           }
         }
       },
-      outlined: {
+      'outlined-click': {
         light: {
           default: {
             hover: 'group-hover:bg-light-on-surface/10',
-            active: 'group-active:bg-light-on-surface/[0.15]',
-            disabled: 'group-'
+            active: 'group-active:bg-light-on-surface/[0.15]'
           },
           primary: {
             hover: 'group-hover:bg-light-primary/10',
-            active: 'group-active:bg-light-primary/[0.15]',
-            disabled: 'group-disabled:border-light-on-surface/40'
+            active: 'group-active:bg-light-primary/[0.15]'
           },
           secondary: {
             hover: 'group-hover:bg-light-secondary/10',
-            active: 'group-active:bg-light-secondary/[0.15]',
-            disabled: 'group-disabled:border-light-on-surface/40'
+            active: 'group-active:bg-light-secondary/[0.15]'
           },
           success: {
             hover: 'group-hover:bg-light-success/10',
-            active: 'group-active:bg-light-success/[0.15]',
-            disabled: 'group-disabled:border-light-on-surface/40'
+            active: 'group-active:bg-light-success/[0.15]'
           },
           warning: {
             hover: 'group-hover:bg-light-warning/10',
-            active: 'group-active:bg-light-warning/[0.15]',
-            disabled: 'group-disabled:border-light-on-surface/40'
+            active: 'group-active:bg-light-warning/[0.15]'
           },
           error: {
             hover: 'group-hover:bg-light-error/10',
-            active: 'group-active:bg-light-error/[0.15]',
-            disabled: 'group-disabled:border-light-on-surface/40'
+            active: 'group-active:bg-light-error/[0.15]'
           }
         }
       },
-      filled: {
+      'filled-click': {
         light: {
           default: {
             hover: 'group-hover:bg-light-on-surface/10',
@@ -150,7 +140,7 @@ const stateLayerConfig: StateLayerConfig = {
           }
         }
       },
-      checked: {
+      unchecked: {
         light: {
           default: {
             hover: 'group-hover:bg-light-on-surface/10',
@@ -178,7 +168,7 @@ const stateLayerConfig: StateLayerConfig = {
           }
         }
       },
-      unchecked: {
+      checked: {
         light: {
           default: {
             hover: 'group-hover:bg-light-on-surface/10',
@@ -205,48 +195,31 @@ const stateLayerConfig: StateLayerConfig = {
             active: 'group-active:bg-light-on-surface/[0.15]'
           }
         }
+      },
+      grab: {
+        light: {
+          default: {
+            background: 'after:bg-light-on-surface/20'
+          },
+          primary: {
+            background: 'after:bg-light-primary/20'
+          },
+          secondary: {
+            background: 'after:bg-light-secondary/20'
+          },
+          success: {
+            background: 'after:bg-light-success/20'
+          },
+          warning: {
+            background: 'after:bg-light-warning20'
+          },
+          error: {
+            background: 'after:bg-light-error/20'
+          }
+        }
       }
     }
   }
 };
 
 export default stateLayerConfig;
-
-/* layer: {
-  base: {
-    position: 'absolute',
-    top: 'top-0',
-    left: 'left-0',
-    display: 'block',
-    height: 'h-full',
-    width: 'w-full',
-    transition: 'transition',
-    pointerEvent: 'pointer-events-none'
-  },
-
-  <Layer
-  variant={variant}
-  color={color}
-  {...layerProps}
-
-  interface LayerProps extends BaseHTMLAttributes<HTMLSpanElement> {
-  variant: ButtonVariants;
-  color: Colors;
-}
-
-const Layer: FC<LayerProps> = ({ variant, color, className, ...restProps }) => {
-  /* --- Set context props ---
-  const theme = useContext(themeContext).theme;
-
-  /* --- Set default props ---
-  const styles = buttonConfig.styles.layer;
-
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
-
-  return (
-    <span
-      className={mergedClassName}
-      {...restProps}
-    ></span>
-  );
-}; */
