@@ -1,7 +1,8 @@
-import React, { type BaseHTMLAttributes, type FC, type ReactNode, forwardRef, useContext, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { type BaseHTMLAttributes, type FC, type ReactNode, forwardRef, useContext, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 import alertConfig from '../../configs/alertConfig';
 import themeContext from '../../contexts/theme';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
+import useOutsideClick from '../../hooks/useOutsideClick';
 import { mergeClasses } from '../../utils/propsHelper';
 
 /********************************************************************************
@@ -80,10 +81,14 @@ const EndDecoratorContainer: FC<EndDecoratorContainerProps> = ({ closable, class
 export type AlertVariant = 'text' | 'filled' | 'ghost' | 'outlined';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
+  onClose?: () => void;
   variant?: AlertVariant;
   color?: Colors;
-  closable?: boolean;
+  closeButton?: boolean;
+  position?: InnerPositions;
   open?: boolean;
+  closeOnAwayClick?: boolean;
+  closeDuration?: number;
   unmountOnExit?: boolean;
   startDecorator?: ReactNode;
   endDecorator?: ReactNode;
@@ -99,10 +104,14 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = alertConfig.styles.container;
   const {
+    onClose,
     variant,
     color,
-    closable,
+    closeButton,
+    position,
     open,
+    closeOnAwayClick,
+    closeDuration,
     unmountOnExit,
     startDecorator,
     endDecorator,
@@ -141,6 +150,34 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     }
   }, [unmountOnExit, open, animationState.enter, animationState.exit]);
 
+  /* --- Set outside click action --- */
+  const outsideClickHandler = useCallback((event: MouseEvent) => {
+    const isAlertClicked = alertRef.current?.contains(event.target as Node) ?? false;
+
+    if (isAlertClicked && onClose !== undefined) {
+      onClose();
+    }
+  }, []);
+
+  useOutsideClick(outsideClickHandler, open && closeOnAwayClick && onClose !== undefined);
+
+  /* --- Set timer action --- */
+  useEffect(() => {
+    let timerId: number;
+
+    if (open && closeDuration !== undefined && onClose !== undefined) {
+      timerId = window.setTimeout(() => {
+        onClose();
+      }, closeDuration);
+    }
+
+    return () => {
+      if (open && closeDuration !== undefined && onClose !== undefined) {
+        clearTimeout(timerId);
+      }
+    };
+  }, [open, closeDuration]);
+
   if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
@@ -166,7 +203,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   if (endDecorator !== undefined) {
     endDecoratorContainerNode = (
       <EndDecoratorContainer
-        closable={closable}
+        closable={closeButton}
         {...endDecoratorContainerProps}
       >
         {endDecorator}
@@ -193,3 +230,5 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 Alert.displayName = 'Alert';
 
 export default Alert;
+
+/* ON_CLOSE() IS NOT IN DEPENDENCY LIST !!! */

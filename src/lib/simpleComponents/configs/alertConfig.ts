@@ -4,8 +4,9 @@ export interface AlertConfig {
   defaultProps: {
     variant: AlertVariant;
     color: Colors;
-    closable: boolean;
+    closeButton: boolean;
     open: boolean;
+    closeOnAwayClick: boolean;
     unmountOnExit: boolean;
   };
   styles: {
@@ -31,8 +32,9 @@ const alertConfig: AlertConfig = {
   defaultProps: {
     variant: 'filled',
     color: 'error',
-    closable: false,
+    closeButton: false,
     open: true,
+    closeOnAwayClick: true,
     unmountOnExit: false
   },
   styles: {
