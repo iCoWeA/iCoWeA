@@ -8,13 +8,13 @@ import { mergeClasses } from '../../utils/propsHelper';
  *   Container
  *
  */
-interface AvatarContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
+interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   size: Sizes;
   color: Colors;
   withBorder: boolean;
 }
 
-const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ size, color, withBorder, className, ...restProps }, ref) => {
+const Container = forwardRef<HTMLDivElement, ContainerProps>(({ size, color, withBorder, className, ...restProps }, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -33,7 +33,7 @@ const AvatarContainer = forwardRef<HTMLDivElement, AvatarContainerProps>(({ size
   );
 });
 
-AvatarContainer.displayName = 'AvatarContainer';
+Container.displayName = 'Container';
 
 /********************************************************************************
  *
@@ -73,7 +73,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   }
 
   return (
-    <AvatarContainer
+    <Container
       size={size}
       color={color}
       withBorder={withBorder}
@@ -81,7 +81,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
       {...containerProps}
     >
       {childrenNode}
-    </AvatarContainer>
+    </Container>
   );
 });
 
