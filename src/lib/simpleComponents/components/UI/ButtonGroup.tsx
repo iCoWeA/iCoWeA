@@ -1,7 +1,44 @@
-import React, { type ReactElement, type FC, useContext, cloneElement, type BaseHTMLAttributes, forwardRef, type ReactNode } from 'react';
+import React, { type BaseHTMLAttributes, type FC, useContext, type ReactElement, cloneElement, forwardRef, type ReactNode } from 'react';
 import buttonGroupConfig from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, isLast } from '../../utils/propsHelper';
+
+/********************************************************************************
+ *
+ *   Layer
+ *
+ */
+interface LayerProps extends BaseHTMLAttributes<HTMLSpanElement> {
+  isFirst: boolean;
+  isLast: boolean;
+  variant: ButtonGroupVariants;
+  color: Colors;
+}
+
+const Layer: FC<LayerProps> = ({ isFirst, isLast, variant, color, className, ...restProps }) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
+  /* --- Set default props --- */
+  const styles = buttonGroupConfig.styles.layer;
+
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.variants[variant][theme][color],
+    isFirst && styles.first,
+    isLast && styles.last,
+    variant !== 'outlined' && isFirst && styles.firstBorder,
+    variant !== 'outlined' && isLast && styles.lastBorder,
+    className
+  );
+
+  return (
+    <span
+      className={mergedClassName}
+      {...restProps}
+    ></span>
+  );
+};
 
 /********************************************************************************
  *
@@ -15,6 +52,7 @@ interface ButtonProps {
   size: Sizes;
   color: Colors;
   fullwidth: boolean;
+  spanProps?: BaseHTMLAttributes<HTMLSpanElement>;
   tabIndex: number;
   disabled: boolean;
   type: 'submit' | 'reset' | 'button';
@@ -22,34 +60,39 @@ interface ButtonProps {
   children: ReactElement;
 }
 
-const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, color, size, fullwidth, tabIndex, disabled, type, className, children }) => {
+const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, color, size, fullwidth, spanProps, tabIndex, disabled, type, className, children }) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const { button: buttonStyles, layer: layerStyles } = buttonGroupConfig.styles;
+  const styles = buttonGroupConfig.styles.button;
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
-    buttonStyles.base,
-    buttonStyles.variants[variant][theme][color],
-    buttonStyles.sizes[size],
-    fullwidth && buttonStyles.fullwidth,
-    isFirst && buttonStyles.first,
-    isLast && buttonStyles.last,
-    layerStyles.base,
-    layerStyles.variants[variant][theme][color],
-    isFirst && layerStyles.first,
-    isLast && layerStyles.last,
-    variant !== 'outlined' && isFirst && layerStyles.firstBorder,
-    variant !== 'outlined' && isLast && layerStyles.lastBorder,
+    styles.base,
+    styles.variants[variant][theme][color],
+    styles.sizes[size],
+    fullwidth && styles.fullwidth,
+    isFirst && styles.first,
+    isLast && styles.last,
     className
   );
 
-  return <>{cloneElement(children, { tabIndex, disabled, type, className: mergedClassName })}</>;
-};
+  const childrenNode = (
+    <>
+      {children.props.children}
+      <Layer
+        variant={variant}
+        color={color}
+        isFirst={isFirst}
+        isLast={isLast}
+        {...spanProps}
+      />
+    </>
+  );
 
-Button.displayName = 'Button';
+  return <>{cloneElement(children, { tabIndex, disabled, type, className: mergedClassName, children: childrenNode })}</>;
+};
 
 /********************************************************************************
  *
@@ -64,6 +107,7 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
+  spanProps?: Record<number, BaseHTMLAttributes<HTMLSpanElement>>;
   tabIndex?: number;
   disabled?: boolean;
   type?: 'submit' | 'reset' | 'button';
@@ -73,7 +117,7 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = buttonGroupConfig.styles.container;
-  const { variant, size, color, elevated, fullwidth, tabIndex, disabled, type, className, children, ...restProps } = {
+  const { variant, size, color, elevated, fullwidth, spanProps, tabIndex, disabled, type, className, children, ...restProps } = {
     ...buttonGroupConfig.defaultProps,
     ...props
   };
@@ -94,6 +138,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
         variant={variant}
         size={size}
         color={color}
+        spanProps={spanProps?.[i]}
         fullwidth={fullwidth}
         tabIndex={childrenNode[i].props.tabIndex ?? tabIndex}
         disabled={childrenNode[i].props.disabled ?? disabled}
