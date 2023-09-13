@@ -12,6 +12,7 @@ export interface CheckboxConfig {
   styles: {
     container: {
       base: Record<string, string>;
+      checked: Record<string, string>;
       disabled: Record<string, string>;
     },
     input: {
@@ -43,7 +44,13 @@ const checkboxConfig: CheckboxConfig = {
         display: 'inline-flex',
         height: 'h-10',
         width: 'w-10',
+        borderRadius: 'rounded-full',
+        overflow: 'overflow-hidden',
+        userSelect: 'select-none',
         group: 'group'
+      },
+      checked: {
+        group: 'checked'
       },
       disabled: {
         group: 'disabled',

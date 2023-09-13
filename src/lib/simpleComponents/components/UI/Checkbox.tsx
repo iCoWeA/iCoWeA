@@ -51,15 +51,16 @@ const Icon: FC<IconProps> = ({ color, valid, invalid, className, children, ...re
  *
  */
 interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
+  checked: boolean;
   disabled: boolean;
 }
 
-const Container = forwardRef<HTMLDivElement, ContainerProps>(({ disabled, className, ...restProps }, ref) => {
+const Container = forwardRef<HTMLDivElement, ContainerProps>(({ checked, disabled, className, ...restProps }, ref) => {
   /* --- Set default props --- */
   const styles = checkboxConfig.styles.container;
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, disabled && styles.disabled, className);
+  const mergedClassName = mergeClasses(styles.base, checked && styles.checked, disabled && styles.disabled, className);
 
   return (
     <div
@@ -95,6 +96,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
 
   return (
     <Container
+      checked={checked}
       disabled={disabled}
       {...containerProps}
       ref={ref}
