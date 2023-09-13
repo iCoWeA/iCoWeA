@@ -1,4 +1,3 @@
-import { type BaseHTMLAttributes } from 'react';
 import { type AlertVariant } from '../components/UI/Alert';
 
 export interface AlertConfig {
@@ -7,9 +6,6 @@ export interface AlertConfig {
     color: Colors;
     invisible: boolean;
     closable: boolean;
-    startDecoratorContainerProps: BaseHTMLAttributes<HTMLDivElement>;
-    bodyContainerProps: BaseHTMLAttributes<HTMLDivElement>;
-    endDecoratorContainerProps: BaseHTMLAttributes<HTMLDivElement>;
   };
   styles: {
     container: {
@@ -35,10 +31,7 @@ const alertConfig: AlertConfig = {
     variant: 'filled',
     color: 'error',
     invisible: false,
-    closable: false,
-    startDecoratorContainerProps: {},
-    bodyContainerProps: {},
-    endDecoratorContainerProps: {}
+    closable: false
   },
   styles: {
     container: {
