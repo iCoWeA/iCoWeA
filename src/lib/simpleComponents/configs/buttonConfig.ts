@@ -25,7 +25,7 @@ export interface ButtonConfig {
 
 const buttonConfig: ButtonConfig = {
   defaultProps: {
-    variant: 'solid',
+    variant: 'filled',
     size: 'md',
     color: 'primary',
     elevated: false,
@@ -175,7 +175,7 @@ const buttonConfig: ButtonConfig = {
             }
           }
         },
-        solid: {
+        filled: {
           light: {
             default: {
               fill: 'fill-light-on-surface',
@@ -337,7 +337,7 @@ const buttonConfig: ButtonConfig = {
             }
           }
         },
-        solid: {
+        filled: {
           light: {
             default: {
               hover: 'hover:before:bg-light-on-surface-variant/10',

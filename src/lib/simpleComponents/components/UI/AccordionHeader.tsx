@@ -37,7 +37,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
     styles.button.colors[theme][accordionColor],
     styles.before.base,
     styles.before.divider[theme],
-    accordionVariant === 'text' && styles.before.colors[theme][accordionColor],
+    accordionVariant === 'filled' && styles.before.colors[theme][accordionColor],
     className
   );
 

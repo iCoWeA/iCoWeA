@@ -38,7 +38,7 @@ export interface ButtonGroupConfig {
 
 const buttonGroupConfig: ButtonGroupConfig = {
   defaultProps: {
-    variant: 'solid',
+    variant: 'filled',
     size: 'md',
     color: 'primary',
     elevated: false,
@@ -205,7 +205,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
             }
           }
         },
-        solid: {
+        filled: {
           light: {
             default: {
               fill: 'fill-light-on-surface',
@@ -402,7 +402,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
             }
           }
         },
-        solid: {
+        filled: {
           light: {
             default: {
               border: 'before:border-x before:border-light-on-surface',
