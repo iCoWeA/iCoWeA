@@ -77,7 +77,7 @@ const checkboxConfig: CheckboxConfig = {
         height: 'h-5',
         borderRadius: 'rounded',
         fill: 'fill-transparent',
-        transition: 'transition',
+        transition: 'transition-colors',
         pointerEvent: 'pointer-events-none'
       },
       border: {

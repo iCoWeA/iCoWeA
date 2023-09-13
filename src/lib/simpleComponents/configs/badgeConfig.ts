@@ -49,7 +49,7 @@ const badgeConfig: BadgeConfig = {
         borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-xs font-sans',
         opacity: 'opacity-100',
-        transition: 'transition'
+        transition: 'transition-[opacity]'
       },
       empty: {
         height: 'h-1.5',
