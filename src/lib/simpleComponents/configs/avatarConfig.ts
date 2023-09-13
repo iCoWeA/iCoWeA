@@ -32,7 +32,8 @@ const avatarConfig: AvatarConfig = {
         aspectRatio: 'aspect-square',
         borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-lg font-sans',
-        overflow: 'overflow-hidden'
+        overflow: 'overflow-hidden',
+        userSelect: 'select-none'
       },
       withBorder: {
         outline: 'outline outline-2 outline-transparent'
