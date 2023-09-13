@@ -14,7 +14,7 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref
 
   /* --- Set default props --- */
   const styles = accordionBodyConfig.styles;
-  const { collapseProps, className, ...restProps } = { ...accordionBodyConfig.defaultProps, ...props };
+  const { collapseProps, className, ...restProps } = { ...props };
 
   /* --- Set props --- */
   const ariaLabelledBy = accordionId === undefined ? undefined : `acd-header-${accordionId}`;
