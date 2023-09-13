@@ -16,7 +16,7 @@ export interface ButtonConfig {
       sizes: Record<Sizes, Record<string, string>>;
       variants: Record<ButtonVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
     },
-    before: {
+    layer: {
       base: Record<string, string>;
       variants: Record<ButtonVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
     }
@@ -229,7 +229,7 @@ const buttonConfig: ButtonConfig = {
         }
       }
     },
-    before: {
+    layer: {
       base: {
         position: 'before:absolute',
         top: 'before:top-0',

@@ -25,7 +25,7 @@ export interface ButtonGroupConfig {
       sizes: Record<Sizes, Record<string, string>>;
       variants: Record<ButtonGroupVariants, Record<string, Record<Colors, Record<string, string>>>>;
     },
-    before: {
+    layer: {
       base: Record<string, string>;
       first: Record<string, string>;
       last: Record<string, string>;
@@ -259,7 +259,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
         }
       }
     },
-    before: {
+    layer: {
       base: {
         position: 'before:absolute',
         top: 'before:top-0',

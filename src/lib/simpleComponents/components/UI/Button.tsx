@@ -20,7 +20,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = buttonConfig.styles;
+  const { button: buttonStyles, layer: layerStyles } = buttonConfig.styles;
   const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, className, children, ...restProps } = {
     ...buttonConfig.defaultProps,
     ...props
@@ -28,13 +28,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
-    styles.button.base,
-    styles.button.variants[variant][theme][color],
-    styles.button.sizes[size],
-    fullwidth && styles.button.fullwidth,
-    styles.before.base,
-    styles.before.variants[variant][theme][color],
-    elevated && styles.button.elevated,
+    buttonStyles.base,
+    buttonStyles.variants[variant][theme][color],
+    buttonStyles.sizes[size],
+    fullwidth && buttonStyles.fullwidth,
+    layerStyles.base,
+    layerStyles.variants[variant][theme][color],
+    elevated && buttonStyles.elevated,
     className
   );
 

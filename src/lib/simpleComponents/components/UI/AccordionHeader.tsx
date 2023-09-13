@@ -22,7 +22,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = accordionHeaderConfig.styles;
+  const { button: buttonStyles, layer: layerStyles } = accordionHeaderConfig.styles;
   const { startDecorator, endDecorator, disabled, className, children, ...restProps } = {
     disabled: isAccordionDisabled,
     ...props
@@ -33,11 +33,11 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   const id = accordionId === undefined ? undefined : `acd-header-${accordionId}`;
 
   const mergedClassName = mergeClasses(
-    styles.button.base,
-    styles.button.colors[theme][accordionColor],
-    styles.before.base,
-    styles.before.divider[theme],
-    accordionVariant === 'filled' && styles.before.colors[theme][accordionColor],
+    buttonStyles.base,
+    buttonStyles.colors[theme][accordionColor],
+    layerStyles.base,
+    layerStyles.divider[theme],
+    accordionVariant === 'filled' && layerStyles.colors[theme][accordionColor],
     className
   );
 

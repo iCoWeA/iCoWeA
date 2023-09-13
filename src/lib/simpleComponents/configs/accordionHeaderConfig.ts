@@ -4,7 +4,7 @@ export interface AccordionHeaderConfig {
       base: Record<string, string>;
       colors: Record<Themes, Record<Colors, Record<string, string>>>;
     },
-    before: {
+    layer: {
       base: Record<string, string>;
       divider: Record<Themes, Record<string, string>>;
       colors: Record<Themes, Record<Colors, Record<string, string>>>;
@@ -62,7 +62,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
         }
       }
     },
-    before: {
+    layer: {
       base: {
         position: 'before:absolute',
         top: 'before:top-0',

@@ -27,22 +27,22 @@ const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, color, size, fullwi
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = buttonGroupConfig.styles;
+  const { button: buttonStyles, layer: layerStyles } = buttonGroupConfig.styles;
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
-    styles.button.base,
-    styles.button.variants[variant][theme][color],
-    styles.button.sizes[size],
-    fullwidth && styles.button.fullwidth,
-    isFirst && styles.button.first,
-    isLast && styles.button.last,
-    styles.before.base,
-    styles.before.variants[variant][theme][color],
-    isFirst && styles.before.first,
-    isLast && styles.before.last,
-    variant !== 'outlined' && isFirst && styles.before.firstBorder,
-    variant !== 'outlined' && isLast && styles.before.lastBorder,
+    buttonStyles.base,
+    buttonStyles.variants[variant][theme][color],
+    buttonStyles.sizes[size],
+    fullwidth && buttonStyles.fullwidth,
+    isFirst && buttonStyles.first,
+    isLast && buttonStyles.last,
+    layerStyles.base,
+    layerStyles.variants[variant][theme][color],
+    isFirst && layerStyles.first,
+    isLast && layerStyles.last,
+    variant !== 'outlined' && isFirst && layerStyles.firstBorder,
+    variant !== 'outlined' && isLast && layerStyles.lastBorder,
     className
   );
 
