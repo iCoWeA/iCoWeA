@@ -12,7 +12,6 @@ export interface CheckboxConfig {
   styles: {
     container: {
       base: Record<string, string>;
-      checked: Record<string, string>;
       disabled: Record<string, string>;
     },
     input: {
@@ -21,12 +20,6 @@ export interface CheckboxConfig {
     icon: {
       base: Record<string, string>;
       border: Record<Themes, Record<string, string>>;
-      valid: Record<Themes, Record<string, string>>;
-      invalid: Record<Themes, Record<string, string>>;
-      colors: Record<Themes, Record<Colors, Record<string, string>>>
-    },
-    layer: {
-      base: Record<string, string>;
       valid: Record<Themes, Record<string, string>>;
       invalid: Record<Themes, Record<string, string>>;
       colors: Record<Themes, Record<Colors, Record<string, string>>>
@@ -51,9 +44,6 @@ const checkboxConfig: CheckboxConfig = {
         height: 'h-10',
         width: 'w-10',
         group: 'group'
-      },
-      checked: {
-        group: 'checked'
       },
       disabled: {
         group: 'disabled',
@@ -125,71 +115,6 @@ const checkboxConfig: CheckboxConfig = {
           error: {
             checked: 'group-[.checked]:fill-light-on-error group-[.checked]:bg-light-error',
             disabled: 'group-[.checked]:group-[.disabled]:fill-light-on-surface/40 group-[.checked]:group-[.disabled]:bg-light-on-surface/20'
-          }
-        }
-      }
-    },
-    layer: {
-      base: {
-        position: 'absolute',
-        top: 'top-0',
-        left: 'left-0',
-        display: 'block',
-        height: 'h-full',
-        width: 'w-full',
-        borderRadius: 'rounded-full',
-        transition: 'transition',
-        pointerEvent: 'pointer-events-none'
-      },
-      valid: {
-        light: {
-          hover: 'group-hover:bg-light-success/10',
-          checkedActive: 'group-[.checked]:group-active:bg-light-success/[0.15]'
-        }
-      },
-      invalid: {
-        light: {
-          hover: 'group-hover:bg-light-error/10',
-          checkedActive: 'group-[.checked]:group-active:bg-light-error/[0.15]'
-        }
-      },
-      colors: {
-        light: {
-          default: {
-            hover: 'group-hover:bg-light-on-surface/10',
-            active: 'group-active:bg-light-on-surface/[0.15]',
-            checkedHover: 'group-[.checked]:group-hover:bg-light-on-surface/10',
-            checkedActive: 'group-[.checked]:group-active:bg-light-on-surface/[0.15]'
-          },
-          primary: {
-            hover: 'group-hover:bg-light-on-surface/10',
-            active: 'group-active:bg-light-primary/[0.15]',
-            checkedHover: 'group-[.checked]:group-hover:bg-light-primary/10',
-            checkedActive: 'group-[.checked]:group-active:bg-light-on-surface/[0.15]'
-          },
-          secondary: {
-            hover: 'group-hover:bg-light-on-surface/10',
-            active: 'group-active:bg-light-secondary/[0.15]',
-            checkedHover: 'group-[.checked]:group-hover:bg-light-secondary/10',
-            checkedActive: 'group-[.checked]:group-active:bg-light-on-surface/[0.15]'
-          },
-          success: {
-            hover: 'group-hover:bg-light-on-surface/10',
-            active: 'group-active:bg-light-success/[0.15]',
-            checkedHover: 'group-[.checked]:group-hover:bg-light-success/10',
-            checkedActive: 'group-[.checked]:group-active:bg-light-on-surface/[0.15]'
-          },
-          warning: {
-            hover: 'group-hover:bg-light-on-surface/10',
-            active: 'group-active:bg-light-warning/[0.15]',
-            checkedHover: 'group-[.checked]:group-hover:bg-light-warning/10',
-            checkedActive: 'group-[.checked]:group-active:bg-light-on-surface/[0.15]'
-          },
-          error: {
-            hover: 'group-hover:bg-light-on-surface/10',
-            active: 'group-active:bg-light-error/[0.15]',
-            checkedHover: 'group-[.checked]:group-hover:bg-light-error/10',
-            checkedActive: 'group-[.checked]:group-active:bg-light-on-surface/[0.15]'
           }
         }
       }

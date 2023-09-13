@@ -3,6 +3,7 @@ import BaseIcon, { type IconProps as BaseIconProps } from './Icon/Icon';
 import checkboxConfig from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
+import StateLayer from './StateLayer';
 
 /********************************************************************************
  *
@@ -46,51 +47,19 @@ const Icon: FC<IconProps> = ({ color, valid, invalid, className, children, ...re
 
 /********************************************************************************
  *
- *   Layer
- *
- */
-interface LayerProps extends BaseHTMLAttributes<HTMLSpanElement> {
-  color: Colors;
-  valid: boolean;
-  invalid: boolean;
-}
-
-const Layer: FC<LayerProps> = ({ color, valid, invalid, className, ...restProps }) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
-  /* --- Set default props --- */
-  const styles = checkboxConfig.styles.layer;
-
-  const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], valid && styles.valid[theme], invalid && styles.invalid[theme], className);
-
-  return (
-    <span
-      className={mergedClassName}
-      {...restProps}
-    ></span>
-  );
-};
-
-/********************************************************************************
- *
  *   Container
  *
  */
 interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
-  checked: boolean;
   disabled: boolean;
-  color: Colors;
-  valid: boolean;
-  invalid: boolean;
 }
 
-const Container = forwardRef<HTMLDivElement, ContainerProps>(({ checked, disabled, color, valid, invalid, className, ...restProps }, ref) => {
+const Container = forwardRef<HTMLDivElement, ContainerProps>(({ disabled, className, ...restProps }, ref) => {
   /* --- Set default props --- */
   const styles = checkboxConfig.styles.container;
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, checked && styles.checked, disabled && styles.disabled, className);
+  const mergedClassName = mergeClasses(styles.base, disabled && styles.disabled, className);
 
   return (
     <div
@@ -109,14 +78,14 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   invalid?: boolean;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
   iconProps?: IconProps;
-  layerProps?: BaseHTMLAttributes<HTMLSpanElement>;
+  stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
   inputRef?: MutableRefObject<HTMLInputElement> | null;
 }
 
 const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = checkboxConfig.styles.input;
-  const { color, valid, invalid, containerProps, iconProps, layerProps, inputRef, checked, disabled, type, className, ...restProps } = {
+  const { color, valid, invalid, containerProps, iconProps, stateLayerProps, inputRef, checked, disabled, type, className, ...restProps } = {
     ...checkboxConfig.defaultProps,
     ...props
   };
@@ -126,11 +95,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
 
   return (
     <Container
-      checked={checked}
       disabled={disabled}
-      color={color}
-      valid={valid}
-      invalid={invalid}
       {...containerProps}
       ref={ref}
     >
@@ -148,11 +113,10 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
         invalid={invalid}
         {...iconProps}
       />
-      <Layer
+      <StateLayer
+        state={checked ? 'checked' : 'unchecked'}
         color={color}
-        valid={valid}
-        invalid={invalid}
-        {...layerProps}
+        {...stateLayerProps}
       />
     </Container>
   );
