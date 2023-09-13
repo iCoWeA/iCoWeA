@@ -1,12 +1,9 @@
-import { type BaseHTMLAttributes } from 'react';
-
 export interface BadgeConfig {
   defaultProps: {
     position: CornerPositions;
     color: Colors;
     withBorder: boolean;
     invisible: boolean;
-    containerProps?: BaseHTMLAttributes<HTMLDivElement>;
   };
   styles: {
     container: {
@@ -29,8 +26,7 @@ const badgeConfig: BadgeConfig = {
     position: 'top-right',
     color: 'error',
     withBorder: false,
-    invisible: false,
-    containerProps: {}
+    invisible: false
   },
   styles: {
     container: {
