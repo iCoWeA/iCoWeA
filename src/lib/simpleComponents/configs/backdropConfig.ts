@@ -14,7 +14,7 @@ export interface BackdropConfig {
 
 const backdropConfig: BackdropConfig = {
   defaultProps: {
-    open: false,
+    open: true,
     invisible: false,
     overlayRef: null
   },
