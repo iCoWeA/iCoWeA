@@ -199,22 +199,22 @@ const stateLayerConfig: StateLayerConfig = {
       grab: {
         light: {
           default: {
-            background: 'after:bg-light-on-surface/20'
+            background: 'bg-light-on-surface/20'
           },
           primary: {
-            background: 'after:bg-light-primary/20'
+            background: 'bg-light-primary/20'
           },
           secondary: {
-            background: 'after:bg-light-secondary/20'
+            background: 'bg-light-secondary/20'
           },
           success: {
-            background: 'after:bg-light-success/20'
+            background: 'bg-light-success/20'
           },
           warning: {
-            background: 'after:bg-light-warning20'
+            background: 'bg-light-warning20'
           },
           error: {
-            background: 'after:bg-light-error/20'
+            background: 'bg-light-error/20'
           }
         }
       }
