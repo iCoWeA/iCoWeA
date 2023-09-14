@@ -80,13 +80,17 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
   /*
    * Set outside click action
    */
-  const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isPoperClicked = poperRef.current?.contains(event.target as Node) ?? false;
+  const outsideClickHandler = useCallback(
+    (event: MouseEvent) => {
+      const isPoperClicked = poperRef.current?.contains(event.target as Node) ?? false;
+      const isAnchorClicked = anchorElement?.contains(event.target as Node) ?? false;
 
-    if (!isPoperClicked && onClose !== undefined) {
-      onClose();
-    }
-  }, []);
+      if (!isPoperClicked && !isAnchorClicked && onClose !== undefined) {
+        onClose();
+      }
+    },
+    [anchorElement, onClose]
+  );
 
   useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
 
@@ -107,20 +111,20 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
         clearTimeout(timerId);
       }
     };
-  }, [animationState.current, closeDuration]);
+  }, [animationState.current, closeDuration, onClose]);
 
   /*
    * Set lock scroll action
    */
   useEffect(() => {
     if (lockScroll) {
-      if (animationState.current === AnimationStates.EXITED) {
-        document.body.style.overflow = 'auto';
-      } else {
+      if (open) {
         document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
       }
     }
-  }, [lockScroll, animationState.current]);
+  }, [lockScroll, open]);
 
   /*
    * Set resize action
@@ -136,7 +140,7 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
       offset,
       responsive
     );
-  }, [anchorElement, position, offset, responsive]);
+  }, [position, anchorElement, offset, responsive]);
 
   useScroll(setPosition, responsive && animationState.current !== AnimationStates.EXITED);
 
