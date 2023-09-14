@@ -1,8 +1,6 @@
-import React, { type BaseHTMLAttributes, type FC, type ReactNode, forwardRef, useContext, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
+import React, { type BaseHTMLAttributes, type FC, type ReactNode, forwardRef, useContext } from 'react';
 import alertConfig from '../../configs/alertConfig';
 import themeContext from '../../contexts/theme';
-import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
-import useOutsideClick from '../../hooks/useOutsideClick';
 import { mergeClasses } from '../../utils/propsHelper';
 
 /********************************************************************************
@@ -81,17 +79,9 @@ const EndDecoratorContainer: FC<EndDecoratorContainerProps> = ({ closable, class
 export type AlertVariant = 'text' | 'filled' | 'ghost' | 'outlined';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
-  onClose?: () => void;
-  onEnter?: () => void;
-  onExit?: () => void;
   variant?: AlertVariant;
   color?: Colors;
   closeButton?: boolean;
-  position?: InnerPositions;
-  open?: boolean;
-  closeOnAwayClick?: boolean;
-  closeDuration?: number;
-  unmountOnExit?: boolean;
   startDecorator?: ReactNode;
   endDecorator?: ReactNode;
   startDecoratorContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
@@ -106,17 +96,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = alertConfig.styles.container;
   const {
-    onClose,
-    onEnter,
-    onExit,
     variant,
     color,
     closeButton,
-    position,
-    open,
-    closeOnAwayClick,
-    closeDuration,
-    unmountOnExit,
     startDecorator,
     endDecorator,
     startDecoratorContainerProps,
@@ -130,76 +112,8 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     ...props
   };
 
-  /* --- Set refs --- */
-  const alertRef = useRef<HTMLDivElement>(null);
-
-  /* --- Set states --- */
-  const {
-    state: animationState,
-    enter,
-    exit,
-    transitionEndHandler,
-    animationEndHandler
-  } = useAnimation<HTMLDivElement>(alertRef.current, open, onEnter, onExit);
-
-  /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => alertRef.current, [
-    unmountOnExit,
-    open,
-    animationState.current === AnimationStates.EXITED
-  ]);
-
-  /* --- Set open state --- */
-  useEffect(() => {
-    if (open && animationState.exit) {
-      enter();
-    }
-
-    if (!open && animationState.enter) {
-      exit();
-    }
-  }, [open, animationState.enter, animationState.exit]);
-
-  /* --- Set outside click action --- */
-  const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isAlertClicked = alertRef.current?.contains(event.target as Node) ?? false;
-
-    if (!isAlertClicked && onClose !== undefined) {
-      onClose();
-    }
-  }, []);
-
-  useOutsideClick(outsideClickHandler, animationState.enter && closeOnAwayClick && onClose !== undefined);
-
-  /* --- Set timer action --- */
-  useEffect(() => {
-    let timerId: number;
-
-    if (animationState.current === AnimationStates.ENTERED && closeDuration !== undefined && onClose !== undefined) {
-      timerId = window.setTimeout(() => {
-        onClose();
-      }, closeDuration);
-    }
-
-    return () => {
-      if (animationState.current === AnimationStates.ENTERED && closeDuration !== undefined && onClose !== undefined) {
-        clearTimeout(timerId);
-      }
-    };
-  }, [animationState.current, closeDuration]);
-
-  if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
-    return <></>;
-  }
-
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant][theme][color],
-    position !== undefined && styles.positions[position],
-    animationState.enter && styles.open,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
 
   /* --- Set startDecorator container props --- */
   let startDecoratorContainerNode: ReactNode;
@@ -224,11 +138,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
   return (
     <div
-      onTransitionEnd={transitionEndHandler}
-      onAnimationEnd={animationEndHandler}
       role="alert"
       className={mergedClassName}
-      ref={alertRef}
+      ref={ref}
       {...restProps}
     >
       {startDecoratorContainerNode}
