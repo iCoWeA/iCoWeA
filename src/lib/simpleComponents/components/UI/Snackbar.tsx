@@ -111,6 +111,7 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
     };
   }, [animationState.enter, closeDuration]);
 
+  /* --- Set styles --- */
   useEffect(() => {
     if (animationState.enter) {
       setStyles<HTMLDivElement>(snackbarRef.current, { opacity: '100', ...style });
