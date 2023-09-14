@@ -1,10 +1,40 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
+import React, { type BaseHTMLAttributes, type FC, useContext, forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 import snackbarConfig from '../../configs/snackbarConfig';
 import themeContext from '../../contexts/theme';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import useOutsideClick from '../../hooks/useOutsideClick';
-import { mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses, setStyles } from '../../utils/propsHelper';
 
+/********************************************************************************
+ *
+ *   Container
+ *
+ */
+interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {}
+
+const Container: FC<ContainerProps> = ({ className, ...restProps }) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
+  /* --- Set default props --- */
+  const styles = snackbarConfig.styles.container;
+
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(styles.base, styles.colors[theme], className);
+
+  return (
+    <div
+      className={mergedClassName}
+      {...restProps}
+    />
+  );
+};
+
+/********************************************************************************
+ *
+ *   Snackbar
+ *
+ */
 export interface SnackbarProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
@@ -17,24 +47,9 @@ export interface SnackbarProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
   /* --- Set default props --- */
-  const styles = snackbarConfig.styles.container;
-  const {
-    onClose,
-    onEnter,
-    onExit,
-    position,
-    open,
-    closeOnAwayClick,
-    closeDuration,
-    unmountOnExit,
-    className,
-    children,
-    ...restProps
-  } = {
+  const styles = snackbarConfig.styles.snackbar;
+  const { onClose, onEnter, onExit, position, open, closeOnAwayClick, closeDuration, unmountOnExit, style, className, children, ...restProps } = {
     ...snackbarConfig.defaultProps,
     ...props
   };
@@ -53,9 +68,7 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
 
   /* --- Set imperative handler --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => snackbarRef.current, [
-    unmountOnExit,
-    open,
-    animationState.current === AnimationStates.EXITED
+    unmountOnExit && !open && animationState.current === AnimationStates.EXITED
   ]);
 
   /* --- Set open state --- */
@@ -78,38 +91,41 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
     }
   }, []);
 
-  useOutsideClick(outsideClickHandler, animationState.enter && closeOnAwayClick && onClose !== undefined);
+  useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
 
   /* --- Set timer action --- */
   useEffect(() => {
     let timerId: number;
 
-    if (animationState.current === AnimationStates.ENTERED && closeDuration !== undefined && onClose !== undefined) {
+    if (animationState.enter && closeDuration !== undefined && onClose !== undefined) {
       timerId = window.setTimeout(() => {
         onClose();
       }, closeDuration);
     }
 
     return () => {
-      if (animationState.current === AnimationStates.ENTERED && closeDuration !== undefined && onClose !== undefined) {
+      if (animationState.enter && closeDuration !== undefined && onClose !== undefined) {
         clearTimeout(timerId);
       }
     };
-  }, [animationState.current, closeDuration]);
+  }, [animationState.enter, closeDuration]);
+
+  useEffect(() => {
+    if (animationState.enter) {
+      setStyles<HTMLDivElement>(snackbarRef.current, { opacity: '100', ...style });
+    } else {
+      setStyles<HTMLDivElement>(snackbarRef.current, { opacity: '0', ...style });
+    }
+  }, [animationState.enter, style]);
 
   if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.colors[theme],
-    children === undefined && styles.empty,
-    position !== undefined && styles.positions[position],
-    animationState.enter && styles.open,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, position !== undefined && styles.positions[position], className);
+
+  const childrenNode = typeof children !== 'object' ? <Container>{children}</Container> : children;
 
   return (
     <div
@@ -119,7 +135,7 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
       ref={snackbarRef}
       {...restProps}
     >
-      {children}
+      {childrenNode}
     </div>
   );
 });
