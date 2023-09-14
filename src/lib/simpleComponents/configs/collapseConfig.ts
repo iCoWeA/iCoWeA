@@ -1,6 +1,8 @@
 export interface CollapseConfig {
   defaultProps: {
+    direction: Directions;
     open: boolean;
+    closeOnAwayClick: boolean;
     unmountOnExit: boolean;
   };
   styles: {
@@ -10,12 +12,16 @@ export interface CollapseConfig {
 
 const collapseConfig: CollapseConfig = {
   defaultProps: {
-    open: false,
+    direction: 'vertical',
+    open: true,
+    closeOnAwayClick: false,
     unmountOnExit: false
   },
   styles: {
     base: {
       display: 'block',
+      height: 'h-0',
+      width: 'w-0',
       overflow: 'overflow-hidden',
       transition: 'transition-[height]',
       transitionDuration: 'duration-500'

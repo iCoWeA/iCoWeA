@@ -29,8 +29,8 @@ const snackbarConfig: SnackbarConfig = {
         height: 'h-fit',
         width: 'w-fit',
         opacity: 'opacity-0',
-        transition: 'transition',
-        transitionDuration: 'duration-[5000ms]'
+        transition: 'transition-[opacity]',
+        transitionDuration: 'duration-500'
       },
       positions: {
         top: {
