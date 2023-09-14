@@ -1,6 +1,8 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
-import containerConfig, { type ContainerVariants } from '../../../configs/containerConfig';
-import { mergeClasses } from '../../../utils/propsHelper';
+import containerConfig from '../../configs/containerConfig';
+import { mergeClasses } from '../../utils/propsHelper';
+
+export type ContainerVariants = 'column' | 'layout' | 'standard-layout' | 'dashboard-layout' | 'fluid';
 
 export interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ContainerVariants;

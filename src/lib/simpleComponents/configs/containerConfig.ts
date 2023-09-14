@@ -1,4 +1,4 @@
-export type ContainerVariants = 'flex' | 'flex-col' | 'grid' | 'column' | 'default' | 'standard' | 'dashboard' | 'fluid';
+import { type ContainerVariants } from '../components/UI/Container';
 
 export interface ContainerConfig {
   defaultProps: {
@@ -12,47 +12,35 @@ export interface ContainerConfig {
 
 const containerConfig: ContainerConfig = {
   defaultProps: {
-    variant: 'flex'
+    variant: 'column'
   },
   styles: {
     base: {
     },
     variants: {
-      flex: {
-        display: 'flex',
-        gap: 'gap-6'
-      },
-      'flex-col': {
-        display: 'flex',
-        flexDirection: 'flex-col',
-        gap: 'gap-6'
-      },
-      grid: {
-        display: 'grid',
-        gap: 'gap-6'
-      },
       column: {
         display: 'grid',
         gridTemplateColumns: 'grid-cols-4',
-        gap: 'gap-y-6 gap-x-[16px]',
+        gap: 'gap-x-[16px]',
         width: 'w-full',
-        md: 'md:grid-cols-8 md:gap-x-[24px]'
+        md: 'md:grid-cols-8 md:gap-x-[24px]',
+        lg: 'lg:grid-cols-12'
       },
-      default: {
+      layout: {
         display: 'grid',
         height: 'min-h-screen',
         width: 'w-full'
       },
-      standard: {
+      'standard-layout': {
         display: 'grid',
         gridTemplateRows: 'grid-rows-layout',
         height: 'min-h-screen',
         width: 'w-full'
       },
-      dashboard: {
+      'dashboard-layout': {
         display: 'grid',
         gridTemplateRows: 'grid-rows-layout',
-        gridTemplateCols: 'grid-rows-layout',
+        gridTemplateCols: 'grid-cols-layout',
         height: 'min-h-screen',
         width: 'w-full'
       },
