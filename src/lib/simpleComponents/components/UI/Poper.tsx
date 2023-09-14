@@ -40,7 +40,6 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
     anchorElement,
     style,
     className,
-    children,
     ...restProps
   } = {
     ...poperConfig.defaultProps,
@@ -180,9 +179,7 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
       className={mergedClassName}
       ref={poperRef}
       {...restProps}
-    >
-      {children}
-    </div>
+    />
   );
 });
 
