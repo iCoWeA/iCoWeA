@@ -3,7 +3,7 @@ import { type ChipVariant } from '../components/UI/Chip';
 export interface ChipConfig {
   defaultProps: {
     variant: ChipVariant;
-    shapeVariant: ShapeVariants;
+    borderShape: BorderShapes;
     color: Colors;
     closeButton: boolean;
     clickable: boolean;
@@ -12,7 +12,7 @@ export interface ChipConfig {
   styles: {
     container: {
       base: Record<string, string>;
-      shapeVaraints: Record<ShapeVariants, Record<string, string>>;
+      borderShapes: Record<BorderShapes, Record<string, string>>;
       variants: Record<ChipVariant, Record<Themes, Record<Colors, Record<string, string>>>>
     },
     startDecoratorContainer: {
@@ -31,7 +31,7 @@ export interface ChipConfig {
 const chipConfig: ChipConfig = {
   defaultProps: {
     variant: 'filled',
-    shapeVariant: 'circular',
+    borderShape: 'circular',
     color: 'primary',
     closeButton: false,
     clickable: false,
@@ -48,12 +48,15 @@ const chipConfig: ChipConfig = {
         transition: 'transition-colors',
         group: 'group'
       },
-      shapeVaraints: {
+      borderShapes: {
         rounded: {
           borderRadius: 'rounded-xl'
         },
         circular: {
           borderRadius: 'rounded-full'
+        },
+        square: {
+          borderRadius: 'rounded-none'
         }
       },
       variants: {

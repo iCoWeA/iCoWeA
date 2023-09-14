@@ -81,7 +81,7 @@ export type ChipVariant = 'filled' | 'ghost' | 'outlined';
 
 export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ChipVariant;
-  shapeVariant?: ShapeVariants;
+  borderShape?: BorderShapes;
   color?: Colors;
   closeButton?: boolean;
   clickable?: boolean;
@@ -102,7 +102,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
   const styles = chipConfig.styles.container;
   const {
     variant,
-    shapeVariant,
+    borderShape,
     color,
     closeButton,
     clickable,
@@ -148,7 +148,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.shapeVaraints[shapeVariant], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.borderShapes[borderShape], className);
 
   /* --- Set startDecorator container props --- */
   let startDecoratorContainerNode: ReactNode;
