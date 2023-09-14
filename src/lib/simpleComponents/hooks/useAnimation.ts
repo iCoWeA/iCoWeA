@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { type TransitionEventHandler, type AnimationEventHandler, useState, useCallback, type TransitionEvent, type AnimationEvent } from 'react';
 
 export enum AnimationStates {ENTERING, ENTERED, EXITING, EXITED}
 
@@ -8,48 +8,67 @@ export interface AnimationState {
   exit: boolean;
 }
 
-interface Return {
+export interface AnimationConfig {
+  onEntering?: () => void;
+  onExiting?: () => void;
+  onEnter?: () => void;
+  onExit?: () => void;
+}
+
+interface Return<T> {
   state: AnimationState;
   enter: (onEntering?: () => void) => void;
   exit: (onExiting?: () => void) => void;
-  stopEntering: (onEnter?: () => void) => void;
-  stopExiting: (onExit?: () => void) => void;
+  transitionEndHandler: TransitionEventHandler<T>,
+  animationEndHandler: AnimationEventHandler<T>
 }
 
-const useAnimation = (): Return => {
-  const [state, setState] = useState<AnimationStates>(AnimationStates.EXITED);
+const useAnimation = <T extends HTMLElement>(element: T | null, isEntered: boolean = false, onEnter?: () => void, onExit?: () => void): Return<T> => {
+  const [state, setState] = useState<AnimationStates>(isEntered ? AnimationStates.ENTERED : AnimationStates.EXITED);
 
-  const enter = useCallback((onEntering?: () => void) => {
-    if (onEntering !== undefined) {
-      onEntering();
-    }
-
+  const enter = useCallback(() => {
     setState(AnimationStates.ENTERING);
   }, []);
 
-  const stopEntering = useCallback((onExiting?: () => void) => {
-    if (onExiting !== undefined) {
-      onExiting();
-    }
-
-    setState(AnimationStates.ENTERED);
-  }, []);
-
-  const exit = useCallback((onEnter?: () => void) => {
-    if (onEnter !== undefined) {
-      onEnter();
-    }
-
+  const exit = useCallback((onExiting?: () => void) => {
     setState(AnimationStates.EXITING);
   }, []);
 
-  const stopExiting = useCallback((onExit?: () => void) => {
-    if (onExit !== undefined) {
-      onExit();
+  const transitionEndHandler = (event: TransitionEvent<T>): void => {
+    if (state === AnimationStates.ENTERING && event.target === element) {
+      if (onEnter !== undefined) {
+        onEnter();
+      }
+
+      setState(AnimationStates.ENTERED);
     }
 
-    setState(AnimationStates.EXITED);
-  }, []);
+    if (state === AnimationStates.EXITING && event.target === element) {
+      if (onExit !== undefined) {
+        onExit();
+      }
+
+      setState(AnimationStates.EXITED);
+    }
+  };
+
+  const animationEndHandler = (event: AnimationEvent<T>): void => {
+    if (state === AnimationStates.ENTERING && event.target === element) {
+      if (onEnter !== undefined) {
+        onEnter();
+      }
+
+      setState(AnimationStates.ENTERED);
+    }
+
+    if (state === AnimationStates.EXITING && event.target === element) {
+      if (onExit !== undefined) {
+        onExit();
+      }
+
+      setState(AnimationStates.EXITED);
+    }
+  };
 
   return {
     state: {
@@ -58,9 +77,9 @@ const useAnimation = (): Return => {
       exit: state === AnimationStates.EXITING || state === AnimationStates.EXITED
     },
     enter,
-    stopEntering,
     exit,
-    stopExiting
+    transitionEndHandler,
+    animationEndHandler
   };
 };
 
