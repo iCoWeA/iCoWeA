@@ -24,6 +24,7 @@ const Container: FC<ContainerProps> = ({ className, ...restProps }) => {
 
   return (
     <div
+      role="alert"
       className={mergedClassName}
       {...restProps}
     />
