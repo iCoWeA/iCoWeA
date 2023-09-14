@@ -15,7 +15,7 @@ const collapseConfig: CollapseConfig = {
     direction: 'vertical',
     open: true,
     closeOnAwayClick: false,
-    unmountOnExit: false
+    unmountOnExit: true
   },
   styles: {
     base: {

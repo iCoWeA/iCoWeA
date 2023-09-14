@@ -20,7 +20,7 @@ const snackbarConfig: SnackbarConfig = {
   defaultProps: {
     open: true,
     closeOnAwayClick: true,
-    unmountOnExit: false
+    unmountOnExit: true
   },
   styles: {
     snackbar: {
