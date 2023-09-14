@@ -13,13 +13,13 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   fit?: boolean;
   closeOnAwayClick?: boolean;
   closeDuration?: number;
-  unmountOnExit?: boolean;
+  keepMounted?: boolean;
 }
 
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = collapseConfig.styles;
-  const { onClose, onEnter, onExit, direction, open, fit, closeOnAwayClick, closeDuration, unmountOnExit, style, className, ...restProps } = {
+  const { onClose, onEnter, onExit, direction, open, fit, closeOnAwayClick, closeDuration, keepMounted, style, className, ...restProps } = {
     ...collapseConfig.defaultProps,
     ...props
   };
@@ -40,7 +40,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
    * Set imperative handler
    */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => collapseRef.current, [
-    unmountOnExit && !open && animationState.current === AnimationStates.EXITED
+    !keepMounted && !open && animationState.current === AnimationStates.EXITED
   ]);
 
   /*
@@ -116,7 +116,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   }, [animationState.current, fit, style]);
 
   /* --- Unmount --- */
-  if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
+  if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
 

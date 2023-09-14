@@ -4,7 +4,7 @@ export interface CollapseConfig {
     open: boolean;
     fit: boolean;
     closeOnAwayClick: boolean;
-    unmountOnExit: boolean;
+    keepMounted: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -18,7 +18,7 @@ const collapseConfig: CollapseConfig = {
     open: false,
     fit: false,
     closeOnAwayClick: false,
-    unmountOnExit: true
+    keepMounted: false
   },
   styles: {
     base: {
