@@ -189,5 +189,3 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
 Poper.displayName = 'Poper';
 
 export default Poper;
-
-/* ON_CLOSE() IS NOT IN DEPENDENCY LIST !!! */
