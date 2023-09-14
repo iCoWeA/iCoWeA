@@ -1,8 +1,6 @@
 export interface FadeConfig {
   defaultProps: {
     open: boolean;
-    closeOnAwayClick: boolean;
-    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -11,9 +9,7 @@ export interface FadeConfig {
 
 const fadeConfig: FadeConfig = {
   defaultProps: {
-    open: false,
-    closeOnAwayClick: true,
-    unmountOnExit: true
+    open: false
   },
   styles: {
     base: {

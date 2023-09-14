@@ -1,23 +1,18 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import fadeConfig from '../../configs/fadeConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
-import useOutsideClick from '../../hooks/useOutsideClick';
 import { setStyles, mergeClasses } from '../../utils/propsHelper';
 
 export interface FadeProps extends BaseHTMLAttributes<HTMLDivElement> {
-  onClose?: () => void;
   onEnter?: () => void;
   onExit?: () => void;
   open?: boolean;
-  closeOnAwayClick?: boolean;
-  closeDuration?: number;
-  unmountOnExit?: boolean;
 }
 
 const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = fadeConfig.styles;
-  const { onClose, onEnter, onExit, open, closeOnAwayClick, closeDuration, unmountOnExit, style, className, ...restProps } = {
+  const { onEnter, onExit, open, style, className, children, ...restProps } = {
     ...fadeConfig.defaultProps,
     ...props
   };
@@ -35,9 +30,7 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   } = useAnimation<HTMLDivElement>(fadeRef.current, open, onEnter, onExit);
 
   /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => fadeRef.current, [
-    unmountOnExit && !open && animationState.current === AnimationStates.EXITED
-  ]);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => fadeRef.current, []);
 
   /*
    * Set open state
@@ -51,38 +44,6 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
       exit();
     }
   }, [open, animationState.enter, animationState.exit]);
-
-  /*
-   * Set outside click action
-   */
-  const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isFadeClicked = fadeRef.current?.contains(event.target as Node) ?? false;
-
-    if (!isFadeClicked && onClose !== undefined) {
-      onClose();
-    }
-  }, []);
-
-  useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
-
-  /*
-   * Set timer action
-   */
-  useEffect(() => {
-    let timerId: number;
-
-    if (animationState.enter && closeDuration !== undefined && onClose !== undefined) {
-      timerId = window.setTimeout(() => {
-        onClose();
-      }, closeDuration);
-    }
-
-    return () => {
-      if (animationState.enter && closeDuration !== undefined && onClose !== undefined) {
-        clearTimeout(timerId);
-      }
-    };
-  }, [animationState.enter, closeDuration]);
 
   /*
    * Set initial style
@@ -106,11 +67,6 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
     }
   }, [animationState.current, style]);
 
-  /* --- Unmount --- */
-  if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
-    return <></>;
-  }
-
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, className);
 
@@ -128,5 +84,3 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
 Fade.displayName = 'Fade';
 
 export default Fade;
-
-/* ON_CLOSE() IS NOT IN DEPENDENCY LIST !!! */
