@@ -18,7 +18,7 @@ export interface SnackbarConfig {
 
 const snackbarConfig: SnackbarConfig = {
   defaultProps: {
-    open: true,
+    open: false,
     closeOnAwayClick: true,
     unmountOnExit: true
   },

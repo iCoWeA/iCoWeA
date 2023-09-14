@@ -134,6 +134,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     }
   }, [animationState.current, fit, style]);
 
+  /* --- Unmount --- */
   if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }

@@ -72,7 +72,9 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
     unmountOnExit && !open && animationState.current === AnimationStates.EXITED
   ]);
 
-  /* --- Set open state --- */
+  /*
+   * Set open state
+   */
   useEffect(() => {
     if (open && animationState.exit) {
       enter();
@@ -83,7 +85,9 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
     }
   }, [open, animationState.enter, animationState.exit]);
 
-  /* --- Set outside click action --- */
+  /*
+   * Set outside click action
+   */
   const outsideClickHandler = useCallback((event: MouseEvent) => {
     const isSnackbarClicked = snackbarRef.current?.contains(event.target as Node) ?? false;
 
@@ -94,7 +98,9 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
 
   useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
 
-  /* --- Set timer action --- */
+  /*
+   * Set timer action
+   */
   useEffect(() => {
     let timerId: number;
 
@@ -111,15 +117,29 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
     };
   }, [animationState.enter, closeDuration]);
 
-  /* --- Set styles --- */
+  /*
+   * Set initial style
+   */
   useEffect(() => {
-    if (animationState.enter) {
+    if (animationState.current === AnimationStates.ENTERED) {
       setStyles<HTMLDivElement>(snackbarRef.current, { opacity: '100', ...style });
-    } else {
+    }
+  }, [animationState.current, style]);
+
+  /*
+   * Set styles
+   */
+  useEffect(() => {
+    if (animationState.current === AnimationStates.ENTERING) {
+      setStyles<HTMLDivElement>(snackbarRef.current, { opacity: '100', ...style });
+    }
+
+    if (animationState.current === AnimationStates.EXITING) {
       setStyles<HTMLDivElement>(snackbarRef.current, { opacity: '0', ...style });
     }
-  }, [animationState.enter, style]);
+  }, [animationState.current, style]);
 
+  /* --- Unmount --- */
   if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
