@@ -89,25 +89,6 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   }, [animationState.enter, closeDuration]);
 
   /*
-   * Set initial style
-   */
-  useEffect(() => {
-    if (animationState.current === AnimationStates.ENTERED && direction === 'vertical' && collapseRef.current !== null) {
-      setStyles<HTMLDivElement>(collapseRef.current, {
-        height: `${collapseRef.current.scrollHeight}px`,
-        ...style
-      });
-    }
-
-    if (animationState.current === AnimationStates.ENTERED && direction === 'horizontal' && collapseRef.current !== null) {
-      setStyles<HTMLDivElement>(collapseRef.current, {
-        width: `${fit ? `${collapseRef.current.scrollWidth}px` : '100%'}`,
-        ...style
-      });
-    }
-  }, []);
-
-  /*
    * Set styles
    */
   useEffect(() => {
