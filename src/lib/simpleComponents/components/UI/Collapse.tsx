@@ -10,6 +10,7 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   onExit?: () => void;
   direction?: Directions;
   open?: boolean;
+  fit?: boolean;
   closeOnAwayClick?: boolean;
   closeDuration?: number;
   unmountOnExit?: boolean;
@@ -18,7 +19,7 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = collapseConfig.styles;
-  const { onClose, onEnter, onExit, direction, open, closeOnAwayClick, closeDuration, unmountOnExit, style, className, children, ...restProps } = {
+  const { onClose, onEnter, onExit, direction, open, fit, closeOnAwayClick, closeDuration, unmountOnExit, style, className, ...restProps } = {
     ...collapseConfig.defaultProps,
     ...props
   };
@@ -35,12 +36,16 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     animationEndHandler
   } = useAnimation<HTMLDivElement>(collapseRef.current, open, onEnter, onExit);
 
-  /* --- Set imperative handler --- */
+  /*
+   * Set imperative handler
+   */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => collapseRef.current, [
     unmountOnExit && !open && animationState.current === AnimationStates.EXITED
   ]);
 
-  /* --- Set open state --- */
+  /*
+   * Set open state
+   */
   useEffect(() => {
     if (open && animationState.exit) {
       enter();
@@ -51,7 +56,9 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     }
   }, [open, animationState.enter, animationState.exit]);
 
-  /* --- Set outside click action --- */
+  /*
+   * Set outside click action
+   */
   const outsideClickHandler = useCallback((event: MouseEvent) => {
     const isSnackbarClicked = collapseRef.current?.contains(event.target as Node) ?? false;
 
@@ -62,7 +69,9 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
 
-  /* --- Set timer action --- */
+  /*
+   * Set timer action
+   */
   useEffect(() => {
     let timerId: number;
 
@@ -79,39 +88,58 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     };
   }, [animationState.enter, closeDuration]);
 
-  /* --- Set styles --- */
+  /*
+   * Set initial style
+   */
   useEffect(() => {
-    if (animationState.enter && direction === 'horizontal' && collapseRef.current !== null) {
+    if (animationState.current === AnimationStates.ENTERED && direction === 'vertical' && collapseRef.current !== null) {
       setStyles<HTMLDivElement>(collapseRef.current, {
-        height: `${collapseRef.current.offsetHeight}px`,
-        width: `${collapseRef.current.offsetWidth}px`,
+        height: `${collapseRef.current.scrollHeight}px`,
         ...style
       });
     }
 
-    if (animationState.exit && direction === 'horizontal' && collapseRef.current !== null) {
-      setStyles<HTMLDivElement>(collapseRef.current, { height: '0px', width: `${collapseRef.current.offsetWidth}px`, ...style });
-    }
-
-    if (animationState.enter && direction === 'vertical' && collapseRef.current !== null) {
+    if (animationState.current === AnimationStates.ENTERED && direction === 'horizontal' && collapseRef.current !== null) {
       setStyles<HTMLDivElement>(collapseRef.current, {
-        height: `${collapseRef.current.offsetHeight}px`,
-        width: `${collapseRef.current.offsetWidth}px`,
+        width: `${fit ? `${collapseRef.current.scrollWidth}px` : '100%'}`,
+        ...style
+      });
+    }
+  }, []);
+
+  /*
+   * Set styles
+   */
+  useEffect(() => {
+    if (animationState.current === AnimationStates.ENTERING && direction === 'vertical' && collapseRef.current !== null) {
+      setStyles<HTMLDivElement>(collapseRef.current, {
+        height: `${collapseRef.current.scrollHeight}px`,
         ...style
       });
     }
 
-    if (animationState.exit && direction === 'vertical' && collapseRef.current !== null) {
-      setStyles<HTMLDivElement>(collapseRef.current, { height: `${collapseRef.current.offsetHeight}px`, width: '0px', ...style });
+    if (animationState.current === AnimationStates.EXITING && direction === 'vertical' && collapseRef.current !== null) {
+      setStyles<HTMLDivElement>(collapseRef.current, { height: '0px', ...style });
     }
-  }, [animationState.enter, animationState.exit, style]);
+
+    if (animationState.current === AnimationStates.ENTERING && direction === 'horizontal' && collapseRef.current !== null) {
+      setStyles<HTMLDivElement>(collapseRef.current, {
+        width: `${fit ? `${collapseRef.current.scrollWidth}px` : '100%'}`,
+        ...style
+      });
+    }
+
+    if (animationState.current === AnimationStates.EXITING && direction === 'horizontal' && collapseRef.current !== null) {
+      setStyles<HTMLDivElement>(collapseRef.current, { width: '0px', ...style });
+    }
+  }, [animationState.current, fit, style]);
 
   if (unmountOnExit && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, className);
+  const mergedClassName = mergeClasses(styles.base, styles.directions[direction], className);
 
   return (
     <div
