@@ -3,7 +3,17 @@ import stateLayerConfig from '../../configs/stateLayerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
-export type StateLayerStates = 'plain-click' | 'text-click' | 'outlined-click' | 'filled-click' | 'checked' | 'unchecked' | 'grab';
+export type StateLayerStates =
+  | 'plain-click'
+  | 'text-click'
+  | 'outlined-click'
+  | 'filled-click'
+  | 'checked'
+  | 'unchecked'
+  | 'plain-grab'
+  | 'text-grab'
+  | 'outlined-grab'
+  | 'filled-grab';
 
 export interface StateLayerProps extends BaseHTMLAttributes<HTMLSpanElement> {
   state?: StateLayerStates;
