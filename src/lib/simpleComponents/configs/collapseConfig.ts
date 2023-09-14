@@ -13,7 +13,7 @@ export interface CollapseConfig {
 const collapseConfig: CollapseConfig = {
   defaultProps: {
     direction: 'vertical',
-    open: true,
+    open: false,
     closeOnAwayClick: false,
     unmountOnExit: true
   },
