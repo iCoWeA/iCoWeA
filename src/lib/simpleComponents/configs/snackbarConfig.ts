@@ -5,12 +5,13 @@ export interface SnackbarConfig {
     unmountOnExit: boolean;
   };
   styles: {
+    snackbar: {
+      base: Record<string, string>;
+      positions: Record<InnerPositions, Record<string, string>>;
+    },
     container: {
       base: Record<string, string>;
-      open: Record<string, string>;
-      empty: Record<string, string>;
       colors: Record<Themes, Record<string, string>>;
-      positions: Record<InnerPositions, Record<string, string>>;
     }
   }
 }
@@ -22,29 +23,14 @@ const snackbarConfig: SnackbarConfig = {
     unmountOnExit: false
   },
   styles: {
-    container: {
+    snackbar: {
       base: {
-        display: 'flex',
+        display: 'block',
         height: 'h-fit',
         width: 'w-fit',
         opacity: 'opacity-0',
         transition: 'transition',
-        transitionDuration: 'duration-500'
-      },
-      open: {
-        opacity: 'opacity-100'
-      },
-      empty: {
-        flexDirection: 'flex-col',
-        padding: 'py-3.5 px-4',
-        font: 'antialiased font-normal text-sm font-sans'
-      },
-      colors: {
-        light: {
-          fill: 'fill-light-on-surface',
-          color: 'text-light-on-surface',
-          background: 'bg-light-surface-dark'
-        }
+        transitionDuration: 'duration-[5000ms]'
       },
       positions: {
         top: {
@@ -90,6 +76,22 @@ const snackbarConfig: SnackbarConfig = {
           top: 'top-2/4',
           right: 'right-6',
           translate: '-translate-y-2/4'
+        }
+      }
+    },
+    container: {
+      base: {
+        display: 'flex',
+        flexDirection: 'flex-col',
+        padding: 'py-3.5 px-4',
+        borderRadius: 'rounded-xl',
+        font: 'antialiased font-normal text-sm font-sans'
+      },
+      colors: {
+        light: {
+          fill: 'fill-light-on-surface',
+          color: 'text-light-on-surface',
+          background: 'bg-light-surface-dark'
         }
       }
     }
