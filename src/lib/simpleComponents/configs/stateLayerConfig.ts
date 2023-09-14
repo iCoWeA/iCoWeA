@@ -196,7 +196,29 @@ const stateLayerConfig: StateLayerConfig = {
           }
         }
       },
-      grab: {
+      'plain-grab': {
+        light: {
+          default: {
+            background: 'bg-light-on-surface-variant/20'
+          },
+          primary: {
+            background: 'bg-light-on-primary/20'
+          },
+          secondary: {
+            background: 'bg-light-on-secondary/20'
+          },
+          success: {
+            background: 'bg-light-on-success/20'
+          },
+          warning: {
+            background: 'bg-light-on-warning/20'
+          },
+          error: {
+            background: 'bg-light-on-error/20'
+          }
+        }
+      },
+      'text-grab': {
         light: {
           default: {
             background: 'bg-light-on-surface/20'
@@ -211,10 +233,54 @@ const stateLayerConfig: StateLayerConfig = {
             background: 'bg-light-success/20'
           },
           warning: {
-            background: 'bg-light-warning20'
+            background: 'bg-light-warning/20'
           },
           error: {
             background: 'bg-light-error/20'
+          }
+        }
+      },
+      'outlined-grab': {
+        light: {
+          default: {
+            hover: 'bg-light-on-surface/20'
+          },
+          primary: {
+            hover: 'bg-light-primary/20'
+          },
+          secondary: {
+            hover: 'bg-light-secondary/20'
+          },
+          success: {
+            hover: 'bg-light-success/20'
+          },
+          warning: {
+            hover: 'bg-light-warning/20'
+          },
+          error: {
+            hover: 'bg-light-error/20'
+          }
+        }
+      },
+      'filled-grab': {
+        light: {
+          default: {
+            background: 'bg-light-on-surface/20'
+          },
+          primary: {
+            background: 'bg-light-on-primary/20'
+          },
+          secondary: {
+            background: 'bg-light-on-secondary/20'
+          },
+          success: {
+            background: 'bg-light-on-success/20'
+          },
+          warning: {
+            background: 'bg-light-on-warning/20'
+          },
+          error: {
+            background: 'bg-light-on-error/20'
           }
         }
       }
