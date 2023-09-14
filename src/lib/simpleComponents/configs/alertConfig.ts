@@ -8,11 +8,9 @@ export interface AlertConfig {
     open: boolean;
   };
   styles: {
-    fade: {
-      positions: Record<InnerPositions, Record<string, string>>;
-    },
     container: {
       base: Record<string, string>;
+      positions: Record<InnerPositions, Record<string, string>>;
       variants: Record<AlertVariant, Record<Themes, Record<Colors, Record<string, string>>>>
     },
     startDecoratorContainer: {
@@ -36,7 +34,13 @@ const alertConfig: AlertConfig = {
     open: true
   },
   styles: {
-    fade: {
+    container: {
+      base: {
+        display: 'flex',
+        width: 'w-full',
+        borderRadius: 'rounded-xl',
+        shadow: 'shadow-md shadow-black/50'
+      },
       positions: {
         top: {
           position: 'fixed',
@@ -82,14 +86,6 @@ const alertConfig: AlertConfig = {
           right: 'right-6',
           translate: '-translate-y-2/4'
         }
-      }
-    },
-    container: {
-      base: {
-        display: 'flex',
-        width: 'w-full',
-        borderRadius: 'rounded-xl',
-        shadow: 'shadow-md shadow-black/50'
       },
       variants: {
         filled: {

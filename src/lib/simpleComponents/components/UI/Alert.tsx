@@ -74,86 +74,6 @@ const EndDecoratorContainer: FC<EndDecoratorContainerProps> = ({ closable, class
 
 /********************************************************************************
  *
- *   Container
- *
- */
-export interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant: AlertVariant;
-  color: Colors;
-  closeButton: boolean;
-  startDecorator?: ReactNode;
-  endDecorator?: ReactNode;
-  startDecoratorContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  bodyContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  endDecoratorContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-}
-
-const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  (
-    {
-      variant,
-      color,
-      closeButton,
-      startDecorator,
-      endDecorator,
-      startDecoratorContainerProps,
-      bodyContainerProps,
-      endDecoratorContainerProps,
-      className,
-      children,
-      ...restProps
-    },
-    ref
-  ) => {
-    /* --- Set context props --- */
-    const theme = useContext(themeContext).theme;
-
-    /* --- Set default props --- */
-    const styles = alertConfig.styles.container;
-
-    /* --- Set props --- */
-    const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
-
-    /* --- Set startDecorator container props --- */
-    let startDecoratorContainerNode: ReactNode;
-
-    if (startDecorator !== undefined) {
-      startDecoratorContainerNode = <StartDecoratorContainer {...startDecoratorContainerProps}>{startDecorator}</StartDecoratorContainer>;
-    }
-
-    /* --- Set button container props --- */
-    let endDecoratorContainerNode: ReactNode;
-
-    if (endDecorator !== undefined) {
-      endDecoratorContainerNode = (
-        <EndDecoratorContainer
-          closable={closeButton}
-          {...endDecoratorContainerProps}
-        >
-          {endDecorator}
-        </EndDecoratorContainer>
-      );
-    }
-
-    return (
-      <div
-        role="alert"
-        className={mergedClassName}
-        ref={ref}
-        {...restProps}
-      >
-        {startDecoratorContainerNode}
-        <BodyContainer {...bodyContainerProps}>{children}</BodyContainer>
-        {endDecoratorContainerNode}
-      </div>
-    );
-  }
-);
-
-Container.displayName = 'Container';
-
-/********************************************************************************
- *
  *   Alert
  *
  */
@@ -175,7 +95,11 @@ export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
+  const styles = alertConfig.styles.container;
   const {
     onClose,
     variant,
@@ -189,6 +113,8 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     bodyContainerProps,
     endDecoratorContainerProps,
     fadeProps,
+    className,
+    children,
     ...restProps
   } = {
     ...alertConfig.defaultProps,
@@ -196,46 +122,62 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   };
 
   /* --- Set props --- */
-  if (onClose !== undefined) {
-    const styles = alertConfig.styles.fade;
-    const mergedClassName = mergeClasses(position !== undefined && styles.positions[position]);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], position !== undefined && styles.positions[position], className);
 
+  /* --- Set startDecorator container props --- */
+  let startDecoratorContainerNode: ReactNode;
+
+  if (startDecorator !== undefined) {
+    startDecoratorContainerNode = <StartDecoratorContainer {...startDecoratorContainerProps}>{startDecorator}</StartDecoratorContainer>;
+  }
+
+  /* --- Set button container props --- */
+  let endDecoratorContainerNode: ReactNode;
+
+  if (endDecorator !== undefined) {
+    endDecoratorContainerNode = (
+      <EndDecoratorContainer
+        closable={closeButton}
+        {...endDecoratorContainerProps}
+      >
+        {endDecorator}
+      </EndDecoratorContainer>
+    );
+  }
+
+  /* --- Set props --- */
+  if (onClose !== undefined) {
     return (
       <Fade
         onClose={onClose}
         open={open}
-        className={mergedClassName}
         ref={ref}
         {...fadeProps}
       >
-        <Container
-          variant={variant}
-          color={color}
-          closeButton={closeButton}
-          startDecorator={startDecorator}
-          endDecorator={endDecorator}
-          startDecoratorContainerProps={startDecoratorContainerProps}
-          bodyContainerProps={bodyContainerProps}
-          endDecoratorContainerProps={endDecoratorContainerProps}
+        <div
+          role="alert"
+          className={mergedClassName}
           {...restProps}
-        />
+        >
+          {startDecoratorContainerNode}
+          <BodyContainer {...bodyContainerProps}>{children}</BodyContainer>
+          {endDecoratorContainerNode}
+        </div>
       </Fade>
     );
   }
 
   return (
-    <Container
-      variant={variant}
-      color={color}
-      closeButton={closeButton}
-      startDecorator={startDecorator}
-      endDecorator={endDecorator}
-      startDecoratorContainerProps={startDecoratorContainerProps}
-      bodyContainerProps={bodyContainerProps}
-      endDecoratorContainerProps={endDecoratorContainerProps}
+    <div
+      role="alert"
+      className={mergedClassName}
       ref={ref}
       {...restProps}
-    />
+    >
+      {startDecoratorContainerNode}
+      <BodyContainer {...bodyContainerProps}>{children}</BodyContainer>
+      {endDecoratorContainerNode}
+    </div>
   );
 });
 
