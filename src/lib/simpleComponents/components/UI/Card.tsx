@@ -40,7 +40,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   if (grabed) {
     stateLayerNode = (
       <StateLayer
-        state="grab"
+        state="text-grab"
         {...stateLayerProps}
       />
     );
