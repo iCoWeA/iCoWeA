@@ -8,7 +8,7 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
   onExit?: () => void;
-  direction?: Directions;
+  direction?: Orientations;
   open?: boolean;
   fit?: boolean;
   closeOnAwayClick?: boolean;

@@ -1,6 +1,6 @@
 export interface CollapseConfig {
   defaultProps: {
-    direction: Directions;
+    direction: Orientations;
     open: boolean;
     fit: boolean;
     closeOnAwayClick: boolean;
@@ -8,7 +8,7 @@ export interface CollapseConfig {
   };
   styles: {
     base: Record<string, string>;
-    directions: Record<Directions, Record<string, string>>;
+    directions: Record<Orientations, Record<string, string>>;
   }
 }
 
