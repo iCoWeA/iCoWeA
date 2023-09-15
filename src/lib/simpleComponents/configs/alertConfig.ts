@@ -1,15 +1,15 @@
-import { type AlertVariant } from '../components/UI/Alert';
+import { type AlertVariants } from '../components/UI/Alert';
 
 export interface AlertConfig {
   defaultProps: {
-    variant: AlertVariant;
+    variant: AlertVariants;
     color: Colors;
     closeButton: boolean;
   };
   styles: {
     container: {
       base: Record<string, string>;
-      variants: Record<AlertVariant, Record<Themes, Record<Colors, Record<string, string>>>>
+      variants: Record<AlertVariants, Record<Themes, Record<Colors, Record<string, string>>>>
     },
     startDecoratorContainer: {
       base: Record<string, string>;
