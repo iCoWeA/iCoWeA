@@ -1,10 +1,12 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import dropdownConfig from '../../../configs/dropdownConfig';
-import themeContext from '../../../contexts/theme';
-import { mergeClasses } from '../../../utils/propsHelper';
+import dropdownConfig from '../../configs/dropdownConfig';
+import themeContext from '../../contexts/theme';
+import { mergeClasses } from '../../utils/propsHelper';
+
+export type DropdownVariants = 'plain' | 'filled' | 'outlined';
 
 export interface DropdownProps extends BaseHTMLAttributes<HTMLDivElement> {
-  color?: Colors;
+  variant?: DropdownVariants;
   elevated?: boolean;
 }
 
@@ -14,10 +16,10 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = dropdownConfig.styles;
-  const { color, elevated, className, ...restProps } = { ...dropdownConfig.defaultProps, ...props };
+  const { variant, elevated, className, ...restProps } = { ...dropdownConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], elevated && styles.elevated[theme], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], elevated && styles.elevated, className);
 
   return (
     <div

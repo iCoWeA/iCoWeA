@@ -1,57 +1,47 @@
+import { type DropdownVariants } from '../components/UI/Dropdown';
+
 export interface DropdownConfig {
   defaultProps: {
-    color: Colors;
+    variant: DropdownVariants;
     elevated: boolean;
   };
   styles: {
     base: Record<string, string>;
-    elevated: Record<string, Record<string, string>>;
-    colors: Record<string, Record<Colors, Record<string, string>>>;
+    elevated: Record<string, string>;
+    variants: Record<DropdownVariants, Record<Themes, Record<string, string>>>;
   }
 }
 
 const dropdownConfig: DropdownConfig = {
   defaultProps: {
-    color: 'light',
-    elevated: true
+    variant: 'plain',
+    elevated: false
   },
   styles: {
     base: {
+      position: 'absolute',
       display: 'flex',
       flexDirection: 'flex-col',
-      borderRadius: 'rounded-2xl',
+      borderRadius: 'rounded-xl',
       overflow: 'overflow-hidden'
     },
     elevated: {
-      default: {
-        shadow: 'shadow-md shadow-default-default/80'
-      }
+      shadow: 'shadow-md shadow-black/50'
     },
-    colors: {
-      default: {
-        default: {
-          background: 'bg-default-default'
-        },
-        primary: {
-          background: 'bg-default-primary'
-        },
-        secondary: {
-          background: 'bg-default-secondary'
-        },
-        success: {
-          background: 'bg-default-success'
-        },
-        warning: {
-          background: 'bg-default-warning'
-        },
-        error: {
-          background: 'bg-default-error'
-        },
+    variants: {
+      plain: {
         light: {
-          background: 'bg-default-light'
-        },
-        dark: {
-          background: 'bg-default-dark'
+          background: 'bg-light-surface-light'
+        }
+      },
+      filled: {
+        light: {
+          background: 'bg-light-surface'
+        }
+      },
+      outlined: {
+        light: {
+          border: 'border border-light-divider'
         }
       }
     }
