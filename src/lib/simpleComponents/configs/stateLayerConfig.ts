@@ -31,8 +31,8 @@ const stateLayerConfig: StateLayerConfig = {
       'plain-click': {
         light: {
           default: {
-            hover: 'group-hover:bg-light-on-surface-variant/10',
-            active: 'group-active:bg-light-on-surface-variant/[0.15]'
+            hover: 'group-hover:bg-light-on-surface/10',
+            active: 'group-active:bg-light-on-surface/[0.15]'
           },
           primary: {
             hover: 'group-hover:bg-light-on-primary/10',
@@ -199,7 +199,7 @@ const stateLayerConfig: StateLayerConfig = {
       'plain-grab': {
         light: {
           default: {
-            background: 'bg-light-on-surface-variant/20'
+            background: 'bg-light-on-surface/20'
           },
           primary: {
             background: 'bg-light-on-primary/20'
