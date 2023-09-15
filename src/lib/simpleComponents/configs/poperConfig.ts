@@ -7,6 +7,7 @@ export interface PoperConfig {
     lockScroll: boolean;
     closeOnAwayClick: boolean;
     keepMounted: boolean;
+    overlayRef: Element | null;
   };
   styles: {
     base: Record<string, string>;
@@ -21,7 +22,8 @@ const poperConfig: PoperConfig = {
     responsive: true,
     lockScroll: false,
     closeOnAwayClick: true,
-    keepMounted: false
+    keepMounted: false,
+    overlayRef: null
   },
   styles: {
     base: {

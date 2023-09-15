@@ -1,4 +1,5 @@
 import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import poperConfig from '../../configs/poperConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import useOutsideClick from '../../hooks/useOutsideClick';
@@ -20,6 +21,7 @@ export interface PoperProps extends BaseHTMLAttributes<HTMLDivElement> {
   closeDuration?: number;
   keepMounted?: boolean;
   anchorElement?: HTMLElement | null;
+  overlayRef?: Element | null;
 }
 
 const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
@@ -38,6 +40,7 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
     closeDuration,
     keepMounted,
     anchorElement,
+    overlayRef,
     style,
     className,
     ...restProps
@@ -172,7 +175,7 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, className);
 
-  return (
+  const node = (
     <div
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
@@ -181,6 +184,8 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
       {...restProps}
     />
   );
+
+  return overlayRef === null ? node : createPortal(node, overlayRef);
 });
 
 Poper.displayName = 'Poper';
