@@ -12,7 +12,7 @@ import React, {
 import popoverConfig from '../../configs/popoverConfig';
 import usePrevious from '../../hooks/usePrevious';
 import Backdrop, { type BackdropProps } from './Backdrop';
-import Poper, { type PoperProps } from './Poper';
+import Popper, { type PopperProps } from './Popper';
 
 /********************************************************************************
  *
@@ -28,7 +28,7 @@ const Handler = forwardRef<HTMLElement, HandlerProps>(({ onClick, children }, re
 
 Handler.displayName = 'Handler';
 
-export interface PopoverProps extends PoperProps {
+export interface PopoverProps extends PopperProps {
   onClose?: () => void;
   open?: boolean;
   position?: OuterPositions;
@@ -141,7 +141,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     <>
       {handlerNode}
       {backdropNode}
-      <Poper
+      <Popper
         onClose={closeHandler}
         open={open ?? isOpen}
         position={position}

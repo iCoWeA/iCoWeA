@@ -1,6 +1,6 @@
 import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import poperConfig from '../../configs/poperConfig';
+import popperConfig from '../../configs/popperConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import useResize from '../../hooks/useResize';
@@ -8,7 +8,7 @@ import useScroll from '../../hooks/useScroll';
 import { setElementPosition } from '../../utils/positiontHelper';
 import { setStyles, mergeClasses } from '../../utils/propsHelper';
 
-export interface PoperProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
   onExit?: () => void;
@@ -24,9 +24,9 @@ export interface PoperProps extends BaseHTMLAttributes<HTMLDivElement> {
   overlayRef?: Element | null;
 }
 
-const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
+const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   /* --- Set default props --- */
-  const styles = poperConfig.styles;
+  const styles = popperConfig.styles;
   const {
     onClose,
     onEnter,
@@ -45,12 +45,12 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
     className,
     ...restProps
   } = {
-    ...poperConfig.defaultProps,
+    ...popperConfig.defaultProps,
     ...props
   };
 
   /* --- Set refs --- */
-  const poperRef = useRef<HTMLDivElement>(null);
+  const popperRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
   const {
@@ -59,10 +59,10 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
     exit,
     transitionEndHandler,
     animationEndHandler
-  } = useAnimation<HTMLDivElement>(poperRef.current, open, onEnter, onExit);
+  } = useAnimation<HTMLDivElement>(popperRef.current, open, onEnter, onExit);
 
   /* --- Set imperative anchorElement --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => poperRef.current, [
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, [
     !keepMounted && !open && animationState.current === AnimationStates.EXITED
   ]);
 
@@ -84,10 +84,10 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
    */
   const outsideClickHandler = useCallback(
     (event: MouseEvent) => {
-      const isPoperClicked = poperRef.current?.contains(event.target as Node) ?? false;
+      const isPopperClicked = popperRef.current?.contains(event.target as Node) ?? false;
       const isAnchorClicked = anchorElement?.contains(event.target as Node) ?? false;
 
-      if (!isPoperClicked && !isAnchorClicked && onClose !== undefined) {
+      if (!isPopperClicked && !isAnchorClicked && onClose !== undefined) {
         onClose();
       }
     },
@@ -133,7 +133,7 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
    */
   const setPosition = useCallback((): void => {
     setElementPosition(
-      poperRef.current,
+      popperRef.current,
       position,
       anchorElement?.offsetTop,
       anchorElement?.offsetLeft,
@@ -159,11 +159,11 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
    */
   useEffect(() => {
     if (animationState.current === AnimationStates.ENTERING) {
-      setStyles<HTMLDivElement>(poperRef.current, { opacity: '100', ...style });
+      setStyles<HTMLDivElement>(popperRef.current, { opacity: '100', ...style });
     }
 
     if (animationState.current === AnimationStates.EXITING) {
-      setStyles<HTMLDivElement>(poperRef.current, { opacity: '0', ...style });
+      setStyles<HTMLDivElement>(popperRef.current, { opacity: '0', ...style });
     }
   }, [animationState.current, style]);
 
@@ -180,7 +180,7 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
       className={mergedClassName}
-      ref={poperRef}
+      ref={popperRef}
       {...restProps}
     />
   );
@@ -188,6 +188,6 @@ const Poper = forwardRef<HTMLDivElement, PoperProps>((props, ref) => {
   return overlayRef === null ? node : createPortal(node, overlayRef);
 });
 
-Poper.displayName = 'Poper';
+Popper.displayName = 'Popper';
 
-export default Poper;
+export default Popper;

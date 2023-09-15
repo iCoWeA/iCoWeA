@@ -1,4 +1,4 @@
-export interface PoperConfig {
+export interface PopperConfig {
   defaultProps: {
     open: boolean;
     position: OuterPositions;
@@ -14,7 +14,7 @@ export interface PoperConfig {
   }
 }
 
-const poperConfig: PoperConfig = {
+const popperConfig: PopperConfig = {
   defaultProps: {
     open: false,
     position: 'bottom',
@@ -38,4 +38,4 @@ const poperConfig: PoperConfig = {
   }
 };
 
-export default poperConfig;
+export default popperConfig;
