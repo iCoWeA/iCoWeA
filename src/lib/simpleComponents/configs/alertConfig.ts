@@ -39,6 +39,34 @@ const alertConfig: AlertConfig = {
         shadow: 'shadow-md shadow-black/50'
       },
       variants: {
+        plain: {
+          light: {
+            default: {
+              fill: 'fill-light-on-surface',
+              color: 'text-light-on-surface'
+            },
+            primary: {
+              fill: 'fill-light-primary',
+              color: 'text-light-primary'
+            },
+            secondary: {
+              fill: 'fill-light-secondary',
+              color: 'text-light-secondary'
+            },
+            success: {
+              fill: 'fill-light-success',
+              color: 'text-light-success'
+            },
+            warning: {
+              fill: 'fill-light-warning',
+              color: 'text-light-warning'
+            },
+            error: {
+              fill: 'fill-light-error',
+              color: 'text-light-error'
+            }
+          }
+        },
         filled: {
           light: {
             default: {
@@ -136,34 +164,6 @@ const alertConfig: AlertConfig = {
             },
             error: {
               border: 'border border-light-error',
-              fill: 'fill-light-error',
-              color: 'text-light-error'
-            }
-          }
-        },
-        text: {
-          light: {
-            default: {
-              fill: 'fill-light-on-surface',
-              color: 'text-light-on-surface'
-            },
-            primary: {
-              fill: 'fill-light-primary',
-              color: 'text-light-primary'
-            },
-            secondary: {
-              fill: 'fill-light-secondary',
-              color: 'text-light-secondary'
-            },
-            success: {
-              fill: 'fill-light-success',
-              color: 'text-light-success'
-            },
-            warning: {
-              fill: 'fill-light-warning',
-              color: 'text-light-warning'
-            },
-            error: {
               fill: 'fill-light-error',
               color: 'text-light-error'
             }

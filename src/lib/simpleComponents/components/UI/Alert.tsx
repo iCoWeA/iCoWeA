@@ -76,7 +76,7 @@ const EndDecoratorContainer: FC<EndDecoratorContainerProps> = ({ closable, class
  *   Alert
  *
  */
-export type AlertVariants = 'text' | 'filled' | 'ghost' | 'outlined';
+export type AlertVariants = 'plain' | 'filled' | 'ghost' | 'outlined';
 
 export interface AlertProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: AlertVariants;
