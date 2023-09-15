@@ -1,23 +1,16 @@
-import { type BaseHTMLAttributes } from 'react';
-
-export type ProgressSizeVariants = 'default' | 'label';
-
 export interface ProgressConfig {
   defaultProps: {
     value: number | string;
-    size: Sizes;
     color: Colors;
-    containerProps: BaseHTMLAttributes<HTMLDivElement>;
   };
   styles: {
     container: {
       base: Record<string, string>;
-      sizes: Record<ProgressSizeVariants, Record<Sizes, Record<string, string>>>;
-      color: Record<string, Record<string, string>>;
+      color: Record<Themes, Record<string, string>>;
     },
     bar: {
       base: Record<string, string>;
-      colors: Record<string, Record<Colors, Record<string, string>>>
+      colors: Record<Themes, Record<Colors, Record<string, string>>>
     }
   }
 }
@@ -25,100 +18,65 @@ export interface ProgressConfig {
 const progressConfig: ProgressConfig = {
   defaultProps: {
     value: 0,
-    size: 'md',
-    color: 'primary',
-    containerProps: {}
+    color: 'primary'
   },
   styles: {
     container: {
       base: {
         display: 'flex',
+        height: 'min-h-1',
         width: 'w-full',
-        borderRadius: 'rounded-full'
-      },
-      sizes: {
-        default: {
-          sm: {
-            height: 'h-2'
-          },
-          md: {
-            height: 'h-3'
-          },
-          lg: {
-            height: 'h-4'
-          }
-        },
-        label: {
-          sm: {
-            height: 'h-3'
-          },
-          md: {
-            height: 'h-4'
-          },
-          lg: {
-            heiight: 'h-5'
-          }
-        }
+        borderRadius: 'rounded-full',
+        overflow: 'overflow-hidden'
       },
       color: {
-        default: {
-          background: 'bg-default-divider'
+        light: {
+          background: 'bg-light-surface-dark'
         }
       }
     },
     bar: {
       base: {
         display: 'flex',
+        gap: 'gap-2',
         alignItems: 'items-center',
         justifyContent: 'justify-center',
         height: 'h-full',
-        width: 'w-0',
-        borderRadius: 'rounded-full',
         font: 'antialiased font-normal text-xs font-sans',
-        transition: 'transition-all',
-        textOverflow: 'text-clip'
+        transition: 'transition-[width]',
+        overflow: 'overflow-hidden'
       },
       colors: {
-        default: {
+        light: {
           default: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-default'
+            fill: 'fill-light-on-surface',
+            color: 'text-light-on-surface',
+            background: 'bg-light-surface-light'
           },
           primary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-primary'
+            fill: 'fill-light-on-primary',
+            color: 'text-light-on-primary',
+            background: 'bg-light-primary'
           },
           secondary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-secondary'
+            fill: 'fill-light-on-secondary',
+            color: 'text-light-on-secondary',
+            background: 'bg-light-secondary'
           },
           success: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-success'
+            fill: 'fill-light-on-success',
+            color: 'text-light-on-success',
+            background: 'bg-light-success'
           },
           warning: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-warning'
+            fill: 'fill-light-on-warning',
+            color: 'text-light-on-warning',
+            background: 'bg-light-warning'
           },
           error: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-error'
-          },
-          light: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-light'
-          },
-          dark: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-dark'
+            fill: 'fill-light-on-error',
+            color: 'text-light-on-error',
+            background: 'bg-light-error'
           }
         }
       }
