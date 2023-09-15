@@ -25,7 +25,6 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref
   return (
     <Collapse
       aria-labelledby={ariaLabelledBy}
-      hidden={!isAccordionOpen}
       role="region"
       id={id}
       open={isAccordionOpen}
