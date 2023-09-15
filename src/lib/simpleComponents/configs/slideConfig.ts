@@ -24,7 +24,7 @@ const slideConfig: SlideConfig = {
       height: 'h-fit',
       width: 'w-fit',
       transition: 'transition',
-      transitionDuration: 'duration-[5000ms]'
+      transitionDuration: 'duration-500'
     },
     directions: {
       top: {
