@@ -59,13 +59,16 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /*
    * Set outside click action
    */
-  const outsideClickHandler = useCallback((event: MouseEvent) => {
-    const isSnackbarClicked = collapseRef.current?.contains(event.target as Node) ?? false;
+  const outsideClickHandler = useCallback(
+    (event: MouseEvent) => {
+      const isSnackbarClicked = collapseRef.current?.contains(event.target as Node) ?? false;
 
-    if (!isSnackbarClicked && onClose !== undefined) {
-      onClose();
-    }
-  }, []);
+      if (!isSnackbarClicked && onClose !== undefined) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
 
@@ -86,7 +89,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
         clearTimeout(timerId);
       }
     };
-  }, [animationState.enter, closeDuration]);
+  }, [animationState.enter, closeDuration, onClose]);
 
   /*
    * Set styles
@@ -137,5 +140,3 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 Collapse.displayName = 'Collapse';
 
 export default Collapse;
-
-/* ON_CLOSE() IS NOT IN DEPENDENCY LIST !!! */
