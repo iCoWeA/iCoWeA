@@ -15,11 +15,11 @@ const labelConfig: LabelConfig = {
     color: {
       light: {
         fill: 'fill-light-on-surface-variant',
-        color: 'text-light-on-surface-varaint'
+        color: 'text-light-on-surface-variant'
       }
     },
     colors: {
-      default: {
+      light: {
         default: {
           fill: 'fill-light-on-surface',
           color: 'text-light-on-surface'
