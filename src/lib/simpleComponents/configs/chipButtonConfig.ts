@@ -10,7 +10,7 @@ export interface ChipButtonConfig {
 const chipButtonConfig: ChipButtonConfig = {
   defaultProps: {
     chipVariant: 'filled',
-    color: 'error'
+    color: 'primary'
   }
 };
 
