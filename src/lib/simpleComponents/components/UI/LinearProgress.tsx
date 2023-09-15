@@ -58,6 +58,10 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
 
   return (
     <Container
+      role="meter"
+      aria-valuenow={+value}
+      aria-valuemax={100}
+      aria-valuemin={0}
       ref={ref}
       {...containerProps}
     >
