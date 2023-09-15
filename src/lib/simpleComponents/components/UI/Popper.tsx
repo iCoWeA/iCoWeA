@@ -6,7 +6,7 @@ import useOutsideClick from '../../hooks/useOutsideClick';
 import useResize from '../../hooks/useResize';
 import useScroll from '../../hooks/useScroll';
 import { setElementPosition } from '../../utils/positiontHelper';
-import { setStyles, mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/propsHelper';
 
 export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
@@ -156,32 +156,17 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
 
   useResize(resizeHandler, responsive && animationState.current !== AnimationStates.EXITED);
 
-  useEffect(() => {
-    if (animationState.current !== AnimationStates.EXITED) {
-      resizeHandler();
-    }
-  }, [animationState.current, resizeHandler]);
-
-  /*
-   * Set styles
-   */
-  useEffect(() => {
-    if (animationState.current === AnimationStates.ENTERING) {
-      setStyles<HTMLDivElement>(popperRef.current, { opacity: '100', ...style });
-    }
-
-    if (animationState.current === AnimationStates.EXITING) {
-      setStyles<HTMLDivElement>(popperRef.current, { opacity: '0', ...style });
-    }
-  }, [animationState.current, style]);
-
   /* --- Unmount --- */
   if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, className);
+  if (animationState.current !== AnimationStates.EXITED) {
+    resizeHandler();
+  }
+
+  const mergedClassName = mergeClasses(styles.base, animationState.enter && styles.open, className);
 
   const node = (
     <div
