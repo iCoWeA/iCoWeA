@@ -7,12 +7,13 @@ export interface FadeProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEnter?: () => void;
   onExit?: () => void;
   open?: boolean;
+  keepMounted?: boolean;
 }
 
 const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = fadeConfig.styles;
-  const { onEnter, onExit, open, style, className, children, ...restProps } = {
+  const { onEnter, onExit, open, keepMounted, style, className, ...restProps } = {
     ...fadeConfig.defaultProps,
     ...props
   };
@@ -29,8 +30,10 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
     animationEndHandler
   } = useAnimation<HTMLDivElement>(fadeRef.current, open, onEnter, onExit);
 
-  /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => fadeRef.current, []);
+  /* --- Set imperative anchorElement --- */
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => fadeRef.current, [
+    !keepMounted && !open && animationState.current === AnimationStates.EXITED
+  ]);
 
   /*
    * Set open state
@@ -46,15 +49,6 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   }, [open, animationState.enter, animationState.exit]);
 
   /*
-   * Set initial style
-   */
-  useEffect(() => {
-    if (animationState.current === AnimationStates.ENTERED) {
-      setStyles<HTMLDivElement>(fadeRef.current, { opacity: '100', ...style });
-    }
-  }, [animationState.current, style]);
-
-  /*
    * Set styles
    */
   useEffect(() => {
@@ -66,6 +60,11 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
       setStyles<HTMLDivElement>(fadeRef.current, { opacity: '0', ...style });
     }
   }, [animationState.current, style]);
+
+  /* --- Unmount --- */
+  if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
+    return <></>;
+  }
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, className);
