@@ -17,7 +17,7 @@ const poperConfig: PoperConfig = {
   defaultProps: {
     open: false,
     position: 'bottom',
-    offset: 0,
+    offset: 8,
     responsive: true,
     lockScroll: false,
     closeOnAwayClick: true,
