@@ -22,7 +22,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = buttonConfig.styles.button;
+  const styles = buttonConfig.styles;
   const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, stateLayerProps, className, children, ...restProps } = {
     ...buttonConfig.defaultProps,
     ...props
@@ -41,7 +41,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   return (
     <button
-      tabIndex={0}
       className={mergedClassName}
       type="button"
       ref={ref}

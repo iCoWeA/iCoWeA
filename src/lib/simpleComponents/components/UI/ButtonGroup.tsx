@@ -17,14 +17,13 @@ interface ButtonProps {
   color: Colors;
   fullwidth: boolean;
   stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
-  tabIndex: number;
   disabled: boolean;
   type: 'submit' | 'reset' | 'button';
   className: string;
   children: ReactElement;
 }
 
-const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwidth, stateLayerProps, tabIndex, disabled, type, className, children }) => {
+const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwidth, stateLayerProps, disabled, type, className, children }) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -55,7 +54,7 @@ const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwi
     </>
   );
 
-  return <>{cloneElement(children, { tabIndex, disabled, type, className: mergedClassName, children: childrenNode })}</>;
+  return <>{cloneElement(children, { disabled, type, className: mergedClassName, children: childrenNode })}</>;
 };
 
 /********************************************************************************
@@ -104,7 +103,6 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
         color={color}
         stateLayerProps={stateLayerProps?.[i]}
         fullwidth={fullwidth}
-        tabIndex={childrenNode[i].props.tabIndex ?? tabIndex}
         disabled={childrenNode[i].props.disabled ?? disabled}
         type={childrenNode[i].props.type ?? type}
         className={childrenNode[i].props.className}
