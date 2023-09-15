@@ -52,7 +52,7 @@ const linearProgressConfig: LinearProgressConfig = {
           default: {
             fill: 'fill-light-on-surface',
             color: 'text-light-on-surface',
-            background: 'bg-light-surface-light'
+            background: 'bg-light-surface'
           },
           primary: {
             fill: 'fill-light-on-primary',
