@@ -137,7 +137,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
         position={position}
         responsive={responsive}
         lockScroll={lockScroll}
-        closeOnAwayClick={closeOnAwayClick}
+        closeOnAwayClick={backdrop ? false : closeOnAwayClick}
         keepMounted={keepMounted}
         anchorElement={handlerRef.current}
         ref={ref}
