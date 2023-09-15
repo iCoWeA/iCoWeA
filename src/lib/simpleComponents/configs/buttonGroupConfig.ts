@@ -125,7 +125,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
               border: 'border-light-on-surface',
               fill: 'fill-light-on-surface',
               color: 'text-light-on-surface',
-              disabled: 'disabled:border-light-on-surface-variant/40 disabled:fill-light-on-surface-variant/40 disabled:text-light-on-surface-variant/40'
+              disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
             },
             primary: {
               border: 'border-light-on-primary',
