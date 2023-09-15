@@ -184,6 +184,7 @@ const alertConfig: AlertConfig = {
       base: {
         display: 'flex',
         flexDirection: 'flex-col',
+        gap: 'gap-4',
         width: 'w-full',
         padding: 'py-3.5 px-4',
         font: 'antialiased font-normal text-sm font-sans'

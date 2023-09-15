@@ -18,7 +18,7 @@ const cardHeaderConfig: CardHeaderConfig = {
       gap: 'gap-4',
       alignItems: 'items-center',
       width: 'w-full',
-      padding: 'pt-4 px-4'
+      padding: 'p-4'
     },
     fullwidth: {
       padding: 'p-0'

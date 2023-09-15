@@ -9,6 +9,7 @@ const cardBodyConfig: CardBodyConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
+      gap: 'gap-4',
       height: 'h-full',
       width: 'w-full',
       padding: 'p-4'
