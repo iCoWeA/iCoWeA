@@ -87,8 +87,8 @@ const buttonConfig: ButtonConfig = {
       plain: {
         light: {
           default: {
-            fill: 'fill-light-on-surface-variant',
-            color: 'text-light-on-surface-variant',
+            fill: 'fill-light-on-surface',
+            color: 'text-light-on-surface',
             disabled: 'disabled:fill-light-on-surface-variant/40 disabled:text-light-on-surface-variant/40'
           },
           primary: {

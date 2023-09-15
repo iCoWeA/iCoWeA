@@ -122,9 +122,9 @@ const buttonGroupConfig: ButtonGroupConfig = {
         plain: {
           light: {
             default: {
-              border: 'border-light-on-surface-variant',
-              fill: 'fill-light-on-surface-variant',
-              color: 'text-light-on-surface-variant',
+              border: 'border-light-on-surface',
+              fill: 'fill-light-on-surface',
+              color: 'text-light-on-surface',
               disabled: 'disabled:border-light-on-surface-variant/40 disabled:fill-light-on-surface-variant/40 disabled:text-light-on-surface-variant/40'
             },
             primary: {
