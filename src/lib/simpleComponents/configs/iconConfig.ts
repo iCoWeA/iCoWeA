@@ -1,70 +1,51 @@
-export type IconSizes = 'xs' | 'sm' | 'md' | 'lg' | 'full';
-
 export interface IconConfig {
-  defaultProps: {
-    size: IconSizes;
-    color: Colors;
-    viewBox: string;
-  };
   styles: {
     base: Record<string, string>;
-    sizes: Record<IconSizes, Record<string, string>>;
-    colors: Record<string, Record<Colors, Record<string, string>>>
+    sizes: Record<Sizes, Record<string, string>>;
+    colors: Record<Themes, Record<Colors, Record<string, string>>>
   }
 }
 
 const iconConfig: IconConfig = {
-  defaultProps: {
-    size: 'md',
-    color: 'none',
-    viewBox: '0 0 24 24'
-  },
   styles: {
     base: {
-      display: 'inline-block'
+      display: 'inline-block',
+      height: 'h-full',
+      aspectRatio: 'aspect-square'
     },
     sizes: {
       xs: {
-        width: 'w-4'
+        height: 'h-6'
       },
       sm: {
-        width: 'w-5'
+        height: 'h-8'
       },
       md: {
-        width: 'w-6'
+        height: 'h-10'
       },
       lg: {
-        width: 'w-7'
-      },
-      full: {
-        width: 'w-full'
+        height: 'h-12'
       }
     },
     colors: {
-      default: {
+      light: {
         default: {
-          fill: 'fill-default-default'
+          fill: 'fill-light-default'
         },
         primary: {
-          fill: 'fill-default-primary'
+          fill: 'fill-light-primary'
         },
         secondary: {
-          fill: 'fill-default-secondary'
+          fill: 'fill-light-secondary'
         },
         success: {
-          fill: 'fill-default-success'
+          fill: 'fill-light-success'
         },
         warning: {
-          fill: 'fill-default-warning'
+          fill: 'fill-light-warning'
         },
         error: {
-          fill: 'fill-default-error'
-        },
-        light: {
-          fill: 'fill-default-light'
-        },
-        dark: {
-          fill: 'fill-default-dark'
+          fill: 'fill-light-error'
         }
       }
     }
