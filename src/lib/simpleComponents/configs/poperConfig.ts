@@ -31,7 +31,7 @@ const poperConfig: PoperConfig = {
       width: 'w-fit',
       opacity: 'opacity-0',
       transition: 'transition-[opacity]',
-      transitionDuration: 'duration-[2000ms]'
+      transitionDuration: 'duration-500'
     }
   }
 };
