@@ -9,7 +9,7 @@ import { mergeClasses } from '../../utils/propsHelper';
  *
  */
 interface SeparatorProps extends BaseHTMLAttributes<HTMLSpanElement> {
-  color: Colors;
+  color?: Colors;
 }
 
 const Separator: FC<SeparatorProps> = ({ color, className, ...restProps }) => {
@@ -20,7 +20,7 @@ const Separator: FC<SeparatorProps> = ({ color, className, ...restProps }) => {
   const styles = breadcrumbsConfig.styles.separator;
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, color === undefined ? styles.color[theme] : styles.colors[theme][color], className);
 
   return (
     <span

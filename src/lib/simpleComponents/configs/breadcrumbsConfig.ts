@@ -2,7 +2,6 @@ import { type ReactNode } from 'react';
 
 export interface BreadcrumbsConfig {
   defaultProps: {
-    color: Colors;
     separator: ReactNode;
     fullwidth: boolean;
   };
@@ -19,6 +18,7 @@ export interface BreadcrumbsConfig {
     },
     separator: {
       base: Record<string, string>;
+      color: Record<Themes, Record<string, string>>;
       colors: Record<Themes, Record<Colors, Record<string, string>>>;
     }
   }
@@ -26,7 +26,6 @@ export interface BreadcrumbsConfig {
 
 const breadcrumbsConfig: BreadcrumbsConfig = {
   defaultProps: {
-    color: 'default',
     separator: '/',
     fullwidth: false
   },
@@ -63,11 +62,17 @@ const breadcrumbsConfig: BreadcrumbsConfig = {
         font: 'antialiased font-normal text-sm font-sans',
         userSelect: 'select-none'
       },
+      color: {
+        light: {
+          fill: 'fill-light-on-surface-variant',
+          color: 'text-light-on-surface-variant'
+        }
+      },
       colors: {
         light: {
           default: {
-            fill: 'fill-light-on-surface-variant',
-            color: 'text-light-on-surface-variant'
+            fill: 'fill-light-on-surface',
+            color: 'text-light-on-surface'
           },
           primary: {
             fill: 'fill-light-primary',
