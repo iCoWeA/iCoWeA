@@ -92,9 +92,9 @@ const iconIconButtonConfig: IconButtonConfig = {
       plain: {
         light: {
           default: {
-            fill: 'fill-light-on-surface-variant',
-            color: 'text-light-on-surface-variant',
-            disabled: 'disabled:fill-light-on-surface-variant/40 disabled:text-light-on-surface-variant/40'
+            fill: 'fill-light-on-surface',
+            color: 'text-light-on-surface',
+            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           primary: {
             fill: 'fill-light-on-primary',
