@@ -41,19 +41,19 @@ const avatarConfig: AvatarConfig = {
       sizes: {
         xs: {
           height: 'h-6',
-          fontSize: 'text-xs'
+          fontSize: 'text-sm'
         },
         sm: {
           height: 'h-8',
-          fontSize: 'text-sm'
+          fontSize: 'text-md'
         },
         md: {
           height: 'h-10',
-          fontSize: 'text-base'
+          fontSize: 'text-lg'
         },
         lg: {
           height: 'h-12',
-          fontSize: 'text-lg'
+          fontSize: 'text-xl'
         }
       },
       colors: {
