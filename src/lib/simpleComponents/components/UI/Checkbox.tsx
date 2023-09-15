@@ -1,5 +1,5 @@
 import React, { type FC, useContext, type BaseHTMLAttributes, forwardRef, type InputHTMLAttributes, type MutableRefObject } from 'react';
-import BaseIcon, { type IconProps as BaseIconProps } from './Icon/Icon';
+import BaseIcon, { type IconProps as BaseIconProps } from './Icon';
 import checkboxConfig from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
