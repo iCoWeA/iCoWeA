@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import fadeConfig from '../../configs/fadeConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
-import { setStyles, mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/propsHelper';
 
 export interface FadeProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEnter?: () => void;
@@ -48,26 +48,13 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
     }
   }, [open, animationState.enter, animationState.exit]);
 
-  /*
-   * Set styles
-   */
-  useEffect(() => {
-    if (animationState.current === AnimationStates.ENTERING) {
-      setStyles<HTMLDivElement>(fadeRef.current, { opacity: '100', ...style });
-    }
-
-    if (animationState.current === AnimationStates.EXITING) {
-      setStyles<HTMLDivElement>(fadeRef.current, { opacity: '0', ...style });
-    }
-  }, [animationState.current, style]);
-
   /* --- Unmount --- */
   if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, className);
+  const mergedClassName = mergeClasses(styles.base, animationState.enter && styles.open, className);
 
   return (
     <div
