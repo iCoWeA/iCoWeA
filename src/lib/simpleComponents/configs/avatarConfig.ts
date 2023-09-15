@@ -31,7 +31,7 @@ const avatarConfig: AvatarConfig = {
         justifyContent: 'justify-center',
         aspectRatio: 'aspect-square',
         borderRadius: 'rounded-full',
-        font: 'antialiased font-normal text-lg font-sans',
+        font: 'antialiased font-normal font-sans',
         overflow: 'overflow-hidden',
         userSelect: 'select-none'
       },
@@ -40,16 +40,20 @@ const avatarConfig: AvatarConfig = {
       },
       sizes: {
         xs: {
-          height: 'h-6'
+          height: 'h-6',
+          fontSize: 'text-xs'
         },
         sm: {
-          height: 'h-8'
+          height: 'h-8',
+          fontSize: 'text-sm'
         },
         md: {
-          height: 'h-10'
+          height: 'h-10',
+          fontSize: 'text-base'
         },
         lg: {
-          height: 'h-12'
+          height: 'h-12',
+          fontSize: 'text-lg'
         }
       },
       colors: {
