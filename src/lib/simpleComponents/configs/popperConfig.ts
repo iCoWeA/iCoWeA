@@ -11,6 +11,7 @@ export interface PopperConfig {
   };
   styles: {
     base: Record<string, string>;
+    open: Record<string, string>;
   }
 }
 
@@ -34,6 +35,9 @@ const popperConfig: PopperConfig = {
       opacity: 'opacity-0',
       transition: 'transition-[opacity]',
       transitionDuration: 'duration-500'
+    },
+    open: {
+      opacity: 'opacity-100'
     }
   }
 };
