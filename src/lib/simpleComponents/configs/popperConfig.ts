@@ -33,7 +33,7 @@ const popperConfig: PopperConfig = {
       height: 'h-fit',
       width: 'w-fit',
       opacity: 'opacity-0',
-      transition: 'transition-[opacity]',
+      transition: 'transition-all',
       transitionDuration: 'duration-500'
     },
     open: {
