@@ -12,6 +12,7 @@ export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
   onExit?: () => void;
+  onResize?: () => void;
   open?: boolean;
   position?: OuterPositions;
   offset?: number;
@@ -31,6 +32,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     onClose,
     onEnter,
     onExit,
+    onResize,
     open,
     position,
     offset,
@@ -131,28 +133,34 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   /*
    * Set resize action
    */
-  const setPosition = useCallback((): void => {
-    setElementPosition(
-      popperRef.current,
-      position,
-      anchorElement?.offsetTop,
-      anchorElement?.offsetLeft,
-      anchorElement?.offsetHeight,
-      anchorElement?.offsetWidth,
-      offset,
-      responsive
-    );
-  }, [position, anchorElement, offset, responsive]);
+  const resizeHandler = useCallback(() => {
+    if (onResize !== undefined) {
+      onResize();
+    }
 
-  useScroll(setPosition, responsive && animationState.current !== AnimationStates.EXITED);
+    if (onResize === undefined) {
+      setElementPosition(
+        popperRef.current,
+        position,
+        anchorElement?.offsetTop,
+        anchorElement?.offsetLeft,
+        anchorElement?.offsetHeight,
+        anchorElement?.offsetWidth,
+        offset,
+        responsive
+      );
+    }
+  }, [onResize, position, anchorElement, offset, responsive]);
 
-  useResize(setPosition, responsive && animationState.current !== AnimationStates.EXITED);
+  useScroll(resizeHandler, responsive && animationState.current !== AnimationStates.EXITED);
+
+  useResize(resizeHandler, responsive && animationState.current !== AnimationStates.EXITED);
 
   useEffect(() => {
     if (animationState.current !== AnimationStates.EXITED) {
-      setPosition();
+      resizeHandler();
     }
-  }, [animationState.current, setPosition]);
+  }, [animationState.current, resizeHandler]);
 
   /*
    * Set styles
