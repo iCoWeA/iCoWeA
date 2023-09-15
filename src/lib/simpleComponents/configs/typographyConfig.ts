@@ -1,125 +1,129 @@
-export type TypographyVariants = 'h1'
-| 'h2'
-| 'h3'
-| 'h4'
-| 'h5'
-| 'h6'
-| 'lead'
-| 'paragraph'
-| 'small'
-| 'span';
+import { type TypographyVariants } from '../components/UI/Typography';
 
 export interface TypographyConfig {
   defaultProps: {
     variant: TypographyVariants;
-    align: Aligns;
-    color: Colors;
   };
   styles: {
     base: Record<string, string>;
-    aligns: Record<Aligns, Record<string, string>>;
-    variants: Record<TypographyVariants, Record<string, string>>;
-    colors: Record<string, Record<Colors, Record<string, string>>>;
+    variants: Record<TypographyVariants, Record<Themes, Record<string, string>>>;
+    colors: Record<Themes, Record<Colors, Record<string, string>>>;
   }
 }
 
 const typographyConfig: TypographyConfig = {
   defaultProps: {
-    variant: 'paragraph',
-    align: 'start',
-    color: 'default'
+    variant: 'body-medium'
   },
   styles: {
     base: {
       font: 'antialiased font-normal font-sans'
     },
-    aligns: {
-      start: {
-        textAlign: 'text-start'
-      },
-      left: {
-        textAlign: 'text-left'
-      },
-      center: {
-        textAlign: 'text-center'
-      },
-      justify: {
-        textAlign: 'text-justify'
-      },
-      end: {
-        textAlign: 'text-end'
-      },
-      right: {
-        textAlign: 'text-right'
-      }
-    },
     variants: {
-      h1: {
-        display: 'block',
-        font: 'text-5xl'
+      'display-large': {
+        light: {
+          display: 'block',
+          font: 'text-7xl',
+          color: 'text-light-on-surface'
+        }
       },
-      h2: {
-        display: 'block',
-        font: 'text-4xl'
+      'display-medium': {
+        light: {
+          display: 'block',
+          font: 'text-6xl',
+          color: 'text-light-on-surface'
+        }
       },
-      h3: {
-        display: 'block',
-        font: 'text-3xl'
+      'display-small': {
+        light: {
+          display: 'block',
+          font: 'text-5xl',
+          color: 'text-light-on-surface'
+        }
       },
-      h4: {
-        display: 'block',
-        font: 'text-2xl'
+      'headline-large': {
+        light: {
+          display: 'block',
+          font: 'text-4xl',
+          color: 'text-light-on-surface'
+        }
       },
-      h5: {
-        display: 'block',
-        font: 'text-xl'
+      'headline-medium': {
+        light: {
+          display: 'block',
+          font: 'text-3xl',
+          color: 'text-light-on-surface'
+        }
       },
-      h6: {
-        display: 'block',
-        font: 'text-lg'
+      'headline-small': {
+        light: {
+          display: 'block',
+          font: 'text-2xl',
+          color: 'text-light-on-surface'
+        }
       },
-      lead: {
-        display: 'block',
-        font: 'text-xl'
+      'title-large': {
+        light: {
+          display: 'block',
+          font: 'text-lg',
+          color: 'text-light-on-surface'
+        }
       },
-      paragraph: {
-        display: 'block',
-        font: 'text-base'
+      'title-medium': {
+        light: {
+          display: 'block',
+          font: 'text-base',
+          color: 'text-light-on-surface'
+        }
       },
-      small: {
-        display: 'block',
-        font: 'text-sm'
+      'title-small': {
+        light: {
+          display: 'block',
+          font: 'text-sm',
+          color: 'text-light-on-surface'
+        }
       },
-      span: {
-        display: 'inline-block',
-        font: 'text-base'
+      'body-large': {
+        light: {
+          display: 'block',
+          font: 'text-base',
+          color: 'text-light-on-surface-variant'
+        }
+      },
+      'body-medium': {
+        light: {
+          display: 'block',
+          font: 'text-sm',
+          color: 'text-light-on-surface-variant'
+        }
+      },
+      'body-small': {
+        light: {
+          display: 'block',
+          font: 'text-sx',
+          color: 'text-light-on-surface-variant'
+        }
       }
     },
     colors: {
-      default: {
+      light: {
         default: {
-          color: 'text-default-default'
+          color: 'text-light-on-surface'
         },
         primary: {
-          color: 'text-default-primary'
+          color: 'text-light-primary'
         },
         secondary: {
-          color: 'text-default-secondary'
+          color: 'text-light-secondary'
         },
         success: {
-          color: 'text-default-success'
+          color: 'text-light-success'
         },
         warning: {
-          color: 'text-default-warning'
+          color: 'text-light-warning'
         },
         error: {
-          color: 'text-default-error'
-        },
-        light: {
-          color: 'text-default-light'
-        },
-        dark: {
-          color: 'text-default-dark'
+          color: 'text-light-error'
         }
       }
     }
