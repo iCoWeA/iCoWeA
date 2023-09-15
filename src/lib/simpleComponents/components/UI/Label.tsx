@@ -16,7 +16,7 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
   const { color, className, ...restProps } = { ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, color !== undefined && styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, color === undefined ? styles.color[theme] : styles.colors[theme][color], className);
 
   return (
     <label
