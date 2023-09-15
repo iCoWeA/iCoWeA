@@ -77,10 +77,10 @@ const EndDecoratorContainer: FC<EndDecoratorContainerProps> = ({ closable, class
  *   Chip
  *
  */
-export type ChipVariant = 'filled' | 'ghost' | 'outlined';
+export type ChipVariants = 'filled' | 'ghost' | 'outlined';
 
 export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: ChipVariant;
+  variant?: ChipVariants;
   borderShape?: BorderShapes;
   color?: Colors;
   closeButton?: boolean;
