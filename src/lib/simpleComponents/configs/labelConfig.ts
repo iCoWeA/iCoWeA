@@ -1,55 +1,48 @@
 export interface LabelConfig {
-  defaultProps: {
-    color: Colors;
-  };
   styles: {
     base: Record<string, string>;
-    colors: Record<string, Record<Colors, Record<string, string>>>;
+    color: Record<Themes, Record<string, string>>;
+    colors: Record<Themes, Record<Colors, Record<string, string>>>;
   }
 }
 
 const labelConfig: LabelConfig = {
-  defaultProps: {
-    color: 'default'
-  },
   styles: {
     base: {
       display: 'inline-block',
-      font: 'antialiased font-normal text-base font-sans'
+      font: 'antialiased font-normal text-xs font-sans'
+    },
+    color: {
+      light: {
+        fill: 'fill-light-on-surface-variant',
+        color: 'text-light-on-surface-varaint'
+      }
     },
     colors: {
       default: {
         default: {
-          fill: 'fill-default-default',
-          color: 'text-default-default'
+          fill: 'fill-light-on-surface',
+          color: 'text-light-on-surface'
         },
         primary: {
-          fill: 'fill-default-primary',
-          color: 'text-default-primary'
+          fill: 'fill-light-primary',
+          color: 'text-light-primary'
         },
         secondary: {
-          fill: 'fill-default-secondary',
-          color: 'text-default-secondary'
+          fill: 'fill-light-secondary',
+          color: 'text-light-secondary'
         },
         success: {
-          fill: 'fill-default-success',
-          color: 'text-default-success'
+          fill: 'fill-light-success',
+          color: 'text-light-success'
         },
         warning: {
-          fill: 'fill-default-warning',
-          color: 'text-default-warning'
+          fill: 'fill-light-warning',
+          color: 'text-light-warning'
         },
         error: {
-          fill: 'fill-default-error',
-          color: 'text-default-error'
-        },
-        light: {
-          fill: 'fill-default-light',
-          color: 'text-default-light'
-        },
-        dark: {
-          fill: 'fill-default-dark',
-          color: 'text-default-dark'
+          fill: 'fill-light-error',
+          color: 'text-light-error'
         }
       }
     }
