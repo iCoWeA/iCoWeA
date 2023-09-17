@@ -6,14 +6,12 @@ export interface ChipConfig {
     borderShape: BorderShapes;
     color: Colors;
     closeButton: boolean;
-    clickable: boolean;
-    grabed: boolean;
   };
   styles: {
     container: {
       base: Record<string, string>;
       borderShapes: Record<BorderShapes, Record<string, string>>;
-      variants: Record<ChipVariants, Record<Themes, Record<Colors, Record<string, string>>>>
+      variants: Record<ChipVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
     },
     startDecoratorContainer: {
       base: Record<string, string>;
@@ -33,9 +31,7 @@ const chipConfig: ChipConfig = {
     variant: 'filled',
     borderShape: 'circular',
     color: 'primary',
-    closeButton: false,
-    clickable: false,
-    grabed: false
+    closeButton: false
   },
   styles: {
     container: {

@@ -2,7 +2,6 @@ import React, { type BaseHTMLAttributes, type FC, type ReactNode, forwardRef, us
 import chipConfig from '../../configs/chipConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
-import StateLayer from './StateLayer';
 
 /********************************************************************************
  *
@@ -84,14 +83,11 @@ export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   borderShape?: BorderShapes;
   color?: Colors;
   closeButton?: boolean;
-  clickable?: boolean;
-  grabed?: boolean;
   startDecorator?: ReactNode;
   endDecorator?: ReactNode;
   startDecoratorContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bodyContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
   endDecoratorContainerProps?: BaseHTMLAttributes<HTMLDivElement>;
-  stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
 }
 
 const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
@@ -105,14 +101,11 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
     borderShape,
     color,
     closeButton,
-    clickable,
-    grabed,
     startDecorator,
     endDecorator,
     startDecoratorContainerProps,
     bodyContainerProps,
     endDecoratorContainerProps,
-    stateLayerProps,
     className,
     children,
     ...restProps
@@ -120,32 +113,6 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
     ...chipConfig.defaultProps,
     ...props
   };
-
-  /* --- Set state props --- */
-  let clickableProps;
-  let stateLayerNode: ReactNode;
-
-  if (clickable) {
-    clickableProps = { tabIndex: 0, role: 'button' };
-
-    stateLayerNode = (
-      <StateLayer
-        state={variant === 'ghost' ? 'text-click' : `${variant}-click`}
-        color={color}
-        {...stateLayerProps}
-      />
-    );
-  }
-
-  if (grabed) {
-    stateLayerNode = (
-      <StateLayer
-        state={variant === 'ghost' ? 'text-grab' : `${variant}-grab`}
-        color={color}
-        {...stateLayerProps}
-      />
-    );
-  }
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], styles.borderShapes[borderShape], className);
@@ -175,13 +142,11 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
     <div
       className={mergedClassName}
       ref={ref}
-      {...clickableProps}
       {...restProps}
     >
       {startDecoratorContainerNode}
       <BodyContainer {...bodyContainerProps}>{children}</BodyContainer>
       {endDecoratorContainerNode}
-      {stateLayerNode}
     </div>
   );
 });
