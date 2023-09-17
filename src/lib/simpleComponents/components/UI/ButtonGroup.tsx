@@ -2,7 +2,6 @@ import React, { type BaseHTMLAttributes, type ReactElement, type FC, useContext,
 import buttonGroupConfig from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, isLast } from '../../utils/propsHelper';
-import StateLayer from './StateLayer';
 
 /********************************************************************************
  *
@@ -39,20 +38,12 @@ const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwi
     fullwidth && styles.fullwidth,
     isFirst && styles.first,
     isLast && styles.last,
+    variant === 'outlined' && isFirst && styles.firstOutline,
     variant === 'outlined' && isLast && styles.lastOutline,
     className
   );
 
-  const childrenNode = (
-    <>
-      {children.props.children}
-      <StateLayer
-        state={`${variant}-click`}
-        color={color}
-        {...stateLayerProps}
-      />
-    </>
-  );
+  const childrenNode = <>{children.props.children}</>;
 
   return <>{cloneElement(children, { disabled, type, className: mergedClassName, children: childrenNode })}</>;
 };
