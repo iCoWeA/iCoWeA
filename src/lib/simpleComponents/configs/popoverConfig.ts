@@ -6,6 +6,7 @@ export interface PopoverConfig {
     closeOnAwayClick: boolean;
     keepMounted: boolean;
     backdrop: boolean;
+    overlayRef: Element | null;
   };
 }
 
@@ -16,7 +17,8 @@ const popoverConfig: PopoverConfig = {
     lockScroll: false,
     closeOnAwayClick: true,
     keepMounted: false,
-    backdrop: false
+    backdrop: false,
+    overlayRef: null
   }
 };
 
