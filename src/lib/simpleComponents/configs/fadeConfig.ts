@@ -5,6 +5,7 @@ export interface FadeConfig {
   };
   styles: {
     base: Record<string, string>;
+    hide: Record<string, string>;
     open: Record<string, string>;
   }
 }
@@ -22,6 +23,9 @@ const fadeConfig: FadeConfig = {
       opacity: 'opacity-0',
       transition: 'transition-[opacity]',
       transitionDuration: 'duration-500'
+    },
+    hide: {
+      display: 'hidden'
     },
     open: {
       opacity: 'opacity-100'
