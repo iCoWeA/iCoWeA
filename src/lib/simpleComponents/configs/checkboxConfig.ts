@@ -15,7 +15,7 @@ export interface CheckboxConfig {
     },
     input: {
       base: Record<string, string>;
-      unchecked: Record<Themes, Record<Colors, Record<string, string>>>;
+      color: Record<Themes, Record<string, string>>;
       checked: Record<Themes, Record<Colors, Record<string, string>>>;
     },
     icon: {
@@ -63,32 +63,10 @@ const checkboxConfig: CheckboxConfig = {
         focus: 'focus:outline-0',
         disabled: 'disabled:pointer-events-none'
       },
-      unchecked: {
+      color: {
         light: {
-          default: {
-            hover: 'hover:bg-light-on-surface/10',
-            active: 'active:bg-light-on-surface/[0.15]'
-          },
-          primary: {
-            hover: 'hover:bg-light-on-surface/10',
-            active: 'active:bg-light-primary/[0.15]'
-          },
-          secondary: {
-            hover: 'hover:bg-light-on-surface/10',
-            active: 'active:bg-light-secondary/[0.15]'
-          },
-          success: {
-            hover: 'hover:bg-light-on-surface/10',
-            active: 'active:bg-light-success/[0.15]'
-          },
-          warning: {
-            hover: 'hover:bg-light-on-surface/10',
-            active: 'active:bg-light-warning/[0.15]'
-          },
-          error: {
-            hover: 'hover:bg-light-on-surface/10',
-            active: 'active:bg-light-error/[0.15]'
-          }
+          hover: 'hover:bg-light-on-surface/10',
+          active: 'active:bg-light-on-surface/[0.15]'
         }
       },
       checked: {
@@ -99,23 +77,23 @@ const checkboxConfig: CheckboxConfig = {
           },
           primary: {
             hover: 'hover:bg-light-primary/10',
-            active: 'active:bg-light-on-surface/[0.15]'
+            active: 'active:bg-light-primary/[0.15]'
           },
           secondary: {
             hover: 'hover:bg-light-secondary/10',
-            active: 'active:bg-light-on-surface/[0.15]'
+            active: 'active:bg-light-secondary/[0.15]'
           },
           success: {
             hover: 'hover:bg-light-success/10',
-            active: 'active:bg-light-on-surface/[0.15]'
+            active: 'active:bg-light-success/[0.15]'
           },
           warning: {
             hover: 'hover:bg-light-warning/10',
-            active: 'active:bg-light-on-surface/[0.15]'
+            active: 'active:bg-light-warning/[0.15]'
           },
           error: {
             hover: 'hover:bg-light-error/10',
-            active: 'active:bg-light-on-surface/[0.15]'
+            active: 'active:bg-light-error/[0.15]'
           }
         }
       }
