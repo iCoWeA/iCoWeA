@@ -3,7 +3,6 @@ import accordionHeaderConfig from '../../configs/accordionHeaderConfig';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
-import StateLayer from './StateLayer';
 
 export interface AccordionHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   startDecorator?: ReactNode;
@@ -30,24 +29,22 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
     ...props
   };
 
-  /* --- Set state props --- */
-  let stateLayerNode: ReactNode;
-
-  if (accordionVariant === 'filled') {
-    stateLayerNode = (
-      <StateLayer
-        state="text-click"
-        color={accordionColor}
-        {...stateLayerProps}
-      />
-    );
-  }
-
   /* --- Set props --- */
   const ariaContarols = accordionId === undefined ? undefined : `acd-body-${accordionId}`;
   const id = accordionId === undefined ? undefined : `acd-header-${accordionId}`;
 
-  const mergedClassName = mergeClasses(styles.base, styles.divider[theme], styles.colors[theme][accordionColor], className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.disabled[theme],
+    accordionVariant === 'plain' && styles.colors[theme][accordionColor],
+    accordionVariant === 'text' && styles.text[theme],
+    accordionVariant === 'filled' && styles.filled[theme],
+    isAccordionOpen && accordionVariant === 'text' && styles['open-text'][theme][accordionColor],
+    isAccordionOpen && accordionVariant === 'filled' && styles['open-filled'][theme][accordionColor],
+    className
+  );
+
+  console.log(accordionVariant);
 
   return (
     <button
@@ -64,7 +61,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
       {startDecorator}
       {children}
       {endDecorator}
-      {stateLayerNode}
     </button>
   );
 });

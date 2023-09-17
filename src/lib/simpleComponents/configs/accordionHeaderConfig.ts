@@ -1,7 +1,6 @@
 export interface AccordionHeaderConfig {
   styles: {
     base: Record<string, string>;
-    divider: Record<Themes, Record<string, string>>;
     disabled: Record<Themes, Record<string, string>>;
     colors: Record<Themes, Record<Colors, Record<string, string>>>;
     text: Record<Themes, Record<string, string>>;
@@ -18,7 +17,7 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       display: 'flex',
       gap: 'gap-4',
       alignItems: 'items-center',
-      height: 'h-[3.0625rem]',
+      height: 'h-12',
       width: 'w-full',
       padding: 'py-3',
       font: 'antialiased font-normal text-base font-sans',
@@ -26,11 +25,6 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       active: 'active:bg-gradient-to-r',
       focus: 'focus:outline-0',
       disabled: 'disabled:pointer-events-none disabled:select-none'
-    },
-    divider: {
-      light: {
-        border: 'border-b border-light-divider'
-      }
     },
     disabled: {
       light: {
