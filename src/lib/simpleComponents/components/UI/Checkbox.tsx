@@ -98,7 +98,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, !checked && styles.unchecked[theme][color], checked && styles.checked[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, !checked && styles.color[theme], checked && styles.checked[theme][color], className);
 
   return (
     <Container
