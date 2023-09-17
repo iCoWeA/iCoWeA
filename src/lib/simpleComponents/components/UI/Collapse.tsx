@@ -37,16 +37,12 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     animationEndHandler
   } = useAnimation<HTMLDivElement>(collapseRef.current, open, onEnter, onExit);
 
-  /*
-   * Set imperative handler
-   */
+  /* --- Set imperative handler --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => collapseRef.current, [
     !keepMounted && !open && animationState.current === AnimationStates.EXITED
   ]);
 
-  /*
-   * Set open state
-   */
+  /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
       enter();
@@ -57,9 +53,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     }
   }, [open, animationState.enter, animationState.exit]);
 
-  /*
-   * Set outside click action
-   */
+  /* --- Set outside click action --- */
   const outsideClickHandler = useCallback(
     (event: MouseEvent) => {
       const isSnackbarClicked = collapseRef.current?.contains(event.target as Node) ?? false;
@@ -73,9 +67,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
 
-  /*
-   * Set timer action
-   */
+  /* --- Set timer action --- */
   useEffect(() => {
     let timerId: number;
 
@@ -92,6 +84,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     };
   }, [animationState.enter, closeDuration, onClose]);
 
+  /* --- Set default style --- */
   useEffect(() => {
     if (open && direction === 'vertical' && collapseRef.current !== null) {
       collapseRef.current.style.height = 'auto';

@@ -68,9 +68,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     !keepMounted && !open && animationState.current === AnimationStates.EXITED
   ]);
 
-  /*
-   * Set open state
-   */
+  /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
       enter();
@@ -81,9 +79,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     }
   }, [open, animationState.enter, animationState.exit]);
 
-  /*
-   * Set outside click action
-   */
+  /* --- Set outside click action --- */
   const outsideClickHandler = useCallback(
     (event: MouseEvent) => {
       const isPopperClicked = popperRef.current?.contains(event.target as Node) ?? false;
@@ -98,9 +94,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
 
   useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
 
-  /*
-   * Set timer action
-   */
+  /* --- Set timer action --- */
   useEffect(() => {
     let timerId: number;
 
@@ -117,9 +111,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     };
   }, [animationState.current, closeDuration, onClose]);
 
-  /*
-   * Set lock scroll action
-   */
+  /* --- Set lock scroll action --- */
   useEffect(() => {
     if (lockScroll) {
       if (open) {
@@ -130,9 +122,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     }
   }, [lockScroll, open]);
 
-  /*
-   * Set resize action
-   */
+  /* --- Set resize action --- */
   const resizeHandler = useCallback(() => {
     if (onResize !== undefined) {
       onResize();

@@ -36,9 +36,7 @@ const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
     !keepMounted && !open && animationState.current === AnimationStates.EXITED
   ]);
 
-  /*
-   * Set open state
-   */
+  /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
       enter();
@@ -55,7 +53,13 @@ const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.directions[direction], animationState.enter && styles.open[direction], className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.directions[direction],
+    animationState.enter && styles.open[direction],
+    animationState.current === AnimationStates.EXITED && !open && styles.hide,
+    className
+  );
 
   return (
     <div

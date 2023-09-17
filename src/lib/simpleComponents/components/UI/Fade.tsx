@@ -35,9 +35,7 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
     !keepMounted && !open && animationState.current === AnimationStates.EXITED
   ]);
 
-  /*
-   * Set open state
-   */
+  /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
       enter();
