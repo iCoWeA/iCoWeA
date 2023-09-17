@@ -10,6 +10,8 @@ export interface CardConfig {
   styles: {
     base: Record<string, string>;
     elevated: Record<string, string>;
+    clickable: Record<Themes, Record<string, string>>;
+    grabed: Record<Themes, Record<string, string>>;
     variants: Record<CardVariants, Record<Themes, Record<string, string>>>;
   }
 }
@@ -32,6 +34,17 @@ const cardConfig: CardConfig = {
     },
     elevated: {
       shadow: 'shadow-md shadow-black/50'
+    },
+    clickable: {
+      light: {
+        hover: 'hover:bg-gradient-to-r hover:from-light-on-surface/10 hover:to-light-on-surface/10',
+        active: 'active:bg-gradient-to-r active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]'
+      }
+    },
+    grabed: {
+      light: {
+        background: 'bg-gradient-to-r from-light-on-surface/20 to-light-on-surface/20'
+      }
     },
     variants: {
       plain: {

@@ -2,7 +2,6 @@ import React, { type BaseHTMLAttributes, forwardRef, useContext, type ReactNode 
 import cardConfig from '../../configs/cardConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
-import StateLayer from './StateLayer';
 
 export type CardVariants = 'plain' | 'filled' | 'outlined';
 
@@ -28,26 +27,17 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
 
   if (clickable) {
     clickableProps = { tabIndex: 0, role: 'button' };
-
-    stateLayerNode = (
-      <StateLayer
-        state="text-click"
-        {...stateLayerProps}
-      />
-    );
-  }
-
-  if (grabed) {
-    stateLayerNode = (
-      <StateLayer
-        state="text-grab"
-        {...stateLayerProps}
-      />
-    );
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], elevated && styles.elevated, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.variants[variant][theme],
+    elevated && styles.elevated,
+    clickable && styles.clickable[theme],
+    grabed && styles.grabed[theme],
+    className
+  );
 
   return (
     <div
