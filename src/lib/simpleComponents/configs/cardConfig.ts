@@ -59,7 +59,8 @@ const cardConfig: CardConfig = {
       },
       outlined: {
         light: {
-          border: 'border border-light-divider'
+          border: 'border border-light-divider',
+          background: 'bg-light-surface-light'
         }
       }
     }

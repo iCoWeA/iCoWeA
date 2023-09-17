@@ -6,6 +6,7 @@ export interface SlideConfig {
   };
   styles: {
     base: Record<string, string>;
+    hide: Record<string, string>;
     directions: Record<Directions, Record<string, string>>;
     open: Record<Directions, Record<string, string>>;
   }
@@ -25,6 +26,9 @@ const slideConfig: SlideConfig = {
       width: 'w-fit',
       transition: 'transition',
       transitionDuration: 'duration-500'
+    },
+    hide: {
+      display: 'hidden'
     },
     directions: {
       top: {
