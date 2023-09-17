@@ -28,6 +28,11 @@ const Handler = forwardRef<HTMLElement, HandlerProps>(({ onClick, children }, re
 
 Handler.displayName = 'Handler';
 
+/********************************************************************************
+ *
+ *   Popover
+ *
+ */
 export interface PopoverProps extends PopperProps {
   onClose?: () => void;
   open?: boolean;
@@ -39,11 +44,12 @@ export interface PopoverProps extends PopperProps {
   backdrop?: boolean;
   handler?: ReactElement;
   backdropProps?: BackdropProps;
+  overlayRef?: Element | null;
 }
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   /* --- Set default props --- */
-  const { onClose, open, position, responsive, lockScroll, closeOnAwayClick, keepMounted, backdrop, handler, backdropProps, ...restProps } = {
+  const { onClose, open, position, responsive, lockScroll, closeOnAwayClick, keepMounted, backdrop, handler, backdropProps, overlayRef, ...restProps } = {
     ...popoverConfig.defaultProps,
     ...props
   };
@@ -150,6 +156,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
         closeOnAwayClick={backdrop ? false : closeOnAwayClick}
         keepMounted={keepMounted}
         anchorElement={handlerRef.current}
+        overlayRef={overlayRef}
         ref={ref}
         {...restProps}
       />
