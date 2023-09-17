@@ -9,6 +9,7 @@ export interface BackdropProps extends FadeProps {
   onClose?: () => void;
   open?: boolean;
   invisible?: boolean;
+  keepMounted?: boolean;
   overlayRef?: Element | null;
 }
 
@@ -18,7 +19,7 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = backdropConfig.styles;
-  const { onClose, open, invisible, overlayRef, className, ...restProps } = { ...backdropConfig.defaultProps, ...props };
+  const { onClose, open, invisible, keepMounted, overlayRef, className, ...restProps } = { ...backdropConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme], invisible && styles.invisible, className);
@@ -27,7 +28,7 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
     <Fade
       onClick={onClose}
       open={open}
-      keepMounted={false}
+      keepMounted={keepMounted}
       className={mergedClassName}
       ref={ref}
       {...restProps}

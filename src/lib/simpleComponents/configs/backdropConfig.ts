@@ -2,6 +2,7 @@ export interface BackdropConfig {
   defaultProps: {
     open: boolean;
     invisible: boolean;
+    keepMounted: boolean;
     overlayRef: Element | null;
   };
   styles: {
@@ -15,6 +16,7 @@ const backdropConfig: BackdropConfig = {
   defaultProps: {
     open: false,
     invisible: false,
+    keepMounted: false,
     overlayRef: null
   },
   styles: {
@@ -22,7 +24,7 @@ const backdropConfig: BackdropConfig = {
       position: 'fixed',
       top: 'top-0',
       left: 'left-0',
-      display: 'block',
+      zIndex: 'z-10',
       height: 'h-screen',
       width: 'w-screen'
     },
