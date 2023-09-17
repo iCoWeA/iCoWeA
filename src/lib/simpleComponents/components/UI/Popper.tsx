@@ -166,7 +166,12 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     resizeHandler();
   }
 
-  const mergedClassName = mergeClasses(styles.base, animationState.enter && styles.open, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    animationState.enter && styles.open,
+    animationState.current === AnimationStates.EXITED && !open && styles.hide,
+    className
+  );
 
   const node = (
     <div
