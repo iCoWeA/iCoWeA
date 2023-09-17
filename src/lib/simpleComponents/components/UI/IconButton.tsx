@@ -2,7 +2,6 @@ import React, { type ButtonHTMLAttributes, type BaseHTMLAttributes, forwardRef, 
 import iconButtonConfig from '../../configs/iconButtonConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
-import StateLayer from './StateLayer';
 
 export type IconButtonVariants = 'plain' | 'text' | 'outlined' | 'filled';
 
@@ -45,11 +44,6 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
       {...restProps}
     >
       {children}
-      <StateLayer
-        state={`${variant}-click`}
-        color={color}
-        {...stateLayerProps}
-      />
     </button>
   );
 });
