@@ -1,9 +1,9 @@
 import { createContext } from 'react';
-import { type AccordionVariant } from '../components/UI/Accordion';
+import { type AccordionVariants } from '../components/UI/Accordion';
 
 export interface AccordionContext {
   onToggle: () => void;
-  variant: AccordionVariant;
+  variant: AccordionVariants;
   color: Colors;
   open: boolean;
   id?: string;

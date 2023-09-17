@@ -4,10 +4,10 @@ import accordionContext, { type AccordionContext } from '../../contexts/accordio
 import usePrevious from '../../hooks/usePrevious';
 import { mergeClasses } from '../../utils/propsHelper';
 
-export type AccordionVariant = 'plain' | 'filled';
+export type AccordionVariants = 'plain' | 'text' | 'filled';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: AccordionVariant;
+  variant?: AccordionVariants;
   color?: Colors;
   open?: boolean;
   defaultOpen?: boolean;
