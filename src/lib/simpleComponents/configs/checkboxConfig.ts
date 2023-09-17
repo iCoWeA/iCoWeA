@@ -12,18 +12,20 @@ export interface CheckboxConfig {
   styles: {
     container: {
       base: Record<string, string>;
-      checked: Record<string, string>;
-      disabled: Record<string, string>;
     },
     input: {
       base: Record<string, string>;
+      unchecked: Record<Themes, Record<Colors, Record<string, string>>>;
+      checked: Record<Themes, Record<Colors, Record<string, string>>>;
     },
     icon: {
       base: Record<string, string>;
       border: Record<Themes, Record<string, string>>;
       valid: Record<Themes, Record<string, string>>;
       invalid: Record<Themes, Record<string, string>>;
-      colors: Record<Themes, Record<Colors, Record<string, string>>>
+      disabled: Record<Themes, Record<string, string>>;
+      disabledChecked: Record<Themes, Record<string, string>>;
+      colors: Record<Themes, Record<Colors, Record<string, string>>>;
     }
   }
 }
@@ -45,16 +47,7 @@ const checkboxConfig: CheckboxConfig = {
         height: 'h-10',
         width: 'w-10',
         borderRadius: 'rounded-full',
-        overflow: 'overflow-hidden',
-        userSelect: 'select-none',
-        group: 'group'
-      },
-      checked: {
-        group: 'checked'
-      },
-      disabled: {
-        group: 'disabled',
-        pointerEvent: 'pointer-events-none'
+        userSelect: 'select-none'
       }
     },
     input: {
@@ -62,9 +55,69 @@ const checkboxConfig: CheckboxConfig = {
         display: 'block',
         height: 'h-full',
         width: 'w-full',
+        borderRadius: 'rounded-full',
         background: 'bg-transparent',
         appearance: 'appearance-none',
-        focus: 'focus:outline-0'
+        hover: 'hover:bg-gradient-to-r',
+        active: 'active:bg-gradient-to-r',
+        focus: 'focus:outline-0',
+        disabled: 'disabled:pointer-events-none'
+      },
+      unchecked: {
+        light: {
+          default: {
+            hover: 'hover:bg-light-on-surface/10',
+            active: 'active:bg-light-on-surface/[0.15]'
+          },
+          primary: {
+            hover: 'hover:bg-light-on-surface/10',
+            active: 'active:bg-light-primary/[0.15]'
+          },
+          secondary: {
+            hover: 'hover:bg-light-on-surface/10',
+            active: 'active:bg-light-secondary/[0.15]'
+          },
+          success: {
+            hover: 'hover:bg-light-on-surface/10',
+            active: 'active:bg-light-success/[0.15]'
+          },
+          warning: {
+            hover: 'hover:bg-light-on-surface/10',
+            active: 'active:bg-light-warning/[0.15]'
+          },
+          error: {
+            hover: 'hover:bg-light-on-surface/10',
+            active: 'active:bg-light-error/[0.15]'
+          }
+        }
+      },
+      checked: {
+        light: {
+          default: {
+            hover: 'hover:bg-light-on-surface/10',
+            active: 'active:bg-light-on-surface/[0.15]'
+          },
+          primary: {
+            hover: 'hover:bg-light-primary/10',
+            active: 'active:bg-light-on-surface/[0.15]'
+          },
+          secondary: {
+            hover: 'hover:bg-light-secondary/10',
+            active: 'active:bg-light-on-surface/[0.15]'
+          },
+          success: {
+            hover: 'hover:bg-light-success/10',
+            active: 'active:bg-light-on-surface/[0.15]'
+          },
+          warning: {
+            hover: 'hover:bg-light-warning/10',
+            active: 'active:bg-light-on-surface/[0.15]'
+          },
+          error: {
+            hover: 'hover:bg-light-error/10',
+            active: 'active:bg-light-on-surface/[0.15]'
+          }
+        }
       }
     },
     icon: {
@@ -82,9 +135,7 @@ const checkboxConfig: CheckboxConfig = {
       },
       border: {
         light: {
-          border: 'border-2 border-light-divider',
-          checked: 'group-[.checked]:border-0',
-          disabled: 'group-[.disabled]:border-light-on-surface/40'
+          border: 'border-2 border-light-divider'
         }
       },
       valid: {
@@ -97,31 +148,49 @@ const checkboxConfig: CheckboxConfig = {
           border: 'border-light-error'
         }
       },
+      disabled: {
+        light: {
+          border: 'border-light-on-surface/40'
+        }
+      },
+      disabledChecked: {
+        light: {
+          border: 'border-0',
+          fill: 'fill-light-on-surface/40',
+          background: 'bg-light-on-surface/20'
+        }
+      },
       colors: {
         light: {
           default: {
-            checked: 'group-[.checked]:fill-light-on-surface group-[.checked]:bg-light-surface-dark',
-            disabled: 'group-[.checked]:group-[.disabled]:fill-light-on-surface/40 group-[.checked]:group-[.disabled]:bg-light-on-surface/20'
+            border: 'border-0',
+            fill: 'fill-light-on-surface',
+            background: 'bg-light-surface-dark'
           },
           primary: {
-            checked: 'group-[.checked]:fill-light-on-primary group-[.checked]:bg-light-primary',
-            disabled: 'group-[.checked]:group-[.disabled]:fill-light-on-surface/40 group-[.checked]:group-[.disabled]:bg-light-on-surface/20'
+            border: 'border-0',
+            fill: 'fill-light-on-primary',
+            background: 'bg-light-primary'
           },
           secondary: {
-            checked: 'group-[.checked]:fill-light-on-secondary group-[.checked]:bg-light-secondary',
-            disabled: 'group-[.checked]:group-[.disabled]:fill-light-on-surface/40 group-[.checked]:group-[.disabled]:bg-light-on-surface/20'
+            border: 'border-0',
+            fill: 'fill-light-on-secondary',
+            background: 'bg-light-secondary'
           },
           success: {
-            checked: 'group-[.checked]:fill-light-on-success group-[.checked]:bg-light-success',
-            disabled: 'group-[.checked]:group-[.disabled]:fill-light-on-surface/40 group-[.checked]:group-[.disabled]:bg-light-on-surface/20'
+            border: 'border-0',
+            fill: 'fill-light-on-success',
+            bnackground: 'bg-light-success'
           },
           warning: {
-            checked: 'group-[.checked]:fill-light-on-warning group-[.checked]:bg-light-warning',
-            disabled: 'group-[.checked]:group-[.disabled]:fill-light-on-surface/40 group-[.checked]:group-[.disabled]:bg-light-on-surface/20'
+            border: 'border-0',
+            fill: 'fill-light-on-warning',
+            background: 'bg-light-warning'
           },
           error: {
-            checked: 'group-[.checked]:fill-light-on-error group-[.checked]:bg-light-error',
-            disabled: 'group-[.checked]:group-[.disabled]:fill-light-on-surface/40 group-[.checked]:group-[.disabled]:bg-light-on-surface/20'
+            border: 'border-0',
+            fill: 'fill-light-on-error',
+            background: 'bg-light-error'
           }
         }
       }

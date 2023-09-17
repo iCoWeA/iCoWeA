@@ -3,7 +3,6 @@ import BaseIcon, { type IconProps as BaseIconProps } from './Icon';
 import checkboxConfig from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
-import StateLayer from './StateLayer';
 
 /********************************************************************************
  *
@@ -14,9 +13,11 @@ interface IconProps extends BaseIconProps {
   color: Colors;
   valid: boolean;
   invalid: boolean;
+  checked: boolean;
+  disabled: boolean;
 }
 
-const Icon: FC<IconProps> = ({ color, valid, invalid, className, children, ...restProps }) => {
+const Icon: FC<IconProps> = ({ color, valid, invalid, checked, disabled, className, children, ...restProps }) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -27,9 +28,11 @@ const Icon: FC<IconProps> = ({ color, valid, invalid, className, children, ...re
   const mergedClassName = mergeClasses(
     styles.base,
     styles.border[theme],
-    styles.colors[theme][color],
+    checked && !disabled && styles.colors[theme][color],
     valid && styles.valid[theme],
     invalid && styles.invalid[theme],
+    disabled && !checked && styles.disabled[theme],
+    disabled && checked && styles.disabledChecked[theme],
     className
   );
 
@@ -60,7 +63,7 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(({ checked, disable
   const styles = checkboxConfig.styles.container;
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, checked && styles.checked, disabled && styles.disabled, className);
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <div
@@ -84,6 +87,9 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
   const styles = checkboxConfig.styles.input;
   const { color, valid, invalid, containerProps, iconProps, stateLayerProps, inputRef, checked, disabled, type, className, ...restProps } = {
@@ -92,7 +98,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, className);
+  const mergedClassName = mergeClasses(styles.base, !checked && styles.unchecked[theme][color], checked && styles.checked[theme][color], className);
 
   return (
     <Container
@@ -113,12 +119,9 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
         color={color}
         valid={valid}
         invalid={invalid}
+        checked={checked}
+        disabled={disabled}
         {...iconProps}
-      />
-      <StateLayer
-        state={checked ? 'checked' : 'unchecked'}
-        color={color}
-        {...stateLayerProps}
       />
     </Container>
   );
