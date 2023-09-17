@@ -1,14 +1,15 @@
+import { type CollapseDirections } from '../components/UI/Collapse';
+
 export interface CollapseConfig {
   defaultProps: {
-    direction: Orientations;
+    direction: CollapseDirections;
     open: boolean;
-    fit: boolean;
     closeOnAwayClick: boolean;
     keepMounted: boolean;
   };
   styles: {
     base: Record<string, string>;
-    directions: Record<Orientations, Record<string, string>>;
+    directions: Record<CollapseDirections, Record<string, string>>;
   }
 }
 
@@ -16,7 +17,6 @@ const collapseConfig: CollapseConfig = {
   defaultProps: {
     direction: 'vertical',
     open: false,
-    fit: false,
     closeOnAwayClick: false,
     keepMounted: false
   },
@@ -33,6 +33,11 @@ const collapseConfig: CollapseConfig = {
         transition: 'transition-[height]'
       },
       horizontal: {
+        height: 'h-fit',
+        width: 'w-0',
+        transition: 'transition-[width]'
+      },
+      'horizontal-full': {
         height: 'h-fit',
         width: 'w-0',
         transition: 'transition-[width]'

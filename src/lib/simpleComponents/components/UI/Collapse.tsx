@@ -4,13 +4,14 @@ import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import { mergeClasses } from '../../utils/propsHelper';
 
+export type CollapseDirections = 'horizontal' | 'horizontal-full' | 'vertical';
+
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
   onExit?: () => void;
-  direction?: Orientations;
+  direction?: CollapseDirections;
   open?: boolean;
-  fit?: boolean;
   closeOnAwayClick?: boolean;
   closeDuration?: number;
   keepMounted?: boolean;
@@ -19,7 +20,7 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = collapseConfig.styles;
-  const { onClose, onEnter, onExit, direction, open, fit, closeOnAwayClick, closeDuration, keepMounted, style, className, ...restProps } = {
+  const { onClose, onEnter, onExit, direction, open, closeOnAwayClick, closeDuration, keepMounted, style, className, ...restProps } = {
     ...collapseConfig.defaultProps,
     ...props
   };
@@ -96,11 +97,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
       collapseRef.current.style.height = 'auto';
     }
 
-    if (open && direction === 'horizontal' && !fit && collapseRef.current !== null) {
+    if (open && direction === 'horizontal-full' && collapseRef.current !== null) {
       collapseRef.current.style.width = '100%';
     }
 
-    if (open && direction === 'horizontal' && fit && collapseRef.current !== null) {
+    if (open && direction === 'horizontal' && collapseRef.current !== null) {
       collapseRef.current.style.width = 'auto';
     }
   }, []);
@@ -124,14 +125,21 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     mergedStyles = { height: '0px', ...style };
   }
 
-  if (animationState.enter && direction === 'horizontal' && collapseRef.current !== null) {
+  if (animationState.enter && direction === 'horizontal-full' && collapseRef.current !== null) {
     mergedStyles = {
-      width: `${fit ? `${collapseRef.current.scrollWidth}px` : '100%'}`,
+      width: '100%',
       ...style
     };
   }
 
-  if (animationState.exit && direction === 'horizontal' && collapseRef.current !== null) {
+  if (animationState.enter && direction === 'horizontal' && collapseRef.current !== null) {
+    mergedStyles = {
+      width: `${collapseRef.current.scrollWidth}px`,
+      ...style
+    };
+  }
+
+  if (animationState.exit && (direction === 'horizontal' || direction === 'horizontal-full') && collapseRef.current !== null) {
     mergedStyles = { width: '0px', ...style };
   }
 
