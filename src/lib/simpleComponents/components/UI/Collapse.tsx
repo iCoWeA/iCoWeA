@@ -1,8 +1,8 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback, type CSSProperties } from 'react';
 import collapseConfig from '../../configs/collapseConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import useOutsideClick from '../../hooks/useOutsideClick';
-import { setStyles, mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/propsHelper';
 
 export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
@@ -91,32 +91,19 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     };
   }, [animationState.enter, closeDuration, onClose]);
 
-  /*
-   * Set styles
-   */
   useEffect(() => {
-    if (animationState.current === AnimationStates.ENTERING && direction === 'vertical' && collapseRef.current !== null) {
-      setStyles<HTMLDivElement>(collapseRef.current, {
-        height: `${collapseRef.current.scrollHeight}px`,
-        ...style
-      });
+    if (open && direction === 'vertical' && collapseRef.current !== null) {
+      collapseRef.current.style.height = 'auto';
     }
 
-    if (animationState.current === AnimationStates.EXITING && direction === 'vertical' && collapseRef.current !== null) {
-      setStyles<HTMLDivElement>(collapseRef.current, { height: '0px', ...style });
+    if (open && direction === 'horizontal' && !fit && collapseRef.current !== null) {
+      collapseRef.current.style.width = '100%';
     }
 
-    if (animationState.current === AnimationStates.ENTERING && direction === 'horizontal' && collapseRef.current !== null) {
-      setStyles<HTMLDivElement>(collapseRef.current, {
-        width: `${fit ? `${collapseRef.current.scrollWidth}px` : '100%'}`,
-        ...style
-      });
+    if (open && direction === 'horizontal' && fit && collapseRef.current !== null) {
+      collapseRef.current.style.width = 'auto';
     }
-
-    if (animationState.current === AnimationStates.EXITING && direction === 'horizontal' && collapseRef.current !== null) {
-      setStyles<HTMLDivElement>(collapseRef.current, { width: '0px', ...style });
-    }
-  }, [animationState.current, fit, style]);
+  }, []);
 
   /* --- Unmount --- */
   if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
@@ -124,12 +111,37 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   }
 
   /* --- Set props --- */
+  let mergedStyles: CSSProperties | undefined;
+
+  if (animationState.enter && direction === 'vertical' && collapseRef.current !== null) {
+    mergedStyles = {
+      height: `${collapseRef.current.scrollHeight}px`,
+      ...style
+    };
+  }
+
+  if (animationState.exit && direction === 'vertical' && collapseRef.current !== null) {
+    mergedStyles = { height: '0px', ...style };
+  }
+
+  if (animationState.enter && direction === 'horizontal' && collapseRef.current !== null) {
+    mergedStyles = {
+      width: `${fit ? `${collapseRef.current.scrollWidth}px` : '100%'}`,
+      ...style
+    };
+  }
+
+  if (animationState.exit && direction === 'horizontal' && collapseRef.current !== null) {
+    mergedStyles = { width: '0px', ...style };
+  }
+
   const mergedClassName = mergeClasses(styles.base, styles.directions[direction], className);
 
   return (
     <div
       onTransitionEnd={transitionEndHandler}
       onAnimationEnd={animationEndHandler}
+      style={mergedStyles}
       className={mergedClassName}
       ref={collapseRef}
       {...restProps}
