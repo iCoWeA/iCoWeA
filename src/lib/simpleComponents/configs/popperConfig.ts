@@ -29,6 +29,7 @@ const popperConfig: PopperConfig = {
   styles: {
     base: {
       position: 'absolute',
+      zIndex: 'z-40',
       display: 'block',
       height: 'h-fit',
       width: 'w-fit',
