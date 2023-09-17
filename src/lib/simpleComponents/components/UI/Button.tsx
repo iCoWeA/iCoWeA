@@ -2,7 +2,6 @@ import React, { type ButtonHTMLAttributes, type ReactNode, type BaseHTMLAttribut
 import buttonConfig from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
-import StateLayer from './StateLayer';
 
 export type ButtonVariants = 'plain' | 'text' | 'outlined' | 'filled';
 
@@ -49,11 +48,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       {startDecoration}
       {children}
       {endDecoration}
-      <StateLayer
-        state={`${variant}-click`}
-        color={color}
-        {...stateLayerProps}
-      />
     </button>
   );
 });
