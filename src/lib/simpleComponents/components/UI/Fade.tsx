@@ -54,7 +54,12 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   }
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, animationState.enter && styles.open, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    animationState.enter && styles.open,
+    animationState.current === AnimationStates.EXITED && !open && styles.hide,
+    className
+  );
 
   return (
     <div
