@@ -126,6 +126,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
       <Backdrop
         onClose={closeHandler}
         open={open ?? isOpen}
+        keepMounted={keepMounted}
         invisible
         {...backdropProps}
       />
