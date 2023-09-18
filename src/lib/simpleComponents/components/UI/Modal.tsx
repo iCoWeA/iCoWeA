@@ -5,6 +5,11 @@ import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 
+/*
+ * ARIA set Aria-labeledby
+ * ARIA set Aria-describedby
+ */
+
 export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
@@ -92,6 +97,8 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
     <>
       {backdropNode}
       <div
+        role="dialog"
+        aria-modal="true"
         onTransitionEnd={transitionEndHandler}
         onAnimationEnd={animationEndHandler}
         className={mergedClassName}
