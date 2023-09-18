@@ -7,7 +7,6 @@ export type DropdownVariants = 'plain' | 'filled' | 'outlined';
 
 export interface DropdownProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: DropdownVariants;
-  elevated?: boolean;
 }
 
 const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
@@ -16,7 +15,7 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = dropdownConfig.styles;
-  const { variant, elevated, className, ...restProps } = { ...dropdownConfig.defaultProps, ...props };
+  const { variant, className, ...restProps } = { ...dropdownConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
