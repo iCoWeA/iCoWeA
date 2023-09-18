@@ -6,7 +6,6 @@ export interface AccordionContext {
   variant: AccordionVariants;
   color: Colors;
   open: boolean;
-  id?: string;
   disabled: boolean;
 }
 
