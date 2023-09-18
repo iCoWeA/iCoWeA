@@ -82,17 +82,17 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
           hover: 'hover:fill-light-on-surface hover:text-light-on-surface'
         },
         primary: {
-          fill: 'fill-text-primary',
+          fill: 'fill-light-primary',
           color: 'text-light-primary',
           hover: 'hover:fill-light-primary hover:text-light-primary'
         },
         secondary: {
-          fill: 'fill-text-secondary',
+          fill: 'fill-light-secondary',
           color: 'text-light-secondary',
           hover: 'hover:fill-light-secondary hover:text-light-secondary'
         },
         success: {
-          fill: 'fill-text-success',
+          fill: 'fill-light-success',
           color: 'text-light-success',
           hover: 'hover:fill-light-success hover:text-light-success'
         },
