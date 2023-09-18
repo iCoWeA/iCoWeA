@@ -6,6 +6,8 @@ import { mergeClasses } from '../../utils/propsHelper';
 export interface SlideProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEnter?: () => void;
   onExit?: () => void;
+  onEntering?: () => void;
+  onExiting?: () => void;
   direction?: Directions;
   open?: boolean;
   keepMounted?: boolean;
@@ -14,7 +16,7 @@ export interface SlideProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = slideConfig.styles;
-  const { onEnter, onExit, direction, open, keepMounted, className, ...restProps } = {
+  const { onEnter, onExit, onEntering, onExiting, direction, open, keepMounted, className, ...restProps } = {
     ...slideConfig.defaultProps,
     ...props
   };
@@ -39,11 +41,11 @@ const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
-      enter();
+      enter(onEntering);
     }
 
     if (!open && animationState.enter) {
-      exit();
+      exit(onExiting);
     }
   }, [open, animationState.enter, animationState.exit]);
 

@@ -6,6 +6,8 @@ import { mergeClasses } from '../../utils/propsHelper';
 export interface FadeProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEnter?: () => void;
   onExit?: () => void;
+  onEntering?: () => void;
+  onExiting?: () => void;
   open?: boolean;
   keepMounted?: boolean;
 }
@@ -13,7 +15,7 @@ export interface FadeProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = fadeConfig.styles;
-  const { onEnter, onExit, open, keepMounted, style, className, ...restProps } = {
+  const { onEnter, onExit, onEntering, onExiting, open, keepMounted, style, className, ...restProps } = {
     ...fadeConfig.defaultProps,
     ...props
   };
@@ -38,11 +40,11 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
-      enter();
+      enter(onEntering);
     }
 
     if (!open && animationState.enter) {
-      exit();
+      exit(onExiting);
     }
   }, [open, animationState.enter, animationState.exit]);
 

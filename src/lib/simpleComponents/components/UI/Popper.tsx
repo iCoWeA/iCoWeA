@@ -11,6 +11,8 @@ export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
   onExit?: () => void;
+  onEntering?: () => void;
+  onExiting?: () => void;
   onResize?: () => void;
   open?: boolean;
   lockScroll?: boolean;
@@ -28,6 +30,8 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     onClose,
     onEnter,
     onExit,
+    onEntering,
+    onExiting,
     onResize,
     open,
     lockScroll,
@@ -64,11 +68,11 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
-      enter();
+      enter(onEntering);
     }
 
     if (!open && animationState.enter) {
-      exit();
+      exit(onExiting);
     }
   }, [open, animationState.enter, animationState.exit]);
 

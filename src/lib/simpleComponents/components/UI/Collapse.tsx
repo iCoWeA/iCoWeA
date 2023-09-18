@@ -10,6 +10,8 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
   onExit?: () => void;
+  onEntering?: () => void;
+  onExiting?: () => void;
   direction?: CollapseDirections;
   open?: boolean;
   closeOnAwayClick?: boolean;
@@ -20,7 +22,7 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = collapseConfig.styles;
-  const { onClose, onEnter, onExit, direction, open, closeOnAwayClick, closeDuration, keepMounted, style, className, ...restProps } = {
+  const { onClose, onEnter, onExit, onEntering, onExiting, direction, open, closeOnAwayClick, closeDuration, keepMounted, style, className, ...restProps } = {
     ...collapseConfig.defaultProps,
     ...props
   };
@@ -45,11 +47,11 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
-      enter();
+      enter(onEntering);
     }
 
     if (!open && animationState.enter) {
-      exit();
+      exit(onExiting);
     }
   }, [open, animationState.enter, animationState.exit]);
 

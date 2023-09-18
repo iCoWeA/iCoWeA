@@ -9,6 +9,8 @@ export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
   onExit?: () => void;
+  onEntering?: () => void;
+  onExiting?: () => void;
   open?: boolean;
   lockScroll?: boolean;
   keepMounted?: boolean;
@@ -19,7 +21,7 @@ export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = modalConfig.styles;
-  const { onClose, onEnter, onExit, open, lockScroll, keepMounted, backdropProps, overlayRef, className, ...restProps } = {
+  const { onClose, onEnter, onExit, onEntering, onExiting, open, lockScroll, keepMounted, backdropProps, overlayRef, className, ...restProps } = {
     ...modalConfig.defaultProps,
     ...props
   };
@@ -44,11 +46,11 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
-      enter();
+      enter(onEntering);
     }
 
     if (!open && animationState.enter) {
-      exit();
+      exit(onExiting);
     }
   }, [open, animationState.enter, animationState.exit]);
 

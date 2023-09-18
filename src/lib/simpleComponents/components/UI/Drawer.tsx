@@ -12,6 +12,8 @@ export interface DrawerProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
   onExit?: () => void;
+  onEntering?: () => void;
+  onExiting?: () => void;
   variant?: DrawerVariants;
   direction?: Directions;
   open?: boolean;
@@ -27,7 +29,22 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = drawerConfig.styles;
-  const { onClose, onEnter, onExit, variant, direction, open, lockScroll, keepMounted, backdropProps, overlayRef, className, ...restProps } = {
+  const {
+    onClose,
+    onEnter,
+    onExit,
+    onEntering,
+    onExiting,
+    variant,
+    direction,
+    open,
+    lockScroll,
+    keepMounted,
+    backdropProps,
+    overlayRef,
+    className,
+    ...restProps
+  } = {
     ...drawerConfig.defaultProps,
     ...props
   };
@@ -52,11 +69,11 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   /* --- Set open state --- */
   useEffect(() => {
     if (open && animationState.exit) {
-      enter();
+      enter(onEntering);
     }
 
     if (!open && animationState.enter) {
-      exit();
+      exit(onExiting);
     }
   }, [open, animationState.enter, animationState.exit]);
 
