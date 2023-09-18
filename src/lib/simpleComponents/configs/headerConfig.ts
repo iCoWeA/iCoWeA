@@ -1,50 +1,36 @@
+import { type HeaderVariants } from '../components/layouts/Header';
+
 export interface HeaderConfig {
   defaultProps: {
-    color: Colors;
+    variant: HeaderVariants;
   };
   styles: {
     base: Record<string, string>;
-    colors: Record<string, Record<Colors, Record<string, string>>>;
+    variants: Record<HeaderVariants, Record<Themes, Record<string, string>>>;
   };
 }
 
 const headerConfig: HeaderConfig = {
   defaultProps: {
-    color: 'none'
+    variant: 'plain'
   },
   styles: {
     base: {
       display: 'flex',
-      gap: 'gap-6',
+      gap: 'gap-4',
       alignItems: 'items-center',
       width: 'w-full',
-      padding: 'py-2'
+      padding: 'py-2 px-4'
     },
-    colors: {
-      default: {
-        default: {
-          background: 'bg-default-default'
-        },
-        primary: {
-          background: 'bg-default-primary'
-        },
-        secondary: {
-          background: 'bg-default-secondary'
-        },
-        success: {
-          background: 'bg-default-success'
-        },
-        warning: {
-          background: 'bgs-default-warning'
-        },
-        error: {
-          background: 'bg-default-error'
-        },
+    variants: {
+      plain: {
         light: {
-          background: 'bg-default-light'
-        },
-        dark: {
-          background: 'bg-default-dark'
+          background: 'bg-light-surface-lowest'
+        }
+      },
+      filled: {
+        light: {
+          background: 'bg-light-surface'
         }
       }
     }

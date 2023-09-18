@@ -3,8 +3,10 @@ import headerConfig from '../../configs/headerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+export type HeaderVariants = 'plain' | 'filled';
+
 export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
-  color?: Colors;
+  variant: HeaderVariants;
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
@@ -13,10 +15,10 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = headerConfig.styles;
-  const { color, className, ...restProps } = { ...headerConfig.defaultProps, ...props };
+  const { variant, className, ...restProps } = { ...headerConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
 
   return (
     <header
