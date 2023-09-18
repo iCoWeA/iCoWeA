@@ -17,7 +17,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
     variant: accordionVariant,
     color: accordionColor,
     open: isAccordionOpen,
-    id: accordionId,
     disabled: isAccordionDisabled
   } = useContext(accordionContext);
   const theme = useContext(themeContext).theme;
@@ -30,9 +29,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   };
 
   /* --- Set props --- */
-  const ariaContarols = accordionId === undefined ? undefined : `acd-body-${accordionId}`;
-  const id = accordionId === undefined ? undefined : `acd-header-${accordionId}`;
-
   const mergedClassName = mergeClasses(
     styles.base,
     styles.disabled[theme],
@@ -44,13 +40,9 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
     className
   );
 
-  console.log(accordionVariant);
-
   return (
     <button
       aria-expanded={isAccordionOpen}
-      aria-controls={ariaContarols}
-      id={id}
       onClick={onAccordionToggle}
       disabled={disabled}
       type="button"

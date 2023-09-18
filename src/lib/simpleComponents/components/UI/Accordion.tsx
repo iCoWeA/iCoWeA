@@ -6,7 +6,8 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 /* ARIA
  *
- * Set ID
+ * Set aria-controls to handler
+ * Set aria-labeledby to region
  *
  */
 
@@ -50,10 +51,9 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
       variant,
       color,
       open: open ?? isOpen,
-      id,
       disabled
     }),
-    [isControlled, variant, color, open, isOpen, id, disabled]
+    [isControlled, variant, color, open, isOpen, disabled]
   );
 
   /* --- Set props --- */
