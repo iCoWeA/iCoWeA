@@ -6,9 +6,12 @@ import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 
-/*
- * ARIA set ID to Collapse
- * ARIA set ARIA-EXPANDED & ARIA-CONTRLS on Handler
+/* ARIA
+ *
+ * Set ID to collapse
+ * Set aria-controls to handler
+ * Set aria-expanded to handler
+ *
  */
 
 export type DrawerVariants = 'plain' | 'filled';
