@@ -3,12 +3,6 @@ import footerConfig from '../../configs/footerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
-/* ARIA
- *
- * Set aria-labeledby to multiple region
- *
- */
-
 export type FooterVariants = 'plain' | 'filled';
 
 export interface FooterProps extends BaseHTMLAttributes<HTMLElement> {
