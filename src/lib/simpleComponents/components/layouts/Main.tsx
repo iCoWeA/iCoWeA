@@ -3,8 +3,10 @@ import mainConfig from '../../configs/mainConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+export type MainVariants = 'plain' | 'filled';
+
 export interface MainProps extends BaseHTMLAttributes<HTMLElement> {
-  color?: Colors;
+  variant?: MainVariants;
 }
 
 const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
@@ -13,10 +15,10 @@ const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = mainConfig.styles;
-  const { color, className, ...restProps } = { ...mainConfig.defaultProps, ...props };
+  const { variant, className, ...restProps } = { ...mainConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
 
   return (
     <main
