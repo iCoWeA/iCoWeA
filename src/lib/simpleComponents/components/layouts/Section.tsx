@@ -3,8 +3,10 @@ import sectionConfig from '../../configs/sectionConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+export type SectionVariants = 'plain' | 'filled';
+
 export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
-  color?: Colors;
+  variant?: SectionVariants;
 }
 
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
@@ -13,10 +15,10 @@ const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = sectionConfig.styles;
-  const { color, className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
+  const { variant, className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
 
   return (
     <section
