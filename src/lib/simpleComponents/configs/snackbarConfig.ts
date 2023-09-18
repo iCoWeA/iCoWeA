@@ -15,7 +15,7 @@ export interface SnackbarConfig {
 
 const snackbarConfig: SnackbarConfig = {
   defaultProps: {
-    position: 'bottom',
+    position: 'bottom-left',
     lockScroll: false,
     closeOnAwayClick: true,
     keepMounted: false,
