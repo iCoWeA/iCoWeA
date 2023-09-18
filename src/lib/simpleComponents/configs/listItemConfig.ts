@@ -1,72 +1,54 @@
 export interface ListItemConfig {
-  defaultProps: {
-    size: Sizes;
-    color: Colors;
-  };
   styles: {
     base: Record<string, string>;
-    sizes: Record<Sizes, Record<string, string>>;
-    colors: Record<string, Record<Colors, Record<string, string>>>;
+    color: Record<Themes, Record<string, string>>;
+    colors: Record<Themes, Record<Colors, Record<string, string>>>;
   }
 }
 
 const listItemConfig: ListItemConfig = {
-  defaultProps: {
-    size: 'md',
-    color: 'default'
-  },
   styles: {
     base: {
       display: 'flex',
-      gap: 'gap-3',
+      gap: 'gap-4',
       alignItems: 'items-center',
+      height: 'min-h-[4rem]',
       width: 'w-full',
+      padding: 'py-2 px-4',
       font: 'antialiased font-normal text-base font-sans'
     },
-    sizes: {
-      sm: {
-        padding: 'py-1.5 px-3'
-      },
-      md: {
-        padding: 'py-2 px-4'
-      },
-      lg: {
-        padding: 'py-2.5 px-5'
+    color: {
+      light: {
+        fill: 'fill-light-on-surface-variant',
+        color: 'text-light-on-surface-variant',
+        background: 'bg-light-surface-low'
       }
     },
     colors: {
-      default: {
+      light: {
         default: {
-          fill: 'fill-default-default',
-          color: 'text-default-default'
+          fill: 'fill-light-on-surface',
+          color: 'text-light-on-surface'
         },
         primary: {
-          fill: 'fill-default-primary',
-          color: 'text-default-primary'
+          fill: 'fill-light-primary',
+          color: 'text-light-primary'
         },
-        secondary: {
-          fill: 'fill-default-secondary',
-          color: 'text-default-secondary'
+        scondary: {
+          fill: 'fill-light-secondary',
+          color: 'text-light-secondary'
         },
         success: {
-          fill: 'fill-default-success',
-          color: 'text-default-success'
+          fill: 'fill-light-success',
+          color: 'text-light-success'
         },
         warning: {
-          fill: 'fill-default-warning',
-          color: 'text-default-warning'
+          fill: 'fill-light-warning',
+          color: 'text-light-warning'
         },
         error: {
-          fill: 'fill-default-error',
-          color: 'text-default-error'
-        },
-        light: {
-          fill: 'fill-default-light',
-          color: 'text-default-light'
-        },
-        dark: {
-          fill: 'fill-default-dark',
-          color: 'text-default-dark'
+          fill: 'fill-light-error',
+          color: 'text-light-error'
         }
       }
     }
