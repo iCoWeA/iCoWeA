@@ -19,7 +19,7 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
   const { variant, elevated, className, ...restProps } = { ...dropdownConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], elevated && styles.elevated, className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
 
   return (
     <div

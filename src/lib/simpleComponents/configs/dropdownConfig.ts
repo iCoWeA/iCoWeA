@@ -3,30 +3,25 @@ import { type DropdownVariants } from '../components/UI/Dropdown';
 export interface DropdownConfig {
   defaultProps: {
     variant: DropdownVariants;
-    elevated: boolean;
   };
   styles: {
     base: Record<string, string>;
-    elevated: Record<string, string>;
     variants: Record<DropdownVariants, Record<Themes, Record<string, string>>>;
   }
 }
 
 const dropdownConfig: DropdownConfig = {
   defaultProps: {
-    variant: 'plain',
-    elevated: false
+    variant: 'plain'
   },
   styles: {
     base: {
       position: 'absolute',
       display: 'flex',
       flexDirection: 'flex-col',
+      shadow: 'shadow-md shadow-black/50',
       borderRadius: 'rounded-xl',
       overflow: 'overflow-hidden'
-    },
-    elevated: {
-      shadow: 'shadow-md shadow-black/50'
     },
     variants: {
       plain: {
