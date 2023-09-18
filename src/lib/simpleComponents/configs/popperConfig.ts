@@ -4,7 +4,6 @@ export interface PopperConfig {
     lockScroll: boolean;
     closeOnAwayClick: boolean;
     keepMounted: boolean;
-    overlayRef: Element | null;
   };
   styles: {
     base: Record<string, string>;
@@ -18,8 +17,7 @@ const popperConfig: PopperConfig = {
     open: false,
     lockScroll: false,
     closeOnAwayClick: true,
-    keepMounted: false,
-    overlayRef: null
+    keepMounted: false
   },
   styles: {
     base: {

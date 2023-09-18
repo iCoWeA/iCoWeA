@@ -126,7 +126,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     </>
   );
 
-  return overlayRef === null ? node : createPortal(node, overlayRef);
+  return overlayRef === undefined || overlayRef === null ? node : createPortal(node, overlayRef);
 });
 
 Drawer.displayName = 'Drawer';

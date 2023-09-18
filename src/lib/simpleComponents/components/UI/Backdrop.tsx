@@ -35,7 +35,7 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
     />
   );
 
-  return overlayRef === null ? node : createPortal(node, overlayRef);
+  return overlayRef === undefined || overlayRef === null ? node : createPortal(node, overlayRef);
 });
 
 Backdrop.displayName = 'Backdrop';

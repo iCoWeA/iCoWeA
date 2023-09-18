@@ -7,7 +7,6 @@ export interface DrawerConfig {
     open: boolean;
     lockScroll: boolean;
     keepMounted: boolean;
-    overlayRef: Element | null;
   };
   styles: {
     base: Record<string, string>;
@@ -24,8 +23,7 @@ const drawerConfig: DrawerConfig = {
     direction: 'bottom',
     open: false,
     lockScroll: true,
-    keepMounted: false,
-    overlayRef: null
+    keepMounted: false
   },
   styles: {
     base: {
