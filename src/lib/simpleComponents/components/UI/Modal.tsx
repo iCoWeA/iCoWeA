@@ -1,13 +1,15 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import modalConfig from '../../configs/modalConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 
-/*
- * ARIA set Aria-labeledby
- * ARIA set Aria-describedby
+/* ARIA
+ *
+ * Set aria-labeledby to title
+ * Set aria-describedby to content
+ *
  */
 
 export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -17,6 +19,7 @@ export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEntering?: () => void;
   onExiting?: () => void;
   open?: boolean;
+  fullwidth?: boolean;
   lockScroll?: boolean;
   keepMounted?: boolean;
   backdropProps?: BackdropProps;
@@ -26,7 +29,7 @@ export interface ModalProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = modalConfig.styles;
-  const { onClose, onEnter, onExit, onEntering, onExiting, open, lockScroll, keepMounted, backdropProps, overlayRef, className, ...restProps } = {
+  const { onClose, onEnter, onExit, onEntering, onExiting, open, fullwidth, lockScroll, keepMounted, backdropProps, overlayRef, className, ...restProps } = {
     ...modalConfig.defaultProps,
     ...props
   };
@@ -76,14 +79,18 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   }
 
   /* --- Set backdrop --- */
-  const backdropNode = (
-    <Backdrop
-      onClose={onClose}
-      open={open}
-      keepMounted={keepMounted}
-      {...backdropProps}
-    />
-  );
+  let backdropNode: ReactNode;
+
+  if (!fullwidth) {
+    backdropNode = (
+      <Backdrop
+        onClose={onClose}
+        open={open}
+        keepMounted={keepMounted}
+        {...backdropProps}
+      />
+    );
+  }
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
