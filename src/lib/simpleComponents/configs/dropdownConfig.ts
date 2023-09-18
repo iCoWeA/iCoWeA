@@ -16,7 +16,6 @@ const dropdownConfig: DropdownConfig = {
   },
   styles: {
     base: {
-      position: 'absolute',
       display: 'flex',
       flexDirection: 'flex-col',
       shadow: 'shadow-md shadow-black/50',
