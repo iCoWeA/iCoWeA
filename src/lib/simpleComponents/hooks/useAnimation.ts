@@ -8,13 +8,6 @@ export interface AnimationState {
   exit: boolean;
 }
 
-export interface AnimationConfig {
-  onEntering?: () => void;
-  onExiting?: () => void;
-  onEnter?: () => void;
-  onExit?: () => void;
-}
-
 interface Return<T> {
   state: AnimationState;
   enter: (onEntering?: () => void) => void;
@@ -26,11 +19,19 @@ interface Return<T> {
 const useAnimation = <T extends HTMLElement>(element: T | null, isEntered: boolean = false, onEnter?: () => void, onExit?: () => void): Return<T> => {
   const [state, setState] = useState<AnimationStates>(isEntered ? AnimationStates.ENTERED : AnimationStates.EXITED);
 
-  const enter = useCallback(() => {
+  const enter = useCallback((onEntering?: () => void) => {
+    if (onEntering !== undefined) {
+      onEntering();
+    }
+
     setState(AnimationStates.ENTERING);
   }, []);
 
   const exit = useCallback((onExiting?: () => void) => {
+    if (onExiting !== undefined) {
+      onExiting();
+    }
+
     setState(AnimationStates.EXITING);
   }, []);
 
