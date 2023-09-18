@@ -7,6 +7,13 @@ import useResize from '../../hooks/useResize';
 import useScroll from '../../hooks/useScroll';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/* ARIA
+ *
+ * Set aria-controls to handler
+ * Set aria-expanded to handler
+ *
+ */
+
 export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
