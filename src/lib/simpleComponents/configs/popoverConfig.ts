@@ -8,7 +8,10 @@ export interface PopoverConfig {
     keepMounted: boolean;
     backdrop: boolean;
     overlayRef: Element | null;
-  };
+  },
+  styles: {
+    base: Record<string, string>;
+  }
 }
 
 const popoverConfig: PopoverConfig = {
@@ -21,6 +24,12 @@ const popoverConfig: PopoverConfig = {
     keepMounted: false,
     backdrop: false,
     overlayRef: null
+  },
+  styles: {
+    base: {
+      position: 'absolute',
+      zIndex: 'z-40'
+    }
   }
 };
 

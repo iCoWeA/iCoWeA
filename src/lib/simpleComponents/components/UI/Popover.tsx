@@ -14,6 +14,7 @@ import React, {
 import popoverConfig from '../../configs/popoverConfig';
 import usePrevious from '../../hooks/usePrevious';
 import { setElementPosition } from '../../utils/positiontHelper';
+import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 import Popper, { type PopperProps } from './Popper';
 
@@ -53,11 +54,26 @@ export interface PopoverProps extends PopperProps {
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
   /* --- Set default props --- */
-  const { onClose, open, position, responsive, offset, lockScroll, closeOnAwayClick, keepMounted, backdrop, handler, backdropProps, overlayRef, ...restProps } =
-    {
-      ...popoverConfig.defaultProps,
-      ...props
-    };
+  const styles = popoverConfig.styles;
+  const {
+    onClose,
+    open,
+    position,
+    responsive,
+    offset,
+    lockScroll,
+    closeOnAwayClick,
+    keepMounted,
+    backdrop,
+    handler,
+    backdropProps,
+    overlayRef,
+    className,
+    ...restProps
+  } = {
+    ...popoverConfig.defaultProps,
+    ...props
+  };
 
   /* --- Set refs --- */
   const popperRef = useRef<HTMLDivElement | null>(null);
@@ -167,6 +183,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     }
   };
 
+  const mergedClassName = mergeClasses(styles.base, className);
+
   return (
     <>
       {handlerNode}
@@ -180,6 +198,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
         keepMounted={keepMounted}
         anchorElement={handlerRef.current}
         overlayRef={overlayRef}
+        className={mergedClassName}
         ref={popperRef}
         {...restProps}
       />
