@@ -31,7 +31,7 @@ const dropdownConfig: DropdownConfig = {
     variants: {
       plain: {
         light: {
-          background: 'bg-light-surface-light'
+          background: 'bg-light-surface-low'
         }
       },
       filled: {

@@ -82,7 +82,7 @@ const drawerConfig: DrawerConfig = {
     variants: {
       plain: {
         light: {
-          background: 'bg-light-surface-light'
+          background: 'bg-light-surface-low'
         }
       },
       filled: {

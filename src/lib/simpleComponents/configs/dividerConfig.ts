@@ -32,10 +32,10 @@ const dividerConfig: DividerConfig = {
     },
     margin: {
       horizontal: {
-        margin: 'py-2'
+        margin: 'my-2'
       },
       vertical: {
-        margin: 'px-2'
+        margin: 'mx-2'
       }
     },
     color: {

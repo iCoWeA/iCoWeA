@@ -48,7 +48,7 @@ const cardConfig: CardConfig = {
     variants: {
       plain: {
         light: {
-          background: 'bg-light-surface-light'
+          background: 'bg-light-surface-low'
         }
       },
       filled: {
@@ -59,7 +59,7 @@ const cardConfig: CardConfig = {
       outlined: {
         light: {
           border: 'border border-light-divider',
-          background: 'bg-light-surface-light'
+          background: 'bg-light-surface-low'
         }
       }
     }
