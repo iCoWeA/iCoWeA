@@ -3,6 +3,12 @@ import headerConfig from '../../configs/headerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/* ARIA
+ *
+ * Set aria-label to multiple region
+ *
+ */
+
 export type HeaderVariants = 'plain' | 'filled';
 
 export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
