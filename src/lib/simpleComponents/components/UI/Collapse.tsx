@@ -4,9 +4,12 @@ import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import { mergeClasses } from '../../utils/propsHelper';
 
-/*
- * ARIA set ID to Collapse
- * ARIA set ARIA-EXPANDED & ARIA-CONTRLS on Handler
+/* ARIA
+ *
+ * Set ID to collapse
+ * Set aria-controls to handler
+ * Set aria-expanded to handler
+ *
  */
 
 export type CollapseDirections = 'horizontal' | 'horizontal-full' | 'vertical';
