@@ -3,12 +3,6 @@ import sectionConfig from '../../configs/sectionConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
-/* ARIA
- *
- * Set aria-labeledby to multiple region
- *
- */
-
 export type SectionVariants = 'plain' | 'filled';
 
 export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
