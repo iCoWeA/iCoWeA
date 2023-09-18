@@ -4,6 +4,12 @@ import accordionContext, { type AccordionContext } from '../../contexts/accordio
 import usePrevious from '../../hooks/usePrevious';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/* ARIA
+ *
+ * Set ID
+ *
+ */
+
 export type AccordionVariants = 'plain' | 'text' | 'filled';
 
 export interface AccordionProps extends BaseHTMLAttributes<HTMLDivElement> {
