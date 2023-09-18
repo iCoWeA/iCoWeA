@@ -16,8 +16,9 @@ module.exports = {
     extend: {
       colors: {
         light: {
-          surface: '#e7f0fe',
-          'surface-light': '#ffffff',
+          surface: '#9dc2fc',
+          'surface-low': '#ffffff',
+          'surface-light': '#cee0fd',
           'surface-dark': '#d9d9d9',
           'on-surface': '#262626',
           'on-surface-variant': '#cccccc',
@@ -47,9 +48,9 @@ module.exports = {
       },
       gridTemplateRows: {
         layout: 'auto 1fr auto'
-
       },
       gridTemplateColumns: {
+        layout: 'auto 1fr auto',
         12: 'repeat(12, 1fr)'
       }
     }
