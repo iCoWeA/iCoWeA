@@ -3,6 +3,12 @@ import mainConfig from '../../configs/mainConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/* ARIA
+ *
+ * Set aria-labeledby to multiple region
+ *
+ */
+
 export type MainVariants = 'plain' | 'filled';
 
 export interface MainProps extends BaseHTMLAttributes<HTMLElement> {
