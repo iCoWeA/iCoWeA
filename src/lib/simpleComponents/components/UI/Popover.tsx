@@ -18,6 +18,12 @@ import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 import Popper, { type PopperProps } from './Popper';
 
+/* ARIA
+ *
+ * Set aria-controls to handler
+ *
+ */
+
 /********************************************************************************
  *
  *   Handler
@@ -25,10 +31,11 @@ import Popper, { type PopperProps } from './Popper';
  */
 interface HandlerProps {
   onClick: MouseEventHandler<HTMLElement>;
+  open: boolean;
   children: ReactElement;
 }
 
-const Handler = forwardRef<HTMLElement, HandlerProps>(({ onClick, children }, ref) => cloneElement(children, { onClick, ref }));
+const Handler = forwardRef<HTMLElement, HandlerProps>(({ onClick, open, children }, ref) => cloneElement(children, { onClick, 'aria-expanded': open, ref }));
 
 Handler.displayName = 'Handler';
 
@@ -68,6 +75,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     handler,
     backdropProps,
     overlayRef,
+    id,
     className,
     ...restProps
   } = {
@@ -140,6 +148,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     handlerNode = (
       <Handler
         onClick={clickHandler}
+        open={open ?? isOpen}
         ref={setHandlerRef}
       >
         {handler}
@@ -182,6 +191,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
       setIsOpen(false);
     }
   };
+
+  console.log(position);
 
   const mergedClassName = mergeClasses(styles.base, className);
 
