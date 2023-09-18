@@ -5,7 +5,6 @@ import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import useResize from '../../hooks/useResize';
 import useScroll from '../../hooks/useScroll';
-import { setElementPosition } from '../../utils/positiontHelper';
 import { mergeClasses } from '../../utils/propsHelper';
 
 export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
@@ -14,9 +13,6 @@ export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   onExit?: () => void;
   onResize?: () => void;
   open?: boolean;
-  position?: OuterPositions;
-  offset?: number;
-  responsive?: boolean;
   lockScroll?: boolean;
   closeOnAwayClick?: boolean;
   closeDuration?: number;
@@ -34,9 +30,6 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     onExit,
     onResize,
     open,
-    position,
-    offset,
-    responsive,
     lockScroll,
     closeOnAwayClick,
     closeDuration,
@@ -123,28 +116,9 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   }, [lockScroll, open]);
 
   /* --- Set resize action --- */
-  const resizeHandler = useCallback(() => {
-    if (onResize !== undefined) {
-      onResize();
-    }
+  useScroll(onResize, animationState.current !== AnimationStates.EXITED);
 
-    if (onResize === undefined) {
-      setElementPosition(
-        popperRef.current,
-        position,
-        anchorElement?.offsetTop,
-        anchorElement?.offsetLeft,
-        anchorElement?.offsetHeight,
-        anchorElement?.offsetWidth,
-        offset,
-        responsive
-      );
-    }
-  }, [onResize, position, anchorElement, offset, responsive]);
-
-  useScroll(resizeHandler, responsive && animationState.current !== AnimationStates.EXITED);
-
-  useResize(resizeHandler, responsive && animationState.current !== AnimationStates.EXITED);
+  useResize(onResize, animationState.current !== AnimationStates.EXITED);
 
   /* --- Unmount --- */
   if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
@@ -152,8 +126,8 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   }
 
   /* --- Set props --- */
-  if (animationState.current !== AnimationStates.EXITED) {
-    resizeHandler();
+  if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+    onResize();
   }
 
   const mergedClassName = mergeClasses(
