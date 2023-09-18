@@ -3,7 +3,6 @@ export interface ModalConfig {
     open: boolean;
     lockScroll: boolean;
     keepMounted: boolean;
-    overlayRef: Element | null;
   };
   styles: {
     base: Record<string, string>;
@@ -16,8 +15,7 @@ const modalConfig: ModalConfig = {
   defaultProps: {
     open: false,
     lockScroll: true,
-    keepMounted: false,
-    overlayRef: null
+    keepMounted: false
   },
   styles: {
     base: {

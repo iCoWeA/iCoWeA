@@ -101,7 +101,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
     </>
   );
 
-  return overlayRef === null ? node : createPortal(node, overlayRef);
+  return overlayRef === undefined || overlayRef === null ? node : createPortal(node, overlayRef);
 });
 
 Modal.displayName = 'Modal';
