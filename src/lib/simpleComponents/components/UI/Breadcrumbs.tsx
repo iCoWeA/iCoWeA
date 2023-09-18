@@ -3,6 +3,10 @@ import breadcrumbsConfig from '../../configs/breadcrumbsConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/*
+ * ARIA set Aria-current="page" to last link
+ */
+
 /********************************************************************************
  *
  *   Separator
