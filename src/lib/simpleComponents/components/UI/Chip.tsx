@@ -80,7 +80,7 @@ export type ChipVariants = 'filled' | 'ghost' | 'outlined';
 
 export interface ChipProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: ChipVariants;
-  borderShape?: BorderShapes;
+  borderShape?: Shapes;
   color?: Colors;
   closeButton?: boolean;
   startDecorator?: ReactNode;

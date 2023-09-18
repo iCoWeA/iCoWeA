@@ -3,7 +3,7 @@ import { type IconButtonVariants } from '../components/UI/IconButton';
 export interface IconButtonConfig {
   defaultProps: {
     variant: IconButtonVariants;
-    borderShape: BorderShapes;
+    borderShape: Shapes;
     size: Sizes;
     color: Colors;
     elevated: boolean;
@@ -11,7 +11,7 @@ export interface IconButtonConfig {
   styles: {
     base: Record<string, string>;
     elevated: Record<string, string>;
-    borderShapes: Record<BorderShapes, Record<string, string>>;
+    borderShapes: Record<Shapes, Record<string, string>>;
     sizes: Record<Sizes, Record<string, string>>;
     outlineSizes: Record<Sizes, Record<string, string>>;
     variants: Record<IconButtonVariants, Record<Themes, Record<Colors, Record<string, string>>>>;

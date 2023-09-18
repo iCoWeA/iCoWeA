@@ -7,7 +7,7 @@ export type IconButtonVariants = 'plain' | 'text' | 'outlined' | 'filled';
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: IconButtonVariants;
-  borderShape?: BorderShapes;
+  borderShape?: Shapes;
   size?: Sizes;
   color?: Colors;
   elevated?: boolean;

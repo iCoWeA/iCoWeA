@@ -3,14 +3,14 @@ import { type ChipVariants } from '../components/UI/Chip';
 export interface ChipConfig {
   defaultProps: {
     variant: ChipVariants;
-    borderShape: BorderShapes;
+    borderShape: Shapes;
     color: Colors;
     closeButton: boolean;
   };
   styles: {
     container: {
       base: Record<string, string>;
-      borderShapes: Record<BorderShapes, Record<string, string>>;
+      borderShapes: Record<Shapes, Record<string, string>>;
       variants: Record<ChipVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
     },
     startDecoratorContainer: {
