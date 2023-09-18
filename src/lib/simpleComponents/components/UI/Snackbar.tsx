@@ -4,6 +4,13 @@ import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 import Popper, { type PopperProps } from './Popper';
 
+/* ARIA
+ *
+ * Set aria-labeledby to title
+ * Set aria-describedby to content
+ *
+ */
+
 export interface SnackbarProps extends PopperProps {
   onClose?: () => void;
   open?: boolean;
