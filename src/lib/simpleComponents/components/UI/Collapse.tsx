@@ -6,7 +6,6 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 /* ARIA
  *
- * Set ID to collapse
  * Set aria-controls to handler
  * Set aria-expanded to handler
  *
