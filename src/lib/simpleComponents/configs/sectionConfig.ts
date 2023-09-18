@@ -1,49 +1,34 @@
+import { type SectionVariants } from '../components/layouts/Section';
+
 export interface SectionConfig {
   defaultProps: {
-    color: Colors;
+    variant: SectionVariants;
   };
   styles: {
     base: Record<string, string>;
-    colors: Record<string, Record<Colors, Record<string, string>>>;
+    variants: Record<SectionVariants, Record<Themes, Record<string, string>>>;
   };
 }
 
 const sectionConfig: SectionConfig = {
   defaultProps: {
-    color: 'none'
+    variant: 'plain'
   },
   styles: {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      gap: 'gap-4',
       width: 'w-full'
     },
-    colors: {
-      default: {
-        default: {
-          background: 'bg-default-default'
-        },
-        primary: {
-          background: 'bg-default-primary'
-        },
-        secondary: {
-          background: 'bg-default-secondary'
-        },
-        success: {
-          background: 'bg-default-success'
-        },
-        warning: {
-          background: 'bgs-default-warning'
-        },
-        error: {
-          background: 'bg-default-error'
-        },
+    variants: {
+      plain: {
         light: {
-          background: 'bg-default-light'
-        },
-        dark: {
-          background: 'bg-default-dark'
+          background: 'bg-light-surface-low'
+        }
+      },
+      filled: {
+        light: {
+          background: 'bg-light-surface'
         }
       }
     }
