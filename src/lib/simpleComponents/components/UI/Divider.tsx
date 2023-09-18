@@ -21,6 +21,7 @@ const Divider = forwardRef<HTMLHRElement, DividerProps>((props, ref) => {
 
   return (
     <hr
+      role="separator"
       className={mergedClassName}
       ref={ref}
       {...restProps}
