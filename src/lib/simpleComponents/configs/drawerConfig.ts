@@ -56,12 +56,14 @@ const drawerConfig: DrawerConfig = {
         top: 'top-0',
         left: 'left-0',
         height: 'h-screen',
+        width: 'w-[22.5rem]',
         translate: '-translate-x-full'
       },
       right: {
         top: 'top-0',
         right: 'right-0',
         height: 'h-screen',
+        width: 'w-[22.5rem]',
         translate: '-translate-x-full'
       }
     },
