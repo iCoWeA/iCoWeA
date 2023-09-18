@@ -3,6 +3,12 @@ import linearProgressConfig from '../../configs/linearProgressConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/* ARIA
+ *
+ * Set aria-labeledby
+ *
+ */
+
 /********************************************************************************
  *
  *   Container
