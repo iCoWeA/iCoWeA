@@ -6,7 +6,7 @@ import { mergeClasses } from '../../utils/propsHelper';
 export type HeaderVariants = 'plain' | 'filled';
 
 export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
-  variant: HeaderVariants;
+  variant?: HeaderVariants;
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
