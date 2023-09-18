@@ -12,10 +12,10 @@ const listItemConfig: ListItemConfig = {
       display: 'flex',
       gap: 'gap-4',
       alignItems: 'items-center',
-      height: 'min-h-[4rem]',
+      height: 'min-h-[3.5rem]',
       width: 'w-full',
       padding: 'py-2 px-4',
-      font: 'antialiased font-normal text-base font-sans'
+      font: 'antialiased font-normal text-sm font-sans'
     },
     color: {
       light: {
