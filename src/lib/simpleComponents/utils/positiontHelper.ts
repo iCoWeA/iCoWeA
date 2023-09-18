@@ -1,11 +1,6 @@
-export interface Position {
-  vertical: 'top' | 'center' | 'bottom';
-  horizontal: 'left' | 'center' | 'right';
-}
-
 export const getViewportCords = (): { top: number; bottom: number; left: number; right: number; } => ({ top: document.documentElement.scrollTop, left: document.documentElement.scrollLeft, bottom: document.documentElement.scrollTop + document.documentElement.clientHeight, right: document.documentElement.scrollLeft + document.documentElement.clientWidth });
 
-export const setElementPosition = (element: HTMLElement | null, position: Positions, anchorTop?: number, anchorLeft?: number, anchorHeight: number = 0, anchorWidth: number = 0, gap: number = 0, responsive: boolean = false): Positions => {
+export const setElementPosition = (element: HTMLElement | null, position: OuterPositions, anchorTop?: number, anchorLeft?: number, anchorHeight: number = 0, anchorWidth: number = 0, offset: number = 0, responsive: boolean = false): OuterPositions => {
   if (element === null || anchorTop === undefined || anchorLeft === undefined) {
     return position;
   }
@@ -14,44 +9,42 @@ export const setElementPosition = (element: HTMLElement | null, position: Positi
   const positions = position.split('-');
   const viewportCords = getViewportCords();
 
-  gap = gap * parseFloat(getComputedStyle(document.documentElement).fontSize);
-
   if (positions[0] === 'top') {
-    cords.top = anchorTop - gap - element.offsetHeight;
+    cords.top = anchorTop - offset - element.offsetHeight;
     position = 'top';
 
     if (responsive && cords.top < viewportCords.top) {
-      cords.top = anchorTop + anchorHeight + gap;
+      cords.top = anchorTop + anchorHeight + offset;
       position = 'bottom';
     }
   }
 
   if (positions[0] === 'bottom') {
-    cords.top = anchorTop + anchorHeight + gap;
+    cords.top = anchorTop + anchorHeight + offset;
     position = 'bottom';
 
     if (responsive && cords.top + element.offsetHeight > viewportCords.bottom) {
-      cords.top = anchorTop - gap - element.offsetHeight;
+      cords.top = anchorTop - offset - element.offsetHeight;
       position = 'top';
     }
   }
 
   if (positions[0] === 'left') {
-    cords.left = anchorLeft - gap - element.offsetWidth;
+    cords.left = anchorLeft - offset - element.offsetWidth;
     position = 'left';
 
     if (responsive && cords.left < viewportCords.left) {
-      cords.left = anchorLeft + anchorWidth + gap;
+      cords.left = anchorLeft + anchorWidth + offset;
       position = 'right';
     }
   }
 
   if (positions[0] === 'right') {
-    cords.left = anchorLeft + gap + anchorWidth;
+    cords.left = anchorLeft + offset + anchorWidth;
     position = 'right';
 
     if (responsive && cords.left + element.offsetWidth > viewportCords.right) {
-      cords.left = anchorLeft - gap - element.offsetWidth;
+      cords.left = anchorLeft - offset - element.offsetWidth;
       position = 'left';
     }
   }
