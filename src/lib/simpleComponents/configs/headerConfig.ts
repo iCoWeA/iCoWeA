@@ -25,7 +25,7 @@ const headerConfig: HeaderConfig = {
     variants: {
       plain: {
         light: {
-          background: 'bg-light-surface-lowest'
+          background: 'bg-light-surface-low'
         }
       },
       filled: {

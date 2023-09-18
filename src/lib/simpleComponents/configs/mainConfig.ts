@@ -1,50 +1,36 @@
+import { type MainVariants } from '../components/layouts/Main';
+
 export interface MainConfig {
   defaultProps: {
-    color: Colors;
+    variant: MainVariants;
   };
   styles: {
     base: Record<string, string>;
-    colors: Record<string, Record<Colors, Record<string, string>>>;
+    variants: Record<MainVariants, Record<Themes, Record<string, string>>>;
   };
 }
 
 const mainConfig: MainConfig = {
   defaultProps: {
-    color: 'none'
+    variant: 'plain'
   },
   styles: {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      gap: 'gap-4',
+      gap: 'gap-6',
       width: 'w-full',
-      padding: 'py-4'
+      padding: 'py-6'
     },
-    colors: {
-      default: {
-        default: {
-          background: 'bg-default-default'
-        },
-        primary: {
-          background: 'bg-default-primary'
-        },
-        secondary: {
-          background: 'bg-default-secondary'
-        },
-        success: {
-          background: 'bg-default-success'
-        },
-        warning: {
-          background: 'bgs-default-warning'
-        },
-        error: {
-          background: 'bg-default-error'
-        },
+    variants: {
+      plain: {
         light: {
-          background: 'bg-default-light'
-        },
-        dark: {
-          background: 'bg-default-dark'
+          background: 'bg-light-surface-low'
+        }
+      },
+      filled: {
+        light: {
+          background: 'bg-light-surface-light'
         }
       }
     }
