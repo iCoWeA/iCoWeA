@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useContext, useRef, useImperativeHandle, useEffect, type TransitionEvent } from 'react';
 import { createPortal } from 'react-dom';
 import drawerConfig from '../../configs/drawerConfig';
 import themeContext from '../../contexts/theme';
@@ -42,6 +42,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     onExit,
     onEntering,
     onExiting,
+    onTransitionEnd,
     variant,
     direction,
     open,
@@ -60,13 +61,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   const drawerRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const {
-    state: animationState,
-    enter,
-    exit,
-    transitionEndHandler,
-    animationEndHandler
-  } = useAnimation<HTMLDivElement>(drawerRef.current, open, onEnter, onExit);
+  const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(drawerRef.current, open, onEnter, onExit);
 
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => drawerRef.current, [
@@ -103,7 +98,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   /* --- Set backdrop --- */
   const backdropNode = (
     <Backdrop
-      onClose={onClose}
+      onClick={onClose}
       open={open}
       keepMounted={keepMounted}
       {...backdropProps}
@@ -111,6 +106,16 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   );
 
   /* --- Set props --- */
+  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
+    if (event.target === drawerRef.current) {
+      endAnimation(onEnter, onExit);
+    }
+
+    if (onTransitionEnd !== undefined) {
+      onTransitionEnd(event);
+    }
+  };
+
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme],
@@ -125,7 +130,6 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
       {backdropNode}
       <div
         onTransitionEnd={transitionEndHandler}
-        onAnimationEnd={animationEndHandler}
         className={mergedClassName}
         ref={drawerRef}
         {...restProps}
