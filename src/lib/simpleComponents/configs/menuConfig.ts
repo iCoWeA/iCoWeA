@@ -33,6 +33,7 @@ const menuConfig: MenuConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       borderRadius: 'rounded-xl',
+      shadow: 'shadow-md shadow-black/50',
       overflow: 'overflow-hidden'
     },
     variants: {
