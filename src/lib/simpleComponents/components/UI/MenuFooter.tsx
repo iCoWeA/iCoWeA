@@ -1,12 +1,12 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
-import dropdownFooterConfig from '../../configs/dropdownFooterConfig';
+import menuFooterConfig from '../../configs/menuFooterConfig';
 import { mergeClasses } from '../../utils/propsHelper';
 
-export interface DropdownFooterProps extends BaseHTMLAttributes<HTMLDivElement> {}
+export interface MenuFooterProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
-const DropdownFooter = forwardRef<HTMLDivElement, DropdownFooterProps>((props, ref) => {
+const MenuFooter = forwardRef<HTMLDivElement, MenuFooterProps>((props, ref) => {
   /* --- Set default props --- */
-  const styles = dropdownFooterConfig.styles;
+  const styles = menuFooterConfig.styles;
   const { className, ...restProps } = { ...props };
 
   /* --- Set props --- */
@@ -21,6 +21,6 @@ const DropdownFooter = forwardRef<HTMLDivElement, DropdownFooterProps>((props, r
   );
 });
 
-DropdownFooter.displayName = 'DropdownFooter';
+MenuFooter.displayName = 'MenuFooter';
 
-export default DropdownFooter;
+export default MenuFooter;

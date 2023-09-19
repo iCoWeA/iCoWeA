@@ -1,19 +1,19 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
-import dropdownBodyConfig from '../../configs/dropdownBodyConfig';
+import menuHeaderConfig from '../../configs/menuHeaderConfig';
 import { mergeClasses } from '../../utils/propsHelper';
 
-export interface DropdownBodyProps extends BaseHTMLAttributes<HTMLUListElement> {}
+export interface MenuHeaderProps extends BaseHTMLAttributes<HTMLDivElement> {}
 
-const DropdownBody = forwardRef<HTMLUListElement, DropdownBodyProps>((props, ref) => {
+const MenuHeader = forwardRef<HTMLDivElement, MenuHeaderProps>((props, ref) => {
   /* --- Set default props --- */
-  const styles = dropdownBodyConfig.styles;
+  const styles = menuHeaderConfig.styles;
   const { className, ...restProps } = { ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, className);
 
   return (
-    <ul
+    <div
       className={mergedClassName}
       ref={ref}
       {...restProps}
@@ -21,6 +21,6 @@ const DropdownBody = forwardRef<HTMLUListElement, DropdownBodyProps>((props, ref
   );
 });
 
-DropdownBody.displayName = 'DropdownBody';
+MenuHeader.displayName = 'MenuHeader';
 
-export default DropdownBody;
+export default MenuHeader;

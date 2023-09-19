@@ -1,14 +1,14 @@
-export interface DropdownHeaderConfig {
+export interface MenuFooterConfig {
   styles: {
     base: Record<string, string>;
   }
 }
 
-const dropdownHeaderConfig: DropdownHeaderConfig = {
+const menuFooterConfig: MenuFooterConfig = {
   styles: {
     base: {
       display: 'flex',
-      gap: 'gap-3',
+      gap: 'gap-2',
       alignItems: 'items-center',
       width: 'w-full',
       padding: 'p-3'
@@ -16,4 +16,4 @@ const dropdownHeaderConfig: DropdownHeaderConfig = {
   }
 };
 
-export default dropdownHeaderConfig;
+export default menuFooterConfig;
