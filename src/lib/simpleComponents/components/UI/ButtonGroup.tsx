@@ -3,6 +3,12 @@ import buttonGroupConfig from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, isLast } from '../../utils/propsHelper';
 
+/* ARIA
+ *
+ * Set aria-pressed as toggle button
+ *
+ */
+
 /********************************************************************************
  *
  *   Button
