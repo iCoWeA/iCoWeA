@@ -82,6 +82,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
     ...popoverConfig.defaultProps,
     ...props
   };
+  const isControlled = open !== undefined;
 
   /* --- Set refs --- */
   const popperRef = useRef<HTMLDivElement | null>(null);
@@ -89,7 +90,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   /* --- Set states --- */
   const [isOpen, setIsOpen] = useState(false);
-  const isControlled = open !== undefined;
 
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, []);
@@ -191,8 +191,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
       setIsOpen(false);
     }
   };
-
-  console.log(position);
 
   const mergedClassName = mergeClasses(styles.base, className);
 
