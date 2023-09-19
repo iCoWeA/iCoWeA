@@ -1,6 +1,7 @@
 import React, { type MouseEventHandler, type ReactElement, forwardRef, cloneElement, type BaseHTMLAttributes, useContext, useRef, useState, useImperativeHandle, useEffect, useCallback, type ReactNode, type MouseEvent } from 'react';
 import tooltipConfig from '../../configs/tooltipConfig';
 import themeContext from '../../contexts/theme';
+import useKeyDown from '../../hooks/useKeyDown';
 import usePrevious from '../../hooks/usePrevious';
 import { setElementPosition } from '../../utils/positiontHelper';
 import { mergeClasses } from '../../utils/propsHelper';
@@ -161,6 +162,21 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
       setIsOpen(prevOpen);
     }
   }, [open]);
+
+  /* --- Set ESC action --- */
+  const keyDownHandler = useCallback(() => {
+    if (open ?? isOpen) {
+      if (isControlled && onClose !== undefined) {
+        onClose();
+      }
+
+      if (!isControlled) {
+        setIsOpen(false);
+      }
+    }
+  }, [open, isOpen, isControlled, onClose]);
+
+  useKeyDown(keyDownHandler, 'Escape');
 
   /* --- Set position action --- */
   const resizeHandler = useCallback(() => {
