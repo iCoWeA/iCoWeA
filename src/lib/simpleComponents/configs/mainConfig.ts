@@ -30,7 +30,7 @@ const mainConfig: MainConfig = {
       },
       filled: {
         light: {
-          background: 'bg-light-surface-light'
+          background: 'bg-light-surface'
         }
       }
     }
