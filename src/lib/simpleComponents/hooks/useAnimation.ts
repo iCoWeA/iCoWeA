@@ -1,4 +1,4 @@
-import { type TransitionEventHandler, type AnimationEventHandler, useState, useCallback, type TransitionEvent, type AnimationEvent } from 'react';
+import { useState, useCallback } from 'react';
 
 export enum AnimationStates {ENTERING, ENTERED, EXITING, EXITED}
 
@@ -8,15 +8,14 @@ export interface AnimationState {
   exit: boolean;
 }
 
-interface Return<T> {
+interface Return {
   state: AnimationState;
   enter: (onEntering?: () => void) => void;
   exit: (onExiting?: () => void) => void;
-  transitionEndHandler: TransitionEventHandler<T>,
-  animationEndHandler: AnimationEventHandler<T>
+  endAnimation: (onEnter?: () => void, onExit?: () => void) => void;
 }
 
-const useAnimation = <T extends HTMLElement>(element: T | null, isEntered: boolean = false, onEnter?: () => void, onExit?: () => void): Return<T> => {
+const useAnimation = <T extends HTMLElement>(element: T | null, isEntered: boolean = false, onEnter?: () => void, onExit?: () => void): Return => {
   const [state, setState] = useState<AnimationStates>(isEntered ? AnimationStates.ENTERED : AnimationStates.EXITED);
 
   const enter = useCallback((onEntering?: () => void) => {
@@ -35,8 +34,8 @@ const useAnimation = <T extends HTMLElement>(element: T | null, isEntered: boole
     setState(AnimationStates.EXITING);
   }, []);
 
-  const transitionEndHandler = (event: TransitionEvent<T>): void => {
-    if (state === AnimationStates.ENTERING && event.target === element) {
+  const endAnimation = useCallback((onEnter?: () => void, onExit?: () => void) => {
+    if (state === AnimationStates.ENTERING) {
       if (onEnter !== undefined) {
         onEnter();
       }
@@ -44,32 +43,14 @@ const useAnimation = <T extends HTMLElement>(element: T | null, isEntered: boole
       setState(AnimationStates.ENTERED);
     }
 
-    if (state === AnimationStates.EXITING && event.target === element) {
+    if (state === AnimationStates.EXITING) {
       if (onExit !== undefined) {
         onExit();
       }
 
       setState(AnimationStates.EXITED);
     }
-  };
-
-  const animationEndHandler = (event: AnimationEvent<T>): void => {
-    if (state === AnimationStates.ENTERING && event.target === element) {
-      if (onEnter !== undefined) {
-        onEnter();
-      }
-
-      setState(AnimationStates.ENTERED);
-    }
-
-    if (state === AnimationStates.EXITING && event.target === element) {
-      if (onExit !== undefined) {
-        onExit();
-      }
-
-      setState(AnimationStates.EXITED);
-    }
-  };
+  }, []);
 
   return {
     state: {
@@ -79,8 +60,7 @@ const useAnimation = <T extends HTMLElement>(element: T | null, isEntered: boole
     },
     enter,
     exit,
-    transitionEndHandler,
-    animationEndHandler
+    endAnimation
   };
 };
 
