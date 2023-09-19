@@ -70,8 +70,8 @@ const accordionHeaderConfig: AccordionHeaderConfig = {
       light: {
         fill: 'fill-light-on-surface-variant',
         color: 'text-light-on-surface-variant',
-        hover: 'hover:fill-light-on-surface hover:text-light-on-surface hover:from-light-on-surface/10 hover:to-light-on-surface/10',
-        active: 'active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]'
+        hover: 'hover:fill-light-on-surface hover:text-light-on-surface hover:from-light-on-surface-variant/10 hover:to-light-on-surface-variant/10',
+        active: 'active:from-light-on-surface-variant/[0.15] active:to-light-on-surfac-variant/[0.15]'
       }
     },
     'open-text': {
