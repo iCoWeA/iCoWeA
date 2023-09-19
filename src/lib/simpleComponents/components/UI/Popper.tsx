@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback, type ReactNode, type TransitionEvent } from 'react';
 import { createPortal } from 'react-dom';
 import popperConfig from '../../configs/popperConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
@@ -6,6 +6,7 @@ import useOutsideClick from '../../hooks/useOutsideClick';
 import useResize from '../../hooks/useResize';
 import useScroll from '../../hooks/useScroll';
 import { mergeClasses } from '../../utils/propsHelper';
+import Backdrop, { type BackdropProps } from './Backdrop';
 
 /* ARIA
  *
@@ -26,7 +27,9 @@ export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   closeOnAwayClick?: boolean;
   closeDuration?: number;
   keepMounted?: boolean;
+  backdrop?: boolean;
   anchorElement?: HTMLElement | null;
+  backdropProps?: BackdropProps;
   overlayRef?: Element | null;
 }
 
@@ -40,12 +43,15 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     onEntering,
     onExiting,
     onResize,
+    onTransitionEnd,
     open,
     lockScroll,
     closeOnAwayClick,
     closeDuration,
     keepMounted,
+    backdrop,
     anchorElement,
+    backdropProps,
     overlayRef,
     style,
     className,
@@ -59,13 +65,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   const popperRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const {
-    state: animationState,
-    enter,
-    exit,
-    transitionEndHandler,
-    animationEndHandler
-  } = useAnimation<HTMLDivElement>(popperRef.current, open, onEnter, onExit);
+  const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(popperRef.current, open, onEnter, onExit);
 
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, [
@@ -96,7 +96,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     [anchorElement, onClose]
   );
 
-  useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
+  useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined && !backdrop);
 
   /* --- Set timer action --- */
   useEffect(() => {
@@ -136,7 +136,32 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     return <></>;
   }
 
+  /* --- Set backdrop --- */
+  let backdropNode: ReactNode;
+
+  if (backdrop) {
+    backdropNode = (
+      <Backdrop
+        onClick={onClose}
+        open={open}
+        keepMounted={keepMounted}
+        invisible
+        {...backdropProps}
+      />
+    );
+  }
+
   /* --- Set props --- */
+  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
+    if (event.target === popperRef.current) {
+      endAnimation(onEnter, onExit);
+    }
+
+    if (onTransitionEnd !== undefined) {
+      onTransitionEnd(event);
+    }
+  };
+
   if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
     onResize();
   }
@@ -149,13 +174,15 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   );
 
   const node = (
-    <div
-      onTransitionEnd={transitionEndHandler}
-      onAnimationEnd={animationEndHandler}
-      className={mergedClassName}
-      ref={popperRef}
-      {...restProps}
-    />
+    <>
+      {backdropNode}
+      <div
+        onTransitionEnd={transitionEndHandler}
+        className={mergedClassName}
+        ref={popperRef}
+        {...restProps}
+      />
+    </>
   );
 
   return overlayRef === undefined || overlayRef === null ? node : createPortal(node, overlayRef);
