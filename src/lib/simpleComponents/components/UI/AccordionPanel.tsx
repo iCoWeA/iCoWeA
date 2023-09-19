@@ -1,19 +1,19 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import accordionBodyConfig from '../../configs/accordionBodyConfig';
+import accordionPanelConfig from '../../configs/accordionPanelConfig';
 import accordionContext from '../../contexts/accordion';
 import { mergeClasses } from '../../utils/propsHelper';
 import Collapse, { type CollapseProps } from './Collapse';
 
-export interface AccordionBodyProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface AccordionPanelProps extends BaseHTMLAttributes<HTMLDivElement> {
   collapseProps?: CollapseProps;
 }
 
-const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref) => {
+const AccordionPanel = forwardRef<HTMLDivElement, AccordionPanelProps>((props, ref) => {
   /* --- Set context props --- */
   const { open: isAccordionOpen } = useContext(accordionContext);
 
   /* --- Set default props --- */
-  const styles = accordionBodyConfig.styles;
+  const styles = accordionPanelConfig.styles;
   const { collapseProps, className, ...restProps } = { ...props };
 
   /* --- Set props --- */
@@ -34,6 +34,6 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>((props, ref
   );
 });
 
-AccordionBody.displayName = 'AccordionBody';
+AccordionPanel.displayName = 'AccordionPanel';
 
-export default AccordionBody;
+export default AccordionPanel;

@@ -1,10 +1,10 @@
-export interface AccordionBodyConfig {
+export interface AccordionPanelConfig {
   styles: {
     base: Record<string, string>;
   }
 }
 
-const accordionBodyConfig: AccordionBodyConfig = {
+const accordionPanelConfig: AccordionPanelConfig = {
   styles: {
     base: {
       display: 'flex',
@@ -15,4 +15,4 @@ const accordionBodyConfig: AccordionBodyConfig = {
   }
 };
 
-export default accordionBodyConfig;
+export default accordionPanelConfig;

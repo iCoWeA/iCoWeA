@@ -1,4 +1,4 @@
-import React, { type ButtonHTMLAttributes, type ReactNode, type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { type ButtonHTMLAttributes, type ReactNode, type BaseHTMLAttributes, forwardRef, useContext, type MouseEvent } from 'react';
 import accordionHeaderConfig from '../../configs/accordionHeaderConfig';
 import accordionContext from '../../contexts/accordion';
 import themeContext from '../../contexts/theme';
@@ -23,12 +23,20 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
 
   /* --- Set default props --- */
   const styles = accordionHeaderConfig.styles;
-  const { startDecorator, endDecorator, stateLayerProps, disabled, className, children, ...restProps } = {
+  const { onClick, startDecorator, endDecorator, stateLayerProps, disabled, className, children, ...restProps } = {
     disabled: isAccordionDisabled,
     ...props
   };
 
   /* --- Set props --- */
+  const clickHandler = (event: MouseEvent<HTMLButtonElement>): void => {
+    onAccordionToggle();
+
+    if (onClick !== undefined) {
+      onClick(event);
+    }
+  };
+
   const mergedClassName = mergeClasses(
     styles.base,
     styles.disabled[theme],
@@ -43,7 +51,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   return (
     <button
       aria-expanded={isAccordionOpen}
-      onClick={onAccordionToggle}
+      onClick={clickHandler}
       disabled={disabled}
       type="button"
       className={mergedClassName}
