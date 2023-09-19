@@ -96,6 +96,7 @@ export type TooltipVariants = 'plain' | 'filled' | 'outlined';
 export interface TooltipProps extends PopperProps {
   onClose?: () => void;
   variant?: TooltipVariants;
+  rich?: boolean;
   keepOnHover?: boolean;
   open?: boolean;
   position?: OuterPositions;
@@ -118,6 +119,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   const {
     onClose,
     variant,
+    rich,
     keepOnHover,
     open,
     position,
@@ -293,12 +295,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     };
   }
 
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], !rich && styles.empty, className);
 
   return (
     <>
       {handlerNode}
       <Popper
+        role="tooltip"
         onMouseLeave={mouseLeaveHandler}
         onResize={resizeHandler}
         open={open ?? isOpen}
