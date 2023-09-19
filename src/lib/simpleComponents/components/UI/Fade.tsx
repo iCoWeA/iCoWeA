@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type TransitionEvent } from 'react';
 import fadeConfig from '../../configs/fadeConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
@@ -15,7 +15,7 @@ export interface FadeProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = fadeConfig.styles;
-  const { onEnter, onExit, onEntering, onExiting, open, keepMounted, style, className, ...restProps } = {
+  const { onEnter, onExit, onEntering, onExiting, onTransitionEnd, open, keepMounted, style, className, ...restProps } = {
     ...fadeConfig.defaultProps,
     ...props
   };
@@ -24,13 +24,7 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   const fadeRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const {
-    state: animationState,
-    enter,
-    exit,
-    transitionEndHandler,
-    animationEndHandler
-  } = useAnimation<HTMLDivElement>(fadeRef.current, open, onEnter, onExit);
+  const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(fadeRef.current, open, onEnter, onExit);
 
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => fadeRef.current, [
@@ -54,6 +48,16 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   }
 
   /* --- Set props --- */
+  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
+    if (event.target === fadeRef.current) {
+      endAnimation(onEnter, onExit);
+    }
+
+    if (onTransitionEnd !== undefined) {
+      onTransitionEnd(event);
+    }
+  };
+
   const mergedClassName = mergeClasses(
     styles.base,
     animationState.enter && styles.open,
@@ -64,7 +68,6 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   return (
     <div
       onTransitionEnd={transitionEndHandler}
-      onAnimationEnd={animationEndHandler}
       className={mergedClassName}
       ref={fadeRef}
       {...restProps}
