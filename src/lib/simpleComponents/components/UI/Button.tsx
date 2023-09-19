@@ -3,6 +3,12 @@ import buttonConfig from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/* ARIA
+ *
+ * Set aria-pressed as toggle button
+ *
+ */
+
 export type ButtonVariants = 'plain' | 'text' | 'outlined' | 'filled';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
