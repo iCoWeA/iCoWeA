@@ -19,7 +19,7 @@ export interface MenuConfig {
 
 const menuConfig: MenuConfig = {
   defaultProps: {
-    variant: 'filled',
+    variant: 'plain',
     position: 'bottom',
     responsive: true,
     offset: 0,
