@@ -1,19 +1,23 @@
 import { useEffect } from 'react';
 
-const useKeyDown = (element: HTMLElement, key: string, onKeydown: () => void): void => {
+const useKeyDown = (onKeydown?: () => void, key?: string, enabled: boolean = true): void => {
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent): void => {
-      if (event.key === key) {
+      if (event.key === key && onKeydown !== undefined) {
         onKeydown();
       }
     };
 
-    element.addEventListener('keydown', keyDownHandler);
+    if (enabled && onKeydown !== undefined && key !== undefined) {
+      document.addEventListener('keydown', keyDownHandler);
+    };
 
     return () => {
-      element.removeEventListener('keydown', keyDownHandler);
+      if (enabled && onKeydown !== undefined && key !== undefined) {
+        document.removeEventListener('keydown', keyDownHandler);
+      }
     };
-  }, [element, key, onKeydown]);
+  }, [onKeydown, key, enabled]);
 };
 
 export default useKeyDown;
