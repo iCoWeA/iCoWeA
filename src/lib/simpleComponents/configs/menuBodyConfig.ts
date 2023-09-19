@@ -1,10 +1,10 @@
-export interface DropdownBodyConfig {
+export interface MenuBodyConfig {
   styles: {
     base: Record<string, string>;
   }
 }
 
-const dropdownBodyConfig: DropdownBodyConfig = {
+const menuBodyConfig: MenuBodyConfig = {
   styles: {
     base: {
       display: 'flex',
@@ -16,4 +16,4 @@ const dropdownBodyConfig: DropdownBodyConfig = {
   }
 };
 
-export default dropdownBodyConfig;
+export default menuBodyConfig;
