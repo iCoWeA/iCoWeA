@@ -31,7 +31,7 @@ const backdropConfig: BackdropConfig = {
     },
     colors: {
       light: {
-        background: 'bg-light-on-surface/50'
+        background: 'bg-light-surface-high/50'
       }
     }
   }
