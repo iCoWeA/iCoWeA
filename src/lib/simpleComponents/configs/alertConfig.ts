@@ -106,7 +106,7 @@ const alertConfig: AlertConfig = {
             default: {
               fill: 'fill-light-on-surface',
               color: 'text-light-on-surface',
-              background: 'bg-light-surface'
+              background: 'bg-light-surface-light'
             },
             primary: {
               fill: 'fill-light-primary',
