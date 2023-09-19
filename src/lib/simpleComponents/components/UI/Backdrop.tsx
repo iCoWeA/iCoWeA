@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext } from 'react';
+import React, { type MouseEvent, forwardRef, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import backdropConfig from '../../configs/backdropConfig';
 import themeContext from '../../contexts/theme';
@@ -19,14 +19,23 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = backdropConfig.styles;
-  const { onClose, open, invisible, keepMounted, overlayRef, className, ...restProps } = { ...backdropConfig.defaultProps, ...props };
+  const { onClose, onClick, open, invisible, keepMounted, overlayRef, className, ...restProps } = { ...backdropConfig.defaultProps, ...props };
 
   /* --- Set props --- */
+  const clickHandler = (event: MouseEvent<HTMLDivElement>): void => {
+    if (onClose !== undefined) {
+      onClose();
+    }
+
+    if (onClick !== undefined) {
+      onClick(event);
+    }
+  };
   const mergedClassName = mergeClasses(styles.base, styles.colors[theme], invisible && styles.invisible, className);
 
   const node = (
     <Fade
-      onClick={onClose}
+      onClick={clickHandler}
       open={open}
       keepMounted={keepMounted}
       className={mergedClassName}
