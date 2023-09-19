@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type TransitionEvent } from 'react';
 import slideConfig from '../../configs/slideConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
@@ -16,7 +16,7 @@ export interface SlideProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = slideConfig.styles;
-  const { onEnter, onExit, onEntering, onExiting, direction, open, keepMounted, className, ...restProps } = {
+  const { onEnter, onExit, onEntering, onExiting, onTransitionEnd, direction, open, keepMounted, className, ...restProps } = {
     ...slideConfig.defaultProps,
     ...props
   };
@@ -25,13 +25,7 @@ const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   const slideRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const {
-    state: animationState,
-    enter,
-    exit,
-    transitionEndHandler,
-    animationEndHandler
-  } = useAnimation<HTMLDivElement>(slideRef.current, open, onEnter, onExit);
+  const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(slideRef.current, open, onEnter, onExit);
 
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => slideRef.current, [
@@ -55,6 +49,16 @@ const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   }
 
   /* --- Set props --- */
+  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
+    if (event.target === slideRef.current) {
+      endAnimation(onEnter, onExit);
+    }
+
+    if (onTransitionEnd !== undefined) {
+      onTransitionEnd(event);
+    }
+  };
+
   const mergedClassName = mergeClasses(
     styles.base,
     styles.directions[direction],
@@ -66,7 +70,6 @@ const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   return (
     <div
       onTransitionEnd={transitionEndHandler}
-      onAnimationEnd={animationEndHandler}
       className={mergedClassName}
       ref={slideRef}
       {...restProps}
