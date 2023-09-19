@@ -32,7 +32,7 @@ const tooltipConfig: TooltipConfig = {
     keepOnHover: false,
     position: 'bottom',
     responsive: true,
-    offset: 0,
+    offset: 4,
     followCursor: false,
     keepMounted: false,
     arrow: false
