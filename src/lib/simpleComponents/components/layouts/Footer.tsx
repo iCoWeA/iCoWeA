@@ -28,6 +28,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
 
   return (
     <footer
+      role="contentinfo"
       className={mergedClassName}
       ref={ref}
       {...restProps}
