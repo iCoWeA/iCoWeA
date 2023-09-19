@@ -30,7 +30,7 @@ const iconConfig: IconConfig = {
     colors: {
       light: {
         default: {
-          fill: 'fill-light-default'
+          fill: 'fill-light-on-surface'
         },
         primary: {
           fill: 'fill-light-primary'
