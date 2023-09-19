@@ -1,145 +1,102 @@
-import { type BaseHTMLAttributes } from 'react';
+import { type TooltipVariants } from '../components/UI/Tooltip';
 
 export interface TooltipConfig {
   defaultProps: {
-    color: Colors;
-    elevated: boolean;
-    position: Positions;
-    gap: number;
+    variant: TooltipVariants;
+    rich: boolean;
+    keepOnHover: boolean;
+    position: OuterPositions;
     responsive: boolean;
+    offset: number;
     followCursor: boolean;
-    unmountOnExit: boolean;
+    keepMounted: boolean;
     arrow: boolean;
-    overlayRef: Element | null;
-    arrowProps: BaseHTMLAttributes<HTMLDivElement>
   };
   styles: {
     container: {
       base: Record<string, string>;
-      open: Record<string, string>;
-      elevated: Record<string, Record<string, string>>;
-      colors: Record<string, Record<Colors, Record<string, string>>>
+      empty: Record<string, string>;
+      variants: Record<TooltipVariants, Record<Themes, Record<string, string>>>;
     },
     arrow: {
       base: Record<string, string>;
-      colors: Record<string, Record<Colors, Record<string, string>>>
+      variants: Record<TooltipVariants, Record<Themes, Record<string, string>>>;
     }
   }
 }
 
 const tooltipConfig: TooltipConfig = {
   defaultProps: {
-    color: 'default',
-    elevated: false,
+    variant: 'plain',
+    rich: false,
+    keepOnHover: false,
     position: 'bottom',
-    gap: 1,
     responsive: true,
+    offset: 0,
     followCursor: false,
-    unmountOnExit: true,
-    arrow: false,
-    overlayRef: null,
-    arrowProps: {}
+    keepMounted: false,
+    arrow: false
   },
   styles: {
     container: {
       base: {
         position: 'absolute',
-        zIndex: 'z-[90]',
+        zIndex: 'z-50',
         display: 'flex',
-        gap: 'gap-3',
-        alignItems: 'items-center',
+        flexDirection: 'flex-col',
+        borderRadius: 'rounded-xl'
+      },
+      empty: {
         padding: 'py-1.5 px-3',
-        borderRadius: 'rounded-full',
-        font: 'antialiased font-normal text-sm font-sans',
-        opacity: 'opacity-0',
-        transition: 'transition-[opacity]'
+        font: 'antialiased font-normal text-xs font-sans'
       },
-      open: {
-        opacity: 'opacity-100'
-      },
-      elevated: {
-        default: {
-          shadow: 'shadow-md shadow-default-default/80'
-        }
-      },
-      colors: {
-        default: {
-          default: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-default'
-          },
-          primary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-primary'
-          },
-          secondary: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-secondary'
-          },
-          success: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-success'
-          },
-          warning: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-warning'
-          },
-          error: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-error'
-          },
+      variants: {
+        plain: {
           light: {
-            fill: 'fill-default-dark',
-            color: 'text-default-dark',
-            background: 'bg-default-light'
-          },
-          dark: {
-            fill: 'fill-default-light',
-            color: 'text-default-light',
-            background: 'bg-default-dark'
+            fill: 'fill-light-on-suface',
+            color: 'text-light-on-surface',
+            background: 'bg-light-surface-high'
+          }
+        },
+        filled: {
+          light: {
+            fill: 'fill-light-on-suface',
+            color: 'text-light-on-surface',
+            background: 'bg-light-surface'
+          }
+        },
+        outlined: {
+          light: {
+            fill: 'fill-light-on-suface',
+            color: 'text-light-on-surface',
+            border: 'border border-light-divider',
+            background: 'bg-light-surface-low'
           }
         }
       }
     },
     arrow: {
       base: {
-        pisition: 'absolute',
+        position: 'absolute',
         display: 'block',
         height: 'h-0',
         width: 'w-0',
-        border: 'border-l-[0.25rem] border-l-transparent border-r-[0.25rem] border-r-transparent border-b-[0.5rem]'
+        border: 'border-l-4 border-l-transparent border-r-4 border-r-transparent border-b-8'
       },
-      colors: {
-        default: {
-          default: {
-            border: 'border-b-default-default/90'
-          },
-          primary: {
-            border: 'border-b-default-primary/90'
-          },
-          secondary: {
-            border: 'border-b-default-secondary/90'
-          },
-          success: {
-            border: 'border-b-default-success/90'
-          },
-          warning: {
-            border: 'border-b-default-warning/90'
-          },
-          error: {
-            border: 'border-b-default-error/90'
-          },
+      variants: {
+        plain: {
           light: {
-            border: 'border-b-default-light/90'
-          },
-          dark: {
-            border: 'border-b-default-dark/90'
+            border: 'border-b-light-surface-high'
+          }
+        },
+        filled: {
+          light: {
+            border: 'border-b-light-surface'
+          }
+        },
+        outlined: {
+          light: {
+            border: 'border-b-light-surface-low'
           }
         }
       }
