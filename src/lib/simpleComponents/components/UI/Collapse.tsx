@@ -1,4 +1,13 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback, type CSSProperties } from 'react';
+import React, {
+  type BaseHTMLAttributes,
+  forwardRef,
+  useRef,
+  useImperativeHandle,
+  useEffect,
+  useCallback,
+  type CSSProperties,
+  type TransitionEvent
+} from 'react';
 import collapseConfig from '../../configs/collapseConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import useOutsideClick from '../../hooks/useOutsideClick';
@@ -29,7 +38,22 @@ export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = collapseConfig.styles;
-  const { onClose, onEnter, onExit, onEntering, onExiting, direction, open, closeOnAwayClick, closeDuration, keepMounted, style, className, ...restProps } = {
+  const {
+    onClose,
+    onEnter,
+    onExit,
+    onEntering,
+    onExiting,
+    onTransitionEnd,
+    direction,
+    open,
+    closeOnAwayClick,
+    closeDuration,
+    keepMounted,
+    style,
+    className,
+    ...restProps
+  } = {
     ...collapseConfig.defaultProps,
     ...props
   };
@@ -38,13 +62,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   const collapseRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const {
-    state: animationState,
-    enter,
-    exit,
-    transitionEndHandler,
-    animationEndHandler
-  } = useAnimation<HTMLDivElement>(collapseRef.current, open, onEnter, onExit);
+  const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(collapseRef.current, open, onEnter, onExit);
 
   /* --- Set imperative handler --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => collapseRef.current, [
@@ -114,6 +132,16 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   }
 
   /* --- Set props --- */
+  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
+    if (event.target === collapseRef.current) {
+      endAnimation(onEnter, onExit);
+    }
+
+    if (onTransitionEnd !== undefined) {
+      onTransitionEnd(event);
+    }
+  };
+
   let mergedStyles: CSSProperties | undefined;
 
   if (animationState.enter && direction === 'vertical' && collapseRef.current !== null) {
@@ -150,7 +178,6 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   return (
     <div
       onTransitionEnd={transitionEndHandler}
-      onAnimationEnd={animationEndHandler}
       style={mergedStyles}
       className={mergedClassName}
       ref={collapseRef}
