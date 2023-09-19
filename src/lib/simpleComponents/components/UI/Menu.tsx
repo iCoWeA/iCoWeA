@@ -1,10 +1,14 @@
-import React, { type ReactElement, forwardRef } from 'react';
-import Dropdown, { type DropdownVariants, type DropdownProps } from './Dropdown';
+import React, { type ReactElement, forwardRef, useContext } from 'react';
+import menuConfig from '../../configs/menuConfig';
+import themeContext from '../../contexts/theme';
+import { mergeClasses } from '../../utils/propsHelper';
 import Popover, { type PopoverProps } from './Popover';
+
+export type MenuVariants = 'plain' | 'filled' | 'outlined';
 
 export interface MenuXProps extends PopoverProps {
   onClose?: () => void;
-  variant?: DropdownVariants;
+  variant?: MenuVariants;
   open?: boolean;
   position?: OuterPositions;
   responsive?: boolean;
@@ -14,12 +18,15 @@ export interface MenuXProps extends PopoverProps {
   keepMounted?: boolean;
   backdrop?: boolean;
   handler?: ReactElement;
-  dropdownProps?: DropdownProps;
   overlayRef?: Element | null;
 }
 
 const Menu = forwardRef<HTMLDivElement, MenuXProps>((props, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
+  const styles = menuConfig.styles;
   const {
     onClose,
     variant,
@@ -32,16 +39,20 @@ const Menu = forwardRef<HTMLDivElement, MenuXProps>((props, ref) => {
     keepMounted,
     backdrop,
     handler,
-    dropdownProps,
     overlayRef,
-    children,
+    className,
     ...restProps
   } = {
+    ...menuConfig.defaultProps,
     ...props
   };
 
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
+
   return (
     <Popover
+      role="menu"
       onClose={onClose}
       open={open}
       position={position}
@@ -53,16 +64,10 @@ const Menu = forwardRef<HTMLDivElement, MenuXProps>((props, ref) => {
       backdrop={backdrop}
       handler={handler}
       overlayRef={overlayRef}
+      className={mergedClassName}
       {...restProps}
       ref={ref}
-    >
-      <Dropdown
-        variant={variant}
-        {...dropdownProps}
-      >
-        {children}
-      </Dropdown>
-    </Popover>
+    />
   );
 });
 

@@ -2,14 +2,14 @@ import { type MenuVariants } from '../components/UI/Menu';
 
 export interface MenuConfig {
   defaultProps: {
-    variant?: MenuVariants;
-    position?: OuterPositions;
-    responsive?: boolean;
-    offset?: number;
-    lockScroll?: boolean;
-    closeOnAwayClick?: boolean;
-    keepMounted?: boolean;
-    backdrop?: boolean;
+    variant: MenuVariants;
+    position: OuterPositions;
+    responsive: boolean;
+    offset: number;
+    lockScroll: boolean;
+    closeOnAwayClick: boolean;
+    keepMounted: boolean;
+    backdrop: boolean;
   };
   styles: {
     base: Record<string, string>;
