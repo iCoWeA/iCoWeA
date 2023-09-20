@@ -1,22 +1,7 @@
-import React, {
-  type MouseEventHandler,
-  type ReactElement,
-  forwardRef,
-  cloneElement,
-  useRef,
-  useState,
-  useImperativeHandle,
-  useMemo,
-  useCallback,
-  useEffect,
-  type ReactNode,
-  type MouseEvent
-} from 'react';
-import menuConfig from '../../configs/menuConfig';
+import React, { type ReactElement, forwardRef, useRef, useState, useImperativeHandle, useMemo, useEffect } from 'react';
+import menuConfig from '../../configs/popoverConfig';
 import menuContext from '../../contexts/menu';
-import { setElementPosition } from '../../utils/positiontHelper';
-import { mergeClasses } from '../../utils/propsHelper';
-import Popper, { type PopperProps, type PopperVariants } from './Popper';
+import Popover, { type PopoverProps, type PopoverVariants } from './Popover';
 
 /* ARIA
  *
@@ -25,30 +10,8 @@ import Popper, { type PopperProps, type PopperVariants } from './Popper';
  *
  */
 
-/********************************************************************************
- *
- *   Handler
- *
- */
-interface HandlerProps {
-  onClick: MouseEventHandler<HTMLElement>;
-  open: boolean;
-  children: ReactElement;
-}
-
-const Handler = forwardRef<HTMLElement, HandlerProps>(({ onClick, open, children }, ref) =>
-  cloneElement(children, { onClick, 'aria-expanded': open, 'aria-haspopup': true, ref })
-);
-
-Handler.displayName = 'Handler';
-
-/********************************************************************************
- *
- *   Menu
- *
- */
-export interface MenuProps extends PopperProps {
-  variant?: PopperVariants;
+export interface MenuProps extends PopoverProps {
+  variant?: PopoverVariants;
   position?: OuterPositions;
   responsive?: boolean;
   offset?: number;
@@ -62,7 +25,6 @@ export interface MenuProps extends PopperProps {
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
   /* --- Set default props --- */
-  const styles = menuConfig.styles;
   const { variant, position, responsive, offset, lockScroll, closeOnAwayClick, keepMounted, backdrop, handler, overlayRef, className, children, ...restProps } =
     {
       ...menuConfig.defaultProps,
@@ -70,8 +32,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     };
 
   /* --- Set refs --- */
-  const popperRef = useRef<HTMLDivElement | null>(null);
-  const handlerRef = useRef<HTMLElement | null>(null);
+  const popoverRef = useRef<HTMLDivElement | null>(null);
   const items = useRef<HTMLLIElement[]>([]);
   const currentItem = useRef(0);
 
@@ -79,7 +40,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
 
   /* --- Set imperative anchorElement --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, []);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popoverRef.current, []);
 
   /* --- Set context --- */
   const context = useMemo(
@@ -90,20 +51,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     }),
     []
   );
-
-  /* --- Set position action --- */
-  const resizeHandler = useCallback(() => {
-    setElementPosition(
-      popperRef.current,
-      position,
-      handlerRef.current?.offsetTop,
-      handlerRef.current?.offsetLeft,
-      handlerRef.current?.offsetHeight,
-      handlerRef.current?.offsetWidth,
-      offset,
-      responsive
-    );
-  }, [position, offset, responsive]);
 
   /* --- Set key down action --- */
   useEffect(() => {
@@ -160,72 +107,31 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     }
   }, [isOpen]);
 
-  /* --- Set handler props --- */
-  let handlerNode: ReactNode;
-
-  if (handler !== undefined) {
-    const setHandlerRef = (element: HTMLElement): void => {
-      const ref = (handler as any).ref;
-
-      if (ref === undefined || ref === null) {
-        handlerRef.current = element;
-      } else if (typeof ref === 'function') {
-        handlerRef.current = element;
-        ref(element);
-      } else {
-        handlerRef.current = element;
-        ref.current = element;
-      }
-    };
-
-    const clickHandler = (event: MouseEvent<HTMLElement>): void => {
-      setIsOpen((isOpen) => !isOpen);
-
-      if (handler.props.onClick !== undefined) {
-        handler.props.onClick(event);
-      }
-    };
-
-    handlerNode = (
-      <Handler
-        onClick={clickHandler}
-        open={isOpen}
-        ref={setHandlerRef}
-      >
-        {handler}
-      </Handler>
-    );
-  }
-
   /* --- Set props --- */
   const closeHandler = (): void => {
     setIsOpen(false);
   };
 
-  const mergedClassName = mergeClasses(styles.base, className);
-
   return (
-    <>
-      {handlerNode}
-      <Popper
-        role="menu"
-        onClose={closeHandler}
-        onResize={resizeHandler}
-        variant={variant}
-        open={isOpen}
-        lockScroll={lockScroll}
-        closeOnAwayClick={backdrop ? false : closeOnAwayClick}
-        keepMounted={keepMounted}
-        anchorElement={handlerRef.current}
-        overlayRef={overlayRef}
-        tabIndex={-1}
-        className={mergedClassName}
-        ref={popperRef}
-        {...restProps}
-      >
-        <menuContext.Provider value={context}>{children}</menuContext.Provider>
-      </Popper>
-    </>
+    <Popover
+      role="menu"
+      onClose={closeHandler}
+      open={isOpen}
+      variant={variant}
+      position={position}
+      responsive={responsive}
+      offset={offset}
+      lockScroll={lockScroll}
+      closeOnAwayClick={closeOnAwayClick}
+      keepMounted={keepMounted}
+      backdrop={backdrop}
+      handler={handler}
+      overlayRef={overlayRef}
+      ref={popoverRef}
+      {...restProps}
+    >
+      <menuContext.Provider value={context}>{children}</menuContext.Provider>
+    </Popover>
   );
 });
 

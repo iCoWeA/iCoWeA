@@ -1,8 +1,8 @@
-import { type PopperVariants } from '../components/UI/Popper';
+import { type PopoverVariants } from '../components/UI/Popover';
 
 export interface MenuConfig {
   defaultProps: {
-    variant: PopperVariants;
+    variant: PopoverVariants;
     position: OuterPositions;
     responsive: boolean;
     offset: number;
@@ -11,9 +11,6 @@ export interface MenuConfig {
     keepMounted: boolean;
     backdrop: boolean;
   };
-  styles: {
-    base: Record<string, string>;
-  }
 }
 
 const menuConfig: MenuConfig = {
@@ -26,11 +23,6 @@ const menuConfig: MenuConfig = {
     closeOnAwayClick: true,
     keepMounted: false,
     backdrop: false
-  },
-  styles: {
-    base: {
-      zIndex: 'z-40'
-    }
   }
 };
 
