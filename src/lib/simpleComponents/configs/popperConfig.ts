@@ -1,5 +1,8 @@
+import { type PopperVariants } from '../components/UI/Popper';
+
 export interface PopperConfig {
   defaultProps: {
+    variant: PopperVariants;
     open: boolean;
     lockScroll: boolean;
     closeOnAwayClick: boolean;
@@ -10,11 +13,13 @@ export interface PopperConfig {
     base: Record<string, string>;
     hide: Record<string, string>;
     open: Record<string, string>;
+    variants: Record<PopperVariants, Record<Themes, Record<string, string>>>;
   }
 }
 
 const popperConfig: PopperConfig = {
   defaultProps: {
+    variant: 'plain',
     open: false,
     lockScroll: false,
     closeOnAwayClick: true,
@@ -23,9 +28,10 @@ const popperConfig: PopperConfig = {
   },
   styles: {
     base: {
-      display: 'block',
-      height: 'h-fit',
-      width: 'w-fit',
+      position: 'absolute',
+      display: 'flex',
+      flexDirection: 'flex-col',
+      borderRadius: 'rounded-xl',
       opacity: 'opacity-0',
       transition: 'transition-all',
       transitionDuration: 'duration-500'
@@ -35,6 +41,30 @@ const popperConfig: PopperConfig = {
     },
     open: {
       opacity: 'opacity-100'
+    },
+    variants: {
+      plain: {
+        light: {
+          fill: 'fill-light-on-suface',
+          color: 'text-light-on-surface',
+          background: 'bg-light-surface-low'
+        }
+      },
+      filled: {
+        light: {
+          fill: 'fill-light-on-suface',
+          color: 'text-light-on-surface',
+          background: 'bg-light-surface'
+        }
+      },
+      outlined: {
+        light: {
+          fill: 'fill-light-on-suface',
+          color: 'text-light-on-surface',
+          border: 'border border-light-divider',
+          background: 'bg-light-surface-low'
+        }
+      }
     }
   }
 };
