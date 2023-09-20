@@ -4,6 +4,9 @@ export interface PopperConfig {
   defaultProps: {
     variant: PopperVariants;
     open: boolean;
+    position: OuterPositions;
+    responsive: boolean;
+    offset: number;
     lockScroll: boolean;
     closeOnAwayClick: boolean;
     keepMounted: boolean;
@@ -21,6 +24,9 @@ const popperConfig: PopperConfig = {
   defaultProps: {
     variant: 'plain',
     open: false,
+    position: 'bottom',
+    responsive: true,
+    offset: 0,
     lockScroll: false,
     closeOnAwayClick: true,
     keepMounted: false,
