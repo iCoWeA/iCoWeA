@@ -24,7 +24,6 @@ const popperConfig: PopperConfig = {
   styles: {
     base: {
       display: 'flex',
-      flexDirection: 'flex-col',
       borderRadius: 'rounded-xl',
       opacity: 'opacity-0',
       transition: 'transition-all',
