@@ -177,8 +177,6 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(styles.base, styles.directions[direction], className);
 
-  console.log(mergedStyles, collapseRef.current);
-
   return (
     <div
       onTransitionEnd={transitionEndHandler}
