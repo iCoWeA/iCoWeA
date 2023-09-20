@@ -322,7 +322,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
         onResize={resizeHandler}
         open={open ?? isOpen}
         keepMounted={keepMounted}
-        anchorElement={handlerRef.current}
         overlayRef={overlayRef}
         className={mergedClassName}
         ref={tooltipRef}
