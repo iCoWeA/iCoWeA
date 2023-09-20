@@ -39,6 +39,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
   return (
     <button
       aria-disabled={disabled}
+      disabled={disabled}
       className={mergedClassName}
       type="button"
       ref={ref}
