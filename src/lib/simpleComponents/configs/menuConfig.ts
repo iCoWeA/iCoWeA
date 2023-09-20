@@ -1,8 +1,8 @@
-import { type MenuVariants } from '../components/UI/Menu';
+import { type PopperVariants } from '../components/UI/Popper';
 
 export interface MenuConfig {
   defaultProps: {
-    variant: MenuVariants;
+    variant: PopperVariants;
     position: OuterPositions;
     responsive: boolean;
     offset: number;
@@ -13,7 +13,6 @@ export interface MenuConfig {
   };
   styles: {
     base: Record<string, string>;
-    variants: Record<MenuVariants, Record<Themes, Record<string, string>>>;
   }
 }
 
@@ -30,29 +29,7 @@ const menuConfig: MenuConfig = {
   },
   styles: {
     base: {
-      display: 'flex',
-      flexDirection: 'flex-col',
-      borderRadius: 'rounded-xl',
-      shadow: 'shadow-md shadow-black/50',
-      overflow: 'overflow-hidden'
-    },
-    variants: {
-      plain: {
-        light: {
-          background: 'bg-light-surface-low'
-        }
-      },
-      filled: {
-        light: {
-          background: 'bg-light-surface'
-        }
-      },
-      outlined: {
-        light: {
-          border: 'border border-light-divider',
-          background: 'bg-light-surface-low'
-        }
-      }
+      zIndex: 'z-40'
     }
   }
 };
