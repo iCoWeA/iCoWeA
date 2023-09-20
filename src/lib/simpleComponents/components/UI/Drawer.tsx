@@ -61,7 +61,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   const drawerRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(drawerRef.current, open, onEnter, onExit);
+  const { state: animationState, startAnimation, endAnimation } = useAnimation(open);
 
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => drawerRef.current, [
@@ -70,14 +70,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (open && animationState.exit) {
-      enter(onEntering);
-    }
-
-    if (!open && animationState.enter) {
-      exit(onExiting);
-    }
-  }, [open, animationState.enter, animationState.exit]);
+    startAnimation(open, onEntering, onExiting);
+  }, [open, onEntering, onExiting]);
 
   /* --- Set lock scroll action --- */
   useEffect(() => {

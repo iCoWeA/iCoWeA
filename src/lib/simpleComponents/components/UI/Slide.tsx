@@ -25,7 +25,7 @@ const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   const slideRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(slideRef.current, open, onEnter, onExit);
+  const { state: animationState, startAnimation, endAnimation } = useAnimation(open);
 
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => slideRef.current, [
@@ -34,14 +34,8 @@ const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (open && animationState.exit) {
-      enter(onEntering);
-    }
-
-    if (!open && animationState.enter) {
-      exit(onExiting);
-    }
-  }, [open, animationState.enter, animationState.exit]);
+    startAnimation(open, onEntering, onExiting);
+  }, [open, onEntering, onExiting]);
 
   /* --- Unmount --- */
   if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {

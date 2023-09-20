@@ -20,7 +20,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
 
   /* --- Set default props --- */
   const styles = iconButtonConfig.styles;
-  const { variant, borderShape, size, color, elevated, stateLayerProps, className, children, ...restProps } = {
+  const { variant, borderShape, size, color, elevated, stateLayerProps, disabled, className, children, ...restProps } = {
     ...iconButtonConfig.defaultProps,
     ...props
   };
@@ -38,6 +38,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
 
   return (
     <button
+      aria-disabled={disabled}
       className={mergedClassName}
       type="button"
       ref={ref}
