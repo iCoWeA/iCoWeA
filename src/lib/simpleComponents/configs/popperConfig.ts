@@ -32,6 +32,7 @@ const popperConfig: PopperConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       borderRadius: 'rounded-xl',
+      shadow: 'shadow-md shadow-black/50',
       opacity: 'opacity-0',
       transition: 'transition-all',
       transitionDuration: 'duration-500'
