@@ -1,16 +1,6 @@
-import React, {
-  type BaseHTMLAttributes,
-  forwardRef,
-  useRef,
-  useImperativeHandle,
-  useEffect,
-  useCallback,
-  type CSSProperties,
-  type TransitionEvent
-} from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type CSSProperties, type TransitionEvent } from 'react';
 import collapseConfig from '../../configs/collapseConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
-import useOutsideClick from '../../hooks/useOutsideClick';
 import { mergeClasses } from '../../utils/propsHelper';
 
 /* ARIA
@@ -81,18 +71,25 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   }, [open, animationState.enter, animationState.exit]);
 
   /* --- Set outside click action --- */
-  const outsideClickHandler = useCallback(
-    (event: MouseEvent) => {
+  useEffect(() => {
+    const outsideClickHandler = (event: MouseEvent): void => {
       const isSnackbarClicked = collapseRef.current?.contains(event.target as Node) ?? false;
 
       if (!isSnackbarClicked && onClose !== undefined) {
         onClose();
       }
-    },
-    [onClose]
-  );
+    };
 
-  useOutsideClick(outsideClickHandler, closeOnAwayClick && animationState.enter && onClose !== undefined);
+    if (closeOnAwayClick && animationState.enter && onClose !== undefined) {
+      document.addEventListener('click', outsideClickHandler);
+    }
+
+    return () => {
+      if (closeOnAwayClick && animationState.enter && onClose !== undefined) {
+        document.removeEventListener('click', outsideClickHandler);
+      }
+    };
+  }, [onClose, closeOnAwayClick, animationState.enter]);
 
   /* --- Set timer action --- */
   useEffect(() => {
