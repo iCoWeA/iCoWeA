@@ -32,7 +32,7 @@ const tooltipConfig: TooltipConfig = {
     keepOnHover: false,
     position: 'bottom',
     responsive: true,
-    offset: 4,
+    offset: 16,
     followCursor: false,
     keepMounted: false,
     arrow: false
@@ -47,7 +47,7 @@ const tooltipConfig: TooltipConfig = {
       empty: {
         flexDirection: 'flex-row',
         gap: 'gap-2',
-        padding: 'py-1 px-3',
+        padding: 'py-1 px-2',
         font: 'antialiased font-normal text-xs font-sans'
       },
       variants: {

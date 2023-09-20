@@ -26,8 +26,9 @@ const popperConfig: PopperConfig = {
       position: 'relative',
       display: 'flex',
       borderRadius: 'rounded-xl',
+      shadow: 'shadow-md shadow-black/50',
       opacity: 'opacity-0',
-      transition: 'transition-all',
+      transition: 'transition-[opacity]',
       transitionDuration: 'duration-500'
     },
     hide: {

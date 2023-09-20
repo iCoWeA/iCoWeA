@@ -32,7 +32,6 @@ const snackbarConfig: SnackbarConfig = {
     empty: {
       gap: 'gap-4',
       padding: 'py-3.5 px-4',
-      shadow: 'shadow-md shadow-black/50',
       font: 'antialiased font-normal text-sm font-sans'
     },
     positions: {
