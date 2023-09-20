@@ -16,13 +16,14 @@ export interface PopperConfig {
 const popperConfig: PopperConfig = {
   defaultProps: {
     open: false,
-    lockScroll: false,
+    lockScroll: true,
     closeOnAwayClick: true,
     keepMounted: false,
     backdrop: false
   },
   styles: {
     base: {
+      position: 'relative',
       display: 'flex',
       borderRadius: 'rounded-xl',
       opacity: 'opacity-0',
