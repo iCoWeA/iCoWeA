@@ -3,21 +3,20 @@ import React, {
   type ReactElement,
   forwardRef,
   cloneElement,
-  useContext,
   useRef,
   useState,
   useImperativeHandle,
-  useEffect,
+  useMemo,
   useCallback,
+  useEffect,
   type ReactNode,
   type MouseEvent
 } from 'react';
 import menuConfig from '../../configs/menuConfig';
-import themeContext from '../../contexts/theme';
-import usePrevious from '../../hooks/usePrevious';
+import menuContext from '../../contexts/menu';
 import { setElementPosition } from '../../utils/positiontHelper';
 import { mergeClasses } from '../../utils/propsHelper';
-import Popper, { type PopperProps } from './Popper';
+import Popper, { type PopperProps, type PopperVariants } from './Popper';
 
 /* ARIA
  *
@@ -48,12 +47,8 @@ Handler.displayName = 'Handler';
  *   Menu
  *
  */
-export type MenuVariants = 'plain' | 'filled' | 'outlined';
-
 export interface MenuProps extends PopperProps {
-  onClose?: () => void;
-  variant?: MenuVariants;
-  open?: boolean;
+  variant?: PopperVariants;
   position?: OuterPositions;
   responsive?: boolean;
   offset?: number;
@@ -66,35 +61,19 @@ export interface MenuProps extends PopperProps {
 }
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
   /* --- Set default props --- */
   const styles = menuConfig.styles;
-  const {
-    onClose,
-    variant,
-    open,
-    position,
-    responsive,
-    offset,
-    lockScroll,
-    closeOnAwayClick,
-    keepMounted,
-    backdrop,
-    handler,
-    overlayRef,
-    className,
-    ...restProps
-  } = {
-    ...menuConfig.defaultProps,
-    ...props
-  };
-  const isControlled = open !== undefined;
+  const { variant, position, responsive, offset, lockScroll, closeOnAwayClick, keepMounted, backdrop, handler, overlayRef, className, children, ...restProps } =
+    {
+      ...menuConfig.defaultProps,
+      ...props
+    };
 
   /* --- Set refs --- */
   const popperRef = useRef<HTMLDivElement | null>(null);
   const handlerRef = useRef<HTMLElement | null>(null);
+  const items = useRef<HTMLLIElement[]>([]);
+  const currentItem = useRef(0);
 
   /* --- Set states --- */
   const [isOpen, setIsOpen] = useState(false);
@@ -102,14 +81,15 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, []);
 
-  /* --- Set previous values  --- */
-  const prevOpen = usePrevious(open);
-
-  useEffect(() => {
-    if (prevOpen !== undefined && open === undefined) {
-      setIsOpen(prevOpen);
-    }
-  }, [open]);
+  /* --- Set context --- */
+  const context = useMemo(
+    () => ({
+      onUnmount: () => {},
+      onMount: () => {},
+      onClose: () => {}
+    }),
+    []
+  );
 
   /* --- Set position action --- */
   const resizeHandler = useCallback(() => {
@@ -124,6 +104,61 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
       responsive
     );
   }, [position, offset, responsive]);
+
+  /* --- Set key down action --- */
+  useEffect(() => {
+    const keyDownHandler = (event: KeyboardEvent): void => {
+      if (event.key === 'ArrowDown' && !isOpen) {
+        currentItem.current = 0;
+        setIsOpen(true);
+      }
+
+      if (event.key === 'ArrowDown' && isOpen && items.current.length !== 0) {
+        currentItem.current = currentItem.current + 1 === items.current.length ? 0 : currentItem.current + 1;
+        items.current[currentItem.current].focus();
+      }
+
+      if (event.key === 'ArrowUp' && !isOpen) {
+        setIsOpen(true);
+        currentItem.current = items.current.length - 1;
+      }
+
+      if (event.key === 'ArrowUp' && isOpen && items.current.length !== 0) {
+        currentItem.current = currentItem.current === 0 ? items.current.length - 1 : currentItem.current - 1;
+      }
+
+      if (event.key === 'Home' && isOpen && items.current.length !== 0) {
+        currentItem.current = 0;
+        items.current[currentItem.current].focus();
+      }
+
+      if (event.key === 'End' && isOpen && items.current.length !== 0) {
+        currentItem.current = items.current.length - 1;
+        items.current[currentItem.current].focus();
+      }
+
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, [isOpen]);
+
+  /* --- Set focus action --- */
+  useEffect(() => {
+    if (!isOpen) {
+      currentItem.current = 0;
+    }
+
+    if (isOpen && items.current[currentItem.current] !== undefined) {
+      items.current[currentItem.current].focus();
+    }
+  }, [isOpen]);
 
   /* --- Set handler props --- */
   let handlerNode: ReactNode;
@@ -144,9 +179,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     };
 
     const clickHandler = (event: MouseEvent<HTMLElement>): void => {
-      if (!isControlled) {
-        setIsOpen((isOpen) => !isOpen);
-      }
+      setIsOpen((isOpen) => !isOpen);
 
       if (handler.props.onClick !== undefined) {
         handler.props.onClick(event);
@@ -156,7 +189,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     handlerNode = (
       <Handler
         onClick={clickHandler}
-        open={open ?? isOpen}
+        open={isOpen}
         ref={setHandlerRef}
       >
         {handler}
@@ -166,16 +199,10 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
 
   /* --- Set props --- */
   const closeHandler = (): void => {
-    if (isControlled && onClose !== undefined) {
-      onClose();
-    }
-
-    if (!isControlled) {
-      setIsOpen(false);
-    }
+    setIsOpen(false);
   };
 
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <>
@@ -184,7 +211,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
         role="menu"
         onClose={closeHandler}
         onResize={resizeHandler}
-        open={open ?? isOpen}
+        variant={variant}
+        open={isOpen}
         lockScroll={lockScroll}
         closeOnAwayClick={backdrop ? false : closeOnAwayClick}
         keepMounted={keepMounted}
@@ -194,7 +222,9 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
         className={mergedClassName}
         ref={popperRef}
         {...restProps}
-      />
+      >
+        <menuContext.Provider value={context}>{children}</menuContext.Provider>
+      </Popper>
     </>
   );
 });
