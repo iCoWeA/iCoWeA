@@ -4,6 +4,12 @@ import checkboxConfig from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+/* ARIA
+ *
+ * Set aria-labeledby to multiple region (aria-label)
+ *
+ */
+
 /********************************************************************************
  *
  *   Icon
