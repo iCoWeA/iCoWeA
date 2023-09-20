@@ -22,7 +22,6 @@ import Popper, { type PopperProps } from './Popper';
 /* ARIA
  *
  * Set aria-controls to handler
- * Set aria-labeledby to popover
  *
  */
 
