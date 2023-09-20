@@ -4,7 +4,7 @@ import themeContext from '../../contexts/theme';
 import usePrevious from '../../hooks/usePrevious';
 import { setElementPosition } from '../../utils/positiontHelper';
 import { mergeClasses } from '../../utils/propsHelper';
-import Popper, { type PopperVariants, type PopperProps } from './Popper';
+import Popper, { type PopperProps } from './Popper';
 
 const setArrowPosition = (element: HTMLElement | null, position: OuterPositions): void => {
   if (element === null) {
@@ -62,7 +62,7 @@ Handler.displayName = 'Handler';
  *
  */
 interface ArrowProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant: PopperVariants;
+  variant: TooltipVariants;
 }
 
 const Arrow = forwardRef<HTMLDivElement, ArrowProps>(({ variant, className, ...restProps }, ref) => {
@@ -91,9 +91,10 @@ Arrow.displayName = 'Arrow';
  *   Tooltip
  *
  */
+export type TooltipVariants = 'plain' | 'filled' | 'outlined';
 
 export interface TooltipProps extends PopperProps {
-  variant?: PopperVariants;
+  variant?: TooltipVariants;
   rich?: boolean;
   keepOnHover?: boolean;
   open?: boolean;
@@ -103,12 +104,15 @@ export interface TooltipProps extends PopperProps {
   followCursor?: boolean;
   keepMounted?: boolean;
   arrow?: boolean;
-  handler: ReactElement;
+  handler?: ReactElement;
   arrowProps?: BaseHTMLAttributes<HTMLDivElement>;
   overlayRef?: Element | null;
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
   const styles = tooltipConfig.styles.container;
   const {
@@ -307,7 +311,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     };
   }
 
-  const mergedClassName = mergeClasses(styles.base, !rich && styles.empty, className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], !rich && styles.empty, className);
 
   return (
     <>
@@ -316,7 +320,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
         role="tooltip"
         onMouseLeave={mouseLeaveHandler}
         onResize={resizeHandler}
-        variant={variant}
         open={open ?? isOpen}
         keepMounted={keepMounted}
         anchorElement={handlerRef.current}
