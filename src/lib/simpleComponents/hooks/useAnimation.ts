@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-export enum AnimationStates {ENTERING, ENTERED, EXITING, EXITED}
+export enum AnimationStates {ENTERING = 'ENTERING', ENTERED = 'ENTERED', EXITING = 'EXITING', EXITED = 'EXITED'}
 
 export interface AnimationState {
   current: AnimationStates;
@@ -10,46 +10,55 @@ export interface AnimationState {
 
 interface Return {
   state: AnimationState;
-  enter: (onEntering?: () => void) => void;
-  exit: (onExiting?: () => void) => void;
+  startAnimation: (open?: boolean, onEntering?: () => void, onExiting?: () => void) => void;
   endAnimation: (onEnter?: () => void, onExit?: () => void) => void;
 }
 
-const useAnimation = <T extends HTMLElement>(element: T | null, isEntered: boolean = false, onEnter?: () => void, onExit?: () => void): Return => {
+const useAnimation = (isEntered: boolean = false): Return => {
   const [state, setState] = useState<AnimationStates>(isEntered ? AnimationStates.ENTERED : AnimationStates.EXITED);
 
-  const enter = useCallback((onEntering?: () => void) => {
-    if (onEntering !== undefined) {
-      onEntering();
-    }
+  const startAnimation = useCallback((open: boolean = false, onEntering?: () => void, onExiting?: () => void) => {
+    setState((prevState): AnimationStates => {
+      if (open && (prevState === AnimationStates.EXITED || prevState === AnimationStates.EXITING)) {
+        if (onEntering !== undefined) {
+          onEntering();
+        }
 
-    setState(AnimationStates.ENTERING);
-  }, []);
+        return AnimationStates.ENTERING;
+      }
 
-  const exit = useCallback((onExiting?: () => void) => {
-    if (onExiting !== undefined) {
-      onExiting();
-    }
+      if (!open && (prevState === AnimationStates.ENTERING || prevState === AnimationStates.ENTERED)) {
+        if (onExiting !== undefined) {
+          onExiting();
+        }
 
-    setState(AnimationStates.EXITING);
+        return AnimationStates.EXITING;
+      }
+
+      return prevState;
+    });
   }, []);
 
   const endAnimation = useCallback((onEnter?: () => void, onExit?: () => void) => {
-    if (state === AnimationStates.ENTERING) {
-      if (onEnter !== undefined) {
-        onEnter();
+    setState((prevState): AnimationStates => {
+      if (prevState === AnimationStates.ENTERING) {
+        if (onEnter !== undefined) {
+          onEnter();
+        }
+
+        return AnimationStates.ENTERED;
       }
 
-      setState(AnimationStates.ENTERED);
-    }
+      if (prevState === AnimationStates.EXITING) {
+        if (onExit !== undefined) {
+          onExit();
+        }
 
-    if (state === AnimationStates.EXITING) {
-      if (onExit !== undefined) {
-        onExit();
+        return AnimationStates.EXITED;
       }
 
-      setState(AnimationStates.EXITED);
-    }
+      return prevState;
+    });
   }, []);
 
   return {
@@ -58,8 +67,7 @@ const useAnimation = <T extends HTMLElement>(element: T | null, isEntered: boole
       enter: state === AnimationStates.ENTERING || state === AnimationStates.ENTERED,
       exit: state === AnimationStates.EXITING || state === AnimationStates.EXITED
     },
-    enter,
-    exit,
+    startAnimation,
     endAnimation
   };
 };
