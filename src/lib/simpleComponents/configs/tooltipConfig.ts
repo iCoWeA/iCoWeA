@@ -1,8 +1,8 @@
-import { type PopperVariants } from '../components/UI/Popper';
+import { type TooltipVariants } from '../components/UI/Tooltip';
 
 export interface TooltipConfig {
   defaultProps: {
-    variant: PopperVariants;
+    variant: TooltipVariants;
     rich: boolean;
     keepOnHover: boolean;
     position: OuterPositions;
@@ -16,10 +16,11 @@ export interface TooltipConfig {
     container: {
       base: Record<string, string>;
       empty: Record<string, string>;
+      variants: Record<TooltipVariants, Record<Themes, Record<string, string>>>;
     },
     arrow: {
       base: Record<string, string>;
-      variants: Record<PopperVariants, Record<Themes, Record<string, string>>>;
+      variants: Record<TooltipVariants, Record<Themes, Record<string, string>>>;
     }
   }
 }
@@ -39,12 +40,39 @@ const tooltipConfig: TooltipConfig = {
   styles: {
     container: {
       base: {
+        position: 'absolute',
         zIndex: 'z-50',
-        shadow: 'shadow-none'
+        flexDirection: 'flex-col'
       },
       empty: {
-        padding: 'py-1.5 px-3',
+        flexDirection: 'flex-row',
+        gap: 'gap-2',
+        padding: 'py-1 px-3',
         font: 'antialiased font-normal text-xs font-sans'
+      },
+      variants: {
+        plain: {
+          light: {
+            fill: 'fill-light-on-suface',
+            color: 'text-light-on-surface',
+            background: 'bg-light-surface-high'
+          }
+        },
+        filled: {
+          light: {
+            fill: 'fill-light-on-suface',
+            color: 'text-light-on-surface',
+            background: 'bg-light-surface'
+          }
+        },
+        outlined: {
+          light: {
+            fill: 'fill-light-on-suface',
+            color: 'text-light-on-surface',
+            border: 'border border-light-divider',
+            background: 'bg-light-surface-low'
+          }
+        }
       }
     },
     arrow: {
