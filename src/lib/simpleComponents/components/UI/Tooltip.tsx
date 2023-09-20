@@ -1,7 +1,20 @@
-import React, { type MouseEventHandler, type ReactElement, forwardRef, cloneElement, type BaseHTMLAttributes, useContext, useRef, useState, useImperativeHandle, useEffect, useCallback, type ReactNode, type MouseEvent } from 'react';
+import React, {
+  type MouseEventHandler,
+  type ReactElement,
+  forwardRef,
+  cloneElement,
+  type BaseHTMLAttributes,
+  useContext,
+  useRef,
+  useState,
+  useImperativeHandle,
+  useEffect,
+  useCallback,
+  type ReactNode,
+  type MouseEvent
+} from 'react';
 import tooltipConfig from '../../configs/tooltipConfig';
 import themeContext from '../../contexts/theme';
-import useKeyDown from '../../hooks/useKeyDown';
 import usePrevious from '../../hooks/usePrevious';
 import { setElementPosition } from '../../utils/positiontHelper';
 import { mergeClasses } from '../../utils/propsHelper';
@@ -164,19 +177,26 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   }, [open]);
 
   /* --- Set ESC action --- */
-  const keyDownHandler = useCallback(() => {
-    if (open ?? isOpen) {
-      if (isControlled && onClose !== undefined) {
-        onClose();
-      }
+  /* --- Set key down action --- */
+  useEffect(() => {
+    const keyDownHandler = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape' && (open ?? isOpen)) {
+        if (isControlled && onClose !== undefined) {
+          onClose();
+        }
 
-      if (!isControlled) {
-        setIsOpen(false);
+        if (!isControlled) {
+          setIsOpen(false);
+        }
       }
-    }
+    };
+
+    document.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
   }, [open, isOpen, isControlled, onClose]);
-
-  useKeyDown(keyDownHandler, 'Escape');
 
   /* --- Set position action --- */
   const resizeHandler = useCallback(() => {
