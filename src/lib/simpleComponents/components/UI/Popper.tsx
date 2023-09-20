@@ -3,8 +3,6 @@ import { createPortal } from 'react-dom';
 import popperConfig from '../../configs/popperConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import useOutsideClick from '../../hooks/useOutsideClick';
-import useResize from '../../hooks/useResize';
-import useScroll from '../../hooks/useScroll';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 
@@ -127,9 +125,29 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   }, [lockScroll, open]);
 
   /* --- Set resize action --- */
-  useScroll(onResize, animationState.current !== AnimationStates.EXITED);
+  useEffect(() => {
+    if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+      document.addEventListener('scroll', onResize);
+    }
 
-  useResize(onResize, animationState.current !== AnimationStates.EXITED);
+    return () => {
+      if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+        document.removeEventListener('scroll', onResize);
+      }
+    };
+  }, [onResize, animationState.current]);
+
+  useEffect(() => {
+    if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+      window.addEventListener('resize', onResize);
+    }
+
+    return () => {
+      if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+        window.removeEventListener('resize', onResize);
+      }
+    };
+  }, [onResize, animationState.current]);
 
   /* --- Unmount --- */
   if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
