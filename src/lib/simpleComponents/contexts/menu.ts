@@ -1,12 +1,14 @@
 import { createContext } from 'react';
 
 export interface MenuContext {
-  onMount: () => void;
+  onMount: (element: HTMLLIElement | null) => void;
+  onUnmount: (element: HTMLLIElement | null) => void;
   onClose: () => void;
 }
 
 export const initialState: MenuContext = {
   onMount: () => {},
+  onUnmount: () => {},
   onClose: () => {}
 };
 
