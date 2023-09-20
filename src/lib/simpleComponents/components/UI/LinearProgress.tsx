@@ -5,7 +5,7 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 /* ARIA
  *
- * Set aria-labeledby to title
+ * Set aria-labeledby / aria-label
  *
  */
 
