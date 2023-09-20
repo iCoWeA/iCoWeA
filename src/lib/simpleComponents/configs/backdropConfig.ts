@@ -7,7 +7,6 @@ export interface BackdropConfig {
   styles: {
     base: Record<string, string>;
     invisible: Record<string, string>;
-    colors: Record<Themes, Record<string, string>>;
   }
 }
 
@@ -22,17 +21,12 @@ const backdropConfig: BackdropConfig = {
       position: 'fixed',
       top: 'top-0',
       left: 'left-0',
-      zIndex: 'z-10',
       height: 'h-screen',
-      width: 'w-screen'
+      width: 'w-screen',
+      background: 'bg-black/50'
     },
     invisible: {
       background: 'bg-transparent'
-    },
-    colors: {
-      light: {
-        background: 'bg-light-surface-high/50'
-      }
     }
   }
 };
