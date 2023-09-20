@@ -32,8 +32,7 @@ const menuConfig: MenuConfig = {
     base: {
       position: 'absolute',
       zIndex: 'z-40',
-      flexDirection: 'flex-col',
-      shadow: 'shadow-md shadow-black/50'
+      flexDirection: 'flex-col'
     },
     variants: {
       plain: {
