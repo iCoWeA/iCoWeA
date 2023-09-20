@@ -25,7 +25,6 @@ export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   closeDuration?: number;
   keepMounted?: boolean;
   backdrop?: boolean;
-  anchorElement?: HTMLElement | null;
   backdropProps?: BackdropProps;
   overlayRef?: Element | null;
 }
@@ -47,7 +46,6 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     closeDuration,
     keepMounted,
     backdrop,
-    anchorElement,
     backdropProps,
     overlayRef,
     style,
@@ -64,7 +62,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   /* --- Set states --- */
   const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(popperRef.current, open, onEnter, onExit);
 
-  /* --- Set imperative anchorElement --- */
+  /* --- Set imperative ref --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, [
     !keepMounted && !open && animationState.current === AnimationStates.EXITED
   ]);
@@ -84,9 +82,8 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   useEffect(() => {
     const outsideClickHandler = (event: MouseEvent): void => {
       const isPopperClicked = popperRef.current?.contains(event.target as Node) ?? false;
-      const isAnchorClicked = anchorElement?.contains(event.target as Node) ?? false;
 
-      if (!isPopperClicked && !isAnchorClicked && onClose !== undefined) {
+      if (!isPopperClicked && onClose !== undefined) {
         onClose();
       }
     };
