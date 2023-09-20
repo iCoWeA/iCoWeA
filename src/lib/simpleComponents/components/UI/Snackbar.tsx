@@ -1,7 +1,8 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import snackbarConfig from '../../configs/snackbarConfig';
+import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
-import Popper, { type PopperProps, type PopperVariants } from './Popper';
+import Popper, { type PopperProps } from './Popper';
 
 /* ARIA
  *
@@ -9,10 +10,11 @@ import Popper, { type PopperProps, type PopperVariants } from './Popper';
  * Set aria-describedby to content
  *
  */
+export type SnackbarVariants = 'plain' | 'filled' | 'outlined';
 
 export interface SnackbarProps extends PopperProps {
   onClose?: () => void;
-  variant?: PopperVariants;
+  variant?: SnackbarVariants;
   open?: boolean;
   position?: InnerPositions;
   lockScroll?: boolean;
@@ -24,6 +26,9 @@ export interface SnackbarProps extends PopperProps {
 }
 
 const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
   const styles = snackbarConfig.styles;
   const { onClose, variant, open, position, lockScroll, closeOnAwayClick, closeDuration, keepMounted, backdrop, overlayRef, className, ...restProps } = {
@@ -32,12 +37,17 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
   };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.positions[position], className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.positions[position],
+    variant !== undefined && styles.empty,
+    variant !== undefined && styles.variants[variant][theme],
+    className
+  );
 
   return (
     <Popper
       onClose={onClose}
-      variant={variant}
       open={open}
       lockScroll={lockScroll}
       closeOnAwayClick={closeOnAwayClick}

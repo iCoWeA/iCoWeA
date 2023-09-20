@@ -1,35 +1,39 @@
-import { type PopperVariants } from '../components/UI/Popper';
+import { type SnackbarVariants } from '../components/UI/Snackbar';
 
 export interface SnackbarConfig {
   styles: {
     base: Record<string, string>;
+    empty: Record<string, string>;
     positions: Record<InnerPositions, Record<string, string>>;
+    variants: Record<SnackbarVariants, Record<Themes, Record<string, string>>>;
   }
   defaultProps: {
-    variant: PopperVariants;
     position: InnerPositions;
     lockScroll: boolean;
     closeOnAwayClick: boolean;
     keepMounted: boolean;
     backdrop: boolean;
-    overlayRef: Element | null;
   };
 }
 
 const snackbarConfig: SnackbarConfig = {
   defaultProps: {
-    variant: 'plain',
     position: 'bottom-left',
     lockScroll: false,
     closeOnAwayClick: true,
     keepMounted: false,
-    backdrop: false,
-    overlayRef: null
+    backdrop: false
   },
   styles: {
     base: {
       position: 'fixed',
       zIndex: 'z-20'
+    },
+    empty: {
+      gap: 'gap-4',
+      padding: 'py-3.5 px-4',
+      shadow: 'shadow-md shadow-black/50',
+      font: 'antialiased font-normal text-sm font-sans'
     },
     positions: {
       top: {
@@ -67,6 +71,30 @@ const snackbarConfig: SnackbarConfig = {
         top: 'top-2/4',
         right: 'right-6',
         translate: '-translate-y-2/4'
+      }
+    },
+    variants: {
+      plain: {
+        light: {
+          fill: 'fill-light-on-suface',
+          color: 'text-light-on-surface',
+          background: 'bg-light-surface-low'
+        }
+      },
+      filled: {
+        light: {
+          fill: 'fill-light-on-suface',
+          color: 'text-light-on-surface',
+          background: 'bg-light-surface'
+        }
+      },
+      outlined: {
+        light: {
+          fill: 'fill-light-on-suface',
+          color: 'text-light-on-surface',
+          border: 'border border-light-divider',
+          background: 'bg-light-surface-low'
+        }
       }
     }
   }
