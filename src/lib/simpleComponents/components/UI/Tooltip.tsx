@@ -108,7 +108,6 @@ Arrow.displayName = 'Arrow';
 export type TooltipVariants = 'plain' | 'filled' | 'outlined';
 
 export interface TooltipProps extends PopperProps {
-  onClose?: () => void;
   variant?: TooltipVariants;
   rich?: boolean;
   keepOnHover?: boolean;
@@ -131,7 +130,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = tooltipConfig.styles.container;
   const {
-    onClose,
+    onMouseLeave,
     variant,
     rich,
     keepOnHover,
@@ -180,23 +179,21 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   /* --- Set key down action --- */
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent): void => {
-      if (event.key === 'Escape' && (open ?? isOpen)) {
-        if (isControlled && onClose !== undefined) {
-          onClose();
-        }
-
-        if (!isControlled) {
-          setIsOpen(false);
-        }
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
       }
     };
 
-    document.addEventListener('keydown', keyDownHandler);
+    if (!isControlled) {
+      document.addEventListener('keydown', keyDownHandler);
+    }
 
     return () => {
-      document.removeEventListener('keydown', keyDownHandler);
+      if (!isControlled) {
+        document.removeEventListener('keydown', keyDownHandler);
+      }
     };
-  }, [open, isOpen, isControlled, onClose]);
+  }, [isOpen, isControlled]);
 
   /* --- Set position action --- */
   const resizeHandler = useCallback(() => {
@@ -315,18 +312,16 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   }
 
   /* --- Set props --- */
-  let mouseLeaveHandler: MouseEventHandler | undefined;
+  let mouseLeaveHandler = onMouseLeave;
 
-  if (keepOnHover) {
+  if (keepOnHover && !isControlled) {
     mouseLeaveHandler = (event) => {
       if (!(handlerRef.current?.contains(event.relatedTarget as Node) ?? false)) {
-        if (isControlled && onClose !== undefined) {
-          onClose();
-        }
+        setIsOpen(false);
+      }
 
-        if (!isControlled) {
-          setIsOpen(false);
-        }
+      if (onMouseLeave !== undefined) {
+        onMouseLeave(event);
       }
     };
   }
