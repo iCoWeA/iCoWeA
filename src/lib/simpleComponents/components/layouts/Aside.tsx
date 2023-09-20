@@ -5,7 +5,7 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 /* ARIA
  *
- * Set aria-labeledby to multiple region
+ * Set aria-labeledby to multiple region (aria-label)
  *
  */
 
@@ -28,6 +28,7 @@ const Aside = forwardRef<HTMLElement, AsideProps>((props, ref) => {
 
   return (
     <aside
+      role="complementary"
       className={mergedClassName}
       ref={ref}
       {...restProps}
