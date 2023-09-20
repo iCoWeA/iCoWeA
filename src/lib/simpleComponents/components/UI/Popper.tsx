@@ -60,7 +60,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   const popperRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(popperRef.current, open, onEnter, onExit);
+  const { state: animationState, startAnimation, endAnimation } = useAnimation(open);
 
   /* --- Set imperative ref --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, [
@@ -69,14 +69,8 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (open && animationState.exit) {
-      enter(onEntering);
-    }
-
-    if (!open && animationState.enter) {
-      exit(onExiting);
-    }
-  }, [open, animationState.enter, animationState.exit]);
+    startAnimation(open, onEntering, onExiting);
+  }, [open, onEntering, onExiting]);
 
   /* --- Set outside click action --- */
   useEffect(() => {
