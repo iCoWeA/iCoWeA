@@ -21,14 +21,13 @@ interface ButtonProps {
   size: Sizes;
   color: Colors;
   fullwidth: boolean;
-  stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
   disabled: boolean;
   type: 'submit' | 'reset' | 'button';
   className: string;
   children: ReactElement;
 }
 
-const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwidth, stateLayerProps, disabled, type, className, children }) => {
+const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwidth, disabled, type, className, children }) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
@@ -51,7 +50,7 @@ const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwi
 
   const childrenNode = <>{children.props.children}</>;
 
-  return <>{cloneElement(children, { disabled, type, className: mergedClassName, children: childrenNode })}</>;
+  return <>{cloneElement(children, { 'aria-disabled': disabled, disabled, type, className: mergedClassName, children: childrenNode })}</>;
 };
 
 /********************************************************************************
@@ -67,7 +66,6 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
   color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
-  stateLayerProps?: Record<number, BaseHTMLAttributes<HTMLSpanElement>>;
   tabIndex?: number;
   disabled?: boolean;
   type?: 'submit' | 'reset' | 'button';
@@ -77,7 +75,7 @@ export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = buttonGroupConfig.styles.container;
-  const { variant, size, color, elevated, fullwidth, stateLayerProps, tabIndex, disabled, type, className, children, ...restProps } = {
+  const { variant, size, color, elevated, fullwidth, tabIndex, disabled, type, className, children, ...restProps } = {
     ...buttonGroupConfig.defaultProps,
     ...props
   };
@@ -98,7 +96,6 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
         variant={variant}
         size={size}
         color={color}
-        stateLayerProps={stateLayerProps?.[i]}
         fullwidth={fullwidth}
         disabled={childrenNode[i].props.disabled ?? disabled}
         type={childrenNode[i].props.type ?? type}

@@ -28,7 +28,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = buttonConfig.styles;
-  const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, stateLayerProps, className, children, ...restProps } = {
+  const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, stateLayerProps, disabled, className, children, ...restProps } = {
     ...buttonConfig.defaultProps,
     ...props
   };
@@ -46,6 +46,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   return (
     <button
+      aria-disabled={disabled}
+      disabled={disabled}
       className={mergedClassName}
       type="button"
       ref={ref}
