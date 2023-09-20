@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type CSSProperties, type TransitionEvent } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type TransitionEvent } from 'react';
 import collapseConfig from '../../configs/collapseConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
@@ -52,7 +52,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   const collapseRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const { state: animationState, enter, exit, endAnimation } = useAnimation<HTMLDivElement>(collapseRef.current, open, onEnter, onExit);
+  const { state: animationState, startAnimation, endAnimation } = useAnimation(open);
 
   /* --- Set imperative handler --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => collapseRef.current, [
@@ -61,14 +61,8 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (open && animationState.exit) {
-      enter(onEntering);
-    }
-
-    if (!open && animationState.enter) {
-      exit(onExiting);
-    }
-  }, [open, animationState.enter, animationState.exit]);
+    startAnimation(open, onEntering, onExiting);
+  }, [open, onEntering, onExiting]);
 
   /* --- Set outside click action --- */
   useEffect(() => {
@@ -139,7 +133,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     }
   };
 
-  let mergedStyles: CSSProperties | undefined;
+  let mergedStyles = style;
 
   if (animationState.enter && direction === 'vertical' && collapseRef.current !== null) {
     mergedStyles = {
