@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import snackbarConfig from '../../configs/snackbarConfig';
 import { mergeClasses } from '../../utils/propsHelper';
-import Popper, { type PopperProps } from './Popper';
+import Popper, { type PopperProps, type PopperVariants } from './Popper';
 
 /* ARIA
  *
@@ -12,6 +12,7 @@ import Popper, { type PopperProps } from './Popper';
 
 export interface SnackbarProps extends PopperProps {
   onClose?: () => void;
+  variant?: PopperVariants;
   open?: boolean;
   position?: InnerPositions;
   lockScroll?: boolean;
@@ -25,7 +26,7 @@ export interface SnackbarProps extends PopperProps {
 const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = snackbarConfig.styles;
-  const { onClose, open, position, lockScroll, closeOnAwayClick, closeDuration, keepMounted, backdrop, overlayRef, className, ...restProps } = {
+  const { onClose, variant, open, position, lockScroll, closeOnAwayClick, closeDuration, keepMounted, backdrop, overlayRef, className, ...restProps } = {
     ...snackbarConfig.defaultProps,
     ...props
   };
@@ -36,6 +37,7 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
   return (
     <Popper
       onClose={onClose}
+      variant={variant}
       open={open}
       lockScroll={lockScroll}
       closeOnAwayClick={closeOnAwayClick}
