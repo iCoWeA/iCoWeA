@@ -39,7 +39,8 @@ const tooltipConfig: TooltipConfig = {
   styles: {
     container: {
       base: {
-        zIndex: 'z-50'
+        zIndex: 'z-50',
+        shadow: 'shadow-none'
       },
       empty: {
         padding: 'py-1.5 px-3',
