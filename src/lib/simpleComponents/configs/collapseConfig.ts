@@ -28,18 +28,19 @@ const collapseConfig: CollapseConfig = {
     },
     directions: {
       vertical: {
-        height: 'h-0',
+        width: 'w-fit',
+        transition: 'transition-[height]'
+      },
+      'vertical-full': {
         width: 'w-fit',
         transition: 'transition-[height]'
       },
       horizontal: {
         height: 'h-fit',
-        width: 'w-0',
         transition: 'transition-[width]'
       },
       'horizontal-full': {
         height: 'h-fit',
-        width: 'w-0',
         transition: 'transition-[width]'
       }
     }
