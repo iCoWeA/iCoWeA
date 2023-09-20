@@ -1,7 +1,6 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext, useRef, useImperativeHandle, useEffect, type ReactNode, type TransitionEvent } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type ReactNode, type TransitionEvent } from 'react';
 import { createPortal } from 'react-dom';
 import popperConfig from '../../configs/popperConfig';
-import themeContext from '../../contexts/theme';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
@@ -13,8 +12,6 @@ import Backdrop, { type BackdropProps } from './Backdrop';
  *
  */
 
-export type PopperVariants = 'plain' | 'filled' | 'outlined';
-
 export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onEnter?: () => void;
@@ -22,7 +19,6 @@ export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEntering?: () => void;
   onExiting?: () => void;
   onResize?: () => void;
-  variant?: PopperVariants;
   open?: boolean;
   lockScroll?: boolean;
   closeOnAwayClick?: boolean;
@@ -35,9 +31,6 @@ export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
 }
 
 const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
   /* --- Set default props --- */
   const styles = popperConfig.styles;
   const {
@@ -48,7 +41,6 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     onExiting,
     onResize,
     onTransitionEnd,
-    variant,
     open,
     lockScroll,
     closeOnAwayClick,
@@ -200,7 +192,6 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.variants[variant][theme],
     animationState.enter && styles.open,
     animationState.current === AnimationStates.EXITED && !open && styles.hide,
     className
