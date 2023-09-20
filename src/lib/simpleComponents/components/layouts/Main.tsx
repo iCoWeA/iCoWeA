@@ -5,7 +5,7 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 /* ARIA
  *
- * Set aria-labeledby to multiple region
+ * Set aria-labeledby to multiple region (aria-label)
  *
  */
 
