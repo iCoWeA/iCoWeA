@@ -6,6 +6,12 @@ import { setElementPosition } from '../../utils/positiontHelper';
 import { mergeClasses } from '../../utils/propsHelper';
 import Popper, { type PopperProps } from './Popper';
 
+/* ARIA
+ *
+ * Set aria-describedby to handler
+ *
+ */
+
 const setArrowPosition = (element: HTMLElement | null, position: OuterPositions): void => {
   if (element === null) {
     return;
