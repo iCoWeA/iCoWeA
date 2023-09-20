@@ -5,7 +5,7 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 /* ARIA
  *
- * Set aria-current="page" to last link
+ * Set aria-current="page" to current page
  *
  */
 
