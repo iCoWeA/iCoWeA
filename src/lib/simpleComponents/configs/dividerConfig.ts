@@ -1,20 +1,17 @@
 export interface DividerConfig {
   defaultProps: {
     orientation: Orientations;
-    margin: boolean;
   }
   styles: {
     base: Record<string, string>;
     orientations: Record<Orientations, Record<string, string>>;
-    margin: Record<Orientations, Record<string, string>>;
     color: Record<Themes, Record<string, string>>;
   }
 }
 
 const dividerConfig: DividerConfig = {
   defaultProps: {
-    orientation: 'horizontal',
-    margin: false
+    orientation: 'horizontal'
   },
   styles: {
     base: {
@@ -28,14 +25,6 @@ const dividerConfig: DividerConfig = {
       vertical: {
         height: 'h-full',
         width: 'w-px'
-      }
-    },
-    margin: {
-      horizontal: {
-        margin: 'my-2'
-      },
-      vertical: {
-        margin: 'mx-2'
       }
     },
     color: {
