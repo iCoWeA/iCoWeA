@@ -1,9 +1,12 @@
+import { type PopperVariants } from '../components/UI/Popper';
+
 export interface SnackbarConfig {
   styles: {
     base: Record<string, string>;
     positions: Record<InnerPositions, Record<string, string>>;
   }
   defaultProps: {
+    variant: PopperVariants;
     position: InnerPositions;
     lockScroll: boolean;
     closeOnAwayClick: boolean;
@@ -15,6 +18,7 @@ export interface SnackbarConfig {
 
 const snackbarConfig: SnackbarConfig = {
   defaultProps: {
+    variant: 'plain',
     position: 'bottom-left',
     lockScroll: false,
     closeOnAwayClick: true,
