@@ -26,11 +26,24 @@ export interface PopperProps extends FadeProps {
 const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = popperConfig.styles;
-  const { onClose, onResize, open, unmountOnExit, lockScroll, closeOnAwayClick, closeDuration, backdrop, backdropProps, overlayRef, className, ...restProps } =
-    {
-      ...popperConfig.defaultProps,
-      ...props
-    };
+  const {
+    onEntering,
+    onClose,
+    onResize,
+    open,
+    unmountOnExit,
+    lockScroll,
+    closeOnAwayClick,
+    closeDuration,
+    backdrop,
+    backdropProps,
+    overlayRef,
+    className,
+    ...restProps
+  } = {
+    ...popperConfig.defaultProps,
+    ...props
+  };
 
   /* --- Set refs --- */
   const popperRef = useRef<HTMLDivElement>(null);
@@ -128,9 +141,15 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   }
 
   /* --- Set props --- */
-  if (onResize !== undefined) {
-    onResize();
-  }
+  const enteringHandler = (): void => {
+    if (onResize !== undefined) {
+      onResize();
+    }
+
+    if (onEntering !== undefined) {
+      onEntering();
+    }
+  };
 
   const mergedClassName = mergeClasses(styles.base, className);
 
@@ -138,6 +157,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     <>
       {backdropNode}
       <Fade
+        onEntering={enteringHandler}
         open={open}
         unmountOnExit={unmountOnExit}
         className={mergedClassName}
