@@ -8,15 +8,14 @@ export interface FadeProps extends TransitionProps {}
 const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = fadeConfig.styles;
-  const { onEntering, onExiting, open, className, ...restProps } = {
-    ...fadeConfig.defaultProps,
+  const { onEntering, onExiting, className, ...restProps } = {
     ...props
   };
 
   /* --- Set refs --- */
   const fadeRef = useRef<HTMLDivElement>(null);
 
-  /* --- Set imperative anchorElement --- */
+  /* --- Set imperative handle --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => fadeRef.current, []);
 
   /* --- Set props --- */
@@ -46,7 +45,6 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
     <Transition
       onEntering={enteringHandler}
       onExiting={exitingHandler}
-      open={open}
       className={mergedClassName}
       ref={fadeRef}
       {...restProps}
