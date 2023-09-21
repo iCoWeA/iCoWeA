@@ -2,8 +2,8 @@ import { type CollapseDirections } from '../components/UI/Collapse';
 
 export interface CollapseConfig {
   defaultProps: {
-    direction: CollapseDirections;
     open: boolean;
+    direction: CollapseDirections;
     closeOnAwayClick: boolean;
   };
   styles: {
@@ -14,8 +14,8 @@ export interface CollapseConfig {
 
 const collapseConfig: CollapseConfig = {
   defaultProps: {
-    direction: 'vertical',
     open: false,
+    direction: 'vertical',
     closeOnAwayClick: false
   },
   styles: {
