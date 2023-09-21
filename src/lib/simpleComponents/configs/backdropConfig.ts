@@ -1,8 +1,6 @@
 export interface BackdropConfig {
   defaultProps: {
-    open: boolean;
     invisible: boolean;
-    keepMounted: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -12,9 +10,7 @@ export interface BackdropConfig {
 
 const backdropConfig: BackdropConfig = {
   defaultProps: {
-    open: false,
-    invisible: false,
-    keepMounted: false
+    invisible: false
   },
   styles: {
     base: {

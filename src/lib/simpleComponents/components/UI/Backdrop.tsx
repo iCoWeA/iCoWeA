@@ -1,30 +1,52 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import backdropConfig from '../../configs/backdropConfig';
 import { mergeClasses } from '../../utils/propsHelper';
 import Fade, { type FadeProps } from './Fade';
 
 export interface BackdropProps extends FadeProps {
-  open?: boolean;
+  onClose?: () => void;
   invisible?: boolean;
-  keepMounted?: boolean;
   overlayRef?: Element | null;
 }
 
 const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = backdropConfig.styles;
-  const { open, invisible, keepMounted, overlayRef, className, ...restProps } = { ...backdropConfig.defaultProps, ...props };
+  const { onClose, invisible, overlayRef, className, ...restProps } = { ...backdropConfig.defaultProps, ...props };
+
+  /* --- Set refs --- */
+  const backdropRef = useRef<HTMLDivElement>(null);
+
+  /* --- Set imperative ref --- */
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => backdropRef.current, []);
+
+  /* --- Set click event --- */
+  useEffect(() => {
+    const clickHandler = (): void => {
+      if (onClose !== undefined) {
+        onClose();
+      }
+    };
+
+    if (onClose !== undefined) {
+      backdropRef.current?.addEventListener('click', clickHandler);
+    }
+
+    return () => {
+      if (onClose !== undefined) {
+        backdropRef.current?.removeEventListener('click', clickHandler);
+      }
+    };
+  }, [onClose]);
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, invisible && styles.invisible, className);
 
   const node = (
     <Fade
-      open={open}
-      keepMounted={keepMounted}
       className={mergedClassName}
-      ref={ref}
+      ref={backdropRef}
       {...restProps}
     />
   );
