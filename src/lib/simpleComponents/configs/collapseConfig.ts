@@ -5,7 +5,6 @@ export interface CollapseConfig {
     direction: CollapseDirections;
     open: boolean;
     closeOnAwayClick: boolean;
-    keepMounted: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -17,8 +16,7 @@ const collapseConfig: CollapseConfig = {
   defaultProps: {
     direction: 'vertical',
     open: false,
-    closeOnAwayClick: false,
-    keepMounted: false
+    closeOnAwayClick: false
   },
   styles: {
     base: {
@@ -28,19 +26,23 @@ const collapseConfig: CollapseConfig = {
     },
     directions: {
       vertical: {
+        height: 'h-0',
         width: 'w-fit',
         transition: 'transition-[height]'
       },
       'vertical-full': {
+        height: 'h-0',
         width: 'w-fit',
         transition: 'transition-[height]'
       },
       horizontal: {
         height: 'h-fit',
+        width: 'w-0',
         transition: 'transition-[width]'
       },
       'horizontal-full': {
         height: 'h-fit',
+        width: 'w-0',
         transition: 'transition-[width]'
       }
     }

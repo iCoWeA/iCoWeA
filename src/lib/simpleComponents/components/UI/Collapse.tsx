@@ -1,7 +1,7 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import collapseConfig from '../../configs/collapseConfig';
-import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
+import Transition, { type TransitionProps } from './Transition';
 
 /* ARIA
  *
@@ -12,38 +12,17 @@ import { mergeClasses } from '../../utils/propsHelper';
 
 export type CollapseDirections = 'horizontal' | 'horizontal-full' | 'vertical' | 'vertical-full';
 
-export interface CollapseProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface CollapseProps extends TransitionProps {
   onClose?: () => void;
-  onEnter?: () => void;
-  onExit?: () => void;
-  onEntering?: () => void;
-  onExiting?: () => void;
   direction?: CollapseDirections;
-  open?: boolean;
   closeOnAwayClick?: boolean;
   closeDuration?: number;
-  keepMounted?: boolean;
 }
 
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = collapseConfig.styles;
-  const {
-    onClose,
-    onEnter,
-    onExit,
-    onEntering,
-    onExiting,
-    onTransitionEnd,
-    direction,
-    open,
-    closeOnAwayClick,
-    closeDuration,
-    keepMounted,
-    style,
-    className,
-    ...restProps
-  } = {
+  const { onClose, onEntering, onExiting, open, direction, closeOnAwayClick, closeDuration, className, ...restProps } = {
     ...collapseConfig.defaultProps,
     ...props
   };
@@ -51,18 +30,8 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set refs --- */
   const collapseRef = useRef<HTMLDivElement>(null);
 
-  /* --- Set states --- */
-  const { state: animationState, startAnimation, endAnimation } = useAnimation(open);
-
   /* --- Set imperative handler --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => collapseRef.current, [
-    !keepMounted && !open && animationState.current === AnimationStates.EXITED
-  ]);
-
-  /* --- Set open state --- */
-  useEffect(() => {
-    startAnimation(open, onEntering, onExiting);
-  }, [open, onEntering, onExiting]);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => collapseRef.current, []);
 
   /* --- Set outside click action --- */
   useEffect(() => {
@@ -74,116 +43,79 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
       }
     };
 
-    if (closeOnAwayClick && animationState.enter && onClose !== undefined) {
+    if (closeOnAwayClick && open && onClose !== undefined) {
       document.addEventListener('click', outsideClickHandler);
     }
 
     return () => {
-      if (closeOnAwayClick && animationState.enter && onClose !== undefined) {
+      if (closeOnAwayClick && open && onClose !== undefined) {
         document.removeEventListener('click', outsideClickHandler);
       }
     };
-  }, [onClose, closeOnAwayClick, animationState.enter]);
+  }, [onClose, closeOnAwayClick, open]);
 
   /* --- Set timer action --- */
   useEffect(() => {
     let timerId: number;
 
-    if (animationState.enter && closeDuration !== undefined && onClose !== undefined) {
+    if (open && closeDuration !== undefined && onClose !== undefined) {
       timerId = window.setTimeout(() => {
         onClose();
       }, closeDuration);
     }
 
     return () => {
-      if (animationState.enter && closeDuration !== undefined && onClose !== undefined) {
+      if (open && closeDuration !== undefined && onClose !== undefined) {
         clearTimeout(timerId);
       }
     };
-  }, [animationState.enter, closeDuration, onClose]);
+  }, [open, closeDuration, onClose]);
 
   /* --- Set default style --- */
-  useEffect(() => {
+  const enteringHandler = (): void => {
     if (open && direction === 'vertical' && collapseRef.current !== null) {
-      collapseRef.current.style.height = 'fit-content';
+      collapseRef.current.style.height = `${collapseRef.current.scrollHeight}px`;
+    }
+
+    if (open && direction === 'horizontal' && collapseRef.current !== null) {
+      collapseRef.current.style.width = `${collapseRef.current.scrollWidth}px`;
     }
 
     if (open && direction === 'vertical-full' && collapseRef.current !== null) {
       collapseRef.current.style.height = '100%';
     }
 
-    if (open && direction === 'horizontal' && collapseRef.current !== null) {
-      collapseRef.current.style.width = 'fit-content';
-    }
-
     if (open && direction === 'horizontal-full' && collapseRef.current !== null) {
       collapseRef.current.style.width = '100%';
     }
-  }, []);
 
-  useEffect(() => {
-    const transitionEndHandler = (event: TransitionEvent): void => {
-      if (event.target === collapseRef.current) {
-        endAnimation(onEnter, onExit);
-      }
-    };
+    if (onEntering !== undefined) {
+      onEntering();
+    }
+  };
 
-    collapseRef.current?.addEventListener('transitionend', transitionEndHandler);
+  const exitingHandler = (): void => {
+    if (!open && (direction === 'vertical' || direction === 'vertical-full') && collapseRef.current !== null) {
+      collapseRef.current.style.height = '0px';
+    }
 
-    return () => {
-      collapseRef.current?.removeEventListener('transitionend', transitionEndHandler);
-    };
-  }, [onEnter, onExit]);
+    if (!open && (direction === 'horizontal' || direction === 'horizontal-full') && collapseRef.current !== null) {
+      collapseRef.current.style.width = '0px';
+    }
 
-  /* --- Unmount --- */
-  if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
-    return <></>;
-  }
+    if (onExiting !== undefined) {
+      onExiting();
+    }
+  };
 
   /* --- Set props --- */
-  let mergedStyles = style;
-
-  if (animationState.enter && direction === 'vertical' && collapseRef.current !== null) {
-    mergedStyles = {
-      height: `${collapseRef.current.scrollHeight}px`,
-      ...style
-    };
-  }
-
-  if (animationState.enter && direction === 'vertical-full' && collapseRef.current !== null) {
-    mergedStyles = {
-      height: '100%',
-      ...style
-    };
-  }
-
-  if (animationState.exit && (direction === 'vertical' || direction === 'vertical-full')) {
-    mergedStyles = { height: '0px', ...style };
-  }
-
-  if (animationState.enter && direction === 'horizontal' && collapseRef.current !== null) {
-    mergedStyles = {
-      width: `${collapseRef.current.scrollWidth}px`,
-      ...style
-    };
-  }
-
-  if (animationState.enter && direction === 'horizontal-full' && collapseRef.current !== null) {
-    mergedStyles = {
-      width: '100%',
-      ...style
-    };
-  }
-
-  if (animationState.exit && (direction === 'horizontal' || direction === 'horizontal-full')) {
-    mergedStyles = { width: '0px', ...style };
-  }
-
   const mergedClassName = mergeClasses(styles.base, styles.directions[direction], className);
 
   return (
-    <div
-      style={mergedStyles}
+    <Transition
+      onEntering={enteringHandler}
+      onExiting={exitingHandler}
+      open={open}
       className={mergedClassName}
       ref={collapseRef}
       {...restProps}
