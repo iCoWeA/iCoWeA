@@ -1,24 +1,22 @@
 export interface PopperConfig {
   defaultProps: {
     open: boolean;
+    unmountOnExit: boolean;
     lockScroll: boolean;
     closeOnAwayClick: boolean;
-    keepMounted: boolean;
     backdrop: boolean;
   };
   styles: {
     base: Record<string, string>;
-    hide: Record<string, string>;
-    open: Record<string, string>;
   }
 }
 
 const popperConfig: PopperConfig = {
   defaultProps: {
     open: false,
+    unmountOnExit: true,
     lockScroll: true,
     closeOnAwayClick: true,
-    keepMounted: false,
     backdrop: false
   },
   styles: {
@@ -27,15 +25,7 @@ const popperConfig: PopperConfig = {
       display: 'flex',
       borderRadius: 'rounded-xl',
       shadow: 'shadow-md shadow-black/50',
-      opacity: 'opacity-0',
-      transition: 'transition-[opacity]',
-      transitionDuration: 'duration-500'
-    },
-    hide: {
-      display: 'hidden'
-    },
-    open: {
-      opacity: 'opacity-100'
+      overflow: 'overflow-hidden'
     }
   }
 };
