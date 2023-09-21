@@ -1,21 +1,14 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type TransitionEvent } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import fadeConfig from '../../configs/fadeConfig';
-import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
+import Transition, { type TransitionProps } from './Transition';
 
-export interface FadeProps extends BaseHTMLAttributes<HTMLDivElement> {
-  onEnter?: () => void;
-  onExit?: () => void;
-  onEntering?: () => void;
-  onExiting?: () => void;
-  open?: boolean;
-  keepMounted?: boolean;
-}
+export interface FadeProps extends TransitionProps {}
 
 const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = fadeConfig.styles;
-  const { onEnter, onExit, onEntering, onExiting, onTransitionEnd, open, keepMounted, style, className, ...restProps } = {
+  const { onEntering, onExiting, open, className, ...restProps } = {
     ...fadeConfig.defaultProps,
     ...props
   };
@@ -23,45 +16,37 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   /* --- Set refs --- */
   const fadeRef = useRef<HTMLDivElement>(null);
 
-  /* --- Set states --- */
-  const { state: animationState, startAnimation, endAnimation } = useAnimation(open);
-
   /* --- Set imperative anchorElement --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => fadeRef.current, [
-    !keepMounted && !open && animationState.current === AnimationStates.EXITED
-  ]);
-
-  /* --- Set open state --- */
-  useEffect(() => {
-    startAnimation(open, onEntering, onExiting);
-  }, [open, onEntering, onExiting]);
-
-  /* --- Unmount --- */
-  if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
-    return <></>;
-  }
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => fadeRef.current, []);
 
   /* --- Set props --- */
-  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (event.target === fadeRef.current) {
-      endAnimation(onEnter, onExit);
+  const enteringHandler = (): void => {
+    if (fadeRef.current !== null) {
+      fadeRef.current.classList.add(mergeClasses(styles.open));
     }
 
-    if (onTransitionEnd !== undefined) {
-      onTransitionEnd(event);
+    if (onEntering !== undefined) {
+      onEntering();
     }
   };
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    animationState.enter && styles.open,
-    animationState.current === AnimationStates.EXITED && !open && styles.hide,
-    className
-  );
+  const exitingHandler = (): void => {
+    if (fadeRef.current !== null) {
+      fadeRef.current.classList.remove(mergeClasses(styles.open));
+    }
+
+    if (onExiting !== undefined) {
+      onExiting();
+    }
+  };
+
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
-    <div
-      onTransitionEnd={transitionEndHandler}
+    <Transition
+      onEntering={enteringHandler}
+      onExiting={exitingHandler}
+      open={open}
       className={mergedClassName}
       ref={fadeRef}
       {...restProps}
