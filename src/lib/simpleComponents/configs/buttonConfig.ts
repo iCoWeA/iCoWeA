@@ -28,7 +28,6 @@ const buttonConfig: ButtonConfig = {
   },
   styles: {
     base: {
-      position: 'relative',
       display: 'flex',
       gap: 'gap-2',
       alignItems: 'items-center',
