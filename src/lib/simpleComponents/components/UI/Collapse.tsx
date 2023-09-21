@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type TransitionEvent } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import collapseConfig from '../../configs/collapseConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
@@ -121,22 +121,26 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
     }
   }, []);
 
+  useEffect(() => {
+    const transitionEndHandler = (event: TransitionEvent): void => {
+      if (event.target === collapseRef.current) {
+        endAnimation(onEnter, onExit);
+      }
+    };
+
+    collapseRef.current?.addEventListener('transitionend', transitionEndHandler);
+
+    return () => {
+      collapseRef.current?.removeEventListener('transitionend', transitionEndHandler);
+    };
+  }, [onEnter, onExit]);
+
   /* --- Unmount --- */
   if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
     return <></>;
   }
 
   /* --- Set props --- */
-  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (event.target === collapseRef.current) {
-      endAnimation(onEnter, onExit);
-    }
-
-    if (onTransitionEnd !== undefined) {
-      onTransitionEnd(event);
-    }
-  };
-
   let mergedStyles = style;
 
   if (animationState.enter && direction === 'vertical' && collapseRef.current !== null) {
@@ -179,7 +183,6 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
 
   return (
     <div
-      onTransitionEnd={transitionEndHandler}
       style={mergedStyles}
       className={mergedClassName}
       ref={collapseRef}
