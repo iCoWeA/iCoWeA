@@ -15,14 +15,8 @@ export type SnackbarVariants = 'plain' | 'filled' | 'outlined';
 export interface SnackbarProps extends PopperProps {
   onClose?: () => void;
   variant?: SnackbarVariants;
-  open?: boolean;
   position?: InnerPositions;
   lockScroll?: boolean;
-  closeOnAwayClick?: boolean;
-  closeDuration?: number;
-  keepMounted?: boolean;
-  backdrop?: boolean;
-  overlayRef?: Element | null;
 }
 
 const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
@@ -31,7 +25,7 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = snackbarConfig.styles;
-  const { onClose, variant, open, position, lockScroll, closeOnAwayClick, closeDuration, keepMounted, backdrop, overlayRef, className, ...restProps } = {
+  const { onClose, variant, position, lockScroll, className, ...restProps } = {
     ...snackbarConfig.defaultProps,
     ...props
   };
@@ -48,13 +42,7 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
   return (
     <Popper
       onClose={onClose}
-      open={open}
       lockScroll={lockScroll}
-      closeOnAwayClick={closeOnAwayClick}
-      closeDuration={closeDuration}
-      keepMounted={keepMounted}
-      backdrop={backdrop}
-      overlayRef={overlayRef}
       className={mergedClassName}
       ref={ref}
       {...restProps}
