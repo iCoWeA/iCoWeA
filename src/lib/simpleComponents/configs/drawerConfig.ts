@@ -2,81 +2,50 @@ import { type DrawerVariants } from '../components/UI/Drawer';
 
 export interface DrawerConfig {
   defaultProps: {
-    variant: DrawerVariants;
-    direction: Directions;
     open: boolean;
+    direction: Directions;
+    unmountOnExit: boolean;
+    variant: DrawerVariants;
     lockScroll: boolean;
-    keepMounted: boolean;
+    closeOnAwayClick: boolean;
+    backdrop: boolean;
   };
   styles: {
     base: Record<string, string>;
-    hide: Record<string, string>;
     directions: Record<Directions, Record<string, string>>;
-    open: Record<Directions, Record<string, string>>;
     variants: Record<DrawerVariants, Record<Themes, Record<string, string>>>;
   }
 }
 
 const drawerConfig: DrawerConfig = {
   defaultProps: {
-    variant: 'plain',
-    direction: 'bottom',
     open: false,
+    direction: 'bottom',
+    unmountOnExit: true,
+    variant: 'plain',
     lockScroll: true,
-    keepMounted: false
+    closeOnAwayClick: false,
+    backdrop: true
   },
   styles: {
     base: {
       position: 'fixed',
       zIndex: 'z-10',
       display: 'flex',
-      flexDirection: 'flex-col',
-      transition: 'transition-[transform]',
-      transitionDuration: 'duration-500'
-    },
-    hide: {
-      display: 'hidden'
+      flexDirection: 'flex-col'
     },
     directions: {
       top: {
-        top: 'top-0',
-        left: 'left-0',
-        width: 'w-screen',
-        translate: '-translate-y-full'
+        width: 'w-screen'
       },
       bottom: {
-        bottom: 'bottom-0',
-        left: 'left-0',
-        width: 'w-screen',
-        translate: 'translate-y-full'
+        width: 'w-screen'
       },
       left: {
-        top: 'top-0',
-        left: 'left-0',
-        height: 'h-screen',
-        width: 'w-[22.5rem]',
-        translate: '-translate-x-full'
+        height: 'h-screen'
       },
       right: {
-        top: 'top-0',
-        right: 'right-0',
-        height: 'h-screen',
-        width: 'w-[22.5rem]',
-        translate: '-translate-x-full'
-      }
-    },
-    open: {
-      top: {
-        translate: 'translate-y-0'
-      },
-      bottom: {
-        translate: 'translate-y-0'
-      },
-      left: {
-        translate: 'translate-x-0'
-      },
-      right: {
-        translate: 'translate-x-0'
+        height: 'h-screen'
       }
     },
     variants: {

@@ -1,10 +1,10 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext, useRef, useImperativeHandle, useEffect, type TransitionEvent } from 'react';
+import React, { forwardRef, useContext, useRef, useImperativeHandle, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import drawerConfig from '../../configs/drawerConfig';
 import themeContext from '../../contexts/theme';
-import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
+import Slide, { type SlideProps } from './Slide';
 
 /* ARIA
  *
@@ -15,17 +15,13 @@ import Backdrop, { type BackdropProps } from './Backdrop';
 
 export type DrawerVariants = 'plain' | 'filled';
 
-export interface DrawerProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface DrawerProps extends SlideProps {
   onClose?: () => void;
-  onEnter?: () => void;
-  onExit?: () => void;
-  onEntering?: () => void;
-  onExiting?: () => void;
   variant?: DrawerVariants;
-  direction?: Directions;
-  open?: boolean;
   lockScroll?: boolean;
-  keepMounted?: boolean;
+  closeOnAwayClick?: boolean;
+  closeDuration?: number;
+  backdrop?: boolean;
   backdropProps?: BackdropProps;
   overlayRef?: Element | null;
 }
@@ -38,16 +34,14 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   const styles = drawerConfig.styles;
   const {
     onClose,
-    onEnter,
-    onExit,
-    onEntering,
-    onExiting,
-    onTransitionEnd,
-    variant,
-    direction,
     open,
+    direction,
+    unmountOnExit,
+    variant,
     lockScroll,
-    keepMounted,
+    closeOnAwayClick,
+    closeDuration,
+    backdrop,
     backdropProps,
     overlayRef,
     className,
@@ -60,70 +54,78 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   /* --- Set refs --- */
   const drawerRef = useRef<HTMLDivElement>(null);
 
-  /* --- Set states --- */
-  const { state: animationState, startAnimation, endAnimation } = useAnimation(open);
-
   /* --- Set imperative anchorElement --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => drawerRef.current, [
-    !keepMounted && !open && animationState.current === AnimationStates.EXITED
-  ]);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => drawerRef.current, []);
 
-  /* --- Set open state --- */
+  /* --- Set outside click action --- */
   useEffect(() => {
-    startAnimation(open, onEntering, onExiting);
-  }, [open, onEntering, onExiting]);
+    const outsideClickHandler = (event: MouseEvent): void => {
+      const isDrawerClicked = drawerRef.current?.contains(event.target as Node) ?? false;
+
+      if (!isDrawerClicked && onClose !== undefined) {
+        onClose();
+      }
+    };
+
+    if (closeOnAwayClick && open && onClose !== undefined && !backdrop) {
+      document.addEventListener('click', outsideClickHandler);
+    }
+
+    return () => {
+      if (closeOnAwayClick && open && onClose !== undefined && !backdrop) {
+        document.removeEventListener('click', outsideClickHandler);
+      }
+    };
+  }, [onClose, closeOnAwayClick, open, backdrop]);
+
+  /* --- Set timer action --- */
+  useEffect(() => {
+    let timerId: number;
+
+    if (open && closeDuration !== undefined && onClose !== undefined) {
+      timerId = window.setTimeout(() => {
+        onClose();
+      }, closeDuration);
+    }
+
+    return () => {
+      if (open && closeDuration !== undefined && onClose !== undefined) {
+        clearTimeout(timerId);
+      }
+    };
+  }, [open, closeDuration, onClose]);
 
   /* --- Set lock scroll action --- */
   useEffect(() => {
-    if (lockScroll) {
-      if (open) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
-      }
+    if (lockScroll && open) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (lockScroll && !open) {
+      document.body.style.overflow = 'auto';
     }
   }, [lockScroll, open]);
-
-  /* --- Unmount --- */
-  if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
-    return <></>;
-  }
 
   /* --- Set backdrop --- */
   const backdropNode = (
     <Backdrop
-      onClick={onClose}
+      onClose={onClose}
       open={open}
-      keepMounted={keepMounted}
+      unmountOnExit={unmountOnExit}
       {...backdropProps}
     />
   );
 
   /* --- Set props --- */
-  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (event.target === drawerRef.current) {
-      endAnimation(onEnter, onExit);
-    }
-
-    if (onTransitionEnd !== undefined) {
-      onTransitionEnd(event);
-    }
-  };
-
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant][theme],
-    styles.directions[direction],
-    animationState.enter && styles.open[direction],
-    animationState.current === AnimationStates.EXITED && !open && styles.hide,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], styles.directions[direction], className);
 
   const node = (
     <>
       {backdropNode}
-      <div
-        onTransitionEnd={transitionEndHandler}
+      <Slide
+        open={open}
+        direction={direction}
+        unmountOnExit={unmountOnExit}
         className={mergedClassName}
         ref={drawerRef}
         {...restProps}
