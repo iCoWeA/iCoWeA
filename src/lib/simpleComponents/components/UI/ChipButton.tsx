@@ -11,7 +11,7 @@ export interface ChipButtonProps extends IconButtonProps {
 
 const ChipButton = forwardRef<HTMLButtonElement, ChipButtonProps>((props, ref) => {
   /* --- Set default props --- */
-  const { chipVariant, color, iconProps, children, ...restProps } = { ...chipButtonConfig.defaultProps, ...props };
+  const { chipVariant, iconProps, children, ...restProps } = { ...chipButtonConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const childrenNode =
@@ -21,7 +21,6 @@ const ChipButton = forwardRef<HTMLButtonElement, ChipButtonProps>((props, ref) =
     <IconButton
       variant={chipVariant === 'filled' ? 'plain' : 'text'}
       size="xs"
-      color={color}
       ref={ref}
       {...restProps}
     >
