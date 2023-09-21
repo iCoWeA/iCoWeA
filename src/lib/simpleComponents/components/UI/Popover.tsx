@@ -8,18 +8,11 @@ import Popper, { type PopperProps } from './Popper';
 export type PopoverVariants = 'plain' | 'filled' | 'outlined';
 
 export interface PopoverProps extends PopperProps {
-  onClose?: () => void;
-  open?: boolean;
   variant?: PopoverVariants;
   position?: OuterPositions;
   responsive?: boolean;
   offset?: number;
-  lockScroll?: boolean;
-  closeOnAwayClick?: boolean;
-  keepMounted?: boolean;
-  backdrop?: boolean;
   anchorElement?: HTMLElement | null;
-  overlayRef?: Element | null;
 }
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
@@ -28,22 +21,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = popoverConfig.styles;
-  const {
-    onClose,
-    open,
-    variant,
-    position,
-    responsive,
-    offset,
-    lockScroll,
-    closeOnAwayClick,
-    keepMounted,
-    backdrop,
-    anchorElement,
-    overlayRef,
-    className,
-    ...restProps
-  } = {
+  const { variant, position, responsive, offset, anchorElement, className, ...restProps } = {
     ...popoverConfig.defaultProps,
     ...props
   };
@@ -73,13 +51,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, ref) => {
 
   return (
     <Popper
-      onClose={onClose}
       onResize={resizeHandler}
-      open={open}
-      lockScroll={lockScroll}
-      closeOnAwayClick={closeOnAwayClick}
-      keepMounted={keepMounted}
-      overlayRef={overlayRef}
       className={mergedClassName}
       ref={popperRef}
       {...restProps}

@@ -16,7 +16,6 @@ export interface SnackbarProps extends PopperProps {
   onClose?: () => void;
   variant?: SnackbarVariants;
   position?: InnerPositions;
-  lockScroll?: boolean;
 }
 
 const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {

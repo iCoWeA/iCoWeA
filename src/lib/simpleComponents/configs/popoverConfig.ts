@@ -6,10 +6,6 @@ export interface MenuConfig {
     position: OuterPositions;
     responsive: boolean;
     offset: number;
-    lockScroll: boolean;
-    closeOnAwayClick: boolean;
-    keepMounted: boolean;
-    backdrop: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -22,11 +18,7 @@ const menuConfig: MenuConfig = {
     variant: 'plain',
     position: 'bottom',
     responsive: true,
-    offset: 0,
-    lockScroll: false,
-    closeOnAwayClick: true,
-    keepMounted: false,
-    backdrop: false
+    offset: 0
   },
   styles: {
     base: {
