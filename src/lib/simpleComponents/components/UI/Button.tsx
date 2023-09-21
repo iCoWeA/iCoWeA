@@ -1,4 +1,13 @@
-import React, { type ButtonHTMLAttributes, type ReactNode, type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import React, {
+  type ButtonHTMLAttributes,
+  type ReactNode,
+  type BaseHTMLAttributes,
+  forwardRef,
+  useContext,
+  useRef,
+  useImperativeHandle,
+  type MouseEvent
+} from 'react';
 import buttonConfig from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
@@ -28,12 +37,26 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = buttonConfig.styles;
-  const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, stateLayerProps, disabled, className, children, ...restProps } = {
+  const { onClick, variant, size, color, elevated, fullwidth, startDecoration, endDecoration, stateLayerProps, disabled, className, children, ...restProps } = {
     ...buttonConfig.defaultProps,
     ...props
   };
 
+  /* --- Set refs --- */
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  /* --- Set imperative ref --- */
+  useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(ref, () => buttonRef.current, []);
+
   /* --- Set props --- */
+  const clickHandler = (event: MouseEvent<HTMLButtonElement>): void => {
+    buttonRef.current?.blur();
+
+    if (onClick !== undefined) {
+      onClick(event);
+    }
+  };
+
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
@@ -46,10 +69,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   return (
     <button
+      onClick={clickHandler}
       disabled={disabled}
       className={mergedClassName}
       type="button"
-      ref={ref}
+      ref={buttonRef}
       {...restProps}
     >
       {startDecoration}
