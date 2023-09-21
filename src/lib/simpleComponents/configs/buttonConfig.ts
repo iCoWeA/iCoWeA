@@ -39,7 +39,7 @@ const buttonConfig: ButtonConfig = {
       userSelect: 'select-none',
       hover: 'hover:bg-gradient-to-r',
       active: 'active:bg-gradient-to-r',
-      focus: 'focus:outline-0',
+      focus: 'focus:outline-0 focus:bg-gradient-to-r',
       disabled: 'disabled:pointer-events-none'
     },
     fullwidth: {
@@ -91,6 +91,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-surface',
             hover: 'hover:from-light-on-surface/10 hover:to-light-on-surface/10',
             active: 'active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]',
+            focus: 'focus:from-light-on-surface/[0.15] focus:to-light-on-surface/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           primary: {
@@ -98,6 +99,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-primary',
             hover: 'hover:from-light-on-primary/10 hover:to-light-on-primary/10',
             active: 'active:from-light-on-primary/[0.15] active:to-light-on-primary/[0.15]',
+            focus: 'focus:from-light-on-primary/[0.15] focus:to-light-on-primary/[0.15]',
             disabled: 'disabled:fill-light-on-primary/40 disabled:text-light-on-primary/40'
           },
           secondary: {
@@ -105,6 +107,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-secondary',
             hover: 'hover:from-light-on-secondary/10 hover:to-light-on-secondary/10',
             active: 'active:from-light-on-secondary/[0.15] active:to-light-on-secondary/[0.15]',
+            focus: 'focus:from-light-on-secondary/[0.15] focus:to-light-on-secondary/[0.15]',
             disabled: 'disabled:fill-light-on-secondary/40 disabled:text-light-on-secondary/40'
           },
           success: {
@@ -112,6 +115,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-success',
             hover: 'hover:from-light-on-success/10 hover:to-light-on-success/10',
             active: 'active:from-light-on-success/[0.15] active:to-light-on-success/[0.15]',
+            focus: 'focus:from-light-on-success/[0.15] focus:to-light-on-success/[0.15]',
             disabled: 'disabled:fill-light-on-success/40 disabled:text-light-on-success/40'
           },
           warning: {
@@ -119,6 +123,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-warning',
             hover: 'hover:from-light-on-warning/10 hover:to-light-on-warning/10',
             active: 'active:from-light-on-warning/[0.15] active:to-light-on-warning/[0.15]',
+            focus: 'focus:from-light-on-warning/[0.15] focus:to-light-on-warning/[0.15]',
             disabled: 'disabled:fill-light-on-warning/40 disabled:text-light-on-warning/40'
           },
           error: {
@@ -126,6 +131,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-error',
             hover: 'hover:from-light-on-error/10 hover:to-light-on-error/10',
             active: 'active:from-light-on-error/[0.15] active:to-light-on-error/[0.15]',
+            focus: 'focus:from-light-on-error/[0.15] focus:to-light-on-error/[0.15]',
             disabled: 'disabled:fill-light-on-error/40 disabled:text-light-on-error/40'
           }
         }
@@ -137,6 +143,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-surface',
             hover: 'hover:from-light-on-surface/10 hover:to-light-on-surface/10',
             active: 'active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]',
+            focus: 'focus:from-light-on-surface/[0.15] focus:to-light-on-surface/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           primary: {
@@ -144,6 +151,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-primary',
             hover: 'hover:from-light-primary/10 hover:to-light-primary/10',
             active: 'active:from-light-primary/[0.15] active:to-light-primary/[0.15]',
+            focus: 'focus:from-light-primary/[0.15] focus:to-light-primary/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           secondary: {
@@ -151,6 +159,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-secondary',
             hover: 'hover:from-light-secondary/10 hover:to-light-secondary/10',
             active: 'active:from-light-secondary/[0.15] active:to-light-secondary/[0.15]',
+            focus: 'focus:from-light-secondary/[0.15] focus:to-light-secondary/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           success: {
@@ -158,6 +167,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-success',
             hover: 'hover:from-light-success/10 hover:to-light-success/10',
             active: 'active:from-light-success/[0.15] active:to-light-success/[0.15]',
+            focus: 'focus:from-light-success/[0.15] focus:to-light-success/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           warning: {
@@ -165,6 +175,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-warning',
             hover: 'hover:from-light-warning/10 hover:to-light-warning/10',
             active: 'active:from-light-warning/[0.15] active:to-light-warning/[0.15]',
+            focus: 'focus:from-light-warning/[0.15] focus:to-light-warning/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           error: {
@@ -172,6 +183,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-error',
             hover: 'hover:from-light-error/10 hover:to-light-error/10',
             active: 'active:from-light-error/[0.15] active:to-light-error/[0.15]',
+            focus: 'focus:from-light-error/[0.15] focus:to-light-error/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           }
         }
@@ -184,6 +196,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-surface',
             hover: 'hover:from-light-on-surface/10 hover:to-light-on-surface/10',
             active: 'active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]',
+            focus: 'focus:from-light-on-surface/[0.15] focus:to-light-on-surface/[0.15]',
             disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           primary: {
@@ -192,6 +205,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-primary',
             hover: 'hover:from-light-primary/10 hover:to-light-primary/10',
             active: 'active:from-light-primary/[0.15] active:to-light-primary/[0.15]',
+            focus: 'focus:from-light-primary/[0.15] focus:to-light-primary/[0.15]',
             disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           secondary: {
@@ -200,6 +214,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-secondary',
             hover: 'hover:from-light-secondary/10 hover:to-light-secondary/10',
             active: 'active:from-light-secondary/[0.15] active:to-light-secondary/[0.15]',
+            focus: 'focus:from-light-secondary/[0.15] focus:to-light-secondary/[0.15]',
             disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           success: {
@@ -208,6 +223,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-success',
             hover: 'hover:from-light-success/10 hover:to-light-success/10',
             active: 'active:from-light-success/[0.15] active:to-light-success/[0.15]',
+            focus: 'focus:from-light-success/[0.15] focus:to-light-success/[0.15]',
             disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           warning: {
@@ -216,6 +232,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-warning',
             hover: 'hover:from-light-warning/10 hover:to-light-warning/10',
             active: 'active:from-light-warning/[0.15] active:to-light-warning/[0.15]',
+            focus: 'focus:from-light-warning/[0.15] focus:to-light-warning/[0.15]',
             disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           error: {
@@ -224,6 +241,7 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-error',
             hover: 'hover:from-light-error/10 hover:to-light-error/10',
             active: 'active:from-light-error/[0.15] active:to-light-error/[0.15]',
+            focus: 'focus:from-light-error/[0.15] focus:to-light-error/[0.15]',
             disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
           }
         }
@@ -236,6 +254,7 @@ const buttonConfig: ButtonConfig = {
             background: 'bg-light-surface-dark',
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-surface/10 hover:to-light-on-surface/10',
             active: 'active:shadow-none active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]',
+            focus: 'focus:shadow-none active:from-light-on-surface/[0.15] focus:to-light-on-surface/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           primary: {
@@ -244,6 +263,7 @@ const buttonConfig: ButtonConfig = {
             background: 'bg-light-primary',
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-primary/10 hover:to-light-on-primary/10',
             active: 'active:shadow-none active:from-light-on-primary/[0.15] active:to-light-on-primary/[0.15]',
+            focus: 'active:shadow-none focus:from-light-on-primary/[0.15] focus:to-light-on-primary/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           secondary: {
@@ -252,6 +272,7 @@ const buttonConfig: ButtonConfig = {
             background: 'bg-light-secondary',
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-secondary/10 hover:to-light-on-secondary/10',
             active: 'active:shadow-none active:from-light-on-secondary/[0.15] active:to-light-on-secondary/[0.15]',
+            focus: 'focus:shadow-none active:from-light-on-secondary/[0.15] focus:to-light-on-secondary/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           success: {
@@ -260,6 +281,7 @@ const buttonConfig: ButtonConfig = {
             background: 'bg-light-success',
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-success/10 hover:to-light-on-success/10',
             active: 'active:shadow-none active:from-light-on-success/[0.15] active:to-light-on-success/[0.15]',
+            focus: 'focus:shadow-none active:from-light-on-success/[0.15] focus:to-light-on-success/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           warning: {
@@ -268,6 +290,7 @@ const buttonConfig: ButtonConfig = {
             background: 'bg-light-warning',
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-warning/10 hover:to-light-on-warning/10',
             active: 'active:shadow-none active:from-light-on-warning/[0.15] active:to-light-on-warning/[0.15]',
+            focus: 'focus:shadow-none active:from-light-on-warning/[0.15] focus:to-light-on-warning/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           error: {
@@ -276,6 +299,7 @@ const buttonConfig: ButtonConfig = {
             background: 'bg-light-error',
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-error/10 hover:to-light-on-error/10',
             active: 'active:shadow-none active:from-light-on-error/[0.15] active:to-light-on-error/[0.15]',
+            focus: 'focus:shadow-none active:from-light-on-error/[0.15] focus:to-light-on-error/[0.15]',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           }
         }
