@@ -28,7 +28,8 @@ const cardConfig: CardConfig = {
       position: 'relative',
       display: 'flex',
       flexDirection: 'flex-col',
-      borderRadius: 'rounded-xl'
+      borderRadius: 'rounded-xl',
+      overflow: 'overflow-hidden'
     },
     elevated: {
       shadow: 'shadow-md shadow-black/50'
