@@ -5,7 +5,6 @@ export interface FadeConfig {
   };
   styles: {
     base: Record<string, string>;
-    hide: Record<string, string>;
     open: Record<string, string>;
   }
 }
@@ -13,19 +12,12 @@ export interface FadeConfig {
 const fadeConfig: FadeConfig = {
   defaultProps: {
     open: false,
-    keepMounted: false
+    keepMounted: true
   },
   styles: {
     base: {
-      display: 'block',
-      height: 'h-fit',
-      width: 'w-fit',
       opacity: 'opacity-0',
-      transition: 'transition-[opacity]',
-      transitionDuration: 'duration-500'
-    },
-    hide: {
-      display: 'hidden'
+      transition: 'transition-[opacity]'
     },
     open: {
       opacity: 'opacity-100'
