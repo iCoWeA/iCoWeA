@@ -29,14 +29,10 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
       }
     };
 
-    if (onClose !== undefined) {
-      backdropRef.current?.addEventListener('click', clickHandler);
-    }
+    backdropRef.current?.addEventListener('click', clickHandler);
 
     return () => {
-      if (onClose !== undefined) {
-        backdropRef.current?.removeEventListener('click', clickHandler);
-      }
+      backdropRef.current?.removeEventListener('click', clickHandler);
     };
   }, [onClose]);
 
