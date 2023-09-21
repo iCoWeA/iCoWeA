@@ -33,6 +33,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = drawerConfig.styles;
   const {
+    onExit,
     onClose,
     open,
     direction,
@@ -100,10 +101,6 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     if (lockScroll && open) {
       document.body.style.overflow = 'hidden';
     }
-
-    if (lockScroll && !open) {
-      document.body.style.overflow = 'auto';
-    }
   }, [lockScroll, open]);
 
   /* --- Set backdrop --- */
@@ -115,19 +112,29 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
         onClick={onClose}
         open={open}
         unmountOnExit={unmountOnExit}
-        invisible
         {...backdropProps}
       />
     );
   }
 
   /* --- Set props --- */
+  const exitHandler = (): void => {
+    if (lockScroll && !open) {
+      document.body.style.overflow = 'auto';
+    }
+
+    if (onExit !== undefined) {
+      onExit();
+    }
+  };
+
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], styles.directions[direction], className);
 
   const node = (
     <>
       {backdropNode}
       <Slide
+        onExit={exitHandler}
         open={open}
         direction={direction}
         unmountOnExit={unmountOnExit}
