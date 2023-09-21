@@ -1,12 +1,9 @@
 export interface SlideConfig {
   defaultProps: {
     direction: Directions;
-    open: boolean;
-    keepMounted: boolean;
   };
   styles: {
     base: Record<string, string>;
-    hide: Record<string, string>;
     directions: Record<Directions, Record<string, string>>;
     open: Record<Directions, Record<string, string>>;
   }
@@ -14,21 +11,11 @@ export interface SlideConfig {
 
 const slideConfig: SlideConfig = {
   defaultProps: {
-    direction: 'bottom',
-    open: false,
-    keepMounted: false
+    direction: 'bottom'
   },
   styles: {
     base: {
-      position: 'absolute',
-      display: 'block',
-      height: 'h-fit',
-      width: 'w-fit',
-      transition: 'transition',
-      transitionDuration: 'duration-500'
-    },
-    hide: {
-      display: 'hidden'
+      position: 'absolute'
     },
     directions: {
       top: {

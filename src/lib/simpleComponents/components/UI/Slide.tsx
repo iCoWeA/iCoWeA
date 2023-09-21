@@ -1,22 +1,16 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type TransitionEvent } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import slideConfig from '../../configs/slideConfig';
-import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
+import Transition, { type TransitionProps } from './Transition';
 
-export interface SlideProps extends BaseHTMLAttributes<HTMLDivElement> {
-  onEnter?: () => void;
-  onExit?: () => void;
-  onEntering?: () => void;
-  onExiting?: () => void;
+export interface SlideProps extends TransitionProps {
   direction?: Directions;
-  open?: boolean;
-  keepMounted?: boolean;
 }
 
 const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = slideConfig.styles;
-  const { onEnter, onExit, onEntering, onExiting, onTransitionEnd, direction, open, keepMounted, className, ...restProps } = {
+  const { onEntering, onExiting, direction, className, ...restProps } = {
     ...slideConfig.defaultProps,
     ...props
   };
@@ -24,46 +18,36 @@ const Slide = forwardRef<HTMLDivElement, SlideProps>((props, ref) => {
   /* --- Set refs --- */
   const slideRef = useRef<HTMLDivElement>(null);
 
-  /* --- Set states --- */
-  const { state: animationState, startAnimation, endAnimation } = useAnimation(open);
-
   /* --- Set imperative anchorElement --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => slideRef.current, [
-    !keepMounted && !open && animationState.current === AnimationStates.EXITED
-  ]);
-
-  /* --- Set open state --- */
-  useEffect(() => {
-    startAnimation(open, onEntering, onExiting);
-  }, [open, onEntering, onExiting]);
-
-  /* --- Unmount --- */
-  if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
-    return <></>;
-  }
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => slideRef.current, []);
 
   /* --- Set props --- */
-  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (event.target === slideRef.current) {
-      endAnimation(onEnter, onExit);
+  const enteringHandler = (): void => {
+    if (slideRef.current !== null) {
+      slideRef.current.classList.add(mergeClasses(styles.open[direction]));
     }
 
-    if (onTransitionEnd !== undefined) {
-      onTransitionEnd(event);
+    if (onEntering !== undefined) {
+      onEntering();
     }
   };
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.directions[direction],
-    animationState.enter && styles.open[direction],
-    animationState.current === AnimationStates.EXITED && !open && styles.hide,
-    className
-  );
+  const exitingHandler = (): void => {
+    if (slideRef.current !== null) {
+      slideRef.current.classList.remove(mergeClasses(styles.open[direction]));
+    }
+
+    if (onExiting !== undefined) {
+      onExiting();
+    }
+  };
+
+  const mergedClassName = mergeClasses(styles.base, styles.directions[direction], className);
 
   return (
-    <div
-      onTransitionEnd={transitionEndHandler}
+    <Transition
+      onEntering={enteringHandler}
+      onExiting={exitingHandler}
       className={mergedClassName}
       ref={slideRef}
       {...restProps}
