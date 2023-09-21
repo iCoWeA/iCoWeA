@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { forwardRef, useContext, useRef, useImperativeHandle, useEffect, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import drawerConfig from '../../configs/drawerConfig';
 import themeContext from '../../contexts/theme';
@@ -107,14 +107,19 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   }, [lockScroll, open]);
 
   /* --- Set backdrop --- */
-  const backdropNode = (
-    <Backdrop
-      onClose={onClose}
-      open={open}
-      unmountOnExit={unmountOnExit}
-      {...backdropProps}
-    />
-  );
+  let backdropNode: ReactNode;
+
+  if (backdrop) {
+    backdropNode = (
+      <Backdrop
+        onClick={onClose}
+        open={open}
+        unmountOnExit={unmountOnExit}
+        invisible
+        {...backdropProps}
+      />
+    );
+  }
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], styles.directions[direction], className);
