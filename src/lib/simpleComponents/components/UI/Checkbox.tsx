@@ -114,7 +114,6 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
       ref={ref}
     >
       <input
-        aria-disabled={disabled}
         checked={checked}
         disabled={disabled}
         type={type}

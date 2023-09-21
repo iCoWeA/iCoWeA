@@ -51,7 +51,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>((pro
   return (
     <button
       aria-expanded={isAccordionOpen}
-      aria-disabled={disabled}
       onClick={clickHandler}
       disabled={disabled}
       type="button"

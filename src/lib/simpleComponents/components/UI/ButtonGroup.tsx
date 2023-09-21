@@ -50,7 +50,7 @@ const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwi
 
   const childrenNode = <>{children.props.children}</>;
 
-  return <>{cloneElement(children, { 'aria-disabled': disabled, disabled, type, className: mergedClassName, children: childrenNode })}</>;
+  return <>{cloneElement(children, { disabled, type, className: mergedClassName, children: childrenNode })}</>;
 };
 
 /********************************************************************************
