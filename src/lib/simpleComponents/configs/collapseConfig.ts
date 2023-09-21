@@ -20,9 +20,7 @@ const collapseConfig: CollapseConfig = {
   },
   styles: {
     base: {
-      display: 'block',
-      overflow: 'overflow-hidden',
-      transitionDuration: 'duration-500'
+      overflow: 'overflow-hidden'
     },
     directions: {
       vertical: {
