@@ -4,6 +4,7 @@ export interface ChipConfig {
   defaultProps: {
     variant: ChipVariants;
     borderShape: Shapes;
+    color: Colors;
     closeButton: boolean;
   };
   styles: {
@@ -29,6 +30,7 @@ const chipConfig: ChipConfig = {
   defaultProps: {
     variant: 'filled',
     borderShape: 'circular',
+    color: 'primary',
     closeButton: false
   },
   styles: {
