@@ -1,9 +1,9 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, type ReactNode, type TransitionEvent } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useEffect, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import popperConfig from '../../configs/popperConfig';
-import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
+import Fade, { type FadeProps } from './Fade';
 
 /* ARIA
  *
@@ -12,18 +12,12 @@ import Backdrop, { type BackdropProps } from './Backdrop';
  *
  */
 
-export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
+export interface PopperProps extends FadeProps {
   onClose?: () => void;
-  onEnter?: () => void;
-  onExit?: () => void;
-  onEntering?: () => void;
-  onExiting?: () => void;
   onResize?: () => void;
-  open?: boolean;
   lockScroll?: boolean;
   closeOnAwayClick?: boolean;
   closeDuration?: number;
-  keepMounted?: boolean;
   backdrop?: boolean;
   backdropProps?: BackdropProps;
   overlayRef?: Element | null;
@@ -32,45 +26,17 @@ export interface PopperProps extends BaseHTMLAttributes<HTMLDivElement> {
 const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = popperConfig.styles;
-  const {
-    onClose,
-    onEnter,
-    onExit,
-    onEntering,
-    onExiting,
-    onResize,
-    onTransitionEnd,
-    open,
-    lockScroll,
-    closeOnAwayClick,
-    closeDuration,
-    keepMounted,
-    backdrop,
-    backdropProps,
-    overlayRef,
-    style,
-    className,
-    ...restProps
-  } = {
-    ...popperConfig.defaultProps,
-    ...props
-  };
+  const { onClose, onResize, open, unmountOnExit, lockScroll, closeOnAwayClick, closeDuration, backdrop, backdropProps, overlayRef, className, ...restProps } =
+    {
+      ...popperConfig.defaultProps,
+      ...props
+    };
 
   /* --- Set refs --- */
   const popperRef = useRef<HTMLDivElement>(null);
 
-  /* --- Set states --- */
-  const { state: animationState, startAnimation, endAnimation } = useAnimation(open);
-
   /* --- Set imperative ref --- */
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, [
-    !keepMounted && !open && animationState.current === AnimationStates.EXITED
-  ]);
-
-  /* --- Set open state --- */
-  useEffect(() => {
-    startAnimation(open, onEntering, onExiting);
-  }, [open, onEntering, onExiting]);
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, []);
 
   /* --- Set outside click action --- */
   useEffect(() => {
@@ -82,74 +48,69 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
       }
     };
 
-    if (closeOnAwayClick && animationState.enter && onClose !== undefined && !backdrop) {
+    if (closeOnAwayClick && open && onClose !== undefined && !backdrop) {
       document.addEventListener('click', outsideClickHandler);
     }
 
     return () => {
-      if (closeOnAwayClick && animationState.enter && onClose !== undefined && !backdrop) {
+      if (closeOnAwayClick && open && onClose !== undefined && !backdrop) {
         document.removeEventListener('click', outsideClickHandler);
       }
     };
-  }, [onClose, closeOnAwayClick, animationState.enter, backdrop]);
+  }, [onClose, closeOnAwayClick, open, backdrop]);
 
   /* --- Set timer action --- */
   useEffect(() => {
     let timerId: number;
 
-    if (animationState.current === AnimationStates.ENTERED && closeDuration !== undefined && onClose !== undefined) {
+    if (open && closeDuration !== undefined && onClose !== undefined) {
       timerId = window.setTimeout(() => {
         onClose();
       }, closeDuration);
     }
 
     return () => {
-      if (animationState.current === AnimationStates.ENTERED && closeDuration !== undefined && onClose !== undefined) {
+      if (open && closeDuration !== undefined && onClose !== undefined) {
         clearTimeout(timerId);
       }
     };
-  }, [animationState.current, closeDuration, onClose]);
+  }, [open, closeDuration, onClose]);
 
   /* --- Set lock scroll action --- */
   useEffect(() => {
-    if (lockScroll) {
-      if (open) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
-      }
+    if (lockScroll && open) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (lockScroll && !open) {
+      document.body.style.overflow = 'auto';
     }
   }, [lockScroll, open]);
 
   /* --- Set resize action --- */
   useEffect(() => {
-    if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+    if (onResize !== undefined) {
       document.addEventListener('scroll', onResize);
     }
 
     return () => {
-      if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+      if (onResize !== undefined) {
         document.removeEventListener('scroll', onResize);
       }
     };
-  }, [onResize, animationState.current]);
+  }, [onResize]);
 
   useEffect(() => {
-    if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+    if (onResize !== undefined) {
       window.addEventListener('resize', onResize);
     }
 
     return () => {
-      if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+      if (onResize !== undefined) {
         window.removeEventListener('resize', onResize);
       }
     };
-  }, [onResize, animationState.current]);
-
-  /* --- Unmount --- */
-  if (!keepMounted && !open && animationState.current === AnimationStates.EXITED) {
-    return <></>;
-  }
+  }, [onResize]);
 
   /* --- Set backdrop --- */
   let backdropNode: ReactNode;
@@ -159,7 +120,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
       <Backdrop
         onClick={onClose}
         open={open}
-        keepMounted={keepMounted}
+        unmountOnExit={unmountOnExit}
         invisible
         {...backdropProps}
       />
@@ -167,32 +128,18 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   }
 
   /* --- Set props --- */
-  const transitionEndHandler = (event: TransitionEvent<HTMLDivElement>): void => {
-    if (event.target === popperRef.current) {
-      endAnimation(onEnter, onExit);
-    }
-
-    if (onTransitionEnd !== undefined) {
-      onTransitionEnd(event);
-    }
-  };
-
-  if (onResize !== undefined && animationState.current !== AnimationStates.EXITED) {
+  if (onResize !== undefined) {
     onResize();
   }
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    animationState.enter && styles.open,
-    animationState.current === AnimationStates.EXITED && !open && styles.hide,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, className);
 
   const node = (
     <>
       {backdropNode}
-      <div
-        onTransitionEnd={transitionEndHandler}
+      <Fade
+        open={open}
+        unmountOnExit={unmountOnExit}
         className={mergedClassName}
         ref={popperRef}
         {...restProps}
