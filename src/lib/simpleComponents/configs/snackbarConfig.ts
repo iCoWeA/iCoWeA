@@ -4,6 +4,11 @@ export interface SnackbarConfig {
   defaultProps: {
     position: InnerPositions;
     lockScroll: boolean;
+    closeOnAwayClick: boolean;
+    backdrop: boolean;
+    overlayRef: Element | null;
+    open: boolean;
+    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -16,7 +21,12 @@ export interface SnackbarConfig {
 const snackbarConfig: SnackbarConfig = {
   defaultProps: {
     position: 'bottom-left',
-    lockScroll: false
+    lockScroll: false,
+    closeOnAwayClick: true,
+    backdrop: false,
+    overlayRef: null,
+    open: false,
+    unmountOnExit: true
   },
   styles: {
     base: {
