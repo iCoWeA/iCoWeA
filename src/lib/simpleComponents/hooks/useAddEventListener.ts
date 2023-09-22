@@ -1,6 +1,6 @@
 import { type MutableRefObject, useEffect } from 'react';
 
-const useAddEventListener = (elementRef: MutableRefObject<HTMLElement | null>, event: string, handler: () => void): void => {
+const useAddEventListener = (elementRef: MutableRefObject<HTMLElement | null>, event: string, handler: EventListener): void => {
   useEffect(() => {
     elementRef.current?.addEventListener(event, handler);
 
