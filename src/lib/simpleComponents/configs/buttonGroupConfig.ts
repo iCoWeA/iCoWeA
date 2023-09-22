@@ -1,14 +1,12 @@
-import { type ButtonGroupVariants } from '../components/UI/ButtonGroup';
+import { type ButtonVariants } from '../components/UI/Button';
 
 export interface ButtonGroupConfig {
   defaultProps: {
-    variant: ButtonGroupVariants;
+    variant: ButtonVariants;
     size: Sizes;
     color: Colors;
     elevated: boolean;
     fullwidth: boolean;
-    disabled: boolean;
-    type: 'submit' | 'reset' | 'button';
   };
   styles: {
     container: {
@@ -20,9 +18,18 @@ export interface ButtonGroupConfig {
       base: Record<string, string>;
       first: Record<string, string>;
       last: Record<string, string>;
-      firstOutline: Record<string, string>;
-      lastOutline: Record<string, string>;
-      variants: Record<ButtonGroupVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      firstOutlined: Record<string, string>;
+      lastOutlined: Record<string, string>;
+      sizes: Record<Sizes, Record<string, string>>;
+      outlineSizes: Record<Sizes, Record<string, string>>;
+      variants: Record<ButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
+    },
+    divider: {
+      base: Record<string, string>;
+      after: Record<string, string>;
+      disabled: Record<Themes, Record<string, string>>;
+      sizes: Record<Sizes, Record<string, string>>;
+      color: Record<Themes, Record<Colors, Record<string, string>>>;
     }
   }
 }
@@ -33,9 +40,7 @@ const buttonGroupConfig: ButtonGroupConfig = {
     size: 'md',
     color: 'primary',
     elevated: false,
-    fullwidth: false,
-    disabled: false,
-    type: 'button'
+    fullwidth: false
   },
   styles: {
     container: {
@@ -54,20 +59,51 @@ const buttonGroupConfig: ButtonGroupConfig = {
     },
     button: {
       base: {
-        border: 'border-r'
+        borderRadius: 'rounded-none'
       },
       first: {
         borderRadius: 'rounded-l-full'
       },
       last: {
-        border: 'border-r-0',
         borderRadius: 'rounded-r-full'
       },
-      firstOutline: {
+      firstOutlined: {
         border: 'border-l'
       },
-      lastOutline: {
+      lastOutlined: {
         border: 'border-r'
+      },
+      sizes: {
+        xs: {
+          height: 'h-6',
+          padding: 'py-0.5 px-2'
+        },
+        sm: {
+          height: 'h-8',
+          padding: 'py-1.5 px-3'
+        },
+        md: {
+          height: 'h-10',
+          padding: 'py-2.5 px-4'
+        },
+        lg: {
+          height: 'h-12',
+          padding: 'py-3.5 px-5'
+        }
+      },
+      outlineSizes: {
+        xs: {
+          padding: 'py-px'
+        },
+        sm: {
+          padding: 'py-[0.3125rem]'
+        },
+        md: {
+          padding: 'py-[0.5625rem]'
+        },
+        lg: {
+          padding: 'py-[0.8125rem]'
+        }
       },
       variants: {
         plain: {
@@ -129,27 +165,27 @@ const buttonGroupConfig: ButtonGroupConfig = {
         outlined: {
           light: {
             default: {
-              border: 'border-y border-light-on-surface',
+              border: 'border-x-0 border-light-on-surface',
               disabled: 'disabled:border-light-on-surface/40'
             },
             primary: {
-              border: 'border-y border-light-primary',
+              border: 'border-x-0 border-light-primary',
               disabled: 'disabled:border-light-on-surface/40'
             },
             secondary: {
-              border: 'border-y border-light-secondary',
+              border: 'border-x-0 border-light-secondary',
               disabled: 'disabled:border-light-on-surface/40'
             },
             success: {
-              border: 'border-y border-light-success',
+              border: 'border-x-0 border-light-success',
               disabled: 'disabled:border-light-on-surface/40'
             },
             warning: {
-              border: 'border-y border-light-warning',
+              border: 'border-x-0 border-light-warning',
               disabled: 'disabled:border-light-on-surface/40'
             },
             error: {
-              border: 'border-y border-light-error',
+              border: 'border-x-0 border-light-error',
               disabled: 'disabled:border-light-on-surface/40'
             }
           }
@@ -157,29 +193,116 @@ const buttonGroupConfig: ButtonGroupConfig = {
         filled: {
           light: {
             default: {
+              position: 'relative',
+              zIndex: 'z-[1]',
               border: 'border-light-on-surface',
+              hover: 'hover:z-[0]',
+              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
               disabled: 'disabled:border-light-on-surface/40'
             },
             primary: {
+              position: 'relative',
+              zIndex: 'z-[1]',
               border: 'border-light-primary-dark',
+              hover: 'hover:z-[0]',
+              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
               disabled: 'disabled:border-light-on-surface/40'
             },
             secondary: {
+              position: 'relative',
+              zIndex: 'z-[1]',
               border: 'border-light-secondary-dark',
+              hover: 'hover:z-[0]',
+              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
               disabled: 'disabled:border-light-on-surface/40'
             },
             success: {
+              position: 'relative',
+              zIndex: 'z-[1]',
               border: 'border-light-success-dark',
+              hover: 'hover:z-[0]',
+              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
               disabled: 'disabled:border-light-on-surface/40'
             },
             warning: {
+              position: 'relative',
+              zIndex: 'z-[1]',
               border: 'border-light-warning-dark',
+              hover: 'hover:z-[0]',
+              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
               disabled: 'disabled:border-light-on-surface/40'
             },
             error: {
+              position: 'relative',
+              zIndex: 'z-[1]',
               border: 'border-light-error-dark',
+              hover: 'hover:z-[0]',
+              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
               disabled: 'disabled:border-light-on-surface/40'
             }
+          }
+        }
+      }
+    },
+    divider: {
+      base: {
+        position: 'relative',
+        zIndex: 'z-[3]',
+        shrink: 'shrink-0'
+      },
+      after: {
+        position: 'after:absolute',
+        top: 'after:top-2/4',
+        zIndex: 'after:z-[2]',
+        translate: 'after:-translate-y-2/4',
+        height: 'after:h-[calc(100%-0.5rem)]',
+        width: 'after:w-px'
+      },
+      disabled: {
+        light: {
+          background: 'bg-light-on-surface/20',
+          after: 'after:bg-light-on-surface/40'
+        }
+      },
+      sizes: {
+        xs: {
+          height: 'h-6'
+        },
+        sm: {
+          height: 'h-8'
+        },
+        md: {
+          height: 'h-10'
+        },
+        lg: {
+          height: 'h-12'
+        }
+      },
+      color: {
+        light: {
+          default: {
+            background: 'bg-light-surface-dark',
+            after: 'after:bg-light-on-surface'
+          },
+          primary: {
+            background: 'bg-light-primary',
+            after: 'after:bg-light-on-primary'
+          },
+          secondary: {
+            background: 'bg-light-secondary',
+            after: 'after:bg-light-on-secondary'
+          },
+          success: {
+            background: 'bg-light-success',
+            after: 'after:bg-light-on-success'
+          },
+          warning: {
+            background: 'bg-light-warning',
+            after: 'after:bg-light-on-warning'
+          },
+          error: {
+            background: 'bg-light-error',
+            after: 'after:bg-light-on-error'
           }
         }
       }

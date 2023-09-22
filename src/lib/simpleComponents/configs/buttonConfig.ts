@@ -285,7 +285,7 @@ const buttonConfig: ButtonConfig = {
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-primary/10 hover:to-light-on-primary/10',
             active: 'active:shadow-none active:from-light-on-primary/[0.15] active:to-light-on-primary/[0.15]',
             focus: 'focus:shadow-none active:from-light-on-primary/[0.15] focus:to-light-on-primary/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-primary',
+            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-primary',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           secondary: {
@@ -295,7 +295,7 @@ const buttonConfig: ButtonConfig = {
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-secondary/10 hover:to-light-on-secondary/10',
             active: 'active:shadow-none active:from-light-on-secondary/[0.15] active:to-light-on-secondary/[0.15]',
             focus: 'focus:shadow-none active:from-light-on-secondary/[0.15] focus:to-light-on-secondary/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-secondary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-secondary',
+            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-secondary',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           success: {
@@ -305,7 +305,7 @@ const buttonConfig: ButtonConfig = {
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-success/10 hover:to-light-on-success/10',
             active: 'active:shadow-none active:from-light-on-success/[0.15] active:to-light-on-success/[0.15]',
             focus: 'focus:shadow-none active:from-light-on-success/[0.15] focus:to-light-on-success/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-success-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-success',
+            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-success focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-success',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           warning: {
@@ -315,7 +315,7 @@ const buttonConfig: ButtonConfig = {
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-warning/10 hover:to-light-on-warning/10',
             active: 'active:shadow-none active:from-light-on-warning/[0.15] active:to-light-on-warning/[0.15]',
             focus: 'focus:shadow-none active:from-light-on-warning/[0.15] focus:to-light-on-warning/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-warning-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-warning',
+            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-warning focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-warning',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           error: {
@@ -325,7 +325,7 @@ const buttonConfig: ButtonConfig = {
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-error/10 hover:to-light-on-error/10',
             active: 'active:shadow-none active:from-light-on-error/[0.15] active:to-light-on-error/[0.15]',
             focus: 'focus:shadow-none active:from-light-on-error/[0.15] focus:to-light-on-error/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-error-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-error',
+            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-error focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-error',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           }
         }
