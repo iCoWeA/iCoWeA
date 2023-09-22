@@ -4,7 +4,7 @@ export interface BreadcrumbsConfig {
   defaultProps: {
     separator: ReactNode;
     fullwidth: boolean;
-    'aria-label': string;
+    'aria-label': 'breadcrumb';
   };
   styles: {
     container: {
