@@ -18,8 +18,7 @@ const listConfig: ListConfig = {
   styles: {
     base: {
       display: 'flex',
-      flexDirection: 'flex-col',
-      padding: 'py-2'
+      flexDirection: 'flex-col'
     },
     row: {
       padding: 'p-0',
