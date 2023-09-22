@@ -3,8 +3,13 @@ import dividerConfig from '../../configs/dividerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
+export type DividerVariants = 'plain' | 'text' | 'outlined' | 'filled';
+
 export interface DividerProps extends BaseHTMLAttributes<HTMLHRElement> {
   orientation?: Orientations;
+  variant?: DividerVariants;
+  color?: Colors;
+  disabled?: boolean;
 }
 
 const Divider = forwardRef<HTMLHRElement, DividerProps>((props, ref) => {
@@ -13,10 +18,16 @@ const Divider = forwardRef<HTMLHRElement, DividerProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = dividerConfig.styles;
-  const { orientation, className, ...restProps } = { ...dividerConfig.defaultProps, ...props };
+  const { orientation, variant, color, disabled, className, ...restProps } = { ...dividerConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.orientations[orientation], styles.color[theme], className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.orientations[orientation],
+    color === undefined ? styles.color[theme] : styles.variants[variant][theme][color],
+    disabled && styles.disabled[theme],
+    className
+  );
 
   return (
     <hr

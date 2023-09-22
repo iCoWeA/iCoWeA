@@ -1,7 +1,51 @@
-import React, { type BaseHTMLAttributes, type ReactElement, type FC, useContext, cloneElement, forwardRef, type ReactNode } from 'react';
+import React, { type FC, useContext, type BaseHTMLAttributes, forwardRef, type ReactElement, type ReactNode, Fragment } from 'react';
 import buttonGroupConfig from '../../configs/buttonGroupConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses, isLast } from '../../utils/propsHelper';
+import BaseButton, { type ButtonProps as BaseButtonProps, type ButtonVariants } from './Button';
+import BaseDivider, { type DividerProps as BaseDividerProps, type DividerVariants } from './Divider';
+
+/********************************************************************************
+ *
+ *   Divider
+ *
+ */
+interface DividerProps extends BaseDividerProps {
+  disabled: boolean;
+  nextDisabled: boolean;
+  variant: DividerVariants;
+  size: Sizes;
+  color: Colors;
+}
+
+const Divider: FC<DividerProps> = ({ disabled, nextDisabled, variant, size, color, className, ...restProps }) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
+  /* --- Set default props --- */
+  const styles = buttonGroupConfig.styles.divider;
+
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.sizes[size],
+    variant === 'filled' && styles.color[theme][color],
+    variant === 'filled' && styles.after,
+    (disabled || nextDisabled) && variant === 'filled' && styles.disabled[theme],
+    className
+  );
+
+  return (
+    <BaseDivider
+      orientation="vertical"
+      variant={variant}
+      color={color}
+      disabled={disabled && nextDisabled}
+      className={mergedClassName}
+      {...restProps}
+    />
+  );
+};
 
 /* ARIA
  *
@@ -14,65 +58,63 @@ import { mergeClasses, isLast } from '../../utils/propsHelper';
  *   Button
  *
  */
-interface ButtonProps {
+interface ButtonProps extends BaseButtonProps {
   isFirst: boolean;
   isLast: boolean;
-  variant: ButtonGroupVariants;
+  variant: ButtonVariants;
   size: Sizes;
   color: Colors;
+  elevated: boolean;
   fullwidth: boolean;
-  disabled: boolean;
-  type: 'submit' | 'reset' | 'button';
-  className: string;
-  children: ReactElement;
 }
 
-const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwidth, disabled, type, className, children }) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
+const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, elevated, fullwidth, className, ...restProps }) => {
   /* --- Set default props --- */
   const styles = buttonGroupConfig.styles.button;
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.variants[variant][theme][color],
+    styles.variants[variant],
+    variant === 'outlined' ? styles.outlineSizes[size] : styles.sizes[size],
     isFirst && styles.first,
     isLast && styles.last,
-    variant === 'outlined' && isFirst && styles.firstOutline,
-    variant === 'outlined' && isLast && styles.lastOutline,
+    variant === 'outlined' && isFirst && styles.firstOutlined,
+    variant === 'outlined' && isLast && styles.lastOutlined,
     className
   );
 
-  const childrenNode = <>{children.props.children}</>;
-
-  return <>{cloneElement(children, { disabled, type, className: mergedClassName, children: childrenNode })}</>;
+  return (
+    <BaseButton
+      variant={variant}
+      size={size}
+      color={color}
+      elevated={elevated}
+      fullwidth={fullwidth}
+      className={mergedClassName}
+      {...restProps}
+    />
+  );
 };
 
-/********************************************************************************
+/* ARIA
  *
- *   Button group
+ * Set aria-pressed as toggle button
  *
  */
-export type ButtonGroupVariants = 'plain' | 'text' | 'outlined' | 'filled';
 
 export interface ButtonGroupProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: ButtonGroupVariants;
+  variant?: ButtonVariants;
   size?: Sizes;
   color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
-  tabIndex?: number;
-  disabled?: boolean;
-  type?: 'submit' | 'reset' | 'button';
-  children: ReactElement | ReactElement[];
 }
 
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = buttonGroupConfig.styles.container;
-  const { variant, size, color, elevated, fullwidth, tabIndex, disabled, type, className, children, ...restProps } = {
+  const { variant, size, color, elevated, fullwidth, className, children, ...restProps } = {
     ...buttonGroupConfig.defaultProps,
     ...props
   };
@@ -85,21 +127,31 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
   const buttonNodes: ReactNode[] = [];
 
   for (let i = 0; i < childrenNode.length; i++) {
-    buttonNodes[i] = (
-      <Button
-        key={i}
-        isFirst={i === 0}
-        isLast={isLast(childrenNode, i)}
+    const isLastNode = isLast(childrenNode, i);
+
+    const dividerNode = !isLastNode && (
+      <Divider
+        disabled={childrenNode[i].props.disabled}
+        nextDisabled={childrenNode[i + 1].props.disabled}
         variant={variant}
         size={size}
         color={color}
-        fullwidth={fullwidth}
-        disabled={childrenNode[i].props.disabled ?? disabled}
-        type={childrenNode[i].props.type ?? type}
-        className={childrenNode[i].props.className}
-      >
-        {childrenNode[i]}
-      </Button>
+      />
+    );
+
+    buttonNodes[i] = (
+      <Fragment key={i}>
+        <Button
+          isFirst={i === 0}
+          isLast={isLastNode}
+          variant={variant}
+          size={size}
+          color={color}
+          fullwidth={fullwidth}
+          {...childrenNode[i].props}
+        />
+        {dividerNode}
+      </Fragment>
     );
   }
 
