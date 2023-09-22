@@ -9,6 +9,7 @@ const Fade = forwardRef<HTMLDivElement, FadeProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = fadeConfig.styles;
   const { onEntering, onExiting, className, ...restProps } = {
+    ...fadeConfig.defaultProps,
     ...props
   };
 
