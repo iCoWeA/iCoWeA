@@ -64,7 +64,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
     <div
       {...clickableProps}
       className={mergedClassName}
-      ref={ref}
+      ref={cardRef}
       {...restProps}
     />
   );
