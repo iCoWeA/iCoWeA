@@ -2,7 +2,7 @@ import { type ListSeparatorVariants } from '../components/UI/ListSeparator';
 
 export interface ListSeparatorConfig {
   defaultProps: {
-    orientation: Orientations;
+    vertical: boolean;
     variant: ListSeparatorVariants;
     fullwidth: boolean;
     disabled: boolean;
@@ -21,7 +21,7 @@ export interface ListSeparatorConfig {
 
 const listSeparatorConfig: ListSeparatorConfig = {
   defaultProps: {
-    orientation: 'horizontal',
+    vertical: false,
     variant: 'plain',
     fullwidth: false,
     disabled: false,

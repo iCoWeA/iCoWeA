@@ -6,7 +6,7 @@ import { mergeClasses } from '../../utils/propsHelper';
 export type ListSeparatorVariants = 'plain' | 'text' | 'outlined' | 'filled';
 
 export interface ListSeparatorProps extends LiHTMLAttributes<HTMLLIElement> {
-  orientation?: Orientations;
+  vertical?: boolean;
   variant?: ListSeparatorVariants;
   color?: Colors;
   fullwidth?: boolean;
@@ -19,14 +19,14 @@ const ListSeparator = forwardRef<HTMLLIElement, ListSeparatorProps>((props, ref)
 
   /* --- Set default props --- */
   const styles = listSeparatorConfig.styles;
-  const { orientation, variant, color, fullwidth, disabled, className, ...restProps } = { ...listSeparatorConfig.defaultProps, ...props };
+  const { vertical, variant, color, fullwidth, disabled, className, ...restProps } = { ...listSeparatorConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
     styles.after,
-    styles.orientations[orientation],
-    fullwidth && styles.fullwidthOrientations[orientation],
+    styles.orientations[vertical ? 'vertical' : 'horizontal'],
+    fullwidth && styles.fullwidthOrientations[vertical ? 'vertical' : 'horizontal'],
     color === undefined ? styles.color[theme] : styles.variants[variant][theme][color],
     disabled && styles.disabled[theme],
     className
