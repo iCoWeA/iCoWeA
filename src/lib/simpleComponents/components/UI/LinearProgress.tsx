@@ -81,7 +81,7 @@ export interface LinearProgressProps extends BaseHTMLAttributes<HTMLDivElement> 
   color?: Colors;
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
   bufferProps?: BaseHTMLAttributes<HTMLDivElement>;
-  barRef?: MutableRefObject<HTMLDivElement> | null;
+  barRef?: MutableRefObject<HTMLDivElement | null>;
 }
 
 const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, ref) => {
