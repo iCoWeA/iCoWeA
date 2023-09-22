@@ -27,8 +27,7 @@ const dividerConfig: DividerConfig = {
       position: 'relative',
       display: 'block',
       shrink: 'shrink-0',
-      border: 'border-0',
-      background: 'bg-transparent'
+      border: 'border-0'
     },
     after: {
       position: 'after:absolute',
