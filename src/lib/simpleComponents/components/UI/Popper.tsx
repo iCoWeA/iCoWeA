@@ -30,6 +30,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     onClose,
     onResize,
     onEntering,
+    onExit,
     lockScroll,
     closeOnAwayClick,
     closeDuration,
@@ -47,6 +48,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
 
   /* --- Set refs --- */
   const popperRef = useRef<HTMLDivElement>(null);
+  const isExited = useRef(true);
 
   /* --- Set imperative ref --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, []);
@@ -94,32 +96,28 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     if (lockScroll && open) {
       document.body.style.overflow = 'hidden';
     }
-
-    if (lockScroll && !open) {
-      document.body.style.overflow = 'auto';
-    }
   }, [lockScroll, open]);
 
   /* --- Set resize action --- */
   useEffect(() => {
-    if (onResize !== undefined) {
+    if (onResize !== undefined && !isExited.current) {
       document.addEventListener('scroll', onResize);
     }
 
     return () => {
-      if (onResize !== undefined) {
+      if (onResize !== undefined && !isExited.current) {
         document.removeEventListener('scroll', onResize);
       }
     };
   }, [onResize]);
 
   useEffect(() => {
-    if (onResize !== undefined) {
+    if (onResize !== undefined && !isExited.current) {
       window.addEventListener('resize', onResize);
     }
 
     return () => {
-      if (onResize !== undefined) {
+      if (onResize !== undefined && !isExited.current) {
         window.removeEventListener('resize', onResize);
       }
     };
@@ -142,12 +140,26 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
 
   /* --- Set props --- */
   const enteringHandler = (): void => {
+    isExited.current = false;
+
     if (onResize !== undefined) {
       onResize();
     }
 
     if (onEntering !== undefined) {
       onEntering();
+    }
+  };
+
+  const exitHandler = (): void => {
+    isExited.current = true;
+
+    if (lockScroll && !open) {
+      document.body.style.overflow = 'auto';
+    }
+
+    if (onExit !== undefined) {
+      onExit();
     }
   };
 
@@ -158,6 +170,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
       {backdropNode}
       <Fade
         onEntering={enteringHandler}
+        onExit={exitHandler}
         open={open}
         unmountOnExit={unmountOnExit}
         className={mergedClassName}
