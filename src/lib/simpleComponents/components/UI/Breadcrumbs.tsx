@@ -138,7 +138,6 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
 
   return (
     <nav
-      aria-label="breadcrumb"
       className={mergedClassName}
       ref={ref}
       {...restProps}
