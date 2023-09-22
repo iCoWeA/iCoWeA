@@ -1,6 +1,8 @@
 export interface SlideConfig {
   defaultProps: {
     direction: Directions;
+    open: boolean;
+    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -11,7 +13,9 @@ export interface SlideConfig {
 
 const slideConfig: SlideConfig = {
   defaultProps: {
-    direction: 'bottom'
+    direction: 'bottom',
+    open: false,
+    unmountOnExit: false
   },
   styles: {
     base: {
