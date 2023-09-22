@@ -62,7 +62,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => drawerRef.current, []);
 
   /* --- Set outside click action --- */
-  useClickAway(open && closeOnAwayClick && onClose !== undefined && !backdrop ? onClose : null, drawerRef.current);
+  useClickAway(open && closeOnAwayClick && onClose !== undefined && !backdrop ? onClose : null, drawerRef);
 
   /* --- Set timer action --- */
   useTimeout(open && closeDuration !== undefined && onClose !== undefined ? onClose : null, closeDuration);
