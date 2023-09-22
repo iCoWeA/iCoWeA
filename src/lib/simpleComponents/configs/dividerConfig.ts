@@ -8,6 +8,7 @@ export interface DividerConfig {
   }
   styles: {
     base: Record<string, string>;
+    after: Record<string, string>;
     orientations: Record<Orientations, Record<string, string>>;
     disabled: Record<Themes, Record<string, string>>;
     color: Record<Themes, Record<string, string>>;
@@ -23,115 +24,123 @@ const dividerConfig: DividerConfig = {
   },
   styles: {
     base: {
+      position: 'relative',
       display: 'block',
-      border: 'border-0'
+      shrink: 'shrink-0',
+      border: 'border-0',
+      background: 'bg-transparent'
+    },
+    after: {
+      position: 'after:absolute'
     },
     orientations: {
       horizontal: {
         height: 'h-px',
-        width: 'w-full'
+        width: 'w-full',
+        after: 'after:h-px after:w-full'
       },
       vertical: {
         height: 'h-full',
-        width: 'w-px'
+        width: 'w-px',
+        after: 'after:h-full after:w-px'
       }
     },
     color: {
       light: {
-        background: 'bg-light-divider'
+        after: 'after:bg-light-divider'
       }
     },
     disabled: {
       light: {
-        background: 'bg-light-on-surface/40'
+        after: 'after:bg-light-on-surface/40'
       }
     },
     variants: {
       plain: {
         light: {
           default: {
-            background: 'bg-light-on-surface'
+            after: 'after:bg-light-on-surface'
           },
           primary: {
-            background: 'bg-light-on-primary'
+            after: 'after:bg-light-on-primary'
           },
           secondary: {
-            background: 'bg-light-on-secondary'
+            after: 'after:bg-light-on-secondary'
           },
           success: {
-            background: 'bg-light-on-success'
+            after: 'after:bg-light-on-success'
           },
           warning: {
-            background: 'bg-light-on-warning'
+            after: 'after:bg-light-on-warning'
           },
           error: {
-            background: 'bg-light-on-error'
+            after: 'after:bg-light-on-error'
           }
         }
       },
       text: {
         light: {
           default: {
-            background: 'bg-light-on-surface'
+            after: 'after:bg-light-on-surface'
           },
           primary: {
-            background: 'bg-light-primary'
+            after: 'after:bg-light-primary'
           },
           secondary: {
-            background: 'bg-light-secondary'
+            after: 'after:bg-light-secondary'
           },
           success: {
-            background: 'bg-light-success'
+            after: 'after:bg-light-success'
           },
           warning: {
-            background: 'bg-light-warning'
+            after: 'after:bg-light-warning'
           },
           error: {
-            background: 'bg-light-error'
+            after: 'after:bg-light-error'
           }
         }
       },
       outlined: {
         light: {
           default: {
-            background: 'bg-light-on-surface'
+            after: 'after:bg-light-on-surface'
           },
           primary: {
-            background: 'bg-light-primary'
+            after: 'after:bg-light-primary'
           },
           secondary: {
-            background: 'bg-light-secondary'
+            after: 'after:bg-light-secondary'
           },
           success: {
-            background: 'bg-light-success'
+            after: 'after:bg-light-success'
           },
           warning: {
-            background: 'bg-light-warning'
+            after: 'after:bg-light-warning'
           },
           error: {
-            background: 'bg-light-error'
+            after: 'after:bg-light-error'
           }
         }
       },
       filled: {
         light: {
           default: {
-            background: 'bg-light-on-surface'
+            after: 'after:bg-light-on-surface'
           },
           primary: {
-            background: 'bg-light-on-primary'
+            after: 'after:bg-light-on-primary'
           },
           secondary: {
-            background: 'bg-light-on-secondary'
+            after: 'after:bg-light-on-secondary'
           },
           success: {
-            background: 'bg-light-on-success'
+            after: 'after:bg-light-on-success'
           },
           warning: {
-            background: 'bg-light-on-warning'
+            after: 'after:bg-light-on-warning'
           },
           error: {
-            background: 'bg-light-on-error'
+            after: 'after:bg-light-on-error'
           }
         }
       }
