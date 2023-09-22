@@ -1,4 +1,8 @@
 export interface IconConfig {
+  defaultProps: {
+    'aria-hidden': 'true'
+    viewBox: '0 0 24 24'
+  },
   styles: {
     base: Record<string, string>;
     sizes: Record<Sizes, Record<string, string>>;
@@ -7,6 +11,10 @@ export interface IconConfig {
 }
 
 const iconConfig: IconConfig = {
+  defaultProps: {
+    'aria-hidden': 'true',
+    viewBox: '0 0 24 24'
+  },
   styles: {
     base: {
       display: 'inline-block',
