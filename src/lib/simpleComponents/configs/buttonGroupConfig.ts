@@ -20,8 +20,6 @@ export interface ButtonGroupConfig {
       last: Record<string, string>;
       firstOutlined: Record<string, string>;
       lastOutlined: Record<string, string>;
-      sizes: Record<Sizes, Record<string, string>>;
-      outlineSizes: Record<Sizes, Record<string, string>>;
       variants: Record<ButtonVariants, Record<string, string>>;
     },
     divider: {
@@ -72,38 +70,6 @@ const buttonGroupConfig: ButtonGroupConfig = {
       },
       lastOutlined: {
         border: 'border-r'
-      },
-      sizes: {
-        xs: {
-          height: 'h-6',
-          padding: 'py-0.5 px-2'
-        },
-        sm: {
-          height: 'h-8',
-          padding: 'py-1.5 px-3'
-        },
-        md: {
-          height: 'h-10',
-          padding: 'py-2.5 px-4'
-        },
-        lg: {
-          height: 'h-12',
-          padding: 'py-3.5 px-5'
-        }
-      },
-      outlineSizes: {
-        xs: {
-          padding: 'py-px'
-        },
-        sm: {
-          padding: 'py-[0.3125rem]'
-        },
-        md: {
-          padding: 'py-[0.5625rem]'
-        },
-        lg: {
-          padding: 'py-[0.8125rem]'
-        }
       },
       variants: {
         plain: {},
