@@ -1,7 +1,8 @@
-import React, { type FC, useContext, type BaseHTMLAttributes, forwardRef, type InputHTMLAttributes, type MutableRefObject } from 'react';
+import React, { type FC, useContext, type BaseHTMLAttributes, forwardRef, type InputHTMLAttributes, type MutableRefObject, useRef, useCallback } from 'react';
 import BaseIcon, { type IconProps as BaseIconProps } from './Icon';
 import checkboxConfig from '../../configs/checkboxConfig';
 import themeContext from '../../contexts/theme';
+import useAddEventListener from '../../hooks/useAddEventListener';
 import { mergeClasses } from '../../utils/propsHelper';
 
 /* ARIA
@@ -89,7 +90,7 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   containerProps?: BaseHTMLAttributes<HTMLDivElement>;
   iconProps?: IconProps;
   stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
-  inputRef?: MutableRefObject<HTMLInputElement> | null;
+  inputRef?: MutableRefObject<HTMLInputElement | null>;
 }
 
 const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
@@ -103,7 +104,25 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
     ...props
   };
 
+  /* --- Set refs --- */
+  const checkboxRef = useRef<HTMLInputElement | null>(null);
+
+  /* --- Set click event --- */
+  const clickHandler = useCallback(() => {
+    checkboxRef.current?.blur();
+  }, []);
+
+  useAddEventListener(checkboxRef, 'click', clickHandler);
+
   /* --- Set props --- */
+  const setRef = (element: HTMLInputElement): void => {
+    checkboxRef.current = element;
+
+    if (inputRef !== undefined) {
+      inputRef.current = element;
+    }
+  };
+
   const mergedClassName = mergeClasses(styles.base, !checked && styles.color[theme], checked && styles.checked[theme][color], className);
 
   return (
@@ -118,7 +137,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
         disabled={disabled}
         type={type}
         className={mergedClassName}
-        ref={inputRef}
+        ref={setRef}
         {...restProps}
       />
       <Icon
