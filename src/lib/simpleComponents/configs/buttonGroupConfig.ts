@@ -87,17 +87,12 @@ const buttonGroupConfig: ButtonGroupConfig = {
     },
     divider: {
       base: {
-        position: 'relative',
-        zIndex: 'z-[3]',
-        shrink: 'shrink-0'
+        zIndex: 'z-[3]'
       },
       after: {
-        position: 'after:absolute',
-        top: 'after:top-2/4',
+        top: 'after:top-1',
         zIndex: 'after:z-[2]',
-        translate: 'after:-translate-y-2/4',
-        height: 'after:h-[calc(100%-0.5rem)]',
-        width: 'after:w-px'
+        height: 'after:h-[calc(100%-0.5rem)]'
       },
       disabled: {
         light: {
@@ -122,28 +117,22 @@ const buttonGroupConfig: ButtonGroupConfig = {
       color: {
         light: {
           default: {
-            background: 'bg-light-surface-dark',
-            after: 'after:bg-light-on-surface'
+            background: 'bg-light-surface-dark'
           },
           primary: {
-            background: 'bg-light-primary',
-            after: 'after:bg-light-on-primary'
+            background: 'bg-light-primary'
           },
           secondary: {
-            background: 'bg-light-secondary',
-            after: 'after:bg-light-on-secondary'
+            background: 'bg-light-secondary'
           },
           success: {
-            background: 'bg-light-success',
-            after: 'after:bg-light-on-success'
+            background: 'bg-light-success'
           },
           warning: {
-            background: 'bg-light-warning',
-            after: 'after:bg-light-on-warning'
+            background: 'bg-light-warning'
           },
           error: {
-            background: 'bg-light-error',
-            after: 'after:bg-light-on-error'
+            background: 'bg-light-error'
           }
         }
       }
