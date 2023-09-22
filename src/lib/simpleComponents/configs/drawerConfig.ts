@@ -2,13 +2,14 @@ import { type DrawerVariants } from '../components/UI/Drawer';
 
 export interface DrawerConfig {
   defaultProps: {
-    open: boolean;
-    direction: Directions;
-    unmountOnExit: boolean;
     variant: DrawerVariants;
     lockScroll: boolean;
     closeOnAwayClick: boolean;
     backdrop: boolean;
+    overlayRef: Element | null;
+    direction: Directions;
+    open: boolean;
+    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -19,13 +20,14 @@ export interface DrawerConfig {
 
 const drawerConfig: DrawerConfig = {
   defaultProps: {
-    open: false,
-    direction: 'bottom',
-    unmountOnExit: true,
     variant: 'plain',
     lockScroll: true,
     closeOnAwayClick: false,
-    backdrop: true
+    backdrop: true,
+    overlayRef: null,
+    direction: 'bottom',
+    open: false,
+    unmountOnExit: true
   },
   styles: {
     base: {

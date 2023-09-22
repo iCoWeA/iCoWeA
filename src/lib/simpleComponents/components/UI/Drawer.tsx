@@ -33,11 +33,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = drawerConfig.styles;
   const {
-    onExit,
     onClose,
-    open,
-    direction,
-    unmountOnExit,
+    onExit,
     variant,
     lockScroll,
     closeOnAwayClick,
@@ -45,6 +42,9 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     backdrop,
     backdropProps,
     overlayRef,
+    open,
+    direction,
+    unmountOnExit,
     className,
     ...restProps
   } = {
