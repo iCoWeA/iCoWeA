@@ -1,7 +1,10 @@
-import React, { forwardRef, useContext, useRef, useImperativeHandle, useEffect, type ReactNode } from 'react';
+import React, { forwardRef, useContext, useRef, useImperativeHandle, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import drawerConfig from '../../configs/drawerConfig';
 import themeContext from '../../contexts/theme';
+import useClickAway from '../../hooks/useClickAway';
+import useLockScroll from '../../hooks/useLockScroll';
+import useTimeout from '../../hooks/useTimeout';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 import Slide, { type SlideProps } from './Slide';
@@ -59,49 +62,13 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => drawerRef.current, []);
 
   /* --- Set outside click action --- */
-  useEffect(() => {
-    const outsideClickHandler = (event: MouseEvent): void => {
-      const isDrawerClicked = drawerRef.current?.contains(event.target as Node) ?? false;
-
-      if (!isDrawerClicked && onClose !== undefined) {
-        onClose();
-      }
-    };
-
-    if (closeOnAwayClick && open && onClose !== undefined && !backdrop) {
-      document.addEventListener('click', outsideClickHandler);
-    }
-
-    return () => {
-      if (closeOnAwayClick && open && onClose !== undefined && !backdrop) {
-        document.removeEventListener('click', outsideClickHandler);
-      }
-    };
-  }, [onClose, closeOnAwayClick, open, backdrop]);
+  useClickAway(open && closeOnAwayClick && onClose !== undefined && !backdrop ? onClose : null, drawerRef.current);
 
   /* --- Set timer action --- */
-  useEffect(() => {
-    let timerId: number;
-
-    if (open && closeDuration !== undefined && onClose !== undefined) {
-      timerId = window.setTimeout(() => {
-        onClose();
-      }, closeDuration);
-    }
-
-    return () => {
-      if (open && closeDuration !== undefined && onClose !== undefined) {
-        clearTimeout(timerId);
-      }
-    };
-  }, [open, closeDuration, onClose]);
+  useTimeout(open && closeDuration !== undefined && onClose !== undefined ? onClose : null, closeDuration);
 
   /* --- Set lock scroll action --- */
-  useEffect(() => {
-    if (lockScroll && open) {
-      document.body.style.overflow = 'hidden';
-    }
-  }, [lockScroll, open]);
+  useLockScroll(lockScroll && open);
 
   /* --- Set backdrop --- */
   let backdropNode: ReactNode;

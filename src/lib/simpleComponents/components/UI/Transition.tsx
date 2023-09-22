@@ -1,7 +1,8 @@
-import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 import transitionConfig from '../../configs/transitionConfig';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
+import useAddEventListener from '../../hooks/useAddEventListener';
 
 export interface TransitionProps extends BaseHTMLAttributes<HTMLDivElement> {
   onEnter?: () => void;
@@ -34,19 +35,13 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, ref) => {
     startAnimation(open);
   }, [open]);
 
-  useEffect(() => {
-    const transitionEndHandler = (event: TransitionEvent): void => {
-      if (event.target === transitionRef.current) {
-        stopAnimation();
-      }
-    };
-
-    transitionRef.current?.addEventListener('transitionend', transitionEndHandler);
-
-    return () => {
-      transitionRef.current?.removeEventListener('transitionend', transitionEndHandler);
-    };
+  const transitionEndHandler = useCallback((event: TransitionEvent): void => {
+    if (event.target === transitionRef.current) {
+      stopAnimation();
+    }
   }, []);
+
+  useAddEventListener(transitionRef, 'transitionend', transitionEndHandler);
 
   /* --- Set state --- */
   if (animationState.current === AnimationStates.ENTERING && onEntering !== undefined) {
