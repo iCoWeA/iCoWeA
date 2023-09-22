@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle, type ReactNode } from 'react';
+import React, { type MutableRefObject, forwardRef, useRef, useImperativeHandle, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import popperConfig from '../../configs/popperConfig';
 import useClickAway from '../../hooks/useClickAway';
@@ -24,6 +24,7 @@ export interface PopperProps extends FadeProps {
   closeDuration?: number;
   backdrop?: boolean;
   backdropProps?: BackdropProps;
+  anchorRef?: MutableRefObject<HTMLElement | null>;
   overlayRef?: Element | null;
 }
 
@@ -42,6 +43,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     closeDuration,
     backdrop,
     backdropProps,
+    anchorRef,
     overlayRef,
     open,
     unmountOnExit,
@@ -61,7 +63,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, []);
 
   /* --- Set outside click action --- */
-  useClickAway(open && closeOnAwayClick && onClose !== undefined && !backdrop ? onClose : null, popperRef);
+  useClickAway(open && closeOnAwayClick && onClose !== undefined && !backdrop ? onClose : null, popperRef, anchorRef);
 
   /* --- Set lock scroll action --- */
   useLockScroll(lockScroll && open);
