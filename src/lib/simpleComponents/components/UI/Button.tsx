@@ -1,7 +1,6 @@
 import React, {
   type ButtonHTMLAttributes,
   type ReactNode,
-  type BaseHTMLAttributes,
   forwardRef,
   useContext,
   useRef,
@@ -28,7 +27,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullwidth?: boolean;
   startDecoration?: ReactNode;
   endDecoration?: ReactNode;
-  stateLayerProps?: BaseHTMLAttributes<HTMLSpanElement>;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
@@ -37,7 +35,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = buttonConfig.styles;
-  const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, stateLayerProps, className, children, ...restProps } = {
+  const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, className, children, ...restProps } = {
     ...buttonConfig.defaultProps,
     ...props
   };

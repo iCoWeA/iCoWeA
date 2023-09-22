@@ -2,9 +2,12 @@ import { type ButtonVariants } from '../components/UI/Button';
 
 export interface IconButtonConfig {
   defaultProps: {
-    variant: ButtonVariants;
     borderShape: Shapes;
+    variant: ButtonVariants;
     size: Sizes;
+    color: Colors;
+    elevated: boolean;
+    fullwidth: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -16,9 +19,12 @@ export interface IconButtonConfig {
 
 const iconIconButtonConfig: IconButtonConfig = {
   defaultProps: {
-    variant: 'filled',
     borderShape: 'circular',
-    size: 'md'
+    variant: 'filled',
+    size: 'md',
+    color: 'primary',
+    elevated: false,
+    fullwidth: false
   },
   styles: {
     base: {

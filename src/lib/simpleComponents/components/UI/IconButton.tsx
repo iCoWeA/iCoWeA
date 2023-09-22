@@ -10,7 +10,7 @@ export interface IconButtonProps extends ButtonProps {
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = iconButtonConfig.styles;
-  const { variant, borderShape, size, className, ...restProps } = {
+  const { borderShape, variant, size, className, ...restProps } = {
     ...iconButtonConfig.defaultProps,
     ...props
   };
