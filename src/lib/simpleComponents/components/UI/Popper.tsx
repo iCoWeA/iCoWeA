@@ -27,17 +27,17 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = popperConfig.styles;
   const {
-    onEntering,
     onClose,
     onResize,
-    open,
-    unmountOnExit,
+    onEntering,
     lockScroll,
     closeOnAwayClick,
     closeDuration,
     backdrop,
     backdropProps,
     overlayRef,
+    open,
+    unmountOnExit,
     className,
     ...restProps
   } = {
@@ -167,7 +167,7 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     </>
   );
 
-  return overlayRef === undefined || overlayRef === null ? node : createPortal(node, overlayRef);
+  return overlayRef === null ? node : createPortal(node, overlayRef);
 });
 
 Popper.displayName = 'Popper';

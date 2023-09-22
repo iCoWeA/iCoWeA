@@ -1,10 +1,11 @@
 export interface PopperConfig {
   defaultProps: {
-    open: boolean;
-    unmountOnExit: boolean;
     lockScroll: boolean;
     closeOnAwayClick: boolean;
     backdrop: boolean;
+    overlayRef: Element | null;
+    open: boolean;
+    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -13,11 +14,12 @@ export interface PopperConfig {
 
 const popperConfig: PopperConfig = {
   defaultProps: {
-    open: false,
-    unmountOnExit: true,
     lockScroll: true,
     closeOnAwayClick: true,
-    backdrop: false
+    backdrop: false,
+    overlayRef: null,
+    open: false,
+    unmountOnExit: true
   },
   styles: {
     base: {
