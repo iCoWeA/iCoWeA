@@ -22,7 +22,8 @@ const listConfig: ListConfig = {
       padding: 'py-2'
     },
     row: {
-      flexDirection: 'flex-row'
+      flexDirection: 'flex-row',
+      padding: 'p-0'
     },
     group: {
       padding: 'p-0'
