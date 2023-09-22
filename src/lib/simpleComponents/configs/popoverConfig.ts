@@ -6,6 +6,12 @@ export interface MenuConfig {
     position: OuterPositions;
     responsive: boolean;
     offset: number;
+    lockScroll: boolean;
+    closeOnAwayClick: boolean;
+    backdrop: boolean;
+    overlayRef: Element | null;
+    open: boolean;
+    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -18,7 +24,13 @@ const menuConfig: MenuConfig = {
     variant: 'plain',
     position: 'bottom',
     responsive: true,
-    offset: 0
+    offset: 0,
+    lockScroll: true,
+    closeOnAwayClick: true,
+    backdrop: false,
+    overlayRef: null,
+    open: false,
+    unmountOnExit: true
   },
   styles: {
     base: {
