@@ -1,10 +1,18 @@
+import { type AriaRole } from 'react';
+
 export interface AccordionPanelConfig {
+  defaultProps: {
+    role: AriaRole;
+  },
   styles: {
     base: Record<string, string>;
   }
 }
 
 const accordionPanelConfig: AccordionPanelConfig = {
+  defaultProps: {
+    role: 'region'
+  },
   styles: {
     base: {
       display: 'flex',

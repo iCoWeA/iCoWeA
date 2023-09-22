@@ -14,14 +14,13 @@ const AccordionPanel = forwardRef<HTMLDivElement, AccordionPanelProps>((props, r
 
   /* --- Set default props --- */
   const styles = accordionPanelConfig.styles;
-  const { collapseProps, className, ...restProps } = { ...props };
+  const { collapseProps, className, ...restProps } = { ...accordionPanelConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <Collapse
-      role="region"
       open={isAccordionOpen}
       ref={ref}
       {...collapseProps}
