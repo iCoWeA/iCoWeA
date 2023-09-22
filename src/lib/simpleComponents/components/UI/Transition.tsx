@@ -24,30 +24,20 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, ref) => {
   const transitionRef = useRef<HTMLDivElement>(null);
 
   /* --- Set states --- */
-  const { state: animationState, enter, exit, stopEntering, stopExiting } = useAnimation(false);
+  const { state: animationState, startAnimation, stopAnimation } = useAnimation(false);
 
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => transitionRef.current, []);
 
   /* --- Set open state --- */
   useEffect(() => {
-    if (open && animationState.exit) {
-      enter();
-    }
-
-    if (!open && animationState.enter) {
-      exit();
-    }
-  }, [open, animationState.enter, animationState.exit]);
+    startAnimation(open);
+  }, [open]);
 
   useEffect(() => {
     const transitionEndHandler = (event: TransitionEvent): void => {
-      if (event.target === transitionRef.current && animationState.current === AnimationStates.EXITING) {
-        stopExiting();
-      }
-
-      if (event.target === transitionRef.current && animationState.current === AnimationStates.ENTERING) {
-        stopEntering();
+      if (event.target === transitionRef.current) {
+        stopAnimation();
       }
     };
 
@@ -56,7 +46,7 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, ref) => {
     return () => {
       transitionRef.current?.removeEventListener('transitionend', transitionEndHandler);
     };
-  }, [animationState.current]);
+  }, []);
 
   /* --- Set state --- */
   if (animationState.current === AnimationStates.ENTERING && onEntering !== undefined) {
