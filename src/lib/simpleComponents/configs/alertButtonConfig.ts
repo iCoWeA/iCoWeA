@@ -16,7 +16,7 @@ const alertButtonConfig: AlertButtonConfig = {
     alertVariant: 'filled',
     borderShape: 'circular',
     size: 'md',
-    color: 'primary',
+    color: 'error',
     elevated: false,
     fullwidth: false
   }
