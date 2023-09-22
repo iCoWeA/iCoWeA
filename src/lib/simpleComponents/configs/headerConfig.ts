@@ -20,7 +20,7 @@ const headerConfig: HeaderConfig = {
       gap: 'gap-4',
       alignItems: 'items-center',
       width: 'w-full',
-      padding: 'py-2 px-4'
+      padding: 'px-4 md:px-8'
     },
     variants: {
       plain: {
