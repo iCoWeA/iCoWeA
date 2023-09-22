@@ -1,6 +1,10 @@
-import React, { forwardRef, useRef, useImperativeHandle, useEffect, type ReactNode } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import popperConfig from '../../configs/popperConfig';
+import useClickAway from '../../hooks/useClickAway';
+import useLockScroll from '../../hooks/useLockScroll';
+import useResize from '../../hooks/useResize';
+import useScroll from '../../hooks/useScroll';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 import Fade, { type FadeProps } from './Fade';
@@ -30,6 +34,8 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     onClose,
     onResize,
     onEntering,
+    onEnter,
+    onExiting,
     onExit,
     lockScroll,
     closeOnAwayClick,
@@ -49,79 +55,20 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
   /* --- Set refs --- */
   const popperRef = useRef<HTMLDivElement>(null);
   const isExited = useRef(true);
+  const timer = useRef(-1);
 
   /* --- Set imperative ref --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => popperRef.current, []);
 
   /* --- Set outside click action --- */
-  useEffect(() => {
-    const outsideClickHandler = (event: MouseEvent): void => {
-      const isPopperClicked = popperRef.current?.contains(event.target as Node) ?? false;
-
-      if (!isPopperClicked && onClose !== undefined) {
-        onClose();
-      }
-    };
-
-    if (closeOnAwayClick && open && onClose !== undefined && !backdrop) {
-      document.addEventListener('click', outsideClickHandler);
-    }
-
-    return () => {
-      if (closeOnAwayClick && open && onClose !== undefined && !backdrop) {
-        document.removeEventListener('click', outsideClickHandler);
-      }
-    };
-  }, [onClose, closeOnAwayClick, open, backdrop]);
-
-  /* --- Set timer action --- */
-  useEffect(() => {
-    let timerId: number;
-
-    if (open && closeDuration !== undefined && onClose !== undefined) {
-      timerId = window.setTimeout(() => {
-        onClose();
-      }, closeDuration);
-    }
-
-    return () => {
-      if (open && closeDuration !== undefined && onClose !== undefined) {
-        clearTimeout(timerId);
-      }
-    };
-  }, [open, closeDuration, onClose]);
+  useClickAway(open && closeOnAwayClick && onClose !== undefined && !backdrop ? onClose : null, popperRef);
 
   /* --- Set lock scroll action --- */
-  useEffect(() => {
-    if (lockScroll && open) {
-      document.body.style.overflow = 'hidden';
-    }
-  }, [lockScroll, open]);
+  useLockScroll(lockScroll && open);
 
   /* --- Set resize action --- */
-  useEffect(() => {
-    if (onResize !== undefined && !isExited.current) {
-      document.addEventListener('scroll', onResize);
-    }
-
-    return () => {
-      if (onResize !== undefined && !isExited.current) {
-        document.removeEventListener('scroll', onResize);
-      }
-    };
-  }, [onResize]);
-
-  useEffect(() => {
-    if (onResize !== undefined && !isExited.current) {
-      window.addEventListener('resize', onResize);
-    }
-
-    return () => {
-      if (onResize !== undefined && !isExited.current) {
-        window.removeEventListener('resize', onResize);
-      }
-    };
-  }, [onResize]);
+  useResize(!isExited.current && onResize !== undefined ? onResize : null);
+  useScroll(!isExited.current && onResize !== undefined ? onResize : null);
 
   /* --- Set backdrop --- */
   let backdropNode: ReactNode;
@@ -151,6 +98,26 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
     }
   };
 
+  const enterHandler = (): void => {
+    if (closeDuration !== undefined && onClose !== undefined) {
+      timer.current = window.setTimeout(() => {
+        onClose();
+      }, closeDuration);
+    }
+
+    if (onEnter !== undefined) {
+      onEnter();
+    }
+  };
+
+  const exitingHandler = (): void => {
+    clearTimeout(timer.current);
+
+    if (onExiting !== undefined) {
+      onExiting();
+    }
+  };
+
   const exitHandler = (): void => {
     isExited.current = true;
 
@@ -170,7 +137,9 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, ref) => {
       {backdropNode}
       <Fade
         onEntering={enteringHandler}
+        onEnter={enterHandler}
         onExit={exitHandler}
+        onExiting={exitingHandler}
         open={open}
         unmountOnExit={unmountOnExit}
         className={mergedClassName}
