@@ -31,7 +31,9 @@ const dividerConfig: DividerConfig = {
       background: 'bg-transparent'
     },
     after: {
-      position: 'after:absolute'
+      position: 'after:absolute',
+      top: 'top-0',
+      left: 'left-0'
     },
     orientations: {
       horizontal: {
