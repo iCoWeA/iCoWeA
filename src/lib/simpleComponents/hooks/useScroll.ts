@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-const useScroll = (onResize: (() => void) | null): void => {
+const useScroll = (onResize?: (() => void) | null): void => {
   useEffect(() => {
-    if (onResize === null) {
+    if (onResize === undefined || onResize === null) {
       return;
     }
 

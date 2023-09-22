@@ -1,8 +1,8 @@
 import { type MutableRefObject, useEffect } from 'react';
 
-const useClickAway = (onClose: (() => void) | null, ...elements: Array<MutableRefObject<HTMLElement | null> | undefined>): void => {
+const useClickAway = (onClose?: (() => void) | null, ...elements: Array<MutableRefObject<HTMLElement | null> | undefined>): void => {
   useEffect(() => {
-    if (onClose === null) {
+    if (onClose === undefined || onClose === null) {
       return;
     }
 
