@@ -1,6 +1,9 @@
 export interface BackdropConfig {
   defaultProps: {
     invisible: boolean;
+    overlayRef: Element | null;
+    open: boolean;
+    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -10,7 +13,10 @@ export interface BackdropConfig {
 
 const backdropConfig: BackdropConfig = {
   defaultProps: {
-    invisible: false
+    invisible: false,
+    overlayRef: null,
+    open: false,
+    unmountOnExit: false
   },
   styles: {
     base: {
