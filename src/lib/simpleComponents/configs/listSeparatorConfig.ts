@@ -47,7 +47,6 @@ const listSeparatorConfig: ListSeparatorConfig = {
         after: 'after:left-4 after:h-px after:w-[calc(100%-2rem)]'
       },
       vertical: {
-        margin: 'mx-2',
         height: 'h-full',
         width: 'w-px',
         after: 'after:top-2 after:h-[calc(100%-1rem)] after:w-px'
