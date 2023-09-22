@@ -1,6 +1,7 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import backdropConfig from '../../configs/backdropConfig';
+import useAddEventListener from '../../hooks/useAddEventListener';
 import { mergeClasses } from '../../utils/propsHelper';
 import Fade, { type FadeProps } from './Fade';
 
@@ -22,19 +23,13 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => backdropRef.current, []);
 
   /* --- Set click event --- */
-  useEffect(() => {
-    const clickHandler = (): void => {
-      if (onClose !== undefined) {
-        onClose();
-      }
-    };
+  const clickHandler = useCallback(() => {
+    if (onClose !== undefined) {
+      onClose();
+    }
+  }, []);
 
-    backdropRef.current?.addEventListener('click', clickHandler);
-
-    return () => {
-      backdropRef.current?.removeEventListener('click', clickHandler);
-    };
-  }, [onClose]);
+  useAddEventListener(backdropRef, 'click', clickHandler);
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, invisible && styles.invisible, className);

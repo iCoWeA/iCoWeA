@@ -1,6 +1,7 @@
-import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef, useContext, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef, useContext, useRef, useImperativeHandle, useCallback } from 'react';
 import buttonConfig from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
+import useAddEventListener from '../../hooks/useAddEventListener';
 import { mergeClasses } from '../../utils/propsHelper';
 
 /* ARIA
@@ -39,17 +40,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(ref, () => buttonRef.current, []);
 
   /* --- Set click event --- */
-  useEffect(() => {
-    const clickHandler = (): void => {
-      buttonRef.current?.blur();
-    };
-
-    buttonRef.current?.addEventListener('click', clickHandler);
-
-    return () => {
-      buttonRef.current?.removeEventListener('click', clickHandler);
-    };
+  const clickHandler = useCallback(() => {
+    buttonRef.current?.blur();
   }, []);
+
+  useAddEventListener(buttonRef, 'click', clickHandler);
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(

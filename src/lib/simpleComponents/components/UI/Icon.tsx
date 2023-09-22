@@ -14,15 +14,13 @@ const Icon = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = iconConfig.styles;
-  const { size, color, className, ...restProps } = { ...props };
+  const { size, color, className, ...restProps } = { ...iconConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, size !== undefined && styles.sizes[size], color !== undefined && styles.colors[theme][color], className);
 
   return (
     <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
       className={mergedClassName}
       ref={ref}
       {...restProps}
