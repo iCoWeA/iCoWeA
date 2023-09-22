@@ -1,21 +1,33 @@
 export interface ListItemConfig {
+  defaultProps: {
+    fullwidth: boolean;
+  }
   styles: {
     base: Record<string, string>;
+    fullwidth: Record<string, string>;
     color: Record<Themes, Record<string, string>>;
     colors: Record<Themes, Record<Colors, Record<string, string>>>;
   }
 }
 
 const listItemConfig: ListItemConfig = {
+  defaultProps: {
+    fullwidth: false
+  },
   styles: {
     base: {
       display: 'flex',
       gap: 'gap-4',
       alignItems: 'items-center',
-      height: 'min-h-[3.5rem]',
+      minHeight: 'min-h-[3.5rem]',
       width: 'w-full',
       padding: 'py-2 px-4',
       font: 'antialiased font-normal text-sm font-sans'
+    },
+    fullwidth: {
+      height: 'h-fit',
+      minHeight: 'min-h-0',
+      padding: 'p-0'
     },
     color: {
       light: {
