@@ -275,7 +275,7 @@ const buttonConfig: ButtonConfig = {
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-surface/10 hover:to-light-on-surface/10',
             active: 'active:shadow-none active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]',
             focus: 'focus:shadow-none active:from-light-on-surface/[0.15] focus:to-light-on-surface/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-surface-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-surface',
+            focusVisible: 'focus-visible:ring-light-on-surface',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           primary: {
