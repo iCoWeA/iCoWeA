@@ -1,12 +1,4 @@
-import React, {
-  type ButtonHTMLAttributes,
-  type ReactNode,
-  forwardRef,
-  useContext,
-  useRef,
-  useImperativeHandle,
-  useEffect
-} from 'react';
+import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef, useContext, useRef, useImperativeHandle, useEffect } from 'react';
 import buttonConfig from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
@@ -73,7 +65,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   return (
     <button
       className={mergedClassName}
-      type="button"
       ref={buttonRef}
       {...restProps}
     >

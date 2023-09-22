@@ -7,6 +7,7 @@ export interface ButtonConfig {
     color: Colors;
     elevated: boolean;
     fullwidth: boolean;
+    type: 'button';
   };
   styles: {
     base: Record<string, string>;
@@ -24,7 +25,8 @@ const buttonConfig: ButtonConfig = {
     size: 'md',
     color: 'primary',
     elevated: false,
-    fullwidth: false
+    fullwidth: false,
+    type: 'button'
   },
   styles: {
     base: {

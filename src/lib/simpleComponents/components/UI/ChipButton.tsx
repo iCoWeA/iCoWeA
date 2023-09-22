@@ -20,7 +20,6 @@ const ChipButton = forwardRef<HTMLButtonElement, ChipButtonProps>((props, ref) =
   return (
     <IconButton
       variant={chipVariant === 'filled' ? 'plain' : 'text'}
-      size="xs"
       ref={ref}
       {...restProps}
     >
