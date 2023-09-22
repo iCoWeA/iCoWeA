@@ -20,7 +20,8 @@ const footerConfig: FooterConfig = {
       gap: 'gap-4',
       alignItems: 'items-center',
       width: 'w-full',
-      padding: 'py-2 px-4'
+      padding: 'py-2 px-4',
+      md: 'md:px-8'
     },
     variants: {
       plain: {
