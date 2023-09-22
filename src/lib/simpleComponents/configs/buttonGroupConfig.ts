@@ -22,7 +22,7 @@ export interface ButtonGroupConfig {
       lastOutlined: Record<string, string>;
       sizes: Record<Sizes, Record<string, string>>;
       outlineSizes: Record<Sizes, Record<string, string>>;
-      variants: Record<ButtonVariants, Record<string, Record<Colors, Record<string, string>>>>;
+      variants: Record<ButtonVariants, Record<string, string>>;
     },
     divider: {
       base: Record<string, string>;
@@ -106,141 +106,16 @@ const buttonGroupConfig: ButtonGroupConfig = {
         }
       },
       variants: {
-        plain: {
-          light: {
-            default: {
-              border: 'border-light-on-surface',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            primary: {
-              border: 'border-light-on-primary',
-              disabled: 'disabled:border-light-on-primary/40'
-            },
-            secondary: {
-              border: 'border-light-on-secondary',
-              disabled: 'disabled:border-light-on-secondary/40'
-            },
-            success: {
-              border: 'border-light-on-success',
-              disabled: 'disabled:border-light-on-success/40'
-            },
-            warning: {
-              border: 'border-light-on-warning',
-              disabled: 'disabled:border-light-on-warning/40'
-            },
-            error: {
-              border: 'border-light-on-error',
-              disabled: 'disabled:border-light-on-error/40'
-            }
-          }
-        },
-        text: {
-          light: {
-            default: {
-              border: 'border-light-on-surface',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            primary: {
-              border: 'border-light-primary',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            secondary: {
-              border: 'border-light-secondary',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            success: {
-              border: 'border-light-success',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            warning: {
-              border: 'border-light-warning',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            error: {
-              border: 'border-light-error',
-              disabled: 'disabled:border-light-on-surface/40'
-            }
-          }
-        },
+        plain: {},
+        text: {},
         outlined: {
-          light: {
-            default: {
-              border: 'border-x-0 border-light-on-surface',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            primary: {
-              border: 'border-x-0 border-light-primary',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            secondary: {
-              border: 'border-x-0 border-light-secondary',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            success: {
-              border: 'border-x-0 border-light-success',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            warning: {
-              border: 'border-x-0 border-light-warning',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            error: {
-              border: 'border-x-0 border-light-error',
-              disabled: 'disabled:border-light-on-surface/40'
-            }
-          }
+          border: 'border-x-0'
         },
         filled: {
-          light: {
-            default: {
-              position: 'relative',
-              zIndex: 'z-[1]',
-              border: 'border-light-on-surface',
-              hover: 'hover:z-[0]',
-              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            primary: {
-              position: 'relative',
-              zIndex: 'z-[1]',
-              border: 'border-light-primary-dark',
-              hover: 'hover:z-[0]',
-              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            secondary: {
-              position: 'relative',
-              zIndex: 'z-[1]',
-              border: 'border-light-secondary-dark',
-              hover: 'hover:z-[0]',
-              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            success: {
-              position: 'relative',
-              zIndex: 'z-[1]',
-              border: 'border-light-success-dark',
-              hover: 'hover:z-[0]',
-              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            warning: {
-              position: 'relative',
-              zIndex: 'z-[1]',
-              border: 'border-light-warning-dark',
-              hover: 'hover:z-[0]',
-              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
-              disabled: 'disabled:border-light-on-surface/40'
-            },
-            error: {
-              position: 'relative',
-              zIndex: 'z-[1]',
-              border: 'border-light-error-dark',
-              hover: 'hover:z-[0]',
-              focusVisible: 'focus-visible:relative focus-visible:z-[2]',
-              disabled: 'disabled:border-light-on-surface/40'
-            }
-          }
+          position: 'relative',
+          zIndex: 'z-[1]',
+          hover: 'hover:z-[0]',
+          focusVisible: 'focus-visible:relative focus-visible:z-[2]'
         }
       }
     },

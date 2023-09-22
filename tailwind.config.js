@@ -28,23 +28,18 @@ module.exports = {
           primary: '#2c7cf5',
           'on-primary': '#ffffff',
           'primary-light': '#9ec3fa',
-          'primary-dark': '#0953c3',
           secondary: '#fea716',
           'on-secondary': '#ffffff',
           'secondary-light': '#fed99a',
-          'secondary-dark': '#cb8101',
           success: '#00cc44',
           'on-success': '#ffffff',
           'success-light': '#99ffbb',
-          'success-dark': '#009933',
           warning: '#ffcc00',
           'on-warning': '#ffffff',
           'warning-light': '#ffeb99',
-          'warning-dark': '#cca300',
           error: '#e83034',
           'on-error': '#ffffff',
-          'error-light': '#f5a3a5',
-          'error-dark': '#b81417'
+          'error-light': '#f5a3a5'
         }
       },
       gridTemplateRows: {
