@@ -2,9 +2,10 @@ import { type CollapseDirections } from '../components/UI/Collapse';
 
 export interface CollapseConfig {
   defaultProps: {
-    open: boolean;
     direction: CollapseDirections;
     closeOnAwayClick: boolean;
+    open: boolean;
+    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -14,9 +15,10 @@ export interface CollapseConfig {
 
 const collapseConfig: CollapseConfig = {
   defaultProps: {
-    open: false,
     direction: 'vertical',
-    closeOnAwayClick: false
+    closeOnAwayClick: false,
+    open: false,
+    unmountOnExit: false
   },
   styles: {
     base: {

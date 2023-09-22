@@ -22,7 +22,7 @@ export interface CollapseProps extends TransitionProps {
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = collapseConfig.styles;
-  const { onClose, onEntering, onExiting, open, direction, closeOnAwayClick, closeDuration, className, ...restProps } = {
+  const { onClose, onEntering, onExiting, direction, closeOnAwayClick, closeDuration, open, className, ...restProps } = {
     ...collapseConfig.defaultProps,
     ...props
   };
