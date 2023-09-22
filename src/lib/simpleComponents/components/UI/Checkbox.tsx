@@ -112,7 +112,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
     checkboxRef.current?.blur();
   }, []);
 
-  useAddEventListener(checkboxRef, 'click', clickHandler);
+  useAddEventListener(checkboxRef, 'mouseup', clickHandler);
 
   /* --- Set props --- */
   const setRef = (element: HTMLInputElement): void => {
