@@ -1,20 +1,17 @@
 import React, { type ChangeEvent, type FC, useEffect, useReducer } from 'react';
 import { deepClone } from '../../../lib/simpleComponents/utils/propsHelper';
-import { useSubmit } from 'react-router-dom';
-import Card from '../../../lib/simpleComponents/components/UI/Card/Card';
+// import { useSubmit } from 'react-router-dom';
+import Card from '../../../lib/simpleComponents/components/UI/Card';
 
-import Icon from '../../../lib/simpleComponents/components/UI/Icon/Icon';
-import IconButton from '../../../lib/simpleComponents/components/UI/IconButton/IconButton';
+import Icon from '../../../lib/simpleComponents/components/UI/Icon';
 import MessagesList from './MessagesList';
-import Container from '../../../lib/simpleComponents/components/UI/Container/Container';
+import Container from '../../../lib/simpleComponents/components/UI/Container';
 
-import CardHeader from '../../../lib/simpleComponents/components/UI/Card/CardHeader';
+import CardHeader from '../../../lib/simpleComponents/components/UI/CardHeader';
 
-import CardBody from '../../../lib/simpleComponents/components/UI/Card/CardBody';
+import CardBody from '../../../lib/simpleComponents/components/UI/CardBody';
 import Input from '../../../lib/simpleComponents/components/UI/Input/Input';
-import Typography from '../../../lib/simpleComponents/components/UI/Typography/Typography';
-import Select from '../../../lib/simpleComponents/components/UI/Select/Select';
-import Option from '../../../lib/simpleComponents/components/UI/Option/Option';
+import Typography from '../../../lib/simpleComponents/components/UI/Typography';
 
 enum FilterDates {
   ANY,
@@ -86,7 +83,7 @@ const reducer = (prevState: State, { type, payload: { messages, filter = '', fil
 };
 
 const MessagesCard: FC<MessagesCardProps> = ({ children }) => {
-  const submit = useSubmit();
+  // const submit = useSubmit();
 
   const initialState: State = {
     messages: children,
@@ -105,9 +102,9 @@ const MessagesCard: FC<MessagesCardProps> = ({ children }) => {
   };
 
   /* Set icon button props */
-  const refetchMessagesHandler = (): void => {
+  /* const refetchMessagesHandler = (): void => {
     submit(null, { method: 'GET' });
-  };
+  }; */
 
   // const [value, setValue] = useState('value');
   // const [isDisabled, setIsDisabled] = useState(false);
@@ -116,12 +113,6 @@ const MessagesCard: FC<MessagesCardProps> = ({ children }) => {
 
   return (
     <Card className="col-span-4 w-full md:col-span-8 lg:col-span-12">
-      <Select label="label">
-        <div className='p-4'>
-        <Option value="1">1</Option>
-        <Option value="2">2</Option>
-        </div>
-      </Select>
       <CardHeader>
         <Container className="flex-col gap-4 md:flex-row md:gap-6">
           <Input
@@ -140,15 +131,6 @@ const MessagesCard: FC<MessagesCardProps> = ({ children }) => {
             value={filter}
           />
         </Container>
-        <IconButton
-          variant="text"
-          color="dark"
-          onClick={refetchMessagesHandler}
-        >
-          <Icon>
-            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
-          </Icon>
-        </IconButton>
       </CardHeader>
       <CardBody>
         <MessagesList>{messages}</MessagesList>

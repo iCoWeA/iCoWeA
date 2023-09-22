@@ -11,27 +11,19 @@ export interface AnimationState {
 interface Return {
   state: AnimationState;
   startAnimation: (open?: boolean, onEntering?: () => void, onExiting?: () => void) => void;
-  endAnimation: (onEnter?: () => void, onExit?: () => void) => void;
+  stopAnimation: (onEnter?: () => void, onExit?: () => void) => void;
 }
 
 const useAnimation = (isEntered: boolean = false): Return => {
   const [state, setState] = useState<AnimationStates>(isEntered ? AnimationStates.ENTERED : AnimationStates.EXITED);
 
-  const startAnimation = useCallback((open: boolean = false, onEntering?: () => void, onExiting?: () => void) => {
+  const startAnimation = useCallback((open: boolean = false) => {
     setState((prevState): AnimationStates => {
       if (open && (prevState === AnimationStates.EXITED || prevState === AnimationStates.EXITING)) {
-        if (onEntering !== undefined) {
-          onEntering();
-        }
-
         return AnimationStates.ENTERING;
       }
 
       if (!open && (prevState === AnimationStates.ENTERING || prevState === AnimationStates.ENTERED)) {
-        if (onExiting !== undefined) {
-          onExiting();
-        }
-
         return AnimationStates.EXITING;
       }
 
@@ -39,21 +31,13 @@ const useAnimation = (isEntered: boolean = false): Return => {
     });
   }, []);
 
-  const endAnimation = useCallback((onEnter?: () => void, onExit?: () => void) => {
+  const stopAnimation = useCallback(() => {
     setState((prevState): AnimationStates => {
       if (prevState === AnimationStates.ENTERING) {
-        if (onEnter !== undefined) {
-          onEnter();
-        }
-
         return AnimationStates.ENTERED;
       }
 
       if (prevState === AnimationStates.EXITING) {
-        if (onExit !== undefined) {
-          onExit();
-        }
-
         return AnimationStates.EXITED;
       }
 
@@ -68,7 +52,7 @@ const useAnimation = (isEntered: boolean = false): Return => {
       exit: state === AnimationStates.EXITING || state === AnimationStates.EXITED
     },
     startAnimation,
-    endAnimation
+    stopAnimation
   };
 };
 

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import Icon, { type IconProps } from '../../lib/simpleComponents/components/UI/Icon/Icon';
+import Icon, { type IconProps } from '../../lib/simpleComponents/components/UI/Icon';
 
 export interface PasswordInputIconProps extends IconProps {
   show: boolean;

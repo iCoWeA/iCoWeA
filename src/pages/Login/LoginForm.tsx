@@ -1,13 +1,13 @@
 import React, { type FC } from 'react';
 import useForm from '../../lib/simpleComponents/hooks/useForm';
 import Section from '../../lib/simpleComponents/components/layouts/Section';
-import Container from '../../lib/simpleComponents/components/UI/Container/Container';
-import Card from '../../lib/simpleComponents/components/UI/Card/Card';
-import CardBody from '../../lib/simpleComponents/components/UI/Card/CardBody';
-import Form from '../../lib/simpleComponents/components/UI/Form/Form';
+import Container from '../../lib/simpleComponents/components/UI/Container';
+import Card from '../../lib/simpleComponents/components/UI/Card';
+import CardBody from '../../lib/simpleComponents/components/UI/CardBody';
+import Form from '../../lib/simpleComponents/components/UI/Form';
 import Input from '../../lib/simpleComponents/components/UI/Input/Input';
-import PasswordInput from '../../components/PasswordInout.tsx/PasswordInput';
-import Button from '../../lib/simpleComponents/components/UI/Button/Button';
+// import PasswordInput from '../../components/PasswordInout.tsx/PasswordInput';
+import Button from '../../lib/simpleComponents/components/UI/Button';
 
 const LoginForm: FC = () => {
   const email = 'email';
@@ -41,15 +41,6 @@ const LoginForm: FC = () => {
                 type="email"
                 required
               />
-              <PasswordInput
-                label="Password"
-                invalid={inputs[password].error}
-                onChange={debouncedChange}
-                onBlur={blur}
-                name={password}
-                value={inputs[password].value}
-                required
-              />
               <Button
                 fullwidth
                 disabled={!isFormValid}
@@ -64,5 +55,17 @@ const LoginForm: FC = () => {
     </Section>
   );
 };
+
+/*
+<PasswordInput
+                label="Password"
+                invalid={inputs[password].error}
+                onChange={debouncedChange}
+                onBlur={blur}
+                name={password}
+                value={inputs[password].value}
+                required
+              />
+*/
 
 export default LoginForm;

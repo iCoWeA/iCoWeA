@@ -1,4 +1,4 @@
-import React, { type MouseEvent, forwardRef } from 'react';
+/* import React, { type MouseEvent, forwardRef } from 'react';
 import IconButton, { type IconButtonProps } from '../../lib/simpleComponents/components/UI/IconButton/IconButton';
 
 export interface PasswordInputButtonProps extends IconButtonProps {
@@ -6,7 +6,7 @@ export interface PasswordInputButtonProps extends IconButtonProps {
 }
 
 const PasswordInputButton = forwardRef<HTMLButtonElement, PasswordInputButtonProps>(({ onShow, onClick, ...restProps }, ref) => {
-  /* --- Set props --- */
+  /* --- Set props ---
   const clickHandler = (event: MouseEvent<HTMLButtonElement>): void => {
     if (onShow !== undefined) {
       event.stopPropagation();
@@ -32,4 +32,4 @@ const PasswordInputButton = forwardRef<HTMLButtonElement, PasswordInputButtonPro
 
 PasswordInputButton.displayName = 'PasswordInputButton';
 
-export default PasswordInputButton;
+export default PasswordInputButton; */

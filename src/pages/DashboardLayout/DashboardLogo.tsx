@@ -1,5 +1,5 @@
 import React, { type FC } from 'react';
-import Link from '../../lib/simpleComponents/components/UI/Link/Link';
+import Link from '../../lib/simpleComponents/components/UI/Link';
 
 const DashboardLogo: FC = () => (
   <Link

@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect } from 'react';
+/* import React, { forwardRef, useState, useEffect } from 'react';
 import { type IconProps } from '../../lib/simpleComponents/components/UI/Icon/Icon';
 import { type IconButtonProps } from '../../lib/simpleComponents/components/UI/IconButton/IconButton';
 import Input, { type InputProps } from '../../lib/simpleComponents/components/UI/Input/Input';
@@ -13,10 +13,10 @@ export interface PasswordInputProps extends InputProps {
 }
 
 const PasswordInput = forwardRef<HTMLDivElement, PasswordInputProps>(({ show, buttonProps = {}, iconProps = {}, ...restProps }, ref) => {
-  /* --- Set states --- */
+  /* --- Set states ---
   const [isShow, setIsShow] = useState(show ?? false);
 
-  /* --- Set previous values  --- */
+  /* --- Set previous values  ---
   const prevShow = usePrevious(show);
 
   useEffect(() => {
@@ -25,10 +25,10 @@ const PasswordInput = forwardRef<HTMLDivElement, PasswordInputProps>(({ show, bu
     }
   }, [show]);
 
-  /* --- Set props --- */
+  /* --- Set props ---
   const type = isShow ? 'text' : 'password';
 
-  /* --- Set button --- */
+  /* --- Set button ---
   let onShow: (() => void) | undefined;
 
   if (show === undefined) {
@@ -59,4 +59,4 @@ const PasswordInput = forwardRef<HTMLDivElement, PasswordInputProps>(({ show, bu
 
 PasswordInput.displayName = 'PasswordInput';
 
-export default PasswordInput;
+export default PasswordInput; */

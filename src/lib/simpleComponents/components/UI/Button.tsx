@@ -6,7 +6,7 @@ import React, {
   useContext,
   useRef,
   useImperativeHandle,
-  type MouseEvent
+  useEffect
 } from 'react';
 import buttonConfig from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
@@ -37,7 +37,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = buttonConfig.styles;
-  const { onClick, variant, size, color, elevated, fullwidth, startDecoration, endDecoration, stateLayerProps, disabled, className, children, ...restProps } = {
+  const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, stateLayerProps, className, children, ...restProps } = {
     ...buttonConfig.defaultProps,
     ...props
   };
@@ -48,15 +48,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   /* --- Set imperative ref --- */
   useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(ref, () => buttonRef.current, []);
 
+  /* --- Set click event --- */
+  useEffect(() => {
+    const clickHandler = (): void => {
+      buttonRef.current?.blur();
+    };
+
+    buttonRef.current?.addEventListener('click', clickHandler);
+
+    return () => {
+      buttonRef.current?.removeEventListener('click', clickHandler);
+    };
+  }, []);
+
   /* --- Set props --- */
-  const clickHandler = (event: MouseEvent<HTMLButtonElement>): void => {
-    buttonRef.current?.blur();
-
-    if (onClick !== undefined) {
-      onClick(event);
-    }
-  };
-
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
@@ -69,8 +74,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   return (
     <button
-      onClick={clickHandler}
-      disabled={disabled}
       className={mergedClassName}
       type="button"
       ref={buttonRef}

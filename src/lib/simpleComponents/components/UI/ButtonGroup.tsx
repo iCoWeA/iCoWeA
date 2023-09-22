@@ -38,9 +38,6 @@ const Button: FC<ButtonProps> = ({ isFirst, isLast, variant, size, color, fullwi
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
-    styles.sizes[size],
-    variant === 'outlined' && styles.outlineSizes[size],
-    fullwidth && styles.fullwidth,
     isFirst && styles.first,
     isLast && styles.last,
     variant === 'outlined' && isFirst && styles.firstOutline,

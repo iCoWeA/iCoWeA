@@ -42,7 +42,8 @@ const tooltipConfig: TooltipConfig = {
       base: {
         position: 'absolute',
         zIndex: 'z-50',
-        flexDirection: 'flex-col'
+        flexDirection: 'flex-col',
+        borderRadius: 'rounded-xl'
       },
       empty: {
         flexDirection: 'flex-row',

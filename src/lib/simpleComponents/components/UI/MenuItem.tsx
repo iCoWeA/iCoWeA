@@ -1,68 +1,44 @@
-import React, { type LiHTMLAttributes, forwardRef, useContext, useRef, useImperativeHandle, useEffect, type MouseEvent } from 'react';
+import React, { type LiHTMLAttributes, forwardRef, useContext } from 'react';
 import menuItemConfig from '../../configs/menuItemConfig';
-import menuContext from '../../contexts/menu';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/propsHelper';
 
-export type MenuItemVariants = 'button' | 'checkbox' | 'radio';
+export type MenuItemVariants = 'plain' | 'filled';
+export type MenuItemTypes = 'button' | 'checkbox' | 'radio';
 
 export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   variant?: MenuItemVariants;
+  type?: MenuItemTypes;
   selected?: boolean;
   color?: Colors;
+  disabled?: boolean;
 }
 
 const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>((props, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
-  const { onMount, onUnmount, onClose } = useContext(menuContext);
 
   /* --- Set default props --- */
   const styles = menuItemConfig.styles;
-  const { onClick, variant, selected, color, disabled, className, ...restProps } = { ...menuItemConfig.defaultProps, ...props };
-
-  /* --- Set refs --- */
-  const itemRef = useRef<HTMLLIElement | null>(null);
-
-  /* --- Set imperative anchorElement --- */
-  useImperativeHandle<HTMLLIElement | null, HTMLLIElement | null>(ref, () => itemRef.current, []);
-
-  /* --- Set mount props --- */
-  useEffect(() => {
-    onMount(itemRef.current);
-
-    return () => {
-      onUnmount(itemRef.current);
-    };
-  }, [onMount, onUnmount]);
+  const { variant, type, selected, color, disabled, className, ...restProps } = { ...menuItemConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const clickHandler = (event: MouseEvent<HTMLLIElement>): void => {
-    onClose();
+  const typeProps: LiHTMLAttributes<HTMLLIElement> = { role: 'menuitem' };
 
-    if (onClick !== undefined) {
-      onClick(event);
-    }
-  };
-
-  const variantProps: LiHTMLAttributes<HTMLLIElement> = { role: 'menuitem' };
-
-  if (variant === 'checkbox' || variant === 'radio') {
-    variantProps.role = variant === 'checkbox' ? 'menuitemcheckbox' : 'menuitemradio';
-    variantProps['aria-checked'] = selected;
+  if (type === 'checkbox' || type === 'radio') {
+    typeProps.role = type === 'checkbox' ? 'menuitemcheckbox' : 'menuitemradio';
+    typeProps['aria-checked'] = selected;
   }
 
   const mergedClassName = mergeClasses(styles.base, styles.color[theme], color !== undefined && styles.colors[theme][color], className);
 
   return (
     <li
-      onClick={clickHandler}
       aria-disabled={disabled}
       tabIndex={-1}
-      disabled={disabled}
       className={mergedClassName}
       ref={ref}
-      {...variantProps}
+      {...typeProps}
       {...restProps}
     />
   );

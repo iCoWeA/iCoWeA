@@ -1,7 +1,7 @@
 export interface TransitionConfig {
   defaultProps: {
     open: boolean;
-    keepMounted: boolean;
+    unmountOnExit: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -12,15 +12,14 @@ export interface TransitionConfig {
 const transitionConfig: TransitionConfig = {
   defaultProps: {
     open: false,
-    keepMounted: true
+    unmountOnExit: false
   },
   styles: {
     base: {
       display: 'block',
       height: 'h-fit',
       width: 'w-fit',
-      transition: 'transition-all',
-      transitionDuration: 'duration-500'
+      transitionDuration: 'duration-[5000ms]'
     },
     hide: {
       display: 'hidden'

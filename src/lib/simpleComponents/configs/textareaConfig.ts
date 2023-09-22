@@ -45,7 +45,7 @@ export interface TextAreaConfig {
 
 const textAreaConfig: TextAreaConfig = {
   defaultProps: {
-    variant: 'outlined',
+    variant: 'outlined', // text
     color: 'primary',
     valid: false,
     invalid: false,

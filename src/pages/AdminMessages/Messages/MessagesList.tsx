@@ -1,5 +1,5 @@
 import React, { type ReactNode, type FC } from 'react';
-import List from '../../../lib/simpleComponents/components/UI/List/List';
+import List from '../../../lib/simpleComponents/components/UI/List';
 
 interface MessagesListProps {
   children?: Record<string, Message> | null;

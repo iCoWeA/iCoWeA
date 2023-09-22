@@ -1,6 +1,6 @@
-import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes } from 'react';
+/* import { type BaseHTMLAttributes, type FieldsetHTMLAttributes, type LabelHTMLAttributes } from 'react';
 import { type IconProps } from '../components/UI/Icon/Icon';
-import { type MenuProps } from '../components/UI/Menu/Menu';
+// import { type MenuProps } from '../components/UI/Menu/Menu';
 
 export interface SelectConfig {
   defaultProps: {
@@ -12,7 +12,7 @@ export interface SelectConfig {
     position: Positions;
     lockScroll: boolean;
     overlayRef: Element | null;
-    menuProps: MenuProps;
+    // menuProps: MenuProps;
     containerProps: BaseHTMLAttributes<HTMLDivElement>;
     startAdornmentContainerProps: BaseHTMLAttributes<HTMLDivElement>;
     fieldsetProps: FieldsetHTMLAttributes<HTMLFieldSetElement>;
@@ -25,7 +25,7 @@ export interface SelectConfig {
     value: string;
   };
   styles: {
-    container: {
+    container: {  //
       base: Record<string, string>;
       focus: Record<string, string>;
       shift: Record<string, string>;
@@ -84,7 +84,7 @@ const selectConfig: SelectConfig = {
     position: 'bottom',
     lockScroll: false,
     overlayRef: null,
-    menuProps: {},
+    // menuProps: {},
     containerProps: {},
     startAdornmentContainerProps: {},
     fieldsetProps: {},
@@ -443,4 +443,4 @@ const selectConfig: SelectConfig = {
   }
 };
 
-export default selectConfig;
+export default selectConfig; */

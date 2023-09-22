@@ -24,7 +24,8 @@ const menuConfig: MenuConfig = {
     base: {
       position: 'absolute',
       zIndex: 'z-40',
-      flexDirection: 'flex-col'
+      flexDirection: 'flex-col',
+      borderRadius: 'rounded-xl'
     },
     variants: {
       plain: {

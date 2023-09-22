@@ -1,13 +1,11 @@
 import React, { type FC } from 'react';
 // import Menu from '../../lib/simpleComponents/components/UI/Menu/Menu';
 // import Avatar from '../../lib/simpleComponents/components/UI/Avatar/Avatar';
-import DropdownBody from '../../lib/simpleComponents/components/UI/Dropdown/DropdownBody';
-import List from '../../lib/simpleComponents/components/UI/List/List';
-import ListItemButton from '../../lib/simpleComponents/components/UI/Listitembutton/ListItemButton';
-import Link from '../../lib/simpleComponents/components/UI/Link/Link';
+import List from '../../lib/simpleComponents/components/UI/List';
+import ListItemButton from '../../lib/simpleComponents/components/UI/ListItemButton';
+import Link from '../../lib/simpleComponents/components/UI/Link';
 
 const DashboardAvatar: FC = () => (
-  <DropdownBody fullwidht>
     <List>
       <ListItemButton
         color="dark"
@@ -32,7 +30,6 @@ const DashboardAvatar: FC = () => (
         </Link>
       </ListItemButton>
     </List>
-  </DropdownBody>
 );
 
 export default DashboardAvatar;

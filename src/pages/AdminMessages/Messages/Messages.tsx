@@ -2,7 +2,7 @@ import React, { type FC, Suspense, type ReactNode, useRef } from 'react';
 import { Await, useLoaderData } from 'react-router-dom';
 import { type DataSnapshot } from 'firebase/database';
 import Section from '../../../lib/simpleComponents/components/layouts/Section';
-import Container from '../../../lib/simpleComponents/components/UI/Container/Container';
+import Container from '../../../lib/simpleComponents/components/UI/Container';
 import MessagesCard from './MessagesCard';
 import MessagesError from './MessagesError';
 

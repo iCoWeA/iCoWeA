@@ -1,28 +1,22 @@
 import { type SnackbarVariants } from '../components/UI/Snackbar';
 
 export interface SnackbarConfig {
+  defaultProps: {
+    position: InnerPositions;
+    lockScroll: boolean;
+  };
   styles: {
     base: Record<string, string>;
     empty: Record<string, string>;
     positions: Record<InnerPositions, Record<string, string>>;
     variants: Record<SnackbarVariants, Record<Themes, Record<string, string>>>;
   }
-  defaultProps: {
-    position: InnerPositions;
-    lockScroll: boolean;
-    closeOnAwayClick: boolean;
-    keepMounted: boolean;
-    backdrop: boolean;
-  };
 }
 
 const snackbarConfig: SnackbarConfig = {
   defaultProps: {
     position: 'bottom-left',
-    lockScroll: false,
-    closeOnAwayClick: true,
-    keepMounted: false,
-    backdrop: false
+    lockScroll: false
   },
   styles: {
     base: {
@@ -32,6 +26,7 @@ const snackbarConfig: SnackbarConfig = {
     empty: {
       gap: 'gap-4',
       padding: 'py-3.5 px-4',
+      borderRadius: 'rounded-xl',
       font: 'antialiased font-normal text-sm font-sans'
     },
     positions: {

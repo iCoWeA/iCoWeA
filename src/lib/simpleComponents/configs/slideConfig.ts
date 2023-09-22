@@ -15,7 +15,8 @@ const slideConfig: SlideConfig = {
   },
   styles: {
     base: {
-      position: 'absolute'
+      position: 'absolute',
+      transition: 'transition-all'
     },
     directions: {
       top: {
@@ -24,9 +25,9 @@ const slideConfig: SlideConfig = {
         translate: '-translate-y-full -translate-x-2/4'
       },
       bottom: {
-        bottom: 'bottom-0',
+        bottom: 'top-full',
         left: 'left-2/4',
-        translate: 'translate-y-full -translate-x-2/4'
+        translate: '-translate-x-2/4'
       },
       left: {
         top: 'top-2/4',
@@ -35,8 +36,8 @@ const slideConfig: SlideConfig = {
       },
       right: {
         top: 'top-2/4',
-        right: 'right-0',
-        translate: '-translate-y-2/4 translate-x-full'
+        right: 'left-full',
+        translate: '-translate-y-2/4'
       }
     },
     open: {
@@ -44,13 +45,13 @@ const slideConfig: SlideConfig = {
         translate: 'translate-y-0'
       },
       bottom: {
-        translate: 'translate-y-0'
+        translate: '-translate-y-full'
       },
       left: {
-        translate: '-translate-x-0'
+        translate: 'translate-x-0'
       },
       right: {
-        translate: 'translate-x-0'
+        test: '-translate-x-full'
       }
     }
   }

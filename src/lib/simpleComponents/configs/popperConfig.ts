@@ -23,7 +23,6 @@ const popperConfig: PopperConfig = {
     base: {
       position: 'relative',
       display: 'flex',
-      borderRadius: 'rounded-xl',
       shadow: 'shadow-md shadow-black/50',
       overflow: 'overflow-hidden'
     }

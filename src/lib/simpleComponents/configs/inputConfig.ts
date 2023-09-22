@@ -78,7 +78,7 @@ const inputConfig: InputConfig = {
   styles: {
     container: {
       base: {
-        display: 'flex',
+        display: 'flex', // flex
         height: 'h-fit',
         width: 'w-full',
         borderRadius: 'rounded-t-2xl',

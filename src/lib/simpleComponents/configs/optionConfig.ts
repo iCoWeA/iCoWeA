@@ -5,7 +5,7 @@ export type OptionVariant = 'standard' | 'filled';
 export interface OptionConfig {
   defaultProps: {
     variant: OptionVariant;
-    size: Sizes;
+    size: ButtonSizes;
     color: Colors;
     fullwidth: boolean;
     selected: boolean;
@@ -18,7 +18,7 @@ export interface OptionConfig {
     button: {
       base: Record<string, string>;
       fullwidth: Record<string, string>;
-      sizes: Record<Sizes, Record<string, string>>;
+      sizes: Record<ButtonSizes, Record<string, string>>;
       selected: Record<OptionVariant, Record<string, Record<Colors, Record<string, string>>>>;
       variants: Record<OptionVariant, Record<string, Record<Colors, Record<string, string>>>>;
     }

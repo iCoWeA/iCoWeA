@@ -38,7 +38,7 @@ const buttonConfig: ButtonConfig = {
       userSelect: 'select-none',
       hover: 'hover:bg-gradient-to-r',
       active: 'active:bg-gradient-to-r',
-      focus: 'focus:outline-0 focus:bg-gradient-to-r',
+      focus: 'focus:bg-gradient-to-r',
       disabled: 'disabled:pointer-events-none'
     },
     fullwidth: {
@@ -261,8 +261,8 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-primary',
             background: 'bg-light-primary',
             hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-primary/10 hover:to-light-on-primary/10',
-            active: 'active:shadow-none active:from-light-on-primary/[0.15] active:to-light-on-primary/[0.15]',
-            focus: 'active:shadow-none focus:from-light-on-primary/[0.15] focus:to-light-on-primary/[0.15]',
+            active: 'active:shadow-none active:bg-red',
+            focus: 'active:shadow-none focus:bg-black',
             disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
           },
           secondary: {

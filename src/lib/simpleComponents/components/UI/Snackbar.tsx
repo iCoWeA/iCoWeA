@@ -13,7 +13,6 @@ import Popper, { type PopperProps } from './Popper';
 export type SnackbarVariants = 'plain' | 'filled' | 'outlined';
 
 export interface SnackbarProps extends PopperProps {
-  onClose?: () => void;
   variant?: SnackbarVariants;
   position?: InnerPositions;
 }
@@ -24,7 +23,7 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = snackbarConfig.styles;
-  const { onClose, variant, position, lockScroll, className, ...restProps } = {
+  const { variant, position, lockScroll, className, ...restProps } = {
     ...snackbarConfig.defaultProps,
     ...props
   };
@@ -40,7 +39,6 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
 
   return (
     <Popper
-      onClose={onClose}
       lockScroll={lockScroll}
       className={mergedClassName}
       ref={ref}

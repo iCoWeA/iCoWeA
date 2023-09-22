@@ -1,9 +1,46 @@
-radio
-slider
-tabs
-spinner
-speeddial
+LIBRARY
+Avatar group
+Circular progress
+Tabs
+Pagination
+Radio
+Slider
+Speeddial
+Step
+Table
+Timeline
+Treeview
 
-skeleton
-switch  
-carousel
+----------
+
+FRIDAY
+tokenHelper
+app
+pages
+passwordInput
+global
+
+----------
+
+THURSDAY
+Carousel    <- Aria
+Switch      <- Aria
+Skeleton
+
+----------
+
+WEDNESDAY
+
+Input       <- Aria
+Select      <- Aria
+Textarea
+Option      <- Aria
+Search      <- Aria
+
+----------
+
+TUESDAY
+Dialog      <- Design
+Navigation  <- Aria
+MenuItem    <- Aria
+ListItem    <- Aria

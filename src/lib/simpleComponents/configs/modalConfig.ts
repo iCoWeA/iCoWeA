@@ -1,6 +1,7 @@
 export interface ModalConfig {
   defaultProps: {
     open: boolean;
+    fullwidth: boolean;
     lockScroll: boolean;
     keepMounted: boolean;
   };
@@ -14,6 +15,7 @@ export interface ModalConfig {
 const modalConfig: ModalConfig = {
   defaultProps: {
     open: false,
+    fullwidth: false,
     lockScroll: true,
     keepMounted: false
   },
@@ -26,7 +28,7 @@ const modalConfig: ModalConfig = {
       zIndex: 'z-30',
       display: 'block',
       opacity: 'opacity-0',
-      transition: 'transition-[opacity]',
+      transition: 'transition',
       transitionDuration: 'duration-500'
     },
     hide: {
