@@ -4,7 +4,6 @@ import drawerConfig from '../../configs/drawerConfig';
 import themeContext from '../../contexts/theme';
 import useClickAway from '../../hooks/useClickAway';
 import useLockScroll from '../../hooks/useLockScroll';
-import useTimeout from '../../hooks/useTimeout';
 import { mergeClasses } from '../../utils/propsHelper';
 import Backdrop, { type BackdropProps } from './Backdrop';
 import Slide, { type SlideProps } from './Slide';
@@ -37,6 +36,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   const styles = drawerConfig.styles;
   const {
     onClose,
+    onEnter,
+    onExiting,
     onExit,
     variant,
     lockScroll,
@@ -57,15 +58,13 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
 
   /* --- Set refs --- */
   const drawerRef = useRef<HTMLDivElement>(null);
+  const timer = useRef(-1);
 
   /* --- Set imperative anchorElement --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => drawerRef.current, []);
 
   /* --- Set outside click action --- */
   useClickAway(open && closeOnAwayClick && onClose !== undefined && !backdrop ? onClose : null, drawerRef);
-
-  /* --- Set timer action --- */
-  useTimeout(open && closeDuration !== undefined && onClose !== undefined ? onClose : null, closeDuration);
 
   /* --- Set lock scroll action --- */
   useLockScroll(lockScroll && open);
@@ -85,6 +84,26 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   }
 
   /* --- Set props --- */
+  const enterHandler = (): void => {
+    if (closeDuration !== undefined && onClose !== undefined) {
+      timer.current = window.setTimeout(() => {
+        onClose();
+      }, closeDuration);
+    }
+
+    if (onEnter !== undefined) {
+      onEnter();
+    }
+  };
+
+  const exitingHandler = (): void => {
+    clearTimeout(timer.current);
+
+    if (onExiting !== undefined) {
+      onExiting();
+    }
+  };
+
   const exitHandler = (): void => {
     if (lockScroll && !open) {
       document.body.style.overflow = 'auto';
@@ -101,6 +120,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     <>
       {backdropNode}
       <Slide
+        onEnter={enterHandler}
+        onExiting={exitingHandler}
         onExit={exitHandler}
         open={open}
         direction={direction}
