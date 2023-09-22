@@ -23,6 +23,7 @@ const Divider = forwardRef<HTMLHRElement, DividerProps>((props, ref) => {
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
+    styles.after,
     styles.orientations[orientation],
     color === undefined ? styles.color[theme] : styles.variants[variant][theme][color],
     disabled && styles.disabled[theme],
