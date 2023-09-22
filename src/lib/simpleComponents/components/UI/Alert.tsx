@@ -138,7 +138,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
   return (
     <div
-      role="alert"
       className={mergedClassName}
       ref={ref}
       {...restProps}

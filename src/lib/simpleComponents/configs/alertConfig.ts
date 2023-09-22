@@ -1,3 +1,4 @@
+import { type AriaRole } from 'react';
 import { type AlertVariants } from '../components/UI/Alert';
 
 export interface AlertConfig {
@@ -5,6 +6,7 @@ export interface AlertConfig {
     variant: AlertVariants;
     color: Colors;
     closeButton: boolean;
+    role: AriaRole
   };
   styles: {
     container: {
@@ -28,7 +30,8 @@ const alertConfig: AlertConfig = {
   defaultProps: {
     variant: 'filled',
     color: 'error',
-    closeButton: false
+    closeButton: false,
+    role: 'alert'
   },
   styles: {
     container: {
