@@ -40,7 +40,10 @@ const cardConfig: CardConfig = {
       light: {
         userSelect: 'select-none',
         pointerEvents: 'pointer-event-none',
-        background: 'bg-light-on-surface/20'
+        background: 'bg-light-on-surface/20',
+        hover: 'hover:bg-none',
+        active: 'active:bg-none',
+        pointer: 'cursor-default'
       }
     },
     clickable: {

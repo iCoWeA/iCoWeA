@@ -45,8 +45,12 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
 
   if (clickable) {
     clickableProps.role = 'button';
-    clickableProps['aria-disabled'] = disabled;
-    clickableProps.tabIndex = 0;
+
+    if (!disabled) {
+      clickableProps.tabIndex = 0;
+    } else {
+      clickableProps['aria-disabled'] = true;
+    }
   }
 
   /* --- Set props --- */
