@@ -1,7 +1,7 @@
 export interface IconConfig {
   defaultProps: {
-    'aria-hidden': 'true'
-    viewBox: '0 0 24 24'
+    'aria-hidden': boolean;
+    viewBox: '0 0 24 24';
   },
   styles: {
     base: Record<string, string>;
@@ -12,7 +12,7 @@ export interface IconConfig {
 
 const iconConfig: IconConfig = {
   defaultProps: {
-    'aria-hidden': 'true',
+    'aria-hidden': true,
     viewBox: '0 0 24 24'
   },
   styles: {
