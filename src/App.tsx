@@ -1,13 +1,11 @@
-import React, { useRef, type FC, useState, useEffect } from 'react';
+import React, { type FC } from 'react';
 import { Provider } from 'react-redux';
-// import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ThemeProvider from './lib/simpleComponents/components/providers/ThemeProvider';
 import store from './store';
-import Button from './lib/simpleComponents/components/UI/Button';
-import Drawer from './lib/simpleComponents/components/UI/Drawer';
-// import Root from './pages/Root';
+import Root from './pages/Root';
 
-/* const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
@@ -40,44 +38,21 @@ import Drawer from './lib/simpleComponents/components/UI/Drawer';
       }
     ]
   }
-]); */
+]);
 
 const App: FC = () => {
-  const [open, setOpen] = useState(true);
-
-  // const overlay = document.getElementById('overlay');
-
-  const refDiv = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (refDiv.current !== null) {
-      refDiv.current.style.opacity = '100';
-      refDiv.current.style.display = 'block';
-    }
-  }, []);
-
-  console.log(open);
-
   return (
     <ThemeProvider>
       <Provider store={store}>
-        <div className='h-[5000px]'>
-          <Drawer direction='right' backdrop={false} closeOnAwayClick onClose={() => { setOpen(false); }} open={open}><div className='p-4 bg-light-primary'>Hlo</div></Drawer>
-          <Button
-            onClick={(event) => {
-              event.stopPropagation();
-              setOpen((open) => !open);
-            }}
-          >
-            Click
-          </Button>
-        </div>
+        <RouterProvider router={router} />
       </Provider>
     </ThemeProvider>
   );
 };
 
 export default App;
+
+/* <RouterProvider router={router} /> */
 
 /* <RouterProvider router={router} />
 

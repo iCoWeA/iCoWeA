@@ -31,6 +31,7 @@ import LinearProgress from '../../lib/simpleComponents/components/UI/LinearProgr
 import ListItem from '../../lib/simpleComponents/components/UI/ListItem';
 import ListItemButton from '../../lib/simpleComponents/components/UI/ListItemButton';
 import Typography from '../../lib/simpleComponents/components/UI/Typography';
+import ListSeparator from '../../lib/simpleComponents/components/UI/ListSeparator';
 
 const Component: FC = () => {
   /* --- Set context props --- */
@@ -380,16 +381,13 @@ const Component: FC = () => {
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup elevated>
         <button>1</button>
         <button>2</button>
         <button>3</button>
-      </ButtonGroup>
-      <ButtonGroup disabled elevated>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4'>
@@ -397,26 +395,31 @@ const Component: FC = () => {
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup size='xs' variant="outlined">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup size='sm' variant="outlined">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup size='md' variant="outlined">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup size='lg' variant="outlined">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4'>
@@ -424,26 +427,31 @@ const Component: FC = () => {
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup size='xs'>
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup size='sm'>
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup size='md'>
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup size='lg'>
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4 bg-light-surface-dark'>
@@ -451,78 +459,87 @@ const Component: FC = () => {
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="plain" color="default">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="plain" color="primary">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="plain" color="secondary">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="plain" color="success">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="plain" color="warning">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="plain" color="error">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4 bg-light-surface-dark'>
-      <ButtonGroup disabled variant="plain">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-      </ButtonGroup>
       <ButtonGroup variant="plain">
         <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="plain" color="default">
-        <button>1</button>
+      <ButtonGroup variant="plain" color="default">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="plain" color="primary">
-        <button>1</button>
+      <ButtonGroup variant="plain" color="primary">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="plain" color="secondary">
-        <button>1</button>
+      <ButtonGroup variant="plain" color="secondary">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="plain" color="success">
-        <button>1</button>
+      <ButtonGroup variant="plain" color="success">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="plain" color="warning">
-        <button>1</button>
+      <ButtonGroup variant="plain" color="warning">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="plain" color="error">
-        <button>1</button>
+      <ButtonGroup variant="plain" color="error">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4'>
@@ -530,78 +547,87 @@ const Component: FC = () => {
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="text" color="default">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="text" color="primary">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="text" color="secondary">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="text" color="success">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="text" color="warning">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="text" color="error">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4'>
-      <ButtonGroup disabled variant="text">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-      </ButtonGroup>
       <ButtonGroup variant="text">
         <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="text" color="default">
-        <button>1</button>
+      <ButtonGroup variant="text" color="default">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="text" color="primary">
-        <button>1</button>
+      <ButtonGroup variant="text" color="primary">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="text" color="secondary">
-        <button>1</button>
+      <ButtonGroup variant="text" color="secondary">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="text" color="success">
-        <button>1</button>
+      <ButtonGroup variant="text" color="success">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="text" color="warning">
-        <button>1</button>
+      <ButtonGroup variant="text" color="warning">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="text" color="error">
-        <button>1</button>
+      <ButtonGroup variant="text" color="error">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4'>
@@ -609,78 +635,87 @@ const Component: FC = () => {
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="outlined" color="default">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="outlined" color="primary">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="outlined" color="secondary">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="outlined" color="success">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="outlined" color="warning">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="outlined" color="error">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4'>
-      <ButtonGroup disabled variant="outlined">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-      </ButtonGroup>
       <ButtonGroup variant="outlined">
         <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="outlined" color="default">
-        <button>1</button>
+      <ButtonGroup variant="outlined" color="default">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="outlined" color="primary">
-        <button>1</button>
+      <ButtonGroup variant="outlined" color="primary">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="outlined" color="secondary">
-        <button>1</button>
+      <ButtonGroup variant="outlined" color="secondary">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="outlined" color="success">
-        <button>1</button>
+      <ButtonGroup variant="outlined" color="success">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="outlined" color="warning">
-        <button>1</button>
+      <ButtonGroup variant="outlined" color="warning">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="outlined" color="error">
-        <button>1</button>
+      <ButtonGroup variant="outlined" color="error">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4'>
@@ -688,78 +723,87 @@ const Component: FC = () => {
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="filled" color="default">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="filled" color="primary">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="filled" color="secondary">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="filled" color="success">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="filled" color="warning">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       <ButtonGroup variant="filled" color="error">
         <button>1</button>
         <button>2</button>
         <button>3</button>
+        <button>4</button>
       </ButtonGroup>
       </div>
       <div className='flex gap-2 p-4'>
-      <ButtonGroup disabled variant="filled">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-      </ButtonGroup>
       <ButtonGroup variant="filled">
         <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="filled" color="default">
-        <button>1</button>
+      <ButtonGroup variant="filled" color="default">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="filled" color="primary">
-        <button>1</button>
+      <ButtonGroup variant="filled" color="primary">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="filled" color="secondary">
-        <button>1</button>
+      <ButtonGroup variant="filled" color="secondary">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="filled" color="success">
-        <button>1</button>
+      <ButtonGroup variant="filled" color="success">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="filled" color="warning">
-        <button>1</button>
+      <ButtonGroup variant="filled" color="warning">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
-      <ButtonGroup disabled variant="filled" color="error">
-        <button>1</button>
+      <ButtonGroup variant="filled" color="error">
+      <button disabled>1</button>
         <button>2</button>
-        <button>3</button>
+        <button disabled>3</button>
+        <button disabled>4</button>
       </ButtonGroup>
       </div>
       <div className='flex flex-col gap-2 p-4'>
@@ -788,12 +832,51 @@ const Component: FC = () => {
           <CardBody><span>1</span><span>2</span></CardBody>
           <CardFooter><span>1</span><span>2</span></CardFooter>
         </Card>
-        <Card clickable>
+        <Card grabed>
           <CardHeader><span>1</span><span>2</span></CardHeader>
           <CardBody><span>1</span><span>2</span></CardBody>
           <CardFooter><span>1</span><span>2</span></CardFooter>
         </Card>
-        <Card grabed>
+      </div>
+      <div className='flex flex-col gap-2 p-4'>
+      <Card clickable>
+          <CardHeader><span>1</span><span>2</span></CardHeader>
+          <CardBody><span>1</span><span>2</span></CardBody>
+          <CardFooter><span>1</span><span>2</span></CardFooter>
+        </Card>
+        <Card clickable variant='plain'>
+          <CardHeader><span>1</span><span>2</span></CardHeader>
+          <CardBody><span>1</span><span>2</span></CardBody>
+          <CardFooter><span>1</span><span>2</span></CardFooter>
+        </Card>
+        <Card clickable variant='filled'>
+          <CardHeader><span>1</span><span>2</span></CardHeader>
+          <CardBody><span>1</span><span>2</span></CardBody>
+          <CardFooter><span>1</span><span>2</span></CardFooter>
+        </Card>
+        <Card clickable variant='outlined'>
+          <CardHeader><span>1</span><span>2</span></CardHeader>
+          <CardBody><span>1</span><span>2</span></CardBody>
+          <CardFooter><span>1</span><span>2</span></CardFooter>
+        </Card>
+      </div>
+      <div className='flex flex-col gap-2 p-4'>
+      <Card clickable disabled>
+          <CardHeader><span>1</span><span>2</span></CardHeader>
+          <CardBody><span>1</span><span>2</span></CardBody>
+          <CardFooter><span>1</span><span>2</span></CardFooter>
+        </Card>
+        <Card clickable disabled variant='plain'>
+          <CardHeader><span>1</span><span>2</span></CardHeader>
+          <CardBody><span>1</span><span>2</span></CardBody>
+          <CardFooter><span>1</span><span>2</span></CardFooter>
+        </Card>
+        <Card clickable disabled variant='filled'>
+          <CardHeader><span>1</span><span>2</span></CardHeader>
+          <CardBody><span>1</span><span>2</span></CardBody>
+          <CardFooter><span>1</span><span>2</span></CardFooter>
+        </Card>
+        <Card clickable disabled variant='outlined'>
           <CardHeader><span>1</span><span>2</span></CardHeader>
           <CardBody><span>1</span><span>2</span></CardBody>
           <CardFooter><span>1</span><span>2</span></CardFooter>
@@ -1039,95 +1122,112 @@ const Component: FC = () => {
       <div className='flex gap-2 p-4'>
         <List className='bg-light-primary'>
           <ListItem><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
-          <Divider/>
+          <ListSeparator/>
           <ListItem color="default"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
-          <Divider/>
+          <ListSeparator disabled/>
           <ListItem color="primary"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
-          <Divider/>
+          <ListSeparator fullwidth/>
           <ListItem color="secondary"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
-          <Divider/>
+          <ListSeparator fullwidth disabled/>
           <ListItem color="success"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
-          <Divider/>
+          <ListSeparator/>
           <ListItem color="warning"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
-          <Divider/>
+          <ListSeparator/>
           <ListItem color="error"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
         </List>
       </div>
       <div className='flex gap-2 p-4'>
         <List>
           <ListItemButton><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator/>
           <ListItemButton fullwidth><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator/>
           <ListItemButton selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
         </List>
       </div>
       <div className='flex gap-2 p-4'>
         <List>
           <ListItemButton><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='plain' color='default'/>
           <ListItemButton color="default"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='plain' color='primary'/>
           <ListItemButton color="primary"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='plain' color='secondary'/>
           <ListItemButton color="secondary"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='plain' color='success'/>
           <ListItemButton color="success"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='plain' color='warning'/>
           <ListItemButton color="warning"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='plain' color='error'/>
           <ListItemButton color="error"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
         </List>
       </div>
       <div className='flex gap-2 p-4'>
         <List>
           <ListItemButton selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='text' color='default'/>
           <ListItemButton color="default" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='text' color='primary'/>
           <ListItemButton color="primary" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='text' color='secondary'/>
           <ListItemButton color="secondary" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='text' color='success'/>
           <ListItemButton color="success" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='text' color='warning'/>
           <ListItemButton color="warning" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='text' color='error'/>
           <ListItemButton color="error" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
         </List>
       </div>
       <div className='flex gap-2 p-4'>
         <List>
           <ListItemButton variant="text"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='outlined' color='default'/>
           <ListItemButton color="default" variant="text"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='outlined' color='primary'/>
           <ListItemButton color="primary" variant="text"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='outlined' color='secondary'/>
           <ListItemButton color="secondary" variant="text"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='outlined' color='success'/>
           <ListItemButton color="success" variant="text"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='outlined' color='warning'/>
           <ListItemButton color="warning" variant="text"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='outlined' color='error'/>
           <ListItemButton color="error" variant="text"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
         </List>
       </div>
       <div className='flex gap-2 p-4'>
         <List>
           <ListItemButton variant="text" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='filled' color='default'/>
           <ListItemButton color="default" variant="text" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='filled' color='primary'/>
           <ListItemButton color="primary" variant="text" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='filled' color='secondary'/>
           <ListItemButton color="secondary" variant="text" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
-          <ListItemButton color="success" variant="text" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='filled' color='success'/>
+          <ListItem fullwidth>
+            <List group>
+            <ListItemButton color="success" variant="text" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
+            <ListSeparator variant='filled' color='warning'/>
           <ListItemButton color="warning" variant="text" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
-          <Divider/>
+          <ListSeparator variant='filled' color='error'/>
           <ListItemButton color="error" variant="text" selected><Avatar>AV</Avatar>ListItem<Checkbox /></ListItemButton>
+            </List>
+          </ListItem>
+        </List>
+      </div>
+      <div className='flex gap-2 p-4'>
+        <List row>
+        <ListItem><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
+          <ListSeparator vertical/>
+          <ListItem color="default"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
+          <ListSeparator vertical disabled/>
+          <ListItem color="primary"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
+          <ListSeparator vertical fullwidth/>
+          <ListItem color="secondary"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
+          <ListSeparator vertical fullwidth disabled/>
+          <ListItem color="success"><Avatar>AV</Avatar>ListItem<Checkbox /></ListItem>
         </List>
       </div>
       <div className='flex flex-col gap-2 p-4'>
