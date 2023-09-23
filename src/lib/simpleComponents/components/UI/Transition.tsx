@@ -1,8 +1,8 @@
 import React, { type BaseHTMLAttributes, forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 import transitionConfig from '../../configs/transitionConfig';
+import useAddEventListener from '../../hooks/useAddEventListener';
 import useAnimation, { AnimationStates } from '../../hooks/useAnimation';
 import { mergeClasses } from '../../utils/propsHelper';
-import useAddEventListener from '../../hooks/useAddEventListener';
 
 export type CollapseDirections = 'horizontal' | 'horizontal-full' | 'vertical' | 'vertical-full';
 
