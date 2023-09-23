@@ -4,13 +4,12 @@ export interface TransitionConfig {
     unmountOnExit: boolean;
     fade: boolean;
     grow: boolean;
-    slide: boolean;
-    collapse: boolean;
-    direction: Directions;
   };
   styles: {
     base: Record<string, string>;
     hide: Record<string, string>;
+    slide: Record<string, string>;
+    positions: Record<Directions, Record<string, string>>;
   }
 }
 
@@ -18,22 +17,41 @@ const transitionConfig: TransitionConfig = {
   defaultProps: {
     open: false,
     unmountOnExit: false,
-    fade: true,
-    grow: false,
-    slide: false,
-    collapse: false,
-    direction: 'bottom'
+    fade: false,
+    grow: false
   },
   styles: {
     base: {
       display: 'block',
       height: 'h-fit',
       width: 'w-fit',
+      overflow: 'overflow-hidden',
       transition: 'transition-all',
       transitionDuration: 'duration-[5000ms]'
     },
     hide: {
       display: 'hidden'
+    },
+    slide: {
+      position: 'absolute'
+    },
+    positions: {
+      top: {
+        top: 'top-0',
+        left: 'left-2/4'
+      },
+      bottom: {
+        bottom: 'top-full',
+        left: 'left-2/4'
+      },
+      left: {
+        top: 'top-2/4',
+        left: 'left-0'
+      },
+      right: {
+        top: 'top-2/4',
+        right: 'left-full'
+      }
     }
   }
 };
