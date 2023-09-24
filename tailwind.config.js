@@ -15,6 +15,10 @@ module.exports = {
     },
     extend: {
       spacing: {
+        xs: '0.5rem',
+        sm: '0.75rem',
+        md: '1rem',
+        lg: '1.25rem',
         'xs-y': '0.1875rem',
         'sm-y': '0.375rem',
         'md-y': '0.5625rem',
