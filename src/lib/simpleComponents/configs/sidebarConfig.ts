@@ -22,42 +22,49 @@ const sidebarConfig: SidebarConfig = {
       flexDirection: 'flex-col',
       alignItems: 'items-center',
       width: 'w-3/12',
-      padding: 'py-md'
+      padding: 'py-md',
+      border: 'border'
     },
     variants: {
       plain: {},
       text: {
         light: {
+          border: 'border-light-surface-light',
           background: 'bg-light-surface-light'
         },
         dark: {
+          border: 'border-dark-surface-light',
           background: 'bg-dark-surface-light'
         }
       },
       soft: {
         light: {
+          border: 'border-light-surface-soft',
           background: 'bg-light-surface-soft'
         },
         dark: {
+          border: 'border-dark-surface-soft',
           background: 'bg-dark-surface-soft'
         }
       },
       solid: {
         light: {
+          border: 'border-light-surface',
           background: 'bg-light-surface'
         },
         dark: {
+          border: 'border-dark-surface',
           background: 'bg-dark-surface'
         }
       },
       outlined: {
         light: {
-          border: 'border border-light-divider',
-          background: 'bg-light-light'
+          border: 'border-light-surface-divider',
+          background: 'bg-light-surface-light'
         },
         dark: {
-          border: 'border border-dark-divider',
-          background: 'bg-dark-light'
+          border: 'border-dark-surface-divider',
+          background: 'bg-dark-surface-light'
         }
       }
     }
