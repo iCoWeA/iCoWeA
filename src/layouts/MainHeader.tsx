@@ -5,7 +5,7 @@ import IconButton from '../lib/simpleComponents/components/UI/IconButton';
 import Header from '../lib/simpleComponents/components/layouts/Header';
 
 const MainHeader: FC = () => (
-  <Header>
+  <Header variant="outlined">
     <Link to="/">
       <img
         src={require('../assets/images/logo.png')}
