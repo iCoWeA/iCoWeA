@@ -22,11 +22,18 @@ const footerConfig: FooterConfig = {
     base: {
       display: 'flex',
       width: 'w-full',
-      padding: 'p-md',
+      padding: 'px-lg-px py-lg-py',
       border: 'border'
     },
     variants: {
-      plain: {},
+      plain: {
+        light: {
+          border: 'border-transparent'
+        },
+        dark: {
+          border: 'border-transparent'
+        }
+      },
       text: {
         light: {
           border: 'border-light-surface-light',
@@ -59,11 +66,11 @@ const footerConfig: FooterConfig = {
       },
       outlined: {
         light: {
-          border: 'border-light-surface-divider',
+          border: 'border-light-divider',
           background: 'bg-light-surface-light'
         },
         dark: {
-          border: 'border-dark-surface-divider',
+          border: 'border-dark-divider',
           background: 'bg-dark-surface-light'
         }
       }
