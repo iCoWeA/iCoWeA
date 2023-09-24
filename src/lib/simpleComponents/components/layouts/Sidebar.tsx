@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
-import asideConfig from '../../configs/asideConfig';
+import sidebarConfig from '../../configs/sidebarConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/utils';
 
 /* ARIA
  *
@@ -9,26 +9,23 @@ import { mergeClasses } from '../../utils/propsHelper';
  *
  */
 
-export type AsideVariants = 'plain' | 'filled';
-
-export interface AsideProps extends BaseHTMLAttributes<HTMLElement> {
-  variant?: AsideVariants;
+export interface SidebarProps extends BaseHTMLAttributes<HTMLElement> {
+  variant?: Variants;
 }
 
-const Aside = forwardRef<HTMLElement, AsideProps>((props, ref) => {
+const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
 
   /* --- Set default props --- */
-  const styles = asideConfig.styles;
-  const { variant, className, ...restProps } = { ...asideConfig.defaultProps, ...props };
+  const styles = sidebarConfig.styles;
+  const { variant, className, ...restProps } = { ...sidebarConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
 
   return (
     <aside
-      role="complementary"
       className={mergedClassName}
       ref={ref}
       {...restProps}
@@ -36,6 +33,6 @@ const Aside = forwardRef<HTMLElement, AsideProps>((props, ref) => {
   );
 });
 
-Aside.displayName = 'Aside';
+Sidebar.displayName = 'Sidebar';
 
-export default Aside;
+export default Sidebar;
