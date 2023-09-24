@@ -1,4 +1,4 @@
-export interface HeaderConfig {
+export interface MainConfig {
   defaultProps: {
     variant: Variants;
   };
@@ -8,17 +8,16 @@ export interface HeaderConfig {
   };
 }
 
-const headerConfig: HeaderConfig = {
+const mainConfig: MainConfig = {
   defaultProps: {
-    variant: 'plain'
+    variant: 'text'
   },
   styles: {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
       alignItems: 'items-center',
-      width: 'w-full',
-      padding: 'py-lg'
+      width: 'w-full'
     },
     variants: {
       plain: {},
@@ -60,4 +59,4 @@ const headerConfig: HeaderConfig = {
   }
 };
 
-export default headerConfig;
+export default mainConfig;
