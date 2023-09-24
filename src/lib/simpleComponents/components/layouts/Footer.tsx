@@ -2,7 +2,7 @@ import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import footerConfig from '../../configs/footerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
-import Container, { type ContainerProps } from '../UI/Container';
+import Box, { type BoxProps } from '../UI/Box';
 
 /* ARIA
  *
@@ -13,7 +13,7 @@ import Container, { type ContainerProps } from '../UI/Container';
 export interface FooterProps extends BaseHTMLAttributes<HTMLElement> {
   variant?: Variants;
   layout?: Layouts;
-  containerProps?: ContainerProps;
+  containerProps?: BoxProps;
 }
 
 const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
@@ -33,12 +33,12 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      <Container
+      <Box
         variant={layout}
         {...containerProps}
       >
         {children}
-      </Container>
+      </Box>
     </footer>
   );
 });

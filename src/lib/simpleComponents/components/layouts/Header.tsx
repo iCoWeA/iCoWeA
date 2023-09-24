@@ -2,7 +2,7 @@ import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import headerConfig from '../../configs/headerConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
-import Container, { type ContainerProps } from '../UI/Container';
+import Box, { type BoxProps } from '../UI/Box';
 
 /* ARIA
  *
@@ -14,7 +14,7 @@ export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
   variant?: Variants;
   layout?: Layouts;
   elevated?: boolean;
-  containerProps?: ContainerProps;
+  containerProps?: BoxProps;
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
@@ -34,12 +34,12 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      <Container
+      <Box
         variant={layout}
         {...containerProps}
       >
         {children}
-      </Container>
+      </Box>
     </header>
   );
 });
