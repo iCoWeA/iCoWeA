@@ -11,6 +11,7 @@ import { mergeClasses } from '../../utils/utils';
 
 export interface MainProps extends BaseHTMLAttributes<HTMLElement> {
   variant?: Variants;
+  layout?: Layouts;
 }
 
 const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
@@ -19,10 +20,10 @@ const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = mainConfig.styles;
-  const { variant, className, ...restProps } = { ...mainConfig.defaultProps, ...props };
+  const { variant, layout, className, ...restProps } = { ...mainConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], styles.layouts[layout], className);
 
   return (
     <main
