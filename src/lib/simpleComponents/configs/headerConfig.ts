@@ -32,7 +32,14 @@ const headerConfig: HeaderConfig = {
       shadow: 'shadow-md shadow-black/50'
     },
     variants: {
-      plain: {},
+      plain: {
+        light: {
+          border: 'border-transparent'
+        },
+        dark: {
+          border: 'border-transparent'
+        }
+      },
       text: {
         light: {
           border: 'border-light-surface-light',
