@@ -32,7 +32,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   const { type, variant, color, className, ...restProps } = { ...typographyConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.types[type][theme], styles.variants[variant][theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.types[type], styles.variants[variant][theme][color], className);
 
   if (type === 'display-large' || type === 'display-medium' || type === 'display-small' || type === 'headline-large') {
     return (
