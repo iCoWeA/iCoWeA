@@ -52,11 +52,11 @@ const footerConfig: FooterConfig = {
       },
       outlined: {
         light: {
-          border: 'border border-light-divider',
+          outline: 'ring-[-1] ring-light-divider',
           background: 'bg-light-light'
         },
         dark: {
-          border: 'border border-dark-divider',
+          outline: 'ring-[-1] ring-dark-divider',
           background: 'bg-dark-light'
         }
       }
