@@ -1,6 +1,9 @@
+import { type AriaRole } from 'react';
+
 export interface MainConfig {
   defaultProps: {
     variant: Variants;
+    role: AriaRole;
   };
   styles: {
     base: Record<string, string>;
@@ -10,7 +13,8 @@ export interface MainConfig {
 
 const mainConfig: MainConfig = {
   defaultProps: {
-    variant: 'text'
+    variant: 'plain',
+    role: 'main'
   },
   styles: {
     base: {
