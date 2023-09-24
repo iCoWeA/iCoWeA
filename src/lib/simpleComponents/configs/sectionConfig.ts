@@ -1,38 +1,67 @@
-import { type SectionVariants } from '../components/layouts/Section';
+import { type AriaRole } from 'react';
 
-export interface SectionConfig {
+export interface FooterConfig {
   defaultProps: {
-    variant: SectionVariants;
+    variant: Variants;
+    layout: Layouts;
+    role: AriaRole;
   };
   styles: {
     base: Record<string, string>;
-    variants: Record<SectionVariants, Record<Themes, Record<string, string>>>;
+    variants: Record<Variants, Record<Themes, Record<string, string>>>;
   };
 }
 
-const sectionConfig: SectionConfig = {
+const footerConfig: FooterConfig = {
   defaultProps: {
-    variant: 'plain'
+    variant: 'text',
+    layout: 'dashboard',
+    role: 'region'
   },
   styles: {
     base: {
       display: 'flex',
-      flexDirection: 'flex-col',
-      width: 'w-full'
+      width: 'w-full',
+      padding: 'p-md'
     },
     variants: {
-      plain: {
+      plain: {},
+      text: {
         light: {
-          background: 'bg-light-surface-low'
+          background: 'bg-light-surface-light'
+        },
+        dark: {
+          background: 'bg-dark-surface-light'
         }
       },
-      filled: {
+      soft: {
+        light: {
+          background: 'bg-light-surface-soft'
+        },
+        dark: {
+          background: 'bg-dark-surface-soft'
+        }
+      },
+      solid: {
         light: {
           background: 'bg-light-surface'
+        },
+        dark: {
+          background: 'bg-dark-surface'
+        }
+      },
+      outlined: {
+        light: {
+          border: 'border-b border-light-divider',
+          background: 'bg-light-light'
+        },
+        dark: {
+          border: 'border-b border-dark-divider',
+          background: 'bg-dark-light'
         }
       }
     }
   }
 };
 
-export default sectionConfig;
+export default footerConfig;
