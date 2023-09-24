@@ -28,16 +28,16 @@ const iconConfig: IconConfig = {
     },
     sizes: {
       xs: {
-        height: 'h-xs-size'
+        height: 'h-xs-h'
       },
       sm: {
-        height: 'h-sm-size'
+        height: 'h-sm-h'
       },
       md: {
-        height: 'h-md-size'
+        height: 'h-md-h'
       },
       lg: {
-        height: 'h-lg-size'
+        height: 'h-lg-h'
       }
     },
     variants: {
