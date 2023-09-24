@@ -15,14 +15,32 @@ module.exports = {
     },
     extend: {
       spacing: {
-        xs: '0.5rem',
-        sm: '0.75rem',
-        md: '1rem',
-        lg: '1.5rem',
-        'xs-size': '1.75rem',
-        'sm-size': '2rem',
-        'md-size': '2.25rem',
-        'lg-size': '2.75rem'
+        'xs-y': '0.1875rem',
+        'sm-y': '0.375rem',
+        'md-y': '0.5625rem',
+        'lg-y': '0.75rem',
+        'xs-x': '0.4375rem',
+        'sm-x': '0.8125rem',
+        'md-x': '1/1875rem',
+        'lg-x': '1.5625rem',
+        'xs-h': '1.75rem',
+        'sm-h': '2rem',
+        'md-h': '2.25rem',
+        'lg-h': '2.5rem',
+        'xs-py': '0.1875rem',
+        'sm-py': '0.3125rem',
+        'md-py': '0.4375rem',
+        'lg-py': '0.5625rem',
+        'xs-px': '0.4375rem',
+        'sm-px': '0.6875rem',
+        'md-px': '0.9375rem',
+        'lg-px': '1.1875rem'
+      },
+      boxShadow: {
+        top: 'inset 0 1px 0 0',
+        bottom: 'inset 0 -1px 0 0',
+        left: 'inset 1px 0 0 0',
+        right: 'inset -1px 0 0 0'
       },
       colors: {
         light: {
