@@ -22,42 +22,49 @@ const mainConfig: MainConfig = {
       flexDirection: 'flex-col',
       alignItems: 'items-center',
       width: 'w-full',
-      padding: 'py-md'
+      padding: 'py-lg-py',
+      border: 'border-y'
     },
     variants: {
       plain: {},
       text: {
         light: {
+          border: 'border-light-surface-light',
           background: 'bg-light-surface-light'
         },
         dark: {
+          border: 'border-dark-surface-light',
           background: 'bg-dark-surface-light'
         }
       },
       soft: {
         light: {
+          border: 'border-light-surface-soft',
           background: 'bg-light-surface-soft'
         },
         dark: {
+          border: 'border-dark-surface-soft',
           background: 'bg-dark-surface-soft'
         }
       },
       solid: {
         light: {
+          border: 'border-light-surface',
           background: 'bg-light-surface'
         },
         dark: {
+          border: 'border-dark-surface',
           background: 'bg-dark-surface'
         }
       },
       outlined: {
         light: {
-          outline: 'ring-[-1] ring-light-divider',
-          background: 'bg-light-light'
+          border: 'border-light-divider',
+          background: 'bg-light-surface-light'
         },
         dark: {
-          outline: 'ring-[-1] ring-dark-divider',
-          background: 'bg-dark-light'
+          border: 'border-dark-divider',
+          background: 'bg-dark-surface-light'
         }
       }
     }
