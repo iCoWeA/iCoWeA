@@ -16,7 +16,7 @@ export interface TypographyConfig {
 const typographyConfig: TypographyConfig = {
   defaultProps: {
     type: 'body-medium',
-    variant: 'plain',
+    variant: 'solid',
     color: 'default'
   },
   styles: {
