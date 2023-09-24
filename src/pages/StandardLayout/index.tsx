@@ -1,11 +1,12 @@
 import React, { type FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import Container from '../../lib/simpleComponents/components/UI/Container';
+import MainHeader from '../../layouts/MainHeader';
 
 export const Component: FC = () => (
-  <Container variant="standard">
+  <>
+    <MainHeader />
     <Outlet />
-  </Container>
+  </>
 );
 
 Component.displayName = 'StandardLayoutRoute';
