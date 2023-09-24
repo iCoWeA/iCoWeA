@@ -10,7 +10,7 @@ const MainHeader: FC = () => (
       <img
         src={require('../assets/images/logo.png')}
         alt="Logo"
-        className="h-md"
+        className="h-md-size"
       />
     </Link>
     <IconButton>

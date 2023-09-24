@@ -14,13 +14,22 @@ module.exports = {
       sans: ['Poppins', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif']
     },
     extend: {
+      spacing: {
+        xs: '0.5rem',
+        sm: '0.75rem',
+        md: '1rem',
+        lg: '1.5rem',
+        'xs-size': '1.75rem',
+        'sm-size': '2rem',
+        'md-size': '2.25rem',
+        'lg-size': '2.75rem'
+      },
       colors: {
         light: {
           surface: '#9dc2fc',
-          'surface-low': '#ffffff',
-          'surface-light': '#cee0fd',
-          'surface-dark': '#6ba2fa',
-          'surface-high': '#d9d9d9',
+          'surface-light': '#ffffff',
+          'surface-soft': '#cee0fd',
+          'surface-dark': '#d9d9d9',
           'on-surface': '#262626',
           'on-surface-variant': '#cccccc',
           divider: '#cccccc',
