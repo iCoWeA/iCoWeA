@@ -22,7 +22,7 @@ const sidebarConfig: SidebarConfig = {
       flexDirection: 'flex-col',
       alignItems: 'items-center',
       width: 'w-3/12',
-      padding: 'py-lg-py',
+      padding: 'p-lg-p',
       border: 'border'
     },
     variants: {

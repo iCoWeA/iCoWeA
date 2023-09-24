@@ -22,7 +22,7 @@ const mainConfig: MainConfig = {
       flexDirection: 'flex-col',
       alignItems: 'items-center',
       width: 'w-full',
-      padding: 'py-lg-py',
+      padding: 'py-lg-p',
       border: 'border'
     },
     variants: {
