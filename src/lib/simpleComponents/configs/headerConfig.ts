@@ -1,6 +1,9 @@
+import { type AriaRole } from 'react';
+
 export interface HeaderConfig {
   defaultProps: {
     variant: ContainerVariants;
+    role: AriaRole;
   };
   styles: {
     base: Record<string, string>;
@@ -10,7 +13,8 @@ export interface HeaderConfig {
 
 const headerConfig: HeaderConfig = {
   defaultProps: {
-    variant: 'plain'
+    variant: 'plain',
+    role: 'banner'
   },
   styles: {
     base: {

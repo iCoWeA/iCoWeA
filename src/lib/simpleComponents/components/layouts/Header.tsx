@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import headerConfig from '../../configs/headerConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/utils';
 
 /* ARIA
  *
@@ -9,10 +9,8 @@ import { mergeClasses } from '../../utils/propsHelper';
  *
  */
 
-export type HeaderVariants = 'plain' | 'filled';
-
 export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
-  variant?: HeaderVariants;
+  variant?: ContainerVariants;
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
@@ -28,7 +26,6 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
 
   return (
     <header
-      role="banner"
       className={mergedClassName}
       ref={ref}
       {...restProps}
