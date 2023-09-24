@@ -4,7 +4,7 @@ import MainHeader from '../../layouts/MainHeader';
 import Container from '../../lib/simpleComponents/components/UI/Container';
 
 export const Component: FC = () => (
-  <Container variant="page">
+  <Container variant="layout">
     <MainHeader />
     <Outlet />
   </Container>
