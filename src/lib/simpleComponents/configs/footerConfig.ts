@@ -14,7 +14,7 @@ export interface FooterConfig {
 
 const footerConfig: FooterConfig = {
   defaultProps: {
-    variant: 'text',
+    variant: 'solid',
     layout: 'page',
     role: 'contentinfo'
   },
@@ -52,11 +52,11 @@ const footerConfig: FooterConfig = {
       },
       outlined: {
         light: {
-          border: 'border-b border-light-divider',
+          border: 'border-t border-light-divider',
           background: 'bg-light-light'
         },
         dark: {
-          border: 'border-b border-dark-divider',
+          border: 'border-t border-dark-divider',
           background: 'bg-dark-light'
         }
       }

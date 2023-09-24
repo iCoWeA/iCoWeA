@@ -15,7 +15,7 @@ export interface FooterConfig {
 const footerConfig: FooterConfig = {
   defaultProps: {
     variant: 'text',
-    layout: 'dashboard',
+    layout: 'page',
     role: 'region'
   },
   styles: {
