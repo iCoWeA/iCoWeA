@@ -2,12 +2,12 @@ import { type AriaRole } from 'react';
 
 export interface HeaderConfig {
   defaultProps: {
-    variant: ContainerVariants;
+    variant: Variants;
     role: AriaRole;
   };
   styles: {
     base: Record<string, string>;
-    variants: Record<ContainerVariants, Record<Themes, Record<string, string>>>;
+    variants: Record<Variants, Record<Themes, Record<string, string>>>;
   };
 }
 
@@ -25,7 +25,8 @@ const headerConfig: HeaderConfig = {
       padding: 'p-lg'
     },
     variants: {
-      plain: {
+      plain: {},
+      text: {
         light: {
           background: 'bg-light-surface-light'
         },
@@ -47,6 +48,16 @@ const headerConfig: HeaderConfig = {
         },
         dark: {
           background: 'bg-dark-surface'
+        }
+      },
+      outlined: {
+        light: {
+          border: 'border border-light-divider',
+          background: 'bg-light-light'
+        },
+        dark: {
+          border: 'border border-dark-divider',
+          background: 'bg-dark-light'
         }
       }
     }
