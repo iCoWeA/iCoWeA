@@ -44,84 +44,84 @@ const iconConfig: IconConfig = {
       plain: {
         light: {
           default: {
-            color: 'text-light-on-surface-variant'
+            fill: 'fill-light-on-surface-variant'
           },
           primary: {
-            color: 'text-light-on-primary'
+            fill: 'fill-light-on-primary'
           },
           secondary: {
-            color: 'text-light-on-secondary'
+            fill: 'fill-light-on-secondary'
           },
           success: {
-            color: 'text-light-on-success'
+            fill: 'fill-light-on-success'
           },
           warning: {
-            color: 'text-light-on-warning'
+            fill: 'fill-light-on-warning'
           },
           error: {
-            color: 'text-light-on-error'
+            fill: 'fill-light-on-error'
           }
         },
         dark: {
           default: {
-            color: 'text-dark-on-surface-variant'
+            fill: 'fill-dark-on-surface-variant'
           },
           primary: {
-            color: 'text-dark-on-primary'
+            fill: 'fill-dark-on-primary'
           },
           secondary: {
-            color: 'text-dark-on-secondary'
+            fill: 'fill-dark-on-secondary'
           },
           success: {
-            color: 'text-dark-on-success'
+            fill: 'fill-dark-on-success'
           },
           warning: {
-            color: 'text-dark-on-warning'
+            fill: 'fill-dark-on-warning'
           },
           error: {
-            color: 'text-dark-on-error'
+            fill: 'fill-dark-on-error'
           }
         }
       },
       solid: {
         light: {
           default: {
-            color: 'text-light-on-surface'
+            fill: 'fill-light-on-surface'
           },
           primary: {
-            color: 'text-light-primary'
+            fill: 'fill-light-primary'
           },
           secondary: {
-            color: 'text-light-secondary'
+            fill: 'fill-light-secondary'
           },
           success: {
-            color: 'text-light-success'
+            fill: 'fill-light-success'
           },
           warning: {
-            color: 'text-light-warning'
+            fill: 'fill-light-warning'
           },
           error: {
-            color: 'text-light-error'
+            fill: 'fill-light-error'
           }
         },
         dark: {
           default: {
-            color: 'text-dark-on-surface'
+            fill: 'fill-dark-on-surface'
           },
           primary: {
-            color: 'text-dark-primary'
+            fill: 'fill-dark-primary'
           },
           secondary: {
-            color: 'text-dark-secondary'
+            fill: 'fill-dark-secondary'
           },
           success: {
-            color: 'text-dark-success'
+            fill: 'fill-dark-success'
           },
           warning: {
-            color: 'text-dark-warning'
+            fill: 'fill-dark-warning'
           },
           error: {
-            color: 'text-dark-error'
+            fill: 'fill-dark-error'
           }
         }
       }
