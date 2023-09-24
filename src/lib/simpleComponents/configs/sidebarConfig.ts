@@ -20,7 +20,7 @@ const sidebarConfig: SidebarConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      alignItems: 'items-center',
+      justifyContent: 'justify-center',
       width: 'w-3/12',
       padding: 'py-md'
     },

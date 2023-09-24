@@ -20,7 +20,7 @@ const mainConfig: MainConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      alignItems: 'items-center',
+      justifyContent: 'justify-center',
       width: 'w-full',
       padding: 'py-md'
     },
