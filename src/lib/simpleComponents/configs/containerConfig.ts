@@ -1,58 +1,46 @@
-import { type ContainerVariants } from '../components/UI/Container';
-
 export interface ContainerConfig {
   defaultProps: {
-    variant: ContainerVariants;
+    variant: Layouts;
   };
   styles: {
-    base: Record<string, string>;
-    variants: Record<ContainerVariants, Record<string, string>>;
+    variants: Record<Layouts, Record<string, string>>;
+    sizes: Record<Sizes, Record<string, string>>;
   }
 }
 
 const containerConfig: ContainerConfig = {
   defaultProps: {
-    variant: 'column'
+    variant: 'row'
   },
   styles: {
-    base: {
-    },
     variants: {
-      column: {
-        display: 'grid',
-        gridTemplateColumns: 'grid-cols-4',
-        gap: 'gap-x-[16px]',
-        width: 'w-full',
-        md: 'md:grid-cols-8 md:gap-x-[24px]',
-        lg: 'lg:grid-cols-12'
+      row: {
+        display: 'flex',
+        alignItems: 'items-center'
       },
-      layout: {
-        display: 'grid',
-        height: 'min-h-screen',
-        width: 'w-full'
+      col: {
+        display: 'flex',
+        flexDirection: 'flex-col'
       },
-      'standard-layout': {
-        display: 'grid',
-        gridTemplateRows: 'grid-rows-layout',
-        height: 'min-h-screen',
-        width: 'w-full'
+      grid: {
+        display: 'grid'
       },
-      'dashboard-layout': {
-        display: 'grid',
-        gridTemplateRows: 'grid-rows-layout',
-        gridTemplateCols: 'grid-cols-layout',
-        height: 'min-h-screen',
-        width: 'w-full'
+      block: {
+        display: 'block'
+      }
+    },
+    sizes: {
+      xs: {
+        gap: 'gap-xs'
       },
-      fluid: {
-        display: 'grid',
-        gridTemplateColumns: 'grid-cols-4',
-        gap: 'gap-[16px]',
-        margin: 'mx-[16px]',
-        md: 'md:grid-cols-8 md:gap-[24px] md:mx-[32px]',
-        lg: 'lg:grid-cols-12 lg:mx-auto lg:w-full lg:max-w-[840px]',
-        xl: 'xl:mx-[200px] xl:max-w-none',
-        xxl: 'xxl:mx-auto xxl:max-w-[1040px]'
+      sm: {
+        gap: 'gap-sm'
+      },
+      md: {
+        gap: 'gap-md'
+      },
+      lg: {
+        gap: 'gap-lg'
       }
     }
   }
