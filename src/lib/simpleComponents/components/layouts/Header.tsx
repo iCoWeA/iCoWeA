@@ -13,6 +13,7 @@ import Container, { type ContainerProps } from '../UI/Container';
 export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
   variant?: Variants;
   layout?: Layouts;
+  elevated?: boolean;
   containerProps?: ContainerProps;
 }
 
@@ -22,10 +23,10 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = headerConfig.styles;
-  const { variant, layout, containerProps, className, children, ...restProps } = { ...headerConfig.defaultProps, ...props };
+  const { variant, layout, elevated, containerProps, className, children, ...restProps } = { ...headerConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], elevated && styles.elevated, className);
 
   return (
     <header
