@@ -22,7 +22,7 @@ const footerConfig: FooterConfig = {
     base: {
       display: 'flex',
       width: 'w-full',
-      padding: 'p-md'
+      padding: 'px-lg py-sm'
     },
     variants: {
       plain: {},
