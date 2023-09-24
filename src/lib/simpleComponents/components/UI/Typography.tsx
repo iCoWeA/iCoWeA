@@ -4,18 +4,18 @@ import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
 
 export type TypographyTypes =
-  | 'display-large'
-  | 'display-medium'
-  | 'display-small'
-  | 'headline-large'
-  | 'headline-medium'
-  | 'headline-small'
-  | 'title-large'
-  | 'title-medium'
-  | 'title-small'
-  | 'body-large'
-  | 'body-medium'
-  | 'body-small';
+  | 'display-lg'
+  | 'display-md'
+  | 'display-sm'
+  | 'headline-lg'
+  | 'headline-md'
+  | 'headline-sm'
+  | 'title-lg'
+  | 'title-md'
+  | 'title-sm'
+  | 'body-lg'
+  | 'body-md'
+  | 'body-sm';
 
 export interface TypographyProps extends BaseHTMLAttributes<HTMLParagraphElement | HTMLHeadingElement> {
   type?: TypographyTypes;
@@ -34,7 +34,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.types[type], styles.variants[variant][theme][color], className);
 
-  if (type === 'display-large' || type === 'display-medium' || type === 'display-small' || type === 'headline-large') {
+  if (type === 'display-lg' || type === 'display-md' || type === 'display-sm' || type === 'headline-lg') {
     return (
       <h1
         className={mergedClassName}
@@ -44,7 +44,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (type === 'headline-medium') {
+  if (type === 'headline-md') {
     return (
       <h2
         className={mergedClassName}
@@ -54,7 +54,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (type === 'headline-small') {
+  if (type === 'headline-sm') {
     return (
       <h3
         className={mergedClassName}
@@ -64,7 +64,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (type === 'title-large') {
+  if (type === 'title-lg') {
     return (
       <h4
         className={mergedClassName}
@@ -74,7 +74,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (type === 'title-medium') {
+  if (type === 'title-md') {
     return (
       <h5
         className={mergedClassName}
@@ -84,7 +84,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (type === 'title-small') {
+  if (type === 'title-sm') {
     return (
       <h6
         className={mergedClassName}

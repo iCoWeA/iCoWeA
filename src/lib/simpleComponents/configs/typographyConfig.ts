@@ -15,7 +15,7 @@ export interface TypographyConfig {
 
 const typographyConfig: TypographyConfig = {
   defaultProps: {
-    type: 'body-medium',
+    type: 'body-md',
     variant: 'solid',
     color: 'default'
   },
@@ -24,51 +24,51 @@ const typographyConfig: TypographyConfig = {
       font: 'antialiased font-normal font-sans'
     },
     types: {
-      'display-large': {
+      'display-lg': {
         display: 'block',
         font: 'text-7xl'
       },
-      'display-medium': {
+      'display-md': {
         display: 'block',
         font: 'text-6xl'
       },
-      'display-small': {
+      'display-sm': {
         display: 'block',
         font: 'text-5xl'
       },
-      'headline-large': {
+      'headline-lg': {
         display: 'block',
         font: 'text-4xl'
       },
-      'headline-medium': {
+      'headline-md': {
         display: 'block',
         font: 'text-3xl'
       },
-      'headline-small': {
+      'headline-sm': {
         display: 'block',
         font: 'text-2xl'
       },
-      'title-large': {
+      'title-lg': {
         display: 'block',
         font: 'text-lg'
       },
-      'title-medium': {
+      'title-md': {
         display: 'block',
         font: 'text-base'
       },
-      'title-small': {
+      'title-sm': {
         display: 'block',
         font: 'text-sm'
       },
-      'body-large': {
+      'body-lg': {
         display: 'block',
         font: 'text-base'
       },
-      'body-medium': {
+      'body-md': {
         display: 'block',
         font: 'text-sm'
       },
-      'body-small': {
+      'body-sm': {
         display: 'block',
         font: 'text-sx'
       }
