@@ -25,7 +25,8 @@ const headerConfig: HeaderConfig = {
     base: {
       display: 'flex',
       width: 'w-full',
-      padding: 'px-lg py-sm'
+      padding: 'px-lg-px py-lg-py',
+      border: 'border'
     },
     elevated: {
       shadow: 'shadow-md shadow-black/50'
@@ -34,36 +35,42 @@ const headerConfig: HeaderConfig = {
       plain: {},
       text: {
         light: {
+          border: 'border-light-surface-light',
           background: 'bg-light-surface-light'
         },
         dark: {
+          border: 'border-dark-surface-light',
           background: 'bg-dark-surface-light'
         }
       },
       soft: {
         light: {
+          border: 'border-light-surface-soft',
           background: 'bg-light-surface-soft'
         },
         dark: {
+          border: 'border-dark-surface-soft',
           background: 'bg-dark-surface-soft'
         }
       },
       solid: {
         light: {
+          border: 'border-light-surface',
           background: 'bg-light-surface'
         },
         dark: {
+          border: 'border-dark-surface',
           background: 'bg-dark-surface'
         }
       },
       outlined: {
         light: {
-          border: 'border-b border-light-divider',
-          background: 'bg-light-light'
+          border: 'border-light-surface-light border-b-light-divider',
+          background: 'bg-light-surface-light'
         },
         dark: {
-          border: 'border-b border-dark-divider',
-          background: 'bg-dark-light'
+          border: 'border-dark-surface-light border-b-dark-divider',
+          background: 'bg-dark-surface-light'
         }
       }
     }
