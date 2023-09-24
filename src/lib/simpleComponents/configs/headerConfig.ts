@@ -23,6 +23,8 @@ const headerConfig: HeaderConfig = {
   },
   styles: {
     base: {
+      position: 'relative',
+      zIndex: 'z-[1]',
       display: 'flex',
       width: 'w-full',
       padding: 'p-lg-p',

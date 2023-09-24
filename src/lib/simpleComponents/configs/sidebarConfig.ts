@@ -18,11 +18,12 @@ const sidebarConfig: SidebarConfig = {
   },
   styles: {
     base: {
+      position: 'relative',
       display: 'flex',
       flexDirection: 'flex-col',
       alignItems: 'items-center',
       width: 'w-3/12',
-      padding: 'p-lg-p',
+      height: 'h-full',
       border: 'border'
     },
     variants: {

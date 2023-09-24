@@ -20,6 +20,7 @@ const footerConfig: FooterConfig = {
   },
   styles: {
     base: {
+      position: 'relative',
       display: 'flex',
       width: 'w-full',
       padding: 'p-lg-p',

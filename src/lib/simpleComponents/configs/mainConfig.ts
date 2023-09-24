@@ -18,10 +18,12 @@ const mainConfig: MainConfig = {
   },
   styles: {
     base: {
+      position: 'relative',
       display: 'flex',
       flexDirection: 'flex-col',
       alignItems: 'items-center',
       width: 'w-full',
+      height: 'h-full',
       padding: 'py-lg-p',
       border: 'border'
     },
