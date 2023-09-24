@@ -21,7 +21,8 @@ const mainConfig: MainConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       alignItems: 'items-center',
-      width: 'w-full'
+      width: 'w-full',
+      padding: 'py-md'
     },
     variants: {
       plain: {},
