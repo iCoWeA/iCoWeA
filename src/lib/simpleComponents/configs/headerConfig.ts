@@ -3,17 +3,22 @@ import { type AriaRole } from 'react';
 export interface HeaderConfig {
   defaultProps: {
     variant: Variants;
+    layout: Layouts;
+    elevated: boolean;
     role: AriaRole;
   };
   styles: {
     base: Record<string, string>;
+    elevated: Record<string, string>;
     variants: Record<Variants, Record<Themes, Record<string, string>>>;
   };
 }
 
 const headerConfig: HeaderConfig = {
   defaultProps: {
-    variant: 'plain',
+    variant: 'text',
+    layout: 'page',
+    elevated: true,
     role: 'banner'
   },
   styles: {
@@ -21,6 +26,9 @@ const headerConfig: HeaderConfig = {
       display: 'flex',
       width: 'w-full',
       padding: 'p-lg'
+    },
+    elevated: {
+      shadow: 'shadow-md shadow-black/50'
     },
     variants: {
       plain: {},
@@ -50,11 +58,11 @@ const headerConfig: HeaderConfig = {
       },
       outlined: {
         light: {
-          border: 'border border-light-divider',
+          border: 'border-b border-light-divider',
           background: 'bg-light-light'
         },
         dark: {
-          border: 'border border-dark-divider',
+          border: 'border-b border-dark-divider',
           background: 'bg-dark-light'
         }
       }
