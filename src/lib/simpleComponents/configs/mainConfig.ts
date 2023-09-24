@@ -1,16 +1,14 @@
-import { type MainVariants } from '../components/layouts/Main';
-
-export interface MainConfig {
+export interface HeaderConfig {
   defaultProps: {
-    variant: MainVariants;
+    variant: Variants;
   };
   styles: {
     base: Record<string, string>;
-    variants: Record<MainVariants, Record<Themes, Record<string, string>>>;
+    variants: Record<Variants, Record<Themes, Record<string, string>>>;
   };
 }
 
-const mainConfig: MainConfig = {
+const headerConfig: HeaderConfig = {
   defaultProps: {
     variant: 'plain'
   },
@@ -18,23 +16,48 @@ const mainConfig: MainConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      gap: 'gap-6',
+      alignItems: 'items-center',
       width: 'w-full',
-      padding: 'py-6'
+      padding: 'py-lg'
     },
     variants: {
-      plain: {
+      plain: {},
+      text: {
         light: {
-          background: 'bg-light-surface-low'
+          background: 'bg-light-surface-light'
+        },
+        dark: {
+          background: 'bg-dark-surface-light'
         }
       },
-      filled: {
+      soft: {
+        light: {
+          background: 'bg-light-surface-soft'
+        },
+        dark: {
+          background: 'bg-dark-surface-soft'
+        }
+      },
+      solid: {
         light: {
           background: 'bg-light-surface'
+        },
+        dark: {
+          background: 'bg-dark-surface'
+        }
+      },
+      outlined: {
+        light: {
+          border: 'border border-light-divider',
+          background: 'bg-light-light'
+        },
+        dark: {
+          border: 'border border-dark-divider',
+          background: 'bg-dark-light'
         }
       }
     }
   }
 };
 
-export default mainConfig;
+export default headerConfig;

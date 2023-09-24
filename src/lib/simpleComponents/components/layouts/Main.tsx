@@ -1,7 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import mainConfig from '../../configs/mainConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/utils';
 
 /* ARIA
  *
@@ -9,10 +9,8 @@ import { mergeClasses } from '../../utils/propsHelper';
  *
  */
 
-export type MainVariants = 'plain' | 'filled';
-
 export interface MainProps extends BaseHTMLAttributes<HTMLElement> {
-  variant?: MainVariants;
+  variant?: Variants;
 }
 
 const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
