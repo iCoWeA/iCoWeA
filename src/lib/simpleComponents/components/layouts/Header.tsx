@@ -10,7 +10,7 @@ import { mergeClasses } from '../../utils/utils';
  */
 
 export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
-  variant?: ContainerVariants;
+  variant?: Variants;
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
