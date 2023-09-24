@@ -14,7 +14,7 @@ export interface FooterConfig {
 
 const footerConfig: FooterConfig = {
   defaultProps: {
-    variant: 'solid',
+    variant: 'text',
     layout: 'page',
     role: 'contentinfo'
   },
