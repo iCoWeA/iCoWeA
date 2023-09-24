@@ -5,7 +5,7 @@ import Typography from '../lib/simpleComponents/components/UI/Typography';
 import Footer from '../lib/simpleComponents/components/layouts/Footer';
 
 const MainFooter: FC = () => (
-  <Footer>
+  <Footer variant="outlined">
     <Typography>Created by iCoWeA team</Typography>
     <Link to="/">
       <Icon>
