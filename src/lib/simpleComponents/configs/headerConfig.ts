@@ -19,9 +19,6 @@ const headerConfig: HeaderConfig = {
   styles: {
     base: {
       display: 'flex',
-      gap: 'gap-lg',
-      justifyContent: 'justify-between',
-      alignItems: 'items-center',
       width: 'w-full',
       padding: 'p-lg'
     },
