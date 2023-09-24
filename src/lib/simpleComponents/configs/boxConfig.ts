@@ -37,18 +37,26 @@ const boxConfig: BoxConfig = {
         width: 'w-screen',
         height: 'min-h-screen'
       },
+      'sticky-layout': {
+        display: 'grid',
+        gridTemplateRows: 'grid-rows-[1fr_auto]',
+        padding: 'pt-[5rem]',
+        width: 'w-screen',
+        height: 'min-h-screen'
+      },
       page: {
         display: 'flex',
         justifyContent: 'justify-between',
         alignItems: 'items-center',
         margin: 'mx-auto',
         width: 'w-full',
-        maxWidth: 'max-w-[70.5rem]'
+        maxWidth: 'max-w-[90rem]'
       },
       dashboard: {
         display: 'flex',
         justifyContent: 'justify-between',
-        alignItems: 'items-center'
+        alignItems: 'items-center',
+        width: 'w-full'
       }
     },
     sizes: {

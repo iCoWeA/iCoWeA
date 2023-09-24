@@ -2,7 +2,7 @@ import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import boxConfig from '../../configs/boxConfig';
 import { mergeClasses } from '../../utils/utils';
 
-export type BoxVariants = 'row' | 'col' | 'grid' | 'block' | 'layout' | 'page' | 'dashboard';
+export type BoxVariants = 'row' | 'col' | 'grid' | 'block' | 'layout' | 'sticky-layout' | 'page' | 'dashboard';
 
 export interface BoxProps extends BaseHTMLAttributes<HTMLDivElement> {
   variant?: BoxVariants;
