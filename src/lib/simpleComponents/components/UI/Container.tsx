@@ -1,11 +1,9 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import containerConfig from '../../configs/containerConfig';
-import { mergeClasses } from '../../utils/propsHelper';
-
-export type ContainerVariants = 'column' | 'layout' | 'standard-layout' | 'dashboard-layout' | 'fluid';
+import { mergeClasses } from '../../utils/utils';
 
 export interface ContainerProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: ContainerVariants;
+  variant?: Layouts;
 }
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
@@ -14,7 +12,7 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
   const { variant, className, ...restProps } = { ...containerConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant], className);
+  const mergedClassName = mergeClasses(styles.variants[variant], className);
 
   return (
     <div
