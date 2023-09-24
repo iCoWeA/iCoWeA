@@ -35,6 +35,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       {...restProps}
     >
       <Box
+        size="lg"
         variant={layout}
         {...containerProps}
       >

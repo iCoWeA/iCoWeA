@@ -34,6 +34,7 @@ const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
       {...restProps}
     >
       <Box
+        size="lg"
         variant={layout}
         {...containerProps}
       >

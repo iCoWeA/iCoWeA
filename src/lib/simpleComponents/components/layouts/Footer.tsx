@@ -34,6 +34,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
       {...restProps}
     >
       <Box
+        size="lg"
         variant={layout}
         {...containerProps}
       >
