@@ -1,9 +1,9 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import typographyConfig from '../../configs/typographyConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/utils';
 
-export type TypographyVariants =
+export type TypographyTypes =
   | 'display-large'
   | 'display-medium'
   | 'display-small'
@@ -18,7 +18,8 @@ export type TypographyVariants =
   | 'body-small';
 
 export interface TypographyProps extends BaseHTMLAttributes<HTMLParagraphElement | HTMLHeadingElement> {
-  variant?: TypographyVariants;
+  type?: TypographyTypes;
+  variant?: TextVariants;
   color?: Colors;
 }
 
@@ -28,12 +29,12 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
 
   /* --- Set default props --- */
   const styles = typographyConfig.styles;
-  const { variant, color, className, ...restProps } = { ...typographyConfig.defaultProps, ...props };
+  const { type, variant, color, className, ...restProps } = { ...typographyConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], color !== undefined && styles.colors[theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, styles.types[type][theme], styles.variants[variant][theme][color], className);
 
-  if (variant === 'display-large' || variant === 'display-medium' || variant === 'display-small' || variant === 'headline-large') {
+  if (type === 'display-large' || type === 'display-medium' || type === 'display-small' || type === 'headline-large') {
     return (
       <h1
         className={mergedClassName}
@@ -43,7 +44,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (variant === 'headline-medium') {
+  if (type === 'headline-medium') {
     return (
       <h2
         className={mergedClassName}
@@ -53,7 +54,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (variant === 'headline-small') {
+  if (type === 'headline-small') {
     return (
       <h3
         className={mergedClassName}
@@ -63,7 +64,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (variant === 'title-large') {
+  if (type === 'title-large') {
     return (
       <h4
         className={mergedClassName}
@@ -73,7 +74,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (variant === 'title-medium') {
+  if (type === 'title-medium') {
     return (
       <h5
         className={mergedClassName}
@@ -83,7 +84,7 @@ const Typography = forwardRef<HTMLParagraphElement | HTMLHeadingElement, Typogra
     );
   }
 
-  if (variant === 'title-small') {
+  if (type === 'title-small') {
     return (
       <h6
         className={mergedClassName}

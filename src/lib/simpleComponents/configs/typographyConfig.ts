@@ -1,129 +1,161 @@
-import { type TypographyVariants } from '../components/UI/Typography';
+import { type TypographyTypes } from '../components/UI/Typography';
 
 export interface TypographyConfig {
   defaultProps: {
-    variant: TypographyVariants;
+    type: TypographyTypes;
+    variant: TextVariants;
+    color: Colors;
   };
   styles: {
     base: Record<string, string>;
-    variants: Record<TypographyVariants, Record<Themes, Record<string, string>>>;
-    colors: Record<Themes, Record<Colors, Record<string, string>>>;
+    types: Record<TypographyTypes, Record<string, string>>;
+    variants: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
   }
 }
 
 const typographyConfig: TypographyConfig = {
   defaultProps: {
-    variant: 'body-medium'
+    type: 'body-medium',
+    variant: 'plain',
+    color: 'default'
   },
   styles: {
     base: {
       font: 'antialiased font-normal font-sans'
     },
-    variants: {
+    types: {
       'display-large': {
-        light: {
-          display: 'block',
-          font: 'text-7xl',
-          color: 'text-light-on-surface'
-        }
+        display: 'block',
+        font: 'text-7xl'
       },
       'display-medium': {
-        light: {
-          display: 'block',
-          font: 'text-6xl',
-          color: 'text-light-on-surface'
-        }
+        display: 'block',
+        font: 'text-6xl'
       },
       'display-small': {
-        light: {
-          display: 'block',
-          font: 'text-5xl',
-          color: 'text-light-on-surface'
-        }
+        display: 'block',
+        font: 'text-5xl'
       },
       'headline-large': {
-        light: {
-          display: 'block',
-          font: 'text-4xl',
-          color: 'text-light-on-surface'
-        }
+        display: 'block',
+        font: 'text-4xl'
       },
       'headline-medium': {
-        light: {
-          display: 'block',
-          font: 'text-3xl',
-          color: 'text-light-on-surface'
-        }
+        display: 'block',
+        font: 'text-3xl'
       },
       'headline-small': {
-        light: {
-          display: 'block',
-          font: 'text-2xl',
-          color: 'text-light-on-surface'
-        }
+        display: 'block',
+        font: 'text-2xl'
       },
       'title-large': {
-        light: {
-          display: 'block',
-          font: 'text-lg',
-          color: 'text-light-on-surface'
-        }
+        display: 'block',
+        font: 'text-lg'
       },
       'title-medium': {
-        light: {
-          display: 'block',
-          font: 'text-base',
-          color: 'text-light-on-surface'
-        }
+        display: 'block',
+        font: 'text-base'
       },
       'title-small': {
-        light: {
-          display: 'block',
-          font: 'text-sm',
-          color: 'text-light-on-surface'
-        }
+        display: 'block',
+        font: 'text-sm'
       },
       'body-large': {
-        light: {
-          display: 'block',
-          font: 'text-base',
-          color: 'text-light-on-surface-variant'
-        }
+        display: 'block',
+        font: 'text-base'
       },
       'body-medium': {
-        light: {
-          display: 'block',
-          font: 'text-sm',
-          color: 'text-light-on-surface-variant'
-        }
+        display: 'block',
+        font: 'text-sm'
       },
       'body-small': {
-        light: {
-          display: 'block',
-          font: 'text-sx',
-          color: 'text-light-on-surface-variant'
-        }
+        display: 'block',
+        font: 'text-sx'
       }
     },
-    colors: {
-      light: {
-        default: {
-          color: 'text-light-on-surface'
+    variants: {
+      plain: {
+        light: {
+          default: {
+            color: 'text-light-on-surface-variant'
+          },
+          primary: {
+            color: 'text-light-on-primary'
+          },
+          secondary: {
+            color: 'text-light-on-secondary'
+          },
+          success: {
+            color: 'text-light-on-success'
+          },
+          warning: {
+            color: 'text-light-on-warning'
+          },
+          error: {
+            color: 'text-light-on-error'
+          }
         },
-        primary: {
-          color: 'text-light-primary'
+        dark: {
+          default: {
+            color: 'text-dark-on-surface-variant'
+          },
+          primary: {
+            color: 'text-dark-on-primary'
+          },
+          secondary: {
+            color: 'text-dark-on-secondary'
+          },
+          success: {
+            color: 'text-dark-on-success'
+          },
+          warning: {
+            color: 'text-dark-on-warning'
+          },
+          error: {
+            color: 'text-dark-on-error'
+          }
+        }
+      },
+      solid: {
+        light: {
+          default: {
+            color: 'text-light-on-surface'
+          },
+          primary: {
+            color: 'text-light-primary'
+          },
+          secondary: {
+            color: 'text-light-secondary'
+          },
+          success: {
+            color: 'text-light-success'
+          },
+          warning: {
+            color: 'text-light-warning'
+          },
+          error: {
+            color: 'text-light-error'
+          }
         },
-        secondary: {
-          color: 'text-light-secondary'
-        },
-        success: {
-          color: 'text-light-success'
-        },
-        warning: {
-          color: 'text-light-warning'
-        },
-        error: {
-          color: 'text-light-error'
+        dark: {
+          default: {
+            color: 'text-dark-on-surface'
+          },
+          primary: {
+            color: 'text-dark-primary'
+          },
+          secondary: {
+            color: 'text-dark-secondary'
+          },
+          success: {
+            color: 'text-dark-success'
+          },
+          warning: {
+            color: 'text-dark-warning'
+          },
+          error: {
+            color: 'text-dark-error'
+          }
         }
       }
     }
