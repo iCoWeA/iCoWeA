@@ -50,13 +50,6 @@ module.exports = {
           'on-error': '#ffffff',
           'error-light': '#f5a3a5'
         }
-      },
-      gridTemplateRows: {
-        layout: 'auto 1fr auto'
-      },
-      gridTemplateColumns: {
-        layout: 'auto 1fr auto',
-        12: 'repeat(12, 1fr)'
       }
     }
   },
