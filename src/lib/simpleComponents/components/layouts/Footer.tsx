@@ -1,7 +1,8 @@
 import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import footerConfig from '../../configs/footerConfig';
 import themeContext from '../../contexts/theme';
-import { mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/utils';
+import Container, { type ContainerProps } from '../UI/Container';
 
 /* ARIA
  *
@@ -9,10 +10,10 @@ import { mergeClasses } from '../../utils/propsHelper';
  *
  */
 
-export type FooterVariants = 'plain' | 'filled';
-
 export interface FooterProps extends BaseHTMLAttributes<HTMLElement> {
-  variant?: FooterVariants;
+  variant?: Variants;
+  layout?: Layouts;
+  containerProps?: ContainerProps;
 }
 
 const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
@@ -21,18 +22,24 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = footerConfig.styles;
-  const { variant, className, ...restProps } = { ...footerConfig.defaultProps, ...props };
+  const { variant, layout, containerProps, className, children, ...restProps } = { ...footerConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
 
   return (
     <footer
-      role="contentinfo"
       className={mergedClassName}
       ref={ref}
       {...restProps}
-    />
+    >
+      <Container
+        variant={layout}
+        {...containerProps}
+      >
+        {children}
+      </Container>
+    </footer>
   );
 });
 

@@ -1,37 +1,63 @@
-import { type FooterVariants } from '../components/layouts/Footer';
+import { type AriaRole } from 'react';
 
 export interface FooterConfig {
   defaultProps: {
-    variant: FooterVariants;
+    variant: Variants;
+    layout: Layouts;
+    role: AriaRole;
   };
   styles: {
     base: Record<string, string>;
-    variants: Record<FooterVariants, Record<Themes, Record<string, string>>>;
+    variants: Record<Variants, Record<Themes, Record<string, string>>>;
   };
 }
 
 const footerConfig: FooterConfig = {
   defaultProps: {
-    variant: 'plain'
+    variant: 'text',
+    layout: 'page',
+    role: 'contentinfo'
   },
   styles: {
     base: {
       display: 'flex',
-      gap: 'gap-4',
-      alignItems: 'items-center',
       width: 'w-full',
-      padding: 'py-2 px-4',
-      md: 'md:px-8'
+      padding: 'p-md'
     },
     variants: {
-      plain: {
+      plain: {},
+      text: {
         light: {
-          background: 'bg-light-surface-low'
+          background: 'bg-light-surface-light'
+        },
+        dark: {
+          background: 'bg-dark-surface-light'
         }
       },
-      filled: {
+      soft: {
+        light: {
+          background: 'bg-light-surface-soft'
+        },
+        dark: {
+          background: 'bg-dark-surface-soft'
+        }
+      },
+      solid: {
         light: {
           background: 'bg-light-surface'
+        },
+        dark: {
+          background: 'bg-dark-surface'
+        }
+      },
+      outlined: {
+        light: {
+          border: 'border-b border-light-divider',
+          background: 'bg-light-light'
+        },
+        dark: {
+          border: 'border-b border-dark-divider',
+          background: 'bg-dark-light'
         }
       }
     }
