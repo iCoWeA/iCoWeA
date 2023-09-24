@@ -21,7 +21,7 @@ const sidebarConfig: SidebarConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       alignItems: 'items-center',
-      width: 'w-full',
+      width: 'w-3/12',
       padding: 'py-md'
     },
     variants: {
