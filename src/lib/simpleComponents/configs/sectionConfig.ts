@@ -23,7 +23,7 @@ const footerConfig: FooterConfig = {
       display: 'flex',
       width: 'w-full',
       padding: 'px-lg-px py-lg-py',
-      border: 'border-y'
+      border: 'border'
     },
     variants: {
       plain: {
@@ -66,11 +66,11 @@ const footerConfig: FooterConfig = {
       },
       outlined: {
         light: {
-          border: 'border-light-divider',
+          border: 'border-light-surface-light border-y-light-divider',
           background: 'bg-light-surface-light'
         },
         dark: {
-          border: 'border-dark-divider',
+          border: 'border-dark-surface-light border-y-dark-divider',
           background: 'bg-dark-surface-light'
         }
       }
