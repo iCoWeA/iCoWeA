@@ -1,12 +1,10 @@
-import { type HeaderVariants } from '../components/layouts/Header';
-
 export interface HeaderConfig {
   defaultProps: {
-    variant: HeaderVariants;
+    variant: ContainerVariants;
   };
   styles: {
     base: Record<string, string>;
-    variants: Record<HeaderVariants, Record<Themes, Record<string, string>>>;
+    variants: Record<ContainerVariants, Record<Themes, Record<string, string>>>;
   };
 }
 
@@ -17,21 +15,34 @@ const headerConfig: HeaderConfig = {
   styles: {
     base: {
       display: 'flex',
-      gap: 'gap-4',
+      gap: 'gap-lg',
       alignItems: 'items-center',
       width: 'w-full',
-      padding: 'py-2 px-4',
-      md: 'md:px-8'
+      padding: 'p-lg'
     },
     variants: {
       plain: {
         light: {
-          background: 'bg-light-surface-low'
+          background: 'bg-light-surface-light'
+        },
+        dark: {
+          background: 'bg-dark-surface-light'
         }
       },
-      filled: {
+      soft: {
+        light: {
+          background: 'bg-light-surface-soft'
+        },
+        dark: {
+          background: 'bg-dark-surface-soft'
+        }
+      },
+      solid: {
         light: {
           background: 'bg-light-surface'
+        },
+        dark: {
+          background: 'bg-dark-surface'
         }
       }
     }
