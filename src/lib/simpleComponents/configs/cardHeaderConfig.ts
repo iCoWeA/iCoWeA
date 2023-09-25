@@ -10,7 +10,6 @@ export interface CardHeaderConfig {
     gap: Sizes;
   }
   styles: {
-    base: Record<string, string>;
     fullwidth: Record<string, string>;
     sizes: Record<Sizes, Record<string, string>>;
   }
@@ -26,9 +25,6 @@ const cardHeaderConfig: CardHeaderConfig = {
     gap: 'md'
   },
   styles: {
-    base: {
-      width: 'w-full'
-    },
     fullwidth: {
       padding: 'p-0',
       border: 'border-0'
