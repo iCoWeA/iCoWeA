@@ -22,6 +22,7 @@ const sidebarConfig: SidebarConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
+      alignItems: 'items-center',
       width: 'w-3/12',
       height: 'h-full',
       border: 'border border-transparent'
