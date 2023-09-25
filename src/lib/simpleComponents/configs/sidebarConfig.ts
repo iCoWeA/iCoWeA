@@ -66,11 +66,11 @@ const sidebarConfig: SidebarConfig = {
       },
       outlined: {
         light: {
-          border: 'border-light-divider',
+          border: 'border-y-light-surface-light border-x-light-divider',
           background: 'bg-light-surface-light'
         },
         dark: {
-          border: 'border-dark-divider',
+          border: 'border-y-dark-surface-light border-x-dark-divider',
           background: 'bg-dark-surface-light'
         }
       }
