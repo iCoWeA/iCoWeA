@@ -3,6 +3,7 @@ import Card from '../lib/simpleComponents/components/UI/Card';
 import Typography from '../lib/simpleComponents/components/UI/Typography';
 import Section from '../lib/simpleComponents/components/layouts/Section';
 import themeContext from '../lib/simpleComponents/contexts/theme';
+import { mergeClasses } from '../lib/simpleComponents/utils/utils';
 
 interface ExampleSectionProps {
   titleId: string;
@@ -17,6 +18,9 @@ const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, 
   const theme = useContext(themeContext).theme;
   const light = theme === 'light';
 
+  /* --- Set props --- */
+  const mergedClassName = mergeClasses(row === true ? 'flex-row justify-between' : 'items-center', light ? 'bg-light-surface-dark' : 'bg-light-surface-dark');
+
   return (
     <Section aria-labelledby={titleId}>
       <Typography
@@ -30,7 +34,7 @@ const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, 
         variant="outlined"
         simple
         gap="md"
-        className={`${row === true ? 'flex-row justify-between' : 'items-center'} ${light ? 'bg-light-surface-dark' : 'bg-light-surface-dark'}`}
+        className={mergedClassName}
       >
         {children}
       </Card>
