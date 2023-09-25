@@ -8,17 +8,15 @@ import { mergeClasses } from '../../utils/utils';
  *
  */
 
-export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
-  gap?: Sizes;
-}
+export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {}
 
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = sectionConfig.styles;
-  const { gap, className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
+  const { className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, gap !== undefined && styles.gaps[gap], className);
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <section
