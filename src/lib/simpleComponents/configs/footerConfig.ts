@@ -1,9 +1,11 @@
 import { type AriaRole } from 'react';
+import { type BoxProps } from '../components/UI/Box';
 
 export interface FooterConfig {
   defaultProps: {
     variant: Variants;
-    layout: Layouts;
+    fullwidth: boolean;
+    boxProps: BoxProps;
     role: AriaRole;
   };
   styles: {
@@ -15,7 +17,11 @@ export interface FooterConfig {
 const footerConfig: FooterConfig = {
   defaultProps: {
     variant: 'text',
-    layout: 'page',
+    fullwidth: false,
+    boxProps: {
+      size: 'lg',
+      variant: 'fullbleed'
+    },
     role: 'contentinfo'
   },
   styles: {
@@ -23,7 +29,7 @@ const footerConfig: FooterConfig = {
       position: 'relative',
       display: 'flex',
       width: 'w-full',
-      padding: 'p-lg-p',
+      padding: 'py-lg-p',
       border: 'border'
     },
     variants: {

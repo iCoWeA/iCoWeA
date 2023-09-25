@@ -12,8 +12,8 @@ import Box, { type BoxProps } from '../UI/Box';
 
 export interface FooterProps extends BaseHTMLAttributes<HTMLElement> {
   variant?: Variants;
-  layout?: Layouts;
-  containerProps?: BoxProps;
+  fullwidth?: boolean;
+  boxProps?: BoxProps;
 }
 
 const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
@@ -22,7 +22,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = footerConfig.styles;
-  const { variant, layout, containerProps, className, children, ...restProps } = { ...footerConfig.defaultProps, ...props };
+  const { variant, fullwidth, boxProps, className, children, ...restProps } = { ...footerConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
@@ -33,13 +33,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      <Box
-        size="lg"
-        variant={layout}
-        {...containerProps}
-      >
-        {children}
-      </Box>
+      <Box {...{ ...footerConfig.defaultProps.boxProps, variant: fullwidth ? 'dashboard' : 'fullbleed', ...boxProps }}>{children}</Box>
     </footer>
   );
 });
