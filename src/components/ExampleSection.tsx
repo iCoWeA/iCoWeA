@@ -19,7 +19,7 @@ const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, 
   const light = theme === 'light';
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(row === true ? 'flex-row justify-between' : 'items-center', light ? 'bg-light-surface-dark' : 'bg-light-surface-dark');
+  const mergedClassName = mergeClasses(row === true ? 'flex-row justify-evenly' : 'items-center', light ? 'bg-light-surface-dark' : 'bg-light-surface-dark');
 
   return (
     <Section aria-labelledby={`example-${titleId}`}>

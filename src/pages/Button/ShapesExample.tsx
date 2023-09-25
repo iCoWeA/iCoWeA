@@ -6,6 +6,7 @@ const ShapesExample: FC = () => (
   <ExampleSection
     title="Shapes"
     titleId="shapes"
+    row
   >
     <Button shape="circular">Button</Button>
     <Button shape="rounded">Button</Button>
