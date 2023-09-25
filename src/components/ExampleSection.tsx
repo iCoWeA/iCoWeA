@@ -22,7 +22,7 @@ const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, 
   const mergedClassName = mergeClasses(row === true ? 'flex-row justify-between' : 'items-center', light ? 'bg-light-surface-dark' : 'bg-light-surface-dark');
 
   return (
-    <Section aria-labelledby={titleId}>
+    <Section aria-labelledby={`example-${titleId}`}>
       <Typography
         id={`example-${titleId}`}
         type="title-lg"
