@@ -3,7 +3,6 @@ import { type BoxLayouts } from '../components/UI/Box';
 export interface BoxConfig {
   defaultProps: {
     layout: BoxLayouts;
-    variant: Variants;
     color: Colors;
   };
   styles: {
@@ -17,7 +16,6 @@ export interface BoxConfig {
 const boxConfig: BoxConfig = {
   defaultProps: {
     layout: 'row',
-    variant: 'plain',
     color: 'default'
   },
   styles: {
