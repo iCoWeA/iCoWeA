@@ -33,7 +33,13 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      <Box {...{ ...footerConfig.defaultProps.boxProps, variant: fullwidth ? 'dashboard' : 'fullbleed', ...boxProps }}>{children}</Box>
+      <Box
+        size="lg"
+        variant={fullwidth ? 'dashboard' : 'fullbleed'}
+        {...boxProps}
+      >
+        {children}
+      </Box>
     </footer>
   );
 });

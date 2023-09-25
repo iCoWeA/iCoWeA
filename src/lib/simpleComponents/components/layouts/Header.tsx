@@ -28,13 +28,21 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], elevated && styles.elevated, className);
 
+  console.log(fullwidth ? 'dashboard' : 'fullwidth');
+
   return (
     <header
       className={mergedClassName}
       ref={ref}
       {...restProps}
     >
-      <Box {...{ ...headerConfig.defaultProps.boxProps, variant: fullwidth ? 'dashboard' : 'fullbleed', ...boxProps }}>{children}</Box>
+      <Box
+        size="lg"
+        variant={fullwidth ? 'dashboard' : 'fullbleed'}
+        {...boxProps}
+      >
+        {children}
+      </Box>
     </header>
   );
 });
