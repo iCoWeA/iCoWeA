@@ -13,7 +13,7 @@ export interface SidebarConfig {
 
 const sidebarConfig: SidebarConfig = {
   defaultProps: {
-    variant: 'solid',
+    variant: 'text',
     role: 'complementary'
   },
   styles: {

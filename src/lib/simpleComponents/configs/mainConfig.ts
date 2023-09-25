@@ -13,7 +13,7 @@ export interface MainConfig {
 
 const mainConfig: MainConfig = {
   defaultProps: {
-    variant: 'plain',
+    variant: 'text',
     role: 'main'
   },
   styles: {
