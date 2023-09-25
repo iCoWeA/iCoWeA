@@ -2,7 +2,6 @@ import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import sectionConfig from '../../configs/sectionConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
-import Box, { type BoxProps } from '../UI/Box';
 
 /* ARIA
  *
@@ -12,8 +11,6 @@ import Box, { type BoxProps } from '../UI/Box';
 
 export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
   variant?: Variants;
-  layout?: Layouts;
-  containerProps?: BoxProps;
 }
 
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
@@ -22,7 +19,7 @@ const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = sectionConfig.styles;
-  const { variant, layout, containerProps, className, children, ...restProps } = { ...sectionConfig.defaultProps, ...props };
+  const { variant, className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
@@ -32,15 +29,7 @@ const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
       className={mergedClassName}
       ref={ref}
       {...restProps}
-    >
-      <Box
-        size="lg"
-        variant={layout}
-        {...containerProps}
-      >
-        {children}
-      </Box>
-    </section>
+    />
   );
 });
 
