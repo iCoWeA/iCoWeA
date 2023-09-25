@@ -10,16 +10,23 @@ interface ExampleSectionProps {
   title: ReactNode;
   description?: ReactNode;
   row?: boolean;
+  reverseColor?: boolean;
   children: ReactNode;
 }
 
-const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, row, children }) => {
+const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, row = false, reverseColor = false, children }) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
   const light = theme === 'light';
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(row === true ? 'flex-row justify-evenly' : 'items-center', light ? 'bg-light-surface-dark' : 'bg-light-surface-dark');
+  const mergedClassName = mergeClasses(
+    row ? 'flex-row justify-evenly' : 'items-center',
+    light && !reverseColor && 'bg-light-surface-dark',
+    !light && !reverseColor && 'bg-light-surface-dark',
+    light && reverseColor && 'bg-light-surface',
+    !light && reverseColor && 'bg-dark-surface'
+  );
 
   return (
     <Section aria-labelledby={`example-${titleId}`}>
