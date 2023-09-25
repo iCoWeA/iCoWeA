@@ -11,6 +11,7 @@ import { mergeClasses } from '../../utils/utils';
 
 export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
   variant?: Variants;
+  color?: Colors;
 }
 
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
@@ -19,10 +20,10 @@ const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = sectionConfig.styles;
-  const { variant, className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
+  const { variant, color, className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme], className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
 
   return (
     <section
