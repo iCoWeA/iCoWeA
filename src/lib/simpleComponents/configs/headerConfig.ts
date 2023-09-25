@@ -26,7 +26,7 @@ const headerConfig: HeaderConfig = {
   styles: {
     base: {
       display: 'flex',
-      width: 'w-full',
+      width: 'w-screen',
       padding: 'py-lg-py',
       border: 'border border-transparent'
     },
