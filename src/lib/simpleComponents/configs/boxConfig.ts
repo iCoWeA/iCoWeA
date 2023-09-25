@@ -28,17 +28,22 @@ const boxConfig: BoxConfig = {
       row: {
         display: 'flex',
         alignItems: 'items-center',
-        justifyContent: 'justify-between'
+        justifyContent: 'justify-between',
+        width: 'w-full'
       },
       col: {
         display: 'flex',
-        flexDirection: 'flex-col'
+        flexDirection: 'flex-col',
+        width: 'w-full'
       },
       grid: {
-        display: 'grid'
+        display: 'grid',
+        width: 'w-full'
       },
       block: {
-        display: 'block'
+        display: 'block',
+        width: 'h-fit',
+        height: 'h-fit'
       },
       layout: {
         display: 'grid',
@@ -58,7 +63,7 @@ const boxConfig: BoxConfig = {
         justifyContent: 'justify-between',
         alignItems: 'items-center',
         margin: 'mx-auto',
-        width: 'w-full',
+        width: 'w-screen',
         padding: 'px-lg-px',
         maxWidth: 'max-w-content'
       },
