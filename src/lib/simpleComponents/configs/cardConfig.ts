@@ -2,6 +2,7 @@ export interface CardConfig {
   defaultProps: {
     variant: Variants;
     color: Colors;
+    simple: boolean;
     elevated: boolean;
     clickable: boolean;
     grabed: boolean;
@@ -24,6 +25,7 @@ const cardConfig: CardConfig = {
   defaultProps: {
     variant: 'text',
     color: 'default',
+    simple: false,
     elevated: false,
     clickable: false,
     grabed: false,
