@@ -1,17 +1,40 @@
+import { type BoxLayouts } from '../components/UI/Box';
+
 export interface CardFooterConfig {
+  defaultProps: {
+    size: Sizes;
+    layout: BoxLayouts;
+    variant: Variants;
+    color: Colors;
+    gap: Sizes;
+  }
   styles: {
-    base: Record<string, string>;
+    sizes: Record<Sizes, Record<string, string>>;
   }
 }
 
 const cardFooterConfig: CardFooterConfig = {
+  defaultProps: {
+    size: 'md',
+    layout: 'row',
+    variant: 'plain',
+    color: 'default',
+    gap: 'xs'
+  },
   styles: {
-    base: {
-      display: 'flex',
-      gap: 'gap-2',
-      alignItems: 'items-center',
-      width: 'w-full',
-      padding: 'p-4'
+    sizes: {
+      xs: {
+        padding: 'px-xs-p'
+      },
+      sm: {
+        padding: 'px-sm-p'
+      },
+      md: {
+        padding: 'px-md-p'
+      },
+      lg: {
+        padding: 'px-lg-p'
+      }
     }
   }
 };

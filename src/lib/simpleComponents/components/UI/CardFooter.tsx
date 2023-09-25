@@ -1,19 +1,22 @@
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import cardFooterConfig from '../../configs/cardFooterConfig';
-import { mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/utils';
+import Box, { type BoxProps } from './Box';
 
-export interface CardFooterProps extends BaseHTMLAttributes<HTMLDivElement> {}
+export interface CardFooterProps extends BoxProps {
+  size?: Sizes;
+}
 
 const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = cardFooterConfig.styles;
-  const { className, ...restProps } = { ...props };
+  const { size, className, ...restProps } = { ...cardFooterConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, className);
+  const mergedClassName = mergeClasses(styles.sizes[size], className);
 
   return (
-    <div
+    <Box
       className={mergedClassName}
       ref={ref}
       {...restProps}
