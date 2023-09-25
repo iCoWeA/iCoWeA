@@ -2,7 +2,7 @@ import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef, useContex
 import buttonConfig from '../../configs/buttonConfig';
 import themeContext from '../../contexts/theme';
 import useAddEventListener from '../../hooks/useAddEventListener';
-import { mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/utils';
 
 /* ARIA
  *
@@ -10,11 +10,10 @@ import { mergeClasses } from '../../utils/propsHelper';
  *
  */
 
-export type ButtonVariants = 'plain' | 'text' | 'outlined' | 'filled';
-
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariants;
   size?: Sizes;
+  shape?: Shapes;
+  variant?: Variants;
   color?: Colors;
   elevated?: boolean;
   fullwidth?: boolean;
@@ -28,7 +27,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = buttonConfig.styles;
-  const { variant, size, color, elevated, fullwidth, startDecoration, endDecoration, className, children, ...restProps } = {
+  const { size, shape, variant, color, elevated, fullwidth, startDecoration, endDecoration, className, children, ...restProps } = {
     ...buttonConfig.defaultProps,
     ...props
   };
@@ -49,9 +48,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.variants[variant][theme][color],
+    styles.after,
     styles.sizes[size],
-    variant === 'outlined' && styles.outlineSizes[size],
+    styles.shapes[shape],
+    styles.variants[variant][theme][color],
     elevated && styles.elevated,
     fullwidth && styles.fullwidth,
     className

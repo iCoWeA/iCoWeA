@@ -1,9 +1,8 @@
-import { type ButtonVariants } from '../components/UI/Button';
-
 export interface ButtonConfig {
   defaultProps: {
-    variant: ButtonVariants;
     size: Sizes;
+    shape: Shapes;
+    variant: Variants;
     color: Colors;
     elevated: boolean;
     fullwidth: boolean;
@@ -11,18 +10,20 @@ export interface ButtonConfig {
   };
   styles: {
     base: Record<string, string>;
+    after: Record<string, string>;
     fullwidth: Record<string, string>;
     elevated: Record<string, string>;
     sizes: Record<Sizes, Record<string, string>>;
-    outlineSizes: Record<Sizes, Record<string, string>>;
-    variants: Record<ButtonVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
+    shapes: Record<Shapes, Record<string, string>>;
+    variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
   }
 }
 
 const buttonConfig: ButtonConfig = {
   defaultProps: {
-    variant: 'filled',
     size: 'md',
+    shape: 'circular',
+    variant: 'solid',
     color: 'primary',
     elevated: false,
     fullwidth: false,
@@ -30,303 +31,616 @@ const buttonConfig: ButtonConfig = {
   },
   styles: {
     base: {
+      position: 'relative',
       display: 'flex',
-      gap: 'gap-2',
+      gap: 'gap-xs',
       alignItems: 'items-center',
       width: 'w-fit',
-      borderRadius: 'rounded-full',
+      border: 'border border-transparent',
       font: 'antialiased font-normal text-sm font-sans',
       transition: 'transition',
       userSelect: 'select-none',
-      hover: 'hover:bg-gradient-to-r',
-      active: 'active:bg-gradient-to-r',
-      focus: 'focus:outline-0 focus:bg-gradient-to-r',
-      focusVisible: 'focus-visible:ring-2',
+      focus: 'focus:outline-none',
+      focusVisible: 'focus-visible:ring-4',
       disabled: 'disabled:pointer-events-none'
+    },
+    after: {
+      position: 'after:absolute',
+      top: 'after:-top-px',
+      left: 'after:-left-px',
+      display: 'after:block',
+      width: 'after:w-[calc(100%_+_2px)]',
+      height: 'after:h-[calc(100%_+_2px)]',
+      transitions: 'after:transition-colors',
+      pointerEvents: 'after:pointer-events-none'
     },
     fullwidth: {
       width: 'w-full',
       justifyContent: 'justify-center'
     },
     elevated: {
-      shadow: 'shadow-md shadow-black/50',
-      hover: 'hover:shadow-lg hover:shadow-black/50',
-      active: 'active:shadow-md active:shadow-black/50'
+      shadow: 'shadow-md',
+      hover: 'hover:shadow-lg',
+      active: 'active:shadow-md',
+      focus: 'focus:shadow-md',
+      focusVisible: 'focus-visible:shadow-md'
+    },
+    shapes: {
+      rounded: {
+        borderRadius: 'rounded-lg',
+        after: 'after:rounded-lg'
+      },
+      circular: {
+        borderRadius: 'rounded-full',
+        after: 'after:rounded-full'
+      },
+      square: {
+        borderRadius: 'rounded-none',
+        after: 'after:rounded-none'
+      }
     },
     sizes: {
       xs: {
-        height: 'h-6',
-        padding: 'py-0.5 px-2'
+        height: 'h-xs-h',
+        padding: 'px-xs-x py-xs-y'
       },
       sm: {
-        height: 'h-8',
-        padding: 'py-1.5 px-3'
+        height: 'h-sm-h',
+        padding: 'px-sm-x py-sm-y'
       },
       md: {
-        height: 'h-10',
-        padding: 'py-2.5 px-4'
+        height: 'h-md-h',
+        padding: 'px-md-x py-md-y'
       },
       lg: {
-        height: 'h-12',
-        padding: 'py-3.5 px-5'
-      }
-    },
-    outlineSizes: {
-      xs: {
-        padding: 'py-px px-[0.4375rem]'
-      },
-      sm: {
-        padding: 'py-[0.3125rem] px-[0.6875rem]'
-      },
-      md: {
-        padding: 'py-[0.5625rem] px-[0.9375rem]'
-      },
-      lg: {
-        padding: 'py-[0.8125rem] px-[1.1875rem]'
+        height: 'h-lg-h',
+        padding: 'px-lg-x py-lg-y'
       }
     },
     variants: {
       plain: {
         light: {
           default: {
-            fill: 'fill-light-on-surface',
             color: 'text-light-on-surface',
-            hover: 'hover:from-light-on-surface/10 hover:to-light-on-surface/10',
-            active: 'active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]',
-            focus: 'focus:from-light-on-surface/[0.15] focus:to-light-on-surface/[0.15]',
+            hover: 'hover:after:bg-light-on-surface/10',
+            active: 'active:after:bg-light-on-surface/20',
+            focus: 'focus:after:bg-light-on-surface/20',
             focusVisible: 'focus-visible:ring-light-on-surface',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           primary: {
-            fill: 'fill-light-on-primary',
             color: 'text-light-on-primary',
-            hover: 'hover:from-light-on-primary/10 hover:to-light-on-primary/10',
-            active: 'active:from-light-on-primary/[0.15] active:to-light-on-primary/[0.15]',
-            focus: 'focus:from-light-on-primary/[0.15] focus:to-light-on-primary/[0.15]',
+            hover: 'hover:after:bg-light-on-primary/10',
+            active: 'active:after:bg-light-on-primary/20',
+            focus: 'focus:after:bg-light-on-primary/20',
             focusVisible: 'focus-visible:ring-light-on-primary',
-            disabled: 'disabled:fill-light-on-primary/40 disabled:text-light-on-primary/40'
+            disabled: 'disabled:text-light-on-primary/40'
           },
           secondary: {
-            fill: 'fill-light-on-secondary',
             color: 'text-light-on-secondary',
-            hover: 'hover:from-light-on-secondary/10 hover:to-light-on-secondary/10',
-            active: 'active:from-light-on-secondary/[0.15] active:to-light-on-secondary/[0.15]',
-            focus: 'focus:from-light-on-secondary/[0.15] focus:to-light-on-secondary/[0.15]',
+            hover: 'hover:after:bg-light-on-secondary/10',
+            active: 'active:after:bg-light-on-secondary/20',
+            focus: 'focus:after:bg-light-on-secondary/20',
             focusVisible: 'focus-visible:ring-light-on-secondary',
-            disabled: 'disabled:fill-light-on-secondary/40 disabled:text-light-on-secondary/40'
+            disabled: 'disabled:text-light-on-secondary/40'
           },
           success: {
-            fill: 'fill-light-on-success',
             color: 'text-light-on-success',
-            hover: 'hover:from-light-on-success/10 hover:to-light-on-success/10',
-            active: 'active:from-light-on-success/[0.15] active:to-light-on-success/[0.15]',
-            focus: 'focus:from-light-on-success/[0.15] focus:to-light-on-success/[0.15]',
+            hover: 'hover:after:bg-light-on-success/10',
+            active: 'active:after:bg-light-on-success/20',
+            focus: 'focus:after:bg-light-on-success/20',
             focusVisible: 'focus-visible:ring-light-on-success',
-            disabled: 'disabled:fill-light-on-success/40 disabled:text-light-on-success/40'
+            disabled: 'disabled:text-light-on-success/40'
           },
           warning: {
-            fill: 'fill-light-on-warning',
             color: 'text-light-on-warning',
-            hover: 'hover:from-light-on-warning/10 hover:to-light-on-warning/10',
-            active: 'active:from-light-on-warning/[0.15] active:to-light-on-warning/[0.15]',
-            focus: 'focus:from-light-on-warning/[0.15] focus:to-light-on-warning/[0.15]',
+            hover: 'hover:after:bg-light-on-warning/10',
+            active: 'active:after:bg-light-on-warning/20',
+            focus: 'focus:after:bg-light-on-warning/20',
             focusVisible: 'focus-visible:ring-light-on-warning',
-            disabled: 'disabled:fill-light-on-warning/40 disabled:text-light-on-warning/40'
+            disabled: 'disabled:text-light-on-warning/40'
           },
           error: {
-            fill: 'fill-light-on-error',
             color: 'text-light-on-error',
-            hover: 'hover:from-light-on-error/10 hover:to-light-on-error/10',
-            active: 'active:from-light-on-error/[0.15] active:to-light-on-error/[0.15]',
-            focus: 'focus:from-light-on-error/[0.15] focus:to-light-on-error/[0.15]',
+            hover: 'hover:after:bg-light-on-error/10',
+            active: 'active:after:bg-light-on-error/20',
+            focus: 'focus:after:bg-light-on-error/20',
             focusVisible: 'focus-visible:ring-light-on-error',
-            disabled: 'disabled:fill-light-on-error/40 disabled:text-light-on-error/40'
+            disabled: 'disabled:text-light-on-error/40'
+          }
+        },
+        dark: {
+          default: {
+            color: 'text-dark-on-surface',
+            hover: 'hover:after:bg-dark-on-surface/10',
+            active: 'active:after:bg-dark-on-surface/20',
+            focus: 'focus:after:bg-dark-on-surface/20',
+            focusVisible: 'focus-visible:ring-dark-on-surface',
+            disabled: 'disabled:text-dark-on-surface/40'
+          },
+          primary: {
+            color: 'text-dark-on-primary',
+            hover: 'hover:after:bg-dark-on-primary/10',
+            active: 'active:after:bg-dark-on-primary/20',
+            focus: 'focus:after:bg-dark-on-primary/20',
+            focusVisible: 'focus-visible:ring-dark-on-primary',
+            disabled: 'disabled:text-dark-on-primary/40'
+          },
+          secondary: {
+            color: 'text-dark-on-secondary',
+            hover: 'hover:after:bg-dark-on-secondary/10',
+            active: 'active:after:bg-dark-on-secondary/20',
+            focus: 'focus:after:bg-dark-on-secondary/20',
+            focusVisible: 'focus-visible:ring-dark-on-secondary',
+            disabled: 'disabled:text-dark-on-secondary/40'
+          },
+          success: {
+            color: 'text-dark-on-success',
+            hover: 'hover:after:bg-dark-on-success/10',
+            active: 'active:after:bg-dark-on-success/20',
+            focus: 'focus:after:bg-dark-on-success/20',
+            focusVisible: 'focus-visible:ring-dark-on-success',
+            disabled: 'disabled:text-dark-on-success/40'
+          },
+          warning: {
+            color: 'text-dark-on-warning',
+            hover: 'hover:after:bg-dark-on-warning/10',
+            active: 'active:after:bg-dark-on-warning/20',
+            focus: 'focus:after:bg-dark-on-warning/20',
+            focusVisible: 'focus-visible:ring-dark-on-warning',
+            disabled: 'disabled:text-dark-on-warning/40'
+          },
+          error: {
+            color: 'text-dark-on-error',
+            hover: 'hover:after:bg-dark-on-error/10',
+            active: 'active:after:bg-dark-on-error/20',
+            focus: 'focus:after:bg-dark-on-error/20',
+            focusVisible: 'focus-visible:ring-dark-on-error',
+            disabled: 'disabled:text-dark-on-error/40'
           }
         }
       },
       text: {
         light: {
           default: {
-            fill: 'fill-light-on-surface',
             color: 'text-light-on-surface',
-            hover: 'hover:from-light-on-surface/10 hover:to-light-on-surface/10',
-            active: 'active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]',
-            focus: 'focus:from-light-on-surface/[0.15] focus:to-light-on-surface/[0.15]',
+            hover: 'hover:after:bg-light-on-surface/10',
+            active: 'active:after:bg-light-on-surface/20',
+            focus: 'focus:after:bg-light-on-surface/20',
             focusVisible: 'focus-visible:ring-light-on-surface',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           primary: {
-            fill: 'fill-light-primary',
             color: 'text-light-primary',
-            hover: 'hover:from-light-primary/10 hover:to-light-primary/10',
-            active: 'active:from-light-primary/[0.15] active:to-light-primary/[0.15]',
-            focus: 'focus:from-light-primary/[0.15] focus:to-light-primary/[0.15]',
+            hover: 'hover:after:bg-light-primary/10',
+            active: 'active:after:bg-light-primary/20',
+            focus: 'focus:after:bg-light-primary/20',
             focusVisible: 'focus-visible:ring-light-primary',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           secondary: {
-            fill: 'fill-light-secondary',
             color: 'text-light-secondary',
-            hover: 'hover:from-light-secondary/10 hover:to-light-secondary/10',
-            active: 'active:from-light-secondary/[0.15] active:to-light-secondary/[0.15]',
-            focus: 'focus:from-light-secondary/[0.15] focus:to-light-secondary/[0.15]',
+            hover: 'hover:after:bg-light-secondary/10',
+            active: 'active:after:bg-light-secondary/20',
+            focus: 'focus:after:bg-light-secondary/20',
             focusVisible: 'focus-visible:ring-light-secondary',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           success: {
-            fill: 'fill-light-success',
             color: 'text-light-success',
-            hover: 'hover:from-light-success/10 hover:to-light-success/10',
-            active: 'active:from-light-success/[0.15] active:to-light-success/[0.15]',
-            focus: 'focus:from-light-success/[0.15] focus:to-light-success/[0.15]',
+            hover: 'hover:after:bg-light-success/10',
+            active: 'active:after:bg-light-success/20',
+            focus: 'focus:after:bg-light-success/20',
             focusVisible: 'focus-visible:ring-light-success',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           warning: {
-            fill: 'fill-light-warning',
             color: 'text-light-warning',
-            hover: 'hover:from-light-warning/10 hover:to-light-warning/10',
-            active: 'active:from-light-warning/[0.15] active:to-light-warning/[0.15]',
-            focus: 'focus:from-light-warning/[0.15] focus:to-light-warning/[0.15]',
+            hover: 'hover:after:bg-light-warning/10',
+            active: 'active:after:bg-light-warning/20',
+            focus: 'focus:after:bg-light-warning/20',
             focusVisible: 'focus-visible:ring-light-warning',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           error: {
-            fill: 'fill-light-error',
             color: 'text-light-error',
-            hover: 'hover:from-light-error/10 hover:to-light-error/10',
-            active: 'active:from-light-error/[0.15] active:to-light-error/[0.15]',
-            focus: 'focus:from-light-error/[0.15] focus:to-light-error/[0.15]',
+            hover: 'hover:after:bg-light-error/10',
+            active: 'active:after:bg-light-error/20',
+            focus: 'focus:after:bg-light-error/20',
             focusVisible: 'focus-visible:ring-light-error',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:text-light-on-surface/40'
+          }
+        },
+        dark: {
+          default: {
+            color: 'text-dark-on-surface',
+            hover: 'hover:after:bg-dark-on-surface/10',
+            active: 'active:after:bg-dark-on-surface/20',
+            focus: 'focus:after:bg-dark-on-surface/20',
+            focusVisible: 'focus-visible:ring-dark-on-surface',
+            disabled: 'disabled:text-dark-on-surface/40'
+          },
+          primary: {
+            color: 'text-dark-primary',
+            hover: 'hover:after:bg-dark-primary/10',
+            active: 'active:after:bg-dark-primary/20',
+            focus: 'focus:after:bg-dark-primary/20',
+            focusVisible: 'focus-visible:ring-dark-primary',
+            disabled: 'disabled:text-dark-on-surface/40'
+          },
+          secondary: {
+            color: 'text-dark-secondary',
+            hover: 'hover:after:bg-dark-secondary/10',
+            active: 'active:after:bg-dark-secondary/20',
+            focus: 'focus:after:bg-dark-secondary/20',
+            focusVisible: 'focus-visible:ring-dark-secondary',
+            disabled: 'disabled:text-dark-on-surface/40'
+          },
+          success: {
+            color: 'text-dark-success',
+            hover: 'hover:after:bg-dark-success/10',
+            active: 'active:after:bg-dark-success/20',
+            focus: 'focus:after:bg-dark-success/20',
+            focusVisible: 'focus-visible:ring-dark-success',
+            disabled: 'disabled:text-dark-on-surface/40'
+          },
+          warning: {
+            color: 'text-dark-warning',
+            hover: 'hover:after:bg-dark-warning/10',
+            active: 'active:after:bg-dark-warning/20',
+            focus: 'focus:after:bg-dark-warning/20',
+            focusVisible: 'focus-visible:ring-dark-warning',
+            disabled: 'disabled:text-dark-on-surface/40'
+          },
+          error: {
+            color: 'text-dark-error',
+            hover: 'hover:after:bg-dark-error/10',
+            active: 'active:after:bg-dark-error/20',
+            focus: 'focus:after:bg-dark-error/20',
+            focusVisible: 'focus-visible:ring-dark-error',
+            disabled: 'disabled:text-dark-on-surface/40'
+          }
+        }
+      },
+      soft: {
+        light: {
+          default: {
+            color: 'text-light-on-surface',
+            background: 'bg-light-surface-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-on-surface/10',
+            active: 'active:shadow-none active:after:bg-light-on-surface/20',
+            focus: 'focus:shadow-none focus:after:bg-light-on-surface/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-on-surface',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          primary: {
+            color: 'text-light-primary',
+            background: 'bg-light-primary-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-primary/10',
+            active: 'active:shadow-none active:after:bg-light-primary/20',
+            focus: 'focus:shadow-none focus:after:bg-light-primary/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-primary',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          secondary: {
+            color: 'text-light-secondary',
+            background: 'bg-light-secondary-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-secondary/10',
+            active: 'active:shadow-none active:after:bg-light-secondary/20',
+            focus: 'focus:shadow-none focus:after:bg-light-secondary/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-secondary',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          success: {
+            color: 'text-light-success',
+            background: 'bg-light-success-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-success/10',
+            active: 'active:shadow-none active:after:bg-light-success/20',
+            focus: 'focus:shadow-none focus:after:bg-light-success/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-success',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          warning: {
+            color: 'text-light-warning',
+            background: 'bg-light-warning-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-warning/10',
+            active: 'active:shadow-none active:after:bg-light-warning/20',
+            focus: 'focus:shadow-none focus:after:bg-light-warning/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-warning',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          error: {
+            color: 'text-light-error',
+            background: 'bg-light-error-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-error/10',
+            active: 'active:shadow-none active:after:bg-light-error/20',
+            focus: 'focus:shadow-none focus:after:bg-light-error/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-error',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          }
+        },
+        dark: {
+          default: {
+            color: 'text-dark-on-surface',
+            background: 'bg-dark-surface-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-on-surface/10',
+            active: 'active:shadow-none active:after:bg-dark-on-surface/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-on-surface/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-on-surface',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          primary: {
+            color: 'text-dark-primary',
+            background: 'bg-dark-primary-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-primary/10',
+            active: 'active:shadow-none active:after:bg-dark-primary/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-primary/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-primary',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          secondary: {
+            color: 'text-dark-secondary',
+            background: 'bg-dark-secondary-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-secondary/10',
+            active: 'active:shadow-none active:after:bg-dark-secondary/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-secondary/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-secondary',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          success: {
+            color: 'text-dark-success',
+            background: 'bg-dark-success-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-success/10',
+            active: 'active:shadow-none active:after:bg-dark-success/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-success/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-success',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          warning: {
+            color: 'text-dark-warning',
+            background: 'bg-dark-warning-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-warning/10',
+            active: 'active:shadow-none active:after:bg-dark-warning/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-warning/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-warning',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          error: {
+            color: 'text-dark-error',
+            background: 'bg-dark-error-soft',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-error/10',
+            active: 'active:shadow-none active:after:bg-dark-error/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-error/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-error',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          }
+        }
+      },
+      solid: {
+        light: {
+          default: {
+            color: 'text-light-on-surface',
+            background: 'bg-light-surface',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-on-surface/10',
+            active: 'active:shadow-none active:after:bg-light-on-surface/20',
+            focus: 'focus:shadow-none focus:after:bg-light-on-surface/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-on-surface',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          primary: {
+            color: 'text-light-on-primary',
+            background: 'bg-light-primary',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-on-primary/10',
+            active: 'active:shadow-none active:after:bg-light-on-primary/20',
+            focus: 'focus:shadow-none focus:after:bg-light-on-primary/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-primary',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          secondary: {
+            color: 'text-light-on-secondary',
+            background: 'bg-light-secondary',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-on-secondary/10',
+            active: 'active:shadow-none active:after:bg-light-on-secondary/20',
+            focus: 'focus:shadow-none focus:after:bg-light-on-secondary/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-secondary',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          success: {
+            color: 'text-light-on-success',
+            background: 'bg-light-success',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-on-success/10',
+            active: 'active:shadow-none active:after:bg-light-on-success/20',
+            focus: 'focus:shadow-none focus:after:bg-light-on-success/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-success',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          warning: {
+            color: 'text-light-on-warning',
+            background: 'bg-light-warning',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-on-warning/10',
+            active: 'active:shadow-none active:after:bg-light-on-warning/20',
+            focus: 'focus:shadow-none focus:after:bg-light-on-warning/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-warning',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          },
+          error: {
+            color: 'text-light-on-error',
+            background: 'bg-light-error',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-light-on-error/10',
+            active: 'active:shadow-none active:after:bg-light-on-error/20',
+            focus: 'focus:shadow-none focus:after:bg-light-on-error/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-light-error',
+            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+          }
+        },
+        dark: {
+          default: {
+            color: 'text-dark-on-surface',
+            background: 'bg-dark-surface',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-on-surface/10',
+            active: 'active:shadow-none active:after:bg-dark-on-surface/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-on-surface/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-on-surface',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          primary: {
+            color: 'text-dark-on-primary',
+            background: 'bg-dark-primary',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-on-primary/10',
+            active: 'active:shadow-none active:after:bg-dark-on-primary/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-on-primary/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-primary',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          secondary: {
+            color: 'text-dark-on-secondary',
+            background: 'bg-dark-secondary',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-on-secondary/10',
+            active: 'active:shadow-none active:after:bg-dark-on-secondary/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-on-secondary/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-secondary',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          success: {
+            color: 'text-dark-on-success',
+            background: 'bg-dark-success',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-on-success/10',
+            active: 'active:shadow-none active:after:bg-dark-on-success/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-on-success/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-success',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          warning: {
+            color: 'text-dark-on-warning',
+            background: 'bg-dark-warning',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-on-warning/10',
+            active: 'active:shadow-none active:after:bg-dark-on-warning/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-on-warning/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-warning',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+          },
+          error: {
+            color: 'text-dark-on-error',
+            background: 'bg-dark-error',
+            hover: 'hover:shadow-md hover:shadow-black/50 hover:after:bg-dark-on-error/10',
+            active: 'active:shadow-none active:after:bg-dark-on-error/20',
+            focus: 'focus:shadow-none focus:after:bg-dark-on-error/20',
+            focusVisible: 'focus-visible:shadow-none focus-visible:ring-dark-error',
+            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
           }
         }
       },
       outlined: {
         light: {
           default: {
-            border: 'border border-light-on-surface',
-            fill: 'fill-light-on-surface',
+            border: 'border-light-on-surface',
             color: 'text-light-on-surface',
-            hover: 'hover:from-light-on-surface/10 hover:to-light-on-surface/10',
-            active: 'active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]',
-            focus: 'focus:from-light-on-surface/[0.15] focus:to-light-on-surface/[0.15]',
+            hover: 'hover:after:bg-light-on-surface/10',
+            active: 'active:after:bg-light-on-surface/20',
+            focus: 'focus:after:bg-light-on-surface/20',
             focusVisible: 'focus-visible:ring-light-on-surface',
-            disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           primary: {
-            border: 'border border-light-primary',
-            fill: 'fill-light-primary',
+            border: 'border-light-primary',
             color: 'text-light-primary',
-            hover: 'hover:from-light-primary/10 hover:to-light-primary/10',
-            active: 'active:from-light-primary/[0.15] active:to-light-primary/[0.15]',
-            focus: 'focus:from-light-primary/[0.15] focus:to-light-primary/[0.15]',
+            hover: 'hover:after:bg-light-primary/10',
+            active: 'active:after:bg-light-primary/20',
+            focus: 'focus:after:bg-light-primary/20',
             focusVisible: 'focus-visible:ring-light-primary',
-            disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           secondary: {
-            border: 'border border-light-secondary',
-            fill: 'fill-light-secondary',
+            border: 'border-light-secondary',
             color: 'text-light-secondary',
-            hover: 'hover:from-light-secondary/10 hover:to-light-secondary/10',
-            active: 'active:from-light-secondary/[0.15] active:to-light-secondary/[0.15]',
-            focus: 'focus:from-light-secondary/[0.15] focus:to-light-secondary/[0.15]',
+            hover: 'hover:after:bg-light-secondary/10',
+            active: 'active:after:bg-light-secondary/20',
+            focus: 'focus:after:bg-light-secondary/20',
             focusVisible: 'focus-visible:ring-light-secondary',
-            disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           success: {
-            border: 'border border-light-success',
-            fill: 'fill-light-success',
+            border: 'border-light-success',
             color: 'text-light-success',
-            hover: 'hover:from-light-success/10 hover:to-light-success/10',
-            active: 'active:from-light-success/[0.15] active:to-light-success/[0.15]',
-            focus: 'focus:from-light-success/[0.15] focus:to-light-success/[0.15]',
+            hover: 'hover:after:bg-light-success/10',
+            active: 'active:after:bg-light-success/20',
+            focus: 'focus:after:bg-light-success/20',
             focusVisible: 'focus-visible:ring-light-success',
-            disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           warning: {
-            border: 'border border-light-warning',
-            fill: 'fill-light-warning',
+            border: 'border-light-warning',
             color: 'text-light-warning',
-            hover: 'hover:from-light-warning/10 hover:to-light-warning/10',
-            active: 'active:from-light-warning/[0.15] active:to-light-warning/[0.15]',
-            focus: 'focus:from-light-warning/[0.15] focus:to-light-warning/[0.15]',
+            hover: 'hover:after:bg-light-warning/10',
+            active: 'active:after:bg-light-warning/20',
+            focus: 'focus:after:bg-light-warning/20',
             focusVisible: 'focus-visible:ring-light-warning',
-            disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
           },
           error: {
-            border: 'border border-light-error',
-            fill: 'fill-light-error',
+            border: 'border-light-error',
             color: 'text-light-error',
-            hover: 'hover:from-light-error/10 hover:to-light-error/10',
-            active: 'active:from-light-error/[0.15] active:to-light-error/[0.15]',
-            focus: 'focus:from-light-error/[0.15] focus:to-light-error/[0.15]',
+            hover: 'hover:after:bg-light-error/10',
+            active: 'active:after:bg-light-error/20',
+            focus: 'focus:after:bg-light-error/20',
             focusVisible: 'focus-visible:ring-light-error',
-            disabled: 'disabled:border-light-on-surface/40 disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40'
+            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
           }
-        }
-      },
-      filled: {
-        light: {
+        },
+        dark: {
           default: {
-            fill: 'fill-light-on-surface',
-            color: 'text-light-on-surface',
-            background: 'bg-light-surface-dark',
-            hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-surface/10 hover:to-light-on-surface/10',
-            active: 'active:shadow-none active:from-light-on-surface/[0.15] active:to-light-on-surface/[0.15]',
-            focus: 'focus:shadow-none active:from-light-on-surface/[0.15] focus:to-light-on-surface/[0.15]',
-            focusVisible: 'focus-visible:ring-light-on-surface',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            border: 'border-dark-on-surface',
+            color: 'text-dark-on-surface',
+            hover: 'hover:after:bg-dark-on-surface/10',
+            active: 'active:after:bg-dark-on-surface/20',
+            focus: 'focus:after:bg-dark-on-surface/20',
+            focusVisible: 'focus-visible:ring-dark-on-surface',
+            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
           },
           primary: {
-            fill: 'fill-light-on-primary',
-            color: 'text-light-on-primary',
-            background: 'bg-light-primary',
-            hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-primary/10 hover:to-light-on-primary/10',
-            active: 'active:shadow-none active:from-light-on-primary/[0.15] active:to-light-on-primary/[0.15]',
-            focus: 'focus:shadow-none active:from-light-on-primary/[0.15] focus:to-light-on-primary/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-primary',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            border: 'border-dark-primary',
+            color: 'text-dark-primary',
+            hover: 'hover:after:bg-dark-primary/10',
+            active: 'active:after:bg-dark-primary/20',
+            focus: 'focus:after:bg-dark-primary/20',
+            focusVisible: 'focus-visible:ring-dark-primary',
+            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
           },
           secondary: {
-            fill: 'fill-light-on-secondary',
-            color: 'text-light-on-secondary',
-            background: 'bg-light-secondary',
-            hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-secondary/10 hover:to-light-on-secondary/10',
-            active: 'active:shadow-none active:from-light-on-secondary/[0.15] active:to-light-on-secondary/[0.15]',
-            focus: 'focus:shadow-none active:from-light-on-secondary/[0.15] focus:to-light-on-secondary/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-secondary',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            border: 'border-dark-secondary',
+            color: 'text-dark-secondary',
+            hover: 'hover:after:bg-dark-secondary/10',
+            active: 'active:after:bg-dark-secondary/20',
+            focus: 'focus:after:bg-dark-secondary/20',
+            focusVisible: 'focus-visible:ring-dark-secondary',
+            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
           },
           success: {
-            fill: 'fill-light-on-success',
-            color: 'text-light-on-success',
-            background: 'bg-light-success',
-            hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-success/10 hover:to-light-on-success/10',
-            active: 'active:shadow-none active:from-light-on-success/[0.15] active:to-light-on-success/[0.15]',
-            focus: 'focus:shadow-none active:from-light-on-success/[0.15] focus:to-light-on-success/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-success focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-success',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            border: 'border-dark-success',
+            color: 'text-dark-success',
+            hover: 'hover:after:bg-dark-success/10',
+            active: 'active:after:bg-dark-success/20',
+            focus: 'focus:after:bg-dark-success/20',
+            focusVisible: 'focus-visible:ring-dark-success',
+            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
           },
           warning: {
-            fill: 'fill-light-on-warning',
-            color: 'text-light-on-warning',
-            background: 'bg-light-warning',
-            hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-warning/10 hover:to-light-on-warning/10',
-            active: 'active:shadow-none active:from-light-on-warning/[0.15] active:to-light-on-warning/[0.15]',
-            focus: 'focus:shadow-none active:from-light-on-warning/[0.15] focus:to-light-on-warning/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-warning focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-warning',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            border: 'border-dark-warning',
+            color: 'text-dark-warning',
+            hover: 'hover:after:bg-dark-warning/10',
+            active: 'active:after:bg-dark-warning/20',
+            focus: 'focus:after:bg-dark-warning/20',
+            focusVisible: 'focus-visible:ring-dark-warning',
+            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
           },
           error: {
-            fill: 'fill-light-on-error',
-            color: 'text-light-on-error',
-            background: 'bg-light-error',
-            hover: 'hover:shadow-md hover:shadow-black/50 hover:from-light-on-error/10 hover:to-light-on-error/10',
-            active: 'active:shadow-none active:from-light-on-error/[0.15] active:to-light-on-error/[0.15]',
-            focus: 'focus:shadow-none active:from-light-on-error/[0.15] focus:to-light-on-error/[0.15]',
-            focusVisible: 'focus-visible:ring-4 focus-visible:ring-light-error focus-visible:outline focus-visible:outline-2 focus-visible:outline-light-on-error',
-            disabled: 'disabled:fill-light-on-surface/40 disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            border: 'border-dark-error',
+            color: 'text-dark-error',
+            hover: 'hover:after:bg-dark-error/10',
+            active: 'active:after:bg-dark-error/20',
+            focus: 'focus:after:bg-dark-error/20',
+            focusVisible: 'focus-visible:ring-dark-error',
+            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
           }
         }
       }
