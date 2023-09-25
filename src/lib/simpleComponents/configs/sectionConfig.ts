@@ -1,6 +1,6 @@
 import { type AriaRole } from 'react';
 
-export interface FooterConfig {
+export interface SectionConfig {
   defaultProps: {
     variant: Variants;
     role: AriaRole;
@@ -11,7 +11,7 @@ export interface FooterConfig {
   };
 }
 
-const footerConfig: FooterConfig = {
+const sectionConfig: SectionConfig = {
   defaultProps: {
     variant: 'text',
     role: 'region'
@@ -77,4 +77,4 @@ const footerConfig: FooterConfig = {
   }
 };
 
-export default footerConfig;
+export default sectionConfig;
