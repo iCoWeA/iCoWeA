@@ -2,9 +2,9 @@ import { type AriaRole } from 'react';
 
 export interface FooterConfig {
   defaultProps: {
-    fullwidth: boolean;
     variant: Variants;
     color: Colors;
+    fullwidth: boolean;
     role: AriaRole;
   };
   styles: {
@@ -15,9 +15,9 @@ export interface FooterConfig {
 
 const footerConfig: FooterConfig = {
   defaultProps: {
-    fullwidth: false,
     variant: 'text',
     color: 'default',
+    fullwidth: false,
     role: 'contentinfo'
   },
   styles: {
