@@ -17,7 +17,8 @@ const sectionConfig: SectionConfig = {
     base: {
       display: 'flex',
       flexDirection: 'flex-col',
-      width: 'w-full'
+      width: 'w-full',
+      padding: 'py-lg'
     }
   }
 };
