@@ -9,19 +9,19 @@ interface ExampleSectionProps {
   titleId: string;
   title: ReactNode;
   description?: ReactNode;
-  row?: boolean;
+  col?: boolean;
   reverseColor?: boolean;
   children: ReactNode;
 }
 
-const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, row = false, reverseColor = false, children }) => {
+const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, col = false, reverseColor = false, children }) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
   const light = theme === 'light';
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
-    row ? 'flex-row justify-evenly' : 'items-center',
+    !col && 'justify-evenly',
     light && !reverseColor && 'bg-light-surface-dark',
     !light && !reverseColor && 'bg-light-surface-dark',
     light && reverseColor && 'bg-light-surface',
@@ -41,6 +41,7 @@ const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, 
         variant="outlined"
         simple
         gap="md"
+        layout={col ? 'col' : 'row'}
         className={mergedClassName}
       >
         {children}

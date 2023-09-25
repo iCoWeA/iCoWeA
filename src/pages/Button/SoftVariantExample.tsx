@@ -6,7 +6,6 @@ const SoftVariantExample: FC = () => (
   <ExampleSection
     title="Soft variant"
     titleId="soft"
-    row
   >
     <Button
       variant="soft"

@@ -2,43 +2,43 @@ import React, { type FC } from 'react';
 import ExampleSection from '../../components/ExampleSection';
 import Button from '../../lib/simpleComponents/components/UI/Button';
 
-const SolidVariantExample: FC = () => (
+const OutlinedVariantExample: FC = () => (
   <ExampleSection
-    title="Solid variant"
-    titleId="solid"
+    title="Outlined variant"
+    titleId="outlined"
   >
     <Button
-      variant="solid"
+      variant="outlined"
       color="default"
     >
       Button
     </Button>
     <Button
-      variant="solid"
+      variant="outlined"
       color="primary"
     >
       Button
     </Button>
     <Button
-      variant="solid"
+      variant="outlined"
       color="secondary"
     >
       Button
     </Button>
     <Button
-      variant="solid"
+      variant="outlined"
       color="success"
     >
       Button
     </Button>
     <Button
-      variant="solid"
+      variant="outlined"
       color="warning"
     >
       Button
     </Button>
     <Button
-      variant="solid"
+      variant="outlined"
       color="error"
     >
       Button
@@ -46,4 +46,4 @@ const SolidVariantExample: FC = () => (
   </ExampleSection>
 );
 
-export default SolidVariantExample;
+export default OutlinedVariantExample;

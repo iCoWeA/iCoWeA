@@ -6,7 +6,6 @@ const TextVariantExample: FC = () => (
   <ExampleSection
     title="Text variant"
     titleId="text"
-    row
   >
     <Button
       variant="text"
