@@ -23,6 +23,7 @@ const mainConfig: MainConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       alignItems: 'items-center',
+      justifyContent: 'justify-between',
       width: 'w-full',
       height: 'h-full',
       padding: 'p-lg-p',
