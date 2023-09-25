@@ -33,7 +33,7 @@ const headerConfig: HeaderConfig = {
     elevated: {
       position: 'relative',
       zIndex: 'z-[1]',
-      shadow: 'shadow-md shadow-black/50'
+      shadow: 'shadow-md'
     },
     variants: {
       plain: {
