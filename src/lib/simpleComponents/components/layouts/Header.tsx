@@ -38,7 +38,6 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       <Box
         layout={fullwidth ? 'dashboard' : 'fullbleed'}
         gap="lg"
-        variant="plain"
         color={color}
         {...boxProps}
       >
