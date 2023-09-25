@@ -1,10 +1,12 @@
 import { type AriaRole } from 'react';
+import { type BoxProps } from '../components/UI/Box';
 
 export interface HeaderConfig {
   defaultProps: {
     variant: Variants;
-    layout: Layouts;
+    fullwidth: boolean;
     elevated: boolean;
+    boxProps: BoxProps;
     role: AriaRole;
   };
   styles: {
@@ -17,8 +19,12 @@ export interface HeaderConfig {
 const headerConfig: HeaderConfig = {
   defaultProps: {
     variant: 'text',
-    layout: 'page',
+    fullwidth: false,
     elevated: true,
+    boxProps: {
+      size: 'lg',
+      variant: 'fullbleed'
+    },
     role: 'banner'
   },
   styles: {
@@ -27,7 +33,7 @@ const headerConfig: HeaderConfig = {
       zIndex: 'z-[1]',
       display: 'flex',
       width: 'w-full',
-      padding: 'p-lg-p',
+      padding: 'py-lg-p',
       border: 'border'
     },
     elevated: {
