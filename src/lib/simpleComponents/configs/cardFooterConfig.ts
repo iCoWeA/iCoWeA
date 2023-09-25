@@ -24,16 +24,16 @@ const cardFooterConfig: CardFooterConfig = {
   styles: {
     sizes: {
       xs: {
-        padding: 'px-xs-p'
+        padding: 'p-xs-p'
       },
       sm: {
-        padding: 'px-sm-p'
+        padding: 'p-sm-p'
       },
       md: {
-        padding: 'px-md-p'
+        padding: 'p-md-p'
       },
       lg: {
-        padding: 'px-lg-p'
+        padding: 'p-lg-p'
       }
     }
   }
