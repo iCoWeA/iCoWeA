@@ -35,7 +35,7 @@ const buttonConfig: ButtonConfig = {
       alignItems: 'items-center',
       width: 'w-fit',
       border: 'border border-transparent',
-      font: 'antialiased font-normal text-sm font-sans',
+      font: 'antialiased font-semibold text-sm font-sans',
       transition: 'transition',
       userSelect: 'select-none',
       focus: 'focus:outline-none',
