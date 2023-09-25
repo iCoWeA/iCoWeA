@@ -15,7 +15,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   shape?: Shapes;
   variant?: Variants;
   color?: Colors;
-  elevated?: boolean;
   fullwidth?: boolean;
   startDecoration?: ReactNode;
   endDecoration?: ReactNode;
@@ -27,7 +26,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = buttonConfig.styles;
-  const { size, shape, variant, color, elevated, fullwidth, startDecoration, endDecoration, className, children, ...restProps } = {
+  const { size, shape, variant, color, fullwidth, startDecoration, endDecoration, className, children, ...restProps } = {
     ...buttonConfig.defaultProps,
     ...props
   };
@@ -53,7 +52,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     styles.shapes[shape],
     styles.variants[variant][theme][color],
     styles.stateLayerVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
-    elevated && styles.elevated,
     fullwidth && styles.fullwidth,
     className
   );

@@ -4,7 +4,6 @@ export interface ButtonConfig {
     shape: Shapes;
     variant: Variants;
     color: Colors;
-    elevated: boolean;
     fullwidth: boolean;
     type: 'button';
   };
@@ -12,7 +11,6 @@ export interface ButtonConfig {
     base: Record<string, string>;
     stateLayer: Record<string, string>;
     fullwidth: Record<string, string>;
-    elevated: Record<string, string>;
     sizes: Record<Sizes, Record<string, string>>;
     shapes: Record<Shapes, Record<string, string>>;
     variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
@@ -26,7 +24,6 @@ const buttonConfig: ButtonConfig = {
     shape: 'circular',
     variant: 'solid',
     color: 'primary',
-    elevated: false,
     fullwidth: false,
     type: 'button'
   },
@@ -58,13 +55,6 @@ const buttonConfig: ButtonConfig = {
     fullwidth: {
       width: 'w-full',
       justifyContent: 'justify-center'
-    },
-    elevated: {
-      shadow: 'shadow-md',
-      hover: 'hover:shadow-lg',
-      active: 'active:shadow-md',
-      focus: 'focus:shadow-md',
-      focusVisible: 'focus-visible:shadow-md'
     },
     shapes: {
       rounded: {
@@ -107,23 +97,23 @@ const buttonConfig: ButtonConfig = {
           },
           primary: {
             color: 'text-light-on-primary',
-            disabled: 'disabled:text-light-on-primary/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           secondary: {
             color: 'text-light-on-secondary',
-            disabled: 'disabled:text-light-on-secondary/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           success: {
             color: 'text-light-on-success',
-            disabled: 'disabled:text-light-on-success/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           warning: {
             color: 'text-light-on-warning',
-            disabled: 'disabled:text-light-on-warning/40'
+            disabled: 'disabled:text-light-on-surface/40'
           },
           error: {
             color: 'text-light-on-error',
-            disabled: 'disabled:text-light-on-error/40'
+            disabled: 'disabled:text-light-on-surface/40'
           }
         },
         dark: {
@@ -133,23 +123,23 @@ const buttonConfig: ButtonConfig = {
           },
           primary: {
             color: 'text-dark-on-primary',
-            disabled: 'disabled:text-dark-on-primary/40'
+            disabled: 'disabled:text-dark-on-surface/40'
           },
           secondary: {
             color: 'text-dark-on-secondary',
-            disabled: 'disabled:text-dark-on-secondary/40'
+            disabled: 'disabled:text-dark-on-surface/40'
           },
           success: {
             color: 'text-dark-on-success',
-            disabled: 'disabled:text-dark-on-success/40'
+            disabled: 'disabled:text-dark-on-surface/40'
           },
           warning: {
             color: 'text-dark-on-warning',
-            disabled: 'disabled:text-dark-on-warning/40'
+            disabled: 'disabled:text-dark-on-surface/40'
           },
           error: {
             color: 'text-dark-on-error',
-            disabled: 'disabled:text-dark-on-error/40'
+            disabled: 'disabled:text-dark-on-surface/40'
           }
         }
       },
