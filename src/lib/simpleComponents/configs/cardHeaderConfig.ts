@@ -1,27 +1,51 @@
+import { type BoxLayouts } from '../components/UI/Box';
+
 export interface CardHeaderConfig {
   defaultProps: {
+    size: Sizes;
     fullwidht: boolean;
+    layout: BoxLayouts;
+    variant: Variants;
+    color: Colors;
+    gap: Sizes;
   }
   styles: {
     base: Record<string, string>;
     fullwidth: Record<string, string>;
+    sizes: Record<Sizes, Record<string, string>>;
   }
 }
 
 const cardHeaderConfig: CardHeaderConfig = {
   defaultProps: {
-    fullwidht: false
+    size: 'md',
+    fullwidht: false,
+    layout: 'row',
+    variant: 'plain',
+    color: 'default',
+    gap: 'md'
   },
   styles: {
     base: {
-      display: 'flex',
-      gap: 'gap-4',
-      alignItems: 'items-center',
-      width: 'w-full',
-      padding: 'p-4'
+      width: 'w-full'
     },
     fullwidth: {
-      padding: 'p-0'
+      padding: 'p-0',
+      border: 'border-0'
+    },
+    sizes: {
+      xs: {
+        padding: 'px-xs-p'
+      },
+      sm: {
+        padding: 'px-sm-p'
+      },
+      md: {
+        padding: 'px-md-p'
+      },
+      lg: {
+        padding: 'px-lg-p'
+      }
     }
   }
 };
