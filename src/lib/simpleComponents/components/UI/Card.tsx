@@ -1,8 +1,9 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext, useRef, useImperativeHandle, useCallback } from 'react';
+import React, { forwardRef, useContext, useRef, useImperativeHandle, type BaseHTMLAttributes, useCallback } from 'react';
 import cardConfig from '../../configs/cardConfig';
 import themeContext from '../../contexts/theme';
 import useAddEventListener from '../../hooks/useAddEventListener';
-import { mergeClasses } from '../../utils/propsHelper';
+import { mergeClasses } from '../../utils/utils';
+import Box, { type BoxProps } from './Box';
 
 /* ARIA
  *
@@ -10,10 +11,11 @@ import { mergeClasses } from '../../utils/propsHelper';
  *
  */
 
-export type CardVariants = 'plain' | 'filled' | 'outlined';
-
-export interface CardProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: CardVariants;
+export interface CardProps extends BoxProps {
+  size?: Sizes;
+  variant?: Variants;
+  color?: Colors;
+  simple?: boolean;
   elevated?: boolean;
   clickable?: boolean;
   grabed?: boolean;
@@ -26,7 +28,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = cardConfig.styles;
-  const { variant, elevated, clickable, grabed, disabled, className, ...restProps } = { ...cardConfig.defaultProps, ...props };
+  const { size, variant, color, simple, elevated, clickable, grabed, disabled, className, ...restProps } = { ...cardConfig.defaultProps, ...props };
 
   /* --- Set refs --- */
   const cardRef = useRef<HTMLDivElement>(null);
@@ -34,7 +36,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   /* --- Set imperative ref --- */
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => cardRef.current, []);
 
-  /* --- Set click props --- */
+  /* --- Set click event --- */
   const clickableProps: BaseHTMLAttributes<HTMLDivElement> = {};
 
   const clickHandler = useCallback(() => {
@@ -56,17 +58,20 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.variants[variant][theme],
+    simple && styles.sizes[size],
     elevated && styles.elevated,
-    clickable && styles.clickable[theme],
-    grabed && styles.grabed[theme],
-    disabled && styles.disabled[theme],
+    (clickable || grabed) && styles.stateLayer,
+    clickable && styles.stateLayerVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
+    grabed && styles.stateLayerGrabedVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
+    disabled && styles.disabled[variant][theme],
     className
   );
 
   return (
-    <div
+    <Box
       {...clickableProps}
+      variant={variant}
+      color={color}
       className={mergedClassName}
       ref={cardRef}
       {...restProps}

@@ -1,5 +1,8 @@
+import { type BoxLayouts } from '../components/UI/Box';
+
 export interface CardConfig {
   defaultProps: {
+    size: Sizes;
     variant: Variants;
     color: Colors;
     simple: boolean;
@@ -7,29 +10,30 @@ export interface CardConfig {
     clickable: boolean;
     grabed: boolean;
     disabled: boolean;
+    layout: BoxLayouts;
   };
   styles: {
     base: Record<string, string>;
     stateLayer: Record<string, string>;
     elevated: Record<string, string>;
-    clickable: Record<string, string>;
-    grabed: Record<string, string>;
     sizes: Record<Sizes, Record<string, string>>;
     stateLayerVariants: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
-    stateLayerGrabed: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
+    stateLayerGrabedVariants: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
     disabled: Record<Variants, Record<Themes, Record<string, string>>>;
   }
 }
 
 const cardConfig: CardConfig = {
   defaultProps: {
+    size: 'md',
     variant: 'text',
     color: 'default',
     simple: false,
     elevated: false,
     clickable: false,
     grabed: false,
-    disabled: false
+    disabled: false,
+    layout: 'col'
   },
   styles: {
     base: {
@@ -37,7 +41,7 @@ const cardConfig: CardConfig = {
       overflow: 'overflow-hidden'
     },
     stateLayer: {
-      position: 'after:absolute',
+      position: 'relative after:absolute',
       top: 'after:-top-px',
       left: 'after:-left-px',
       display: 'after:block',
@@ -48,12 +52,6 @@ const cardConfig: CardConfig = {
     },
     elevated: {
       shadow: 'shadow-md'
-    },
-    clickable: {
-      position: 'relative'
-    },
-    grabed: {
-      position: 'relative'
     },
     sizes: {
       xs: {
@@ -227,7 +225,7 @@ const cardConfig: CardConfig = {
         }
       }
     },
-    stateLayerGrabed: {
+    stateLayerGrabedVariants: {
       plain: {
         light: {
           default: {
