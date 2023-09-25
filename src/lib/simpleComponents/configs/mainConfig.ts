@@ -25,7 +25,7 @@ const mainConfig: MainConfig = {
       alignItems: 'items-center',
       width: 'w-full',
       height: 'h-full',
-      padding: 'py-lg-py',
+      padding: 'p-lg-p',
       border: 'border border-transparent'
     },
     variants: {
