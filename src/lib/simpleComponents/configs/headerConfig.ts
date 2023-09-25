@@ -28,7 +28,7 @@ const headerConfig: HeaderConfig = {
       display: 'flex',
       width: 'w-screen',
       padding: 'py-lg-py',
-      border: 'border border-transparent'
+      border: 'border-y border-transparent'
     },
     elevated: {
       position: 'relative',

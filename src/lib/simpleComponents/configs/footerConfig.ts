@@ -25,7 +25,7 @@ const footerConfig: FooterConfig = {
       display: 'flex',
       width: 'w-screen',
       padding: 'py-lg-py',
-      border: 'border border-transparent'
+      border: 'border-y border-transparent'
     },
     variants: {
       plain: {
