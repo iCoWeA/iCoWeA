@@ -1,21 +1,33 @@
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import boxConfig from '../../configs/boxConfig';
+import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
 
-export type BoxVariants = 'row' | 'col' | 'grid' | 'block' | 'layout' | 'sticky-layout' | 'page' | 'dashboard';
+export type BoxLayouts = 'row' | 'col' | 'grid' | 'block' | 'layout' | 'sticky-layout' | 'fullbleed' | 'dashboard';
 
 export interface BoxProps extends BaseHTMLAttributes<HTMLDivElement> {
-  variant?: BoxVariants;
-  size?: Sizes;
+  layout?: BoxLayouts;
+  gap?: Sizes;
+  variant?: Variants;
+  color?: Colors;
 }
 
 const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
   const styles = boxConfig.styles;
-  const { variant, size, className, ...restProps } = { ...boxConfig.defaultProps, ...props };
+  const { layout, gap, variant, color, className, ...restProps } = { ...boxConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.variants[variant], size !== undefined && styles.sizes[size], className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.layouts[layout],
+    gap !== undefined && styles.gaps[gap],
+    styles.variants[variant][theme][color],
+    className
+  );
 
   return (
     <div
