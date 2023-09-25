@@ -8,10 +8,11 @@ interface ExampleSectionProps {
   titleId: string;
   title: ReactNode;
   description?: ReactNode;
+  row?: boolean;
   children: ReactNode;
 }
 
-const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, children }) => {
+const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, row, children }) => {
   /* --- Set context props --- */
   const theme = useContext(themeContext).theme;
   const light = theme === 'light';
@@ -29,7 +30,7 @@ const ExampleSection: FC<ExampleSectionProps> = ({ titleId, title, description, 
         variant="outlined"
         simple
         gap="md"
-        className={light ? 'bg-light-surface-dark' : 'bg-light-surface-dark'}
+        className={`${row === true ? 'flex-row justify-between' : 'items-center'} ${light ? 'bg-light-surface-dark' : 'bg-light-surface-dark'}`}
       >
         {children}
       </Card>
