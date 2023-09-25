@@ -48,10 +48,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.after,
+    styles.stateLayer,
     styles.sizes[size],
     styles.shapes[shape],
     styles.variants[variant][theme][color],
+    styles.stateLayerVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
     elevated && styles.elevated,
     fullwidth && styles.fullwidth,
     className
