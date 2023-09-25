@@ -2,10 +2,10 @@ import { type AriaRole } from 'react';
 
 export interface HeaderConfig {
   defaultProps: {
-    fullwidth: boolean;
-    elevated: boolean;
     variant: Variants;
     color: Colors;
+    elevated: boolean;
+    fullwidth: boolean;
     role: AriaRole;
   };
   styles: {
@@ -17,10 +17,10 @@ export interface HeaderConfig {
 
 const headerConfig: HeaderConfig = {
   defaultProps: {
-    fullwidth: false,
-    elevated: true,
     variant: 'text',
     color: 'default',
+    elevated: true,
+    fullwidth: false,
     role: 'banner'
   },
   styles: {
