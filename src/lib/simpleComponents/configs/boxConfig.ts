@@ -62,7 +62,7 @@ const boxConfig: BoxConfig = {
         alignItems: 'items-center',
         margin: 'mx-auto',
         width: 'w-screen',
-        padding: 'px-lg-px',
+        padding: 'px-lg',
         maxWidth: 'max-w-content'
       },
       dashboard: {
@@ -70,7 +70,7 @@ const boxConfig: BoxConfig = {
         justifyContent: 'justify-between',
         alignItems: 'items-center',
         width: 'w-full',
-        padding: 'px-lg-px'
+        padding: 'px-lg'
       }
     },
     gaps: {
