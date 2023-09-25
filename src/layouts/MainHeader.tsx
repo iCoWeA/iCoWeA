@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../lib/simpleComponents/components/layouts/Header';
 
 const MainHeader: FC = () => (
-  <Header variant="outlined">
+  <Header>
     <Link to="/">
       <img
         src={require('../assets/images/logo.png')}
