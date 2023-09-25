@@ -34,7 +34,7 @@ const headerConfig: HeaderConfig = {
       display: 'flex',
       width: 'w-full',
       padding: 'py-lg-p',
-      border: 'border'
+      border: 'border-y'
     },
     elevated: {
       shadow: 'shadow-md shadow-black/50'
@@ -80,11 +80,11 @@ const headerConfig: HeaderConfig = {
       },
       outlined: {
         light: {
-          border: 'border-light-surface-light border-b-light-divider',
+          border: 'border-t-light-surface-light border-b-light-divider',
           background: 'bg-light-surface-light'
         },
         dark: {
-          border: 'border-dark-surface-light border-b-dark-divider',
+          border: 'border-t-dark-surface-light border-b-dark-divider',
           background: 'bg-dark-surface-light'
         }
       }
