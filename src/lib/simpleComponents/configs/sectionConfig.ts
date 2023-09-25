@@ -3,7 +3,6 @@ import { type AriaRole } from 'react';
 export interface FooterConfig {
   defaultProps: {
     variant: Variants;
-    layout: Layouts;
     role: AriaRole;
   };
   styles: {
@@ -15,15 +14,14 @@ export interface FooterConfig {
 const footerConfig: FooterConfig = {
   defaultProps: {
     variant: 'text',
-    layout: 'page',
     role: 'region'
   },
   styles: {
     base: {
       position: 'relative',
       display: 'flex',
+      flexDirection: 'flex-col',
       width: 'w-full',
-      padding: 'p-lg-p',
       border: 'border'
     },
     variants: {
