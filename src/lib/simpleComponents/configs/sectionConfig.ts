@@ -6,6 +6,7 @@ export interface SectionConfig {
   };
   styles: {
     base: Record<string, string>;
+    gaps: Record<Sizes, Record<string, string>>;
   };
 }
 
@@ -18,6 +19,20 @@ const sectionConfig: SectionConfig = {
       display: 'flex',
       flexDirection: 'flex-col',
       width: 'w-full'
+    },
+    gaps: {
+      xs: {
+        gap: 'gap-xs'
+      },
+      sm: {
+        gap: 'gap-sm'
+      },
+      md: {
+        gap: 'gap-md'
+      },
+      lg: {
+        gap: 'gap-lg'
+      }
     }
   }
 };
