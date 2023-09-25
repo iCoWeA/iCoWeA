@@ -21,7 +21,6 @@ const sidebarConfig: SidebarConfig = {
       position: 'relative',
       display: 'flex',
       flexDirection: 'flex-col',
-      alignItems: 'items-center',
       width: 'w-3/12',
       height: 'h-full',
       border: 'border'
