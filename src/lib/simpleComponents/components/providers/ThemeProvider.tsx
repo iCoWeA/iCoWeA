@@ -6,8 +6,10 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
+  /* --- Set states --- */
   const [{ theme }, setTheme] = useState(initialState);
 
+  /* --- Set context --- */
   const context = useMemo(
     () => ({
       theme,
