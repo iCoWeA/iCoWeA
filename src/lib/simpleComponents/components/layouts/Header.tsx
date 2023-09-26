@@ -16,6 +16,7 @@ export interface HeaderProps extends BoxProps {
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
+  /* --- Set default props --- */
   const styles = headerConfig.styles;
   const { divider, fullwidth, containerProps, className, children, ...restProps } = { ...headerConfig.defaultProps.box, ...props };
   const mergedContainerProps = { ...headerConfig.defaultProps.container, ...containerProps };
