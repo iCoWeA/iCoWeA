@@ -38,7 +38,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
         layout={fullwidth ? 'dashboard' : 'fullbleed'}
         gap="lg"
         variant="plain"
-        color={color}
+        color="default"
         {...boxProps}
       >
         {children}
