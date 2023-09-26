@@ -18,7 +18,12 @@ const Icon = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   const { size, variant, color, className, ...restProps } = { ...iconConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(styles.base, styles.sizes[size], styles.variants[variant][theme][color], className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    size !== undefined && styles.sizes[size],
+    variant !== undefined && styles.variants[variant][theme][color],
+    className
+  );
 
   return (
     <svg
