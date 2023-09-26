@@ -1,7 +1,17 @@
+import { type AriaRole, type BaseHTMLAttributes } from 'react';
+
 export interface FooterConfig {
   defaultProps: {
-    color: Colors;
-    fullwidth: boolean;
+    container: {
+      role: AriaRole;
+    },
+    box: {
+      fullwidth: boolean;
+      containerProps: BaseHTMLAttributes<HTMLElement>;
+      gap: Sizes;
+      color: Colors;
+      elevated: boolean;
+    }
   };
   styles: {
     base: Record<string, string>;
@@ -11,8 +21,16 @@ export interface FooterConfig {
 
 const footerConfig: FooterConfig = {
   defaultProps: {
-    color: 'default',
-    fullwidth: false
+    container: {
+      role: 'contentinfo'
+    },
+    box: {
+      fullwidth: false,
+      containerProps: {},
+      gap: 'lg',
+      color: 'default',
+      elevated: false
+    }
   },
   styles: {
     base: {
