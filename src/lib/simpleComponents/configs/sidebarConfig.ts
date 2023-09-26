@@ -4,10 +4,12 @@ export interface SidebarConfig {
   defaultProps: {
     variant: Variants;
     color: Colors;
+    simple: boolean;
     role: AriaRole;
   };
   styles: {
     base: Record<string, string>;
+    simple: Record<string, string>;
     variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
   };
 }
@@ -16,6 +18,7 @@ const sidebarConfig: SidebarConfig = {
   defaultProps: {
     variant: 'text',
     color: 'default',
+    simple: false,
     role: 'complementary'
   },
   styles: {
@@ -24,8 +27,10 @@ const sidebarConfig: SidebarConfig = {
       flexDirection: 'flex-col',
       alignItems: 'items-center',
       width: 'w-3/12',
-      height: 'h-full',
-      border: 'border border-transparent'
+      height: 'h-full'
+    },
+    simple: {
+      padding: 'p-lg'
     },
     variants: {
       plain: {
@@ -161,53 +166,53 @@ const sidebarConfig: SidebarConfig = {
       outlined: {
         light: {
           default: {
-            border: 'border-x-light-divider',
+            border: 'border-x border-x-light-divider',
             background: 'bg-light-surface-light'
           },
           primary: {
-            border: 'border-x-light-primary',
+            border: 'border-x border-x-light-primary',
             background: 'bg-light-surface-light'
           },
           secondary: {
-            border: 'border-x-light-secondary',
+            border: 'border-x border-x-light-secondary',
             background: 'bg-light-surface-light'
           },
           success: {
-            border: 'border-x-light-success',
+            border: 'border-x border-x-light-success',
             background: 'bg-light-surface-light'
           },
           warning: {
-            border: 'border-x-light-warning',
+            border: 'border-x border-x-light-warning',
             background: 'bg-light-surface-light'
           },
           error: {
-            border: 'border-x-light-error',
+            border: 'border-x border-x-light-error',
             background: 'bg-light-surface-light'
           }
         },
         dark: {
           default: {
-            border: 'border-x-dark-divider',
+            border: 'border-x border-x-dark-divider',
             background: 'bg-dark-surface-light'
           },
           primary: {
-            border: 'border-x-dark-primary',
+            border: 'border-x border-x-dark-primary',
             background: 'bg-dark-surface-light'
           },
           secondary: {
-            border: 'border-x-dark-secondary',
+            border: 'border-x border-x-dark-secondary',
             background: 'bg-dark-surface-light'
           },
           success: {
-            border: 'border-x-dark-success',
+            border: 'border-x border-x-dark-success',
             background: 'bg-dark-surface-light'
           },
           warning: {
-            border: 'border-x-dark-warning',
+            border: 'border-x border-x-dark-warning',
             background: 'bg-dark-surface-light'
           },
           error: {
-            border: 'border-x-dark-error',
+            border: 'border-x border-x-dark-error',
             background: 'bg-dark-surface-light'
           }
         }
