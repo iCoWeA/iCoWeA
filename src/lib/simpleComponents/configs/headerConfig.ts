@@ -1,8 +1,17 @@
+import { type AriaRole, type BaseHTMLAttributes } from 'react';
+
 export interface HeaderConfig {
   defaultProps: {
-    color: Colors;
-    elevated: boolean;
-    fullwidth: boolean;
+    container: {
+      role: AriaRole;
+    },
+    box: {
+      fullwidth: boolean;
+      containerProps: BaseHTMLAttributes<HTMLElement>;
+      gap: Sizes;
+      color: Colors;
+      elevated: boolean;
+    }
   };
   styles: {
     base: Record<string, string>;
@@ -12,9 +21,16 @@ export interface HeaderConfig {
 
 const headerConfig: HeaderConfig = {
   defaultProps: {
-    color: 'default',
-    elevated: false,
-    fullwidth: false
+    container: {
+      role: 'banner'
+    },
+    box: {
+      fullwidth: false,
+      containerProps: {},
+      gap: 'md',
+      color: 'default',
+      elevated: false
+    }
   },
   styles: {
     base: {

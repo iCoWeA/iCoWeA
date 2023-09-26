@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import headerConfig from '../../configs/headerConfig';
 import { mergeClasses } from '../../utils/utils';
 import Box, { type BoxProps } from '../UI/Box';
@@ -10,33 +10,26 @@ import Box, { type BoxProps } from '../UI/Box';
  */
 
 export interface HeaderProps extends BoxProps {
-  variant?: BoxVariants;
-  color?: Colors;
   divider?: TextVariants;
-  elevated?: boolean;
   fullwidth?: boolean;
-  containerProps?: BoxProps;
+  containerProps?: BaseHTMLAttributes<HTMLElement>;
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
   const styles = headerConfig.styles;
-  const { variant, color, divider, elevated, fullwidth, containerProps, className, children, ...restProps } = { ...headerConfig.defaultProps, ...props };
+  const { divider, fullwidth, containerProps, className, children, ...restProps } = { ...headerConfig.defaultProps.box, ...props };
+  const mergedContainerProps = { ...headerConfig.defaultProps.container, ...containerProps };
 
   /* --- Set classes --- */
   const mergedClassName = mergeClasses(styles.base, divider !== undefined && styles.divider, className);
 
   return (
     <header
-      role="banner"
       ref={ref}
-      {...containerProps}
+      {...mergedContainerProps}
     >
       <Box
         layout={fullwidth ? 'dashboard' : 'fullbleed'}
-        gap="lg"
-        variant={variant}
-        color={color}
-        elevated={elevated}
         className={mergedClassName}
         {...restProps}
       >
