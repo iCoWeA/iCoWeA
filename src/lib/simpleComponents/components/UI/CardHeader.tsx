@@ -14,7 +14,7 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>((props, ref) => {
   const { size, fullwidht, className, ...restProps } = { ...cardHeaderConfig.defaultProps, ...props };
 
   /* --- Set props --- */
-  const mergedClassName = mergeClasses(!fullwidht && styles.sizes[size], fullwidht && styles.fullwidth, className);
+  const mergedClassName = mergeClasses(!fullwidht && styles.sizes[size], className);
 
   return (
     <Box

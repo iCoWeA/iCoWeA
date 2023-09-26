@@ -1,14 +1,14 @@
-import { type BoxLayouts } from '../components/UI/Box';
-
 export interface CardHeaderConfig {
   defaultProps: {
     size: Sizes;
     fullwidht: boolean;
-    layout: BoxLayouts;
     gap: Sizes;
+    layout: BoxLayouts;
+    variant: Variants;
+    color: Colors;
+    elevated: boolean;
   }
   styles: {
-    fullwidth: Record<string, string>;
     sizes: Record<Sizes, Record<string, string>>;
   }
 }
@@ -17,25 +17,25 @@ const cardHeaderConfig: CardHeaderConfig = {
   defaultProps: {
     size: 'md',
     fullwidht: false,
+    gap: 'md',
     layout: 'row',
-    gap: 'md'
+    variant: 'plain',
+    color: 'default',
+    elevated: false
   },
   styles: {
-    fullwidth: {
-      padding: 'p-0'
-    },
     sizes: {
       xs: {
-        padding: 'p-xs-p'
+        padding: 'p-xs'
       },
       sm: {
-        padding: 'p-sm-p'
+        padding: 'p-sm'
       },
       md: {
-        padding: 'p-md-p'
+        padding: 'p-md'
       },
       lg: {
-        padding: 'p-lg-p'
+        padding: 'p-lg'
       }
     }
   }
