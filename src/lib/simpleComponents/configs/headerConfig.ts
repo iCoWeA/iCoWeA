@@ -27,7 +27,7 @@ const headerConfig: HeaderConfig = {
     base: {
       display: 'flex',
       width: 'w-screen',
-      padding: 'py-lg-y px-lg'
+      padding: 'py-lg-y'
     },
     elevated: {
       position: 'relative',
