@@ -51,6 +51,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     styles.sizes[size],
     styles.shapes[shape],
     styles.variants[variant][theme][color],
+    styles.focusVisible[variant === 'plain' ? 'plain' : 'solid'][theme][color],
     styles.stateLayerVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
     fullwidth && styles.fullwidth,
     className
