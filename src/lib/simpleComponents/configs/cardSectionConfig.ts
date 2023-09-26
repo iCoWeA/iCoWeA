@@ -4,8 +4,6 @@ export interface CardSectionConfig {
   defaultProps: {
     size: Sizes;
     layout: BoxLayouts;
-    variant: Variants;
-    color: Colors;
   }
   styles: {
     sizes: Record<Sizes, Record<string, string>>;
@@ -15,9 +13,7 @@ export interface CardSectionConfig {
 const cardSectionConfig: CardSectionConfig = {
   defaultProps: {
     size: 'md',
-    layout: 'col',
-    variant: 'plain',
-    color: 'default'
+    layout: 'col'
   },
   styles: {
     sizes: {
