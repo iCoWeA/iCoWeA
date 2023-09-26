@@ -4,7 +4,7 @@ import Icon from '../lib/simpleComponents/components/UI/Icon';
 import Header from '../lib/simpleComponents/components/layouts/Header';
 
 const MainHeader: FC = () => (
-  <Header variant="outlined">
+  <Header>
     <Link to="/">
       <Icon
         width="192"
