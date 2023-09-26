@@ -8,7 +8,6 @@ export type BoxLayouts = 'row' | 'col' | 'grid' | 'block' | 'layout' | 'sticky-l
 export interface BoxProps extends BaseHTMLAttributes<HTMLDivElement> {
   layout?: BoxLayouts;
   gap?: Sizes;
-  border?: boolean;
   variant?: Variants;
   color?: Colors;
 }
@@ -19,13 +18,12 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = boxConfig.styles;
-  const { layout, gap, border, variant, color, className, ...restProps } = { ...boxConfig.defaultProps, ...props };
+  const { layout, gap, variant, color, className, ...restProps } = { ...boxConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
     styles.layouts[layout],
     gap !== undefined && styles.gaps[gap],
-    border !== undefined && styles.border,
     variant !== undefined && styles.variants[variant][theme][color],
     className
   );
