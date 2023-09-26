@@ -27,7 +27,7 @@ const headerConfig: HeaderConfig = {
     box: {
       fullwidth: false,
       containerProps: {},
-      gap: 'md',
+      gap: 'lg',
       color: 'default',
       elevated: false
     }
