@@ -1,7 +1,7 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { type HTMLAttributes, forwardRef, type BaseHTMLAttributes } from 'react';
 import sidebarConfig from '../../configs/sidebarConfig';
-import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
+import Box, { type BoxProps } from '../UI/Box';
 
 /* ARIA
  *
@@ -9,21 +9,20 @@ import { mergeClasses } from '../../utils/utils';
  *
  */
 
-export interface SidebarProps extends BaseHTMLAttributes<HTMLElement> {
-  variant?: Variants;
-  color?: Colors;
-}
+/********************************************************************************
+ *
+ *   Body container
+ *
+ */
 
-const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
+interface ContainerProps extends HTMLAttributes<HTMLElement> {}
 
+const Container = forwardRef<HTMLElement, ContainerProps>(({ className, ...restProps }, ref) => {
   /* --- Set default props --- */
-  const styles = sidebarConfig.styles;
-  const { variant, color, className, ...restProps } = { ...sidebarConfig.defaultProps, ...props };
+  const styles = sidebarConfig.styles.container;
 
   /* --- Set classes --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <aside
@@ -31,6 +30,39 @@ const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
       ref={ref}
       {...restProps}
     />
+  );
+});
+
+Container.displayName = 'Container';
+
+export interface SidebarProps extends BoxProps {
+  divider?: 'left-plain' | 'right-plain' | 'both-plain' | 'left-solid' | 'right-solid' | 'both-solid';
+  containerProps?: BaseHTMLAttributes<HTMLElement>;
+}
+
+const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
+  /* --- Set default props --- */
+  const styles = sidebarConfig.styles.box;
+  const { divider, containerProps, className, ...restProps } = { ...sidebarConfig.defaultProps.box, ...props };
+  const mergedContainerProps = { ...sidebarConfig.defaultProps.container, ...containerProps };
+
+  /* --- Set classes --- */
+  const mergedClassName = mergeClasses(
+    (divider === 'left-plain' || divider === 'left-solid' || divider === 'both-plain' || divider === 'both-solid') && styles.leftDivider,
+    (divider === 'right-plain' || divider === 'right-solid' || divider === 'both-plain' || divider === 'both-solid') && styles.rightDivider,
+    className
+  );
+
+  return (
+    <Container
+      ref={ref}
+      {...mergedContainerProps}
+    >
+      <Box
+        className={mergedClassName}
+        {...restProps}
+      />
+    </Container>
   );
 });
 
