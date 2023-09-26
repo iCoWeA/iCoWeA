@@ -1,6 +1,5 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { forwardRef } from 'react';
 import footerConfig from '../../configs/footerConfig';
-import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
 import Box, { type BoxProps } from '../UI/Box';
 
@@ -10,36 +9,35 @@ import Box, { type BoxProps } from '../UI/Box';
  *
  */
 
-export interface FooterProps extends BaseHTMLAttributes<HTMLElement> {
-  variant?: Variants;
+export interface FooterProps extends BoxProps {
+  variant?: BoxVariants;
   color?: Colors;
+  divider?: TextVariants;
   fullwidth?: boolean;
-  boxProps?: BoxProps;
+  containerProps?: BoxProps;
 }
 
 const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
   /* --- Set default props --- */
   const styles = footerConfig.styles;
-  const { variant, color, fullwidth, boxProps, className, children, ...restProps } = { ...footerConfig.defaultProps, ...props };
+  const { variant, color, divider, fullwidth, containerProps, className, children, ...restProps } = { ...footerConfig.defaultProps, ...props };
 
   /* --- Set classes --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, divider !== undefined && styles.divider, className);
 
   return (
     <footer
-      className={mergedClassName}
+      role="contentinfo"
       ref={ref}
-      {...restProps}
+      {...containerProps}
     >
       <Box
         layout={fullwidth ? 'dashboard' : 'fullbleed'}
         gap="lg"
-        variant="plain"
-        color="default"
-        {...boxProps}
+        variant={variant}
+        color={color}
+        className={mergedClassName}
+        {...restProps}
       >
         {children}
       </Box>
