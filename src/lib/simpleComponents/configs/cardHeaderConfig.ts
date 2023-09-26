@@ -5,8 +5,6 @@ export interface CardHeaderConfig {
     size: Sizes;
     fullwidht: boolean;
     layout: BoxLayouts;
-    variant: Variants;
-    color: Colors;
     gap: Sizes;
   }
   styles: {
@@ -20,14 +18,11 @@ const cardHeaderConfig: CardHeaderConfig = {
     size: 'md',
     fullwidht: false,
     layout: 'row',
-    variant: 'plain',
-    color: 'default',
     gap: 'md'
   },
   styles: {
     fullwidth: {
-      padding: 'p-0',
-      border: 'border-0'
+      padding: 'p-0'
     },
     sizes: {
       xs: {
