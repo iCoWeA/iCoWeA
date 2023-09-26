@@ -2,8 +2,10 @@ export interface BoxConfig {
   defaultProps: {
     layout: BoxLayouts;
     color: Colors;
+    elevated: boolean;
   };
   styles: {
+    elevated: Record<string, string>;
     layouts: Record<BoxLayouts, Record<string, string>>;
     gaps: Record<Sizes, Record<string, string>>;
     plain: Record<Themes, Record<string, string>>;
@@ -15,9 +17,15 @@ export interface BoxConfig {
 const boxConfig: BoxConfig = {
   defaultProps: {
     layout: 'row',
-    color: 'default'
+    color: 'default',
+    elevated: false
   },
   styles: {
+    elevated: {
+      position: 'relative',
+      zIndex: 'z-[1]',
+      shadow: 'shadow-md'
+    },
     layouts: {
       row: {
         display: 'flex',

@@ -8,6 +8,7 @@ export interface BoxProps extends BaseHTMLAttributes<HTMLDivElement> {
   gap?: Sizes;
   variant?: BoxVariants;
   color?: Colors;
+  elevated?: boolean;
 }
 
 const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
@@ -16,7 +17,7 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = boxConfig.styles;
-  const { layout, gap, variant, color, className, ...restProps } = { ...boxConfig.defaultProps, ...props };
+  const { layout, gap, variant, color, elevated, className, ...restProps } = { ...boxConfig.defaultProps, ...props };
 
   /* --- Set props --- */
   const mergedClassName = mergeClasses(
@@ -24,6 +25,7 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     gap !== undefined && styles.gaps[gap],
     variant !== undefined && variant === 'plain' && styles.plain[theme],
     variant !== undefined && variant !== 'plain' && styles.variants[variant][theme][color],
+    elevated && styles.elevated,
     className
   );
 
