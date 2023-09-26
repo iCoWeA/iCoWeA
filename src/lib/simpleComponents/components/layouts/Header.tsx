@@ -1,6 +1,5 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { forwardRef } from 'react';
 import headerConfig from '../../configs/headerConfig';
-import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
 import Box, { type BoxProps } from '../UI/Box';
 
@@ -10,42 +9,35 @@ import Box, { type BoxProps } from '../UI/Box';
  *
  */
 
-export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
+export interface HeaderProps extends BoxProps {
   variant?: BoxVariants;
   color?: Colors;
   divider?: TextVariants;
   elevated?: boolean;
   fullwidth?: boolean;
-  boxProps?: BoxProps;
+  containerProps?: BoxProps;
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
-  /* --- Set default props --- */
   const styles = headerConfig.styles;
-  const { variant, color, divider, elevated, fullwidth, boxProps, className, children, ...restProps } = { ...headerConfig.defaultProps, ...props };
+  const { variant, color, divider, elevated, fullwidth, containerProps, className, children, ...restProps } = { ...headerConfig.defaultProps, ...props };
 
   /* --- Set classes --- */
-  const mergedClassName = mergeClasses(
-    styles.base,
-    variant !== undefined && variant === 'plain' && styles.plain[theme],
-    variant !== undefined && variant !== 'plain' && styles.variants[variant][theme][color],
-    elevated && styles.elevated,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, divider !== undefined && styles.divider, className);
 
   return (
     <header
-      className={mergedClassName}
       ref={ref}
-      {...restProps}
+      {...containerProps}
     >
       <Box
         layout={fullwidth ? 'dashboard' : 'fullbleed'}
         gap="lg"
-        {...boxProps}
+        variant={variant}
+        color={color}
+        elevated={elevated}
+        className={mergedClassName}
+        {...restProps}
       >
         {children}
       </Box>
