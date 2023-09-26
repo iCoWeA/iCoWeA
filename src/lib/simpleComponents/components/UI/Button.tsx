@@ -44,7 +44,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   useAddEventListener(buttonRef, 'click', clickHandler);
 
-  /* --- Set props --- */
+  /* --- Set classes --- */
   const mergedClassName = mergeClasses(
     styles.base,
     styles.stateLayer,

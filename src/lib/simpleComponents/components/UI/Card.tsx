@@ -55,12 +55,13 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
     }
   }
 
-  /* --- Set props --- */
+  /* --- Set classes --- */
   const mergedClassName = mergeClasses(
     styles.base,
     simple && styles.sizes[size],
     elevated && styles.elevated,
     (clickable || grabed) && styles.stateLayer,
+    clickable && styles.focusVisible[variant === 'plain' ? 'plain' : 'solid'][theme][color],
     clickable && styles.stateLayerVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
     grabed && styles.stateLayerGrabedVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
     disabled && styles.disabled[variant][theme],
