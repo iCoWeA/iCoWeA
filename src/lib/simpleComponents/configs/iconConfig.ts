@@ -1,8 +1,5 @@
 export interface IconConfig {
   defaultProps: {
-    size: Sizes;
-    variant: TextVariants;
-    color: Colors;
     'aria-hidden': boolean;
     viewBox: string;
   },
@@ -15,15 +12,13 @@ export interface IconConfig {
 
 const iconConfig: IconConfig = {
   defaultProps: {
-    size: 'md',
-    variant: 'plain',
-    color: 'default',
     'aria-hidden': true,
     viewBox: '0 0 24 24'
   },
   styles: {
     base: {
       display: 'inline-block',
+      height: 'h-full',
       aspectRatio: 'aspect-square'
     },
     sizes: {
