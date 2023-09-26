@@ -179,7 +179,7 @@ const boxConfig: BoxConfig = {
       plain: {
         light: {
           default: {
-            border: 'border border-light-on-surface'
+            border: 'border border-light-divider-variant'
           },
           primary: {
             border: 'border border-light-on-primary'
@@ -199,7 +199,7 @@ const boxConfig: BoxConfig = {
         },
         dark: {
           default: {
-            border: 'border border-dark-on-surface'
+            border: 'border border-dark-divider-variant'
           },
           primary: {
             border: 'border border-dark-on-primary'
@@ -221,7 +221,7 @@ const boxConfig: BoxConfig = {
       solid: {
         light: {
           default: {
-            border: 'border border-light-surface'
+            border: 'border border-light-divider'
           },
           primary: {
             border: 'border border-light-primary'
@@ -241,7 +241,7 @@ const boxConfig: BoxConfig = {
         },
         dark: {
           default: {
-            border: 'border border-dark-surface'
+            border: 'border border-dark-divider'
           },
           primary: {
             border: 'border border-dark-primary'
