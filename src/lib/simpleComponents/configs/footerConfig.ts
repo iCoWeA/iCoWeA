@@ -9,6 +9,7 @@ export interface FooterConfig {
       fullwidth: boolean;
       containerProps: BaseHTMLAttributes<HTMLElement>;
       gap: Sizes;
+      variant: Variants;
       color: Colors;
       elevated: boolean;
     }
@@ -28,6 +29,7 @@ const footerConfig: FooterConfig = {
       fullwidth: false,
       containerProps: {},
       gap: 'lg',
+      variant: 'plain',
       color: 'default',
       elevated: false
     }

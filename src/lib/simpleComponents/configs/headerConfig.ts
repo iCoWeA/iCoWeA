@@ -9,6 +9,7 @@ export interface HeaderConfig {
       fullwidth: boolean;
       containerProps: BaseHTMLAttributes<HTMLElement>;
       gap: Sizes;
+      variant: Variants;
       color: Colors;
       elevated: boolean;
     }
@@ -28,6 +29,7 @@ const headerConfig: HeaderConfig = {
       fullwidth: false,
       containerProps: {},
       gap: 'lg',
+      variant: 'plain',
       color: 'default',
       elevated: false
     }

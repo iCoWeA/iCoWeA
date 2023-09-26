@@ -8,6 +8,7 @@ export interface SidebarConfig {
     box: {
       containerProps: BaseHTMLAttributes<HTMLElement>;
       layout: BoxLayouts;
+      variant: Variants;
       color: Colors;
       elevated: boolean;
     }
@@ -31,6 +32,7 @@ const sidebarConfig: SidebarConfig = {
     box: {
       containerProps: {},
       layout: 'col',
+      variant: 'plain',
       color: 'default',
       elevated: false
     }
