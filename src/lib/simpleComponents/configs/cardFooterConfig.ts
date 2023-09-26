@@ -4,8 +4,6 @@ export interface CardFooterConfig {
   defaultProps: {
     size: Sizes;
     layout: BoxLayouts;
-    variant: Variants;
-    color: Colors;
     gap: Sizes;
   }
   styles: {
@@ -17,8 +15,6 @@ const cardFooterConfig: CardFooterConfig = {
   defaultProps: {
     size: 'md',
     layout: 'row',
-    variant: 'plain',
-    color: 'default',
     gap: 'xs'
   },
   styles: {
