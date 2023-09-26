@@ -26,8 +26,7 @@ const mainConfig: MainConfig = {
       justifyContent: 'justify-center',
       width: 'w-full',
       height: 'h-full',
-      padding: 'p-lg-p',
-      border: 'border border-transparent'
+      padding: 'p-lg'
     },
     variants: {
       plain: {
@@ -163,53 +162,53 @@ const mainConfig: MainConfig = {
       outlined: {
         light: {
           default: {
-            border: 'border-light-divider',
+            border: 'border border-light-divider',
             background: 'bg-light-surface-light'
           },
           primary: {
-            border: 'border-light-primary',
+            border: 'border border-light-primary',
             background: 'bg-light-surface-light'
           },
           secondary: {
-            border: 'border-light-secondary',
+            border: 'border border-light-secondary',
             background: 'bg-light-surface-light'
           },
           success: {
-            border: 'border-light-success',
+            border: 'border border-light-success',
             background: 'bg-light-surface-light'
           },
           warning: {
-            border: 'border-light-warning',
+            border: 'border border-light-warning',
             background: 'bg-light-surface-light'
           },
           error: {
-            border: 'border-light-error',
+            border: 'border border-light-error',
             background: 'bg-light-surface-light'
           }
         },
         dark: {
           default: {
-            border: 'border-dark-divider',
+            border: 'border border-dark-divider',
             background: 'bg-dark-surface-light'
           },
           primary: {
-            border: 'border-dark-primary',
+            border: 'border border-dark-primary',
             background: 'bg-dark-surface-light'
           },
           secondary: {
-            border: 'border-dark-secondary',
+            border: 'border border-dark-secondary',
             background: 'bg-dark-surface-light'
           },
           success: {
-            border: 'border-dark-success',
+            border: 'border border-dark-success',
             background: 'bg-dark-surface-light'
           },
           warning: {
-            border: 'border-dark-warning',
+            border: 'border border-dark-warning',
             background: 'bg-dark-surface-light'
           },
           error: {
-            border: 'border-dark-error',
+            border: 'border border-dark-error',
             background: 'bg-dark-surface-light'
           }
         }
