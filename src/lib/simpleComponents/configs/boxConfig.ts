@@ -52,14 +52,14 @@ const boxConfig: BoxConfig = {
       layout: {
         display: 'grid',
         gridTemplateRows: 'grid-rows-[auto_1fr_auto]',
-        width: 'w-screen',
+        width: 'w-full',
         height: 'min-h-screen'
       },
       'sticky-layout': {
         display: 'grid',
         gridTemplateRows: 'grid-rows-[1fr_auto]',
         padding: 'pt-header',
-        width: 'w-screen',
+        width: 'w-full',
         height: 'min-h-screen'
       },
       fullbleed: {
@@ -67,7 +67,7 @@ const boxConfig: BoxConfig = {
         justifyContent: 'justify-between',
         alignItems: 'items-center',
         margin: 'mx-auto',
-        width: 'w-screen',
+        width: 'w-full',
         maxWidth: 'max-w-content'
       },
       dashboard: {
