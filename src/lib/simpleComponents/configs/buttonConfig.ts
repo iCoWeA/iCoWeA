@@ -13,7 +13,9 @@ export interface ButtonConfig {
     fullwidth: Record<string, string>;
     sizes: Record<Sizes, Record<string, string>>;
     shapes: Record<Shapes, Record<string, string>>;
+    disabled: Record<TextVariants, Record<Themes, Record<string, string>>>;
     variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
+    outlined: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
     focusVisible: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
     stateLayerVariants: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
   }
@@ -35,7 +37,6 @@ const buttonConfig: ButtonConfig = {
       gap: 'gap-xs',
       alignItems: 'items-center',
       width: 'w-fit',
-      border: 'border border-transparent',
       font: 'antialiased font-semibold text-sm font-sans',
       transition: 'transition',
       userSelect: 'select-none',
@@ -45,11 +46,11 @@ const buttonConfig: ButtonConfig = {
     },
     stateLayer: {
       position: 'after:absolute',
-      top: 'after:-top-px',
-      left: 'after:-left-px',
+      top: 'after:top-0',
+      left: 'after:left-0',
       display: 'after:block',
-      width: 'after:w-[calc(100%_+_2px)]',
-      height: 'after:h-[calc(100%_+_2px)]',
+      width: 'after:w-full',
+      height: 'after:h-full',
       transitions: 'after:transition-colors',
       pointerEvents: 'after:pointer-events-none'
     },
@@ -74,19 +75,37 @@ const buttonConfig: ButtonConfig = {
     sizes: {
       xs: {
         height: 'h-xs-h',
-        padding: 'px-xs-x py-xs-y'
+        padding: 'px-xs py-xs-y'
       },
       sm: {
         height: 'h-sm-h',
-        padding: 'px-sm-x py-sm-y'
+        padding: 'px-sm py-sm-y'
       },
       md: {
         height: 'h-md-h',
-        padding: 'px-md-x py-md-y'
+        padding: 'px-md py-md-y'
       },
       lg: {
         height: 'h-lg-h',
-        padding: 'px-lg-x py-lg-y'
+        padding: 'px-lg py-lg-y'
+      }
+    },
+    disabled: {
+      plain: {
+        light: {
+          disabled: 'disabled:text-light-on-surface/40'
+        },
+        dark: {
+          disabled: 'disabled:text-dark-on-surface/40'
+        }
+      },
+      solid: {
+        light: {
+          disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+        },
+        dark: {
+          disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+        }
       }
     },
     variants: {
@@ -94,65 +113,53 @@ const buttonConfig: ButtonConfig = {
         light: {
           default: {
             fill: 'fill-light-on-surface',
-            color: 'text-light-on-surface',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-on-surface'
           },
           primary: {
             fill: 'fill-light-on-primary',
-            color: 'text-light-on-primary',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-on-primary'
           },
           secondary: {
             fill: 'fill-light-on-secondary',
-            color: 'text-light-on-secondary',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-on-secondary'
           },
           success: {
             fill: 'fill-light-on-success',
-            color: 'text-light-on-success',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-on-success'
           },
           warning: {
             fill: 'fill-light-on-warning',
-            color: 'text-light-on-warning',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-on-warning'
           },
           error: {
             fill: 'fill-light-on-error',
-            color: 'text-light-on-error',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-on-error'
           }
         },
         dark: {
           default: {
             fill: 'fill-dark-on-surface',
-            color: 'text-dark-on-surface',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-on-surface'
           },
           primary: {
             fill: 'fill-dark-on-primary',
-            color: 'text-dark-on-primary',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-on-primary'
           },
           secondary: {
             fill: 'fill-dark-on-secondary',
-            color: 'text-dark-on-secondary',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-on-secondary'
           },
           success: {
             fill: 'fill-dark-on-success',
-            color: 'text-dark-on-success',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-on-success'
           },
           warning: {
             fill: 'fill-dark-on-warning',
-            color: 'text-dark-on-warning',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-on-warning'
           },
           error: {
             fill: 'fill-dark-on-error',
-            color: 'text-dark-on-error',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-on-error'
           }
         }
       },
@@ -160,65 +167,53 @@ const buttonConfig: ButtonConfig = {
         light: {
           default: {
             fill: 'fill-light-on-surface',
-            color: 'text-light-on-surface',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-on-surface'
           },
           primary: {
             fill: 'fill-light-primary',
-            color: 'text-light-primary',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-primary'
           },
           secondary: {
             fill: 'fill-light-secondary',
-            color: 'text-light-secondary',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-secondary'
           },
           success: {
             fill: 'fill-light-success',
-            color: 'text-light-success',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-success'
           },
           warning: {
             fill: 'fill-light-warning',
-            color: 'text-light-warning',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-warning'
           },
           error: {
             fill: 'fill-light-error',
-            color: 'text-light-error',
-            disabled: 'disabled:text-light-on-surface/40'
+            color: 'text-light-error'
           }
         },
         dark: {
           default: {
             fill: 'fill-dark-on-surface',
-            color: 'text-dark-on-surface',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-on-surface'
           },
           primary: {
             fill: 'fill-dark-primary',
-            color: 'text-dark-primary',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-primary'
           },
           secondary: {
             fill: 'fill-dark-secondary',
-            color: 'text-dark-secondary',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-secondary'
           },
           success: {
             fill: 'fill-dark-success',
-            color: 'text-dark-success',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-success'
           },
           warning: {
             fill: 'fill-dark-warning',
-            color: 'text-dark-warning',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-warning'
           },
           error: {
             fill: 'fill-dark-error',
-            color: 'text-dark-error',
-            disabled: 'disabled:text-dark-on-surface/40'
+            color: 'text-dark-error'
           }
         }
       },
@@ -229,66 +224,42 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-surface',
             background: 'bg-light-surface-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           primary: {
             fill: 'fill-light-primary',
             color: 'text-light-primary',
             background: 'bg-light-primary-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           secondary: {
             fill: 'fill-light-secondary',
             color: 'text-light-secondary',
             background: 'bg-light-secondary-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           success: {
             fill: 'fill-light-success',
             color: 'text-light-success',
             background: 'bg-light-success-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           warning: {
             fill: 'fill-light-warning',
             color: 'text-light-warning',
             background: 'bg-light-warning-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           error: {
             fill: 'fill-light-error',
             color: 'text-light-error',
             background: 'bg-light-error-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           }
         },
         dark: {
@@ -297,66 +268,42 @@ const buttonConfig: ButtonConfig = {
             color: 'text-dark-on-surface',
             background: 'bg-dark-surface-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           primary: {
             fill: 'fill-dark-primary',
             color: 'text-dark-primary',
             background: 'bg-dark-primary-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           secondary: {
             fill: 'fill-dark-secondary',
             color: 'text-dark-secondary',
             background: 'bg-dark-secondary-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           success: {
             fill: 'fill-dark-success',
             color: 'text-dark-success',
             background: 'bg-dark-success-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           warning: {
             fill: 'fill-dark-warning',
             color: 'text-dark-warning',
             background: 'bg-dark-warning-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           error: {
             fill: 'fill-dark-error',
             color: 'text-dark-error',
             background: 'bg-dark-error-soft',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           }
         }
       },
@@ -367,66 +314,42 @@ const buttonConfig: ButtonConfig = {
             color: 'text-light-on-surface',
             background: 'bg-light-surface',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           primary: {
             fill: 'fill-light-primary',
             color: 'text-light-on-primary',
             background: 'bg-light-primary',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           secondary: {
             fill: 'fill-light-secondary',
             color: 'text-light-on-secondary',
             background: 'bg-light-secondary',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           success: {
             fill: 'fill-light-success',
             color: 'text-light-on-success',
             background: 'bg-light-success',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           warning: {
             fill: 'fill-light-warning',
             color: 'text-light-on-warning',
             background: 'bg-light-warning',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           error: {
             fill: 'fill-light-error',
             color: 'text-light-on-error',
             background: 'bg-light-error',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-light-on-surface/40 disabled:bg-light-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           }
         },
         dark: {
@@ -435,144 +358,128 @@ const buttonConfig: ButtonConfig = {
             color: 'text-dark-on-surface',
             background: 'bg-dark-surface',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           primary: {
             fill: 'fill-dark-on-primary',
             color: 'text-dark-on-primary',
             background: 'bg-dark-primary',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           secondary: {
             fill: 'fill-dark-on-secondary',
             color: 'text-dark-on-secondary',
             background: 'bg-dark-secondary',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           success: {
             fill: 'fill-dark-on-success',
             color: 'text-dark-on-success',
             background: 'bg-dark-success',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           warning: {
             fill: 'fill-dark-on-warning',
             color: 'text-dark-on-warning',
             background: 'bg-dark-warning',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           },
           error: {
             fill: 'fill-dark-on-error',
             color: 'text-dark-on-error',
             background: 'bg-dark-error',
             shadow: 'shadow-sm',
-            hover: 'hover:shadow-md',
-            active: 'active:shadow-none',
-            focus: 'focus:shadow-none',
-            focusVisible: 'focus-visible:shadow-none',
-            disabled: 'disabled:text-dark-on-surface/40 disabled:bg-dark-on-surface/20'
+            hover: '[&:hover:not(:active:focus:focus-visible)]:shadow-md'
           }
         }
-      },
-      outlined: {
+      }
+    },
+    outlined: {
+      plain: {
         light: {
           default: {
-            border: 'border-light-on-surface',
-            fill: 'fill-light-on-surface',
-            color: 'text-light-on-surface',
-            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
+            border: 'border border-light-divider-variant'
           },
           primary: {
-            border: 'border-light-primary',
-            fill: 'fill-light-primary',
-            color: 'text-light-primary',
-            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
+            border: 'border border-light-on-primary'
           },
           secondary: {
-            border: 'border-light-secondary',
-            fill: 'fill-light-secondary',
-            color: 'text-light-secondary',
-            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
+            border: 'border border-light-on-secondary'
           },
           success: {
-            border: 'border-light-success',
-            fill: 'fill-light-success',
-            color: 'text-light-success',
-            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
+            border: 'border border-light-on-success'
           },
           warning: {
-            border: 'border-light-warning',
-            fill: 'fill-light-warning',
-            color: 'text-light-warning',
-            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
+            border: 'border border-light-on-warning'
           },
           error: {
-            border: 'border-light-error',
-            fill: 'fill-light-error',
-            color: 'text-light-error',
-            disabled: 'disabled:border-light-on-surface/40 disabled:text-light-on-surface/40'
+            border: 'border border-light-on-error'
           }
         },
         dark: {
           default: {
-            border: 'border-dark-on-surface',
-            fill: 'fill-dark-on-surface',
-            color: 'text-dark-on-surface',
-            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
+            border: 'border border-dark-divider-variant'
           },
           primary: {
-            border: 'border-dark-primary',
-            fill: 'fill-dark-primary',
-            color: 'text-dark-primary',
-            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
+            border: 'border border-dark-on-primary'
           },
           secondary: {
-            border: 'border-dark-secondary',
-            fill: 'fill-dark-secondary',
-            color: 'text-dark-secondary',
-            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
+            border: 'border border-dark-on-secondary'
           },
           success: {
-            border: 'border-dark-success',
-            fill: 'fill-dark-success',
-            color: 'text-dark-success',
-            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
+            border: 'border border-dark-on-success'
           },
           warning: {
-            border: 'border-dark-warning',
-            fill: 'fill-dark-warning',
-            color: 'text-dark-warning',
-            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
+            border: 'border border-dark-on-warning'
           },
           error: {
-            border: 'border-dark-error',
-            fill: 'fill-dark-error',
-            color: 'text-dark-error',
-            disabled: 'disabled:border-dark-on-surface/40 disabled:text-dark-on-surface/40'
+            border: 'border border-dark-on-error'
+          }
+        }
+      },
+      solid: {
+        light: {
+          default: {
+            border: 'border border-light-divider'
+          },
+          primary: {
+            border: 'border border-light-primary'
+          },
+          secondary: {
+            border: 'border border-light-secondary'
+          },
+          success: {
+            border: 'border border-light-success'
+          },
+          warning: {
+            border: 'border border-light-warning'
+          },
+          error: {
+            border: 'border border-light-error'
+          }
+        },
+        dark: {
+          default: {
+            border: 'border border-dark-divider'
+          },
+          primary: {
+            border: 'border border-dark-primary'
+          },
+          secondary: {
+            border: 'border border-dark-secondary'
+          },
+          success: {
+            border: 'border border-dark-success'
+          },
+          warning: {
+            border: 'border border-dark-warning'
+          },
+          error: {
+            border: 'border border-dark-error'
           }
         }
       }
