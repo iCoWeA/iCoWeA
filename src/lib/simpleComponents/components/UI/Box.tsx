@@ -6,7 +6,7 @@ import { mergeClasses } from '../../utils/utils';
 export interface BoxProps extends BaseHTMLAttributes<HTMLDivElement> {
   layout?: BoxLayouts;
   gap?: Sizes;
-  variant?: BoxVariants;
+  variant?: Variants;
   color?: Colors;
   elevated?: boolean;
 }
@@ -23,8 +23,8 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.layouts[layout],
     gap !== undefined && styles.gaps[gap],
-    variant !== undefined && variant === 'plain' && styles.plain[theme],
-    variant !== undefined && variant !== 'plain' && styles.variants[variant][theme][color],
+    variant !== undefined && variant === 'text' && styles.text[theme],
+    variant !== undefined && variant !== 'text' && variant !== 'plain' && styles.variants[variant][theme][color],
     elevated && styles.elevated,
     className
   );

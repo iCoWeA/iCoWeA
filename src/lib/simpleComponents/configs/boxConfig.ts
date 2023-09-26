@@ -1,6 +1,7 @@
 export interface BoxConfig {
   defaultProps: {
     layout: BoxLayouts;
+    variant: Variants;
     color: Colors;
     elevated: boolean;
   };
@@ -17,6 +18,7 @@ export interface BoxConfig {
 const boxConfig: BoxConfig = {
   defaultProps: {
     layout: 'row',
+    variant: 'plain',
     color: 'default',
     elevated: false
   },
