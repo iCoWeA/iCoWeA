@@ -15,11 +15,10 @@ export interface CardProps extends BoxProps {
   size?: Sizes;
   variant?: Variants;
   color?: Colors;
-  simple?: boolean;
-  elevated?: boolean;
   clickable?: boolean;
   grabed?: boolean;
   disabled?: boolean;
+  outlined?: TextVariants;
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
@@ -28,7 +27,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = cardConfig.styles;
-  const { size, variant, color, simple, elevated, clickable, grabed, disabled, className, ...restProps } = { ...cardConfig.defaultProps, ...props };
+  const { size, variant, color, clickable, grabed, disabled, outlined, className, ...restProps } = { ...cardConfig.defaultProps, ...props };
 
   /* --- Set refs --- */
   const cardRef = useRef<HTMLDivElement>(null);
@@ -58,13 +57,13 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   /* --- Set classes --- */
   const mergedClassName = mergeClasses(
     styles.base,
-    simple && styles.sizes[size],
-    elevated && styles.elevated,
+    size !== undefined && styles.sizes[size],
     (clickable || grabed) && styles.stateLayer,
-    clickable && styles.focusVisible[variant === 'plain' ? 'plain' : 'solid'][theme][color],
-    clickable && styles.stateLayerVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
+    clickable && !grabed && styles.focusVisible[variant === 'plain' ? 'plain' : 'solid'][theme][color],
+    clickable && !grabed && styles.stateLayerVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
     grabed && styles.stateLayerGrabedVariants[variant === 'plain' || variant === 'solid' ? 'plain' : 'solid'][theme][color],
-    disabled && styles.disabled[variant][theme],
+    disabled && styles.disabled[variant === 'plain' || variant === 'text' ? 'plain' : 'solid'][theme],
+    disabled && outlined !== undefined && styles.disabledOutline[theme],
     className
   );
 
@@ -73,6 +72,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
       {...clickableProps}
       variant={variant}
       color={color}
+      outlined={outlined}
       className={mergedClassName}
       ref={cardRef}
       {...restProps}

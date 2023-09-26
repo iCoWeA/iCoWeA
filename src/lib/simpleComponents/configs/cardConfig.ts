@@ -3,12 +3,11 @@ export interface CardConfig {
     size: Sizes;
     variant: Variants;
     color: Colors;
-    simple: boolean;
-    elevated: boolean;
     clickable: boolean;
     grabed: boolean;
     disabled: boolean;
     layout: BoxLayouts;
+    elevated: boolean;
   };
   styles: {
     base: Record<string, string>;
@@ -27,7 +26,6 @@ const cardConfig: CardConfig = {
     size: 'md',
     variant: 'text',
     color: 'default',
-    simple: false,
     clickable: false,
     grabed: false,
     disabled: false,
