@@ -26,7 +26,7 @@ const mainConfig: MainConfig = {
       justifyContent: 'justify-center',
       width: 'w-full',
       height: 'h-full',
-      padding: 'p-lg'
+      padding: 'py-lg-y'
     },
     variants: {
       plain: {
