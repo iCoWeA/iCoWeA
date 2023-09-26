@@ -24,7 +24,7 @@ const footerConfig: FooterConfig = {
     base: {
       display: 'flex',
       width: 'w-screen',
-      padding: 'py-lg-y'
+      padding: 'px-lg py-lg-y'
     },
     variants: {
       plain: {
