@@ -19,7 +19,7 @@ const headerConfig: HeaderConfig = {
   defaultProps: {
     variant: 'text',
     color: 'default',
-    elevated: true,
+    elevated: false,
     fullwidth: false,
     role: 'banner'
   },
@@ -27,8 +27,7 @@ const headerConfig: HeaderConfig = {
     base: {
       display: 'flex',
       width: 'w-screen',
-      padding: 'py-lg-py',
-      border: 'border-y border-transparent'
+      padding: 'py-lg-y px-lg'
     },
     elevated: {
       position: 'relative',
@@ -169,53 +168,53 @@ const headerConfig: HeaderConfig = {
       outlined: {
         light: {
           default: {
-            border: 'border-b-light-divider',
+            border: 'border-b border-b-light-divider',
             background: 'bg-light-surface-light'
           },
           primary: {
-            border: 'border-b-light-primary',
+            border: 'border-b border-b-light-primary',
             background: 'bg-light-surface-light'
           },
           secondary: {
-            border: 'border-b-light-secondary',
+            border: 'border-b border-b-light-secondary',
             background: 'bg-light-surface-light'
           },
           success: {
-            border: 'border-b-light-success',
+            border: 'border-b border-b-light-success',
             background: 'bg-light-surface-light'
           },
           warning: {
-            border: 'border-b-light-warning',
+            border: 'border-b border-b-light-warning',
             background: 'bg-light-surface-light'
           },
           error: {
-            border: 'border-b-light-error',
+            border: 'border-b border-b-light-error',
             background: 'bg-light-surface-light'
           }
         },
         dark: {
           default: {
-            border: 'border-b-dark-divider',
+            border: 'border-b border-b-dark-divider',
             background: 'bg-dark-surface-light'
           },
           primary: {
-            border: 'border-b-dark-primary',
+            border: 'border-b border-b-dark-primary',
             background: 'bg-dark-surface-light'
           },
           secondary: {
-            border: 'border-b-dark-secondary',
+            border: 'border-b border-b-dark-secondary',
             background: 'bg-dark-surface-light'
           },
           success: {
-            border: 'border-b-dark-success',
+            border: 'border-b border-b-dark-success',
             background: 'bg-dark-surface-light'
           },
           warning: {
-            border: 'border-b-dark-warning',
+            border: 'border-b border-b-dark-warning',
             background: 'bg-dark-surface-light'
           },
           error: {
-            border: 'border-b-dark-error',
+            border: 'border-b border-b-dark-error',
             background: 'bg-dark-surface-light'
           }
         }
