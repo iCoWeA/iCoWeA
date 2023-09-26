@@ -5,7 +5,7 @@ import Button from '../../lib/simpleComponents/components/UI/Button';
 const PlainVariantExample: FC = () => (
   <ExampleSection
     title="Plain disabled variant"
-    titleId="plain-disableds"
+    titleId="plain-disabled"
     reverseColor
   >
     <Button
