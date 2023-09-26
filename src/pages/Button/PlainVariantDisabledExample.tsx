@@ -6,7 +6,6 @@ const PlainVariantExample: FC = () => (
   <ExampleSection
     title="Plain disabled variant"
     titleId="plain-disabled"
-    reverseColor
   >
     <Button
       disabled
