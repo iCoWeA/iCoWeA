@@ -6,7 +6,7 @@ export interface BoxConfig {
     color: Colors;
   };
   styles: {
-    base: Record<string, string>;
+    variant: Record<string, string>;
     layouts: Record<BoxLayouts, Record<string, string>>;
     gaps: Record<Sizes, Record<string, string>>;
     variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
@@ -19,7 +19,7 @@ const boxConfig: BoxConfig = {
     color: 'default'
   },
   styles: {
-    base: {
+    variant: {
       border: 'border border-transparent'
     },
     layouts: {

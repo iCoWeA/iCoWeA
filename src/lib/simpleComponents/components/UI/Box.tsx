@@ -24,7 +24,7 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.layouts[layout],
     gap !== undefined && styles.gaps[gap],
-    variant !== undefined && styles.base,
+    variant !== undefined && styles.variant,
     variant !== undefined && styles.variants[variant][theme][color],
     className
   );
