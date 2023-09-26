@@ -1,5 +1,6 @@
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
 import sectionConfig from '../../configs/sectionConfig';
+import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
 
 /* ARIA
@@ -8,15 +9,21 @@ import { mergeClasses } from '../../utils/utils';
  *
  */
 
-export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {}
+export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {
+  variant?: Variants;
+  color?: Colors;
+}
 
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
+  /* --- Set context props --- */
+  const theme = useContext(themeContext).theme;
+
   /* --- Set default props --- */
   const styles = sectionConfig.styles;
-  const { className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
+  const { variant, color, className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
 
   /* --- Set classes --- */
-  const mergedClassName = mergeClasses(styles.base, className);
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
 
   return (
     <section
