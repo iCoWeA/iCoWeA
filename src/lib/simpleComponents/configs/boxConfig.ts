@@ -60,15 +60,13 @@ const boxConfig: BoxConfig = {
         alignItems: 'items-center',
         margin: 'mx-auto',
         width: 'w-screen',
-        padding: 'px-lg',
         maxWidth: 'max-w-content'
       },
       dashboard: {
         display: 'flex',
         justifyContent: 'justify-between',
         alignItems: 'items-center',
-        width: 'w-full',
-        padding: 'px-lg'
+        width: 'w-full'
       }
     },
     gaps: {
