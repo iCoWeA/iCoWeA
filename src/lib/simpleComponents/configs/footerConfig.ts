@@ -160,53 +160,53 @@ const footerConfig: FooterConfig = {
       outlined: {
         light: {
           default: {
-            border: 'border-t border-t-light-divider',
+            border: 'border-t border-light-divider',
             background: 'bg-light-surface-light'
           },
           primary: {
-            border: 'border-t border-t-light-primary',
+            border: 'border-t border-light-primary',
             background: 'bg-light-surface-light'
           },
           secondary: {
-            border: 'border-t border-t-light-secondary',
+            border: 'border-t border-light-secondary',
             background: 'bg-light-surface-light'
           },
           success: {
-            border: 'border-t border-t-light-success',
+            border: 'border-t border-light-success',
             background: 'bg-light-surface-light'
           },
           warning: {
-            border: 'border-t border-t-light-warning',
+            border: 'border-t border-light-warning',
             background: 'bg-light-surface-light'
           },
           error: {
-            border: 'border-t border-t-light-error',
+            border: 'border-t border-light-error',
             background: 'bg-light-surface-light'
           }
         },
         dark: {
           default: {
-            border: 'border-t border-t-dark-divider',
+            border: 'border-t border-dark-divider',
             background: 'bg-dark-surface-light'
           },
           primary: {
-            border: 'border-t border-t-dark-primary',
+            border: 'border-t border-dark-primary',
             background: 'bg-dark-surface-light'
           },
           secondary: {
-            border: 'border-t border-t-dark-secondary',
+            border: 'border-t border-dark-secondary',
             background: 'bg-dark-surface-light'
           },
           success: {
-            border: 'border-t border-t-dark-success',
+            border: 'border-t border-dark-success',
             background: 'bg-dark-surface-light'
           },
           warning: {
-            border: 'border-t border-t-dark-warning',
+            border: 'border-t border-dark-warning',
             background: 'bg-dark-surface-light'
           },
           error: {
-            border: 'border-t border-t-dark-error',
+            border: 'border-t border-dark-error',
             background: 'bg-dark-surface-light'
           }
         }
