@@ -36,7 +36,7 @@ const Container = forwardRef<HTMLElement, ContainerProps>(({ className, ...restP
 Container.displayName = 'Container';
 
 export interface SidebarProps extends BoxProps {
-  divider?: 'left-plain' | 'right-plain' | 'both-plain' | 'left-solid' | 'right-solid' | 'both-solid';
+  divider?: 'left-text' | 'right-text' | 'both-text' | 'left-solid' | 'right-solid' | 'both-solid';
   containerProps?: BaseHTMLAttributes<HTMLElement>;
 }
 
@@ -48,8 +48,8 @@ const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
 
   /* --- Set classes --- */
   const mergedClassName = mergeClasses(
-    (divider === 'left-plain' || divider === 'left-solid' || divider === 'both-plain' || divider === 'both-solid') && styles.leftDivider,
-    (divider === 'right-plain' || divider === 'right-solid' || divider === 'both-plain' || divider === 'both-solid') && styles.rightDivider,
+    (divider === 'left-text' || divider === 'left-solid' || divider === 'both-text' || divider === 'both-solid') && styles.leftDivider,
+    (divider === 'right-text' || divider === 'right-solid' || divider === 'both-text' || divider === 'both-solid') && styles.rightDivider,
     className
   );
 
@@ -59,6 +59,7 @@ const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
       {...mergedContainerProps}
     >
       <Box
+        outlined={divider === 'both-solid' || divider === 'left-solid' || divider === 'right-solid' ? 'solid' : 'plain'}
         className={mergedClassName}
         {...restProps}
       />

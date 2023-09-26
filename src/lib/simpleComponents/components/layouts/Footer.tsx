@@ -31,6 +31,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
     >
       <Box
         layout={fullwidth ? 'dashboard' : 'fullbleed'}
+        outlined={divider}
         className={mergedClassName}
         {...restProps}
       >

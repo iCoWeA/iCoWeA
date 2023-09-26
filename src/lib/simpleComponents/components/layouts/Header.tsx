@@ -31,6 +31,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
     >
       <Box
         layout={fullwidth ? 'dashboard' : 'fullbleed'}
+        outlined={divider}
         className={mergedClassName}
         {...restProps}
       >
