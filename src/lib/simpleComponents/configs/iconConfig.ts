@@ -1,5 +1,6 @@
 export interface IconConfig {
   defaultProps: {
+    color: Colors;
     'aria-hidden': boolean;
     viewBox: string;
   },
@@ -12,6 +13,7 @@ export interface IconConfig {
 
 const iconConfig: IconConfig = {
   defaultProps: {
+    color: 'default',
     'aria-hidden': true,
     viewBox: '0 0 24 24'
   },
