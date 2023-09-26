@@ -4,12 +4,14 @@ export interface SidebarConfig {
   defaultProps: {
     variant: Variants;
     color: Colors;
-    simple: boolean;
+    noLeftBorder: boolean;
+    noRightBorder: boolean;
     role: AriaRole;
   };
   styles: {
     base: Record<string, string>;
-    simple: Record<string, string>;
+    noLeftBorder: Record<string, string>;
+    noRightBorder: Record<string, string>;
     variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
   };
 }
@@ -18,7 +20,8 @@ const sidebarConfig: SidebarConfig = {
   defaultProps: {
     variant: 'text',
     color: 'default',
-    simple: false,
+    noLeftBorder: false,
+    noRightBorder: false,
     role: 'complementary'
   },
   styles: {
@@ -27,10 +30,14 @@ const sidebarConfig: SidebarConfig = {
       flexDirection: 'flex-col',
       alignItems: 'items-center',
       width: 'w-3/12',
-      height: 'h-full'
+      height: 'h-full',
+      padding: 'py-lg-y'
     },
-    simple: {
-      padding: 'p-lg'
+    noLeftBorder: {
+      border: 'border-l-0'
+    },
+    noRightBorder: {
+      border: 'border-r-0'
     },
     variants: {
       plain: {
