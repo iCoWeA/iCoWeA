@@ -2,7 +2,6 @@ import { type AriaRole } from 'react';
 
 export interface HeaderConfig {
   defaultProps: {
-    variant: Variants;
     color: Colors;
     elevated: boolean;
     fullwidth: boolean;
@@ -11,13 +10,14 @@ export interface HeaderConfig {
   styles: {
     base: Record<string, string>;
     elevated: Record<string, string>;
-    variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
+    plain: Record<Themes, Record<string, string>>;
+    variants: Record<BgVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
+    outlined: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
   };
 }
 
 const headerConfig: HeaderConfig = {
   defaultProps: {
-    variant: 'text',
     color: 'default',
     elevated: false,
     fullwidth: false,
@@ -34,53 +34,15 @@ const headerConfig: HeaderConfig = {
       zIndex: 'z-[1]',
       shadow: 'shadow-md'
     },
+    plain: {
+      light: {
+        background: 'bg-light-surface-light'
+      },
+      dark: {
+        background: 'bg-dark-surface-light'
+      }
+    },
     variants: {
-      plain: {
-        light: {},
-        dark: {}
-      },
-      text: {
-        light: {
-          default: {
-            background: 'bg-light-surface-light'
-          },
-          primary: {
-            background: 'bg-light-surface-light'
-          },
-          secondary: {
-            background: 'bg-light-surface-light'
-          },
-          success: {
-            background: 'bg-light-surface-light'
-          },
-          warning: {
-            background: 'bg-light-surface-light'
-          },
-          error: {
-            background: 'bg-light-surface-light'
-          }
-        },
-        dark: {
-          default: {
-            background: 'bg-dark-surface-light'
-          },
-          primary: {
-            background: 'bg-dark-surface-light'
-          },
-          secondary: {
-            background: 'bg-dark-surface-light'
-          },
-          success: {
-            background: 'bg-dark-surface-light'
-          },
-          warning: {
-            background: 'bg-dark-surface-light'
-          },
-          error: {
-            background: 'bg-dark-surface-light'
-          }
-        }
-      },
       soft: {
         light: {
           default: {
@@ -164,58 +126,90 @@ const headerConfig: HeaderConfig = {
             background: 'bg-dark-error'
           }
         }
-      },
-      outlined: {
+      }
+    },
+    outlined: {
+      plain: {
         light: {
           default: {
-            border: 'border-b border-light-divider',
-            background: 'bg-light-surface-light'
+            border: 'border-b border-light-divider-variant'
           },
           primary: {
-            border: 'border-b border-light-primary',
-            background: 'bg-light-surface-light'
+            border: 'border-b border-light-on-primary'
           },
           secondary: {
-            border: 'border-b border-light-secondary',
-            background: 'bg-light-surface-light'
+            border: 'border-b border-light-on-secondary'
           },
           success: {
-            border: 'border-b border-light-success',
-            background: 'bg-light-surface-light'
+            border: 'border-b border-light-on-success'
           },
           warning: {
-            border: 'border-b border-light-warning',
-            background: 'bg-light-surface-light'
+            border: 'border-b border-light-on-warning'
           },
           error: {
-            border: 'border-b border-light-error',
-            background: 'bg-light-surface-light'
+            border: 'border-b border-light-on-error'
           }
         },
         dark: {
           default: {
-            border: 'border-b border-dark-divider',
-            background: 'bg-dark-surface-light'
+            border: 'border-b border-dark-divider-variant'
           },
           primary: {
-            border: 'border-b border-dark-primary',
-            background: 'bg-dark-surface-light'
+            border: 'border-b border-dark-on-primary'
           },
           secondary: {
-            border: 'border-b border-dark-secondary',
-            background: 'bg-dark-surface-light'
+            border: 'border-b border-dark-on-secondary'
           },
           success: {
-            border: 'border-b border-dark-success',
-            background: 'bg-dark-surface-light'
+            border: 'border-b border-dark-on-success'
           },
           warning: {
-            border: 'border-b border-dark-warning',
-            background: 'bg-dark-surface-light'
+            border: 'border-b border-dark-on-warning'
           },
           error: {
-            border: 'border-b border-dark-error',
-            background: 'bg-dark-surface-light'
+            border: 'border-b border-dark-on-error'
+          }
+        }
+      },
+      solid: {
+        light: {
+          default: {
+            border: 'border-b border-light-divider'
+          },
+          primary: {
+            border: 'border-b border-light-primary'
+          },
+          secondary: {
+            border: 'border-b border-light-secondary'
+          },
+          success: {
+            border: 'border-b border-light-success'
+          },
+          warning: {
+            border: 'border-b border-light-warning'
+          },
+          error: {
+            border: 'border-b border-light-error'
+          }
+        },
+        dark: {
+          default: {
+            border: 'border-b border-dark-divider'
+          },
+          primary: {
+            border: 'border-b border-dark-primary'
+          },
+          secondary: {
+            border: 'border-b border-dark-secondary'
+          },
+          success: {
+            border: 'border-b border-dark-success'
+          },
+          warning: {
+            border: 'border-b border-dark-warning'
+          },
+          error: {
+            border: 'border-b border-dark-error'
           }
         }
       }

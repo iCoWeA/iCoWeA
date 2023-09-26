@@ -11,8 +11,9 @@ import Box, { type BoxProps } from '../UI/Box';
  */
 
 export interface HeaderProps extends BaseHTMLAttributes<HTMLElement> {
-  variant?: Variants;
+  variant?: BoxVariants;
   color?: Colors;
+  divider?: TextVariants;
   elevated?: boolean;
   fullwidth?: boolean;
   boxProps?: BoxProps;
@@ -24,10 +25,16 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = headerConfig.styles;
-  const { variant, color, elevated, fullwidth, boxProps, className, children, ...restProps } = { ...headerConfig.defaultProps, ...props };
+  const { variant, color, divider, elevated, fullwidth, boxProps, className, children, ...restProps } = { ...headerConfig.defaultProps, ...props };
 
   /* --- Set classes --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], elevated && styles.elevated, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    variant !== undefined && variant === 'plain' && styles.plain[theme],
+    variant !== undefined && variant !== 'plain' && styles.variants[variant][theme][color],
+    elevated && styles.elevated,
+    className
+  );
 
   return (
     <header
@@ -38,8 +45,6 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       <Box
         layout={fullwidth ? 'dashboard' : 'fullbleed'}
         gap="lg"
-        variant="plain"
-        color="default"
         {...boxProps}
       >
         {children}
