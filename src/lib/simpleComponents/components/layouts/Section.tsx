@@ -13,14 +13,13 @@ export interface SectionProps extends BaseHTMLAttributes<HTMLElement> {}
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
   /* --- Set default props --- */
   const styles = sectionConfig.styles;
-  const { className, ...restProps } = { ...props };
+  const { className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
 
   /* --- Set classes --- */
   const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <section
-      role="region"
       className={mergedClassName}
       ref={ref}
       {...restProps}
