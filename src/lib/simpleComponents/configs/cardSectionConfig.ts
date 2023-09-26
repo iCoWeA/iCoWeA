@@ -1,9 +1,10 @@
-import { type BoxLayouts } from '../components/UI/Box';
-
 export interface CardSectionConfig {
   defaultProps: {
     size: Sizes;
     layout: BoxLayouts;
+    variant: Variants;
+    color: Colors;
+    elevated: boolean;
   }
   styles: {
     sizes: Record<Sizes, Record<string, string>>;
@@ -13,21 +14,24 @@ export interface CardSectionConfig {
 const cardSectionConfig: CardSectionConfig = {
   defaultProps: {
     size: 'md',
-    layout: 'col'
+    layout: 'col',
+    variant: 'plain',
+    color: 'default',
+    elevated: false
   },
   styles: {
     sizes: {
       xs: {
-        padding: 'p-xs-p'
+        padding: 'p-xs'
       },
       sm: {
-        padding: 'p-sm-p'
+        padding: 'p-sm'
       },
       md: {
-        padding: 'p-md-p'
+        padding: 'p-md'
       },
       lg: {
-        padding: 'p-lg-p'
+        padding: 'p-lg'
       }
     }
   }
