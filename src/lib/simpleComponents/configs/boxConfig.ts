@@ -8,7 +8,7 @@ export interface BoxConfig {
     elevated: Record<string, string>;
     layouts: Record<BoxLayouts, Record<string, string>>;
     gaps: Record<Sizes, Record<string, string>>;
-    plain: Record<Themes, Record<string, string>>;
+    text: Record<Themes, Record<string, string>>;
     variants: Record<BgVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
     outlined: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
   }
@@ -89,7 +89,7 @@ const boxConfig: BoxConfig = {
         gap: 'gap-lg'
       }
     },
-    plain: {
+    text: {
       light: {
         background: 'bg-light-surface-light'
       },
