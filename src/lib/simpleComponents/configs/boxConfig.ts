@@ -1,22 +1,18 @@
-import { type BoxLayouts } from '../components/UI/Box';
-
 export interface BoxConfig {
   defaultProps: {
     layout: BoxLayouts;
-    variant?: Variants;
     color: Colors;
   };
   styles: {
     layouts: Record<BoxLayouts, Record<string, string>>;
     gaps: Record<Sizes, Record<string, string>>;
-    variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
+    variants: Record<BoxVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
   }
 }
 
 const boxConfig: BoxConfig = {
   defaultProps: {
     layout: 'row',
-    variant: 'plain',
     color: 'default'
   },
   styles: {
@@ -85,10 +81,6 @@ const boxConfig: BoxConfig = {
     },
     variants: {
       plain: {
-        light: {},
-        dark: {}
-      },
-      text: {
         light: {
           default: {
             background: 'bg-light-surface-light'
@@ -211,60 +203,6 @@ const boxConfig: BoxConfig = {
           },
           error: {
             background: 'bg-dark-error'
-          }
-        }
-      },
-      outlined: {
-        light: {
-          default: {
-            border: 'border border-light-divider',
-            background: 'bg-light-surface-light'
-          },
-          primary: {
-            border: 'border border-light-primary',
-            background: 'bg-light-surface-light'
-          },
-          secondary: {
-            border: 'border border-light-secondary',
-            background: 'bg-light-surface-light'
-          },
-          success: {
-            border: 'border border-light-success',
-            background: 'bg-light-surface-light'
-          },
-          warning: {
-            border: 'border border-light-warning',
-            background: 'bg-light-surface-light'
-          },
-          error: {
-            border: 'border border-light-error',
-            background: 'bg-light-surface-light'
-          }
-        },
-        dark: {
-          default: {
-            border: 'border border-dark-divider',
-            background: 'bg-dark-surface-light'
-          },
-          primary: {
-            border: 'border border-dark-primary',
-            background: 'bg-dark-surface-light'
-          },
-          secondary: {
-            border: 'border border-dark-secondary',
-            background: 'bg-dark-surface-light'
-          },
-          success: {
-            border: 'border border-dark-success',
-            background: 'bg-dark-surface-light'
-          },
-          warning: {
-            border: 'border border-dark-warning',
-            background: 'bg-dark-surface-light'
-          },
-          error: {
-            border: 'border border-dark-error',
-            background: 'bg-dark-surface-light'
           }
         }
       }

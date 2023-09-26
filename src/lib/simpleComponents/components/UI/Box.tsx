@@ -3,12 +3,10 @@ import boxConfig from '../../configs/boxConfig';
 import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
 
-export type BoxLayouts = 'row' | 'col' | 'grid' | 'block' | 'layout' | 'sticky-layout' | 'fullbleed' | 'dashboard';
-
 export interface BoxProps extends BaseHTMLAttributes<HTMLDivElement> {
   layout?: BoxLayouts;
   gap?: Sizes;
-  variant?: Variants;
+  variant?: BoxVariants;
   color?: Colors;
 }
 
