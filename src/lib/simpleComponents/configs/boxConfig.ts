@@ -3,10 +3,12 @@ import { type BoxLayouts } from '../components/UI/Box';
 export interface BoxConfig {
   defaultProps: {
     layout: BoxLayouts;
+    border: boolean;
+    variant?: Variants;
     color: Colors;
   };
   styles: {
-    variant: Record<string, string>;
+    border: Record<string, string>;
     layouts: Record<BoxLayouts, Record<string, string>>;
     gaps: Record<Sizes, Record<string, string>>;
     variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
@@ -16,10 +18,12 @@ export interface BoxConfig {
 const boxConfig: BoxConfig = {
   defaultProps: {
     layout: 'row',
+    border: false,
+    variant: 'plain',
     color: 'default'
   },
   styles: {
-    variant: {
+    border: {
       border: 'border border-transparent'
     },
     layouts: {

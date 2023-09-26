@@ -8,7 +8,7 @@ export type BoxLayouts = 'row' | 'col' | 'grid' | 'block' | 'layout' | 'sticky-l
 export interface BoxProps extends BaseHTMLAttributes<HTMLDivElement> {
   layout?: BoxLayouts;
   gap?: Sizes;
-  border: boolean;
+  border?: boolean;
   variant?: Variants;
   color?: Colors;
 }
