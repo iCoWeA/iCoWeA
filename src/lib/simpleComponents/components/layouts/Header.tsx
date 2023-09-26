@@ -27,6 +27,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
 
   return (
     <header
+      role="banner"
       ref={ref}
       {...containerProps}
     >
