@@ -4,14 +4,10 @@ export interface SidebarConfig {
   defaultProps: {
     variant: Variants;
     color: Colors;
-    noLeftBorder: boolean;
-    noRightBorder: boolean;
     role: AriaRole;
   };
   styles: {
     base: Record<string, string>;
-    noLeftBorder: Record<string, string>;
-    noRightBorder: Record<string, string>;
     variants: Record<Variants, Record<Themes, Record<Colors, Record<string, string>>>>;
   };
 }
@@ -20,8 +16,6 @@ const sidebarConfig: SidebarConfig = {
   defaultProps: {
     variant: 'text',
     color: 'default',
-    noLeftBorder: false,
-    noRightBorder: false,
     role: 'complementary'
   },
   styles: {
@@ -32,12 +26,6 @@ const sidebarConfig: SidebarConfig = {
       width: 'w-3/12',
       height: 'h-full',
       padding: 'py-lg-y'
-    },
-    noLeftBorder: {
-      border: 'border-l-0'
-    },
-    noRightBorder: {
-      border: 'border-r-0'
     },
     variants: {
       plain: {
@@ -173,53 +161,53 @@ const sidebarConfig: SidebarConfig = {
       outlined: {
         light: {
           default: {
-            border: 'border-x border-x-light-divider',
+            border: 'border border-light-divider',
             background: 'bg-light-surface-light'
           },
           primary: {
-            border: 'border-x border-x-light-primary',
+            border: 'border border-light-primary',
             background: 'bg-light-surface-light'
           },
           secondary: {
-            border: 'border-x border-x-light-secondary',
+            border: 'border border-light-secondary',
             background: 'bg-light-surface-light'
           },
           success: {
-            border: 'border-x border-x-light-success',
+            border: 'border border-light-success',
             background: 'bg-light-surface-light'
           },
           warning: {
-            border: 'border-x border-x-light-warning',
+            border: 'border border-light-warning',
             background: 'bg-light-surface-light'
           },
           error: {
-            border: 'border-x border-x-light-error',
+            border: 'border border-light-error',
             background: 'bg-light-surface-light'
           }
         },
         dark: {
           default: {
-            border: 'border-x border-x-dark-divider',
+            border: 'border border-dark-divider',
             background: 'bg-dark-surface-light'
           },
           primary: {
-            border: 'border-x border-x-dark-primary',
+            border: 'border border-dark-primary',
             background: 'bg-dark-surface-light'
           },
           secondary: {
-            border: 'border-x border-x-dark-secondary',
+            border: 'border border-dark-secondary',
             background: 'bg-dark-surface-light'
           },
           success: {
-            border: 'border-x border-x-dark-success',
+            border: 'border border-dark-success',
             background: 'bg-dark-surface-light'
           },
           warning: {
-            border: 'border-x border-x-dark-warning',
+            border: 'border border-dark-warning',
             background: 'bg-dark-surface-light'
           },
           error: {
-            border: 'border-x border-x-dark-error',
+            border: 'border border-dark-error',
             background: 'bg-dark-surface-light'
           }
         }

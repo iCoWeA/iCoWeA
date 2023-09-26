@@ -12,8 +12,6 @@ import { mergeClasses } from '../../utils/utils';
 export interface SidebarProps extends BaseHTMLAttributes<HTMLElement> {
   variant?: Variants;
   color?: Colors;
-  noLeftBorder?: boolean;
-  noRightBorder?: boolean;
 }
 
 const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
@@ -22,16 +20,10 @@ const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
 
   /* --- Set default props --- */
   const styles = sidebarConfig.styles;
-  const { variant, color, noRightBorder, noLeftBorder, className, ...restProps } = { ...sidebarConfig.defaultProps, ...props };
+  const { variant, color, className, ...restProps } = { ...sidebarConfig.defaultProps, ...props };
 
   /* --- Set classes --- */
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant][theme][color],
-    noLeftBorder && styles.noLeftBorder,
-    noRightBorder && styles.noRightBorder,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
 
   return (
     <aside
