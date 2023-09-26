@@ -13,7 +13,7 @@ const mainConfig: MainConfig = {
       justifyContent: 'justify-center',
       width: 'w-full',
       height: 'h-full',
-      padding: 'px-lg py-lg-y'
+      padding: 'px-lg'
     }
   }
 };
