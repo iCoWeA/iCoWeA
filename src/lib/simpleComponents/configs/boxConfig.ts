@@ -6,7 +6,9 @@ export interface BoxConfig {
   styles: {
     layouts: Record<BoxLayouts, Record<string, string>>;
     gaps: Record<Sizes, Record<string, string>>;
-    variants: Record<BoxVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
+    plain: Record<Themes, Record<string, string>>;
+    variants: Record<BgVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
+    outlined: Record<TextVariants, Record<Themes, Record<Colors, Record<string, string>>>>;
   }
 }
 
@@ -79,49 +81,15 @@ const boxConfig: BoxConfig = {
         gap: 'gap-lg'
       }
     },
-    variants: {
-      plain: {
-        light: {
-          default: {
-            background: 'bg-light-surface-light'
-          },
-          primary: {
-            background: 'bg-light-surface-light'
-          },
-          secondary: {
-            background: 'bg-light-surface-light'
-          },
-          success: {
-            background: 'bg-light-surface-light'
-          },
-          warning: {
-            background: 'bg-light-surface-light'
-          },
-          error: {
-            background: 'bg-light-surface-light'
-          }
-        },
-        dark: {
-          default: {
-            background: 'bg-dark-surface-light'
-          },
-          primary: {
-            background: 'bg-dark-surface-light'
-          },
-          secondary: {
-            background: 'bg-dark-surface-light'
-          },
-          success: {
-            background: 'bg-dark-surface-light'
-          },
-          warning: {
-            background: 'bg-dark-surface-light'
-          },
-          error: {
-            background: 'bg-dark-surface-light'
-          }
-        }
+    plain: {
+      light: {
+        background: 'bg-light-surface-light'
       },
+      dark: {
+        background: 'bg-dark-surface-light'
+      }
+    },
+    variants: {
       soft: {
         light: {
           default: {
@@ -203,6 +171,92 @@ const boxConfig: BoxConfig = {
           },
           error: {
             background: 'bg-dark-error'
+          }
+        }
+      }
+    },
+    outlined: {
+      plain: {
+        light: {
+          default: {
+            border: 'border border-light-on-surface'
+          },
+          primary: {
+            border: 'border border-light-on-primary'
+          },
+          secondary: {
+            border: 'border border-light-on-secondary'
+          },
+          success: {
+            border: 'border border-light-on-success'
+          },
+          warning: {
+            border: 'border border-light-on-warning'
+          },
+          error: {
+            border: 'border border-light-on-error'
+          }
+        },
+        dark: {
+          default: {
+            border: 'border border-dark-on-surface'
+          },
+          primary: {
+            border: 'border border-dark-on-primary'
+          },
+          secondary: {
+            border: 'border border-dark-on-secondary'
+          },
+          success: {
+            border: 'border border-dark-on-success'
+          },
+          warning: {
+            border: 'border border-dark-on-warning'
+          },
+          error: {
+            border: 'border border-dark-on-error'
+          }
+        }
+      },
+      solid: {
+        light: {
+          default: {
+            border: 'border border-light-surface'
+          },
+          primary: {
+            border: 'border border-light-primary'
+          },
+          secondary: {
+            border: 'border border-light-secondary'
+          },
+          success: {
+            border: 'border border-light-success'
+          },
+          warning: {
+            border: 'border border-light-warning'
+          },
+          error: {
+            border: 'border border-light-error'
+          }
+        },
+        dark: {
+          default: {
+            border: 'border border-dark-surface'
+          },
+          primary: {
+            border: 'border border-dark-primary'
+          },
+          secondary: {
+            border: 'border border-dark-secondary'
+          },
+          success: {
+            border: 'border border-dark-success'
+          },
+          warning: {
+            border: 'border border-dark-warning'
+          },
+          error: {
+            border: 'border border-dark-error'
           }
         }
       }
