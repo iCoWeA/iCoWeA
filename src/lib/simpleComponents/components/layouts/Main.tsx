@@ -1,6 +1,5 @@
-import React, { type BaseHTMLAttributes, forwardRef, useContext } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 import mainConfig from '../../configs/mainConfig';
-import themeContext from '../../contexts/theme';
 import { mergeClasses } from '../../utils/utils';
 
 /* ARIA
@@ -9,21 +8,15 @@ import { mergeClasses } from '../../utils/utils';
  *
  */
 
-export interface MainProps extends BaseHTMLAttributes<HTMLElement> {
-  variant?: Variants;
-  color?: Colors;
-}
+export interface MainProps extends BaseHTMLAttributes<HTMLElement> {}
 
 const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
-  /* --- Set context props --- */
-  const theme = useContext(themeContext).theme;
-
   /* --- Set default props --- */
   const styles = mainConfig.styles;
-  const { variant, color, className, ...restProps } = { ...mainConfig.defaultProps, ...props };
+  const { className, ...restProps } = { ...props };
 
   /* --- Set classes --- */
-  const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <main
