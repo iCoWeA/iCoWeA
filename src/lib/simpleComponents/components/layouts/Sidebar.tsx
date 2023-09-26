@@ -22,7 +22,7 @@ const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
   const styles = sidebarConfig.styles;
   const { variant, color, className, ...restProps } = { ...sidebarConfig.defaultProps, ...props };
 
-  /* --- Set props --- */
+  /* --- Set classes --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
 
   return (

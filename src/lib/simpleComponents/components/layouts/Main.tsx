@@ -22,7 +22,7 @@ const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
   const styles = mainConfig.styles;
   const { variant, color, className, ...restProps } = { ...mainConfig.defaultProps, ...props };
 
-  /* --- Set props --- */
+  /* --- Set classes --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
 
   return (

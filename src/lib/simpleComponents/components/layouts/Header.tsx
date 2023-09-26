@@ -26,7 +26,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
   const styles = headerConfig.styles;
   const { variant, color, elevated, fullwidth, boxProps, className, children, ...restProps } = { ...headerConfig.defaultProps, ...props };
 
-  /* --- Set props --- */
+  /* --- Set classes --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], elevated && styles.elevated, className);
 
   return (

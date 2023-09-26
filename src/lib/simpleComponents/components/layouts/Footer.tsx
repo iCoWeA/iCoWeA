@@ -25,7 +25,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
   const styles = footerConfig.styles;
   const { variant, color, fullwidth, boxProps, className, children, ...restProps } = { ...footerConfig.defaultProps, ...props };
 
-  /* --- Set props --- */
+  /* --- Set classes --- */
   const mergedClassName = mergeClasses(styles.base, styles.variants[variant][theme][color], className);
 
   return (

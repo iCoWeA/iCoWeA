@@ -15,7 +15,7 @@ const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
   const styles = sectionConfig.styles;
   const { className, ...restProps } = { ...sectionConfig.defaultProps, ...props };
 
-  /* --- Set props --- */
+  /* --- Set classes --- */
   const mergedClassName = mergeClasses(styles.base, className);
 
   return (
