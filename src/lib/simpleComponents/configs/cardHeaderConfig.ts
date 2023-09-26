@@ -26,16 +26,16 @@ const cardHeaderConfig: CardHeaderConfig = {
   styles: {
     sizes: {
       xs: {
-        padding: 'p-xs'
+        padding: 'p-xs-px'
       },
       sm: {
-        padding: 'p-sm'
+        padding: 'p-sm-px'
       },
       md: {
-        padding: 'p-md'
+        padding: 'p-md-px'
       },
       lg: {
-        padding: 'p-lg'
+        padding: 'p-lg-px'
       }
     }
   }
