@@ -1,9 +1,11 @@
 import React, { type FC } from 'react';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ThemeProvider from './lib/simpleComponents/components/providers/ThemeProvider';
-import store from './store';
+
+import ConfigProvider from './lib/iCoWeaUI/components/providers/ConfigProvider';
+import ThemeProvider from './lib/iCoWeaUI/components/providers/ThemeProvider';
 import Root from './pages/Root';
+import store from './store';
 
 const router = createBrowserRouter([
   {
@@ -13,23 +15,20 @@ const router = createBrowserRouter([
       {
         path: '',
         lazy: async () => await import('./pages/StandardLayout'),
-        children: [
-          {
-            path: 'container',
-            lazy: async () => await import('./pages/Container')
-          }
-        ]
+        children: []
       }
     ]
   }
 ]);
 
 const App: FC = () => (
-  <ThemeProvider>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  </ThemeProvider>
+  <ConfigProvider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </ThemeProvider>
+  </ConfigProvider>
 );
 
 export default App;
