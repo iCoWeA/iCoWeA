@@ -11,7 +11,7 @@ interface State<T> {
 
 interface Action<T> {
   type: ActionTypes;
-  payload: {
+  payload?: {
     data?: T;
     error?: unknown;
   };
@@ -28,37 +28,38 @@ interface Return<T> {
   send: (url: string, request?: RequestInit) => Promise<void>;
 }
 
-const createReducer = <T>() => (prevState: State<T>, { type, payload: { data, error } }: Action<T>): State<T> => {
+const reducer = <T>(prevState: State<T>, { type, payload }: Action<T>): State<T> => {
   const state = deepClone(prevState);
 
   if (type === ActionTypes.LOADING) {
     state.isLoading = true;
+    state.data = payload?.data;
+    state.error = payload?.error;
   }
 
   if (type === ActionTypes.FAILED) {
     state.isLoading = false;
-    state.error = error;
+    state.data = payload?.data;
+    state.error = payload?.error;
   }
 
   if (type === ActionTypes.SUCCESS) {
     state.isLoading = false;
-    state.data = data;
-    state.error = error;
+    state.data = payload?.data;
+    state.error = payload?.error;
   }
 
   return state;
 };
 
 const actions: Actions = {
-  loading: () => ({ type: ActionTypes.LOADING, payload: {} }),
+  loading: () => ({ type: ActionTypes.LOADING }),
   success: (data) => ({ type: ActionTypes.SUCCESS, payload: { data } }),
   failed: (error) => ({ type: ActionTypes.FAILED, payload: { error } })
 };
 
 const useRequest = <T>(data?: T, isLoading: boolean = false, error: unknown = null): Return<T> => {
-  const reducer = createReducer<T>();
-  const initialState = { data, isLoading, error };
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer<T>, { data, isLoading, error });
 
   const send = useCallback(async (url: string, request?: RequestInit): Promise<void> => {
     dispatch(actions.loading());
@@ -67,7 +68,7 @@ const useRequest = <T>(data?: T, isLoading: boolean = false, error: unknown = nu
       const response = await fetch(url, request);
 
       if (response.status < 200 || response.status > 299) {
-        dispatch(actions.failed(new Error('response Error')));
+        throw new Error('response Error');
       }
 
       dispatch(actions.success(await response.json()));
