@@ -1,15 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { type StoreState } from '..';
 
-const initialState = false;
+import { type StoreState } from '..';
 
 const navMenu = createSlice({
   name: 'navMenu',
-  initialState,
+  initialState: false,
   reducers: {
-    show () { return true; },
-    hide () { return false; },
-    toggle (prevState) { return !prevState; }
+    show: () => true,
+    hide: () => false,
+    toggle: (prevState) => !prevState
   }
 });
 
