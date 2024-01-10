@@ -1,13 +1,13 @@
 export const validate: (input?: HTMLInputElement | HTMLTextAreaElement, pattern?: string) => boolean = (input, pattern) => {
-  if (input === undefined) {
+  if (!input) {
     return false;
   }
 
-  if (pattern !== undefined) {
+  if (pattern) {
     return pattern.search(input.value) !== -1;
   }
 
-  if (input instanceof HTMLInputElement && input.pattern !== undefined && input.pattern !== '') {
+  if (input instanceof HTMLInputElement && input.pattern && input.pattern !== '') {
     return input.value.search(input.pattern) !== -1;
   }
 
