@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import navMenu from './slices/navMenu';
 
 const store = configureStore({
