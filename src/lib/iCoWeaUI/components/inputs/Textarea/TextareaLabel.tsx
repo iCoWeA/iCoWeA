@@ -11,7 +11,6 @@ export type TextareaLabelProps = TextareaLabelDefaultProps & {
   color: Colors;
   valid: boolean;
   invalid: boolean;
-  name?: string;
   disabled?: boolean;
 };
 
@@ -21,7 +20,6 @@ const TextareaLabel: FC<TextareaLabelProps> = ({
   color,
   valid,
   invalid,
-  name,
   disabled,
   className,
   ...restProps
@@ -41,7 +39,6 @@ const TextareaLabel: FC<TextareaLabelProps> = ({
 
   return (
     <label
-      htmlFor={name}
       className={mergedClassName}
       {...restProps}
     />

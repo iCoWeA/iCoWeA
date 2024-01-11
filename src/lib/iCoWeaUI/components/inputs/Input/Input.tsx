@@ -61,7 +61,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
     clearanceProps,
     inputRef,
     placeholder,
-    name,
+    id,
     disabled,
     value,
     defaultClassName,
@@ -144,7 +144,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
             color={color}
             valid={valid}
             invalid={invalid}
-            name={name}
+            htmlFor={id}
             disabled={disabled}
             {...labelProps}
           >
@@ -153,7 +153,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
         )}
         <input
           placeholder={isFocused ? placeholder : undefined}
-          name={name}
+          id={id}
           disabled={disabled}
           value={value}
           className={mergedClassName}

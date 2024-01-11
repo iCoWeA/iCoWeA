@@ -11,7 +11,6 @@ export type InputLabelProps = InputLabelDefaultProps & {
   color: Colors;
   valid: boolean;
   invalid: boolean;
-  name?: string;
   disabled?: boolean;
 };
 
@@ -21,7 +20,6 @@ const InputLabel: FC<InputLabelProps> = ({
   color,
   valid,
   invalid,
-  name,
   disabled,
   className,
   ...restProps
@@ -41,7 +39,6 @@ const InputLabel: FC<InputLabelProps> = ({
 
   return (
     <label
-      htmlFor={name}
       className={mergedClassName}
       {...restProps}
     />
