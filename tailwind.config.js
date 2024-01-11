@@ -42,7 +42,8 @@ module.exports = {
     },
     extend: {
       maxWidth: {
-        content: '94rem' // max content width (90rem (1440px)) + padding (2* (2rem (32px)))
+        '2/4': '50%',
+        23.5: '94rem' // max content width (90rem (1440px)) + padding (2* (2rem (32px)))
       },
       zIndex: {
         0: '0',
