@@ -15,16 +15,15 @@ export type SectionDefaultProps = {
   variant?: Variants;
   color?: Colors;
   bordered?: boolean;
+  justify?: JustifyContent;
+  align?: AlignItems;
 };
 
 export type SectionProps = BaseHTMLAttributes<HTMLElement> & SectionDefaultProps;
 
 const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
-  const { variant, color, bordered, defaultClassName, className, ...restProps } = useConfig(
-    'section',
-    sectionConfig.defaultProps,
-    props
-  );
+  const { variant, color, bordered, justify, align, defaultClassName, className, ...restProps } =
+    useConfig('section', sectionConfig.defaultProps, props);
   const theme = useTheme();
 
   /* --- Set classes --- */
@@ -33,6 +32,8 @@ const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
+    justify !== 'start' && styles.justifies[justify],
+    align !== 'stretch' && styles.aligns[align],
     bordered && styles.border,
     defaultClassName,
     className

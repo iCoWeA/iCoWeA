@@ -2,7 +2,9 @@ const sidebarConfig = {
   defaultProps: {
     variant: 'default',
     color: 'neutral',
-    bordered: 'none'
+    bordered: 'none',
+    justify: 'start',
+    align: 'stretch'
   },
   styles: {
     base: {
@@ -19,6 +21,43 @@ const sidebarConfig = {
       },
       both: {
         border: 'border-x'
+      }
+    },
+    justifies: {
+      normal: {
+        justifyContent: 'justify-normal'
+      },
+      stretch: {
+        justifyContent: 'justify-stretch'
+      },
+      end: {
+        justifyContent: 'justify-end'
+      },
+      center: {
+        justifyContent: 'justify-center'
+      },
+      between: {
+        justifyContent: 'justify-between'
+      },
+      around: {
+        justifyContent: 'justify-around'
+      },
+      evenly: {
+        justifyContent: 'justify-evenly'
+      }
+    },
+    aligns: {
+      start: {
+        alignItems: 'items-start'
+      },
+      end: {
+        alignItems: 'items-end'
+      },
+      center: {
+        alignItems: 'items-center'
+      },
+      baseline: {
+        alignItems: 'items-baseline'
       }
     },
     variants: {
