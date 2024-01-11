@@ -1,10 +1,15 @@
 const layoutConfig = {
   defaultProps: {
-    layout: 'default'
+    layout: 'standard'
   },
   styles: {
     layouts: {
       default: {
+        display: 'grid',
+        height: 'min-h-screen',
+        gridTemplateRows: 'grid-rows-[1fr]'
+      },
+      standard: {
         display: 'grid',
         height: 'min-h-screen',
         gridTemplateRows: 'grid-rows-[auto_1fr_auto]'

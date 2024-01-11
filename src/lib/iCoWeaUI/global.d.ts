@@ -70,7 +70,7 @@ declare global {
   export type Spacing = 'none' | 'sm' | 'md' | 'lg';
   export type Underlines = 'none' | 'hover' | 'always';
   export type Transitions = 'fade' | 'grow-x' | 'grow-y' | 'grow' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right' | 'slide-top-smooth' | 'slide-bottom-smooth' | 'slide-left-smooth' | 'slide-right-smooth';
-  export type Layouts = 'default' | 'sticky' | 'fullbleed' | 'dashboard';
+  export type Layouts = 'default' | 'standard' | 'sticky' | 'fullbleed' | 'dashboard';
   export type ContainerLayouts = 'default' | 'panel' | 'header' | 'footer' | 'body';
   export type Directions = 'row' | 'col' | 'row-reverse' | 'col-reverse';
   export type Orientations = 'vertical' | 'horizontal';
