@@ -12,6 +12,8 @@ export type HeaderDefaultProps = {
   bordered?: boolean;
   block?: boolean;
   shadow?: boolean;
+  justify?: JustifyContent;
+  align?: AlignItems;
 };
 
 export type HeaderProps = BaseHTMLAttributes<HTMLElement> &
@@ -27,6 +29,8 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
     bordered,
     block,
     shadow,
+    justify,
+    align,
     divider,
     containerProps,
     defaultClassName,
@@ -56,6 +60,8 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
         layout={block ? 'dashboard' : 'fullbleed'}
         variant={variant}
         color={color}
+        justify={justify}
+        align={align}
         bordered={bordered}
         {...containerProps}
       >

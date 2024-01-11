@@ -11,6 +11,8 @@ export type FooterDefaultProps = {
   color?: TextColors;
   bordered?: boolean;
   block?: boolean;
+  justify?: JustifyContent;
+  align?: AlignItems;
 };
 
 export type FooterProps = BaseHTMLAttributes<HTMLElement> &
@@ -25,6 +27,8 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
     color,
     bordered,
     block,
+    justify,
+    align,
     divider,
     containerProps,
     defaultClassName,
@@ -50,6 +54,8 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
         layout={block ? 'dashboard' : 'fullbleed'}
         variant={variant}
         color={color}
+        justify={justify}
+        align={align}
         bordered={bordered}
         {...containerProps}
       >

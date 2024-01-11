@@ -11,13 +11,27 @@ export type HeaderContainerProps = HeaderContainerDefaultProps & {
   variant: Variants;
   color: TextColors;
   bordered: boolean;
+  justify: JustifyContent;
+  align: AlignItems;
 };
 
-const HeaderContainer: FC<HeaderContainerProps> = ({ bordered, className, ...restProps }) => {
+const HeaderContainer: FC<HeaderContainerProps> = ({
+  bordered,
+  justify,
+  align,
+  className,
+  ...restProps
+}) => {
   /* --- Set classes --- */
   const styles = headerConfig.styles.container;
 
-  const mergedClassName = mergeClasses(styles.base, bordered && styles.border, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    justify !== 'start' && styles.justifies[justify],
+    align !== 'stretch' && styles.aligns[align],
+    bordered && styles.border,
+    className
+  );
 
   return (
     <Layout

@@ -11,13 +11,27 @@ export type FooterContainerProps = FooterContainerDefaultProps & {
   variant: Variants;
   color: TextColors;
   bordered: boolean;
+  justify: JustifyContent;
+  align: AlignItems;
 };
 
-const FooterContainer: FC<FooterContainerProps> = ({ bordered, className, ...restProps }) => {
+const FooterContainer: FC<FooterContainerProps> = ({
+  bordered,
+  justify,
+  align,
+  className,
+  ...restProps
+}) => {
   /* --- Set classes --- */
   const styles = footerConfig.styles.container;
 
-  const mergedClassName = mergeClasses(styles.base, bordered && styles.border, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    justify !== 'start' && styles.justifies[justify],
+    align !== 'stretch' && styles.aligns[align],
+    bordered && styles.border,
+    className
+  );
 
   return (
     <Layout
