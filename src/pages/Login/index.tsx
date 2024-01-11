@@ -1,26 +1,83 @@
 import React, { type FC } from 'react';
-import { redirect } from 'react-router-dom';
-import Main from '../../lib/simpleComponents/components/layouts/Main';
-import LoginForm from './LoginForm';
+import { Form, redirect } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+
+import PasswordInput from '../../components/PasswordInput/PasswordInput';
+import { EMAIL_PATTERN } from '../../data/constants';
 import { auth } from '../../firebase';
+import Button from '../../lib/iCoWeaUI/components/inputs/Button/Button';
+import FormControl from '../../lib/iCoWeaUI/components/inputs/FormControl/FormControl';
+import Input from '../../lib/iCoWeaUI/components/inputs/Input/Input';
+import Section from '../../lib/iCoWeaUI/components/layouts/Section/Section';
+import Stack from '../../lib/iCoWeaUI/components/layouts/Stack/Stack';
+import Card from '../../lib/iCoWeaUI/components/surfaces/Card/Card';
+import useForm from '../../lib/iCoWeaUI/hooks/useForm';
 
 export const Component: FC = () => {
-  /* --- Set default props --- */
-
-  /* --- Set error --- */
+  const {
+    state: { inputs, isFormValid },
+    change,
+    blur,
+    resetForm
+  } = useForm({ email: '', password: '' });
 
   return (
-    <Main
-      color="primary"
-      className="justify-center"
-    >
-      <LoginForm />
-    </Main>
+    <Section align="center">
+      <Card
+        simple
+        block
+        className="lg:max-w-2/4"
+      >
+        <Form
+          method="post"
+          onSubmit={resetForm}
+        >
+          <Stack gap="md">
+            <FormControl color="error">
+              <Input
+                block
+                label="Email"
+                invalid={inputs.email.error}
+                onChange={(event) => {
+                  change(event, 1000);
+                }}
+                onBlur={blur}
+                name="email"
+                value={inputs.email.value}
+                type="email"
+                pattern={EMAIL_PATTERN}
+                required
+              />
+              {inputs.email.error && 'Invalid email'}
+            </FormControl>
+            <FormControl color="error">
+              <PasswordInput
+                block
+                label="Password"
+                invalid={inputs.password.error}
+                onChange={(event) => {
+                  change(event, 1000);
+                }}
+                onBlur={blur}
+                name="password"
+                value={inputs.password.value}
+                required
+              />
+              {inputs.password.error && 'Invalid password'}
+            </FormControl>
+            <Button
+              block
+              disabled={!isFormValid}
+              type="submit"
+            >
+              LOGIN
+            </Button>
+          </Stack>
+        </Form>
+      </Card>
+    </Section>
   );
 };
-
-Component.displayName = 'LoginRoute';
 
 export const action = async ({ request }: { request: Request }): Promise<unknown> => {
   const formData = await request.formData();
@@ -35,3 +92,5 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
 
   return redirect('/admin');
 };
+
+Component.displayName = 'LoginRoot';
