@@ -42,6 +42,7 @@ export const Component: FC = () => {
                   change(event, 1000);
                 }}
                 onBlur={blur}
+                id="email"
                 name="email"
                 value={inputs.email.value}
                 type="email"
@@ -59,6 +60,7 @@ export const Component: FC = () => {
                   change(event, 1000);
                 }}
                 onBlur={blur}
+                id="password"
                 name="password"
                 value={inputs.password.value}
                 required
