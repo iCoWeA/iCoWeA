@@ -2,7 +2,7 @@ const flexConfig = {
   defaultProps: {
     direction: 'row',
     justify: 'start',
-    align: 'stretch',
+    align: 'center',
     wrap: 'wrap',
     gap: 'none'
   },
