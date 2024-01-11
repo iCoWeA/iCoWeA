@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import Layout from '../../lib/iCoWeaUI/components/layouts/Layout/Layout';
 import Main from '../../lib/iCoWeaUI/components/layouts/Main/Main';
 
-const DefaultLayout: FC = () => (
+export const Component: FC = () => (
   <Layout layout="default">
     <Main>
       <Outlet />
@@ -12,6 +12,4 @@ const DefaultLayout: FC = () => (
   </Layout>
 );
 
-DefaultLayout.displayName = 'DefaultLayoutRoot';
-
-export default DefaultLayout;
+Component.displayName = 'DefaultLayoutRoot';
