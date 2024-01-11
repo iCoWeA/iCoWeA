@@ -1,6 +1,6 @@
 const headerConfig = {
   defaultProps: {
-    variant: 'plain',
+    variant: 'default',
     color: 'neutral',
     bordered: false,
     block: false,

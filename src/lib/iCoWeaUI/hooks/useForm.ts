@@ -1,4 +1,4 @@
-import { type ChangeEventHandler, type FocusEventHandler, useRef, useReducer, useEffect, useCallback, type ChangeEvent, type FocusEvent } from 'react';
+import { type FocusEventHandler, useRef, useReducer, useEffect, useCallback, type ChangeEvent, type FocusEvent } from 'react';
 
 import { deepClone } from '../utils/utils';
 
@@ -32,7 +32,7 @@ interface Actions {
 
 interface Return {
   state: State;
-  change: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  change: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, delay?: number) => void;
   blur: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   reset: (name: string) => void;
   resetForm: () => void;

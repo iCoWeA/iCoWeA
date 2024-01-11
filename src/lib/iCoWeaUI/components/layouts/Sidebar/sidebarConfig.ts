@@ -1,6 +1,6 @@
 const sidebarConfig = {
   defaultProps: {
-    variant: 'plain',
+    variant: 'default',
     color: 'neutral',
     bordered: 'none'
   },

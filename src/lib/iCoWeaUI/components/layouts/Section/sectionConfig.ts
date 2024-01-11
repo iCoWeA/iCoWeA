@@ -1,6 +1,6 @@
 const sectionConfig = {
   defaultProps: {
-    variant: 'plain',
+    variant: 'default',
     color: 'neutral'
   },
   styles: {

@@ -1,6 +1,6 @@
 const mainConfig = {
   defaultProps: {
-    variant: 'plain',
+    variant: 'default',
     color: 'neutral',
     bordered: false
   },
