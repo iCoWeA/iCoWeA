@@ -23,7 +23,7 @@ const layoutConfig = {
       fullbleed: {
         display: 'flex',
         margin: 'mx-auto',
-        maxWidth: 'max-w-23.5',
+        maxWidth: 'max-w-374',
         padding: 'px-4 md:px-8',
         justifyContent: 'justify-between',
         alignItems: 'items-center',
