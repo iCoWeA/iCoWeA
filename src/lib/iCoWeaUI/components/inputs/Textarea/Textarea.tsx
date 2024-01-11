@@ -61,6 +61,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
     clearanceProps,
     textareaRef,
     placeholder,
+    name,
     disabled,
     value,
     defaultClassName,
@@ -143,6 +144,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
             color={color}
             valid={valid}
             invalid={invalid}
+            name={name}
             disabled={disabled}
             {...labelProps}
           >
@@ -150,7 +152,8 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
           </TextareaLabel>
         )}
         <textarea
-          placeholder={isFocused ? placeholder : ''}
+          placeholder={isFocused ? placeholder : undefined}
+          name={name}
           disabled={disabled}
           value={value}
           className={mergedClassName}
