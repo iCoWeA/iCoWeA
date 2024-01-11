@@ -29,8 +29,8 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
 
   return (
     <Container
-      variant="plain"
-      color="neutral"
+      variant="default"
+      color="inherit"
       bordered={false}
       block
       className={mergedClassName}
