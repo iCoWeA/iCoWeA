@@ -3,6 +3,7 @@ const textareaConfig = {
     textarea: {
       variant: 'outlined',
       color: 'primary',
+      block: false,
       valid: false,
       invalid: false
     }
@@ -14,6 +15,9 @@ const textareaConfig = {
         height: 'h-fit',
         focus: 'focus:outline-0',
         group: 'group'
+      },
+      block: {
+        width: 'w-full'
       },
       disabled: {
         pointer: 'pointer-events-none',
@@ -42,6 +46,7 @@ const textareaConfig = {
           position: 'relative',
           dispaly: 'block',
           margin: 'mx-0',
+          width: 'w-full',
           border: 'border-x-0',
           borderRadius: 'rounded-none',
           focusWithing: 'group-[.focus]:border-x-0'

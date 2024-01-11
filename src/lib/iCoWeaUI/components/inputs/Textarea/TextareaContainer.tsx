@@ -14,6 +14,7 @@ import textareaConfig from './textareaConfig';
 export type TextareaContianerDefaultProps = FlexProps;
 
 export type TextareaContainerProps = TextareaContianerDefaultProps & {
+  block: boolean;
   isFocused: boolean;
   textareaRef: MutableRefObject<HTMLTextAreaElement | null>;
   defaultClassName?: string;
@@ -21,7 +22,7 @@ export type TextareaContainerProps = TextareaContianerDefaultProps & {
 
 const TextareaContainer = forwardRef<HTMLDivElement, TextareaContainerProps>(
   (
-    { isFocused, textareaRef, disabled, defaultClassName, className, ...restProps },
+    { block, isFocused, textareaRef, disabled, defaultClassName, className, ...restProps },
     forwardedRef
   ) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -48,6 +49,7 @@ const TextareaContainer = forwardRef<HTMLDivElement, TextareaContainerProps>(
 
     const mergedClassName = mergeClasses(
       styles.base,
+      block && styles.block,
       disabled && styles.disabled,
       isShifted && styles.shift,
       isFocused && styles.focus,

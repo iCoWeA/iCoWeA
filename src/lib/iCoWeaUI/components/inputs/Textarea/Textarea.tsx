@@ -24,6 +24,7 @@ import useMergeRefs from '../../../hooks/useMergeRefs';
 export type TextareaDefaultProps = {
   variant?: InputVariants;
   color?: Colors;
+  block?: boolean;
   valid?: boolean;
   invalid?: boolean;
 };
@@ -46,6 +47,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
   const {
     variant,
     color,
+    block,
     valid,
     invalid,
     label,
@@ -102,6 +104,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
 
   return (
     <TextareaContainer
+      block={block}
       isFocused={isFocused}
       disabled={disabled}
       textareaRef={ref}

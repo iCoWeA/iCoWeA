@@ -14,13 +14,17 @@ import inputConfig from './inputConfig';
 export type InputContianerDefaultProps = FlexProps;
 
 export type InputContainerProps = InputContianerDefaultProps & {
+  block: boolean;
   isFocused: boolean;
   inputRef: MutableRefObject<HTMLInputElement | null>;
   defaultClassName?: string;
 };
 
 const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(
-  ({ isFocused, inputRef, disabled, defaultClassName, className, ...restProps }, forwardedRef) => {
+  (
+    { block, isFocused, inputRef, disabled, defaultClassName, className, ...restProps },
+    forwardedRef
+  ) => {
     const ref = useRef<HTMLDivElement>(null);
 
     useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
@@ -44,6 +48,7 @@ const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(
 
     const mergedClassName = mergeClasses(
       styles.base,
+      block && styles.block,
       disabled && styles.disabled,
       isShifted && styles.shift,
       isFocused && styles.focus,

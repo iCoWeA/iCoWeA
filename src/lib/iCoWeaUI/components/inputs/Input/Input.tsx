@@ -24,6 +24,7 @@ import useMergeRefs from '../../../hooks/useMergeRefs';
 export type InputDefaultProps = {
   variant?: InputVariants;
   color?: Colors;
+  block?: boolean;
   valid?: boolean;
   invalid?: boolean;
 };
@@ -46,6 +47,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
   const {
     variant,
     color,
+    block,
     valid,
     invalid,
     label,
@@ -102,6 +104,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
 
   return (
     <InputContainer
+      block={block}
       isFocused={isFocused}
       disabled={disabled}
       inputRef={ref}
