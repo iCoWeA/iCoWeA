@@ -1,11 +1,14 @@
 import React, { type FC } from 'react';
-import Container from '../../lib/simpleComponents/components/UI/Container';
 import { Outlet } from 'react-router-dom';
 
-export const Component: FC = () => (
-  <Container variant="layout">
+import Layout from '../../lib/iCoWeaUI/components/layouts/Layout/Layout';
+
+const DefaultLayout: FC = () => (
+  <Layout layout='default'>
     <Outlet />
-  </Container>
+  </Layout>
 );
 
-Component.displayName = 'DefaultLayoutRoute';
+DefaultLayout.displayName = 'DefaultLayoutRoot';
+
+export default DefaultLayout;
