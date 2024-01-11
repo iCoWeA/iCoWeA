@@ -1,13 +1,17 @@
 import React, { type FC } from 'react';
-import Container from '../../lib/simpleComponents/components/UI/Container';
-import DashboardHeader from './DashboardHeader';
 import { Outlet } from 'react-router-dom';
 
+import Layout from '../../lib/iCoWeaUI/components/layouts/Layout/Layout';
+import Main from '../../lib/iCoWeaUI/components/layouts/Main/Main';
+import DashboardHeader from './DashboardHeader';
+
 export const Component: FC = () => (
-  <Container variant="dashboard-layout">
+  <Layout>
     <DashboardHeader />
-    <Outlet />
-  </Container>
+    <Main justify="start">
+      <Outlet />
+    </Main>
+  </Layout>
 );
 
 Component.displayName = 'DashboardLayoutRoute';

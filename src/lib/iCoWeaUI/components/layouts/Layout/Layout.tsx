@@ -21,11 +21,7 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
   /* --- Set classes --- */
   const styles = layoutConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.layouts[layout],
-    defaultClassName,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.layouts[layout], defaultClassName, className);
 
   return (
     <Container

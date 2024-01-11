@@ -3,6 +3,9 @@ const layoutConfig = {
     layout: 'standard'
   },
   styles: {
+    border: {
+      border: 'border-y'
+    },
     layouts: {
       default: {
         display: 'grid',
@@ -36,9 +39,6 @@ const layoutConfig = {
         alignItems: 'items-center',
         gap: 'gap-8'
       }
-    },
-    border: {
-      border: 'border-y'
     }
   }
 };

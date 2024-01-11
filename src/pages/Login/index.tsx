@@ -90,7 +90,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     return 'Login error';
   }
 
-  return redirect('/admin');
+  return redirect('/admin-home');
 };
 
 Component.displayName = 'LoginRoot';
