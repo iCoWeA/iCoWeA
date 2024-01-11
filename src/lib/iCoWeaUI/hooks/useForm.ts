@@ -82,6 +82,11 @@ const reducer = (prevState: State, { type, payload: { input, name = input?.name 
       ? false
       : state.inputs[name].error;
     state.inputs[name].timerId = timerId;
+
+    if (state.inputs[name].valid) {
+      clearTimeout(timerId);
+      state.inputs[name].timerId = initialTimerId;
+    }
   }
 
   if (type === ActionTypes.REVALID) {
@@ -130,7 +135,7 @@ const actions: Actions = {
     payload: { input }
   }),
   debouncedChange: (input, timerId) => ({
-    type: ActionTypes.CHANGE,
+    type: ActionTypes.DEBOUNCED_CHANGE,
     payload: { input, timerId }
   }),
   revalid: (input) => ({
