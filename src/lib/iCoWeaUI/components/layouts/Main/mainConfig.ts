@@ -11,7 +11,7 @@ const mainConfig = {
       display: 'flex',
       width: 'w-full',
       height: 'h-full',
-      padding: 'py-8',
+      padding: 'px-4 md:px-8 py-8',
       flexDirection: 'flex-col',
       gap: 'gap-16'
     },
