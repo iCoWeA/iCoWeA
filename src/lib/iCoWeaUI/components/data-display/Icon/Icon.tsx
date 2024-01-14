@@ -6,8 +6,11 @@ import { mergeClasses } from '../../../utils/utils';
 import iconConfig from './iconConfig';
 
 export type IconDefaultProps = {
+  variant?: Variants;
   color?: TextColors;
   size?: Sizes;
+  spacing?: Spacing;
+  bordered?: boolean;
 };
 
 export type IconProps = SVGAttributes<SVGSVGElement> &
@@ -16,11 +19,17 @@ IconDefaultProps & {
 };
 
 const Icon: FC<IconProps> = (props) => {
-  const { size, color, defaultClassName, className, children, ...restProps } = useConfig(
-    'icon',
-    iconConfig.defaultProps,
-    props
-  );
+  const {
+    variant,
+    color,
+    size,
+    spacing,
+    bordered,
+    defaultClassName,
+    className,
+    children,
+    ...restProps
+  } = useConfig('icon', iconConfig.defaultProps, props);
   const theme = useTheme();
 
   /* --- Set classes --- */
@@ -29,7 +38,9 @@ const Icon: FC<IconProps> = (props) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.sizes[size],
-    color !== 'inherit' && styles.colors[theme][color],
+    spacing !== 'none' && styles.spacing[spacing],
+    color !== 'inherit' && styles.variants[variant][theme][color],
+    bordered && styles.border,
     defaultClassName,
     className
   );
