@@ -2,6 +2,7 @@ const containerConfig = {
   defaultProps: {
     variant: 'default',
     color: 'inherit',
+    spacing: 'none',
     bordered: false,
     block: false
   },
@@ -30,6 +31,17 @@ const containerConfig = {
         color: 'text-light-neutral/40',
         background: 'bg-light-neutral/20',
         pointerEvents: 'pointer-events-none'
+      }
+    },
+    spacing: {
+      sm: {
+        paddding: 'p-4'
+      },
+      md: {
+        paddding: 'p-6'
+      },
+      lg: {
+        paddding: 'p-8'
       }
     },
     variants: {
