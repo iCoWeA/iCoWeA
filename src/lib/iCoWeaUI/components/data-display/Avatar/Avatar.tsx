@@ -10,7 +10,6 @@ export type AvatarDefaultProps = {
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  inner?: boolean;
   bordered?: boolean;
 };
 
@@ -24,7 +23,6 @@ AvatarDefaultProps & {
 const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   const {
     size,
-    inner,
     bordered,
     imageProps,
     src,
@@ -41,7 +39,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(
     styles.base,
-    inner ? styles.innerSizes[sizeVariant] : styles.sizes[sizeVariant][size],
+    styles.sizes[sizeVariant][size],
     bordered && styles.border,
     defaultClassName,
     className
