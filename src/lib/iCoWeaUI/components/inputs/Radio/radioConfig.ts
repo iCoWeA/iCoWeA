@@ -11,7 +11,7 @@ const radioConfig = {
     root: {
       base: {
         position: 'relative',
-        display: 'inline-flex',
+        display: 'inline-block',
         borderRadius: 'rounded-full'
       },
       checked: {
