@@ -30,9 +30,9 @@ const Fab = forwardRef<HTMLButtonElement, FabProps>((props, ref) => {
 
   return (
     <Button
-      inner={false}
       block={false}
       shadow
+      loading={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}

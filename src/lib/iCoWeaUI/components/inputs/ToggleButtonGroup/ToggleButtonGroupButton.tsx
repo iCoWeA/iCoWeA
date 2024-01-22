@@ -5,14 +5,13 @@ import { type ToggleButtonProps } from '../ToggleButton/ToggleButton';
 import toggleButtonGroupConfig from './toggleButtonGroupConfig';
 
 export type ToggleButtonGroupButtonProps = {
-  position: RowPositions;
+  position: ContainerPositions;
   vertical: boolean;
   uncheckedVariant: Variants;
   variant: Variants;
   uncheckedColor: Colors;
   color: Colors;
   size: Sizes;
-  inner: boolean;
   icon: boolean;
   bordered: boolean;
   block: boolean;
@@ -29,7 +28,6 @@ const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
   uncheckedColor,
   color,
   size,
-  inner,
   icon,
   bordered,
   block,
@@ -45,7 +43,6 @@ const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
     styles.base,
     styles.orientations[orientation][position],
     bordered && styles.border[orientation][position],
-    block && styles.block,
     element.props.className
   );
 
@@ -56,7 +53,6 @@ const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
     uncheckedColor,
     color,
     size,
-    inner,
     icon,
     bordered,
     block,

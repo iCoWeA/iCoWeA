@@ -34,8 +34,8 @@ const InputDecorator: FC<InputDecoratorProps> = ({
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.variants[variant],
     styles.positions[position],
+    styles.variants[variant][position],
     children && styles.padding[position],
     !disabled && variant === 'soft' && styles.background[theme],
     !valid && !invalid && !disabled && styles.colors[theme][color],

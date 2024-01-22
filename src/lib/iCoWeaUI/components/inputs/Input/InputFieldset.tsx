@@ -28,8 +28,8 @@ const InputFieldset: FC<InputFieldsetProps> = ({
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.variants[variant],
     styles.positions.middle,
+    styles.variants[variant].middle,
     !disabled && variant === 'soft' && styles.background[theme],
     !valid && !invalid && !disabled && styles.colors[theme][color],
     valid && !disabled && styles.valid[theme],

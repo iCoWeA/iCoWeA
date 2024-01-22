@@ -65,90 +65,40 @@ const radioConfig = {
         top: 'top-2/4',
         left: 'left-2/4',
         translate: '-translate-y-2/4 -translate-x-2/4',
-        display: 'block',
-        borderRadius: 'rounded-full',
-        fill: 'fill-transparent',
         transition: 'transition-colors',
         pointerEvent: 'pointer-events-none'
       },
-      border: {
-        border: 'border'
-      },
-      sizes: {
-        sm: {
-          width: 'w-4',
-          height: 'h-4'
-        },
-        md: {
-          width: 'w-5',
-          height: 'h-5'
-        },
-        lg: {
-          width: 'w-6',
-          height: 'h-6'
-        }
-      },
       color: {
         light: {
-          border: 'border-light-divider',
-          background: 'bg-light-soft-neutral/20'
+          border: 'border-light-neutral/20',
+          fill: 'fill-transparent',
+          background: 'bg-light-neutral/10'
         }
       },
       valid: {
         light: {
           border: 'border-light-success',
+          fill: 'fill-transparent',
           background: 'bg-light-success/20'
         }
       },
       invalid: {
         light: {
           border: 'border-light-error',
+          fill: 'fill-transparent',
           background: 'bg-light-error/20'
         }
       },
       disabled: {
         light: {
           border: 'border-light-neutral/40',
+          fill: 'fill-transparent',
           background: 'bg-light-neutral/20'
         }
       },
       disabledChecked: {
         light: {
           fill: 'fill-light-neutral/40'
-        }
-      },
-      checkedColors: {
-        light: {
-          neutral: {
-            border: 'border-light-neutral',
-            fill: 'fill-light-neutral',
-            background: 'bg-transparent'
-          },
-          primary: {
-            border: 'border-light-primary',
-            fill: 'fill-light-primary',
-            background: 'bg-transparent'
-          },
-          secondary: {
-            border: 'border-light-secondary',
-            fill: 'fill-light-secondary',
-            background: 'bg-transparent'
-          },
-          success: {
-            border: 'border-light-success',
-            fill: 'fill-light-success',
-            background: 'bg-transparent'
-          },
-          warning: {
-            border: 'border-light-warning',
-            fill: 'fill-light-warning',
-            background: 'bg-transparent'
-          },
-          error: {
-            border: 'border-light-error',
-            fill: 'fill-light-error',
-            background: 'bg-transparent'
-          }
         }
       }
     }

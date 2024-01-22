@@ -10,15 +10,15 @@ import buttonGroupConfig from './buttonGroupConfig';
 
 export type ButtonGroupDefaultProps = {
   vertical?: boolean;
+  divided?: boolean;
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  inner?: boolean;
   icon?: boolean;
-  divided?: boolean;
   bordered?: boolean;
   block?: boolean;
   shadow?: boolean;
+  loading?: boolean;
   noRipple?: boolean;
 };
 
@@ -34,14 +34,14 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
     variant,
     color,
     size,
-    inner,
     icon,
     bordered,
     block,
     shadow,
+    loading,
     noRipple,
-    defaultClassName,
     className,
+    defaultClassName,
     children,
     ...restProps
   } = useConfig('buttonGroup', buttonGroupConfig.defaultProps, props);
@@ -65,11 +65,11 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
       variant,
       color,
       size,
-      inner,
       icon,
       bordered,
       block,
       shadow,
+      loading,
       noRipple
     });
   }
@@ -87,12 +87,12 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
             variant={variant}
             color={color}
             size={size}
-            inner={inner}
             icon={icon}
             divided={divided}
             bordered={bordered}
             block={block}
             shadow={shadow}
+            loading={loading}
             noRipple={noRipple}
             element={children[i]}
           />
@@ -104,10 +104,11 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
   return (
     <Flex
       direction={vertical ? 'col' : 'row'}
+      wrap="nowrap"
       justify="start"
       align="stretch"
-      wrap="nowrap"
       gap="none"
+      block={block}
       role="group"
       className={mergedClassName}
       ref={ref}

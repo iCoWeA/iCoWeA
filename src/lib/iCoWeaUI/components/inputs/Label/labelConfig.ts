@@ -8,9 +8,8 @@ const labelConfig = {
   styles: {
     base: {
       display: 'flex',
-      width: 'w-fit',
-      height: 'h-fit',
-      flexWrap: 'flex-wrap'
+      flexWrap: 'flex-wrap',
+      font: 'antialiased font-semibold text-xs font-sans'
     },
     columns: {
       flexDirection: 'flex-col'
@@ -46,26 +45,32 @@ const labelConfig = {
     colors: {
       light: {
         neutral: {
+          border: 'border-light-neutral',
           fill: 'fill-light-neutral',
           color: 'text-light-neutral'
         },
         primary: {
+          border: 'border-light-primary',
           fill: 'fill-light-primary',
           text: 'text-light-primary'
         },
         secondary: {
+          border: 'border-light-secondary',
           fill: 'fill-light-secondary',
           text: 'text-light-secondary'
         },
         success: {
+          border: 'border-light-success',
           fill: 'fill-light-success',
           text: 'text-light-success'
         },
         warning: {
+          border: 'border-light-warning',
           fill: 'fill-light-warning',
           text: 'text-light-warning'
         },
         error: {
+          border: 'border-light-error',
           fill: 'fill-light-error',
           text: 'text-light-error'
         }

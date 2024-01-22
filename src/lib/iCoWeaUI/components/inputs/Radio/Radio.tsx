@@ -8,7 +8,7 @@ import React, {
 import useConfig from '../../../hooks/useConfig';
 import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
-import Ripple from '../../utils/Ripple/Ripple';
+import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
 import RadioContainer, { type RadioContainerDefaultProps } from './RadioContainer';
 import RadioDot, { type RadioDotDefaultProps } from './RadioDot';
 import radioConfig from './radioConfig';
@@ -27,6 +27,7 @@ RadioDefaultProps & {
   children?: ReactElement<SVGSVGElement>;
   containerProps?: RadioContainerDefaultProps;
   dotProps?: RadioDotDefaultProps;
+  rippleProps?: RippleProps;
   inputRef?: MutableRefObject<HTMLInputElement | null>;
 };
 
@@ -40,6 +41,7 @@ const Radio = forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
     noRipple,
     containerProps,
     dotProps,
+    rippleProps,
     inputRef,
     checked,
     disabled,
@@ -76,6 +78,7 @@ const Radio = forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
           variant="default"
           color={checked ? color : valid ? 'success' : invalid ? 'error' : 'neutral'}
           sibling
+          {...rippleProps}
         />
       )}
       <RadioDot

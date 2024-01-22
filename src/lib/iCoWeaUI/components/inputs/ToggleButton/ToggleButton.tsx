@@ -12,7 +12,6 @@ export type ToggleButtonDefaultProps = {
   uncheckedColor?: Colors;
   color?: Colors;
   size?: Sizes;
-  inner?: boolean;
   icon?: boolean;
   bordered?: boolean;
   block?: boolean;
@@ -42,9 +41,7 @@ const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>((props, re
   const styles = toggleButtonConfig.styles;
 
   const mergedClassName = mergeClasses(
-    !checked &&
-      uncheckedVariant === 'default' &&
-      styles.uncheckedVariants[uncheckedVariant][theme][uncheckedColor],
+    !checked && uncheckedVariant === 'default' && styles.uncheckedVariants[theme][uncheckedColor],
     checked && styles.checked,
     defaultClassName,
     className
@@ -54,6 +51,7 @@ const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>((props, re
     <Button
       variant={checked ? variant : uncheckedVariant}
       color={checked ? color : uncheckedColor}
+      loading={false}
       aria-pressed={checked}
       className={mergedClassName}
       ref={ref}

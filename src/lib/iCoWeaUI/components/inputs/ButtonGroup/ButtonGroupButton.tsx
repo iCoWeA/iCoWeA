@@ -5,18 +5,18 @@ import { type ButtonProps } from '../Button/Button';
 import buttonGroupConfig from './buttonGroupConfig';
 
 export type ButtonGroupButtonProps = {
-  position: RowPositions;
+  position: ContainerPositions;
   vertical: boolean;
   divided: boolean;
   theme: Themes;
   variant: Variants;
   color: Colors;
   size: Sizes;
-  inner: boolean;
   icon: boolean;
   bordered: boolean;
   block: boolean;
   shadow: boolean;
+  loading: boolean;
   noRipple: boolean;
   element: ReactElement<ButtonProps>;
 };
@@ -29,11 +29,11 @@ const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({
   variant,
   color,
   size,
-  inner,
   icon,
   bordered,
   block,
   shadow,
+  loading,
   noRipple,
   element
 }) => {
@@ -46,7 +46,6 @@ const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({
     styles.orientations[orientation][position],
     (divided || bordered) && styles.divider[orientation][position],
     divided && styles.variants[variant][theme][color],
-    block && styles.block,
     element.props.className
   );
 
@@ -55,11 +54,11 @@ const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({
     variant,
     color,
     size,
-    inner,
     icon,
     bordered,
     block,
     shadow,
+    loading,
     noRipple
   });
 };

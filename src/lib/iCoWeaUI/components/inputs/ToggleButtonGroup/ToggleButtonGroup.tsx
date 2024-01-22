@@ -3,6 +3,7 @@ import React, { type ReactElement, forwardRef, cloneElement, Fragment } from 're
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses, isLast } from '../../../utils/utils';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
+import buttonGroupConfig from '../ButtonGroup/buttonGroupConfig';
 import { type ToggleButtonProps } from '../ToggleButton/ToggleButton';
 import ToggleButtonGroupButton from './ToggleButtonGroupButton';
 import toggleButtonGroupConfig from './toggleButtonGroupConfig';
@@ -14,7 +15,6 @@ export type ToggleButtonGroupDefaultProps = {
   uncheckedColor?: Colors;
   color?: Colors;
   size?: Sizes;
-  inner?: boolean;
   icon?: boolean;
   bordered?: boolean;
   block?: boolean;
@@ -35,7 +35,6 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
     uncheckedColor,
     color,
     size,
-    inner,
     icon,
     bordered,
     block,
@@ -48,7 +47,7 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
   } = useConfig('toggleButtonGroup', toggleButtonGroupConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = toggleButtonGroupConfig.styles.root;
+  const styles = buttonGroupConfig.styles.root;
 
   const mergedClassName = mergeClasses(
     styles.base,
@@ -67,7 +66,6 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
       uncheckedColor,
       color,
       size,
-      inner,
       icon,
       bordered,
       block,
@@ -90,7 +88,6 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
             uncheckedColor={uncheckedColor}
             color={color}
             size={size}
-            inner={inner}
             icon={icon}
             bordered={bordered}
             block={block}
@@ -106,10 +103,12 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
   return (
     <Flex
       direction={vertical ? 'col' : 'row'}
+      wrap="nowrap"
       justify="start"
       align="stretch"
-      wrap="nowrap"
       gap="none"
+      block={block}
+      role="group"
       className={mergedClassName}
       ref={ref}
       {...restProps}

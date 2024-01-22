@@ -1,15 +1,15 @@
 const buttonGroupConfig = {
   defaultProps: {
     vertical: false,
+    divided: false,
     variant: 'solid',
     color: 'primary',
     size: 'md',
-    inner: false,
     icon: false,
-    divided: true,
     bordered: false,
     block: false,
     shadow: false,
+    loading: false,
     noRipple: false
   },
   styles: {
@@ -25,15 +25,12 @@ const buttonGroupConfig = {
     button: {
       base: {
         width: 'w-auto',
-        height: 'h-auto',
         zIndex: 'z-100',
+        flexGrow: 'grow',
         active: 'active:z-200',
         focus: 'focus:z-200',
         focusVisible: 'focus-visible:z-200 focus-visible:border-transparent',
         disabled: 'disabled:z-0'
-      },
-      block: {
-        width: 'w-full'
       },
       orientations: {
         horizontal: {
@@ -62,34 +59,28 @@ const buttonGroupConfig = {
       divider: {
         horizontal: {
           left: {
-            border: 'border-r',
-            borderRadius: 'rounded-r-none'
+            border: 'border-r'
           },
           middle: {
             margin: '-ml-px',
-            border: 'border-x',
-            borderRadius: 'rounded-none'
+            border: 'border-x'
           },
           right: {
             margin: '-ml-px',
-            border: 'border-l',
-            borderRadius: 'rounded-l-none'
+            border: 'border-l'
           }
         },
         vertical: {
           left: {
-            border: 'border-b',
-            borderRadius: 'rounded-b-none'
+            border: 'border-b'
           },
           middle: {
             margin: '-mt-px',
-            border: 'border-y',
-            borderRadius: 'rounded-none'
+            border: 'border-y'
           },
           right: {
             margin: '-mt-px',
-            border: 'border-t',
-            borderRadius: 'rounded-t-none'
+            border: 'border-t'
           }
         }
       },

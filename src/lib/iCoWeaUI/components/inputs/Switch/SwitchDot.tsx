@@ -4,22 +4,18 @@ import { mergeClasses } from '../../../utils/utils';
 import Icon, { type IconProps } from '../../data-display/Icon/Icon';
 import switchConfig from './switchConfig';
 
-export type SwitchDotDefaultProps = IconProps & {
-  color?: Colors;
-};
+export type SwitchDotDefaultProps = IconProps;
 
 export type SwitchDotProps = SwitchDotDefaultProps & {
   theme: Themes;
-  color: Colors;
+  size: Sizes;
   checked?: boolean;
-  disabled?: boolean;
 };
 
 const SwitchDot: FC<SwitchDotProps> = ({
   theme,
-  color,
+  size,
   checked,
-  disabled,
   className,
   children,
   ...restProps
@@ -29,17 +25,18 @@ const SwitchDot: FC<SwitchDotProps> = ({
 
   const mergedClassName = mergeClasses(
     styles.base,
-    !disabled && !checked && styles.color[theme],
-    !disabled && checked && styles.checkedColors[theme][color],
-    disabled && styles.disabled[theme],
+    styles.sizes[size],
     checked && styles.checked,
     className
   );
 
   return (
     <Icon
-      color={color}
-      size="md"
+      variant="solid"
+      color="inherit"
+      size={size}
+      spacing="none"
+      bordered={false}
       className={mergedClassName}
       {...restProps}
     >

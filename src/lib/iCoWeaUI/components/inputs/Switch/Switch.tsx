@@ -15,7 +15,6 @@ import switchConfig from './switchConfig';
 export type SwitchDefaultProps = {
   color?: Colors;
   size?: Sizes;
-  bordered?: boolean;
 };
 
 export type SwitchProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> &
@@ -30,7 +29,6 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>((props, ref) => {
   const {
     color,
     size,
-    bordered,
     containerProps,
     dotProps,
     inputRef,
@@ -46,21 +44,18 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>((props, ref) => {
   /* --- Set classes --- */
   const styles = switchConfig.styles.input;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    !checked && !disabled && styles.color[theme],
-    checked && !disabled && styles.checkedColors[theme][color],
-    disabled && styles.disabled[theme],
-    bordered && styles.border,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <SwitchContainer
+      theme={theme}
+      color={color}
       size={size}
-      checked={checked}
+      disabled={disabled}
       defaultClassName={defaultClassName}
+      checked={checked}
       ref={ref}
+      {...containerProps}
     >
       <input
         className={mergedClassName}
@@ -73,9 +68,9 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>((props, ref) => {
       />
       <SwitchDot
         theme={theme}
-        color={color}
+        size={size}
         checked={checked}
-        disabled={disabled}
+        {...dotProps}
       >
         {children}
       </SwitchDot>

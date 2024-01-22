@@ -22,7 +22,6 @@ export type RadioDotProps = RadioDotDefaultProps & {
 const RadioDot: FC<RadioDotProps> = ({
   theme,
   color,
-  size,
   bordered,
   valid,
   invalid,
@@ -37,27 +36,28 @@ const RadioDot: FC<RadioDotProps> = ({
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.sizes[size],
     !valid && !invalid && !checked && !disabled && styles.color[theme],
-    checked && !disabled && styles.checkedColors[theme][color],
     valid && !disabled && !checked && styles.valid[theme],
     invalid && !disabled && !checked && styles.invalid[theme],
     disabled && styles.disabled[theme],
     checked && disabled && styles.disabledChecked[theme],
-    bordered && !checked && styles.border,
-    checked && styles.border,
     className
   );
 
   return (
     <Icon
-      size={size}
-      color={color}
+      variant="default"
+      color={valid ? 'success' : invalid ? 'error' : color}
+      spacing="none"
+      bordered={checked ? true : bordered}
       className={mergedClassName}
       {...restProps}
     >
       {children ?? (
-        <svg viewBox="0 0 24 24" focusable="false">
+        <svg
+          viewBox="0 0 24 24"
+          focusable="false"
+        >
           <circle
             cx="12"
             cy="12"

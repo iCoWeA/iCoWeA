@@ -1,20 +1,21 @@
-import React, { type ReactNode, type ButtonHTMLAttributes, forwardRef } from 'react';
+import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
 import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
+import ButtonSpinner, { type ButtonSpinnerDefaultProps } from './ButtonSpinner';
 import buttonConfig from './buttonConfig';
 
 export type ButtonDefaultProps = {
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  inner?: boolean;
   icon?: boolean;
   bordered?: boolean;
   block?: boolean;
   shadow?: boolean;
+  loading?: boolean;
   noRipple?: boolean;
 };
 
@@ -23,6 +24,7 @@ ButtonDefaultProps & {
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
   rippleProps?: RippleProps;
+  spinnerProps?: ButtonSpinnerDefaultProps;
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
@@ -30,15 +32,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     variant,
     color,
     size,
-    inner,
     icon,
     bordered,
     block,
     shadow,
+    loading,
     noRipple,
     leftDecorator,
     rightDecorator,
     rippleProps,
+    spinnerProps,
     defaultClassName,
     className,
     children,
@@ -47,18 +50,19 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = buttonConfig.styles;
+  const styles = buttonConfig.styles.root;
   const sizeVariant = icon ? 'icon' : 'default';
 
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
     styles.disabled[theme],
-    inner ? styles.innerSizes[sizeVariant] : styles.sizes[sizeVariant][size],
+    styles.sizes[sizeVariant][size],
     icon && styles.icon,
     bordered && styles.border,
     block && styles.block,
     shadow && styles.shadow,
+    loading && styles.loading,
     defaultClassName,
     className
   );
@@ -73,6 +77,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       {leftDecorator}
       {children}
       {rightDecorator}
+      {loading && (
+        <ButtonSpinner
+          theme={theme}
+          variant={variant}
+          color={color}
+          {...spinnerProps}
+        />
+      )}
       {!noRipple && (
         <Ripple
           variant={variant}

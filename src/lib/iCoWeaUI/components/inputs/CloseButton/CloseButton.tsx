@@ -2,36 +2,36 @@ import React, { forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
-import Icon from '../../data-display/Icon/Icon';
+import Icon, { type IconProps } from '../../data-display/Icon/Icon';
 import Button, { type ButtonProps } from '../Button/Button';
 import closeButtonConfig from './closeButtonConfig';
 
 export type CloseButtonDefaultProps = {
-  position?: PanelPositions;
+  position?: SidePositions;
+  panel?: boolean;
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  inner?: boolean;
   bordered?: boolean;
   noRipple?: boolean;
 };
 
-export type CloseButtonProps = ButtonProps & CloseButtonDefaultProps;
+export type CloseButtonProps = ButtonProps &
+CloseButtonDefaultProps & {
+  iconProps?: IconProps;
+};
 
 const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref) => {
-  const { position, size, inner, defaultClassName, className, children, ...restProps } = useConfig(
-    'closeButton',
-    closeButtonConfig.defaultProps,
-    props
-  );
+  const { position, panel, size, iconProps, defaultClassName, className, children, ...restProps } =
+    useConfig('closeButton', closeButtonConfig.defaultProps, props);
 
   /* --- Set classes --- */
   const styles = closeButtonConfig.styles;
+  const positionVariant = panel ? 'panel' : 'default';
 
   const mergedClassName = mergeClasses(
     styles.base,
-    !inner && styles.positions[position][size],
-    inner && styles.innerPositions[position][size],
+    styles.positions[positionVariant][position][size],
     defaultClassName,
     className
   );
@@ -39,16 +39,23 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref)
   return (
     <Button
       size={size}
-      inner={inner}
       icon
       block={false}
       shadow={false}
+      loading={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}
     >
       {children ?? (
-        <Icon size={inner ? 'sm' : 'md'}>
+        <Icon
+          variant="default"
+          color="inherit"
+          size="md"
+          spacing="none"
+          bordered={false}
+          {...iconProps}
+        >
           <svg
             focusable="false"
             viewBox="0 0 24 24"

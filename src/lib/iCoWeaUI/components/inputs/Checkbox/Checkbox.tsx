@@ -8,10 +8,14 @@ import React, {
 import useConfig from '../../../hooks/useConfig';
 import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
-import Ripple from '../../utils/Ripple/Ripple';
+import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
 import CheckboxContainer, { type CheckboxContainerDefaultProps } from './CheckboxContainer';
 import CheckboxIcon, { type CheckboxIconDefaultProps } from './CheckboxIcon';
 import checkboxConfig from './checkboxConfig';
+
+/* --- ARIA ---
+ * 3 state
+ */
 
 export type CheckboxDefaultProps = {
   color?: Colors;
@@ -27,6 +31,7 @@ CheckboxDefaultProps & {
   children?: ReactElement<SVGSVGElement>;
   containerProps?: CheckboxContainerDefaultProps;
   iconProps?: CheckboxIconDefaultProps;
+  rippleProps?: RippleProps;
   inputRef?: MutableRefObject<HTMLInputElement | null>;
 };
 
@@ -40,6 +45,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
     noRipple,
     containerProps,
     iconProps,
+    rippleProps,
     inputRef,
     checked,
     disabled,
@@ -76,6 +82,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
           variant="default"
           color={checked ? color : valid ? 'success' : invalid ? 'error' : 'neutral'}
           sibling
+          {...rippleProps}
         />
       )}
       <CheckboxIcon
