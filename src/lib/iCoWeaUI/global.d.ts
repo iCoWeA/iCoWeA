@@ -34,21 +34,17 @@ import { type SwitchDefaultProps } from './components/inputs/Switch/SwitchContai
 import { type TextareaDefaultProps } from './components/inputs/Textarea/Textarea';
 import { type ToggleButtonDefaultProps } from './components/inputs/ToggleButton/ToggleButton';
 import { type ToggleButtonGroupDefaultProps } from './components/inputs/ToggleButtonGroup/ToggleButtonGroup';
-import { type ContainerDefaultProps } from './components/layouts/Container/Container';
+import { type BoxDefaultProps } from './components/layouts/Box/Box';
 import { type FlexDefaultProps } from './components/layouts/Flex/Flex';
-import { type FooterDefaultProps } from './components/layouts/Footer/Footer';
 import { type HeaderDefaultProps } from './components/layouts/Header/Header';
 import { type LayoutDefaultProps } from './components/layouts/Layout/Layout';
-import { type MainDefaultProps } from './components/layouts/Main/Main';
-import { type SectionDefaultProps } from './components/layouts/Section/Section';
-import { type SidebarDefaultProps } from './components/layouts/Sidebar/Sidebar';
 import { type StackDefaultProps } from './components/layouts/Stack/Stack';
 import { type BreadcrumbsDefaultProps } from './components/navigation/Breadcrumbs/Breadcrumbs';
 import { type LinkDefaultProps } from './components/navigation/Link/Link';
 import { type NavlinkDefaultProps } from './components/navigation/Navlink/Navlink';
 import { type AccordionDefaultProps } from './components/surfaces/Accordion/Accordion';
-import { type BoxDefaultProps } from './components/surfaces/Box/Box';
 import { type CardDefaultProps } from './components/surfaces/Card/Card';
+import { type ContainerDefaultProps } from './components/surfaces/Container/Container';
 import { type CollapseDefaultProps } from './components/utils/Collapse/Collapse';
 import { type PopoverDefaultProps } from './components/utils/Popover/Popover';
 import { type PopperDefaultProps } from './components/utils/Popper/Popper';
@@ -68,17 +64,17 @@ declare global {
   export type Aligns = 'left' | 'right' | 'center' | 'justify';
   export type Gaps = 'none' | 'base' | 'sm' | 'md' | 'lg';
   export type Spacing = 'none' | 'sm' | 'md' | 'lg';
+  export type Borders = 'none' | 'all' | 'x' | 'y' | 'top' | 'bottom' | 'left' | 'right' | boolean;
   export type Underlines = 'none' | 'hover' | 'always';
-  export type Transitions = 'fade' | 'grow-x' | 'grow-y' | 'grow' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right' | 'slide-top-smooth' | 'slide-bottom-smooth' | 'slide-left-smooth' | 'slide-right-smooth';
-  export type Layouts = 'default' | 'standard' | 'sticky' | 'fullbleed' | 'dashboard';
-  export type ContainerLayouts = 'default' | 'panel' | 'header' | 'footer' | 'body';
+  export type Transitions = 'fade' | 'grow-x' | 'grow-y' | 'grow' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right';
+  export type Layouts = 'default' | 'fullbleed' | 'dashboard';
+  export type ContainerLayouts = 'default' | 'header' | 'footer' | 'body';
   export type Directions = 'row' | 'col' | 'row-reverse' | 'col-reverse';
   export type Orientations = 'vertical' | 'horizontal';
   export type Closable = 'none' | 'left' | 'right';
   export type Positions = 'top' | 'left' | 'right' | 'bottom';
   export type SidePositions = 'left' | 'right';
-  export type PanelPositions = 'left' | 'right' | 'left-panel' | 'right-panel';
-  export type RowPositions = 'left' | 'middle' | 'right';
+  export type ContainerPositions = 'left' | 'middle' | 'right';
   export type InnerPositions = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' | 'right';
   export type OuterPositions = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end';
   export type CornerPositions = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
@@ -185,7 +181,7 @@ declare global {
     },
     footer: {
       styles?: string;
-      defaultProps?: FooterDefaultProps;
+      defaultProps?;
     },
     formControl: {
       styles?: string;
@@ -245,7 +241,7 @@ declare global {
     },
     main: {
       styles?: string;
-      defaultProps?: MainDefaultProps;
+      defaultProps?;
     },
     mark: {
       styles?: string;
@@ -273,11 +269,11 @@ declare global {
     },
     section: {
       styles?: string;
-      defaultProps?: SectionDefaultProps;
+      defaultProps?;
     },
     sidebar: {
       styles?: string;
-      defaultProps?: SidebarDefaultProps;
+      defaultProps?;
     },
     snackbar: {
       styles?: string;

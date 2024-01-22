@@ -1,6 +1,6 @@
 import { type MutableRefObject } from 'react';
 
-export const setTransitionStyle = (elementRef: MutableRefObject<HTMLElement | null>, variant: Transitions, isEntering: boolean, isUnmounted: boolean): void => {
+export const setTransitionStyle = (elementRef: MutableRefObject<HTMLElement | null>, variant: Transitions, smooth: boolean, isEntering: boolean, isUnmounted: boolean): void => {
   if (!elementRef.current) {
     return;
   }
@@ -11,9 +11,11 @@ export const setTransitionStyle = (elementRef: MutableRefObject<HTMLElement | nu
     elementRef.current.style.visibility = 'visible';
   }
 
-  if (variant === 'fade') {
+  if (smooth || variant === 'fade') {
     isEntering ? (elementRef.current.style.opacity = '100') : (elementRef.current.style.opacity = '0');
-  } else if (variant === 'grow') {
+  }
+
+  if (variant === 'grow') {
     isEntering
       ? (elementRef.current.style.transform = 'scale(100%)')
       : (elementRef.current.style.transform = 'scale(0%)');
@@ -41,25 +43,5 @@ export const setTransitionStyle = (elementRef: MutableRefObject<HTMLElement | nu
     isEntering
       ? (elementRef.current.style.transform = 'translateX(0%)')
       : (elementRef.current.style.transform = 'translateX(100%)');
-  } else if (variant === 'slide-top-smooth') {
-    isEntering
-      ? (elementRef.current.style.transform = 'translateY(0%)')
-      : (elementRef.current.style.transform = 'translateY(-100%)');
-    isEntering ? (elementRef.current.style.opacity = '100') : (elementRef.current.style.opacity = '0');
-  } else if (variant === 'slide-bottom-smooth') {
-    isEntering
-      ? (elementRef.current.style.transform = 'translateY(0%)')
-      : (elementRef.current.style.transform = 'translateY(100%)');
-    isEntering ? (elementRef.current.style.opacity = '100') : (elementRef.current.style.opacity = '0');
-  } else if (variant === 'slide-left-smooth') {
-    isEntering
-      ? (elementRef.current.style.transform = 'translateX(0%)')
-      : (elementRef.current.style.transform = 'translateX(-100%)');
-    isEntering ? (elementRef.current.style.opacity = '100') : (elementRef.current.style.opacity = '0');
-  } else if (variant === 'slide-right-smooth') {
-    isEntering
-      ? (elementRef.current.style.transform = 'translateX(0%)')
-      : (elementRef.current.style.transform = 'translateX(100%)');
-    isEntering ? (elementRef.current.style.opacity = '100') : (elementRef.current.style.opacity = '0');
   }
 };
