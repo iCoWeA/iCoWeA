@@ -6,7 +6,6 @@ import Main from '../../lib/iCoWeaUI/components/layouts/Main/Main';
 
 export const Component: FC = () => (
   <Layout
-    layout="default"
     variant="solid"
     color="primary"
   >
