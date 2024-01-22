@@ -8,9 +8,7 @@ const avatarConfig = {
   styles: {
     base: {
       display: 'inline-flex',
-      aspectRatio: 'aspect-square',
       borderRadius: 'rounded-full',
-      font: 'antialiased font-semibold font-sans',
       overflow: 'overflow-hidden',
       userSelect: 'select-none'
     },
@@ -20,28 +18,34 @@ const avatarConfig = {
     sizes: {
       default: {
         sm: {
+          width: 'w-8',
           height: 'h-8',
           fontSize: 'text-xs'
         },
         md: {
+          width: 'w-9',
           height: 'h-9',
           fontSize: 'text-sm'
         },
         lg: {
+          width: 'w-10',
           height: 'h-10',
           fontSize: 'text-base'
         }
       },
       bordered: {
         sm: {
+          width: 'w-9',
           height: 'h-9',
           fontSize: 'text-xs'
         },
         md: {
+          width: 'w-10',
           height: 'h-10',
           fontSize: 'text-sm'
         },
         lg: {
+          width: 'w-11',
           height: 'h-11',
           fontSize: 'text-base'
         }

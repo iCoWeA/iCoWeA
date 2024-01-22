@@ -17,8 +17,6 @@ const badgeConfig = {
       base: {
         position: 'absolute',
         borderRadius: 'rounded-full',
-        font: 'antialiased font-normal font-sans',
-        shadow: 'shadow-sm',
         userSelect: 'select-none'
       },
       border: {

@@ -1,49 +1,89 @@
 const iconConfig = {
   defaultProps: {
     variant: 'default',
-    color: 'none',
+    color: 'neutral',
     size: 'md',
     spacing: 'none',
     bordered: false
   },
   styles: {
     base: {
-      boxSizing: 'box-content',
       display: 'inline-block',
-      border: 'border-inherit',
-      borderRadius: 'rounded-full',
-      fill: 'fill-inherit'
+      borderRadius: 'rounded-full'
     },
     border: {
       border: 'border'
     },
     sizes: {
-      sm: {
-        height: 'h-4'
+      default: {
+        sm: {
+          width: 'w-4',
+          height: 'h-4'
+        },
+        md: {
+          width: 'w-5',
+          height: 'h-5'
+        },
+        lg: {
+          width: 'w-6',
+          height: 'h-6'
+        }
       },
-      md: {
-        height: 'h-5'
-      },
-      lg: {
-        height: 'h-6'
+      space: {
+        sm: {
+          width: 'w-8',
+          height: 'h-8'
+        },
+        md: {
+          width: 'w-9',
+          height: 'h-9'
+        },
+        lg: {
+          width: 'w-10',
+          height: 'h-10'
+        }
       }
     },
     spacing: {
       sm: {
-        padding: 'p-1.5'
+        sm: {
+          padding: 'p-2'
+        },
+        md: {
+          padding: 'p-1.5'
+        },
+        lg: {
+          padding: 'p-1'
+        }
       },
       md: {
-        padding: 'p-2'
+        sm: {
+          padding: 'p-2.5'
+        },
+        md: {
+          padding: 'p-2'
+        },
+        lg: {
+          padding: 'p-1.5'
+        }
       },
       lg: {
-        padding: 'p-2.5'
+        sm: {
+          padding: 'p-3'
+        },
+        md: {
+          padding: 'p-2.5'
+        },
+        lg: {
+          padding: 'p-2'
+        }
       }
     },
     variants: {
       default: {
         light: {
           neutral: {
-            border: 'border-light-divider',
+            border: 'border-light-neutral',
             fill: 'fill-light-neutral'
           },
           primary: {
@@ -71,7 +111,7 @@ const iconConfig = {
       plain: {
         light: {
           neutral: {
-            border: 'border-light-divider',
+            border: 'border-light-neutral',
             fill: 'fill-light-neutral',
             background: 'bg-light-neutral-variant'
           },
@@ -105,7 +145,7 @@ const iconConfig = {
       soft: {
         light: {
           neutral: {
-            border: 'border-light-divider',
+            border: 'border-light-neutral',
             fill: 'fill-light-neutral',
             background: 'bg-light-soft-neutral'
           },

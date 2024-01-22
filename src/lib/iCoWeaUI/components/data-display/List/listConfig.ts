@@ -2,10 +2,10 @@ const listConfig = {
   defaultProps: {
     spacing: 'md',
     justify: 'start',
-    align: 'center',
+    align: 'stretch',
     gap: 'none',
     row: false,
-    fit: false
+    block: false
   },
   styles: {
     base: {

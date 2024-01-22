@@ -6,15 +6,16 @@ import { mergeClasses } from '../../../utils/utils';
 import markConfig from './markConfig';
 
 export type MarkDefaultProps = {
-  size?: Sizes;
+  variant?: Variants;
   color?: TextColors;
-  bg?: TextColors;
+  size?: Sizes;
+  bordered?: boolean;
 };
 
 export type MarkProps = BaseHTMLAttributes<HTMLSpanElement> & MarkDefaultProps;
 
 const Mark = forwardRef<HTMLSpanElement, MarkProps>((props, ref) => {
-  const { size, color, bg, defaultClassName, className, ...restProps } = useConfig(
+  const { variant, color, size, bordered, defaultClassName, className, ...restProps } = useConfig(
     'mark',
     markConfig.defaultProps,
     props
@@ -27,8 +28,8 @@ const Mark = forwardRef<HTMLSpanElement, MarkProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.sizes[size],
-    color !== 'inherit' && styles.colors[theme][color],
-    bg !== 'inherit' && styles.bg[theme][bg],
+    color !== 'inherit' && styles.variants[variant][theme][color],
+    bordered && styles.border,
     defaultClassName,
     className
   );

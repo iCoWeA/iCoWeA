@@ -17,46 +17,18 @@ const dividerConfig = {
           height: 'h-full'
         }
       },
-      colors: {
+      color: {
         light: {
-          neutral: {
-            border: 'border-light-neutral',
-            fill: 'fill-light-neutral',
-            color: 'text-light-neutral'
-          },
-          primary: {
-            border: 'border-light-primary',
-            fill: 'fill-light-primary',
-            text: 'text-light-primary'
-          },
-          secondary: {
-            border: 'border-light-secondary',
-            fill: 'fill-light-secondary',
-            text: 'text-light-secondary'
-          },
-          success: {
-            border: 'border-light-success',
-            fill: 'fill-light-success',
-            text: 'text-light-success'
-          },
-          warning: {
-            border: 'border-light-warning',
-            fill: 'fill-light-warning',
-            text: 'text-light-warning'
-          },
-          error: {
-            border: 'border-light-error',
-            fill: 'fill-light-error',
-            text: 'text-light-error'
-          }
+          border: 'border-light-divider',
+          fill: 'fill-light-divider',
+          color: 'text-light-divider'
         }
       }
     },
     line: {
       base: {
         display: 'block',
-        flexGrow: 'grow',
-        border: 'border-inherit'
+        flexGrow: 'grow'
       },
       orientations: {
         horizontal: {

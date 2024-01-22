@@ -34,11 +34,12 @@ const Icon: FC<IconProps> = (props) => {
 
   /* --- Set classes --- */
   const styles = iconConfig.styles;
+  const sizeVariant = spacing === 'none' ? 'default' : 'space';
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.sizes[size],
-    spacing !== 'none' && styles.spacing[spacing],
+    styles.sizes[sizeVariant][size],
+    spacing !== 'none' && styles.spacing[size][spacing],
     color !== 'inherit' && styles.variants[variant][theme][color],
     bordered && styles.border,
     defaultClassName,

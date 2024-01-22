@@ -17,11 +17,9 @@ const BadgeAnchor = forwardRef<HTMLDivElement, BadgeAnchorProps>(
 
     return (
       <Flex
-        direction="row"
         justify="start"
         align="stretch"
-        wrap="wrap"
-        gap="none"
+        gap="base"
         className={mergedClassName}
         ref={ref}
         {...restProps}

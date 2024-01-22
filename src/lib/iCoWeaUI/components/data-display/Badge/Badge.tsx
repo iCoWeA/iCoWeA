@@ -19,6 +19,7 @@ export type BadgeProps = Omit<FlexProps, 'content'> &
 BadgeDefaultProps & {
   anchorProps?: BadgeAnchorDefaultProps;
   content?: ReactNode;
+  disabled?: boolean;
 };
 
 const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
@@ -56,10 +57,9 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     >
       {children}
       <Flex
-        direction="row"
+        bordered={bordered}
         justify="center"
         align="center"
-        wrap="wrap"
         gap="base"
         className={mergedClassName}
         {...restProps}

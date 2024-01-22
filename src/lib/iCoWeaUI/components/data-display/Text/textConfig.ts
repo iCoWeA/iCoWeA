@@ -1,7 +1,7 @@
 const textConfig = {
   defaultProps: {
-    size: 'md',
     color: 'inherit',
+    size: 'md',
     align: 'left',
     gutter: false
   },
@@ -38,9 +38,9 @@ const textConfig = {
     colors: {
       light: {
         neutral: {
-          border: 'border-light-divider',
-          fill: 'fill-light-neutral',
-          color: 'text-light-neutral'
+          border: 'border-light-on-neutral-variant',
+          fill: 'fill-light-on-neutral-variant',
+          color: 'text-light-on-neutral-variant'
         },
         primary: {
           border: 'border-light-primary',

@@ -5,15 +5,18 @@ import { mergeClasses } from '../../../utils/utils';
 import listItemConfig from './listItemConfig';
 
 export type ListItemDefaultProps = {
-  size?: Sizes;
-  block?: boolean;
+  spacing?: Spacing;
   divider?: boolean;
+  block?: boolean;
+  justify?: JustifyContent;
+  align?: AlignItems;
+  gap?: Gaps;
 };
 
 export type ListItemProps = LiHTMLAttributes<HTMLLIElement> & ListItemDefaultProps;
 
 const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
-  const { size, block, divider, defaultClassName, className, ...restProps } = useConfig(
+  const { spacing, block, divider, justify, align, gap, defaultClassName, className, ...restProps } = useConfig(
     'listItem',
     listItemConfig.defaultProps,
     props
@@ -24,9 +27,12 @@ const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.sizes[size],
-    block && styles.block,
+    spacing !== 'none' && styles.spacings[spacing],
     divider && styles.divider,
+    block && styles.block,
+    justify !== 'start' && styles.justifies[justify],
+    align !== 'stretch' && styles.aligns[align],
+    gap !== 'none' && styles.gaps[gap],
     defaultClassName,
     className
   );

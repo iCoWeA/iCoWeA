@@ -2,7 +2,9 @@ import React, { type ReactNode, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
-import Box, { type BoxProps } from '../../surfaces/Box/Box';
+import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
+import { type IconProps } from '../Icon/Icon';
+import ChipButton, { type ChipButtonDefaultProps } from './ChipButton';
 import chipConfig from './chipConfig';
 
 export type ChipDefaultProps = {
@@ -12,16 +14,32 @@ export type ChipDefaultProps = {
   bordered?: boolean;
 };
 
-export type ChipProps = BoxProps &
+export type ChipProps = FlexProps &
 ChipDefaultProps & {
+  leftCloseButton?: boolean;
+  rightCloseButton?: boolean;
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
+  leftButtonProps?: ChipButtonDefaultProps;
+  rightButtonProps?: ChipButtonDefaultProps;
+  leftButtonIconProps?: IconProps;
+  rightButtonIconProps?: IconProps;
+  disabled?: boolean;
 };
 
 const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
   const {
+    variant,
+    color,
+    size,
+    leftCloseButton,
+    rightCloseButton,
     leftDecorator,
     rightDecorator,
+    leftButtonProps,
+    rightButtonProps,
+    leftButtonIconProps,
+    rightButtonIconProps,
     defaultClassName,
     className,
     children,
@@ -29,24 +47,49 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
   } = useConfig('chip', chipConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = chipConfig.styles;
+  const styles = chipConfig.styles.root;
 
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.sizes[size],
+    defaultClassName,
+    className
+  );
 
   return (
-    <Box
-      layout="panel"
-      inner
-      closable="none"
-      buttonGap="base"
+    <Flex
+      variant={variant}
+      color={color}
+      spacing={size}
+      justify="start"
+      align="center"
+      gap="base"
       className={mergedClassName}
       ref={ref}
       {...restProps}
     >
+      {leftCloseButton && (
+        <ChipButton
+          position="left"
+          variant={variant}
+          color={color}
+          iconProps={leftButtonIconProps}
+          {...leftButtonProps}
+        />
+      )}
       {leftDecorator}
       {children}
       {rightDecorator}
-    </Box>
+      {rightCloseButton && (
+        <ChipButton
+          position="right"
+          variant={variant}
+          color={color}
+          iconProps={rightButtonIconProps}
+          {...rightButtonProps}
+        />
+      )}
+    </Flex>
   );
 });
 

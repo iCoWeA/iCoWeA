@@ -64,7 +64,7 @@ const titleConfig = {
     colors: {
       light: {
         neutral: {
-          border: 'border-light-divider',
+          border: 'border-light-neutral',
           fill: 'fill-light-neutral',
           color: 'text-light-neutral'
         },

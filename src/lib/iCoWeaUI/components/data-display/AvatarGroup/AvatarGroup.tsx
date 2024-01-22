@@ -33,7 +33,6 @@ const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>((props, ref) =>
       direction={vertical ? 'col' : 'row'}
       justify="start"
       align="center"
-      wrap="nowrap"
       gap="none"
       className={mergedClassName}
       ref={ref}

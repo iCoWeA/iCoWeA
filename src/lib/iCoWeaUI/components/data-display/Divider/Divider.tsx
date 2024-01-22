@@ -12,7 +12,7 @@ export type DividerDefaultProps = {
   vertical?: boolean;
   spacing?: Spacing;
   panel?: boolean;
-  justify?: RowPositions;
+  justify?: ContainerPositions;
   gap?: Gaps;
 };
 
@@ -44,7 +44,7 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(
     styles.orientations[orientation],
-    color !== 'inherit' && styles.colors[theme][color],
+    color === 'neutral' && styles.color[theme],
     defaultClassName,
     className
   );
@@ -111,11 +111,10 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
 
   return (
     <Flex
-      direction={vertical ? 'col' : 'row'}
       color={color}
+      direction={vertical ? 'col' : 'row'}
       justify="stretch"
       align="center"
-      wrap="nowrap"
       className={mergedClassName}
       ref={ref}
       {...restProps}

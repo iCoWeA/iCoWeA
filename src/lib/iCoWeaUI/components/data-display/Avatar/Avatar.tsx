@@ -47,9 +47,10 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
 
   return (
     <Stack
+      bordered={bordered}
       justify="center"
       align="center"
-      gap="base"
+      gap="none"
       className={mergedClassName}
       ref={ref}
       {...restProps}

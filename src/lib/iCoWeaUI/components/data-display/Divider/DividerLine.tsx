@@ -6,7 +6,7 @@ import dividerConfig from './dividerConfig';
 export type DividerLineDefaultProps = BaseHTMLAttributes<HTMLHRElement>;
 
 export type DividerLineProps = DividerLineDefaultProps & {
-  position: RowPositions;
+  position: ContainerPositions;
   orientation: Orientations;
   spacing: Spacing;
   panel: boolean;

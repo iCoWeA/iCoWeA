@@ -6,8 +6,8 @@ import { mergeClasses } from '../../../utils/utils';
 import textConfig from './textConfig';
 
 export type TextDefaultProps = {
-  size?: Sizes;
   color?: TextColors;
+  size?: Sizes;
   align?: Aligns;
   gutter?: boolean;
 };
@@ -15,7 +15,7 @@ export type TextDefaultProps = {
 export type TextProps = BaseHTMLAttributes<HTMLParagraphElement> & TextDefaultProps;
 
 const Text = forwardRef<HTMLParagraphElement, TextProps>((props, ref) => {
-  const { size, color, align, gutter, defaultClassName, className, ...restProps } = useConfig(
+  const { color, size, align, gutter, defaultClassName, className, ...restProps } = useConfig(
     'text',
     textConfig.defaultProps,
     props
