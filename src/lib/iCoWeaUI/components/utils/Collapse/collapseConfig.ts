@@ -3,7 +3,8 @@ const collapseConfig = {
     closeOnOutsideClick: false,
     closeOnEscape: false,
     closeDuration: -1,
-    horizontal: false
+    horizontal: false,
+    smooth: true
   }
 };
 

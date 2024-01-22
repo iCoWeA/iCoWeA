@@ -16,6 +16,7 @@ import transitionConfig from './transitionConfig';
 
 export type TransitionDefaultProps = {
   variant?: Transitions;
+  smooth?: boolean;
   unmountOnExit?: boolean;
 };
 
@@ -36,6 +37,7 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
     onExiting,
     enter,
     variant,
+    smooth,
     unmountOnExit,
     defaultClassName,
     className,
@@ -91,8 +93,8 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
   const isUnmounted = state === TransitionStates.EXIT && !enter;
 
   useEffect(() => {
-    setTransitionStyle(ref, variant, isEntering, isUnmounted);
-  }, [variant, isEntering, isUnmounted]);
+    setTransitionStyle(ref, variant, smooth, isEntering, isUnmounted);
+  }, [variant, smooth, isEntering, isUnmounted]);
 
   /* --- Set classes --- */
   const styles = transitionConfig.styles;

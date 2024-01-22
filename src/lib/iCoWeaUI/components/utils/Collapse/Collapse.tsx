@@ -1,9 +1,3 @@
-/* ARIA
- *
- * Set aria-controls to handler
- *
- */
-
 import React, { type MutableRefObject, forwardRef, useRef, useImperativeHandle } from 'react';
 
 import useClickOutside from '../../../hooks/useClickOutside';
@@ -18,6 +12,7 @@ export type CollapseDefaultProps = {
   closeOnEscape?: boolean;
   closeDuration?: number;
   horizontal?: boolean;
+  smooth?: boolean;
 };
 
 export type CollapseProps = TransitionProps &
