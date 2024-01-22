@@ -7,12 +7,12 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       light: {
-        divider: '#FF0000', // #808080'
+        divider: '#FF0000', // #bfbfbf'
         neutral: '#1a1a1a',
         'on-neutral': '#ffffff',
         'soft-neutral': '#d9d9d9',
         'neutral-variant': '#ffffff',
-        'on-neutral-variant': '#FF0000', // #4d4d4d
+        'on-neutral-variant': '#FF0000', // #808080
         primary: '#0b68f4',
         'on-primary': '#ffffff',
         'soft-primary': '#cee0fd',
