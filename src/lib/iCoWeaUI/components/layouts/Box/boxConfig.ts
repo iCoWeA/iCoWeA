@@ -1,56 +1,162 @@
-const containerConfig = {
+const boxConfig = {
   defaultProps: {
     variant: 'default',
     color: 'inherit',
     spacing: 'none',
-    bordered: false,
+    panel: false,
+    bordered: 'none',
+    direction: 'row',
+    wrap: 'wrap',
+    justify: 'start',
+    align: 'stretch',
+    gap: 'none',
     block: false
   },
   styles: {
     base: {
-      display: 'block'
+      display: 'flex',
+      font: 'antialiased font-normal text-sm font-sans'
     },
     block: {
       width: 'w-full'
     },
-    border: {
-      border: 'border'
-    },
-    inherit: {
-      border: 'border-inherit',
-      fill: 'fill-inherit',
-      color: 'text-inherit'
-    },
-    transparent: {
-      background: 'bg-transparent'
+    borders: {
+      all: {
+        border: 'border'
+      },
+      x: {
+        border: 'border-x'
+      },
+      y: {
+        border: 'border-y'
+      },
+      top: {
+        border: 'border-t'
+      },
+      bottom: {
+        border: 'border-b'
+      },
+      left: {
+        border: 'border-l'
+      },
+      right: {
+        border: 'border-r'
+      }
     },
     disabled: {
       light: {
         border: 'border-light-neutral/40',
         fill: 'fill-light-neutral/40',
         color: 'text-light-neutral/40',
-        background: 'bg-light-neutral/20',
         pointerEvents: 'pointer-events-none'
       }
     },
-    spacing: {
+    disabledBg: {
+      light: {
+        background: 'bg-light-neutral/20'
+      }
+    },
+    directions: {
+      col: {
+        flexDirection: 'flex-col'
+      },
+      'row-reverse': {
+        flexDirection: 'flex-row-reverse'
+      },
+      'col-reverse': {
+        flexDirection: 'flex-col-reverse'
+      }
+    },
+    wraps: {
+      wrap: {
+        flexWrap: 'flex-wrap'
+      },
+      'wrap-reverse': {
+        flexWrap: 'flex-wrap-reverse'
+      }
+    },
+    justifies: {
+      normal: {
+        justifyContent: 'justify-normal'
+      },
+      stretch: {
+        justifyContent: 'justify-stretch'
+      },
+      end: {
+        justifyContent: 'justify-end'
+      },
+      center: {
+        justifyContent: 'justify-center'
+      },
+      between: {
+        justifyContent: 'justify-between'
+      },
+      around: {
+        justifyContent: 'justify-around'
+      },
+      evenly: {
+        justifyContent: 'justify-evenly'
+      }
+    },
+    aligns: {
+      start: {
+        alignItems: 'items-start'
+      },
+      end: {
+        alignItems: 'items-end'
+      },
+      center: {
+        alignItems: 'items-center'
+      },
+      baseline: {
+        alignItems: 'items-baseline'
+      }
+    },
+    gaps: {
+      base: {
+        gap: 'gap-2'
+      },
       sm: {
-        paddding: 'p-4'
+        gap: 'gap-4'
       },
       md: {
-        paddding: 'p-6'
+        gap: 'gap-6'
       },
       lg: {
-        paddding: 'p-8'
+        gap: 'gap-8'
+      }
+    },
+    spacing: {
+      default: {
+        sm: {
+          paddding: 'p-4'
+        },
+        md: {
+          paddding: 'p-6'
+        },
+        lg: {
+          paddding: 'p-8'
+        }
+      },
+      panel: {
+        sm: {
+          paddding: 'px-4 py-2'
+        },
+        md: {
+          paddding: 'px-6 py-3'
+        },
+        lg: {
+          paddding: 'px-8 py-4'
+        }
       }
     },
     variants: {
       default: {
         light: {
           neutral: {
-            border: 'border-light-divider',
-            fill: 'fill-light-on-neutral-variant',
-            color: 'text-light-on-neutral-variant'
+            border: 'border-light-neutral',
+            fill: 'fill-light-neutral',
+            color: 'text-light-neutral'
           },
           primary: {
             border: 'border-light-primary',
@@ -82,9 +188,9 @@ const containerConfig = {
       plain: {
         light: {
           neutral: {
-            border: 'border-light-divider',
-            fill: 'fill-light-on-neutral-variant',
-            color: 'text-light-on-neutral-variant',
+            border: 'border-light-neutral',
+            fill: 'fill-light-neutral',
+            color: 'text-light-neutral',
             background: 'bg-light-neutral-variant'
           },
           primary: {
@@ -122,9 +228,9 @@ const containerConfig = {
       soft: {
         light: {
           neutral: {
-            border: 'border-light-divider',
-            fill: 'fill-light-on-neutral-variant',
-            color: 'text-light-on-neutral-variant',
+            border: 'border-light-neutral',
+            fill: 'fill-light-neutral',
+            color: 'text-light-neutral',
             background: 'bg-light-soft-neutral'
           },
           primary: {
@@ -203,4 +309,4 @@ const containerConfig = {
   }
 };
 
-export default containerConfig;
+export default boxConfig;

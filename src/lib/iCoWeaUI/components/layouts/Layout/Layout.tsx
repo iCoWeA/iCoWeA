@@ -2,14 +2,15 @@ import React, { forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
-import Container, { type ContainerProps } from '../Container/Container';
+import Box, { type BoxProps } from '../Box/Box';
 import layoutConfig from './layoutConfig';
 
 export type LayoutDefaultProps = {
   layout?: Layouts;
+  panel?: boolean;
 };
 
-export type LayoutProps = ContainerProps & LayoutDefaultProps;
+export type LayoutProps = BoxProps & LayoutDefaultProps;
 
 const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
   const { layout, defaultClassName, className, ...restProps } = useConfig(
@@ -24,10 +25,16 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
   const mergedClassName = mergeClasses(styles.layouts[layout], defaultClassName, className);
 
   return (
-    <Container
+    <Box
       variant="default"
       color="inherit"
-      bordered={false}
+      spacing="lg"
+      bordered="none"
+      direction={layout === 'default' ? 'col' : 'row'}
+      wrap="wrap"
+      justify={layout === 'default' ? 'start' : 'between'}
+      align={layout === 'default' ? 'stretch' : 'center'}
+      gap={layout === 'default' ? 'none' : 'lg'}
       block
       className={mergedClassName}
       ref={ref}
