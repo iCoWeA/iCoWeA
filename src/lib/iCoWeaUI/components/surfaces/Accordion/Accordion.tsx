@@ -8,19 +8,19 @@ import Stack, { type StackProps } from '../../layouts/Stack/Stack';
 import accordionConfig from './accordionConfig';
 
 export type AccordionDefaultProps = {
-  defaultOpen?: boolean;
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
+  bordered?: Borders;
   divider?: boolean;
-  bordered?: boolean;
-  leftExpandIcon?: boolean;
-  rightExpandIcon?: boolean;
 };
 
 export type AccordionProps = StackProps &
 AccordionDefaultProps & {
   open?: boolean;
+  defaultOpen?: boolean;
+  leftExpandIcon?: boolean;
+  rightExpandIcon?: boolean;
   indexId?: string;
 };
 
@@ -28,14 +28,14 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   const {
     open,
     defaultOpen,
+    indexId,
     variant,
     color,
     size,
-    divider,
     bordered,
+    divider,
     leftExpandIcon,
     rightExpandIcon,
-    indexId,
     disabled,
     defaultClassName,
     className,
@@ -43,7 +43,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
     ...restProps
   } = useConfig('accordion', accordionConfig.defaultProps, props);
 
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [isOpen, setIsOpen] = useState(defaultOpen ?? false);
 
   const prevOpen = usePrevious(open);
 
@@ -84,16 +84,16 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   /* --- Set classes --- */
   const styles = accordionConfig.styles.root;
 
-  const mergedClassName = mergeClasses(styles.base, className);
+  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
 
   return (
     <Stack
-      variant={variant}
       color={color}
       bordered={bordered}
       justify="start"
       align="stretch"
       gap="none"
+      block
       disabled={disabled}
       className={mergedClassName}
       ref={ref}

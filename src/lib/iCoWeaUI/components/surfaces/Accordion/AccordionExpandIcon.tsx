@@ -18,6 +18,8 @@ const AccordionExpandIcon: FC<AccordionExpandIconProps> = ({ right, className, .
 
   return (
     <ExpandIcon
+      color="inherit"
+      size="md"
       className={mergedClassName}
       {...restProps}
     />

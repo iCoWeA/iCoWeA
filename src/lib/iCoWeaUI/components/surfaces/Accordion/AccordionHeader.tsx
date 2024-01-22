@@ -2,12 +2,10 @@ import React, { forwardRef, useContext, useRef, useImperativeHandle } from 'reac
 
 import accordionContext from '../../../contexts/accordion';
 import useAddEventListener from '../../../hooks/useAddEventListener';
-import { mergeClasses } from '../../../utils/utils';
-import ToggleButton, { type ToggleButtonProps } from '../../inputs/ToggleButton/ToggleButton';
+import ListButton, { type ListButtonProps } from '../../data-display/ListButton/ListButton';
 import AccordionExpandIcon, { type AccordionExpandIconDefaultProps } from './AccordionExpandIcon';
-import accordionConfig from './accordionConfig';
 
-export type AccordionHeaderDefaultProps = ToggleButtonProps;
+export type AccordionHeaderDefaultProps = ListButtonProps;
 
 export type AccordionHeaderProps = AccordionHeaderDefaultProps & {
   leftExpandIconProps?: AccordionExpandIconDefaultProps;
@@ -15,10 +13,7 @@ export type AccordionHeaderProps = AccordionHeaderDefaultProps & {
 };
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
-  (
-    { leftExpandIconProps, rightExpandIconProps, className, children, ...restProps },
-    forwardedRef
-  ) => {
+  ({ leftExpandIconProps, rightExpandIconProps, children, ...restProps }, forwardedRef) => {
     const {
       onToggle,
       open,
@@ -41,31 +36,22 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     useAddEventListener(ref, 'click', onToggle);
 
-    /* --- Set classes --- */
-    const styles = accordionConfig.styles.header;
-
-    const mergedClassName = mergeClasses(styles.base, styles.sizes[size], className);
-
     return (
-      <ToggleButton
-        uncheckedVariant={variant}
+      <ListButton
+        unselectVariant={variant}
         variant={variant}
-        uncheckedColor={color}
+        unselectColor={color}
         color={color}
         size={size}
-        inner={false}
-        icon={false}
         bordered={false}
         block
-        shadow={false}
         noRipple={false}
-        checked={open}
+        selected={open}
         id={indexId ? `${indexId}-header` : indexId}
         aria-controls={indexId ? `${indexId}-body` : indexId}
         aria-pressed={undefined}
         aria-expanded={open}
         disabled={disabled}
-        className={mergedClassName}
         ref={ref}
         {...restProps}
       >
@@ -83,7 +69,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
             {...rightExpandIconProps}
           />
         )}
-      </ToggleButton>
+      </ListButton>
     );
   }
 );
