@@ -14,8 +14,23 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        lazy: async () => await import('./pages/StandardLayout'),
-        children: []
+        lazy: async () => await import('./pages/DefaultLayout'),
+        children: [
+          {
+            path: 'login',
+            lazy: async () => await import('./pages/Login')
+          }
+        ]
+      },
+      {
+        path: '',
+        lazy: async () => await import('./pages/DashboardLayout'),
+        children: [
+          {
+            path: 'admin-home',
+            lazy: async () => await import('./pages/AdminHome')
+          }
+        ]
       }
     ]
   }
