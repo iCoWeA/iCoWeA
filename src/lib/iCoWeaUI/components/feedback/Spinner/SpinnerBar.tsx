@@ -1,6 +1,7 @@
 import React, { type SVGAttributes, type FC } from 'react';
 
 import { mergeClasses } from '../../../utils/utils';
+import spinnerConfig from './spinnerConfig';
 
 export type SpinnerBarDefaultProps = SVGAttributes<SVGCircleElement> & {
   color?: Colors;
@@ -8,20 +9,14 @@ export type SpinnerBarDefaultProps = SVGAttributes<SVGCircleElement> & {
 };
 
 export type SpinnerBarProps = SpinnerBarDefaultProps & {
-  styles: any;
   theme: Themes;
   color: Colors;
 };
 
-const SpinnerBar: FC<SpinnerBarProps> = ({
-  styles,
-  theme,
-  color,
-  disabled,
-  className,
-  ...restProps
-}) => {
+const SpinnerBar: FC<SpinnerBarProps> = ({ theme, color, disabled, className, ...restProps }) => {
   /* --- Set classes --- */
+  const styles = spinnerConfig.styles.bar;
+
   const mergedClassName = mergeClasses(
     styles.base,
     disabled ? styles.disabled[theme] : styles.strokes[theme][color],
@@ -31,6 +26,9 @@ const SpinnerBar: FC<SpinnerBarProps> = ({
   return (
     <circle
       className={mergedClassName}
+      cx="20"
+      cy="20"
+      r="18"
       {...restProps}
     />
   );

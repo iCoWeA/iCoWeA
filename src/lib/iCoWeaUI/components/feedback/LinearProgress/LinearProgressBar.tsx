@@ -9,18 +9,14 @@ export type LinearProgressBarDefaultProps = FlexProps & {
 };
 
 export type LinearProgressBarProps = LinearProgressBarDefaultProps & {
-  theme: Themes;
   color: Colors;
   orientation: Orientations;
   value: number | string;
 };
 
 const LinearProgressBar: FC<LinearProgressBarProps> = ({
-  theme,
-  color,
   orientation,
   value,
-  disabled,
   style,
   className,
   ...restProps
@@ -37,19 +33,15 @@ const LinearProgressBar: FC<LinearProgressBarProps> = ({
   const mergedClassName = mergeClasses(
     styles.base,
     styles.orientations[orientation],
-    disabled ? styles.disabled[theme] : styles.colors[theme][color],
     className
   );
 
   return (
     <Flex
-      color={color}
-      direction="row"
+      variant="solid"
       justify="center"
       align="center"
-      wrap="nowrap"
       gap="none"
-      disabled={disabled}
       style={mergedStyle}
       className={mergedClassName}
       {...restProps}

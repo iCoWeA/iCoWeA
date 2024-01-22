@@ -19,6 +19,7 @@ const SpinnerContainer: FC<SpinnerContainerProps> = ({ rotate, className, ...res
 
   return (
     <svg
+      viewBox="0 0 40 40"
       className={mergedClassName}
       {...restProps}
     />

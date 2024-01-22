@@ -1,28 +1,26 @@
-/* ARIA
- *
- * Set aria-labeledby
- *
- */
-
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
+import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import LinearProgressBar, { type LinearProgressBarDefaultProps } from './LinearProgressBar';
 import LinearProgressLabel, { type LinearProgressLabelDefaultProps } from './LinearProgressLabel';
 import linearProgressConfig from './linearProgressConfig';
 
+/* --- ARIA ---
+ * aria-labelledby
+ */
+
 export type LinearProgressDefaultProps = {
   color?: Colors;
   size?: Sizes;
-  inner?: boolean;
   vertical?: boolean;
   innerBar?: TextColors;
   value?: number | string;
 };
 
-export type LinearProgressProps = BaseHTMLAttributes<HTMLDivElement> &
+export type LinearProgressProps = FlexProps &
 LinearProgressDefaultProps & {
   progressBarProps?: LinearProgressBarDefaultProps;
   labelProps?: LinearProgressLabelDefaultProps;
@@ -33,7 +31,6 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
   const {
     color,
     size,
-    inner,
     vertical,
     innerBar,
     progressBarProps,
@@ -53,10 +50,7 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.orientations[orientation],
-    !children && !inner && styles.sizes[orientation][size],
-    !children && inner && styles.innerSizes[orientation],
-    !!children && styles.labelSizes[orientation],
+    children ? styles.labelSizes[orientation] : styles.sizes[orientation][size],
     innerBar !== 'inherit' && !disabled && styles.colors[theme][innerBar],
     disabled && styles.disabled[theme],
     defaultClassName,
@@ -64,7 +58,12 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
   );
 
   return (
-    <div
+    <Flex
+      direction={vertical ? 'col' : 'row'}
+      justify="start"
+      align="stretch"
+      gap="none"
+      block
       aria-valuenow={+value}
       aria-valuemin={0}
       aria-valuemax={100}
@@ -74,7 +73,6 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
       {...restContainerProps}
     >
       <LinearProgressBar
-        theme={theme}
         color={color}
         orientation={orientation}
         value={value}
@@ -83,7 +81,6 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
       >
         {children && (
           <LinearProgressLabel
-            theme={theme}
             color={color}
             vertical={vertical}
             disabled={disabled}
@@ -93,7 +90,7 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
           </LinearProgressLabel>
         )}
       </LinearProgressBar>
-    </div>
+    </Flex>
   );
 });
 

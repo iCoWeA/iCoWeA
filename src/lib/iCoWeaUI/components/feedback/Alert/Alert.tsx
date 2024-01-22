@@ -3,20 +3,20 @@ import React, { type ReactNode, forwardRef } from 'react';
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
 import Stack, { type StackProps } from '../../layouts/Stack/Stack';
-import Box, { type BoxProps } from '../../surfaces/Box/Box';
+import Container, { type ContainerProps } from '../../surfaces/Container/Container';
 import AlertBody from './AlertBody';
 import alertConfig from './alertConfig';
 
 export type AlerDefaultProps = {
   variant?: Variants;
   color?: Colors;
-  bordered?: boolean;
   size?: Sizes;
+  bordered?: Borders;
+  shadow?: boolean;
   closable?: Closable;
-  buttonGap?: Gaps;
 };
 
-export type AlertProps = BoxProps &
+export type AlertProps = ContainerProps &
 AlerDefaultProps & {
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
@@ -27,6 +27,8 @@ AlerDefaultProps & {
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   const {
+    size,
+    shadow,
     leftDecorator,
     rightDecorator,
     bodyProps,
@@ -41,14 +43,22 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   /* --- Set classes --- */
   const styles = alertConfig.styles.root;
 
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    shadow && styles.shadow,
+    defaultClassName,
+    className
+  );
 
   return (
-    <Box
-      layout="panel"
-      inner={false}
+    <Container
+      layout="default"
+      spacing={size}
+      panel
       align="start"
       wrap="nowrap"
+      gap={size}
+      closeGap={size}
       className={mergedClassName}
       role="alert"
       ref={ref}
@@ -75,7 +85,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
           {rightDecorator}
         </Stack>
       )}
-    </Box>
+    </Container>
   );
 });
 

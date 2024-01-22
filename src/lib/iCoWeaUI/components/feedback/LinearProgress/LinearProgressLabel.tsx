@@ -9,17 +9,14 @@ export type LinearProgressLabelDefaultProps = FlexProps & {
 };
 
 export type LinearProgressLabelProps = LinearProgressLabelDefaultProps & {
-  theme: Themes;
   color: Colors;
   vertical: boolean;
 };
 
 const LinearProgressLabel: FC<LinearProgressLabelProps> = ({
-  theme,
-  color,
   vertical,
-  disabled,
   className,
+  disabled,
   ...restProps
 }) => {
   /* -- Set classes --- */
@@ -28,17 +25,14 @@ const LinearProgressLabel: FC<LinearProgressLabelProps> = ({
   const mergedClassName = mergeClasses(
     styles.base,
     vertical && styles.vertical,
-    !disabled && styles.colors[theme][color],
     className
   );
 
   return (
     <Flex
-      color={color}
-      direction="row"
+      variant={disabled ? 'default' : 'solid'}
       justify="center"
       align="center"
-      wrap="nowrap"
       gap="base"
       disabled={disabled}
       className={mergedClassName}

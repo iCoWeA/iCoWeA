@@ -51,6 +51,7 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, forwardedRef)
     <Transition
       enter={open}
       variant="fade"
+      smooth
       unmountOnExit={false}
       aria-hidden={true}
       className={mergedClassName}

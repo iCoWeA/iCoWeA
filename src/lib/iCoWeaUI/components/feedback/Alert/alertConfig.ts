@@ -3,18 +3,18 @@ const alertConfig = {
     alert: {
       variant: 'solid',
       color: 'primary',
-      bordered: false,
       size: 'md',
-      closable: 'none',
-      buttonGap: 'md'
+      bordered: 'none',
+      shadow: true,
+      closable: 'none'
     }
   },
   styles: {
     root: {
       base: {
-        width: 'w-full',
-        height: 'h-fit',
-        borderRadius: 'rounded-xl',
+        borderRadius: 'rounded-xl'
+      },
+      shadow: {
         shadow: 'shadow-sm'
       }
     },

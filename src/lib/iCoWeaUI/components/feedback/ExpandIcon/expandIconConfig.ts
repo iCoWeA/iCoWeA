@@ -1,6 +1,6 @@
 const expandIconConfig = {
   defaultProps: {
-    color: 'none',
+    color: 'inherit',
     size: 'md'
   },
   styles: {
