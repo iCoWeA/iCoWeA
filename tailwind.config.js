@@ -7,13 +7,12 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       light: {
-        divider: '#808080',
-        'divider-variant': '#808080',
+        divider: '#FF0000', // #808080'
         neutral: '#1a1a1a',
-        'on-neutral': '#e6e6e6',
+        'on-neutral': '#ffffff',
         'soft-neutral': '#d9d9d9',
         'neutral-variant': '#ffffff',
-        'on-neutral-variant': '#4d4d4d',
+        'on-neutral-variant': '#FF0000', // #4d4d4d
         primary: '#0b68f4',
         'on-primary': '#ffffff',
         'soft-primary': '#cee0fd',
@@ -42,8 +41,8 @@ module.exports = {
     },
     extend: {
       maxWidth: {
-        374: '94rem', // max content width (90rem (1440px)) + padding (2* (2rem (32px)))
-        '2/4': '50%'
+        376: '94rem', // max content width (90rem (1440px)) + padding (2* (2rem (32px)))
+        120: '30rem'
       },
       zIndex: {
         0: '0',
