@@ -6,10 +6,12 @@ import { mergeClasses } from '../../../utils/utils';
 import linkConfig from './linkConfig';
 
 export type LinkDefaultProps = {
-  underline?: Underlines;
   color?: TextColors;
   size?: Sizes;
+  align?: Aligns;
+  underline?: Underlines;
   block?: boolean;
+  gutter?: boolean;
 };
 
 export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
@@ -18,8 +20,18 @@ LinkDefaultProps & {
 };
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const { underline, color, size, block, disabled, defaultClassName, className, ...restProps } =
-    useConfig('link', linkConfig.defaultProps, props);
+  const {
+    color,
+    size,
+    align,
+    underline,
+    block,
+    gutter,
+    disabled,
+    defaultClassName,
+    className,
+    ...restProps
+  } = useConfig('link', linkConfig.defaultProps, props);
   const theme = useTheme();
 
   /* --- Set classes --- */
@@ -29,9 +41,11 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
     styles.base,
     styles.underlines[underline],
     styles.sizes[size],
+    align !== 'left' && styles.aligns[align],
     !disabled && color !== 'inherit' && styles.colors[theme][color],
     disabled && styles.disabled[theme],
     block && styles.block,
+    gutter && styles.gutter,
     defaultClassName,
     className
   );

@@ -1,23 +1,15 @@
-/* ARIA
- *
- * Set aria-current="page" to current page
- *
- */
-
 import React, { type BaseHTMLAttributes, type ReactNode, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
-import useTheme from '../../../hooks/useTheme';
 import { mergeClasses, isLast } from '../../../utils/utils';
 import List, { type ListProps } from '../../data-display/List/List';
-import BreadcrumbsContainer, {
-  type BreadcrumbsContainerDefaultProps
-} from './BreadcrumbsContainer';
-import BreadcrumbsItem, { type BreadcrumbsItemDefaultProps } from './BreadcrumbsItem';
-import BreadcrumbsSeparator, {
-  type BreadcrumbsSeparatorDefaultProps
-} from './BreadcrumbsSeparator';
+import ListItem, { type ListItemProps } from '../../data-display/ListItem/ListItem';
+import Mark, { type MarkProps } from '../../data-display/Mark/Mark';
 import breadcrumbsConfig from './breadcrumbsConfig';
+
+/* --- ARIA ---
+ * aria-current="page"
+ */
 
 export type BreadcrumbsDefaultProps = {
   color?: TextColors;
@@ -29,9 +21,8 @@ export type BreadcrumbsProps = BaseHTMLAttributes<HTMLElement> &
 BreadcrumbsDefaultProps & {
   separator?: ReactNode;
   listProps?: ListProps;
-  itemsProps?: Record<number, BreadcrumbsItemDefaultProps>;
-  containerProps?: Record<number, BreadcrumbsContainerDefaultProps>;
-  separatorsProps?: Record<number, BreadcrumbsSeparatorDefaultProps>;
+  itemsProps?: Record<number, ListItemProps>;
+  separatorsProps?: Record<number, MarkProps>;
 };
 
 const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
@@ -48,10 +39,9 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
     children,
     ...restProps
   } = useConfig('breadcrumbs', breadcrumbsConfig.defaultProps, props);
-  const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = breadcrumbsConfig.styles.root;
+  const styles = breadcrumbsConfig.styles;
 
   const mergedClassName = mergeClasses(
     styles.base,
@@ -65,12 +55,15 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
 
   if (children && !Array.isArray(children)) {
     itemNodes = (
-      <BreadcrumbsItem
+      <ListItem
+        spacing="none"
+        divider={false}
+        block={false}
         gap={gap}
         {...itemsProps?.[0]}
       >
-        <BreadcrumbsContainer>{children}</BreadcrumbsContainer>
-      </BreadcrumbsItem>
+        {children}
+      </ListItem>
     );
   }
 
@@ -79,22 +72,27 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
 
     for (let i = 0; i < children.length; i++) {
       itemNodes[i] = (
-        <BreadcrumbsItem
+        <ListItem
           key={i}
+          spacing="none"
+          divider={false}
+          block={false}
           gap={gap}
           {...itemsProps?.[i]}
         >
-          <BreadcrumbsContainer>{children[i]}</BreadcrumbsContainer>
+          {children[i]}
           {!isLast(children, i) && (
-            <BreadcrumbsSeparator
-              theme={theme}
+            <Mark
+              variant="default"
               color={color}
+              size="sm"
+              bordered={false}
               {...separatorsProps?.[i]}
             >
               {separator}
-            </BreadcrumbsSeparator>
+            </Mark>
           )}
-        </BreadcrumbsItem>
+        </ListItem>
       );
     }
   }
@@ -112,6 +110,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
         align="center"
         gap={gap}
         row
+        block
         {...listProps}
       >
         {itemNodes}

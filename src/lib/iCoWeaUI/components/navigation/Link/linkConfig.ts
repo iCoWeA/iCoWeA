@@ -1,24 +1,24 @@
 const linkConfig = {
   defaultProps: {
-    underline: 'none',
     color: 'primary',
     size: 'md',
-    block: false
+    align: 'left',
+    underline: 'none',
+    block: false,
+    gutter: false
   },
   styles: {
     base: {
-      display: 'inline-flex',
-      width: 'w-fit',
-      height: 'h-fit',
-      justifyContent: 'justify-center',
-      alignItems: 'items-center',
-      gap: 'gap-2',
+      display: 'inline-block',
       font: 'antialiased font-normal font-sans',
       cursor: 'cursor-pointer',
       focus: 'focus:outline-0'
     },
     block: {
       width: 'w-full'
+    },
+    gutter: {
+      margin: 'mb-2'
     },
     underlines: {
       none: {
@@ -42,6 +42,17 @@ const linkConfig = {
         font: 'text-base'
       }
     },
+    aligns: {
+      right: {
+        textAlign: 'text-right'
+      },
+      center: {
+        textAlign: 'text-center'
+      },
+      justify: {
+        textAlign: 'text-justify'
+      }
+    },
     disabled: {
       light: {
         border: 'border-light-neutral/40',
@@ -54,7 +65,7 @@ const linkConfig = {
     colors: {
       light: {
         neutral: {
-          border: 'border-light-divider',
+          border: 'border-light-neutral',
           fill: 'fill-light-neutral',
           color: 'text-light-neutral'
         },
