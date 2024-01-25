@@ -1,7 +1,7 @@
 const iconConfig = {
   defaultProps: {
     variant: 'default',
-    color: 'neutral',
+    color: 'inherit',
     size: 'md',
     spacing: 'none',
     bordered: false
