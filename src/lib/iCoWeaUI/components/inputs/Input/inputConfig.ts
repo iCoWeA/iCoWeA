@@ -59,7 +59,6 @@ const inputConfig = {
         default: {
           left: {
             margin: 'mt-0.5 mb-px',
-            padding: 'pt-5.5 pb-0.5',
             border: 'border-b',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           },
@@ -71,7 +70,6 @@ const inputConfig = {
           },
           right: {
             margin: 'mt-0.5 mb-px',
-            padding: 'pt-5.5 pb-0.5',
             border: 'border-b',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           }
@@ -79,7 +77,6 @@ const inputConfig = {
         outlined: {
           left: {
             margin: 'my-px ml-px',
-            padding: 'py-3',
             border: 'border-y border-l',
             borderRadius: 'rounded-l-xl',
             focusWithin: 'group-[.focus]:m-0 group-[.focus]:border-y-2 group-[.focus]:border-l-2'
@@ -92,7 +89,6 @@ const inputConfig = {
           },
           right: {
             margin: 'my-px mr-px',
-            padding: 'py-3',
             border: 'border-y border-r',
             borderRadius: 'rounded-r-xl',
             focusWithin: 'group-[.focus]:m-0 group-[.focus]:border-y-2 group-[.focus]:border-r-2'
@@ -101,7 +97,6 @@ const inputConfig = {
         soft: {
           left: {
             margin: 'mt-0.5 mb-px',
-            padding: 'pt-5.5 pb-0.5',
             border: 'border-b',
             borderRadius: 'rounded-tl',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
@@ -114,7 +109,6 @@ const inputConfig = {
           },
           right: {
             margin: 'mt-0.5 mb-px',
-            padding: 'pt-5.5 pb-0.5',
             border: 'border-b',
             borderRadius: 'rounded-tr',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
