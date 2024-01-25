@@ -36,3 +36,10 @@ export const cloneRef = (element: ReactElement, elementRef: MutableRefObject<HTM
     ref.current = HTMLelement;
   };
 };
+
+export const getFocusableElements = (element: HTMLElement): HTMLElement[] => [...element.querySelectorAll<HTMLElement>(
+  'a[href], button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+)
+].filter(
+  el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden')
+);
