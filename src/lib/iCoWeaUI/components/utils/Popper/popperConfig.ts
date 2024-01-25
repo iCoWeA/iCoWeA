@@ -1,10 +1,10 @@
 const popperConfig = {
   defaultProps: {
-    open: false,
     lockScroll: false,
     closeOnOutsideClick: true,
     closeOnEscape: false,
     closeDuration: -1,
+    focusTrap: false,
     backdrop: false,
     closeOnBackdropClick: true
   },

@@ -42,6 +42,7 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
     children,
     ...restContainerProps
   } = useConfig('linearProgress', linearProgressConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */

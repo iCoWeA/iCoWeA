@@ -4,13 +4,13 @@ import React, {
   type MutableRefObject,
   forwardRef,
   useRef,
-  useCallback,
-  useImperativeHandle,
-  useState
+  useState,
+  useImperativeHandle
 } from 'react';
 
 import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
+import useMergeRefs from '../../../hooks/useMergeRefs';
 import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
 import TextareaClearance, { type TextareaClearanceProps } from './TextareaClearance';
@@ -19,7 +19,6 @@ import TextareaDecorator, { type TextareaDecoratorProps } from './TextareaDecora
 import TextareaFieldset, { type TextareaFieldsetProps } from './TextareaFieldset';
 import TextareaLabel, { type TextareaLabelProps } from './TextareaLabel';
 import textareaConfig from './textareaConfig';
-import useMergeRefs from '../../../hooks/useMergeRefs';
 
 export type TextareaDefaultProps = {
   variant?: InputVariants;
@@ -74,28 +73,29 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
   const containerRef = useRef<HTMLDivElement>(null);
   const mergedRefs = useMergeRefs(ref, textareaRef);
 
+  const [isFocused, setIsFocused] = useState(false);
+
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
     forwardedRef,
     () => containerRef.current,
     []
   );
 
-  const [isFocused, setIsFocused] = useState(false);
-
-  /* --- Set focus handlers --- */
-  const focusHandler = useCallback((event: FocusEvent): void => {
+  /* --- Set event handlers --- */
+  const focusHandler = (event: FocusEvent): void => {
     if (ref.current === event.target) {
       setIsFocused(true);
     }
-  }, []);
+  };
 
-  const blurHandler = useCallback((event: FocusEvent): void => {
+  const blurHandler = (event: FocusEvent): void => {
     if (event.relatedTarget === null || event.relatedTarget !== containerRef.current) {
       setIsFocused(false);
     }
-  }, []);
+  };
 
   useAddEventListener(ref, 'focus', focusHandler);
+
   useAddEventListener(ref, 'blur', blurHandler);
 
   /* --- Set classes --- */

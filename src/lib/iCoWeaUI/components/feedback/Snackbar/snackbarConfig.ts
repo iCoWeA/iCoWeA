@@ -1,6 +1,8 @@
 const snackbarConfig = {
   defaultProps: {
-    position: 'bottom-left'
+    position: 'bottom-left',
+    closeOnEscape: false,
+    closeDuration: -1
   },
   styles: {
     base: {

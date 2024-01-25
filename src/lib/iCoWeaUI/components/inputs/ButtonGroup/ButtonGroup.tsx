@@ -45,6 +45,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
     children,
     ...restProps
   } = useConfig('buttonGroup', buttonGroupConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */

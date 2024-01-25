@@ -1,29 +1,36 @@
-import React, { forwardRef } from 'react';
+import React, { type MutableRefObject, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
+import { type BackdropProps } from '../../feedback/Backdrop/Backdrop';
 import Popper, { type PopperProps } from '../../utils/Popper/Popper';
 import DrawerContainer, { type DrawerContainerDefaultProps } from './DrawerContainer';
 import drawerConfig from './drawerConfig';
 
 export type DrawerDefaultProps = {
+  variant?: Variants;
   color?: Colors;
-  bordered?: boolean;
   position?: Positions;
+  closeOnEscape?: boolean;
+  focusTrap?: boolean;
 };
 
-export type DrawerProps = PopperProps &
+export type DrawerProps = Omit<PopperProps, 'variant'> &
 DrawerDefaultProps & {
+  onClose?: ((state: boolean) => void) | ((state?: boolean) => void);
+  open?: boolean;
+  portalTarget?: Element | null;
+  anchorRef?: MutableRefObject<HTMLElement | null>;
+  backdropProps?: BackdropProps;
   containerProps?: DrawerContainerDefaultProps;
 };
 
 const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   const {
+    variant,
     color,
-    bordered,
     position,
     containerProps,
-    backdropProps,
     defaultClassName,
     className,
     children,
@@ -40,26 +47,24 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     className
   );
 
-  /* --- Set backdrop --- */
-  const mergedBackdropProps = { invisible: false, ...backdropProps };
-
   return (
     <Popper
-      open={false}
       lockScroll
       closeOnOutsideClick={false}
-      closeOnEscape
       closeDuration={-1}
       backdrop
       closeOnBackdropClick
-      backdropProps={mergedBackdropProps}
+      variant={`slide-${position}`}
+      smooth
       className={mergedClassName}
       ref={ref}
       {...restProps}
     >
       <DrawerContainer
+        variant={variant}
         color={color}
         position={position}
+        {...containerProps}
       >
         {children}
       </DrawerContainer>

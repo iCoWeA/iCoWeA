@@ -20,6 +20,7 @@ const Text = forwardRef<HTMLParagraphElement, TextProps>((props, ref) => {
     textConfig.defaultProps,
     props
   );
+
   const theme = useTheme();
 
   /* --- Set classes --- */

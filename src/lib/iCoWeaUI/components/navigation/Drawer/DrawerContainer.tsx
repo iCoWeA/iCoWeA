@@ -7,6 +7,7 @@ import drawerConfig from './drawerConfig';
 export type DrawerContainerDefaultProps = CardProps;
 
 export type DrawerContainerProps = DrawerContainerDefaultProps & {
+  variant: Variants;
   color: Colors;
   position: Positions;
 };
@@ -19,7 +20,8 @@ const DraweContainer: FC<DrawerContainerProps> = ({ position, className, ...rest
 
   return (
     <Card
-      simple={false}
+      spacing="none"
+      bordered="none"
       shadow={false}
       className={mergedClassName}
       {...restProps}

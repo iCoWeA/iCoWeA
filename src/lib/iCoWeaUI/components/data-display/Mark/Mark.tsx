@@ -20,6 +20,7 @@ const Mark = forwardRef<HTMLSpanElement, MarkProps>((props, ref) => {
     markConfig.defaultProps,
     props
   );
+
   const theme = useTheme();
 
   /* --- Set classes --- */

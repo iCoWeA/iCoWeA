@@ -30,6 +30,7 @@ const Icon: FC<IconProps> = (props) => {
     children,
     ...restProps
   } = useConfig('icon', iconConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */

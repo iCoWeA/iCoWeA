@@ -46,6 +46,7 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
     children,
     ...restProps
   } = useConfig('spinner', spinnerConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */

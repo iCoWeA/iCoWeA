@@ -35,7 +35,6 @@ export const config: Config = {
   listButton: {},
   listItem: {},
   listNavlink: {},
-  listSeparator: {},
   main: {},
   mark: {},
   navlink: {},
@@ -54,5 +53,6 @@ export const config: Config = {
   title: {},
   toggleButton: {},
   toggleButtonGroup: {},
+  tooltip: {},
   transition: {}
 };

@@ -47,6 +47,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     children,
     ...restProps
   } = useConfig('button', buttonConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */

@@ -54,6 +54,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
     children,
     ...restProps
   } = useConfig('checkbox', checkboxConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */

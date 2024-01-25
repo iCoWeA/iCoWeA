@@ -1,8 +1,10 @@
 const drawerConfig = {
   defaultProps: {
+    variant: 'plain',
     color: 'neutral',
-    bordered: false,
-    position: 'left'
+    position: 'left',
+    closeOnEscape: true,
+    focusTrap: false
   },
   styles: {
     root: {

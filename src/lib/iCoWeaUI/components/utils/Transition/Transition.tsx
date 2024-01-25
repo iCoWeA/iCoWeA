@@ -3,8 +3,7 @@ import React, {
   forwardRef,
   useRef,
   useImperativeHandle,
-  useEffect,
-  useCallback
+  useEffect
 } from 'react';
 
 import useAddEventListener from '../../../hooks/useAddEventListener';
@@ -55,12 +54,24 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
     []
   );
 
-  /* --- Start transition --- */
+  /* --- Set event handlers --- */
+  const isEntering = state === TransitionStates.ENTER || state === TransitionStates.ENTERING;
+  const isUnmounted = state === TransitionStates.EXIT && !enter;
+
+  const transitionEndHandler = (event: Event): void => {
+    if (event.target === ref.current) {
+      stopTransition();
+    }
+  };
+
   useEffect(() => {
     startTransition(enter);
   }, [enter]);
 
-  /* --- Execute transition handlers --- */
+  useEffect(() => {
+    setTransitionStyle(ref, variant, smooth, isEntering, isUnmounted);
+  }, [variant, smooth, isEntering, isUnmounted]);
+
   useEffect(() => {
     if (state === TransitionStates.ENTER && onEnter) {
       onEnter();
@@ -79,22 +90,7 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
     }
   }, [state, onEnter, onExit, onEntering, onExiting]);
 
-  /* --- Exit transition --- */
-  const transitionEndHandler = useCallback((event: Event): void => {
-    if (event.target === ref.current) {
-      stopTransition();
-    }
-  }, []);
-
   useAddEventListener(ref, 'transitionend', transitionEndHandler);
-
-  /* --- Set styles --- */
-  const isEntering = state === TransitionStates.ENTER || state === TransitionStates.ENTERING;
-  const isUnmounted = state === TransitionStates.EXIT && !enter;
-
-  useEffect(() => {
-    setTransitionStyle(ref, variant, smooth, isEntering, isUnmounted);
-  }, [variant, smooth, isEntering, isUnmounted]);
 
   /* --- Set classes --- */
   const styles = transitionConfig.styles;

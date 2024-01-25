@@ -171,6 +171,10 @@ export const setPosition = (element: HTMLElement, position: OuterPositions, anch
 };
 
 export const setOffset = (element: HTMLElement, position: OuterPositions, offset: number = 0): void => {
+  if (offset <= 0) {
+    return;
+  }
+
   if (position.startsWith('top')) {
     element.style.padding = `0px 0px ${offset}px 0px`;
   }
@@ -185,33 +189,5 @@ export const setOffset = (element: HTMLElement, position: OuterPositions, offset
 
   if (position.startsWith('right')) {
     element.style.padding = `0px 0px 0px ${offset}px`;
-  }
-};
-
-export const setArrowPosition = (element: HTMLElement, position: OuterPositions, offset: number): void => {
-  const splitedPosition = position.split('-')[0];
-
-  if (splitedPosition === 'top') {
-    element.style.top = `calc(100% - ${offset}px)`;
-    element.style.left = '50%';
-    element.style.transform = 'translate(-50%, 0%) rotate(180deg)';
-  }
-
-  if (splitedPosition === 'bottom') {
-    element.style.top = `${offset}px`;
-    element.style.left = '50%';
-    element.style.transform = 'translate(-50%, -100%)';
-  }
-
-  if (splitedPosition === 'left') {
-    element.style.top = '50%';
-    element.style.left = `calc(100% - ${offset}px`;
-    element.style.transform = 'translate(0%, -50%) rotate(90deg)';
-  }
-
-  if (splitedPosition === 'right') {
-    element.style.top = '50%';
-    element.style.left = `${offset}px`;
-    element.style.transform = 'translate(-100%, -50%) rotate(-90deg)';
   }
 };

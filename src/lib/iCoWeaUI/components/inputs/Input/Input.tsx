@@ -4,13 +4,13 @@ import React, {
   type MutableRefObject,
   forwardRef,
   useRef,
-  useCallback,
-  useImperativeHandle,
-  useState
+  useState,
+  useImperativeHandle
 } from 'react';
 
 import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
+import useMergeRefs from '../../../hooks/useMergeRefs';
 import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
 import InputClearance, { type InputClearanceProps } from './InputClearance';
@@ -19,7 +19,6 @@ import InputDecorator, { type InputDecoratorProps } from './InputDecorator';
 import InputFieldset, { type InputFieldsetProps } from './InputFieldset';
 import InputLabel, { type InputLabelProps } from './InputLabel';
 import inputConfig from './inputConfig';
-import useMergeRefs from '../../../hooks/useMergeRefs';
 
 export type InputDefaultProps = {
   variant?: InputVariants;
@@ -68,11 +67,14 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
     className,
     ...restProps
   } = useConfig('input', inputConfig.defaultProps.input, props);
+
   const theme = useTheme();
 
   const ref = useRef<HTMLInputElement | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const mergedRefs = useMergeRefs(ref, inputRef);
+
+  const [isFocused, setIsFocused] = useState(false);
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
     forwardedRef,
@@ -80,22 +82,21 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
     []
   );
 
-  const [isFocused, setIsFocused] = useState(false);
-
-  /* --- Set focus handlers --- */
-  const focusHandler = useCallback((event: FocusEvent): void => {
+  /* --- Set event handlers --- */
+  const focusHandler = (event: FocusEvent): void => {
     if (ref.current === event.target) {
       setIsFocused(true);
     }
-  }, []);
+  };
 
-  const blurHandler = useCallback((event: FocusEvent): void => {
+  const blurHandler = (event: FocusEvent): void => {
     if (event.relatedTarget === null || event.relatedTarget !== containerRef.current) {
       setIsFocused(false);
     }
-  }, []);
+  };
 
   useAddEventListener(ref, 'focus', focusHandler);
+
   useAddEventListener(ref, 'blur', blurHandler);
 
   /* --- Set classes --- */

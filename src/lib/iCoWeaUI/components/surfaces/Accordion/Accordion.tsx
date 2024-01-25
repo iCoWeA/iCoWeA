@@ -43,11 +43,10 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
     ...restProps
   } = useConfig('accordion', accordionConfig.defaultProps, props);
 
-  const [isOpen, setIsOpen] = useState(defaultOpen ?? false);
-
   const prevOpen = usePrevious(open);
 
-  /* --- Set prev state --- */
+  const [isOpen, setIsOpen] = useState(defaultOpen ?? false);
+
   useEffect(() => {
     if (prevOpen !== undefined && open === undefined) {
       setIsOpen(prevOpen);

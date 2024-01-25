@@ -42,6 +42,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, forwardedRef)
     []
   );
 
+  /* --- Set event handlers --- */
   const closeHandler = onClose && (() => onClose(false));
 
   useClickOutside(closeOnOutsideClick && open && closeHandler, ref, anchorRef);
@@ -49,11 +50,6 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, forwardedRef)
   useKeyboard('Escape', closeOnEscape && closeHandler);
 
   useTimer(open && closeHandler, closeDuration);
-
-  /* --- Set props --- */
-  if (anchorRef?.current) {
-    anchorRef.current.ariaExpanded = String(open);
-  }
 
   return (
     <Transition

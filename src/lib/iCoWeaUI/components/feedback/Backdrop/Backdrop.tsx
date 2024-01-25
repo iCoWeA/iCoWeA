@@ -22,6 +22,7 @@ BackdropDefaultProps & {
 const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, forwardedRef) => {
   const { onClose, open, invisible, portalTarget, defaultClassName, className, ...restProps } =
     useConfig('backdrop', backdropConfig.defaultProps, props);
+
   const theme = useTheme();
 
   const ref = useRef<HTMLDivElement>(null);
@@ -32,6 +33,7 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, forwardedRef)
     []
   );
 
+  /* --- Set event handlers --- */
   const clickHandler = onClose && (() => onClose(false));
 
   useAddEventListener(ref, 'click', clickHandler);

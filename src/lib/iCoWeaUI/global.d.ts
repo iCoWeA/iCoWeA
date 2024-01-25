@@ -1,7 +1,7 @@
 import { type AvatarDefaultProps } from './components/data-display/Avatar/Avatar';
 import { type AvatarGroupDefaultProps } from './components/data-display/AvatarGroup/AvatarGroup';
 import { type BadgeDefaultProps } from './components/data-display/Badge/Badge';
-import { type ChipDefaultProps } from './components/data-display/Chip/chipConfig';
+import { type ChipDefaultProps } from './components/data-display/Chip/Chip';
 import { type DividerDefaultProps } from './components/data-display/Divider/Divider';
 import { type IconDefaultProps } from './components/data-display/Icon/Icon';
 import { type ImageDefaultProps } from './components/data-display/Image/Image';
@@ -9,14 +9,13 @@ import { type ListDefaultProps } from './components/data-display/List/List';
 import { type ListButtonDefaultProps } from './components/data-display/ListButton/ListButton';
 import { type ListItemDefaultProps } from './components/data-display/ListItem/ListItem';
 import { type ListNavlinkDefaultProps } from './components/data-display/ListNavlink/ListNavlink';
-import { type ListSeparatorDefaultProps } from './components/data-display/ListSeparator/ListSeparator';
 import { type MarkDefaultProps } from './components/data-display/Mark/Mark';
 import { type TextDefaultProps } from './components/data-display/Text/Text';
 import { type TitleDefaultProps } from './components/data-display/Title/Title';
+import { type TooltipDefaultProps } from './components/data-display/Tooltip/Tooltip';
 import { type AlerDefaultProps } from './components/feedback/Alert/Alert';
 import { type BackdropDefaultProps } from './components/feedback/Backdrop/Backdrop';
 import { type CircularProgressDefaultProps } from './components/feedback/CircularProgress/CircularProgress';
-import { type DrawerDefaultProps } from './components/feedback/Drawer/Drawer';
 import { type ExpandIconDefaultProps } from './components/feedback/ExpandIcon/ExpandIcon';
 import { type LinearProgressDefaultProps } from './components/feedback/LinearProgress/LinearProgress';
 import { type SnackbarDefaultProps } from './components/feedback/Snackbar/Snackbar';
@@ -30,7 +29,7 @@ import { type FormControlDefauProps } from './components/inputs/FormControl/Form
 import { type InputDefaultProps } from './components/inputs/Input/Input';
 import { type LabelDefauProps } from './components/inputs/Label/Label';
 import { type RadioDefaultProps } from './components/inputs/Radio/Radio';
-import { type SwitchDefaultProps } from './components/inputs/Switch/SwitchContainer';
+import { type SwitchDefaultProps } from './components/inputs/Switch/Switch';
 import { type TextareaDefaultProps } from './components/inputs/Textarea/Textarea';
 import { type ToggleButtonDefaultProps } from './components/inputs/ToggleButton/ToggleButton';
 import { type ToggleButtonGroupDefaultProps } from './components/inputs/ToggleButtonGroup/ToggleButtonGroup';
@@ -40,6 +39,7 @@ import { type HeaderDefaultProps } from './components/layouts/Header/Header';
 import { type LayoutDefaultProps } from './components/layouts/Layout/Layout';
 import { type StackDefaultProps } from './components/layouts/Stack/Stack';
 import { type BreadcrumbsDefaultProps } from './components/navigation/Breadcrumbs/Breadcrumbs';
+import { type DrawerDefaultProps } from './components/navigation/Drawer/Drawer';
 import { type LinkDefaultProps } from './components/navigation/Link/Link';
 import { type NavlinkDefaultProps } from './components/navigation/Navlink/Navlink';
 import { type AccordionDefaultProps } from './components/surfaces/Accordion/Accordion';
@@ -80,7 +80,7 @@ declare global {
   export type CornerPositions = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   export type BorderPositions = 'none' | 'left' | 'right' | 'both';
   export type Variants = 'default' | 'plain' | 'soft' | 'solid';
-  export type LayoutVariants = 'plain' | 'soft' | 'solid';
+  export type DropdownVariants = 'plain' | 'soft' | 'solid';
   export type InputVariants = 'default' | 'outlined' | 'soft';
   export type SizeVariants = 'container' | 'panel' | 'in-container' | 'in-panel';
   export type TitleVariants =
@@ -235,10 +235,6 @@ declare global {
       styles?: string;
       defaultProps?: ListNavlinkDefaultProps;
     },
-    listSeparator: {
-      styles?: string;
-      defaultProps?: ListSeparatorDefaultProps;
-    },
     main: {
       styles?: string;
       defaultProps?;
@@ -254,7 +250,7 @@ declare global {
     popover: {
       styles?: string;
       defaultProps?: PopoverDefaultProps;
-    },
+    }
     popper: {
       styles?: string;
       defaultProps?: PopperDefaultProps;
@@ -311,6 +307,10 @@ declare global {
       styles?: string;
       defaultProps?: ToggleButtonGroupDefaultProps;
     },
+    tooltip: {
+      styles?: string;
+      defaultProps?: TooltipDefaultProps;
+    }
     transition: {
       styles?: string;
       defaultProps?: TransitionDefaultProps;

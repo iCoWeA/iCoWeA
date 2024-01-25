@@ -1,20 +1,9 @@
-/* ARIA
- *
- * Set aria-controls to handler
- *
- */
-
-import React, {
-  type MutableRefObject,
-  forwardRef,
-  useRef,
-  useImperativeHandle,
-  type ReactNode
-} from 'react';
+import React, { type MutableRefObject, forwardRef, useRef, useImperativeHandle } from 'react';
 import { createPortal } from 'react-dom';
 
 import useClickOutside from '../../../hooks/useClickOutside';
 import useConfig from '../../../hooks/useConfig';
+import useFocusTrap from '../../../hooks/useFocusTrap';
 import useKeyboard from '../../../hooks/useKeyboard';
 import useLockScroll from '../../../hooks/useLockScroll';
 import useTimer from '../../../hooks/useTimer';
@@ -24,20 +13,23 @@ import Transition, { type TransitionProps } from '../Transition/Transition';
 import popperConfig from './popperConfig';
 
 export type PopperDefaultProps = {
-  onClose?: ((state: boolean) => void) | ((state?: boolean) => void);
-  open?: boolean;
   lockScroll?: boolean;
   closeOnOutsideClick?: boolean;
   closeOnEscape?: boolean;
   closeDuration?: number;
+  focusTrap?: boolean;
   backdrop?: boolean;
   closeOnBackdropClick?: boolean;
-  anchorRef?: MutableRefObject<HTMLElement | null>;
-  portalTarget?: Element | null;
-  backdropProps?: BackdropProps;
 };
 
-export type PopperProps = TransitionProps & PopperDefaultProps;
+export type PopperProps = TransitionProps &
+PopperDefaultProps & {
+  onClose?: ((state: boolean) => void) | ((state?: boolean) => void);
+  open?: boolean;
+  portalTarget?: Element | null;
+  anchorRef?: MutableRefObject<HTMLElement | null>;
+  backdropProps?: BackdropProps;
+};
 
 const Popper = forwardRef<HTMLDivElement, PopperProps>((props, forwardedRef) => {
   const {
@@ -47,10 +39,11 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, forwardedRef) => 
     closeOnOutsideClick,
     closeOnEscape,
     closeDuration,
+    focusTrap,
     backdrop,
     closeOnBackdropClick,
-    anchorRef,
     portalTarget,
+    anchorRef,
     backdropProps,
     defaultClassName,
     className,
@@ -65,7 +58,10 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, forwardedRef) => 
     []
   );
 
+  /* --- Set event handlers --- */
   const closeHandler = onClose && (() => onClose(false));
+
+  useFocusTrap(ref, open && focusTrap);
 
   useLockScroll(lockScroll && open);
 
@@ -80,43 +76,31 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, forwardedRef) => 
 
   const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
 
-  /* --- Set anchor --- */
-  if (anchorRef?.current) {
-    anchorRef.current.ariaExpanded = String(open);
-  }
-
-  /* --- Set backdrop --- */
-  let backdropNode: ReactNode;
-
-  if (backdrop) {
-    backdropNode = (
-      <Backdrop
-        onClose={closeOnBackdropClick ? onClose : undefined}
-        open={open}
-        invisible
-        {...backdropProps}
-      />
-    );
-  }
-
   /* --- Set portal --- */
-  let node = (
+  const node = (
     <Transition
       enter={open}
       variant="fade"
+      smooth={false}
       unmountOnExit={false}
+      tabIndex={focusTrap ? -1 : undefined}
       className={mergedClassName}
       ref={ref}
       {...restProps}
     />
   );
 
-  node = portalTarget ? createPortal(node, portalTarget) : node;
-
   return (
     <>
-      {backdropNode}
-      {node}
+      {backdrop && (
+        <Backdrop
+          onClose={closeOnBackdropClick ? onClose : undefined}
+          open={open}
+          invisible
+          {...backdropProps}
+        />
+      )}
+      {portalTarget ? createPortal(node, portalTarget) : node}
     </>
   );
 });

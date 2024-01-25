@@ -36,6 +36,7 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
     children,
     ...restProps
   } = useConfig('divider', dividerConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */

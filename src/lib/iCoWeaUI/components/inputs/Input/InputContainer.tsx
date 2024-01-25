@@ -1,10 +1,4 @@
-import React, {
-  type MutableRefObject,
-  forwardRef,
-  useRef,
-  useImperativeHandle,
-  useCallback
-} from 'react';
+import React, { type MutableRefObject, forwardRef, useRef, useImperativeHandle } from 'react';
 
 import useAddEventListener from '../../../hooks/useAddEventListener';
 import { mergeClasses } from '../../../utils/utils';
@@ -33,12 +27,12 @@ const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(
       []
     );
 
-    /* --- Set handlers --- */
-    const focusHandler = useCallback((event: FocusEvent): void => {
+    /* --- Set event handlers --- */
+    const focusHandler = (event: FocusEvent): void => {
       if (ref.current === event.target || inputRef.current === event.target) {
         inputRef.current?.focus();
       }
-    }, []);
+    };
 
     useAddEventListener(ref, 'focus', focusHandler);
 

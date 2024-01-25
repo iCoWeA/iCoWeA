@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { type MutableRefObject, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
@@ -7,9 +7,17 @@ import snackbarConfig from './snackbarConfig';
 
 export type SnackbarDefaultProps = {
   position?: InnerPositions;
+  closeOnEscape?: boolean;
+  closeDuration?: number;
 };
 
-export type SnackbarProps = PopperProps & SnackbarDefaultProps;
+export type SnackbarProps = PopperProps &
+SnackbarDefaultProps & {
+  onClose?: ((state: boolean) => void) | ((state?: boolean) => void);
+  open?: boolean;
+  portalTarget?: Element | null;
+  anchorRef?: MutableRefObject<HTMLElement | null>;
+};
 
 const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
   const { position, defaultClassName, className, ...restProps } = useConfig(
@@ -30,11 +38,9 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
 
   return (
     <Popper
-      open={false}
       lockScroll={false}
       closeOnOutsideClick
-      closeOnEscape
-      closeDuration={-1}
+      focusTrap={false}
       backdrop={false}
       closeOnBackdropClick
       className={mergedClassName}

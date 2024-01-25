@@ -20,6 +20,7 @@ const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
     titleConfig.defaultProps,
     props
   );
+
   const theme = useTheme();
 
   /* --- Set classes --- */
