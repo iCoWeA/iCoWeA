@@ -28,7 +28,7 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
     <Box
       variant="default"
       color="inherit"
-      spacing="lg"
+      spacing="none"
       bordered="none"
       direction={layout === 'default' ? 'col' : 'row'}
       wrap="wrap"
