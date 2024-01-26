@@ -21,7 +21,7 @@ export const Component: FC = () => {
   } = useForm({ email: '', password: '' });
 
   return (
-    <Section className="max-w-120">
+    <Section className="mx-auto max-w-120">
       <Form
         method="post"
         onSubmit={resetForm}
