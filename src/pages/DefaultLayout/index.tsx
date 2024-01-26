@@ -9,7 +9,10 @@ export const Component: FC = () => (
     variant="solid"
     color="primary"
   >
-    <Layout layout="fullbleed">
+    <Layout
+      layout="default"
+      align="center"
+    >
       <Main>
         <Outlet />
       </Main>
