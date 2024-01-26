@@ -9,8 +9,7 @@ const listItemConfig = {
   },
   styles: {
     base: {
-      display: 'flex',
-      font: 'antialiased font-normal text-sm font-sans'
+      display: 'flex'
     },
     block: {
       width: 'w-full',

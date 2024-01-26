@@ -20,7 +20,7 @@ const buttonConfig = {
         borderRadius: 'rounded-full',
         alignItems: 'items-center',
         gap: 'gap-2',
-        font: 'antialiased font-semibold text-sm font-sans',
+        font: 'font-semibold',
         userSelect: 'select-none',
         transition: 'transition-all',
         focus: 'focus:outline-none',

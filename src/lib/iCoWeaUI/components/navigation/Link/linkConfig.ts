@@ -10,7 +10,6 @@ const linkConfig = {
   styles: {
     base: {
       display: 'inline-block',
-      font: 'antialiased font-normal font-sans',
       cursor: 'cursor-pointer',
       focus: 'focus:outline-0'
     },

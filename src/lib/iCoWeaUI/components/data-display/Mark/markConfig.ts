@@ -8,7 +8,6 @@ const markConfig = {
   styles: {
     base: {
       display: 'inline-flex',
-      font: 'antialiased font-normal font-sans',
       alignItems: 'items-center',
       gap: 'gap-2'
     },

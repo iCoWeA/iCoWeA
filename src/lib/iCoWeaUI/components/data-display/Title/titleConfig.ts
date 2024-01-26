@@ -8,7 +8,7 @@ const titleConfig = {
   styles: {
     base: {
       display: 'block',
-      font: 'antialiased font-semibold font-sans'
+      font: 'font-semibold'
     },
     aligns: {
       right: {

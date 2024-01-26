@@ -7,8 +7,7 @@ const textConfig = {
   },
   styles: {
     base: {
-      display: 'block',
-      font: 'antialiased font-normal font-sans'
+      display: 'block'
     },
     gutter: {
       margin: 'mb-2'

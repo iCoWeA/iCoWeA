@@ -9,7 +9,7 @@ const labelConfig = {
     base: {
       display: 'flex',
       flexWrap: 'flex-wrap',
-      font: 'antialiased font-semibold text-xs font-sans'
+      font: 'font-semibold text-xs'
     },
     columns: {
       flexDirection: 'flex-col'
