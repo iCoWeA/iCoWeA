@@ -1,25 +1,27 @@
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
-
-import useConfig from '../../../hooks/useConfig';
-import { mergeClasses } from '../../../utils/utils';
-import headerConfig from './headerConfig';
-
 /* --- ARIA ---
  * aria-labelledby
  */
 
+import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+
+import useConfig from '../../../hooks/useConfig';
+import { mergeClasses } from '../../../utils/utils';
+import Layout, { type LayoutProps } from '../Layout/Layout';
+import headerConfig from './headerConfig';
+
 export type HeaderDefaultProps = {
+  block?: boolean;
   shadow?: boolean;
 };
 
-export type HeaderProps = BaseHTMLAttributes<HTMLElement> & HeaderDefaultProps;
+export type HeaderProps = BaseHTMLAttributes<HTMLElement> &
+HeaderDefaultProps & {
+  containerProps?: LayoutProps;
+};
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
-  const { shadow, defaultClassName, className, ...restProps } = useConfig(
-    'header',
-    headerConfig.defaultProps,
-    props
-  );
+  const { block, shadow, containerProps, defaultClassName, className, children, ...restProps } =
+    useConfig('header', headerConfig.defaultProps, props);
 
   /* --- Set classes --- */
   const styles = headerConfig.styles;
@@ -36,7 +38,16 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       className={mergedClassName}
       ref={ref}
       {...restProps}
-    />
+    >
+      <Layout
+        layout={block ? 'dashboard' : 'fullbleed'}
+        spacing="lg"
+        panel
+        {...containerProps}
+      >
+        {children}
+      </Layout>
+    </header>
   );
 });
 

@@ -1,3 +1,7 @@
+/* --- ARIA ---
+ * 3 state
+ */
+
 import React, {
   type InputHTMLAttributes,
   type ReactElement,
@@ -12,10 +16,6 @@ import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
 import CheckboxContainer, { type CheckboxContainerDefaultProps } from './CheckboxContainer';
 import CheckboxIcon, { type CheckboxIconDefaultProps } from './CheckboxIcon';
 import checkboxConfig from './checkboxConfig';
-
-/* --- ARIA ---
- * 3 state
- */
 
 export type CheckboxDefaultProps = {
   color?: Colors;

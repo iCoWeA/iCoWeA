@@ -1,12 +1,12 @@
+/* --- ARIA ---
+ * aria-labelledby
+ */
+
 import React, { forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import Spinner, { type SpinnerProps } from '../Spinner/Spinner';
 import circularProgressConfig from './circularProgressConfig';
-
-/* --- ARIA ---
- * aria-labelledby
- */
 
 export type CircularProgressDefaultProps = {
   color?: Colors;

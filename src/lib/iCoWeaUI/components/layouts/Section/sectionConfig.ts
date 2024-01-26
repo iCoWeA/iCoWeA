@@ -3,9 +3,9 @@ const sectionConfig = {
   styles: {
     base: {
       display: 'flex',
+      margin: 'my-8',
       width: 'w-full',
-      flexDirection: 'flex-col',
-      gap: 'gap-8'
+      flexDirection: 'flex-col'
     }
   }
 };

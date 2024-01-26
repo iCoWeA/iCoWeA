@@ -1,12 +1,12 @@
+/* --- ARIA ---
+ * aria-labelledby
+ */
+
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
 import mainConfig from './mainConfig';
-
-/* --- ARIA ---
- * aria-labelledby
- */
 
 export type MainProps = BaseHTMLAttributes<HTMLElement>;
 

@@ -1,3 +1,7 @@
+/* --- ARIA ---
+ * aria-labelledby
+ */
+
 import React, { forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
@@ -7,10 +11,6 @@ import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import LinearProgressBar, { type LinearProgressBarDefaultProps } from './LinearProgressBar';
 import LinearProgressLabel, { type LinearProgressLabelDefaultProps } from './LinearProgressLabel';
 import linearProgressConfig from './linearProgressConfig';
-
-/* --- ARIA ---
- * aria-labelledby
- */
 
 export type LinearProgressDefaultProps = {
   color?: Colors;

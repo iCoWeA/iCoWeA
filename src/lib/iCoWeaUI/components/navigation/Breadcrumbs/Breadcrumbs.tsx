@@ -1,3 +1,7 @@
+/* --- ARIA ---
+ * aria-current="page"
+ */
+
 import React, { type BaseHTMLAttributes, type ReactNode, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
@@ -6,10 +10,6 @@ import List, { type ListProps } from '../../data-display/List/List';
 import ListItem, { type ListItemProps } from '../../data-display/ListItem/ListItem';
 import Mark, { type MarkProps } from '../../data-display/Mark/Mark';
 import breadcrumbsConfig from './breadcrumbsConfig';
-
-/* --- ARIA ---
- * aria-current="page"
- */
 
 export type BreadcrumbsDefaultProps = {
   color?: TextColors;

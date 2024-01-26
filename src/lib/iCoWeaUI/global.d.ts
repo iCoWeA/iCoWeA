@@ -35,9 +35,11 @@ import { type ToggleButtonDefaultProps } from './components/inputs/ToggleButton/
 import { type ToggleButtonGroupDefaultProps } from './components/inputs/ToggleButtonGroup/ToggleButtonGroup';
 import { type BoxDefaultProps } from './components/layouts/Box/Box';
 import { type FlexDefaultProps } from './components/layouts/Flex/Flex';
+import { type FooterDefaultProps } from './components/layouts/Footer/Footer';
 import { type GridDefaultProps } from './components/layouts/Grid/Grid';
 import { type HeaderDefaultProps } from './components/layouts/Header/Header';
 import { type LayoutDefaultProps } from './components/layouts/Layout/Layout';
+import { type SidebarDefaultProps } from './components/layouts/Sidebar/Sidebar';
 import { type StackDefaultProps } from './components/layouts/Stack/Stack';
 import { type BreadcrumbsDefaultProps } from './components/navigation/Breadcrumbs/Breadcrumbs';
 import { type DrawerDefaultProps } from './components/navigation/Drawer/Drawer';
@@ -184,7 +186,7 @@ declare global {
     },
     footer: {
       styles?: string;
-      defaultProps?;
+      defaultProps?: FooterDefaultProps;
     },
     formControl: {
       styles?: string;
@@ -276,7 +278,7 @@ declare global {
     },
     sidebar: {
       styles?: string;
-      defaultProps?;
+      defaultProps?: SidebarDefaultProps;
     },
     snackbar: {
       styles?: string;
