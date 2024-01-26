@@ -6,11 +6,16 @@ import Main from '../../lib/iCoWeaUI/components/layouts/Main/Main';
 import DashboardHeader from './DashboardHeader';
 
 export const Component: FC = () => (
-  <Layout>
+  <Layout
+    variant="soft"
+    color="neutral"
+  >
     <DashboardHeader />
-    <Main justify="start">
-      <Outlet />
-    </Main>
+    <Layout layout="dashboard">
+      <Main>
+        <Outlet />
+      </Main>
+    </Layout>
   </Layout>
 );
 
