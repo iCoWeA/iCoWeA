@@ -16,6 +16,7 @@ export type BoxDefaultProps = {
   justify?: JustifyContent;
   align?: AlignItems;
   gap?: Gaps;
+  grow?: boolean;
   block?: boolean;
 };
 
@@ -36,6 +37,7 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     justify,
     align,
     gap,
+    grow,
     block,
     disabled,
     defaultClassName,
@@ -57,6 +59,7 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     justify !== 'start' && styles.justifies[justify],
     align !== 'stretch' && styles.aligns[align],
     gap !== 'none' && styles.gaps[gap],
+    grow && styles.grow,
     block && styles.block,
     disabled && styles.disabled[theme],
     disabled && variant !== 'default' && styles.disabledBg[theme],

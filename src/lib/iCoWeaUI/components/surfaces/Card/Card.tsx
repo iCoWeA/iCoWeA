@@ -39,6 +39,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
       justify="start"
       align="stretch"
       gap="none"
+      grow={false}
       block={false}
       className={mergedClassName}
       ref={ref}

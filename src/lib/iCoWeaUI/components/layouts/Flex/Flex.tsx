@@ -24,6 +24,7 @@ const Flex = forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
       bordered="none"
       direction="row"
       wrap="wrap"
+      grow={false}
       block={false}
       ref={ref}
       {...mergedProps}

@@ -10,6 +10,7 @@ const boxConfig = {
     justify: 'start',
     align: 'stretch',
     gap: 'none',
+    grow: false,
     block: false
   },
   styles: {
@@ -19,6 +20,9 @@ const boxConfig = {
     },
     block: {
       width: 'w-full'
+    },
+    grow: {
+      flexGrow: 'grow'
     },
     borders: {
       all: {

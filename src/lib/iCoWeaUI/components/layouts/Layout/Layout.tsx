@@ -30,11 +30,12 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
       color="inherit"
       spacing="none"
       bordered="none"
-      direction={layout === 'default' ? 'col' : 'row'}
+      direction={layout === 'page' ? 'col' : 'row'}
       wrap="wrap"
-      justify={layout === 'default' ? 'start' : 'between'}
-      align={layout === 'default' ? 'stretch' : 'center'}
-      gap={layout === 'default' ? 'none' : 'lg'}
+      justify={layout === 'page' || layout === 'default' ? 'stretch' : 'between'}
+      align={layout === 'page' || layout === 'default' ? 'stretch' : 'center'}
+      gap={layout === 'page' || layout === 'default' ? 'none' : 'lg'}
+      grow={layout === 'default' || layout === 'dashboard'}
       block
       className={mergedClassName}
       ref={ref}

@@ -24,6 +24,7 @@ const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
       bordered="none"
       direction="col"
       wrap="wrap"
+      grow={false}
       block={false}
       ref={ref}
       {...mergedProps}

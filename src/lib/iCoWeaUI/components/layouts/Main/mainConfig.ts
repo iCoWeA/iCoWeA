@@ -4,9 +4,9 @@ const mainConfig = {
     base: {
       display: 'flex',
       width: 'w-full',
-      height: 'h-full',
       padding: 'py-8',
       flexDirection: 'flex-col',
+      flexGrow: 'grow',
       gap: 'gap-16'
     }
   }

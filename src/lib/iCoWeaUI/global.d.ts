@@ -67,7 +67,7 @@ declare global {
   export type Borders = 'none' | 'all' | 'x' | 'y' | 'top' | 'bottom' | 'left' | 'right' | boolean;
   export type Underlines = 'none' | 'hover' | 'always';
   export type Transitions = 'fade' | 'grow-x' | 'grow-y' | 'grow' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right';
-  export type Layouts = 'default' | 'fullbleed' | 'dashboard';
+  export type Layouts = 'page' | 'default' | 'fullbleed' | 'dashboard';
   export type ContainerLayouts = 'default' | 'header' | 'footer' | 'body';
   export type Directions = 'row' | 'col' | 'row-reverse' | 'col-reverse';
   export type Orientations = 'vertical' | 'horizontal';

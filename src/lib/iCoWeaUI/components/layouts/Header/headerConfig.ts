@@ -6,7 +6,6 @@ const headerConfig = {
     base: {
       display: 'flex',
       width: 'w-full',
-      height: 'h-fit',
       flexDirection: 'flex-col'
     },
     shadow: {

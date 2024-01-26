@@ -41,6 +41,7 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
       justify="start"
       align={layout === 'body' ? 'stretch' : 'center'}
       gap={layout === 'body' ? 'none' : 'base'}
+      grow={false}
       block
       className={mergedClassName}
       ref={ref}
