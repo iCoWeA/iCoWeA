@@ -7,6 +7,7 @@ import DashboardHeader from './DashboardHeader';
 
 export const Component: FC = () => (
   <Layout
+    layout="root"
     variant="soft"
     color="neutral"
   >
