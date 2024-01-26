@@ -21,7 +21,7 @@ export const Component: FC = () => {
   } = useForm({ email: '', password: '' });
 
   return (
-    <Section className="mx-auto max-w-120">
+    <Section>
       <Form
         method="post"
         onSubmit={resetForm}
@@ -29,6 +29,7 @@ export const Component: FC = () => {
         <Card
           spacing="md"
           gap="md"
+          className="mx-auto max-w-120"
         >
           <FormControl color="error">
             <Input
