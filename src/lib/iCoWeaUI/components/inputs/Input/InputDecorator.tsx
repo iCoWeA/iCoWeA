@@ -48,10 +48,11 @@ const InputDecorator: FC<InputDecoratorProps> = ({
   return (
     <Flex
       direction="row"
+      wrap="nowrap"
       justify="start"
       align="center"
-      wrap="nowrap"
       gap="base"
+      grow={false}
       className={mergedClassName}
       {...restProps}
     >

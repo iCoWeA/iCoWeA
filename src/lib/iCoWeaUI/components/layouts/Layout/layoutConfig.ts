@@ -1,12 +1,17 @@
 const layoutConfig = {
   defaultProps: {
-    layout: 'default',
-    panel: false
+    layout: 'standard'
   },
   styles: {
     layouts: {
+      root: {
+        minHeight: 'min-h-screen',
+        font: 'antialiased font-normal text-sm font-sans'
+      },
       default: {
-        minHeight: 'min-h-screen'
+        margin: 'mx-auto',
+        maxWidth: 'max-w-376',
+        padding: 'px-4 md:px-8'
       },
       standard: {
         margin: 'mx-auto',

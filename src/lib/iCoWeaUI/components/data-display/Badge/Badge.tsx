@@ -58,9 +58,12 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       {children}
       <Flex
         bordered={bordered}
+        direction="row"
+        wrap="nowrap"
         justify="center"
         align="center"
         gap="base"
+        grow={false}
         className={mergedClassName}
         {...restProps}
       >

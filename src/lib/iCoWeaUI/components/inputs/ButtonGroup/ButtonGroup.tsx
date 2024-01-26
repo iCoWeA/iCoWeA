@@ -109,6 +109,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
       justify="start"
       align="stretch"
       gap="none"
+      grow={false}
       block={block}
       role="group"
       className={mergedClassName}

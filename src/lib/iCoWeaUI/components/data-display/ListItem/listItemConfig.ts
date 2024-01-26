@@ -31,17 +31,14 @@ const listItemConfig = {
       }
     },
     justifies: {
-      normal: {
-        justifyContent: 'justify-normal'
-      },
-      stretch: {
-        justifyContent: 'justify-stretch'
-      },
       end: {
         justifyContent: 'justify-end'
       },
       center: {
         justifyContent: 'justify-center'
+      },
+      stretch: {
+        justifyContent: 'justify-stretch'
       },
       between: {
         justifyContent: 'justify-between'

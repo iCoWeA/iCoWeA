@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
-import Box, { type BoxProps } from '../../layouts/Box/Box';
+import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import containerConfig from './containerConfig';
 
 export type ContainerDefaultProps = {
@@ -13,7 +13,7 @@ export type ContainerDefaultProps = {
   closeGap?: Gaps;
 };
 
-export type ContainerProps = BoxProps & ContainerDefaultProps;
+export type ContainerProps = FlexProps & ContainerDefaultProps;
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
   const { layout, spacing, closable, closeGap, defaultClassName, className, ...restProps } =
@@ -31,11 +31,8 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
   );
 
   return (
-    <Box
-      variant="default"
-      color="inherit"
+    <Flex
       spacing={spacing}
-      bordered="none"
       direction={layout === 'body' ? 'col' : 'row'}
       wrap="wrap"
       justify="start"

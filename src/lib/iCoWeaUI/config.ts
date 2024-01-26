@@ -23,6 +23,7 @@ export const config: Config = {
   flex: {},
   footer: {},
   formControl: {},
+  grid: {},
   header: {},
   icon: {},
   image: {},

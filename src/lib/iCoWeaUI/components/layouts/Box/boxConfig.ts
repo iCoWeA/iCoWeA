@@ -5,24 +5,14 @@ const boxConfig = {
     spacing: 'none',
     panel: false,
     bordered: 'none',
-    direction: 'row',
-    wrap: 'wrap',
-    justify: 'start',
-    align: 'stretch',
-    gap: 'none',
-    grow: false,
     block: false
   },
   styles: {
     base: {
-      display: 'flex',
-      font: 'antialiased font-normal text-sm font-sans'
+      display: 'block'
     },
     block: {
       width: 'w-full'
-    },
-    grow: {
-      flexGrow: 'grow'
     },
     borders: {
       all: {
@@ -58,76 +48,6 @@ const boxConfig = {
     disabledBg: {
       light: {
         background: 'bg-light-neutral/20'
-      }
-    },
-    directions: {
-      col: {
-        flexDirection: 'flex-col'
-      },
-      'row-reverse': {
-        flexDirection: 'flex-row-reverse'
-      },
-      'col-reverse': {
-        flexDirection: 'flex-col-reverse'
-      }
-    },
-    wraps: {
-      wrap: {
-        flexWrap: 'flex-wrap'
-      },
-      'wrap-reverse': {
-        flexWrap: 'flex-wrap-reverse'
-      }
-    },
-    justifies: {
-      normal: {
-        justifyContent: 'justify-normal'
-      },
-      stretch: {
-        justifyContent: 'justify-stretch'
-      },
-      end: {
-        justifyContent: 'justify-end'
-      },
-      center: {
-        justifyContent: 'justify-center'
-      },
-      between: {
-        justifyContent: 'justify-between'
-      },
-      around: {
-        justifyContent: 'justify-around'
-      },
-      evenly: {
-        justifyContent: 'justify-evenly'
-      }
-    },
-    aligns: {
-      start: {
-        alignItems: 'items-start'
-      },
-      end: {
-        alignItems: 'items-end'
-      },
-      center: {
-        alignItems: 'items-center'
-      },
-      baseline: {
-        alignItems: 'items-baseline'
-      }
-    },
-    gaps: {
-      base: {
-        gap: 'gap-2'
-      },
-      sm: {
-        gap: 'gap-4'
-      },
-      md: {
-        gap: 'gap-6'
-      },
-      lg: {
-        gap: 'gap-8'
       }
     },
     spacing: {

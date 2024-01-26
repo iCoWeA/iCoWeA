@@ -26,6 +26,19 @@ const markConfig = {
         font: 'text-base'
       }
     },
+    disabled: {
+      light: {
+        border: 'border-light-neutral/40',
+        fill: 'fill-light-neutral/40',
+        color: 'text-light-neutral/40',
+        pointerEvents: 'pointer-events-none'
+      }
+    },
+    disabledBg: {
+      light: {
+        background: 'bg-light-neutral/20'
+      }
+    },
     variants: {
       default: {
         light: {

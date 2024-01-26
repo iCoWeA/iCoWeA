@@ -53,10 +53,11 @@ const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(
     return (
       <Flex
         direction="row"
+        wrap="nowrap"
         justify="start"
         align="stretch"
-        wrap="nowrap"
         gap="none"
+        grow={false}
         className={mergedClassName}
         tabIndex={-1}
         ref={ref}

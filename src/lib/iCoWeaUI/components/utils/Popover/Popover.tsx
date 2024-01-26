@@ -22,7 +22,7 @@ import popoverConfig from './popoverConfig';
 export type PopoverDefaultProps = {
   position?: OuterPositions;
   offset?: number | string;
-  variant?: DropdownVariants;
+  variant?: Variants;
   color?: Colors;
   spacing?: Spacing;
   responsive?: boolean;

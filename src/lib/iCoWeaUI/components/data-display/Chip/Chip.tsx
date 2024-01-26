@@ -61,9 +61,12 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
       variant={variant}
       color={color}
       spacing={size}
+      direction="row"
+      wrap="nowrap"
       justify="start"
       align="center"
       gap="base"
+      grow={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}

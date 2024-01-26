@@ -61,9 +61,11 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
   return (
     <Flex
       direction={vertical ? 'col' : 'row'}
+      wrap="nowrap"
       justify="start"
       align="stretch"
       gap="none"
+      grow={false}
       block
       aria-valuenow={+value}
       aria-valuemin={0}

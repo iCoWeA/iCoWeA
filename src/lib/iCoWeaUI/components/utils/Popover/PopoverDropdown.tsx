@@ -5,11 +5,11 @@ import Card, { type CardProps } from '../../surfaces/Card/Card';
 import popoverConfig from './popoverConfig';
 
 export type PopoverDropdownDefaultProps = CardProps & {
-  variant?: DropdownVariants;
+  variant?: Variants;
 };
 
 export type PopoverDropdownProps = PopoverDropdownDefaultProps & {
-  variant: DropdownVariants;
+  variant: Variants;
   color: Colors;
   spacing: Spacing;
 };

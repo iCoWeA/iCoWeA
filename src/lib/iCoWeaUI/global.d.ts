@@ -35,6 +35,7 @@ import { type ToggleButtonDefaultProps } from './components/inputs/ToggleButton/
 import { type ToggleButtonGroupDefaultProps } from './components/inputs/ToggleButtonGroup/ToggleButtonGroup';
 import { type BoxDefaultProps } from './components/layouts/Box/Box';
 import { type FlexDefaultProps } from './components/layouts/Flex/Flex';
+import { type GridDefaultProps } from './components/layouts/Grid/Grid';
 import { type HeaderDefaultProps } from './components/layouts/Header/Header';
 import { type LayoutDefaultProps } from './components/layouts/Layout/Layout';
 import { type StackDefaultProps } from './components/layouts/Stack/Stack';
@@ -59,17 +60,20 @@ declare global {
   export type Themes = 'light';
   export type Colors = 'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'error';
   export type TextColors = 'inherit' | 'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'error';
-  export type JustifyContent = 'normal' | 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'stretch';
-  export type AlignItems = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
+  export type JustifyContent = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'stretch';
+  export type AlignContent = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'stretch' | 'baseline';
+  export type JustifyItems = 'stretch' | 'start' | 'end' | 'center';
+  export type AlignItems = 'stretch' | 'start' | 'end' | 'center' | 'baseline';
   export type Aligns = 'left' | 'right' | 'center' | 'justify';
   export type Gaps = 'none' | 'base' | 'sm' | 'md' | 'lg';
   export type Spacing = 'none' | 'sm' | 'md' | 'lg';
   export type Borders = 'none' | 'all' | 'x' | 'y' | 'top' | 'bottom' | 'left' | 'right' | boolean;
   export type Underlines = 'none' | 'hover' | 'always';
   export type Transitions = 'fade' | 'grow-x' | 'grow-y' | 'grow' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right';
-  export type Layouts = 'default' | 'standard' | 'dashboard' | 'fullbleed';
+  export type Layouts = 'root' | 'default' | 'standard' | 'dashboard' | 'fullbleed';
   export type ContainerLayouts = 'default' | 'header' | 'footer' | 'body';
   export type Directions = 'row' | 'col' | 'row-reverse' | 'col-reverse';
+  export type Flows = 'row' | 'col' | 'dense' | 'row-dense' | 'col-dense';
   export type Orientations = 'vertical' | 'horizontal';
   export type Closable = 'none' | 'left' | 'right';
   export type Positions = 'top' | 'left' | 'right' | 'bottom';
@@ -80,7 +84,6 @@ declare global {
   export type CornerPositions = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   export type BorderPositions = 'none' | 'left' | 'right' | 'both';
   export type Variants = 'default' | 'plain' | 'soft' | 'solid';
-  export type DropdownVariants = 'plain' | 'soft' | 'solid';
   export type InputVariants = 'default' | 'outlined' | 'soft';
   export type SizeVariants = 'container' | 'panel' | 'in-container' | 'in-panel';
   export type TitleVariants =
@@ -186,6 +189,10 @@ declare global {
     formControl: {
       styles?: string;
       defaultProps?: FormControlDefauProps;
+    },
+    grid: {
+      styles?: string;
+      defaultProps?: GridDefaultProps;
     }
     header: {
       styles?: string;

@@ -1,16 +1,14 @@
 import React, { forwardRef } from 'react';
-
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
-import Box, { type BoxProps } from '../Box/Box';
+import Flex, { type FlexProps } from '../Flex/Flex';
 import layoutConfig from './layoutConfig';
 
 export type LayoutDefaultProps = {
   layout?: Layouts;
-  panel?: boolean;
 };
 
-export type LayoutProps = BoxProps & LayoutDefaultProps;
+export type LayoutProps = FlexProps & LayoutDefaultProps;
 
 const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
   const { layout, defaultClassName, className, ...restProps } = useConfig(
@@ -25,17 +23,15 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
   const mergedClassName = mergeClasses(styles.layouts[layout], defaultClassName, className);
 
   return (
-    <Box
-      variant="default"
-      color="inherit"
-      spacing="none"
-      bordered="none"
-      direction={layout === 'default' ? 'col' : 'row'}
+    <Flex
+      direction={layout === 'root' ? 'col' : 'row'}
       wrap="wrap"
-      justify={layout === 'default' || layout === 'standard' ? 'stretch' : 'between'}
-      align={layout === 'default' || layout === 'standard' ? 'stretch' : 'center'}
-      gap={layout === 'default' || layout === 'standard' ? 'none' : 'lg'}
-      grow={layout === 'standard' || layout === 'dashboard'}
+      justify={
+        layout === 'root' || layout === 'default' || layout === 'standard' ? 'stretch' : 'between'
+      }
+      align={layout === 'root' || layout === 'standard' ? 'stretch' : 'center'}
+      gap={layout === 'root' || layout === 'default' || layout === 'standard' ? 'none' : 'lg'}
+      grow={layout === 'default' || layout === 'standard' || layout === 'dashboard'}
       block
       className={mergedClassName}
       ref={ref}

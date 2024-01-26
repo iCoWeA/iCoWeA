@@ -31,9 +31,11 @@ const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>((props, ref) =>
   return (
     <Flex
       direction={vertical ? 'col' : 'row'}
+      wrap="nowrap"
       justify="start"
       align="center"
       gap="none"
+      grow={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}

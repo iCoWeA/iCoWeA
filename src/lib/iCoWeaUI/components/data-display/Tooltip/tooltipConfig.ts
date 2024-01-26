@@ -2,7 +2,7 @@ const tooltipConfig = {
   defaultProps: {
     position: 'bottom',
     offset: 0,
-    variant: 'plain',
+    variant: 'solid',
     color: 'neutral',
     spacing: 'md',
     responsive: true,

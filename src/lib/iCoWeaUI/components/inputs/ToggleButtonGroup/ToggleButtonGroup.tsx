@@ -107,6 +107,7 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
       justify="start"
       align="stretch"
       gap="none"
+      grow={false}
       block={block}
       role="group"
       className={mergedClassName}

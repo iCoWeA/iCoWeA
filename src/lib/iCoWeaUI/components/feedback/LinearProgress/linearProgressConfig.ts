@@ -93,7 +93,6 @@ const linearProgressConfig = {
     label: {
       base: {
         position: 'relative',
-        font: 'text-xs',
         userSelect: 'select-none'
       },
       vertical: {

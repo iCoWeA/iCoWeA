@@ -158,6 +158,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
           disabled={disabled}
           value={value}
           className={mergedClassName}
+          type="text"
           ref={mergedRefs}
           {...restProps}
         />

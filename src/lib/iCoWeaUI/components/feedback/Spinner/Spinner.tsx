@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 import useConfig from '../../../hooks/useConfig';
 import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
-import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
+import Stack, { type StackProps } from '../../layouts/Stack/Stack';
 import SpinnerBar, { type SpinnerBarDefaultProps } from './SpinnerBar';
 import SpinnerContainer, { type SpinnerContainerDefaultProps } from './SpinnerContainer';
 import SpinnerLabel, { type SpinnerLabelDefaultProps } from './SpinnerLabel';
@@ -18,7 +18,7 @@ export type SpinnerDefaultProps = {
   value?: number | string;
 };
 
-export type SpinnerProps = FlexProps &
+export type SpinnerProps = StackProps &
 SpinnerDefaultProps & {
   containerProps?: SpinnerContainerDefaultProps;
   barProps?: SpinnerBarDefaultProps;
@@ -61,7 +61,7 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
   );
 
   return (
-    <Flex
+    <Stack
       color={color}
       justify="center"
       align="center"
@@ -93,13 +93,15 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
       </SpinnerContainer>
       {children && (
         <SpinnerLabel
+          color={color}
           size={size}
+          disabled={disabled}
           {...labelProps}
         >
           {children}
         </SpinnerLabel>
       )}
-    </Flex>
+    </Stack>
   );
 });
 

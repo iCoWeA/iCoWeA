@@ -1,10 +1,10 @@
 import React, { type FC } from 'react';
 
 import { mergeClasses } from '../../../utils/utils';
-import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
+import Mark, { type MarkProps } from '../../data-display/Mark/Mark';
 import linearProgressConfig from './linearProgressConfig';
 
-export type LinearProgressLabelDefaultProps = FlexProps & {
+export type LinearProgressLabelDefaultProps = MarkProps & {
   color?: Colors;
 };
 
@@ -22,18 +22,13 @@ const LinearProgressLabel: FC<LinearProgressLabelProps> = ({
   /* -- Set classes --- */
   const styles = linearProgressConfig.styles.label;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    vertical && styles.vertical,
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, vertical && styles.vertical, className);
 
   return (
-    <Flex
+    <Mark
       variant={disabled ? 'default' : 'solid'}
-      justify="center"
-      align="center"
-      gap="base"
+      size="sm"
+      bordered={false}
       disabled={disabled}
       className={mergedClassName}
       {...restProps}

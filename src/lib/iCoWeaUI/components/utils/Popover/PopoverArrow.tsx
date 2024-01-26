@@ -10,7 +10,7 @@ export type PopoverArrowDefaultProps = BaseHTMLAttributes<HTMLDivElement> & {
 export type PopoverArrowProps = PopoverArrowDefaultProps & {
   theme: Themes;
   position: OuterPositions;
-  variant: DropdownVariants;
+  variant: Variants;
   color: Colors;
 };
 

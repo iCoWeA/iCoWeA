@@ -11,12 +11,6 @@ export type BoxDefaultProps = {
   spacing?: Spacing;
   panel?: boolean;
   bordered?: Borders;
-  direction?: Directions;
-  wrap?: Wraps;
-  justify?: JustifyContent;
-  align?: AlignItems;
-  gap?: Gaps;
-  grow?: boolean;
   block?: boolean;
 };
 
@@ -32,12 +26,6 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     spacing,
     panel,
     bordered,
-    direction,
-    wrap,
-    justify,
-    align,
-    gap,
-    grow,
     block,
     disabled,
     defaultClassName,
@@ -54,12 +42,6 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     styles.base,
     !disabled && color !== 'inherit' && styles.variants[variant][theme][color],
     spacing !== 'none' && styles.spacing[sizeVariant][spacing],
-    direction !== 'row' && styles.directions[direction],
-    wrap !== 'nowrap' && styles.wraps[wrap],
-    justify !== 'start' && styles.justifies[justify],
-    align !== 'stretch' && styles.aligns[align],
-    gap !== 'none' && styles.gaps[gap],
-    grow && styles.grow,
     block && styles.block,
     disabled && styles.disabled[theme],
     disabled && variant !== 'default' && styles.disabledBg[theme],

@@ -114,8 +114,10 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
     <Flex
       color={color}
       direction={vertical ? 'col' : 'row'}
+      wrap="nowrap"
       justify="stretch"
       align="center"
+      grow={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}

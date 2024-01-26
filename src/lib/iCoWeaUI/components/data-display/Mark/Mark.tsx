@@ -12,14 +12,14 @@ export type MarkDefaultProps = {
   bordered?: boolean;
 };
 
-export type MarkProps = BaseHTMLAttributes<HTMLSpanElement> & MarkDefaultProps;
+export type MarkProps = BaseHTMLAttributes<HTMLSpanElement> &
+MarkDefaultProps & {
+  disabled?: boolean;
+};
 
 const Mark = forwardRef<HTMLSpanElement, MarkProps>((props, ref) => {
-  const { variant, color, size, bordered, defaultClassName, className, ...restProps } = useConfig(
-    'mark',
-    markConfig.defaultProps,
-    props
-  );
+  const { variant, color, size, bordered, disabled, defaultClassName, className, ...restProps } =
+    useConfig('mark', markConfig.defaultProps, props);
 
   const theme = useTheme();
 
@@ -29,7 +29,10 @@ const Mark = forwardRef<HTMLSpanElement, MarkProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.sizes[size],
-    color !== 'inherit' && styles.variants[variant][theme][color],
+    color !== 'inherit' && !disabled && styles.variants[variant][theme][color],
+    color !== 'inherit' && disabled && styles.disabled[theme],
+    disabled && styles.disabled[theme],
+    disabled && variant !== 'default' && styles.disabledBg[theme],
     bordered && styles.border,
     defaultClassName,
     className

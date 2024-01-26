@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
-import Box, { type BoxProps } from '../Box/Box';
+import Flex, { type FlexProps } from '../Flex/Flex';
 import stackConfig from './stackConfig';
 
 export type StackDefaultProps = {
@@ -10,18 +10,13 @@ export type StackDefaultProps = {
   gap?: Gaps;
 };
 
-export type StackProps = BoxProps & StackDefaultProps;
+export type StackProps = FlexProps & StackDefaultProps;
 
 const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
   const mergedProps = useConfig('stack', stackConfig.defaultProps, props);
 
   return (
-    <Box
-      variant="default"
-      color="inherit"
-      spacing="none"
-      panel={false}
-      bordered="none"
+    <Flex
       direction="col"
       wrap="wrap"
       grow={false}

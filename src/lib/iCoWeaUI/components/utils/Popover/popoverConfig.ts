@@ -88,6 +88,28 @@ const popoverConfig = {
         }
       },
       variants: {
+        default: {
+          light: {
+            neutral: {
+              border: 'border-light-neutral border-r-transparent border-l-transparent border-b-transparent'
+            },
+            primary: {
+              border: 'border-light-primary border-r-transparent border-l-transparent border-b-transparent'
+            },
+            secondary: {
+              border: 'border-light-secondary border-r-transparent border-l-transparent border-b-transparent'
+            },
+            success: {
+              border: 'border-light-success border-r-transparent border-l-transparent border-b-transparent'
+            },
+            warning: {
+              border: 'border-light-warning border-r-transparent border-l-transparent border-b-transparent'
+            },
+            error: {
+              border: 'border-light-error border-r-transparent border-l-transparent border-b-transparent'
+            }
+          }
+        },
         plain: {
           light: {
             neutral: {

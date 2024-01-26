@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
-import Box, { type BoxProps } from '../../layouts/Box/Box';
+import Stack, { type StackProps } from '../../layouts/Stack/Stack';
 import cardConfig from './cardConfig';
 
 export type CardDefaultProps = {
@@ -13,7 +13,7 @@ export type CardDefaultProps = {
   shadow?: boolean;
 };
 
-export type CardProps = BoxProps & CardDefaultProps;
+export type CardProps = StackProps & CardDefaultProps;
 
 const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const { shadow, defaultClassName, className, ...restProps } = useConfig(
@@ -32,15 +32,10 @@ const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   );
 
   return (
-    <Box
-      panel={false}
-      direction="col"
-      wrap="wrap"
+    <Stack
       justify="start"
       align="stretch"
       gap="none"
-      grow={false}
-      block={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}

@@ -39,19 +39,19 @@ const drawerConfig = {
       positions: {
         top: {
           width: 'w-full',
-          borderRadius: 'rounded-t-none'
+          borderRadius: 'rounded-b-xl'
         },
         bottom: {
           width: 'w-full',
-          borderRadius: 'rounded-b-none'
+          borderRadius: 'rounded-t-xl'
         },
         left: {
           width: 'h-full',
-          borderRadius: 'rounded-l-none'
+          borderRadius: 'rounded-r-xl'
         },
         right: {
           width: 'h-full',
-          borderRadius: 'rounded-r-none'
+          borderRadius: 'rounded-l-xl'
         }
       }
     }

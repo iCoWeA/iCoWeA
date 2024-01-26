@@ -1,10 +1,12 @@
 import React, { type FC } from 'react';
 
 import { mergeClasses } from '../../../utils/utils';
-import Card, { type CardProps } from '../../surfaces/Card/Card';
+import Stack, { type StackProps } from '../../layouts/Stack/Stack';
 import drawerConfig from './drawerConfig';
 
-export type DrawerContainerDefaultProps = CardProps;
+export type DrawerContainerDefaultProps = StackProps & {
+  color?: Colors;
+};
 
 export type DrawerContainerProps = DrawerContainerDefaultProps & {
   variant: Variants;
@@ -19,10 +21,10 @@ const DraweContainer: FC<DrawerContainerProps> = ({ position, className, ...rest
   const mergedClassName = mergeClasses(styles.positions[position], className);
 
   return (
-    <Card
-      spacing="none"
-      bordered="none"
-      shadow={false}
+    <Stack
+      justify="start"
+      align="stretch"
+      gap="none"
       className={mergedClassName}
       {...restProps}
     />

@@ -27,7 +27,7 @@ export type CursorPosition = {
 export type TooltipDefaultProps = {
   position?: OuterPositions;
   offset?: number | string;
-  variant?: DropdownVariants;
+  variant?: Variants;
   color?: Colors;
   spacing?: Spacing;
   responsive?: boolean;

@@ -35,9 +35,12 @@ const SwitchContainer = forwardRef<HTMLDivElement, SwitchContainerProps>(
       <Flex
         variant="solid"
         spacing="none"
+        direction="row"
+        wrap="nowrap"
         justify="stretch"
         align="stretch"
         gap="none"
+        grow={false}
         disabled={disabled}
         className={mergedClassName}
         ref={ref}

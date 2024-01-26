@@ -48,10 +48,11 @@ const TextareaDecorator: FC<TextareaDecoratorProps> = ({
   return (
     <Flex
       direction="row"
+      wrap="nowrap"
       justify="start"
       align="start"
-      wrap="nowrap"
       gap="base"
+      grow={false}
       className={mergedClassName}
       {...restProps}
     >

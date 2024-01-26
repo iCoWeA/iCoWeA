@@ -113,17 +113,6 @@ const spinnerConfig = {
         top: 'top-2/4',
         translate: '-translate-x-2/4 -translate-y-2/4',
         userSelect: 'select-none'
-      },
-      sizes: {
-        sm: {
-          font: 'text-xs'
-        },
-        md: {
-          font: 'text-sm'
-        },
-        lg: {
-          font: 'text-base'
-        }
       }
     }
   }
