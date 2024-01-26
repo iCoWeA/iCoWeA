@@ -1,39 +1,37 @@
 import React, { type FC } from 'react';
-import useBreakpoint, { Breakpoints } from '../../lib/simpleComponents/hooks/useBreakpoint';
-import Header from '../../lib/simpleComponents/components/layouts/Header';
-import Container from '../../lib/simpleComponents/components/UI/Container';
-import DashboardMenuButton from './DashboardMenuButton';
-import DashboardLogo from './DashboardLogo';
-import DashboardAvatar from './DashboardAvatar';
 
-const DashboardHeader: FC = () => {
-  /* --- Set default props --- */
-  const breakpoint = useBreakpoint();
+import Avatar from '../../lib/iCoWeaUI/components/data-display/Avatar/Avatar';
+import Text from '../../lib/iCoWeaUI/components/data-display/Text/Text';
+import Flex from '../../lib/iCoWeaUI/components/layouts/Flex/Flex';
+import Header from '../../lib/iCoWeaUI/components/layouts/Header/Header';
+import Layout from '../../lib/iCoWeaUI/components/layouts/Layout/Layout';
+import Stack from '../../lib/iCoWeaUI/components/layouts/Stack/Stack';
 
-  if (breakpoint === Breakpoints.SM) {
-    return (
-      <Header
-        color="light"
-        className="justify-between px-[16px]"
-      >
-        <Container>
-          <DashboardMenuButton />
-          <DashboardLogo />
-        </Container>
-        <DashboardAvatar />
-      </Header>
-    );
-  }
-
-  return (
-    <Header
-      color="light"
-      className="justify-between pr-[32px] md:pl-6"
+const DashboardHeader: FC = () => (
+  <Header>
+    <Layout
+      layout="dashboard"
+      variant="plain"
+      justify="end"
     >
-      <DashboardLogo />
-      <DashboardAvatar />
-    </Header>
-  );
-};
+      <Flex gap="base">
+        <Stack>
+          <Text>Richard Wagner</Text>
+          <Text
+            size="sm"
+            align="right"
+          >
+            Admin
+          </Text>
+        </Stack>
+        <Avatar
+          color="neutral"
+          src={require('../../assets/images/photo.png')}
+          alt="RW"
+        />
+      </Flex>
+    </Layout>
+  </Header>
+);
 
 export default DashboardHeader;
