@@ -1,5 +1,8 @@
 const footerConfig = {
-  defaultProps: {},
+  defaultProps: {
+    justify: 'start',
+    block: false
+  },
   styles: {
     base: {
       display: 'flex',

@@ -10,6 +10,7 @@ import Layout, { type LayoutProps } from '../Layout/Layout';
 import headerConfig from './headerConfig';
 
 export type HeaderDefaultProps = {
+  justify?: JustifyContent;
   block?: boolean;
   shadow?: boolean;
 };
@@ -20,8 +21,16 @@ HeaderDefaultProps & {
 };
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
-  const { block, shadow, containerProps, defaultClassName, className, children, ...restProps } =
-    useConfig('header', headerConfig.defaultProps, props);
+  const {
+    justify,
+    block,
+    shadow,
+    containerProps,
+    defaultClassName,
+    className,
+    children,
+    ...restProps
+  } = useConfig('header', headerConfig.defaultProps, props);
 
   /* --- Set classes --- */
   const styles = headerConfig.styles;
@@ -40,6 +49,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       {...restProps}
     >
       <Layout
+        justify={justify}
         layout={block ? 'dashboard' : 'fullbleed'}
         spacing="lg"
         panel
