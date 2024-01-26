@@ -1,14 +1,14 @@
 const layoutConfig = {
   defaultProps: {
-    layout: 'page',
+    layout: 'default',
     panel: false
   },
   styles: {
     layouts: {
-      page: {
+      default: {
         minHeight: 'min-h-screen'
       },
-      default: {
+      standard: {
         margin: 'mx-auto',
         maxWidth: 'max-w-376',
         padding: 'px-4 md:px-8'
