@@ -10,7 +10,7 @@ export const Component: FC = () => (
     color="primary"
   >
     <Layout
-      layout="default"
+      layout="standard"
       align="center"
     >
       <Main>
