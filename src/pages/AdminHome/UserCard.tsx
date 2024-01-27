@@ -23,8 +23,8 @@ const UserCard: FC = () => (
         className="w-24 h-24"
       />
       <Stack justify="between">
-        <Title variant="5">Welcome</Title>
-        <Title variant="3">Richard Wagner</Title>
+        <Title variant="4">Welcome</Title>
+        <Title variant="2">Richard Wagner</Title>
       </Stack>
     </Flex>
     <Text>Welcome back to our comunity.</Text>
