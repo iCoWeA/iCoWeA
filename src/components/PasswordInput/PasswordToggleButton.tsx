@@ -8,6 +8,7 @@ import ToggleButton, {
 const PasswordInputButton: FC<ToggleButtonProps> = ({ checked, ...restProps }) => (
   <ToggleButton
     icon
+    size="sm"
     checked={checked}
     {...restProps}
   >
