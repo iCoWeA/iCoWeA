@@ -8,11 +8,11 @@ const MessagesCard: FC = () => (
     variant="solid"
     color="primary"
     spacing="md"
-    gap="md"
   >
     <Title
       variant="2"
       color="inherit"
+      gutter
     >
       0
     </Title>
