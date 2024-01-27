@@ -26,11 +26,9 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
     <Flex
       direction={layout === 'root' ? 'col' : 'row'}
       wrap="wrap"
-      justify={
-        layout === 'root' || layout === 'default' || layout === 'standard' ? 'stretch' : 'between'
-      }
-      align={layout === 'root' || layout === 'standard' ? 'stretch' : 'center'}
-      gap={layout === 'root' || layout === 'default' || layout === 'standard' ? 'none' : 'lg'}
+      justify={layout === 'dashboard' || layout === 'fullbleed' ? 'between' : 'stretch'}
+      align={layout === 'default' ? 'center' : 'stretch'}
+      gap={layout === 'dashboard' || layout === 'fullbleed' ? 'lg' : 'none'}
       grow={layout === 'default' || layout === 'standard' || layout === 'dashboard'}
       block
       className={mergedClassName}

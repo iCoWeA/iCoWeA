@@ -1,8 +1,8 @@
 const gridConfig = {
   defaultProps: {
     flow: 'row',
-    justify: 'start',
-    align: 'center',
+    justify: 'stretch',
+    align: 'stretch',
     justifyContent: 'start',
     alignContent: 'start',
     gap: 'none',
