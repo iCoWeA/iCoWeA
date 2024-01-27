@@ -9,6 +9,8 @@ import Layout, { type LayoutProps } from '../Layout/Layout';
 import footerConfig from './footerConfig';
 
 export type FooterDefaultProps = {
+  variant?: Variants;
+  color?: Colors;
   justify?: JustifyContent;
   block?: boolean;
 };
@@ -19,8 +21,17 @@ FooterDefaultProps & {
 };
 
 const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
-  const { justify, block, containerProps, defaultClassName, className, children, ...restProps } =
-    useConfig('footer', footerConfig.defaultProps, props);
+  const {
+    variant,
+    color,
+    justify,
+    block,
+    containerProps,
+    defaultClassName,
+    className,
+    children,
+    ...restProps
+  } = useConfig('footer', footerConfig.defaultProps, props);
 
   /* --- Set classes --- */
   const styles = footerConfig.styles;
@@ -34,6 +45,8 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
       {...restProps}
     >
       <Layout
+        variant={variant}
+        color={color}
         justify={justify}
         layout={block ? 'dashboard' : 'fullbleed'}
         spacing="lg"

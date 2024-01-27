@@ -1,12 +1,10 @@
 const inputConfig = {
   defaultProps: {
-    input: {
-      variant: 'outlined',
-      color: 'primary',
-      block: false,
-      valid: false,
-      invalid: false
-    }
+    variant: 'outlined',
+    color: 'primary',
+    block: false,
+    valid: false,
+    invalid: false
   },
   styles: {
     root: {
@@ -58,18 +56,18 @@ const inputConfig = {
       variants: {
         default: {
           left: {
-            margin: 'mt-0.5 mb-px',
+            margin: 'mb-px',
             border: 'border-b',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           },
           middle: {
-            margin: 'mt-0.5 mb-px',
-            padding: 'pt-5.5 pb-0.5',
+            margin: 'mb-px',
+            padding: 'pt-4 pb-0.5',
             border: 'border-b',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           },
           right: {
-            margin: 'mt-0.5 mb-px',
+            margin: 'mb-px',
             border: 'border-b',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           }
@@ -78,39 +76,39 @@ const inputConfig = {
           left: {
             margin: 'my-px ml-px',
             border: 'border-y border-l',
-            borderRadius: 'rounded-l-xl',
+            borderRadius: 'rounded-l-lg',
             focusWithin: 'group-[.focus]:m-0 group-[.focus]:border-y-2 group-[.focus]:border-l-2'
           },
           middle: {
             margin: 'my-px',
-            padding: 'py-3',
+            padding: 'py-2',
             border: 'border-y',
             focusWithin: 'group-[.focus]:m-0 group-[.focus]:border-y-2'
           },
           right: {
             margin: 'my-px mr-px',
             border: 'border-y border-r',
-            borderRadius: 'rounded-r-xl',
+            borderRadius: 'rounded-r-lg',
             focusWithin: 'group-[.focus]:m-0 group-[.focus]:border-y-2 group-[.focus]:border-r-2'
           }
         },
         soft: {
           left: {
-            margin: 'mt-0.5 mb-px',
+            margin: 'mb-px',
             border: 'border-b',
-            borderRadius: 'rounded-tl',
+            borderRadius: 'rounded-tl-lg',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           },
           middle: {
-            margin: 'mt-0.5 mb-px',
-            padding: 'pt-5.5 pb-0.5',
+            margin: 'mb-px',
+            padding: 'pt-4 pb-0.5',
             border: 'border-b',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           },
           right: {
-            margin: 'mt-0.5 mb-px',
+            margin: 'mb-px',
             border: 'border-b',
-            borderRadius: 'rounded-tr',
+            borderRadius: 'rounded-tr-lg',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           }
         }
@@ -139,27 +137,27 @@ const inputConfig = {
       colors: {
         light: {
           neutral: {
-            border: 'border-light-neutral',
+            border: 'border-light-divider',
             focusWithin: 'group-[.focus]:border-light-neutral'
           },
           primary: {
-            border: 'border-light-neutral',
+            border: 'border-light-divider',
             focusWithin: 'group-[.focus]:border-light-primary'
           },
           secondary: {
-            border: 'border-light-neutral',
+            border: 'border-light-divider',
             focusWithin: 'group-[.focus]:border-light-secondary'
           },
           success: {
-            border: 'border-light-neutral',
+            border: 'border-light-divider',
             focusWithin: 'group-[.focus]:border-light-success'
           },
           warning: {
-            border: 'border-light-neutral',
+            border: 'border-light-divider',
             focusWithin: 'group-[.focus]:border-light-warning'
           },
           error: {
-            border: 'border-light-neutral',
+            border: 'border-light-divider',
             focusWithin: 'group-[.focus]:border-light-error'
           }
         }
@@ -208,21 +206,21 @@ const inputConfig = {
         transition: 'transition-all',
         pointer: 'pointer-events-none',
         userSelect: 'select-none',
-        shift: 'group-[.shift]:text-xs',
-        focusWithin: 'group-[.focus]:text-xs'
+        shift: 'group-[.shift]:h-4 group-[.shift]:text-xs',
+        focusWithin: 'group-[.focus]:h-4 group-[.focus]:text-xs'
       },
       variants: {
         default: {
-          shift: 'group-[.shift]:top-0.5 group-[.shift]:translate-y-0',
-          focusWithin: 'group-[.focus]:top-0.5 group-[.focus]:translate-y-0'
+          shift: 'group-[.shift]:top-0 group-[.shift]:translate-y-0',
+          focusWithin: 'group-[.focus]:top-0 group-[.focus]:translate-y-0'
         },
         outlined: {
           shift: 'group-[.shift]:-top-px group-[.shift]:left-1',
           focusWithin: 'group-[.focus]:-top-px group-[.focus]:left-1'
         },
         soft: {
-          shift: 'group-[.shift]:top-0.5 group-[.shift]:translate-y-0',
-          focusWithin: 'group-[.focus]:top-0.5 group-[.focus]:translate-y-0'
+          shift: 'group-[.shift]:top-0 group-[.shift]:translate-y-0',
+          focusWithin: 'group-[.focus]:top-0 group-[.focus]:translate-y-0'
         }
       },
       valid: {

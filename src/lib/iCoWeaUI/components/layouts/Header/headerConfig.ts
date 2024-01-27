@@ -1,5 +1,7 @@
 const headerConfig = {
   defaultProps: {
+    variant: 'plain',
+    color: 'neutral',
     justify: 'start',
     block: false,
     shadow: false

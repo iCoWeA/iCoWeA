@@ -47,7 +47,7 @@ const linearProgressConfig = {
             height: 'h-1'
           },
           lg: {
-            height: 'h-1.5'
+            height: 'h-2'
           }
         },
         vertical: {
@@ -58,7 +58,7 @@ const linearProgressConfig = {
             width: 'w-1'
           },
           lg: {
-            width: 'w-1.5'
+            width: 'w-2'
           }
         }
       },
@@ -93,7 +93,8 @@ const linearProgressConfig = {
     label: {
       base: {
         position: 'relative',
-        userSelect: 'select-none'
+        userSelect: 'select-none',
+        whiteSpace: 'whitespace-nowrap'
       },
       vertical: {
         transform: '-rotate-90'

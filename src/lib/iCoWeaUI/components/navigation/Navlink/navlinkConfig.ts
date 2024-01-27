@@ -69,10 +69,10 @@ const navlinkConfig = {
             padding: 'px-3 py-1.5'
           },
           md: {
-            padding: 'px-4 py-2'
+            padding: 'px-4 py-2.5'
           },
           lg: {
-            padding: 'px-5 py-2.5'
+            padding: 'px-5 py-3.5'
           }
         },
         icon: {
@@ -80,10 +80,10 @@ const navlinkConfig = {
             padding: 'p-1.5'
           },
           md: {
-            padding: 'p-2'
+            padding: 'p-2.5'
           },
           lg: {
-            padding: 'p-2.5'
+            padding: 'p-3.5'
           }
         }
       },

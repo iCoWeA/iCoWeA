@@ -11,20 +11,20 @@ const layoutConfig = {
       default: {
         margin: 'mx-auto',
         maxWidth: 'max-w-376',
-        padding: 'px-4 md:px-8'
+        padding: 'px-8 max-md:px-4'
       },
       standard: {
         margin: 'mx-auto',
         maxWidth: 'max-w-376',
-        padding: 'px-4 md:px-8'
+        padding: 'px-8 max-md:px-4'
       },
       dashboard: {
-        padding: 'px-4 md:px-8'
+        padding: 'px-8 max-md:px-4'
       },
       fullbleed: {
         margin: 'mx-auto',
         maxWidth: 'max-w-376',
-        padding: 'px-4 md:px-8'
+        padding: 'px-8 max-md:px-4'
       }
     }
   }

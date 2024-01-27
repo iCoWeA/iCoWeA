@@ -10,6 +10,8 @@ import Layout, { type LayoutProps } from '../Layout/Layout';
 import headerConfig from './headerConfig';
 
 export type HeaderDefaultProps = {
+  variant?: Variants;
+  color?: Colors;
   justify?: JustifyContent;
   block?: boolean;
   shadow?: boolean;
@@ -22,6 +24,8 @@ HeaderDefaultProps & {
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
   const {
+    variant,
+    color,
     justify,
     block,
     shadow,
@@ -49,6 +53,8 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       {...restProps}
     >
       <Layout
+        variant={variant}
+        color={color}
         justify={justify}
         layout={block ? 'dashboard' : 'fullbleed'}
         spacing="lg"

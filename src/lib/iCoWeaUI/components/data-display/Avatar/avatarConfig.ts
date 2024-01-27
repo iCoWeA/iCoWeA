@@ -23,13 +23,13 @@ const avatarConfig = {
           fontSize: 'text-xs'
         },
         md: {
-          width: 'w-9',
-          height: 'h-9',
+          width: 'w-10',
+          height: 'h-10',
           fontSize: 'text-sm'
         },
         lg: {
-          width: 'w-10',
-          height: 'h-10',
+          width: 'w-12',
+          height: 'h-12',
           fontSize: 'text-base'
         }
       },
@@ -40,13 +40,13 @@ const avatarConfig = {
           fontSize: 'text-xs'
         },
         md: {
-          width: 'w-10',
-          height: 'h-10',
+          width: 'w-11',
+          height: 'h-11',
           fontSize: 'text-sm'
         },
         lg: {
-          width: 'w-11',
-          height: 'h-11',
+          width: 'w-13',
+          height: 'h-13',
           fontSize: 'text-base'
         }
       }

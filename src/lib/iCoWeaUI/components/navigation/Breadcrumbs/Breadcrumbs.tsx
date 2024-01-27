@@ -106,8 +106,6 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
     >
       <List
         spacing="none"
-        justify="center"
-        align="center"
         gap={gap}
         row
         block

@@ -6,8 +6,6 @@ import listConfig from './listConfig';
 
 export type ListDefaultProps = {
   spacing?: Spacing;
-  justify?: JustifyContent;
-  align?: AlignItems;
   gap?: Gaps;
   row?: boolean;
   block?: boolean;
@@ -16,8 +14,11 @@ export type ListDefaultProps = {
 export type ListProps = BaseHTMLAttributes<HTMLUListElement> & ListDefaultProps;
 
 const List = forwardRef<HTMLUListElement, ListProps>((props, ref) => {
-  const { spacing, justify, align, gap, row, block, defaultClassName, className, ...restProps } =
-    useConfig('list', listConfig.defaultProps, props);
+  const { spacing, gap, row, block, defaultClassName, className, ...restProps } = useConfig(
+    'list',
+    listConfig.defaultProps,
+    props
+  );
 
   /* --- Set classes --- */
   const styles = listConfig.styles;
@@ -25,10 +26,8 @@ const List = forwardRef<HTMLUListElement, ListProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     spacing !== 'none' && styles.spacing[spacing],
-    justify !== 'start' && styles.justifies[justify],
-    align !== 'stretch' && styles.aligns[align],
     gap !== 'none' && styles.gaps[gap],
-    !row && styles.column,
+    row ? styles.row : styles.column,
     block && styles.block,
     defaultClassName,
     className

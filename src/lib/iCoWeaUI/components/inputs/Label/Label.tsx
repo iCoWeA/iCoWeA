@@ -8,6 +8,7 @@ import labelConfig from './labelConfig';
 export type LabelDefauProps = {
   position?: Positions;
   color?: TextColors;
+  size?: Sizes;
   align?: AlignItems;
   gap?: Gaps;
 };
@@ -21,6 +22,7 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
   const {
     position,
     color,
+    size,
     align,
     gap,
     label,
@@ -38,6 +40,7 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
     styles.base,
     (position === 'top' || position === 'bottom') && styles.columns,
     color !== 'inherit' && styles.colors[theme][color],
+    styles.sizes[size],
     align !== 'stretch' && styles.aligns[align],
     gap !== 'none' && styles.gaps[gap],
     defaultClassName,

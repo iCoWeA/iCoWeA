@@ -64,47 +64,13 @@ const containerConfig = {
       md: {
         none: {
           left: {
-            padding: 'pl-13'
+            padding: 'pl-13.5'
           },
           right: {
-            padding: 'pr-13'
+            padding: 'pr-13.5'
           }
         },
         base: {
-          left: {
-            padding: 'pl-15'
-          },
-          right: {
-            padding: 'pr-15'
-          }
-        },
-        sm: {
-          left: {
-            padding: 'pl-17'
-          },
-          right: {
-            padding: 'pr-17'
-          }
-        },
-        md: {
-          left: {
-            padding: 'pl-19'
-          },
-          right: {
-            padding: 'pr-19'
-          }
-        },
-        lg: {
-          left: {
-            padding: 'pl-21'
-          },
-          right: {
-            padding: 'pr-21'
-          }
-        }
-      },
-      lg: {
-        none: {
           left: {
             padding: 'pl-15.5'
           },
@@ -112,7 +78,7 @@ const containerConfig = {
             padding: 'pr-15.5'
           }
         },
-        base: {
+        sm: {
           left: {
             padding: 'pl-17.5'
           },
@@ -120,7 +86,7 @@ const containerConfig = {
             padding: 'pr-17.5'
           }
         },
-        sm: {
+        md: {
           left: {
             padding: 'pl-19.5'
           },
@@ -128,20 +94,54 @@ const containerConfig = {
             padding: 'pr-19.5'
           }
         },
-        md: {
+        lg: {
           left: {
             padding: 'pl-21.5'
           },
           right: {
             padding: 'pr-21.5'
           }
+        }
+      },
+      lg: {
+        none: {
+          left: {
+            padding: 'pl-16.5'
+          },
+          right: {
+            padding: 'pr-16.5'
+          }
+        },
+        base: {
+          left: {
+            padding: 'pl-18.5'
+          },
+          right: {
+            padding: 'pr-18.5'
+          }
+        },
+        sm: {
+          left: {
+            padding: 'pl-20.5'
+          },
+          right: {
+            padding: 'pr-20.5'
+          }
+        },
+        md: {
+          left: {
+            padding: 'pl-22.5'
+          },
+          right: {
+            padding: 'pr-22.5'
+          }
         },
         lg: {
           left: {
-            padding: 'pl-23.5'
+            padding: 'pl-24.5'
           },
           right: {
-            padding: 'pr-23.5'
+            padding: 'pr-24.5'
           }
         }
       }

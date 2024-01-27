@@ -2,6 +2,7 @@ const labelConfig = {
   defaultProps: {
     position: 'right',
     color: 'neutral',
+    size: 'md',
     align: 'center',
     gap: 'base'
   },
@@ -13,6 +14,17 @@ const labelConfig = {
     },
     columns: {
       flexDirection: 'flex-col'
+    },
+    sizes: {
+      sm: {
+        font: 'text-xs'
+      },
+      md: {
+        font: 'text-sm'
+      },
+      lg: {
+        font: 'text-base'
+      }
     },
     aligns: {
       start: {

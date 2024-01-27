@@ -66,7 +66,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
     defaultClassName,
     className,
     ...restProps
-  } = useConfig('input', inputConfig.defaultProps.input, props);
+  } = useConfig('input', inputConfig.defaultProps, props);
 
   const theme = useTheme();
 

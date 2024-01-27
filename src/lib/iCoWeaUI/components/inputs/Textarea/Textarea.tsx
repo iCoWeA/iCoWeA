@@ -66,7 +66,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
     defaultClassName,
     className,
     ...restProps
-  } = useConfig('textarea', textareaConfig.defaultProps.textarea, props);
+  } = useConfig('textarea', textareaConfig.defaultProps, props);
   const theme = useTheme();
 
   const ref = useRef<HTMLTextAreaElement | null>(null);

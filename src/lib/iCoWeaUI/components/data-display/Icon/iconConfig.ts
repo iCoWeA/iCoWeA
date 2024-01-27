@@ -35,12 +35,12 @@ const iconConfig = {
           height: 'h-8'
         },
         md: {
-          width: 'w-9',
-          height: 'h-9'
-        },
-        lg: {
           width: 'w-10',
           height: 'h-10'
+        },
+        lg: {
+          width: 'w-12',
+          height: 'h-12'
         }
       }
     },
@@ -58,17 +58,6 @@ const iconConfig = {
       },
       md: {
         sm: {
-          padding: 'p-2.5'
-        },
-        md: {
-          padding: 'p-2'
-        },
-        lg: {
-          padding: 'p-1.5'
-        }
-      },
-      lg: {
-        sm: {
           padding: 'p-3'
         },
         md: {
@@ -76,6 +65,17 @@ const iconConfig = {
         },
         lg: {
           padding: 'p-2'
+        }
+      },
+      lg: {
+        sm: {
+          padding: 'p-4'
+        },
+        md: {
+          padding: 'p-3.5'
+        },
+        lg: {
+          padding: 'p-3'
         }
       }
     },

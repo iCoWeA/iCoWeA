@@ -8,6 +8,7 @@ const chipConfig = {
   styles: {
     root: {
       base: {
+        height: 'h-fit',
         borderRadius: 'rounded-full',
         fontSize: 'text-xs'
       },

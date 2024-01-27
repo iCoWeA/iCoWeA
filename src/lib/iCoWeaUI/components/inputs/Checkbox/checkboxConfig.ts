@@ -24,12 +24,12 @@ const checkboxConfig = {
             height: 'h-8'
           },
           md: {
-            width: 'w-9',
-            height: 'h-9'
-          },
-          lg: {
             width: 'w-10',
             height: 'h-10'
+          },
+          lg: {
+            width: 'w-12',
+            height: 'h-12'
           }
         },
         plain: {

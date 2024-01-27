@@ -13,7 +13,7 @@ export type SpinnerLabelProps = SpinnerLabelDefaultProps & {
   size: Sizes;
 };
 
-const SpinnerLabel: FC<SpinnerLabelProps> = ({ size, className, ...restProps }) => {
+const SpinnerLabel: FC<SpinnerLabelProps> = ({ className, ...restProps }) => {
   /* -- Set classes --- */
   const styles = spinnerConfig.styles.label;
 
