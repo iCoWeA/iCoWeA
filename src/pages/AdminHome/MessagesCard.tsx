@@ -8,7 +8,7 @@ const MessagesCard: FC = () => (
     variant="solid"
     color="primary"
     spacing="md"
-    justify="between"
+    gap="md"
   >
     <Title
       variant="2"

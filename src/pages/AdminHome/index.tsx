@@ -8,7 +8,7 @@ import UserCard from './UserCard';
 export const Component: FC = () => (
   <Grid
     gap="lg"
-    className="grid-cols-2 grid-rows-2 max-md:grid-cols-1 max-md:grid-rows-3"
+    className="grid-cols-2 max-md:grid-cols-1"
   >
     <UserCard />
     <LikesCard />
