@@ -4,10 +4,9 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
+import Textfield from '../../components/Textfield/Textfield';
 import { EMAIL_PATTERN } from '../../data/constants';
 import Button from '../../lib/iCoWeaUI/components/inputs/Button/Button';
-import FormControl from '../../lib/iCoWeaUI/components/inputs/FormControl/FormControl';
-import Input from '../../lib/iCoWeaUI/components/inputs/Input/Input';
 import Section from '../../lib/iCoWeaUI/components/layouts/Section/Section';
 import Card from '../../lib/iCoWeaUI/components/surfaces/Card/Card';
 import useForm from '../../lib/iCoWeaUI/hooks/useForm';
@@ -31,25 +30,19 @@ export const Component: FC = () => {
           gap="md"
           className="mx-auto max-w-120"
         >
-          <FormControl color="error">
-            <Input
-              block
-              label="Email"
-              invalid={inputs.email.error}
-              onChange={(event) => {
-                change(event, 1000);
-              }}
-              onBlur={blur}
-              id="email"
-              name="email"
-              value={inputs.email.value}
-              type="email"
-              pattern={EMAIL_PATTERN}
-              required
-            />
-            {inputs.email.error && 'Invalid email'}
-          </FormControl>
-          <FormControl color="error">
+          <Textfield
+            indexId="email"
+            invalid={inputs.email.error}
+            onChange={(event) => {
+              change(event, 1000);
+            }}
+            onBlur={blur}
+            value={inputs.email.value}
+            type="email"
+            pattern={EMAIL_PATTERN}
+            required
+          />
+          <Textfield>
             <PasswordInput
               block
               label="Password"
@@ -64,7 +57,7 @@ export const Component: FC = () => {
               required
             />
             {inputs.password.error && 'Invalid password'}
-          </FormControl>
+          </Textfield>
           <Button
             block
             disabled={!isFormValid}
