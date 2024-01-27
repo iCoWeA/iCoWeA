@@ -7,7 +7,10 @@ import Header from '../../lib/iCoWeaUI/components/layouts/Header/Header';
 import Stack from '../../lib/iCoWeaUI/components/layouts/Stack/Stack';
 
 const DashboardHeader: FC = () => (
-  <Header justify="end">
+  <Header
+    justify="end"
+    block
+  >
     <Flex gap="base">
       <Stack>
         <Text>Richard Wagner</Text>
