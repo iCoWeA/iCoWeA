@@ -44,7 +44,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>((props, ref) => {
   /* --- Set classes --- */
   const styles = switchConfig.styles.input;
 
-  const mergedClassName = mergeClasses(styles.base, className);
+  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
 
   return (
     <SwitchContainer
@@ -52,7 +52,6 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>((props, ref) => {
       color={color}
       size={size}
       disabled={disabled}
-      defaultClassName={defaultClassName}
       checked={checked}
       ref={ref}
       {...containerProps}

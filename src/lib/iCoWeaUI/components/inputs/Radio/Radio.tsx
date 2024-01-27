@@ -55,13 +55,12 @@ const Radio = forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
   /* --- Set classes --- */
   const styles = radioConfig.styles.input;
 
-  const mergedClassName = mergeClasses(styles.base, className);
+  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
 
   return (
     <RadioContainer
       size={size}
       noRipple={noRipple}
-      defaultClassName={defaultClassName}
       checked={checked}
       {...containerProps}
     >

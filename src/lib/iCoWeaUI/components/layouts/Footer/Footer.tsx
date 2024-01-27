@@ -3,7 +3,9 @@
  */
 
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+
 import useConfig from '../../../hooks/useConfig';
+import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
 import Layout, { type LayoutProps } from '../Layout/Layout';
 import footerConfig from './footerConfig';
@@ -12,6 +14,7 @@ export type FooterDefaultProps = {
   variant?: Variants;
   color?: Colors;
   justify?: JustifyContent;
+  bordered?: boolean;
   block?: boolean;
 };
 
@@ -25,6 +28,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
     variant,
     color,
     justify,
+    bordered,
     block,
     containerProps,
     defaultClassName,
@@ -33,10 +37,18 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
     ...restProps
   } = useConfig('footer', footerConfig.defaultProps, props);
 
+  const theme = useTheme();
+
   /* --- Set classes --- */
   const styles = footerConfig.styles;
 
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
+  const mergedClassName = mergeClasses(
+    styles.base,
+    styles.variants[variant][theme][color],
+    bordered && styles.border,
+    defaultClassName,
+    className
+  );
 
   return (
     <footer
@@ -45,12 +57,8 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
       {...restProps}
     >
       <Layout
-        variant={variant}
-        color={color}
         justify={justify}
         layout={block ? 'dashboard' : 'fullbleed'}
-        spacing="lg"
-        panel
         {...containerProps}
       >
         {children}

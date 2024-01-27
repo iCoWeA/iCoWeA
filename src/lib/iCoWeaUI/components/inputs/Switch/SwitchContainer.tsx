@@ -12,12 +12,11 @@ export type SwitchContainerProps = SwitchContainerDefaultProps & {
   theme: Themes;
   color: Colors;
   size: Sizes;
-  defaultClassName: string;
   checked?: boolean;
 };
 
 const SwitchContainer = forwardRef<HTMLDivElement, SwitchContainerProps>(
-  ({ theme, size, checked, disabled, defaultClassName, className, ...restProps }, ref) => {
+  ({ theme, size, checked, disabled, className, ...restProps }, ref) => {
     /* --- Set classes --- */
     const styles = switchConfig.styles.root;
 
@@ -27,7 +26,6 @@ const SwitchContainer = forwardRef<HTMLDivElement, SwitchContainerProps>(
       !checked && !disabled && styles.color[theme],
       !checked && disabled && styles.disabled[theme],
       checked && styles.checked,
-      defaultClassName,
       className
     );
 

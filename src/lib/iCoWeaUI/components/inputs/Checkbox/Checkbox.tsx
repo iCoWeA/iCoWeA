@@ -60,13 +60,12 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   /* --- Set classes --- */
   const styles = checkboxConfig.styles.input;
 
-  const mergedClassName = mergeClasses(styles.base, className);
+  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
 
   return (
     <CheckboxContainer
       size={size}
       noRipple={noRipple}
-      defaultClassName={defaultClassName}
       checked={checked}
       {...containerProps}
     >

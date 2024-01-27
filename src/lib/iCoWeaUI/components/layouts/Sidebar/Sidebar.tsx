@@ -5,21 +5,24 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
+import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
 import sidebarConfig from './sidebarConfig';
 
 export type SidebarDefaultProps = {
   position?: SidePositions;
+  variant?: Variants;
+  color?: Colors;
+  bordered?: Borders;
 };
 
 export type SidebarProps = BaseHTMLAttributes<HTMLElement> & SidebarDefaultProps;
 
 const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
-  const { position, defaultClassName, className, ...restProps } = useConfig(
-    'sidebar',
-    sidebarConfig.defaultProps,
-    props
-  );
+  const { position, variant, color, bordered, defaultClassName, className, ...restProps } =
+    useConfig('sidebar', sidebarConfig.defaultProps, props);
+
+  const theme = useTheme();
 
   /* --- Set classes --- */
   const styles = sidebarConfig.styles;
@@ -27,6 +30,9 @@ const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.positions[position],
+    styles.variants[variant][theme][color],
+    typeof bordered === 'string' && bordered !== 'none' && styles.borders[bordered],
+    typeof bordered === 'boolean' && bordered && styles.borders.all,
     defaultClassName,
     className
   );

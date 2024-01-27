@@ -5,6 +5,7 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
+import useTheme from '../../../hooks/useTheme';
 import { mergeClasses } from '../../../utils/utils';
 import Layout, { type LayoutProps } from '../Layout/Layout';
 import headerConfig from './headerConfig';
@@ -13,6 +14,7 @@ export type HeaderDefaultProps = {
   variant?: Variants;
   color?: Colors;
   justify?: JustifyContent;
+  bordered?: boolean;
   block?: boolean;
   shadow?: boolean;
 };
@@ -27,6 +29,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
     variant,
     color,
     justify,
+    bordered,
     block,
     shadow,
     containerProps,
@@ -36,11 +39,15 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
     ...restProps
   } = useConfig('header', headerConfig.defaultProps, props);
 
+  const theme = useTheme();
+
   /* --- Set classes --- */
   const styles = headerConfig.styles;
 
   const mergedClassName = mergeClasses(
     styles.base,
+    styles.variants[variant][theme][color],
+    bordered && styles.border,
     shadow && styles.shadow,
     defaultClassName,
     className
@@ -53,12 +60,8 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       {...restProps}
     >
       <Layout
-        variant={variant}
-        color={color}
         justify={justify}
         layout={block ? 'dashboard' : 'fullbleed'}
-        spacing="lg"
-        panel
         {...containerProps}
       >
         {children}

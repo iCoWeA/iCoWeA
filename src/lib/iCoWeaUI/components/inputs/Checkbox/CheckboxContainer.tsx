@@ -9,11 +9,10 @@ export type CheckboxContainerProps = CheckboxContainerDefaultProps & {
   size: Sizes;
   noRipple: boolean;
   checked?: boolean;
-  defaultClassName: string;
 };
 
 const CheckboxContainer = forwardRef<HTMLDivElement, CheckboxContainerProps>(
-  ({ size, noRipple, checked, defaultClassName, className, ...restProps }, ref) => {
+  ({ size, noRipple, checked, className, ...restProps }, ref) => {
     /* --- Set classes --- */
     const styles = checkboxConfig.styles.root;
     const sizeVariant = noRipple ? 'plain' : 'default';
@@ -22,7 +21,6 @@ const CheckboxContainer = forwardRef<HTMLDivElement, CheckboxContainerProps>(
       styles.base,
       styles.sizes[sizeVariant][size],
       checked && styles.checked,
-      defaultClassName,
       className
     );
 

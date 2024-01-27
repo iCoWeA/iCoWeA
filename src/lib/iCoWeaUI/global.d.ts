@@ -39,6 +39,8 @@ import { type FooterDefaultProps } from './components/layouts/Footer/Footer';
 import { type GridDefaultProps } from './components/layouts/Grid/Grid';
 import { type HeaderDefaultProps } from './components/layouts/Header/Header';
 import { type LayoutDefaultProps } from './components/layouts/Layout/Layout';
+import { type MainDefaultProps } from './components/layouts/Main/Main';
+import { type SectionDefaultProps } from './components/layouts/Section/Section';
 import { type SidebarDefaultProps } from './components/layouts/Sidebar/Sidebar';
 import { type StackDefaultProps } from './components/layouts/Stack/Stack';
 import { type BreadcrumbsDefaultProps } from './components/navigation/Breadcrumbs/Breadcrumbs';
@@ -246,7 +248,7 @@ declare global {
     },
     main: {
       styles?: string;
-      defaultProps?;
+      defaultProps?: MainDefaultProps;
     },
     mark: {
       styles?: string;
@@ -274,7 +276,7 @@ declare global {
     },
     section: {
       styles?: string;
-      defaultProps?;
+      defaultProps?: SectionDefaultProps;
     },
     sidebar: {
       styles?: string;
