@@ -40,6 +40,7 @@ import { type GridDefaultProps } from './components/layouts/Grid/Grid';
 import { type HeaderDefaultProps } from './components/layouts/Header/Header';
 import { type LayoutDefaultProps } from './components/layouts/Layout/Layout';
 import { type MainDefaultProps } from './components/layouts/Main/Main';
+import { type NavigationDefaultProps } from './components/layouts/Navigation/Navigation';
 import { type SectionDefaultProps } from './components/layouts/Section/Section';
 import { type SidebarDefaultProps } from './components/layouts/Sidebar/Sidebar';
 import { type StackDefaultProps } from './components/layouts/Stack/Stack';
@@ -254,6 +255,10 @@ declare global {
       styles?: string;
       defaultProps?: MarkDefaultProps;
     },
+    navigation: {
+      styles?: string,
+      defaultProps?: NavigationDefaultProps;
+    }
     navlink: {
       styles?: string;
       defaultProps?: NavlinkDefaultProps;

@@ -7,30 +7,18 @@ import buttonConfig from './buttonConfig';
 export type ButtonSpinnerDefaultProps = SpinnerProps;
 
 export type ButtonSpinnerProps = ButtonSpinnerDefaultProps & {
-  theme: Themes;
   variant: Variants;
   color: Colors;
 };
 
-const ButtonSpinner: FC<ButtonSpinnerProps> = ({
-  theme,
-  variant,
-  color,
-  className,
-  ...restProps
-}) => {
+const ButtonSpinner: FC<ButtonSpinnerProps> = ({ className, ...restProps }) => {
   /* --- Set classes --- */
   const styles = buttonConfig.styles.spinner;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant][theme][color],
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, className);
 
   return (
     <Spinner
-      color={color}
       size="md"
       innerBar="inherit"
       rotate

@@ -38,6 +38,7 @@ export const config: Config = {
   listNavlink: {},
   main: {},
   mark: {},
+  navigation: {},
   navlink: {},
   popover: {},
   popper: {},

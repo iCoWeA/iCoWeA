@@ -88,7 +88,6 @@ const Navlink = forwardRef<HTMLAnchorElement, NavlinkProps>((props, ref) => {
       {rightDecorator}
       {loading && (
         <NavlinkSpinner
-          theme={theme}
           variant={variant}
           activeVariant={activeVariant}
           color={color}

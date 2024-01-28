@@ -2,6 +2,7 @@ import React, { type ReactNode, forwardRef } from 'react';
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses } from '../../../utils/utils';
+import CloseButton, { type CloseButtonProps } from '../../inputs/CloseButton/CloseButton';
 import Stack, { type StackProps } from '../../layouts/Stack/Stack';
 import Container, { type ContainerProps } from '../../surfaces/Container/Container';
 import AlertBody from './AlertBody';
@@ -23,17 +24,22 @@ AlerDefaultProps & {
   bodyProps?: StackProps;
   leftDecoratorProps?: StackProps;
   rightDecoratorProps?: StackProps;
+  closeButton?: CloseButtonProps;
 };
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   const {
+    variant,
+    color,
     size,
     shadow,
+    closable,
     leftDecorator,
     rightDecorator,
     bodyProps,
     leftDecoratorProps,
     rightDecoratorProps,
+    closeButton,
     defaultClassName,
     className,
     children,
@@ -52,12 +58,15 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
   return (
     <Container
+      variant={variant}
+      color={color}
       layout="default"
       spacing={size}
       panel
       align="start"
       wrap="nowrap"
       gap={size}
+      closable={closable}
       closeGap={size}
       className={mergedClassName}
       role="alert"
@@ -84,6 +93,18 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
         >
           {rightDecorator}
         </Stack>
+      )}
+      {closable !== 'none' && (
+        <CloseButton
+          position={closable}
+          panel
+          variant={variant}
+          color={color}
+          size={size}
+          border={false}
+          noRipple={false}
+          {...closeButton}
+        />
       )}
     </Container>
   );

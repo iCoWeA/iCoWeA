@@ -11,7 +11,7 @@ import mainConfig from './mainConfig';
 
 export type MainDefaultProps = {
   variant?: Variants;
-  color?: Colors;
+  color?: TextColors;
   border?: Borders;
 };
 
@@ -31,7 +31,7 @@ const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.variants[variant][theme][color],
+    color !== 'inherit' && styles.variants[variant][theme][color],
     typeof border === 'string' && border !== 'none' && styles.borders[border],
     typeof border === 'boolean' && border && styles.borders.all,
     defaultClassName,

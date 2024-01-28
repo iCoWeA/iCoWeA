@@ -1,7 +1,7 @@
 const footerConfig = {
   defaultProps: {
     variant: 'plain',
-    color: 'neutral',
+    color: 'inherit',
     justify: 'between',
     border: false,
     block: false

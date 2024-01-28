@@ -12,15 +12,18 @@ import sidebarConfig from './sidebarConfig';
 export type SidebarDefaultProps = {
   position?: SidePositions;
   variant?: Variants;
-  color?: Colors;
+  color?: TextColors;
   border?: Borders;
 };
 
 export type SidebarProps = BaseHTMLAttributes<HTMLElement> & SidebarDefaultProps;
 
 const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
-  const { position, variant, color, border, defaultClassName, className, ...restProps } =
-    useConfig('sidebar', sidebarConfig.defaultProps, props);
+  const { position, variant, color, border, defaultClassName, className, ...restProps } = useConfig(
+    'sidebar',
+    sidebarConfig.defaultProps,
+    props
+  );
 
   const theme = useTheme();
 
@@ -30,7 +33,7 @@ const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.positions[position],
-    styles.variants[variant][theme][color],
+    color !== 'inherit' && styles.variants[variant][theme][color],
     typeof border === 'string' && border !== 'none' && styles.borders[border],
     typeof border === 'boolean' && border && styles.borders.all,
     defaultClassName,

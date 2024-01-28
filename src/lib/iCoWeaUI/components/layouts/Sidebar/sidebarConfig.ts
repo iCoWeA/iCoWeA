@@ -2,7 +2,7 @@ const sidebarConfig = {
   defaultProps: {
     position: 'left',
     variant: 'default',
-    color: 'neutral',
+    color: 'inherit',
     border: false
   },
   styles: {

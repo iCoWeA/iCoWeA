@@ -195,7 +195,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) =
         onClose={isControlled ? onClose : setIsOpen}
         open={open ?? isOpen}
         position={resizedPosition}
-        offset={offset}
+        offset="0"
         responsive={false}
         openOnHover={false}
         lockScroll={false}

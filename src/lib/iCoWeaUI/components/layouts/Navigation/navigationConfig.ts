@@ -1,15 +1,18 @@
-const mainConfig = {
+const navigationConfig = {
   defaultProps: {
     variant: 'default',
     color: 'inherit',
-    border: false
+    border: false,
+    gap: 'base',
+    vertical: false,
+    block: false
   },
   styles: {
     base: {
-      display: 'flex',
-      width: 'w-full',
-      flexDirection: 'flex-col',
-      flexGrow: 'grow'
+      display: 'flex'
+    },
+    block: {
+      width: 'w-full'
     },
     borders: {
       all: {
@@ -193,4 +196,4 @@ const mainConfig = {
   }
 };
 
-export default mainConfig;
+export default navigationConfig;

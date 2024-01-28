@@ -4,14 +4,6 @@ const breadcrumbsConfig = {
     block: false,
     gap: 'base',
     separator: '/'
-  },
-  styles: {
-    base: {
-      display: 'block'
-    },
-    block: {
-      width: 'w-full'
-    }
   }
 };
 

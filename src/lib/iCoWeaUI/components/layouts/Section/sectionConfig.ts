@@ -1,7 +1,7 @@
 const sectionConfig = {
   defaultProps: {
     variant: 'default',
-    color: 'neutral',
+    color: 'inherit',
     border: false
   },
   styles: {

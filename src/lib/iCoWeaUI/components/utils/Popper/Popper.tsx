@@ -83,7 +83,6 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, forwardedRef) => 
       variant="fade"
       smooth={false}
       unmountOnExit={false}
-      tabIndex={focusTrap ? -1 : undefined}
       className={mergedClassName}
       ref={ref}
       {...restProps}

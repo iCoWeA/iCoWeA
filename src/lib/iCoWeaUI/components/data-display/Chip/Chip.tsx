@@ -60,7 +60,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
     <Flex
       variant={variant}
       color={color}
-      spacing={size}
+      spacing="none"
       direction="row"
       wrap="nowrap"
       justify="start"

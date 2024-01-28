@@ -112,7 +112,7 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
 
   return (
     <Flex
-      color={color}
+      color={color === 'neutral' ? 'inherit' : color}
       direction={vertical ? 'col' : 'row'}
       wrap="nowrap"
       justify="stretch"

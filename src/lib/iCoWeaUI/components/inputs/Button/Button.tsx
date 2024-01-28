@@ -80,7 +80,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       {rightDecorator}
       {loading && (
         <ButtonSpinner
-          theme={theme}
           variant={variant}
           color={color}
           {...spinnerProps}

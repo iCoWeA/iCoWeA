@@ -12,7 +12,7 @@ import footerConfig from './footerConfig';
 
 export type FooterDefaultProps = {
   variant?: Variants;
-  color?: Colors;
+  color?: TextColors;
   justify?: JustifyContent;
   border?: boolean;
   block?: boolean;
@@ -44,7 +44,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.variants[variant][theme][color],
+    color !== 'inherit' && styles.variants[variant][theme][color],
     border && styles.border,
     defaultClassName,
     className

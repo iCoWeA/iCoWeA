@@ -6,10 +6,11 @@ import React, { type BaseHTMLAttributes, type ReactNode, forwardRef } from 'reac
 
 import useConfig from '../../../hooks/useConfig';
 import { mergeClasses, isLast } from '../../../utils/utils';
-import List, { type ListProps } from '../../data-display/List/List';
+import { type ListProps } from '../../data-display/List/List';
 import ListItem, { type ListItemProps } from '../../data-display/ListItem/ListItem';
 import Mark, { type MarkProps } from '../../data-display/Mark/Mark';
 import breadcrumbsConfig from './breadcrumbsConfig';
+import Navigation from '../../layouts/Navigation/Navigation';
 
 export type BreadcrumbsDefaultProps = {
   color?: TextColors;
@@ -41,14 +42,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
   } = useConfig('breadcrumbs', breadcrumbsConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = breadcrumbsConfig.styles;
-
-  const mergedClassName = mergeClasses(
-    styles.base,
-    block && styles.block,
-    defaultClassName,
-    className
-  );
+  const mergedClassName = mergeClasses(defaultClassName, className);
 
   /* --- Set items --- */
   let itemNodes;
@@ -84,7 +78,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
           {!isLast(children, i) && (
             <Mark
               variant="default"
-              color={color}
+              color="inherit"
               size="sm"
               border={false}
               {...separatorsProps?.[i]}
@@ -98,22 +92,21 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
   }
 
   return (
-    <nav
-      className={mergedClassName}
+    <Navigation
       aria-label="breadcrumbs"
+      variant="default"
+      color={color}
+      border={false}
+      gap={gap}
+      vertical={false}
+      block={block}
+      listProps={listProps}
+      className={mergedClassName}
       ref={ref}
       {...restProps}
     >
-      <List
-        spacing="none"
-        gap={gap}
-        row
-        block
-        {...listProps}
-      >
-        {itemNodes}
-      </List>
-    </nav>
+      {itemNodes}
+    </Navigation>
   );
 });
 

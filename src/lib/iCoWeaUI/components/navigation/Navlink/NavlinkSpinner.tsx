@@ -7,7 +7,6 @@ import navlinkConfig from './navlinkConfig';
 export type NavlinkSpinnerDefaultProps = SpinnerProps;
 
 export type NavlinkSpinnerProps = NavlinkSpinnerDefaultProps & {
-  theme: Themes;
   variant: Variants;
   activeVariant: Variants;
   color: Colors;
@@ -16,7 +15,6 @@ export type NavlinkSpinnerProps = NavlinkSpinnerDefaultProps & {
 };
 
 const ButtonSpinner: FC<NavlinkSpinnerProps> = ({
-  theme,
   variant,
   activeVariant,
   color,
@@ -28,17 +26,11 @@ const ButtonSpinner: FC<NavlinkSpinnerProps> = ({
   /* --- Set classes --- */
   const styles = navlinkConfig.styles.spinner;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    active,
-    active
-      ? styles.variants[activeVariant][theme][activeColor]
-      : styles.variants[variant][theme][color],
-    className
-  );
+  const mergedClassName = mergeClasses(styles.base, active, className);
 
   return (
     <Spinner
+      variant={active ? activeVariant : variant}
       color={active ? activeColor : color}
       size="md"
       innerBar="inherit"

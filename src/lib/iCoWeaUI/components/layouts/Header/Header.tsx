@@ -12,7 +12,7 @@ import headerConfig from './headerConfig';
 
 export type HeaderDefaultProps = {
   variant?: Variants;
-  color?: Colors;
+  color?: TextColors;
   justify?: JustifyContent;
   border?: boolean;
   block?: boolean;
@@ -46,7 +46,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
 
   const mergedClassName = mergeClasses(
     styles.base,
-    styles.variants[variant][theme][color],
+    color !== 'inherit' && styles.variants[variant][theme][color],
     border && styles.border,
     shadow && styles.shadow,
     defaultClassName,

@@ -57,7 +57,6 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     >
       {children}
       <Flex
-        border={border}
         direction="row"
         wrap="nowrap"
         justify="center"

@@ -13,7 +13,6 @@ export type LinearProgressLabelProps = LinearProgressLabelDefaultProps & {
 const LinearProgressLabel: FC<LinearProgressLabelProps> = ({
   vertical,
   className,
-  disabled,
   ...restProps
 }) => {
   /* -- Set classes --- */
@@ -27,7 +26,6 @@ const LinearProgressLabel: FC<LinearProgressLabelProps> = ({
       color="inherit"
       size="sm"
       border={false}
-      disabled={disabled}
       className={mergedClassName}
       {...restProps}
     />
