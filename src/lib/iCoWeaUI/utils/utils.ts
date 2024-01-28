@@ -1,6 +1,8 @@
 import { type ReactElement, type MutableRefObject } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+export enum Breakpoints {SM, MD, LG, XL, XXL};
+
 export const calculateBreakpoint = (width: number): Breakpoints => {
   if (width < 600) {
     return Breakpoints.SM;
