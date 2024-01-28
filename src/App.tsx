@@ -6,11 +6,13 @@ import ConfigProvider from './lib/iCoWeaUI/components/providers/ConfigProvider';
 import ThemeProvider from './lib/iCoWeaUI/components/providers/ThemeProvider';
 import Root from './pages/Root';
 import store from './store';
+import ErrorScreen from './components/ErrorScreen/ErrorScreen';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <ErrorScreen />,
     children: [
       {
         path: '',
@@ -24,11 +26,33 @@ const router = createBrowserRouter([
       },
       {
         path: '',
+        lazy: async () => await import('./pages/StandardLayout'),
+        children: [
+          {
+            path: '',
+            index: true,
+            lazy: async () => await import('./pages/Home')
+          }
+        ]
+      },
+      {
+        path: '',
         lazy: async () => await import('./pages/DashboardLayout'),
         children: [
           {
-            path: 'admin-home',
-            lazy: async () => await import('./pages/AdminHome')
+            path: 'admin',
+            lazy: async () => await import('./pages/Admin'),
+            children: [
+              {
+                path: '',
+                index: true,
+                lazy: async () => await import('./pages/AdminHome')
+              },
+              {
+                path: 'my-account',
+                lazy: async () => await import('./pages/AdminMyAccount')
+              }
+            ]
           }
         ]
       }
