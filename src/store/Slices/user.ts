@@ -22,13 +22,14 @@ type User = {
   facebook?: string
 };
 
-type State = User | null;
+type State = User | null | undefined;
 
 const user = createSlice<State, SliceCaseReducers<State>>({
   name: 'user',
   initialState: null,
   reducers: {
-    set: (prevState, {
+    setError: (): null => null,
+    setUser: (prevState, {
       payload: {
         id,
         firstname,
@@ -72,4 +73,4 @@ const user = createSlice<State, SliceCaseReducers<State>>({
 
 export default user;
 
-export const selectNavMenuState = ({ user }: StoreState): User | null => user;
+export const selectNavMenuState = ({ user }: StoreState): State => user;
