@@ -15,8 +15,20 @@ const ErrorScreen: FC<ErrorScreenProps> = ({ children }) => (
     justify="center"
     align="center"
   >
-    <Title variant="2">ERROR</Title>
-    {children && <Title variant="3">{children}</Title>}
+    <Title
+      variant="2"
+      color="inherit"
+    >
+      ERROR
+    </Title>
+    {children && (
+      <Title
+        variant="3"
+        color="inherit"
+      >
+        {children}
+      </Title>
+    )}
   </Layout>
 );
 
