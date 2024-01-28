@@ -60,6 +60,7 @@ import { type TransitionDefaultProps } from './components/utils/Transition/Trans
 export {};
 
 declare global {
+  export enum Breakpoints {SM, MD, LG, XL, XXL};
   export type Sizes = 'sm' | 'md' | 'lg';
   export type Wraps = 'nowrap' | 'wrap' | 'wrap-reverse';
   export type Themes = 'light';

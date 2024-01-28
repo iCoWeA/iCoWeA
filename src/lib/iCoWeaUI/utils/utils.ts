@@ -1,6 +1,26 @@
 import { type ReactElement, type MutableRefObject } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+export const calculateBreakpoint = (width: number): Breakpoints => {
+  if (width < 600) {
+    return Breakpoints.SM;
+  }
+
+  if (width < 905) {
+    return Breakpoints.MD;
+  }
+
+  if (width < 1240) {
+    return Breakpoints.LG;
+  }
+
+  if (width < 1440) {
+    return Breakpoints.XL;
+  }
+
+  return Breakpoints.XXL;
+};
+
 export const mergeClasses = (...classNames: Array<Record<string, string> | any>): string => twMerge(classNames.filter((className) => typeof className === 'string' || (typeof className === 'object' && className !== null)).map((className) => {
   if (typeof className === 'object' && className !== null) {
     return Object.values(className).join(' ');
