@@ -6,6 +6,8 @@ import { database } from '../../firebase';
 
 import ErrorScreen from '../../components/ErrorScreen/ErrorScreen';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
+import useWindowResize from '../../lib/iCoWeaUI/hooks/useWindowResize';
+import { breakpointActions } from '../../store/slices/breakpoint';
 import { selectUser, userActions } from '../../store/slices/user';
 
 const Component: FC = () => {
@@ -26,6 +28,8 @@ const Component: FC = () => {
       dispatch(userActions.setError());
     });
   }, []);
+
+  useWindowResize(() => dispatch(breakpointActions.set()));
 
   return (
     <>
