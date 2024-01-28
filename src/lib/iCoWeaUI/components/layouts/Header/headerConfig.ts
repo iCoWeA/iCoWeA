@@ -1,7 +1,7 @@
 const headerConfig = {
   defaultProps: {
     variant: 'plain',
-    color: 'inherit',
+    color: 'neutral',
     justify: 'between',
     border: false,
     block: false,
