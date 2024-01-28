@@ -1,4 +1,4 @@
-import { createSlice, type SliceCaseReducers, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { type StoreState } from '..';
 
@@ -22,13 +22,18 @@ type User = {
   facebook?: string
 };
 
-type State = User | null | undefined;
+type State = User | Record<string, string> | null;
 
-const user = createSlice<State, SliceCaseReducers<State>>({
+type Reducers = {
+  setError: () => Record<string, string>,
+  setUser: (prevState: State, action: PayloadAction<User>) => User
+};
+
+const user = createSlice<State, Reducers>({
   name: 'user',
   initialState: null,
   reducers: {
-    setError: (): null => null,
+    setError: () => ({}),
     setUser: (prevState, {
       payload: {
         id,
@@ -49,7 +54,7 @@ const user = createSlice<State, SliceCaseReducers<State>>({
         instagram,
         facebook
       }
-    }: PayloadAction<User>): User => ({
+    }) => ({
       id,
       firstname,
       lastname,
@@ -73,4 +78,6 @@ const user = createSlice<State, SliceCaseReducers<State>>({
 
 export default user;
 
-export const selectNavMenuState = ({ user }: StoreState): State => user;
+export const selectUser = ({ user }: StoreState): State => user;
+
+export const userActions = user.actions;

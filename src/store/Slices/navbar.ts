@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { type StoreState } from '..';
 
-const navMenu = createSlice({
-  name: 'navMenu',
+const navbar = createSlice({
+  name: 'navbar',
   initialState: false,
   reducers: {
     show: () => true,
@@ -12,6 +12,8 @@ const navMenu = createSlice({
   }
 });
 
-export default navMenu;
+export default navbar;
 
-export const selectNavMenuState = ({ navMenu }: StoreState): boolean => navMenu;
+export const selectNavbar = ({ navbar }: StoreState): boolean => navbar;
+
+export const navbarActions = navbar.actions;
