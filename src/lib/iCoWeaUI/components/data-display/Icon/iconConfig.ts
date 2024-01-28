@@ -17,29 +17,23 @@ const iconConfig = {
     sizes: {
       default: {
         sm: {
-          width: 'w-4',
           height: 'h-4'
         },
         md: {
-          width: 'w-5',
           height: 'h-5'
         },
         lg: {
-          width: 'w-6',
           height: 'h-6'
         }
       },
       space: {
         sm: {
-          width: 'w-8',
           height: 'h-8'
         },
         md: {
-          width: 'w-10',
           height: 'h-10'
         },
         lg: {
-          width: 'w-12',
           height: 'h-12'
         }
       }
