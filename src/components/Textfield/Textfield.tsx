@@ -32,14 +32,14 @@ const Textfield: FC<TextfieldProps> = ({
           <Label
             htmlFor={indexId}
             {...labelProps}
-          >{`${indexId[0].toUpperCase() + indexId.slice(1)}`}</Label>
+          >{`${indexId[0].toUpperCase() + indexId.slice(1).replace('-', ' ')}`}</Label>
         )}
         <Input
           block
           label={
             labelVariant === 'floating' &&
             indexId &&
-            `${indexId[0].toUpperCase() + indexId.slice(1)}`
+            `${indexId[0].toUpperCase() + indexId.slice(1).replace('-', ' ')}`
           }
           id={indexId}
           name={indexId}
