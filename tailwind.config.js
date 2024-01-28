@@ -7,12 +7,12 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       light: {
-        divider: '#FF0000', // #bfbfbf'
+        divider: '#bfbfbf',
         neutral: '#1a1a1a',
         'on-neutral': '#ffffff',
         'soft-neutral': '#d9d9d9',
         'neutral-variant': '#ffffff',
-        'on-neutral-variant': '#FF0000', // #808080
+        'on-neutral-variant': '#808080',
         primary: '#0b68f4',
         'on-primary': '#ffffff',
         'soft-primary': '#cee0fd',
@@ -105,6 +105,7 @@ module.exports = {
         12: '3rem',
         12.5: '3.125rem',
         13: '3.25rem',
+        13.5: '3.375rem',
         14: '3.5rem',
         14.5: '3.625rem',
         15: '3.75rem',
@@ -113,13 +114,21 @@ module.exports = {
         16.5: '4.125rem',
         17: '4.25rem',
         17.5: '4.375rem',
+        18: '4.5rem',
         18.5: '4.625rem',
         19: '4.75rem',
         19.5: '4.875rem',
         20: '5rem',
+        20.5: '5.125rem',
         21: '5.25rem',
         21.5: '5.375rem',
+        22: '5.5rem',
+        22.5: '5.625rem',
         23.5: '5.875rem',
+        24: '6rem',
+        24.5: '6.125rem',
+        26: '6.5rem',
+        28: '7rem',
         40: '10rem',
         full: '100%'
       }
