@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import navMenu from './slices/navMenu';
+import user from './slices/user';
 
 const store = configureStore({
   reducer: {
+    user: user.reducer,
     navMenu: navMenu.reducer
   }
 });
