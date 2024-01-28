@@ -12,13 +12,13 @@ import mainConfig from './mainConfig';
 export type MainDefaultProps = {
   variant?: Variants;
   color?: Colors;
-  bordered?: Borders;
+  border?: Borders;
 };
 
 export type MainProps = BaseHTMLAttributes<HTMLElement> & MainDefaultProps;
 
 const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
-  const { variant, color, bordered, defaultClassName, className, ...restProps } = useConfig(
+  const { variant, color, border, defaultClassName, className, ...restProps } = useConfig(
     'main',
     mainConfig.defaultProps,
     props
@@ -32,8 +32,8 @@ const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
-    typeof bordered === 'string' && bordered !== 'none' && styles.borders[bordered],
-    typeof bordered === 'boolean' && bordered && styles.borders.all,
+    typeof border === 'string' && border !== 'none' && styles.borders[border],
+    typeof border === 'boolean' && border && styles.borders.all,
     defaultClassName,
     className
   );

@@ -11,7 +11,7 @@ export type BadgeDefaultProps = {
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  bordered?: boolean;
+  border?: boolean;
   invisible?: boolean;
 };
 
@@ -26,7 +26,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   const {
     position,
     size,
-    bordered,
+    border,
     invisible,
     content,
     anchorProps,
@@ -38,13 +38,13 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
 
   /* --- Set classes --- */
   const styles = badgeConfig.styles.root;
-  const sizeVariant = !content ? 'empty' : bordered ? 'bordered' : 'default';
+  const sizeVariant = !content ? 'empty' : border ? 'border' : 'default';
 
   const mergedClassName = mergeClasses(
     styles.base,
     styles.positions[position],
     styles.sizes[sizeVariant][size],
-    bordered && styles.border,
+    border && styles.border,
     invisible && styles.invisible,
     defaultClassName,
     className
@@ -57,7 +57,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     >
       {children}
       <Flex
-        bordered={bordered}
+        border={border}
         direction="row"
         wrap="nowrap"
         justify="center"

@@ -13,6 +13,7 @@ import LinearProgressLabel, { type LinearProgressLabelDefaultProps } from './Lin
 import linearProgressConfig from './linearProgressConfig';
 
 export type LinearProgressDefaultProps = {
+  variant?: Variants;
   color?: Colors;
   size?: Sizes;
   vertical?: boolean;
@@ -29,6 +30,7 @@ LinearProgressDefaultProps & {
 
 const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, ref) => {
   const {
+    variant,
     color,
     size,
     vertical,
@@ -76,6 +78,8 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
       {...restContainerProps}
     >
       <LinearProgressBar
+        theme={theme}
+        variant={variant}
         color={color}
         orientation={orientation}
         value={value}
@@ -84,7 +88,6 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
       >
         {children && (
           <LinearProgressLabel
-            color={color}
             vertical={vertical}
             disabled={disabled}
             {...labelProps}

@@ -16,7 +16,7 @@ import radioConfig from './radioConfig';
 export type RadioDefaultProps = {
   color?: Colors;
   size?: Sizes;
-  bordered?: boolean;
+  border?: boolean;
   valid?: boolean;
   invalid?: boolean;
   noRipple?: boolean;
@@ -35,7 +35,7 @@ const Radio = forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
   const {
     color,
     size,
-    bordered,
+    border,
     valid,
     invalid,
     noRipple,
@@ -84,7 +84,7 @@ const Radio = forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
         theme={theme}
         color={color}
         size={size}
-        bordered={bordered}
+        border={border}
         valid={valid}
         invalid={invalid}
         checked={checked}

@@ -6,7 +6,7 @@ const navlinkConfig = {
     activeColor: 'primary',
     size: 'md',
     icon: false,
-    bordered: false,
+    border: false,
     block: false,
     shadow: false,
     loading: false,
@@ -52,7 +52,7 @@ const navlinkConfig = {
       loading: {
         border: 'border-transparent',
         fill: 'fill-transparent',
-        text: 'text-transparent'
+        color: 'text-transparent'
       },
       disabled: {
         light: {

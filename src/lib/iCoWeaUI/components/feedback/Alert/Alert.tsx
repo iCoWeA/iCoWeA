@@ -11,7 +11,7 @@ export type AlerDefaultProps = {
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  bordered?: Borders;
+  border?: Borders;
   shadow?: boolean;
   closable?: Closable;
 };

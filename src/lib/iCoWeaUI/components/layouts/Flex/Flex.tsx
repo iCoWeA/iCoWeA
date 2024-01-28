@@ -41,7 +41,7 @@ const Flex = forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
       color="inherit"
       spacing="none"
       panel={false}
-      bordered={false}
+      border={false}
       block={false}
       className={mergedClassName}
       ref={ref}

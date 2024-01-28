@@ -11,6 +11,7 @@ import SpinnerProgressBar from './SpinnerProgressBar';
 import spinnerConfig from './spinnerConfig';
 
 export type SpinnerDefaultProps = {
+  variant?: Variants;
   color?: Colors;
   size?: Sizes;
   innerBar?: TextColors;
@@ -30,6 +31,7 @@ SpinnerDefaultProps & {
 
 const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
   const {
+    variant,
     color,
     size,
     innerBar,
@@ -55,14 +57,13 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.sizes[size],
-    disabled ? styles.disabled[theme] : styles.strokes[theme][color],
+    disabled ? styles.disabled[theme] : styles.variants[variant][theme][color],
     defaultClassName,
     className
   );
 
   return (
     <Stack
-      color={color}
       justify="center"
       align="center"
       gap="none"
@@ -93,7 +94,6 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
       </SpinnerContainer>
       {children && (
         <SpinnerLabel
-          color={color}
           size={size}
           disabled={disabled}
           {...labelProps}

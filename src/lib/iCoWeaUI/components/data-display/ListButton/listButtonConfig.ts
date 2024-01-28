@@ -5,7 +5,7 @@ const listButtonConfig = {
     unselectColor: 'neutral',
     color: 'primary',
     size: 'md',
-    bordered: false,
+    border: false,
     block: false,
     noRipple: false
   },

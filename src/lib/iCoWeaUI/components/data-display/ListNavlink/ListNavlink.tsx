@@ -11,7 +11,7 @@ export type ListNavlinkDefaultProps = {
   color?: Colors;
   activeColor?: Colors;
   size?: Sizes;
-  bordered?: boolean;
+  border?: boolean;
   block?: boolean;
   noRipple?: boolean;
 };

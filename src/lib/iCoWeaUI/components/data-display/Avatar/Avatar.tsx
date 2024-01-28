@@ -10,7 +10,7 @@ export type AvatarDefaultProps = {
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  bordered?: boolean;
+  border?: boolean;
 };
 
 export type AvatarProps = StackProps &
@@ -23,7 +23,7 @@ AvatarDefaultProps & {
 const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   const {
     size,
-    bordered,
+    border,
     imageProps,
     src,
     alt,
@@ -35,19 +35,18 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
 
   /* --- Set classes --- */
   const styles = avatarConfig.styles;
-  const sizeVariant = bordered ? 'bordered' : 'default';
+  const sizeVariant = border ? 'border' : 'default';
 
   const mergedClassName = mergeClasses(
     styles.base,
     styles.sizes[sizeVariant][size],
-    bordered && styles.border,
+    border && styles.border,
     defaultClassName,
     className
   );
 
   return (
     <Stack
-      bordered={bordered}
       justify="center"
       align="center"
       gap="none"

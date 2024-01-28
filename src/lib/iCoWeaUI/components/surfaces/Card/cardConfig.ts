@@ -3,7 +3,7 @@ const cardConfig = {
     variant: 'plain',
     color: 'neutral',
     spacing: 'none',
-    bordered: 'none',
+    border: 'none',
     shadow: false
   },
   styles: {

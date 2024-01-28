@@ -11,7 +11,7 @@ export type ListButtonDefaultProps = {
   unselectColor?: Colors;
   color?: Colors;
   size?: Sizes;
-  bordered?: boolean;
+  border?: boolean;
   block?: boolean;
   noRipple?: boolean;
 };

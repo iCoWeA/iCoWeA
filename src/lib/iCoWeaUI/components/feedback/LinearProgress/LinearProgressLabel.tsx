@@ -4,12 +4,9 @@ import { mergeClasses } from '../../../utils/utils';
 import Mark, { type MarkProps } from '../../data-display/Mark/Mark';
 import linearProgressConfig from './linearProgressConfig';
 
-export type LinearProgressLabelDefaultProps = MarkProps & {
-  color?: Colors;
-};
+export type LinearProgressLabelDefaultProps = MarkProps;
 
 export type LinearProgressLabelProps = LinearProgressLabelDefaultProps & {
-  color: Colors;
   vertical: boolean;
 };
 
@@ -26,9 +23,10 @@ const LinearProgressLabel: FC<LinearProgressLabelProps> = ({
 
   return (
     <Mark
-      variant={disabled ? 'default' : 'solid'}
+      variant="default"
+      color="inherit"
       size="sm"
-      bordered={false}
+      border={false}
       disabled={disabled}
       className={mergedClassName}
       {...restProps}

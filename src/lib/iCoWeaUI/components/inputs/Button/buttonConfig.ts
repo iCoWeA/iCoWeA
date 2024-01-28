@@ -4,7 +4,7 @@ const buttonConfig = {
     color: 'primary',
     size: 'md',
     icon: false,
-    bordered: false,
+    border: false,
     block: false,
     shadow: false,
     loading: false,
@@ -46,13 +46,13 @@ const buttonConfig = {
       loading: {
         border: 'border-transparent',
         fill: 'fill-transparent',
-        text: 'text-transparent'
+        color: 'text-transparent'
       },
       disabled: {
         light: {
           border: 'disabled:border-light-neutral/40',
           fill: 'disabled:fill-light-neutral/40',
-          text: 'disabled:text-light-neutral/40',
+          color: 'disabled:text-light-neutral/40',
           background: 'disabled:bg-light-neutral/20',
           pointerEvents: 'disabled:pointer-events-none'
         }

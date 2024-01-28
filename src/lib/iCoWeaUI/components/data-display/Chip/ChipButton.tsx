@@ -30,7 +30,7 @@ const ChipButton: FC<ChipButtonProps> = ({
     <Button
       size="md"
       icon
-      bordered={false}
+      border={false}
       block={false}
       shadow={false}
       loading={false}
@@ -44,7 +44,7 @@ const ChipButton: FC<ChipButtonProps> = ({
           color="inherit"
           size="sm"
           spacing="none"
-          bordered={false}
+          border={false}
           {...iconProps}
         >
           <svg

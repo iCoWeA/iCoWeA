@@ -13,13 +13,13 @@ export type SidebarDefaultProps = {
   position?: SidePositions;
   variant?: Variants;
   color?: Colors;
-  bordered?: Borders;
+  border?: Borders;
 };
 
 export type SidebarProps = BaseHTMLAttributes<HTMLElement> & SidebarDefaultProps;
 
 const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
-  const { position, variant, color, bordered, defaultClassName, className, ...restProps } =
+  const { position, variant, color, border, defaultClassName, className, ...restProps } =
     useConfig('sidebar', sidebarConfig.defaultProps, props);
 
   const theme = useTheme();
@@ -31,8 +31,8 @@ const Sidebar = forwardRef<HTMLElement, SidebarProps>((props, ref) => {
     styles.base,
     styles.positions[position],
     styles.variants[variant][theme][color],
-    typeof bordered === 'string' && bordered !== 'none' && styles.borders[bordered],
-    typeof bordered === 'boolean' && bordered && styles.borders.all,
+    typeof border === 'string' && border !== 'none' && styles.borders[border],
+    typeof border === 'boolean' && border && styles.borders.all,
     defaultClassName,
     className
   );

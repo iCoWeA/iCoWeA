@@ -64,27 +64,27 @@ const labelConfig = {
         primary: {
           border: 'border-light-primary',
           fill: 'fill-light-primary',
-          text: 'text-light-primary'
+          color: 'text-light-primary'
         },
         secondary: {
           border: 'border-light-secondary',
           fill: 'fill-light-secondary',
-          text: 'text-light-secondary'
+          color: 'text-light-secondary'
         },
         success: {
           border: 'border-light-success',
           fill: 'fill-light-success',
-          text: 'text-light-success'
+          color: 'text-light-success'
         },
         warning: {
           border: 'border-light-warning',
           fill: 'fill-light-warning',
-          text: 'text-light-warning'
+          color: 'text-light-warning'
         },
         error: {
           border: 'border-light-error',
           fill: 'fill-light-error',
-          text: 'text-light-error'
+          color: 'text-light-error'
         }
       }
     }

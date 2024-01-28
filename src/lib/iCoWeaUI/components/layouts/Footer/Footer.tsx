@@ -14,7 +14,7 @@ export type FooterDefaultProps = {
   variant?: Variants;
   color?: Colors;
   justify?: JustifyContent;
-  bordered?: boolean;
+  border?: boolean;
   block?: boolean;
 };
 
@@ -28,7 +28,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
     variant,
     color,
     justify,
-    bordered,
+    border,
     block,
     containerProps,
     defaultClassName,
@@ -45,7 +45,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
-    bordered && styles.border,
+    border && styles.border,
     defaultClassName,
     className
   );

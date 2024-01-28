@@ -34,6 +34,7 @@ const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps>((prop
       aria-valuenow={+value}
       aria-valuemin={0}
       aria-valuemax={100}
+      value={value}
       ref={ref}
       {...restProps}
     />

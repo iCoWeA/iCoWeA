@@ -2,7 +2,7 @@ const checkboxConfig = {
   defaultProps: {
     color: 'primary',
     size: 'md',
-    bordered: false,
+    border: false,
     valid: false,
     invalid: false,
     noRipple: false

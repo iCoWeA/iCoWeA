@@ -13,7 +13,7 @@ export type ButtonGroupButtonProps = {
   color: Colors;
   size: Sizes;
   icon: boolean;
-  bordered: boolean;
+  border: boolean;
   block: boolean;
   shadow: boolean;
   loading: boolean;
@@ -30,7 +30,7 @@ const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({
   color,
   size,
   icon,
-  bordered,
+  border,
   block,
   shadow,
   loading,
@@ -44,7 +44,7 @@ const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({
   const mergedClassName = mergeClasses(
     styles.base,
     styles.orientations[orientation][position],
-    (divided || bordered) && styles.divider[orientation][position],
+    (divided || border) && styles.divider[orientation][position],
     divided && styles.variants[variant][theme][color],
     element.props.className
   );
@@ -55,7 +55,7 @@ const ButtonGroupButton: FC<ButtonGroupButtonProps> = ({
     color,
     size,
     icon,
-    bordered,
+    border,
     block,
     shadow,
     loading,

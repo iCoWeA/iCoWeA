@@ -12,7 +12,7 @@ export type CloseButtonDefaultProps = {
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  bordered?: boolean;
+  border?: boolean;
   noRipple?: boolean;
 };
 
@@ -53,7 +53,7 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref)
           color="inherit"
           size="md"
           spacing="none"
-          bordered={false}
+          border={false}
           {...iconProps}
         >
           <svg

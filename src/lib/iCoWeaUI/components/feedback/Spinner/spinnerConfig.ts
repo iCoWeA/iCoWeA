@@ -1,5 +1,6 @@
 const spinnerConfig = {
   defaultProps: {
+    variant: 'default',
     color: 'primary',
     size: 'md',
     innerBar: 'inherit',
@@ -30,25 +31,165 @@ const spinnerConfig = {
           height: 'h-12'
         }
       },
-      strokes: {
-        light: {
-          neutral: {
-            stroke: 'stroke-light-neutral'
-          },
-          primary: {
-            stroke: 'stroke-light-primary'
-          },
-          secondary: {
-            stroke: 'stroke-light-secondary'
-          },
-          success: {
-            stroke: 'stroke-light-success'
-          },
-          warning: {
-            stroke: 'stroke-light-warning'
-          },
-          error: {
-            stroke: 'stroke-light-error'
+      variants: {
+        default: {
+          light: {
+            neutral: {
+              border: 'border-light-neutral',
+              fill: 'fill-light-neutral',
+              color: 'text-light-neutral',
+              stroke: 'stroke-light-neutral'
+            },
+            primary: {
+              border: 'border-light-primary',
+              fill: 'fill-light-primary',
+              color: 'text-light-primary',
+              stroke: 'stroke-light-primary'
+            },
+            secondary: {
+              border: 'border-light-secondary',
+              fill: 'fill-light-secondary',
+              color: 'text-light-secondary',
+              stroke: 'stroke-light-secondary'
+            },
+            success: {
+              border: 'border-light-success',
+              fill: 'fill-light-success',
+              color: 'text-light-success',
+              stroke: 'stroke-light-success'
+            },
+            warning: {
+              border: 'border-light-warning',
+              fill: 'fill-light-warning',
+              color: 'text-light-warning',
+              stroke: 'stroke-light-warning'
+            },
+            error: {
+              border: 'border-light-error',
+              fill: 'fill-light-error',
+              color: 'text-light-error',
+              stroke: 'stroke-light-error'
+            }
+          }
+        },
+        plain: {
+          light: {
+            neutral: {
+              border: 'border-light-neutral',
+              fill: 'fill-light-neutral',
+              color: 'text-light-neutral',
+              stroke: 'stroke-light-neutral'
+            },
+            primary: {
+              border: 'border-light-primary',
+              fill: 'fill-light-primary',
+              color: 'text-light-primary',
+              stroke: 'stroke-light-primary'
+            },
+            secondary: {
+              border: 'border-light-secondary',
+              fill: 'fill-light-secondary',
+              color: 'text-light-secondary',
+              stroke: 'stroke-light-secondary'
+            },
+            success: {
+              border: 'border-light-success',
+              fill: 'fill-light-success',
+              color: 'text-light-success',
+              stroke: 'stroke-light-success'
+            },
+            warning: {
+              border: 'border-light-warning',
+              fill: 'fill-light-warning',
+              color: 'text-light-warning',
+              stroke: 'stroke-light-warning'
+            },
+            error: {
+              border: 'border-light-error',
+              fill: 'fill-light-error',
+              color: 'text-light-error',
+              stroke: 'stroke-light-error'
+            }
+          }
+        },
+        soft: {
+          light: {
+            neutral: {
+              border: 'border-light-neutral',
+              fill: 'fill-light-neutral',
+              color: 'text-light-neutral',
+              stroke: 'stroke-light-neutral'
+            },
+            primary: {
+              border: 'border-light-primary',
+              fill: 'fill-light-primary',
+              color: 'text-light-primary',
+              stroke: 'stroke-light-primary'
+            },
+            secondary: {
+              border: 'border-light-secondary',
+              fill: 'fill-light-secondary',
+              color: 'text-light-secondary',
+              stroke: 'stroke-light-secondary'
+            },
+            success: {
+              border: 'border-light-success',
+              fill: 'fill-light-success',
+              color: 'text-light-success',
+              stroke: 'stroke-light-success'
+            },
+            warning: {
+              border: 'border-light-warning',
+              fill: 'fill-light-warning',
+              color: 'text-light-warning',
+              stroke: 'stroke-light-warning'
+            },
+            error: {
+              border: 'border-light-error',
+              fill: 'fill-light-error',
+              color: 'text-light-error',
+              stroke: 'stroke-light-error'
+            }
+          }
+        },
+        solid: {
+          light: {
+            neutral: {
+              border: 'border-light-on-neutral',
+              fill: 'fill-light-on-neutral',
+              color: 'text-light-on-neutral',
+              stroke: 'stroke-light-on-neutral'
+            },
+            primary: {
+              border: 'border-light-on-primary',
+              fill: 'fill-light-on-primary',
+              color: 'text-light-on-primary',
+              stroke: 'stroke-light-on-primary'
+            },
+            secondary: {
+              border: 'border-light-on-secondary',
+              fill: 'fill-light-on-secondary',
+              color: 'text-light-on-secondary',
+              stroke: 'stroke-light-on-secondary'
+            },
+            success: {
+              border: 'border-light-on-success',
+              fill: 'fill-light-on-success',
+              color: 'text-light-on-success',
+              stroke: 'stroke-light-on-success'
+            },
+            warning: {
+              border: 'border-light-on-warning',
+              fill: 'fill-light-on-warning',
+              color: 'text-light-on-warning',
+              stroke: 'stroke-light-on-warning'
+            },
+            error: {
+              border: 'border-light-on-error',
+              fill: 'fill-light-on-error',
+              color: 'text-light-on-error',
+              stroke: 'stroke-light-on-error'
+            }
           }
         }
       }

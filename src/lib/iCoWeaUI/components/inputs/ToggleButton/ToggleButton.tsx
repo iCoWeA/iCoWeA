@@ -13,7 +13,7 @@ export type ToggleButtonDefaultProps = {
   color?: Colors;
   size?: Sizes;
   icon?: boolean;
-  bordered?: boolean;
+  border?: boolean;
   block?: boolean;
   shadow?: boolean;
   noRipple?: boolean;

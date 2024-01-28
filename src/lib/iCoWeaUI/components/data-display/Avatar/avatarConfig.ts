@@ -3,7 +3,7 @@ const avatarConfig = {
     variant: 'solid',
     color: 'primary',
     size: 'md',
-    bordered: false
+    border: false
   },
   styles: {
     base: {
@@ -33,7 +33,7 @@ const avatarConfig = {
           fontSize: 'text-base'
         }
       },
-      bordered: {
+      border: {
         sm: {
           width: 'w-9',
           height: 'h-9',

@@ -86,7 +86,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
               variant="default"
               color={color}
               size="sm"
-              bordered={false}
+              border={false}
               {...separatorsProps?.[i]}
             >
               {separator}

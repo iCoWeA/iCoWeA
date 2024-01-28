@@ -5,7 +5,7 @@ const closeButtonConfig = {
     variant: 'default',
     color: 'primary',
     size: 'md',
-    bordered: false,
+    border: false,
     noRipple: false
   },
   styles: {

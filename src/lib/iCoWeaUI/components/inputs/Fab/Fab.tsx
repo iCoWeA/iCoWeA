@@ -10,7 +10,7 @@ export type FabDefaultProps = {
   color?: Colors;
   size?: Sizes;
   icon?: boolean;
-  bordered?: boolean;
+  border?: boolean;
   noRipple?: boolean;
 };
 

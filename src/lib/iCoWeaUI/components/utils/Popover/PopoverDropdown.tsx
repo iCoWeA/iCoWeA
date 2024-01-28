@@ -27,7 +27,7 @@ const PopoverDropdown: FC<PopoverDropdownProps> = ({ spacing, className, ...rest
   return (
     <Card
       spacing={spacing}
-      bordered={false}
+      border={false}
       shadow
       className={mergedClassName}
       {...restProps}

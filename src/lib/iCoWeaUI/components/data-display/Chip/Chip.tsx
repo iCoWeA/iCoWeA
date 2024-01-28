@@ -11,7 +11,7 @@ export type ChipDefaultProps = {
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  bordered?: boolean;
+  border?: boolean;
 };
 
 export type ChipProps = FlexProps &

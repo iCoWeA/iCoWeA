@@ -20,7 +20,7 @@ import checkboxConfig from './checkboxConfig';
 export type CheckboxDefaultProps = {
   color?: Colors;
   size?: Sizes;
-  bordered?: boolean;
+  border?: boolean;
   valid?: boolean;
   invalid?: boolean;
   noRipple?: boolean;
@@ -39,7 +39,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   const {
     color,
     size,
-    bordered,
+    border,
     valid,
     invalid,
     noRipple,
@@ -89,7 +89,7 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
         theme={theme}
         color={color}
         size={size}
-        bordered={bordered}
+        border={border}
         valid={valid}
         invalid={invalid}
         checked={checked}

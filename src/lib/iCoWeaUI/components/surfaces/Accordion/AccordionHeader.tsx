@@ -43,7 +43,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         unselectColor={color}
         color={color}
         size={size}
-        bordered={false}
+        border={false}
         block
         noRipple={false}
         selected={open}

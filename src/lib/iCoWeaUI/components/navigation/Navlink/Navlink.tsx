@@ -14,7 +14,7 @@ export type NavlinkDefaultProps = {
   activeColor?: Colors;
   size?: Sizes;
   icon?: boolean;
-  bordered?: boolean;
+  border?: boolean;
   block?: boolean;
   shadow?: boolean;
   loading?: boolean;
@@ -39,7 +39,7 @@ const Navlink = forwardRef<HTMLAnchorElement, NavlinkProps>((props, ref) => {
     activeColor,
     size,
     icon,
-    bordered,
+    border,
     block,
     shadow,
     loading,
@@ -69,7 +69,7 @@ const Navlink = forwardRef<HTMLAnchorElement, NavlinkProps>((props, ref) => {
     active && styles.active,
     disabled && styles.disabled[theme],
     icon && styles.icon,
-    bordered && styles.border,
+    border && styles.border,
     block && styles.block,
     shadow && styles.shadow,
     loading && styles.loading,

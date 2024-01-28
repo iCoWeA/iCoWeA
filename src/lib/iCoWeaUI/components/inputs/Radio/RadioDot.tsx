@@ -12,7 +12,7 @@ export type RadioDotProps = RadioDotDefaultProps & {
   theme: Themes;
   color: Colors;
   size: Sizes;
-  bordered: boolean;
+  border: boolean;
   valid: boolean;
   invalid: boolean;
   checked?: boolean;
@@ -22,7 +22,7 @@ export type RadioDotProps = RadioDotDefaultProps & {
 const RadioDot: FC<RadioDotProps> = ({
   theme,
   color,
-  bordered,
+  border,
   valid,
   invalid,
   checked,
@@ -49,7 +49,7 @@ const RadioDot: FC<RadioDotProps> = ({
       variant="default"
       color={valid ? 'success' : invalid ? 'error' : color}
       spacing="none"
-      bordered={checked ? true : bordered}
+      border={checked ? true : border}
       className={mergedClassName}
       {...restProps}
     >

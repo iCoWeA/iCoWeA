@@ -3,7 +3,7 @@ const accordionConfig = {
     variant: 'default',
     color: 'neutral',
     size: 'md',
-    bordered: 'none',
+    border: 'none',
     divider: false
   },
   styles: {

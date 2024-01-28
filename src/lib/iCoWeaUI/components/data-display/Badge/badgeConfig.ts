@@ -4,7 +4,7 @@ const badgeConfig = {
     variant: 'solid',
     color: 'error',
     size: 'md',
-    bordered: false,
+    border: false,
     invisible: false
   },
   styles: {
@@ -43,7 +43,7 @@ const badgeConfig = {
             font: 'text-base'
           }
         },
-        bordered: {
+        border: {
           sm: {
             minWidth: 'min-w-5',
             padding: 'px-0.5',

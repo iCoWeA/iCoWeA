@@ -14,7 +14,7 @@ export type HeaderDefaultProps = {
   variant?: Variants;
   color?: Colors;
   justify?: JustifyContent;
-  bordered?: boolean;
+  border?: boolean;
   block?: boolean;
   shadow?: boolean;
 };
@@ -29,7 +29,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
     variant,
     color,
     justify,
-    bordered,
+    border,
     block,
     shadow,
     containerProps,
@@ -47,7 +47,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[variant][theme][color],
-    bordered && styles.border,
+    border && styles.border,
     shadow && styles.shadow,
     defaultClassName,
     className

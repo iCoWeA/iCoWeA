@@ -6,7 +6,7 @@ const buttonGroupConfig = {
     color: 'primary',
     size: 'md',
     icon: false,
-    bordered: false,
+    border: false,
     block: false,
     shadow: false,
     loading: false,

@@ -11,7 +11,7 @@ export type AccordionDefaultProps = {
   variant?: Variants;
   color?: Colors;
   size?: Sizes;
-  bordered?: Borders;
+  border?: Borders;
   divider?: boolean;
 };
 
@@ -32,7 +32,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
     variant,
     color,
     size,
-    bordered,
+    border,
     divider,
     leftExpandIcon,
     rightExpandIcon,
@@ -88,7 +88,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   return (
     <Stack
       color={color}
-      bordered={bordered}
+      border={border}
       justify="start"
       align="stretch"
       gap="none"

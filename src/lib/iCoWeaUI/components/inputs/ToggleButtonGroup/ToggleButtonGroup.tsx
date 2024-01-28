@@ -16,7 +16,7 @@ export type ToggleButtonGroupDefaultProps = {
   color?: Colors;
   size?: Sizes;
   icon?: boolean;
-  bordered?: boolean;
+  border?: boolean;
   block?: boolean;
   shadow?: boolean;
   noRipple?: boolean;
@@ -36,7 +36,7 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
     color,
     size,
     icon,
-    bordered,
+    border,
     block,
     shadow,
     noRipple,
@@ -67,7 +67,7 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
       color,
       size,
       icon,
-      bordered,
+      border,
       block,
       shadow,
       noRipple
@@ -89,7 +89,7 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
             color={color}
             size={size}
             icon={icon}
-            bordered={bordered}
+            border={border}
             block={block}
             shadow={shadow}
             noRipple={noRipple}

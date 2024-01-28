@@ -56,7 +56,7 @@ const Grid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
       color="inherit"
       spacing="none"
       panel={false}
-      bordered={false}
+      border={false}
       block={false}
       className={mergedClassName}
       ref={ref}

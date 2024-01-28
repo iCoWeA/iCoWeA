@@ -2,7 +2,7 @@ const sectionConfig = {
   defaultProps: {
     variant: 'default',
     color: 'neutral',
-    bordered: false
+    border: false
   },
   styles: {
     base: {
@@ -45,27 +45,27 @@ const sectionConfig = {
           primary: {
             border: 'border-light-primary',
             fill: 'fill-light-primary',
-            text: 'text-light-primary'
+            color: 'text-light-primary'
           },
           secondary: {
             border: 'border-light-secondary',
             fill: 'fill-light-secondary',
-            text: 'text-light-secondary'
+            color: 'text-light-secondary'
           },
           success: {
             border: 'border-light-success',
             fill: 'fill-light-success',
-            text: 'text-light-success'
+            color: 'text-light-success'
           },
           warning: {
             border: 'border-light-warning',
             fill: 'fill-light-warning',
-            text: 'text-light-warning'
+            color: 'text-light-warning'
           },
           error: {
             border: 'border-light-error',
             fill: 'fill-light-error',
-            text: 'text-light-error'
+            color: 'text-light-error'
           }
         }
       },
@@ -80,31 +80,31 @@ const sectionConfig = {
           primary: {
             border: 'border-light-primary',
             fill: 'fill-light-primary',
-            text: 'text-light-primary',
+            color: 'text-light-primary',
             background: 'bg-light-neutral-variant'
           },
           secondary: {
             border: 'border-light-secondary',
             fill: 'fill-light-secondary',
-            text: 'text-light-secondary',
+            color: 'text-light-secondary',
             background: 'bg-light-neutral-variant'
           },
           success: {
             border: 'border-light-success',
             fill: 'fill-light-success',
-            text: 'text-light-success',
+            color: 'text-light-success',
             background: 'bg-light-neutral-variant'
           },
           warning: {
             border: 'border-light-warning',
             fill: 'fill-light-warning',
-            text: 'text-light-warning',
+            color: 'text-light-warning',
             background: 'bg-light-neutral-variant'
           },
           error: {
             border: 'border-light-error',
             fill: 'fill-light-error',
-            text: 'text-light-error',
+            color: 'text-light-error',
             background: 'bg-light-neutral-variant'
           }
         }
@@ -120,31 +120,31 @@ const sectionConfig = {
           primary: {
             border: 'border-light-primary',
             fill: 'fill-light-primary',
-            text: 'text-light-primary',
+            color: 'text-light-primary',
             background: 'bg-light-soft-primary'
           },
           secondary: {
             border: 'border-light-secondary',
             fill: 'fill-light-secondary',
-            text: 'text-light-secondary',
+            color: 'text-light-secondary',
             background: 'bg-light-soft-secondary'
           },
           success: {
             border: 'border-light-success',
             fill: 'fill-light-success',
-            text: 'text-light-success',
+            color: 'text-light-success',
             background: 'bg-light-soft-success'
           },
           warning: {
             border: 'border-light-warning',
             fill: 'fill-light-warning',
-            text: 'text-light-warning',
+            color: 'text-light-warning',
             background: 'bg-light-soft-warning'
           },
           error: {
             border: 'border-light-error',
             fill: 'fill-light-error',
-            text: 'text-light-error',
+            color: 'text-light-error',
             background: 'bg-light-soft-error'
           }
         }
@@ -160,31 +160,31 @@ const sectionConfig = {
           primary: {
             border: 'border-light-on-primary',
             fill: 'fill-light-on-primary',
-            text: 'text-light-on-primary',
+            color: 'text-light-on-primary',
             background: 'bg-light-primary'
           },
           secondary: {
             border: 'border-light-on-secondary',
             fill: 'fill-light-on-secondary',
-            text: 'text-light-on-secondary',
+            color: 'text-light-on-secondary',
             background: 'bg-light-secondary'
           },
           success: {
             border: 'border-light-on-success',
             fill: 'fill-light-on-success',
-            text: 'text-light-on-success',
+            color: 'text-light-on-success',
             background: 'bg-light-success'
           },
           warning: {
             border: 'border-light-on-warning',
             fill: 'fill-light-on-warning',
-            text: 'text-light-on-warning',
+            color: 'text-light-on-warning',
             background: 'bg-light-warning'
           },
           error: {
             border: 'border-light-on-error',
             fill: 'fill-light-on-error',
-            text: 'text-light-on-error',
+            color: 'text-light-on-error',
             background: 'bg-light-error'
           }
         }

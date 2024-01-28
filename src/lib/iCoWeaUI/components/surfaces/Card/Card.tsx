@@ -9,7 +9,7 @@ export type CardDefaultProps = {
   variant?: Variants;
   color?: Colors;
   spacing?: Spacing;
-  bordered?: Borders;
+  border?: Borders;
   shadow?: boolean;
 };
 

@@ -15,7 +15,7 @@ export type ButtonGroupDefaultProps = {
   color?: Colors;
   size?: Sizes;
   icon?: boolean;
-  bordered?: boolean;
+  border?: boolean;
   block?: boolean;
   shadow?: boolean;
   loading?: boolean;
@@ -35,7 +35,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
     color,
     size,
     icon,
-    bordered,
+    border,
     block,
     shadow,
     loading,
@@ -67,7 +67,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
       color,
       size,
       icon,
-      bordered,
+      border,
       block,
       shadow,
       loading,
@@ -90,7 +90,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
             size={size}
             icon={icon}
             divided={divided}
-            bordered={bordered}
+            border={border}
             block={block}
             shadow={shadow}
             loading={loading}

@@ -3,7 +3,7 @@ const chipConfig = {
     variant: 'solid',
     color: 'primary',
     size: 'md',
-    bordered: false
+    border: false
   },
   styles: {
     root: {

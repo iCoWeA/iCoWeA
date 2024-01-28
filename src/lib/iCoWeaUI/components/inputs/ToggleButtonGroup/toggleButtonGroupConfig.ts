@@ -7,7 +7,7 @@ const toggleButtonGroupConfig = {
     color: 'primary',
     size: 'md',
     icon: false,
-    bordered: false,
+    border: false,
     block: false,
     shadow: false,
     noRipple: false

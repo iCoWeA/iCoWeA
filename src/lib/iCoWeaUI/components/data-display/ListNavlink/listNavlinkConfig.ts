@@ -5,7 +5,7 @@ const listNavlinkConfig = {
     color: 'primary',
     activeColor: 'neutral',
     size: 'md',
-    bordered: false,
+    border: false,
     block: false,
     noRipple: false
   },

@@ -12,7 +12,7 @@ export type CheckboxIconProps = CheckboxIconDefaultProps & {
   theme: Themes;
   color: Colors;
   size: Sizes;
-  bordered: boolean;
+  border: boolean;
   valid: boolean;
   invalid: boolean;
   checked?: boolean;
@@ -22,7 +22,7 @@ export type CheckboxIconProps = CheckboxIconDefaultProps & {
 const CheckboxIcon: FC<CheckboxIconProps> = ({
   theme,
   color,
-  bordered,
+  border,
   valid,
   invalid,
   checked,
@@ -49,7 +49,7 @@ const CheckboxIcon: FC<CheckboxIconProps> = ({
       variant="solid"
       color={valid ? 'success' : invalid ? 'error' : color}
       spacing="none"
-      bordered={!checked && bordered}
+      border={!checked && border}
       className={mergedClassName}
       {...restProps}
     >

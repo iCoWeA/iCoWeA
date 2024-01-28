@@ -36,7 +36,7 @@ const ExpandIcon: FC<ExpandIconProps> = (props) => {
     <Icon
       variant="default"
       spacing="none"
-      bordered={false}
+      border={false}
       className={mergedClassName}
       {...restProps}
     >

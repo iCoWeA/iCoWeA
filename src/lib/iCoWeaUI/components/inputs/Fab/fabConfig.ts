@@ -4,7 +4,7 @@ const fabConfig = {
     color: 'primary',
     size: 'md',
     icon: false,
-    bordered: false,
+    border: false,
     noRipple: false
   },
   styles: {

@@ -36,7 +36,7 @@ const SwitchDot: FC<SwitchDotProps> = ({
       color="inherit"
       size={size}
       spacing="none"
-      bordered={false}
+      border={false}
       className={mergedClassName}
       {...restProps}
     >

@@ -12,7 +12,7 @@ export type ButtonDefaultProps = {
   color?: Colors;
   size?: Sizes;
   icon?: boolean;
-  bordered?: boolean;
+  border?: boolean;
   block?: boolean;
   shadow?: boolean;
   loading?: boolean;
@@ -33,7 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     color,
     size,
     icon,
-    bordered,
+    border,
     block,
     shadow,
     loading,
@@ -60,7 +60,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     styles.disabled[theme],
     styles.sizes[sizeVariant][size],
     icon && styles.icon,
-    bordered && styles.border,
+    border && styles.border,
     block && styles.block,
     shadow && styles.shadow,
     loading && styles.loading,

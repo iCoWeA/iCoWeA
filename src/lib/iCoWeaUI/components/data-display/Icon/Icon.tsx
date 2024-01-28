@@ -10,7 +10,7 @@ export type IconDefaultProps = {
   color?: TextColors;
   size?: Sizes;
   spacing?: Spacing;
-  bordered?: boolean;
+  border?: boolean;
 };
 
 export type IconProps = SVGAttributes<SVGSVGElement> &
@@ -24,7 +24,7 @@ const Icon: FC<IconProps> = (props) => {
     color,
     size,
     spacing,
-    bordered,
+    border,
     defaultClassName,
     className,
     children,
@@ -42,7 +42,7 @@ const Icon: FC<IconProps> = (props) => {
     styles.sizes[sizeVariant][size],
     spacing !== 'none' && styles.spacing[size][spacing],
     color !== 'inherit' && styles.variants[variant][theme][color],
-    bordered && styles.border,
+    border && styles.border,
     defaultClassName,
     className
   );

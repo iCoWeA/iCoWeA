@@ -4,7 +4,7 @@ const iconConfig = {
     color: 'inherit',
     size: 'md',
     spacing: 'none',
-    bordered: false
+    border: false
   },
   styles: {
     base: {

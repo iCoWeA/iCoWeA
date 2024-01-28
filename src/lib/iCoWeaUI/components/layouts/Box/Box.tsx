@@ -10,7 +10,7 @@ export type BoxDefaultProps = {
   color?: TextColors;
   spacing?: Spacing;
   panel?: boolean;
-  bordered?: Borders;
+  border?: Borders;
   block?: boolean;
 };
 
@@ -25,7 +25,7 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     color,
     spacing,
     panel,
-    bordered,
+    border,
     block,
     disabled,
     defaultClassName,
@@ -45,8 +45,8 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     block && styles.block,
     disabled && styles.disabled[theme],
     disabled && variant !== 'default' && styles.disabledBg[theme],
-    bordered !== 'none' && styles.borders[bordered],
-    bordered && typeof bordered === 'boolean' && styles.borders.all,
+    border !== 'none' && styles.borders[border],
+    border && typeof border === 'boolean' && styles.borders.all,
     defaultClassName,
     className
   );

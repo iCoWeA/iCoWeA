@@ -4,12 +4,9 @@ import { mergeClasses } from '../../../utils/utils';
 import Mark, { type MarkProps } from '../../data-display/Mark/Mark';
 import spinnerConfig from './spinnerConfig';
 
-export type SpinnerLabelDefaultProps = MarkProps & {
-  color?: Colors;
-};
+export type SpinnerLabelDefaultProps = MarkProps;
 
 export type SpinnerLabelProps = SpinnerLabelDefaultProps & {
-  color: Colors;
   size: Sizes;
 };
 
@@ -22,7 +19,8 @@ const SpinnerLabel: FC<SpinnerLabelProps> = ({ className, ...restProps }) => {
   return (
     <Mark
       variant="default"
-      bordered={false}
+      color="inherit"
+      border={false}
       className={mergedClassName}
       {...restProps}
     />

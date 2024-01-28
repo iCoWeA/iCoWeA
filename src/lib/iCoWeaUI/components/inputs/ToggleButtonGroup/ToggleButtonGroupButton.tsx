@@ -13,7 +13,7 @@ export type ToggleButtonGroupButtonProps = {
   color: Colors;
   size: Sizes;
   icon: boolean;
-  bordered: boolean;
+  border: boolean;
   block: boolean;
   shadow: boolean;
   noRipple: boolean;
@@ -29,7 +29,7 @@ const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
   color,
   size,
   icon,
-  bordered,
+  border,
   block,
   shadow,
   noRipple,
@@ -42,7 +42,7 @@ const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
   const mergedClassName = mergeClasses(
     styles.base,
     styles.orientations[orientation][position],
-    bordered && styles.border[orientation][position],
+    border && styles.border[orientation][position],
     element.props.className
   );
 
@@ -54,7 +54,7 @@ const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
     color,
     size,
     icon,
-    bordered,
+    border,
     block,
     shadow,
     noRipple

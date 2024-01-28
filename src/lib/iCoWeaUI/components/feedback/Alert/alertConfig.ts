@@ -4,7 +4,7 @@ const alertConfig = {
       variant: 'solid',
       color: 'primary',
       size: 'md',
-      bordered: 'none',
+      border: 'none',
       shadow: true,
       closable: 'none'
     }
