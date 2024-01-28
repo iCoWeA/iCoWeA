@@ -20,4 +20,4 @@ export const Component: FC = () => (
   </Layout>
 );
 
-Component.displayName = 'DashboardLayoutRoute';
+Component.displayName = 'StandardLayoutRoute';
