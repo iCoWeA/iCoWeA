@@ -14,6 +14,6 @@ const navbar = createSlice({
 
 export default navbar;
 
-export const useSelectNavbar = ({ navbar }: StoreState): boolean => navbar;
+export const selectNavbar = ({ navbar }: StoreState): boolean => navbar;
 
 export const navbarActions = navbar.actions;

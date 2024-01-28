@@ -78,6 +78,6 @@ const user = createSlice<State, Reducers>({
 
 export default user;
 
-export const useSelectUser = ({ user }: StoreState): State => user;
+export const selectUser = ({ user }: StoreState): State => user;
 
 export const userActions = user.actions;
