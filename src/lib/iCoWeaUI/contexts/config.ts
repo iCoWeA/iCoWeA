@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 type Element = {
   styles?: string;
-  defaultProps?: Record<string, string>;
+  defaultProps?: Obj;
 };
 
 export type Config = Record<string, Record<string, Element>>;

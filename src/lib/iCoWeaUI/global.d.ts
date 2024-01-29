@@ -1,6 +1,7 @@
 export {};
 
 declare global {
+  export type Obj = Record<string, string>;
   export type Sizes = 'sm' | 'md' | 'lg';
   export type Wraps = 'nowrap' | 'wrap' | 'wrap-reverse';
   export type Themes = 'light';

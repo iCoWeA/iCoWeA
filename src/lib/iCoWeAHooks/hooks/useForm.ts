@@ -18,7 +18,7 @@ interface State {
 
 interface Action {
   type: ActionTypes,
-  payload: { input?: HTMLInputElement | HTMLTextAreaElement, name?: string; timerId?: number, defaultValue?: string; config?: Record<string, string> };
+  payload: { input?: HTMLInputElement | HTMLTextAreaElement, name?: string; timerId?: number, defaultValue?: string; config?: Obj };
 }
 
 interface Actions {
@@ -27,7 +27,7 @@ interface Actions {
   revalid: (input: HTMLInputElement | HTMLTextAreaElement) => Action;
   blur: (input: HTMLInputElement | HTMLTextAreaElement) => Action;
   reset: (name: string, defaultValue: string) => Action;
-  resetForm: (config: Record<string, string>) => Action;
+  resetForm: (config: Obj) => Action;
 }
 
 interface Return {
@@ -119,7 +119,7 @@ const reducer = (prevState: State, { type, payload: { input, name = input?.name 
   return state;
 };
 
-const initializer = (config: Record<string, string>): State => {
+const initializer = (config: Obj): State => {
   const state: State = { isFormValid: false, inputs: {} };
 
   Object.keys(config).forEach((name) => {
@@ -153,7 +153,7 @@ const actions: Actions = {
   resetForm: (config) => ({ type: ActionTypes.RESET_FORM, payload: { config } })
 };
 
-const useForm = (config: Record<string, string>): Return => {
+const useForm = (config: Obj): Return => {
   const savedConfig = useRef(config);
 
   const [state, dispatch] = useReducer(
