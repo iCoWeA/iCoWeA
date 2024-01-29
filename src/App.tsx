@@ -2,16 +2,14 @@ import React, { type FC } from 'react';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import ConfigProvider from './lib/iCoWeaUI/components/providers/ConfigProvider';
-import ThemeProvider from './lib/iCoWeaUI/components/providers/ThemeProvider';
-import Root from './pages/Root';
+import ConfigProvider from './lib/iCoWeAUI/providers/ConfigProvider';
+import ThemeProvider from './lib/iCoWeAUI/providers/ThemeProvider';
 import store from './store';
-import ErrorScreen from './components/ErrorScreen/ErrorScreen';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Root />,
+    path: '/'
+    /* element: <Root />,
     errorElement: <ErrorScreen />,
     children: [
       {
@@ -56,12 +54,12 @@ const router = createBrowserRouter([
           }
         ]
       }
-    ]
+    ] */
   }
 ]);
 
 const App: FC = () => (
-  <ConfigProvider>
+  <ConfigProvider config={{}}>
     <ThemeProvider>
       <Provider store={store}>
         <RouterProvider router={router} />
