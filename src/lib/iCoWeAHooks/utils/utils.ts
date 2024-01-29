@@ -17,3 +17,15 @@ export const validate: (input?: HTMLInputElement | HTMLTextAreaElement, pattern?
 
   return true;
 };
+
+export const deepClone = <T>(object: T): T => {
+  const newObject: Record<string, any> = {};
+
+  for (const key in object) {
+    newObject[key] = object[key] === 'object' ? deepClone(object[key]) : object[key];
+  }
+
+  return newObject as T;
+};
+
+export const convertRemToPixels = (rem: number): number => (rem * parseFloat(getComputedStyle(document.documentElement).fontSize));

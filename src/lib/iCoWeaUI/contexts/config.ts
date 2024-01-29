@@ -1,15 +1,12 @@
 import { createContext } from 'react';
 
-import { config } from '../config';
-
-export type ConfigContext = {
-  config: Config;
+type Element = {
+  styles?: string;
+  defaultProps?: Record<string, string>;
 };
 
-export const configInitialState: ConfigContext = {
-  config
-};
+export type Config = Record<string, Record<string, Element>>;
 
-const configContext = createContext<ConfigContext>(configInitialState);
+const configContext = createContext<Config>({});
 
 export default configContext;
