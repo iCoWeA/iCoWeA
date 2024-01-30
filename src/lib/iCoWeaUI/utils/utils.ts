@@ -7,3 +7,5 @@ export const mergeClasses = (...classNames: Array<Obj | any>): string => twMerge
 
   return className;
 }).join(' '));
+
+export const mergeProps = <D, P>(defaultProps: D, props: P): D & P => ({ ...defaultProps, ...props });

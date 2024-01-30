@@ -27,5 +27,3 @@ export const deepClone = <T>(object: T): T => {
 
   return newObject as T;
 };
-
-export const convertRemToPixels = (rem: number): number => (rem * parseFloat(getComputedStyle(document.documentElement).fontSize));

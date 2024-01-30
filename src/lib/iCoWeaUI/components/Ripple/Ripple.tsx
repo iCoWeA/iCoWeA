@@ -1,8 +1,7 @@
 import React, { type BaseHTMLAttributes, forwardRef } from 'react';
 
-import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
-import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
-import useConfig from '../../../hooks/useConfig';
+import useTheme from '../../hooks/useTheme';
+import { mergeProps, mergeClasses } from '../../utils/utils';
 import rippleConfig from './rippleConfig';
 
 export type RippleDefaultProps = {
@@ -14,11 +13,11 @@ export type RippleDefaultProps = {
 export type RippleProps = BaseHTMLAttributes<HTMLSpanElement> & RippleDefaultProps;
 
 const Ripple = forwardRef<HTMLSpanElement, RippleProps>((props, ref) => {
-  const { variant, color, sibling, defaultClassName, className, ...restProps } = useConfig(
-    'ripple',
+  const { variant, color, sibling, className, ...restProps } = mergeProps(
     rippleConfig.defaultProps,
     props
   );
+
   const theme = useTheme();
 
   /* --- Set classes --- */
@@ -28,7 +27,6 @@ const Ripple = forwardRef<HTMLSpanElement, RippleProps>((props, ref) => {
   const mergedClassName = mergeClasses(
     styles.base,
     styles.variants[selector][variant][theme][color],
-    defaultClassName,
     className
   );
 

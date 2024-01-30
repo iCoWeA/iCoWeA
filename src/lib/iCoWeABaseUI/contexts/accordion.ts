@@ -7,6 +7,9 @@ type AccordionContext = {
   color: Colors;
   size: Sizes;
   divider: boolean;
+  noRipple: boolean,
+  openVariant?: Variants;
+  openColor?: Colors;
   leftExpandIcon?: boolean;
   rightExpandIcon?: boolean;
   indexId?: string;
@@ -18,7 +21,8 @@ export const initialState: AccordionContext = {
   variant: 'default',
   color: 'neutral',
   size: 'md',
-  divider: false
+  divider: false,
+  noRipple: false
 };
 
 const accordionContext = createContext(initialState);
