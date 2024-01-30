@@ -1,8 +1,9 @@
 import React, { type FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Layout from '../../lib/iCoWeaUI/components/layouts/Layout/Layout';
-import Main from '../../lib/iCoWeaUI/components/layouts/Main/Main';
+import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
+import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
+import StandardFooter from './StandardFooter';
 import StandardHeader from './StandardHeader';
 
 export const Component: FC = () => (
@@ -17,6 +18,7 @@ export const Component: FC = () => (
         <Outlet />
       </Main>
     </Layout>
+    <StandardFooter />
   </Layout>
 );
 
