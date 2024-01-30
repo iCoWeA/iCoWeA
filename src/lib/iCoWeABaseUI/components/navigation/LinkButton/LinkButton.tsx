@@ -1,10 +1,12 @@
 import React, { type AnchorHTMLAttributes, type ReactNode, forwardRef } from 'react';
 
+import ButtonSpinner, {
+  type ButtonSpinnerProps
+} from '../../../../iCoWeAUI/components/ButtonSpinner/ButtonSpinner';
+import Ripple, { type RippleProps } from '../../../../iCoWeAUI/components/Ripple/Ripple';
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
-import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
-import LinkButtonSpinner, { type LinkButtonSpinnerDefaultProps } from './LinkButtonSpinner';
 import linkButtonConfig from './linkButtonConfig';
 
 export type LinkButtonDefaultProps = {
@@ -24,7 +26,7 @@ LinkButtonDefaultProps & {
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
   rippleProps?: RippleProps;
-  spinnerProps?: LinkButtonSpinnerDefaultProps;
+  spinnerProps?: ButtonSpinnerProps;
   disabled?: boolean;
 };
 
@@ -53,10 +55,8 @@ const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>((props, ref) =
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = linkButtonConfig.styles.root;
+  const styles = linkButtonConfig.styles;
   const sizeVariant = icon ? 'icon' : 'default';
-
-  console.log(variant);
 
   const mergedClassName = mergeClasses(
     styles.base,
@@ -81,9 +81,10 @@ const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>((props, ref) =
       {children}
       {rightDecorator}
       {loading && (
-        <LinkButtonSpinner
+        <ButtonSpinner
           variant={variant}
           color={color}
+          value="75"
           {...spinnerProps}
         />
       )}

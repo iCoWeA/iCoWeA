@@ -1,4 +1,4 @@
-import React, { type ReactNode, forwardRef } from 'react';
+import React, { type CSSProperties, type ReactNode, forwardRef } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -7,9 +7,7 @@ import listNavlinkConfig from './listNavlinkConfig';
 
 export type ListNavlinkDefaultProps = {
   variant?: Variants;
-  activeVariant?: Variants;
   color?: Colors;
-  activeColor?: Colors;
   size?: Sizes;
   border?: boolean;
   block?: boolean;
@@ -18,14 +16,17 @@ export type ListNavlinkDefaultProps = {
 
 export type ListNavlinkProps = NavlinkProps &
 ListNavlinkDefaultProps & {
-  leftDecorator?: ReactNode;
-  rightDecorator?: ReactNode;
   active?: boolean;
+  activeVariant?: Variants;
+  activeColor?: Colors;
+  activeStyle?: CSSProperties;
+  activeClassName?: string;
+  activeChildren?: ReactNode;
   disabled?: boolean;
 };
 
 const ListNavlink = forwardRef<HTMLAnchorElement, ListNavlinkProps>((props, ref) => {
-  const { size, block, defaultClassName, className, ...restProps } = useConfig(
+  const { size, block, activeClassName, defaultClassName, className, ...restProps } = useConfig(
     'listNavlink',
     listNavlinkConfig.defaultProps,
     props
@@ -42,6 +43,16 @@ const ListNavlink = forwardRef<HTMLAnchorElement, ListNavlinkProps>((props, ref)
     className
   );
 
+  const mergedActiveClassName =
+    activeClassName &&
+    mergeClasses(
+      styles.base,
+      styles.sizes[size],
+      block && styles.block,
+      defaultClassName,
+      activeClassName
+    );
+
   return (
     <Navlink
       size={size}
@@ -49,6 +60,7 @@ const ListNavlink = forwardRef<HTMLAnchorElement, ListNavlinkProps>((props, ref)
       block
       shadow={false}
       loading={false}
+      activeClassName={mergedActiveClassName}
       className={mergedClassName}
       ref={ref}
       {...restProps}

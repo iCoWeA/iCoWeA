@@ -11,9 +11,7 @@ import toggleButtonGroupConfig from './toggleButtonGroupConfig';
 
 export type ToggleButtonGroupDefaultProps = {
   vertical?: boolean;
-  uncheckedVariant?: Variants;
   variant?: Variants;
-  uncheckedColor?: Colors;
   color?: Colors;
   size?: Sizes;
   icon?: boolean;
@@ -25,15 +23,15 @@ export type ToggleButtonGroupDefaultProps = {
 
 export type ToggleButtonGroupProps = FlexProps &
 ToggleButtonGroupDefaultProps & {
+  checkedVariant?: Variants;
+  checkedColor?: Colors;
   children?: ReactElement<ToggleButtonProps> | Array<ReactElement<ToggleButtonProps>>;
 };
 
 const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((props, ref) => {
   const {
     vertical,
-    uncheckedVariant,
     variant,
-    uncheckedColor,
     color,
     size,
     icon,
@@ -41,6 +39,8 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
     block,
     shadow,
     noRipple,
+    checkedVariant,
+    checkedColor,
     defaultClassName,
     className,
     children,
@@ -62,16 +62,16 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
 
   if (children && !Array.isArray(children)) {
     buttonNodes = cloneElement(children, {
-      uncheckedVariant,
       variant,
-      uncheckedColor,
       color,
       size,
       icon,
       border,
       block,
       shadow,
-      noRipple
+      noRipple,
+      checkedVariant,
+      checkedColor
     });
   }
 
@@ -84,9 +84,7 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
           <ToggleButtonGroupButton
             position={i === 0 ? 'left' : isLast(children, i) ? 'right' : 'middle'}
             vertical={vertical}
-            uncheckedVariant={uncheckedVariant}
             variant={variant}
-            uncheckedColor={uncheckedColor}
             color={color}
             size={size}
             icon={icon}
@@ -94,6 +92,8 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
             block={block}
             shadow={shadow}
             noRipple={noRipple}
+            checkedVariant={checkedVariant}
+            checkedColor={checkedColor}
             element={children[i]}
           />
         </Fragment>

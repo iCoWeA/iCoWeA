@@ -1,9 +1,7 @@
 const toggleButtonGroupConfig = {
   defaultProps: {
     vertical: false,
-    uncheckedVariant: 'default',
-    variant: 'solid',
-    uncheckedColor: 'neutral',
+    variant: 'default',
     color: 'primary',
     size: 'md',
     icon: false,

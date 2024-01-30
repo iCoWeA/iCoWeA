@@ -1,15 +1,14 @@
-import React, { forwardRef } from 'react';
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 
-import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
+import React, { type ReactNode, forwardRef } from 'react';
+
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
 import Button, { type ButtonProps } from '../Button/Button';
 import toggleButtonConfig from './toggleButtonConfig';
 
 export type ToggleButtonDefaultProps = {
-  uncheckedVariant?: Variants;
   variant?: Variants;
-  uncheckedColor?: Colors;
   color?: Colors;
   size?: Sizes;
   icon?: boolean;
@@ -22,35 +21,33 @@ export type ToggleButtonDefaultProps = {
 export type ToggleButtonProps = ButtonProps &
 ToggleButtonDefaultProps & {
   checked?: boolean;
+  checkedVariant?: Variants;
+  checkedColor?: Colors;
+  leftDecorator?: ReactNode;
+  rightDecorator?: ReactNode;
 };
 
 const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>((props, ref) => {
   const {
-    uncheckedVariant,
     variant,
-    uncheckedColor,
     color,
     checked,
+    checkedVariant,
+    checkedColor,
     defaultClassName,
     className,
     ...restProps
   } = useConfig('toggleButton', toggleButtonConfig.defaultProps, props);
-  const theme = useTheme();
 
   /* --- Set classes --- */
   const styles = toggleButtonConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    !checked && uncheckedVariant === 'default' && styles.uncheckedVariants[theme][uncheckedColor],
-    checked && styles.checked,
-    defaultClassName,
-    className
-  );
+  const mergedClassName = mergeClasses(checked && styles.checked, defaultClassName, className);
 
   return (
     <Button
-      variant={checked ? variant : uncheckedVariant}
-      color={checked ? color : uncheckedColor}
+      variant={(checked && checkedVariant) || variant}
+      color={(checked && checkedColor) || color}
       loading={false}
       aria-pressed={checked}
       className={mergedClassName}

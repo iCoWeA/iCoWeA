@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import React, { forwardRef, useContext, useRef, useImperativeHandle } from 'react';
 
+import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import accordionContext from '../../../contexts/accordion';
 import useAddEventListener from '../../../hooks/useAddEventListener';
-import ListButton, { type ListButtonProps } from '../../data-display/ListButton/ListButton';
+import Button, { type ButtonProps } from '../../inputs/Button/Button';
 import AccordionExpandIcon, { type AccordionExpandIconDefaultProps } from './AccordionExpandIcon';
+import accordionConfig from './accordionConfig';
 
-type AccordionHeaderDefaultProps = ListButtonProps;
+type AccordionHeaderDefaultProps = ButtonProps;
 
 export type AccordionHeaderProps = AccordionHeaderDefaultProps & {
   leftExpandIconProps?: AccordionExpandIconDefaultProps;
@@ -13,15 +16,21 @@ export type AccordionHeaderProps = AccordionHeaderDefaultProps & {
 };
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
-  ({ leftExpandIconProps, rightExpandIconProps, children, ...restProps }, forwardedRef) => {
+  (
+    { leftExpandIconProps, rightExpandIconProps, className, children, ...restProps },
+    forwardedRef
+  ) => {
     const {
       onToggle,
       open,
       variant,
       color,
       size,
+      noRipple,
       leftExpandIcon,
       rightExpandIcon,
+      openVariant,
+      openColor,
       indexId,
       disabled
     } = useContext(accordionContext);
@@ -36,20 +45,25 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     useAddEventListener(ref, 'click', onToggle);
 
+    /* --- Set classes --- */
+    const styles = accordionConfig.styles.header;
+
+    const mergedClassName = mergeClasses(styles.base, styles.sizes[size], className);
+
     return (
-      <ListButton
-        unselectVariant={variant}
-        variant={variant}
-        unselectColor={color}
-        color={color}
+      <Button
+        variant={(open && openVariant) || variant}
+        color={(open && openColor) || color}
         size={size}
+        icon={false}
         border={false}
         block
-        noRipple={false}
-        selected={open}
+        shadow={false}
+        loading={false}
+        noRipple={noRipple}
+        className={mergedClassName}
         id={indexId ? `${indexId}-header` : indexId}
         aria-controls={indexId ? `${indexId}-body` : indexId}
-        aria-pressed={undefined}
         aria-expanded={open}
         disabled={disabled}
         ref={ref}
@@ -69,7 +83,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
             {...rightExpandIconProps}
           />
         )}
-      </ListButton>
+      </Button>
     );
   }
 );

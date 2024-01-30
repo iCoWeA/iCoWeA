@@ -9,10 +9,10 @@ import React, {
   forwardRef
 } from 'react';
 
+import Ripple, { type RippleProps } from '../../../../iCoWeAUI/components/Ripple/Ripple';
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
-import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
 import CheckboxContainer, { type CheckboxContainerDefaultProps } from './CheckboxContainer';
 import CheckboxIcon, { type CheckboxIconDefaultProps } from './CheckboxIcon';
 import checkboxConfig from './checkboxConfig';

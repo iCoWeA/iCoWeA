@@ -5,10 +5,10 @@ import React, {
   forwardRef
 } from 'react';
 
+import Ripple, { type RippleProps } from '../../../../iCoWeAUI/components/Ripple/Ripple';
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
-import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
 import RadioContainer, { type RadioContainerDefaultProps } from './RadioContainer';
 import RadioDot, { type RadioDotDefaultProps } from './RadioDot';
 import radioConfig from './radioConfig';

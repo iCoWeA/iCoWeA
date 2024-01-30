@@ -7,9 +7,7 @@ import toggleButtonGroupConfig from './toggleButtonGroupConfig';
 export type ToggleButtonGroupButtonProps = {
   position: ContainerPositions;
   vertical: boolean;
-  uncheckedVariant: Variants;
   variant: Variants;
-  uncheckedColor: Colors;
   color: Colors;
   size: Sizes;
   icon: boolean;
@@ -17,15 +15,15 @@ export type ToggleButtonGroupButtonProps = {
   block: boolean;
   shadow: boolean;
   noRipple: boolean;
+  checkedVariant?: Variants;
+  checkedColor?: Colors;
   element: ReactElement<ToggleButtonProps>;
 };
 
 const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
   position,
   vertical,
-  uncheckedVariant,
   variant,
-  uncheckedColor,
   color,
   size,
   icon,
@@ -33,6 +31,8 @@ const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
   block,
   shadow,
   noRipple,
+  checkedVariant,
+  checkedColor,
   element
 }) => {
   /* --- Set classes --- */
@@ -48,16 +48,16 @@ const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
 
   return cloneElement(element, {
     className: mergedClassName,
-    uncheckedVariant,
     variant,
-    uncheckedColor,
     color,
     size,
     icon,
     border,
     block,
     shadow,
-    noRipple
+    noRipple,
+    checkedVariant,
+    checkedColor
   });
 };
 

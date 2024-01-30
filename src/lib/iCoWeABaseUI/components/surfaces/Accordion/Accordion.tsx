@@ -13,6 +13,7 @@ export type AccordionDefaultProps = {
   size?: Sizes;
   border?: Borders;
   divider?: boolean;
+  noRipple?: boolean;
 };
 
 export type AccordionProps = StackProps &
@@ -21,6 +22,8 @@ AccordionDefaultProps & {
   defaultOpen?: boolean;
   leftExpandIcon?: boolean;
   rightExpandIcon?: boolean;
+  openVariant?: Variants;
+  openColor?: Colors;
   indexId?: string;
 };
 
@@ -34,8 +37,11 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
     size,
     border,
     divider,
+    noRipple,
     leftExpandIcon,
     rightExpandIcon,
+    openVariant,
+    openColor,
     disabled,
     defaultClassName,
     className,
@@ -61,8 +67,11 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
       color,
       size,
       divider,
+      noRipple,
       leftExpandIcon,
       rightExpandIcon,
+      openVariant,
+      openColor,
       indexId,
       disabled
     }),
@@ -73,8 +82,11 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
       color,
       size,
       divider,
+      noRipple,
       leftExpandIcon,
       rightExpandIcon,
+      openVariant,
+      openColor,
       indexId,
       disabled
     ]

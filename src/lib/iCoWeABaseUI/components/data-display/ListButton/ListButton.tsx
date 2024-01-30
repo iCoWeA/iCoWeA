@@ -1,4 +1,5 @@
-import React, { type ReactNode, forwardRef } from 'react';
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+import React, { forwardRef } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -6,9 +7,7 @@ import Button, { type ButtonProps } from '../../inputs/Button/Button';
 import listButtonConfig from './listButtonConfig';
 
 export type ListButtonDefaultProps = {
-  unselectVariant?: Variants;
   variant?: Variants;
-  unselectColor?: Colors;
   color?: Colors;
   size?: Sizes;
   border?: boolean;
@@ -18,21 +17,20 @@ export type ListButtonDefaultProps = {
 
 export type ListButtonProps = ButtonProps &
 ListButtonDefaultProps & {
-  leftDecorator?: ReactNode;
-  rightDecorator?: ReactNode;
   selected?: boolean;
-  disabled?: boolean;
+  selectedVariant?: Variants;
+  selectedColor?: Colors;
 };
 
 const ListButton = forwardRef<HTMLButtonElement, ListButtonProps>((props, ref) => {
   const {
-    unselectVariant,
     variant,
-    unselectColor,
     color,
     size,
     block,
     selected,
+    selectedVariant,
+    selectedColor,
     defaultClassName,
     className,
     ...restProps
@@ -52,14 +50,13 @@ const ListButton = forwardRef<HTMLButtonElement, ListButtonProps>((props, ref) =
 
   return (
     <Button
-      variant={selected ? variant : unselectVariant}
-      color={selected ? color : unselectColor}
+      variant={(selected && selectedVariant) || variant}
+      color={(selected && selectedColor) || color}
       size={size}
       icon={false}
       block
       shadow={false}
       loading={false}
-      aria-pressed={selected}
       className={mergedClassName}
       ref={ref}
       {...restProps}

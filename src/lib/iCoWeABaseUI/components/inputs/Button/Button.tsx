@@ -1,10 +1,12 @@
 import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef } from 'react';
 
+import ButtonSpinner, {
+  type ButtonSpinnerProps
+} from '../../../../iCoWeAUI/components/ButtonSpinner/ButtonSpinner';
+import Ripple, { type RippleProps } from '../../../../iCoWeAUI/components/Ripple/Ripple';
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
-import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
-import ButtonSpinner, { type ButtonSpinnerDefaultProps } from './ButtonSpinner';
 import buttonConfig from './buttonConfig';
 
 export type ButtonDefaultProps = {
@@ -24,7 +26,7 @@ ButtonDefaultProps & {
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
   rippleProps?: RippleProps;
-  spinnerProps?: ButtonSpinnerDefaultProps;
+  spinnerProps?: ButtonSpinnerProps;
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
@@ -51,7 +53,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = buttonConfig.styles.root;
+  const styles = buttonConfig.styles;
   const sizeVariant = icon ? 'icon' : 'default';
 
   const mergedClassName = mergeClasses(
@@ -82,6 +84,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         <ButtonSpinner
           variant={variant}
           color={color}
+          value="75"
           {...spinnerProps}
         />
       )}

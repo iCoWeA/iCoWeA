@@ -1,9 +1,7 @@
 const navlinkConfig = {
   defaultProps: {
     variant: 'default',
-    activeVariant: 'solid',
-    color: 'neutral',
-    activeColor: 'primary',
+    color: 'primary',
     size: 'md',
     icon: false,
     border: false,

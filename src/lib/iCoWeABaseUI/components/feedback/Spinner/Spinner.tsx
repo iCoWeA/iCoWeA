@@ -7,7 +7,7 @@ import Stack, { type StackProps } from '../../layouts/Stack/Stack';
 import SpinnerBar, { type SpinnerBarDefaultProps } from './SpinnerBar';
 import SpinnerContainer, { type SpinnerContainerDefaultProps } from './SpinnerContainer';
 import SpinnerLabel, { type SpinnerLabelDefaultProps } from './SpinnerLabel';
-import SpinnerProgressBar from './SpinnerProgressBar';
+import SpinnerProgressBar, { type SpinnerProgressBarDefaultProps } from './SpinnerProgressBar';
 import spinnerConfig from './spinnerConfig';
 
 export type SpinnerDefaultProps = {
@@ -23,7 +23,7 @@ export type SpinnerProps = StackProps &
 SpinnerDefaultProps & {
   containerProps?: SpinnerContainerDefaultProps;
   barProps?: SpinnerBarDefaultProps;
-  progressBarProps?: SpinnerBarDefaultProps;
+  progressBarProps?: SpinnerProgressBarDefaultProps;
   labelProps?: SpinnerLabelDefaultProps;
   strokeWidth?: number | string;
   disabled?: boolean;
