@@ -1,7 +1,6 @@
 export {};
 
 declare global {
-  export enum Breakpoints {SM, MD, LG, XL, XXL};
   export type User = {
     id: string,
     firstname: string,
