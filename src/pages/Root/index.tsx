@@ -14,6 +14,8 @@ const Component: FC = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
+  const isEmpty = user && Object.keys(user).length === 0;
+
   /* --- Set event handlers --- */
   useEffect(() => {
     const userRef = ref(database, 'users/0');
@@ -35,13 +37,8 @@ const Component: FC = () => {
     <>
       <ScrollRestoration />
       {!user && <LoadingScreen />}
-      {user && Object.keys(user).length === 0
-        ? (
-        <ErrorScreen>{'User not found'}</ErrorScreen>
-          )
-        : (
-        <Outlet />
-          )}
+      {user && isEmpty && <ErrorScreen>{'User not found'}</ErrorScreen>}
+      {user && !isEmpty && <Outlet />}
     </>
   );
 };
