@@ -2,11 +2,11 @@ import React, { type FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScrollRestoration, Outlet } from 'react-router-dom';
 import { ref, onValue } from 'firebase/database';
-import { database } from '../../firebase';
 
 import ErrorScreen from '../../components/ErrorScreen/ErrorScreen';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
-import useWindowResize from '../../lib/iCoWeaUI/hooks/useWindowResize';
+import { database } from '../../firebase';
+import useWindowResize from '../../lib/iCoWeABaseUI/hooks/useWindowResize';
 import { breakpointActions } from '../../store/slices/breakpoint';
 import { selectUser, userActions } from '../../store/slices/user';
 
