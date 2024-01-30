@@ -1,7 +1,7 @@
 import React, { type ReactNode, type FC } from 'react';
 
-import Title from '../../lib/iCoWeaUI/components/data-display/Title/Title';
-import Layout from '../../lib/iCoWeaUI/components/layouts/Layout/Layout';
+import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
+import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
 
 type ErrorScreenProps = {
   children?: ReactNode;
