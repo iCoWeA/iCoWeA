@@ -2,8 +2,26 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { type StoreState } from '..';
 
+export enum Breakpoints {SM, MD, LG, XL, XXL};
+
 const calculateBreakpoint = (width: number): Breakpoints => {
-  return Breakpoints.SM;
+  if (width < 600) {
+    return Breakpoints.SM;
+  }
+
+  if (width < 905) {
+    return Breakpoints.MD;
+  }
+
+  if (width < 1240) {
+    return Breakpoints.LG;
+  }
+
+  if (width < 1440) {
+    return Breakpoints.XL;
+  }
+
+  return Breakpoints.XXL;
 };
 
 const breakpoint = createSlice({
