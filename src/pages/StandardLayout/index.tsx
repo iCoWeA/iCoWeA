@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom';
 
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
-import StandardFooter from './StandardFooter';
-import StandardHeader from './StandardHeader';
+import StandardFooter from './Footer/StandardFooter';
+import StandardHeader from './Header/StandardHeader';
 
 export const Component: FC = () => (
   <Layout
