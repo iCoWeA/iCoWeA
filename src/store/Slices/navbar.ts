@@ -6,8 +6,8 @@ const navbar = createSlice({
   name: 'navbar',
   initialState: false,
   reducers: {
-    show: () => true,
-    hide: () => false,
+    open: () => true,
+    close: () => false,
     toggle: (prevState) => !prevState
   }
 });
