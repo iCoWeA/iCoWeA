@@ -2,48 +2,31 @@
  * aria-current="page"
  */
 
-import React, { type BaseHTMLAttributes, type ReactNode, forwardRef } from 'react';
+import React, { type ReactNode, forwardRef } from 'react';
 
-import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
-import { isLast } from '../../../utils/utils';
-import { type ListProps } from '../../data-display/List/List';
+import { cutTextColor, isLast } from '../../../utils/utils';
 import ListItem, { type ListItemProps } from '../../data-display/ListItem/ListItem';
 import Mark, { type MarkProps } from '../../data-display/Mark/Mark';
-import Navigation from '../../layouts/Navigation/Navigation';
+import Navigation, { type NavigationProps } from '../../layouts/Navigation/Navigation';
 import breadcrumbsConfig from './breadcrumbsConfig';
 
 export type BreadcrumbsDefaultProps = {
-  color?: TextColors;
   block?: boolean;
+  color?: TextColors;
   gap?: Gaps;
 };
 
-export type BreadcrumbsProps = BaseHTMLAttributes<HTMLElement> &
+export type BreadcrumbsProps = Omit<NavigationProps, 'color'> &
 BreadcrumbsDefaultProps & {
   separator?: ReactNode;
-  listProps?: ListProps;
   itemsProps?: Record<number, ListItemProps>;
   separatorsProps?: Record<number, MarkProps>;
 };
 
 const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
-  const {
-    color,
-    block,
-    gap,
-    separator,
-    listProps,
-    itemsProps,
-    separatorsProps,
-    defaultClassName,
-    className,
-    children,
-    ...restProps
-  } = useConfig('breadcrumbs', breadcrumbsConfig.defaultProps, props);
-
-  /* --- Set classes --- */
-  const mergedClassName = mergeClasses(defaultClassName, className);
+  const { block, color, gap, separator, itemsProps, separatorsProps, children, ...restProps } =
+    useConfig('breadcrumbs', breadcrumbsConfig.defaultProps, props);
 
   /* --- Set items --- */
   let itemNodes;
@@ -52,8 +35,12 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
     itemNodes = (
       <ListItem
         spacing="none"
-        divider={false}
-        block={false}
+        variant="default"
+        color="inherit"
+        border={false}
+        radius="none"
+        justify="start"
+        align="stretch"
         gap={gap}
         {...itemsProps?.[0]}
       >
@@ -70,17 +57,21 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
         <ListItem
           key={i}
           spacing="none"
-          divider={false}
-          block={false}
+          variant="default"
+          color="inherit"
+          border={false}
+          radius="none"
+          justify="start"
+          align="stretch"
           gap={gap}
           {...itemsProps?.[i]}
         >
           {children[i]}
           {!isLast(children, i) && (
             <Mark
+              size="sm"
               variant="default"
               color="inherit"
-              size="sm"
               border={false}
               {...separatorsProps?.[i]}
             >
@@ -94,15 +85,15 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
 
   return (
     <Navigation
-      aria-label="breadcrumbs"
-      variant="default"
-      color={color}
-      border={false}
-      gap={gap}
       vertical={false}
       block={block}
-      listProps={listProps}
-      className={mergedClassName}
+      variant={color.startsWith('on') ? 'default' : 'text'}
+      color={cutTextColor(color)}
+      border={false}
+      justify={block ? 'center' : 'start'}
+      align="center"
+      gap={gap}
+      aria-label="breadcrumbs"
       ref={ref}
       {...restProps}
     >

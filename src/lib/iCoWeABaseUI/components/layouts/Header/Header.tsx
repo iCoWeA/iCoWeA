@@ -2,21 +2,24 @@
  * aria-labelledby
  */
 
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useMemo } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { getBorderType, getBorderVariant } from '../../../utils/utils';
 import Layout, { type LayoutProps } from '../Layout/Layout';
 import headerConfig from './headerConfig';
 
 export type HeaderDefaultProps = {
-  variant?: Variants;
-  color?: TextColors;
-  justify?: JustifyContent;
-  border?: boolean;
+  position?: Positions;
   block?: boolean;
+  variant?: Variants;
+  color?: Colors;
+  border?: boolean;
   shadow?: boolean;
+  justify?: JustifyContent;
+  align?: AlignItems;
 };
 
 export type HeaderProps = BaseHTMLAttributes<HTMLElement> &
@@ -26,12 +29,14 @@ HeaderDefaultProps & {
 
 const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
   const {
+    position,
+    block,
     variant,
     color,
-    justify,
     border,
-    block,
     shadow,
+    justify,
+    align,
     containerProps,
     defaultClassName,
     className,
@@ -42,16 +47,24 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = headerConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = headerConfig.styles;
+    const borderType = getBorderType(border);
+    const borderVariant = getBorderVariant(variant);
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    color !== 'inherit' && styles.variants[variant][theme][color],
-    border && styles.border,
-    shadow && styles.shadow,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      border && styles.border,
+      shadow && styles.shadow,
+      position !== 'static' && styles.positions[position],
+      color !== 'inherit' && styles.variants[variant][theme][color],
+      color !== 'inherit' &&
+        borderType !== 'none' &&
+        styles.borderVariants[borderVariant][theme][color],
+      defaultClassName,
+      className
+    );
+  }, [border, shadow, position, variant, theme, color, defaultClassName, className]);
 
   return (
     <header
@@ -60,8 +73,9 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       {...restProps}
     >
       <Layout
-        justify={justify}
         layout={block ? 'dashboard' : 'fullbleed'}
+        justify={justify}
+        align={align}
         {...containerProps}
       >
         {children}

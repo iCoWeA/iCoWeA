@@ -1,4 +1,10 @@
-import React, { type MutableRefObject, forwardRef, useRef, useImperativeHandle } from 'react';
+import React, {
+  type MutableRefObject,
+  forwardRef,
+  useRef,
+  useImperativeHandle,
+  useCallback
+} from 'react';
 
 import useClickOutside from '../../../hooks/useClickOutside';
 import useConfig from '../../../hooks/useConfig';
@@ -25,11 +31,11 @@ CollapseDefaultProps & {
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, forwardedRef) => {
   const {
     onClose,
-    open,
     closeOnOutsideClick,
     closeOnEscape,
     closeDuration,
     horizontal,
+    open,
     anchorRef,
     ...restProps
   } = useConfig('collapse', collapseConfig.defaultProps, props);
@@ -43,7 +49,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, forwardedRef)
   );
 
   /* --- Set event handlers --- */
-  const closeHandler = onClose && (() => onClose(false));
+  const closeHandler = useCallback(() => (onClose ? onClose(false) : undefined), [onClose]);
 
   useClickOutside(closeOnOutsideClick && open && closeHandler, ref, anchorRef);
 
@@ -53,9 +59,9 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, forwardedRef)
 
   return (
     <Transition
-      enter={open}
-      variant={horizontal ? 'grow-x' : 'grow-y'}
+      transition={horizontal ? 'grow-x' : 'grow-y'}
       unmountOnExit={false}
+      enter={open}
       ref={ref}
       {...restProps}
     />

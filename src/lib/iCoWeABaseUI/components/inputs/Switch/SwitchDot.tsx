@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import Icon, { type IconProps } from '../../data-display/Icon/Icon';
@@ -7,48 +7,37 @@ import switchConfig from './switchConfig';
 export type SwitchDotDefaultProps = IconProps;
 
 export type SwitchDotProps = SwitchDotDefaultProps & {
-  theme: Themes;
   size: Sizes;
   checked?: boolean;
 };
 
-const SwitchDot: FC<SwitchDotProps> = ({
-  theme,
-  size,
-  checked,
-  className,
-  children,
-  ...restProps
-}) => {
+const SwitchDot: FC<SwitchDotProps> = ({ checked, className, children, ...restProps }) => {
   /* --- Set classes --- */
-  const styles = switchConfig.styles.dot;
+  const mergedClassName = useMemo(() => {
+    const styles = switchConfig.styles.dot;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.sizes[size],
-    checked && styles.checked,
-    className
-  );
+    return mergeClasses(styles.base, checked && styles.checked, className);
+  }, [checked, className]);
 
   return (
     <Icon
-      variant="text"
+      spacing="text"
+      variant="default"
       color="inherit"
-      size={size}
-      spacing={false}
       border={false}
+      radius="circular"
       className={mergedClassName}
       {...restProps}
     >
       {children ?? (
         <svg
-          viewBox="0 0 24 24"
           focusable="false"
+          viewBox="0 0 24 24"
         >
           <circle
             cx="12"
             cy="12"
-            r="12"
+            r="8"
           />
         </svg>
       )}

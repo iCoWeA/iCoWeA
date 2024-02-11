@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-
-import React, { type ReactNode, forwardRef } from 'react';
+import React, { type ReactNode, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -8,13 +7,13 @@ import Button, { type ButtonProps } from '../Button/Button';
 import toggleButtonConfig from './toggleButtonConfig';
 
 export type ToggleButtonDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
-  size?: Sizes;
-  icon?: boolean;
-  border?: boolean;
+  size?: Spacings;
   block?: boolean;
-  shadow?: boolean;
+  icon?: boolean;
+  variant?: Variants;
+  color?: DefaultColors;
+  border?: boolean;
+  radius?: Radiuses;
   noRipple?: boolean;
 };
 
@@ -22,7 +21,7 @@ export type ToggleButtonProps = ButtonProps &
 ToggleButtonDefaultProps & {
   checked?: boolean;
   checkedVariant?: Variants;
-  checkedColor?: Colors;
+  checkedColor?: DefaultColors;
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
 };
@@ -40,9 +39,11 @@ const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>((props, re
   } = useConfig('toggleButton', toggleButtonConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = toggleButtonConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = toggleButtonConfig.styles;
 
-  const mergedClassName = mergeClasses(checked && styles.checked, defaultClassName, className);
+    return mergeClasses(checked && styles.checked, defaultClassName, className);
+  }, [checked, defaultClassName, className]);
 
   return (
     <Button

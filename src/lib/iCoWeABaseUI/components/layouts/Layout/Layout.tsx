@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -19,9 +19,11 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
   );
 
   /* --- Set classes --- */
-  const styles = layoutConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = layoutConfig.styles;
 
-  const mergedClassName = mergeClasses(styles.layouts[layout], defaultClassName, className);
+    return mergeClasses(styles.layouts[layout], defaultClassName, className);
+  }, [layout, defaultClassName, className]);
 
   return (
     <Flex
@@ -30,7 +32,6 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
       justify={layout === 'dashboard' || layout === 'fullbleed' ? 'between' : 'stretch'}
       align={layout === 'default' ? 'center' : 'stretch'}
       gap={layout === 'dashboard' || layout === 'fullbleed' ? 'lg' : 'none'}
-      grow={layout === 'default' || layout === 'standard' || layout === 'dashboard'}
       block
       className={mergedClassName}
       ref={ref}

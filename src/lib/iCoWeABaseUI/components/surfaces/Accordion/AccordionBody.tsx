@@ -12,14 +12,14 @@ export type AccordionBodyProps = AccordionBodyDefaultProps & {
 };
 
 const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
-  ({ divider, collapseProps, className, ...restProps }, ref) => {
+  ({ divider, collapseProps, ...restProps }, ref) => {
     const {
       onToggle,
-      open,
+      size,
       variant,
       color,
-      size,
       divider: borderDivider,
+      open,
       indexId,
       disabled
     } = useContext(accordionContext);
@@ -27,28 +27,28 @@ const AccordionBody = forwardRef<HTMLDivElement, AccordionBodyProps>(
     return (
       <Collapse
         onClose={onToggle}
-        open={open}
         closeOnOutsideClick={false}
         closeOnEscape={false}
         closeDuration={-1}
         horizontal={false}
         smooth={false}
+        open={open}
         ref={ref}
         {...collapseProps}
       >
         {divider}
         <Stack
-          variant={variant}
-          color={color}
-          spacing={size}
-          border={borderDivider ? 'top' : 'none'}
           justify="start"
           align="stretch"
           gap="none"
-          id={indexId ? `${indexId}-body` : indexId}
+          spacing={size}
+          variant={variant}
+          color={color}
+          border={borderDivider ? 'top' : 'none'}
           aria-labelledby={indexId ? `${indexId}-header` : indexId}
-          role="region"
           disabled={disabled}
+          id={indexId ? `${indexId}-body` : indexId}
+          role="region"
           {...restProps}
         />
       </Collapse>

@@ -1,22 +1,12 @@
 const linearProgressConfig = {
   defaultProps: {
-    variant: 'default',
-    color: 'primary',
-    size: 'md',
     vertical: false,
-    innerBar: 'neutral',
+    size: 'md',
+    color: 'primary',
     value: 0
   },
   styles: {
     root: {
-      base: {
-        borderRadius: 'rounded-full'
-      },
-      disabled: {
-        light: {
-          background: 'bg-light-neutral/20'
-        }
-      },
       colors: {
         light: {
           neutral: {
@@ -36,46 +26,102 @@ const linearProgressConfig = {
           },
           error: {
             background: 'bg-light-error/10'
+          },
+          'on-neutral': {
+            background: 'bg-light-on-neutral/10'
+          },
+          'on-primary': {
+            background: 'bg-light-on-primary/10'
+          },
+          'on-secondary': {
+            background: 'bg-light-on-secondary/10'
+          },
+          'on-success': {
+            background: 'bg-light-on-success/10'
+          },
+          'on-warning': {
+            background: 'bg-light-on-warning/10'
+          },
+          'on-error': {
+            background: 'bg-light-on-error/10'
+          }
+        },
+        dark: {
+          neutral: {
+            background: 'bg-dark-neutral/10'
+          },
+          primary: {
+            background: 'bg-dark-primary/10'
+          },
+          secondary: {
+            background: 'bg-dark-secondary/10'
+          },
+          success: {
+            background: 'bg-dark-success/10'
+          },
+          warning: {
+            background: 'bg-dark-warning/10'
+          },
+          error: {
+            background: 'bg-dark-error/10'
+          },
+          'on-neutral': {
+            background: 'bg-dark-on-neutral/10'
+          },
+          'on-primary': {
+            background: 'bg-dark-on-primary/10'
+          },
+          'on-secondary': {
+            background: 'bg-dark-on-secondary/10'
+          },
+          'on-success': {
+            background: 'bg-dark-on-success/10'
+          },
+          'on-warning': {
+            background: 'bg-dark-on-warning/10'
+          },
+          'on-error': {
+            background: 'bg-dark-on-error/10'
           }
         }
       },
       sizes: {
-        horizontal: {
-          sm: {
-            height: 'h-0.5'
+        default: {
+          horizontal: {
+            sm: {
+              height: 'h-0.5'
+            },
+            md: {
+              height: 'h-1'
+            },
+            lg: {
+              height: 'h-2'
+            }
           },
-          md: {
-            height: 'h-1'
-          },
-          lg: {
-            height: 'h-2'
+          vertical: {
+            sm: {
+              width: 'w-0.5'
+            },
+            md: {
+              width: 'w-1'
+            },
+            lg: {
+              width: 'w-2'
+            }
           }
         },
-        vertical: {
-          sm: {
-            width: 'w-0.5'
+        label: {
+          horizontal: {
+            height: 'h-4'
           },
-          md: {
-            width: 'w-1'
-          },
-          lg: {
-            width: 'w-2'
+          vertical: {
+            width: 'w-4'
           }
-        }
-      },
-      labelSizes: {
-        horizontal: {
-          height: 'h-4'
-        },
-        vertical: {
-          width: 'w-4'
         }
       }
     },
     progressBar: {
       base: {
-        position: 'relative',
-        borderRadius: 'rounded-[inherit]',
         overflow: 'overflow-hidden'
       },
       orientations: {
@@ -89,177 +135,15 @@ const linearProgressConfig = {
           translate: '-translate-y-full',
           transition: 'transition-[height]'
         }
-      },
-      variants: {
-        default: {
-          light: {
-            neutral: {
-              border: 'border-light-on-neutral',
-              fill: 'fill-light-on-neutral',
-              color: 'text-light-on-neutral',
-              background: 'bg-light-neutral'
-            },
-            primary: {
-              border: 'border-light-on-primary',
-              fill: 'fill-light-on-primary',
-              color: 'text-light-on-primary',
-              background: 'bg-light-primary'
-            },
-            secondary: {
-              border: 'border-light-on-secondary',
-              fill: 'fill-light-on-secondary',
-              color: 'text-light-on-secondary',
-              background: 'bg-light-secondary'
-            },
-            success: {
-              border: 'border-light-on-success',
-              fill: 'fill-light-on-success',
-              color: 'text-light-on-success',
-              background: 'bg-light-success'
-            },
-            warning: {
-              border: 'border-light-on-warning',
-              fill: 'fill-light-on-warning',
-              color: 'text-light-on-warning',
-              background: 'bg-light-warning'
-            },
-            error: {
-              border: 'border-light-on-error',
-              fill: 'fill-light-on-error',
-              color: 'text-light-on-error',
-              background: 'bg-light-error'
-            }
-          }
-        },
-        plain: {
-          light: {
-            neutral: {
-              border: 'border-light-on-neutral',
-              fill: 'fill-light-on-neutral',
-              color: 'text-light-on-neutral',
-              background: 'bg-light-neutral'
-            },
-            primary: {
-              border: 'border-light-on-primary',
-              fill: 'fill-light-on-primary',
-              color: 'text-light-on-primary',
-              background: 'bg-light-primary'
-            },
-            secondary: {
-              border: 'border-light-on-secondary',
-              fill: 'fill-light-on-secondary',
-              color: 'text-light-on-secondary',
-              background: 'bg-light-secondary'
-            },
-            success: {
-              border: 'border-light-on-success',
-              fill: 'fill-light-on-success',
-              color: 'text-light-on-success',
-              background: 'bg-light-success'
-            },
-            warning: {
-              border: 'border-light-on-warning',
-              fill: 'fill-light-on-warning',
-              color: 'text-light-on-warning',
-              background: 'bg-light-warning'
-            },
-            error: {
-              border: 'border-light-on-error',
-              fill: 'fill-light-on-error',
-              color: 'text-light-on-error',
-              background: 'bg-light-error'
-            }
-          }
-        },
-        soft: {
-          light: {
-            neutral: {
-              border: 'border-light-on-neutral',
-              fill: 'fill-light-on-neutral',
-              color: 'text-light-on-neutral',
-              background: 'bg-light-neutral'
-            },
-            primary: {
-              border: 'border-light-on-primary',
-              fill: 'fill-light-on-primary',
-              color: 'text-light-on-primary',
-              background: 'bg-light-primary'
-            },
-            secondary: {
-              border: 'border-light-on-secondary',
-              fill: 'fill-light-on-secondary',
-              color: 'text-light-on-secondary',
-              background: 'bg-light-secondary'
-            },
-            success: {
-              border: 'border-light-on-success',
-              fill: 'fill-light-on-success',
-              color: 'text-light-on-success',
-              background: 'bg-light-success'
-            },
-            warning: {
-              border: 'border-light-on-warning',
-              fill: 'fill-light-on-warning',
-              color: 'text-light-on-warning',
-              background: 'bg-light-warning'
-            },
-            error: {
-              border: 'border-light-on-error',
-              fill: 'fill-light-on-error',
-              color: 'text-light-on-error',
-              background: 'bg-light-error'
-            }
-          }
-        },
-        solid: {
-          light: {
-            neutral: {
-              border: 'border-light-neutral',
-              fill: 'fill-light-neutral',
-              color: 'text-light-neutral',
-              background: 'bg-light-on-neutral'
-            },
-            primary: {
-              border: 'border-light-primary',
-              fill: 'fill-light-primary',
-              color: 'text-light-primary',
-              background: 'bg-light-on-primary'
-            },
-            secondary: {
-              border: 'border-light-secondary',
-              fill: 'fill-light-secondary',
-              color: 'text-light-secondary',
-              background: 'bg-light-on-secondary'
-            },
-            success: {
-              border: 'border-light-success',
-              fill: 'fill-light-success',
-              color: 'text-light-success',
-              background: 'bg-light-on-success'
-            },
-            warning: {
-              border: 'border-light-warning',
-              fill: 'fill-light-warning',
-              color: 'text-light-warning',
-              background: 'bg-light-on-warning'
-            },
-            error: {
-              border: 'border-light-error',
-              fill: 'fill-light-error',
-              color: 'text-light-error',
-              background: 'bg-light-on-error'
-            }
-          }
-        }
       }
     },
     label: {
       base: {
-        position: 'relative',
         userSelect: 'select-none',
         whiteSpace: 'whitespace-nowrap'
       },
       vertical: {
+        position: 'relative',
         transform: '-rotate-90'
       }
     }

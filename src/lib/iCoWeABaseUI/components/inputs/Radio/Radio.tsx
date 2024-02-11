@@ -1,95 +1,106 @@
+/* --- ARIA ---
+ * 3 state
+ */
+
 import React, {
   type InputHTMLAttributes,
-  type ReactElement,
   type MutableRefObject,
-  forwardRef
+  type ReactElement,
+  forwardRef,
+  useMemo
 } from 'react';
 
-import Ripple, { type RippleProps } from '../../../../iCoWeAUI/components/Ripple/Ripple';
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { cutTextColor } from '../../../utils/utils';
+import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
 import RadioContainer, { type RadioContainerDefaultProps } from './RadioContainer';
 import RadioDot, { type RadioDotDefaultProps } from './RadioDot';
 import radioConfig from './radioConfig';
 
 export type RadioDefaultProps = {
-  color?: Colors;
   size?: Sizes;
+  color?: DefaultTextColors;
   border?: boolean;
-  valid?: boolean;
-  invalid?: boolean;
   noRipple?: boolean;
 };
 
 export type RadioProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> &
 RadioDefaultProps & {
-  children?: ReactElement<SVGSVGElement>;
+  valid?: boolean;
+  invalid?: boolean;
   containerProps?: RadioContainerDefaultProps;
-  dotProps?: RadioDotDefaultProps;
+  iconProps?: RadioDotDefaultProps;
   rippleProps?: RippleProps;
   inputRef?: MutableRefObject<HTMLInputElement | null>;
+  children?: ReactElement<SVGSVGElement>;
 };
 
 const Radio = forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
   const {
-    color,
     size,
+    color,
     border,
+    noRipple,
     valid,
     invalid,
-    noRipple,
     containerProps,
-    dotProps,
+    iconProps,
     rippleProps,
     inputRef,
-    checked,
-    disabled,
     defaultClassName,
+    checked,
     className,
+    disabled,
     children,
     ...restProps
   } = useConfig('radio', radioConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = radioConfig.styles.input;
+  const mergedClassName = useMemo(() => {
+    const styles = radioConfig.styles.input;
 
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
+    return mergeClasses(styles.base, defaultClassName, className);
+  }, [defaultClassName, className]);
 
   return (
     <RadioContainer
       size={size}
       noRipple={noRipple}
       checked={checked}
+      ref={ref}
       {...containerProps}
     >
       <input
-        className={mergedClassName}
         checked={checked}
+        className={mergedClassName}
         disabled={disabled}
         type="radio"
         ref={inputRef}
         {...restProps}
       />
-      {!noRipple && (
+      {!noRipple && !disabled && (
         <Ripple
-          variant="default"
-          color={checked ? color : valid ? 'success' : invalid ? 'error' : 'neutral'}
+          color={invalid ? 'error' : valid ? 'success' : checked ? color : 'neutral'}
+          border={false}
           sibling
           {...rippleProps}
         />
       )}
       <RadioDot
         theme={theme}
-        color={color}
         size={size}
+        variant={color.startsWith('on') ? 'default' : 'text'}
+        color={cutTextColor(color)}
         border={border}
         valid={valid}
         invalid={invalid}
         checked={checked}
         disabled={disabled}
-        {...dotProps}
+        {...iconProps}
       >
         {children}
       </RadioDot>

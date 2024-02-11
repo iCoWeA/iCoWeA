@@ -8,11 +8,12 @@ import Stack, { type StackProps } from '../../layouts/Stack/Stack';
 import accordionConfig from './accordionConfig';
 
 export type AccordionDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
   size?: Sizes;
+  variant?: Variants;
+  color?: DefaultColors;
   border?: Borders;
   divider?: boolean;
+  radius?: Radiuses;
   noRipple?: boolean;
 };
 
@@ -20,31 +21,31 @@ export type AccordionProps = StackProps &
 AccordionDefaultProps & {
   open?: boolean;
   defaultOpen?: boolean;
+  openVariant?: Variants;
+  openColor?: DefaultColors;
   leftExpandIcon?: boolean;
   rightExpandIcon?: boolean;
-  openVariant?: Variants;
-  openColor?: Colors;
   indexId?: string;
 };
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   const {
-    open,
-    defaultOpen,
-    indexId,
+    size,
     variant,
     color,
-    size,
     border,
     divider,
     noRipple,
-    leftExpandIcon,
-    rightExpandIcon,
+    open,
+    defaultOpen,
     openVariant,
     openColor,
-    disabled,
+    leftExpandIcon,
+    rightExpandIcon,
+    indexId,
     defaultClassName,
     className,
+    disabled,
     children,
     ...restProps
   } = useConfig('accordion', accordionConfig.defaultProps, props);
@@ -62,51 +63,54 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
   const context = useMemo(
     () => ({
       onToggle: open === undefined ? () => setIsOpen((isOpen) => !isOpen) : undefined,
-      open: open ?? isOpen,
+      size,
       variant,
       color,
-      size,
       divider,
       noRipple,
-      leftExpandIcon,
-      rightExpandIcon,
+      open: open ?? isOpen,
       openVariant,
       openColor,
+      leftExpandIcon,
+      rightExpandIcon,
       indexId,
       disabled
     }),
     [
-      open,
-      isOpen,
+      size,
       variant,
       color,
-      size,
       divider,
       noRipple,
-      leftExpandIcon,
-      rightExpandIcon,
+      open,
+      isOpen,
       openVariant,
       openColor,
+      leftExpandIcon,
+      rightExpandIcon,
       indexId,
       disabled
     ]
   );
 
   /* --- Set classes --- */
-  const styles = accordionConfig.styles.root;
+  const mergedClassName = useMemo(() => {
+    const styles = accordionConfig.styles.root;
 
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
+    return mergeClasses(styles.base, defaultClassName, className);
+  }, [defaultClassName, className]);
 
   return (
     <Stack
-      color={color}
-      border={border}
       justify="start"
       align="stretch"
       gap="none"
       block
-      disabled={disabled}
+      variant={variant === 'solid' || variant === 'default' ? 'default' : 'text'}
+      color={color}
+      border={border}
       className={mergedClassName}
+      disabled={disabled}
       ref={ref}
       {...restProps}
     >

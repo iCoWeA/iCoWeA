@@ -14,6 +14,9 @@ const backdropConfig = {
     background: {
       light: {
         background: 'bg-light-neutral/40'
+      },
+      dark: {
+        background: 'bg-dark-neutral/40'
       }
     }
   }

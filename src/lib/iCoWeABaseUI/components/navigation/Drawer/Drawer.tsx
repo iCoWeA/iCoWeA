@@ -1,35 +1,38 @@
-import React, { type MutableRefObject, forwardRef } from 'react';
+import React, { type MutableRefObject, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
-import { type BackdropProps } from '../../feedback/Backdrop/Backdrop';
 import Popper, { type PopperProps } from '../../utils/Popper/Popper';
 import DrawerContainer, { type DrawerContainerDefaultProps } from './DrawerContainer';
 import drawerConfig from './drawerConfig';
 
 export type DrawerDefaultProps = {
+  placement?: Placements;
   variant?: Variants;
-  color?: Colors;
-  position?: Positions;
+  color?: DefaultColors;
+  radius?: Radiuses;
   closeOnEscape?: boolean;
   focusTrap?: boolean;
+  smooth?: boolean;
+  backdrop?: Backdrop;
 };
 
-export type DrawerProps = Omit<PopperProps, 'variant'> &
+export type DrawerProps = PopperProps &
 DrawerDefaultProps & {
   onClose?: ((state: boolean) => void) | ((state?: boolean) => void);
   open?: boolean;
   portalTarget?: Element | null;
   anchorRef?: MutableRefObject<HTMLElement | null>;
-  backdropProps?: BackdropProps;
   containerProps?: DrawerContainerDefaultProps;
 };
 
 const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   const {
+    placement,
     variant,
     color,
-    position,
+    radius,
+    backdrop,
     containerProps,
     defaultClassName,
     className,
@@ -38,32 +41,29 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   } = useConfig('drawer', drawerConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = drawerConfig.styles.root;
+  const mergedClassName = useMemo(() => {
+    const styles = drawerConfig.styles.root;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.positions[position],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(styles.base, styles.placements[placement], defaultClassName, className);
+  }, [placement, defaultClassName, className]);
 
   return (
     <Popper
       lockScroll
-      closeOnOutsideClick={false}
+      closeOnOutsideClick={backdrop === 'none'}
       closeDuration={-1}
-      backdrop
       closeOnBackdropClick
-      variant={`slide-${position}`}
-      smooth
+      backdrop={backdrop}
+      transition={`slide-${placement}`}
       className={mergedClassName}
       ref={ref}
       {...restProps}
     >
       <DrawerContainer
+        placement={placement}
         variant={variant}
         color={color}
-        position={position}
+        radius={radius}
         {...containerProps}
       >
         {children}

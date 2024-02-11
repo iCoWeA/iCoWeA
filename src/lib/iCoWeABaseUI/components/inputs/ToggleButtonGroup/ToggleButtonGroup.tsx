@@ -1,4 +1,4 @@
-import React, { type ReactElement, forwardRef, cloneElement, Fragment } from 'react';
+import React, { type ReactElement, forwardRef, useMemo, cloneElement, Fragment } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -11,33 +11,33 @@ import toggleButtonGroupConfig from './toggleButtonGroupConfig';
 
 export type ToggleButtonGroupDefaultProps = {
   vertical?: boolean;
-  variant?: Variants;
-  color?: Colors;
   size?: Sizes;
-  icon?: boolean;
-  border?: boolean;
   block?: boolean;
-  shadow?: boolean;
+  icon?: boolean;
+  variant?: Variants;
+  color?: DefaultColors;
+  border?: boolean;
+  radius?: Radiuses;
   noRipple?: boolean;
 };
 
 export type ToggleButtonGroupProps = FlexProps &
 ToggleButtonGroupDefaultProps & {
   checkedVariant?: Variants;
-  checkedColor?: Colors;
+  checkedColor?: DefaultColors;
   children?: ReactElement<ToggleButtonProps> | Array<ReactElement<ToggleButtonProps>>;
 };
 
 const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((props, ref) => {
   const {
     vertical,
+    size,
+    block,
+    icon,
     variant,
     color,
-    size,
-    icon,
     border,
-    block,
-    shadow,
+    radius,
     noRipple,
     checkedVariant,
     checkedColor,
@@ -48,27 +48,24 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
   } = useConfig('toggleButtonGroup', toggleButtonGroupConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = buttonGroupConfig.styles.root;
+  const mergedClassName = useMemo(() => {
+    const styles = buttonGroupConfig.styles.root;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    block && styles.block,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(styles.base, block && styles.block, defaultClassName, className);
+  }, [block, defaultClassName, className]);
 
   /* --- Set buttons --- */
   let buttonNodes;
 
   if (children && !Array.isArray(children)) {
     buttonNodes = cloneElement(children, {
+      size,
+      block,
+      icon,
       variant,
       color,
-      size,
-      icon,
       border,
-      block,
-      shadow,
+      radius,
       noRipple,
       checkedVariant,
       checkedColor
@@ -82,15 +79,15 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
       buttonNodes[i] = (
         <Fragment key={i}>
           <ToggleButtonGroupButton
-            position={i === 0 ? 'left' : isLast(children, i) ? 'right' : 'middle'}
+            placement={i === 0 ? 'left' : isLast(children, i) ? 'right' : 'middle'}
             vertical={vertical}
+            size={size}
+            block={block}
+            icon={icon}
             variant={variant}
             color={color}
-            size={size}
-            icon={icon}
             border={border}
-            block={block}
-            shadow={shadow}
+            radius={radius}
             noRipple={noRipple}
             checkedVariant={checkedVariant}
             checkedColor={checkedColor}
@@ -108,10 +105,9 @@ const ToggleButtonGroup = forwardRef<HTMLDivElement, ToggleButtonGroupProps>((pr
       justify="start"
       align="stretch"
       gap="none"
-      grow={false}
       block={block}
-      role="group"
       className={mergedClassName}
+      role="group"
       ref={ref}
       {...restProps}
     >

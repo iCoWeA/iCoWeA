@@ -1,14 +1,14 @@
 const buttonGroupConfig = {
   defaultProps: {
     vertical: false,
-    divided: false,
+    size: 'md',
+    block: false,
+    icon: false,
     variant: 'solid',
     color: 'primary',
-    size: 'md',
-    icon: false,
     border: false,
-    block: false,
-    shadow: false,
+    divided: false,
+    radius: 'circular',
     loading: false,
     noRipple: false
   },
@@ -24,13 +24,17 @@ const buttonGroupConfig = {
     },
     button: {
       base: {
-        width: 'w-auto',
         zIndex: 'z-100',
-        flexGrow: 'grow',
         active: 'active:z-200',
         focus: 'focus:z-200',
-        focusVisible: 'focus-visible:z-200 focus-visible:border-transparent',
+        focusVisible: 'focus-visible:z-200',
         disabled: 'disabled:z-0'
+      },
+      width: {
+        width: 'w-auto'
+      },
+      divider: {
+        border: 'border-0'
       },
       orientations: {
         horizontal: {
@@ -56,7 +60,7 @@ const buttonGroupConfig = {
           }
         }
       },
-      divider: {
+      border: {
         horizontal: {
           left: {
             border: 'border-r'
@@ -84,93 +88,45 @@ const buttonGroupConfig = {
           }
         }
       },
-      variants: {
-        default: {
-          light: {
-            neutral: {
-              border: 'border-light-neutral'
-            },
-            primary: {
-              border: 'border-light-primary'
-            },
-            secondary: {
-              border: 'border-light-secondary'
-            },
-            success: {
-              border: 'border-light-success'
-            },
-            warning: {
-              border: 'border-light-warning'
-            },
-            error: {
-              border: 'border-light-error'
-            }
+      dividers: {
+        light: {
+          neutral: {
+            border: 'border-light-neutral/20'
+          },
+          primary: {
+            border: 'border-light-primary/20'
+          },
+          secondary: {
+            border: 'border-light-secondary/20'
+          },
+          success: {
+            border: 'border-light-success/20'
+          },
+          warning: {
+            border: 'border-light-warning/20'
+          },
+          error: {
+            border: 'border-light-error/20'
           }
         },
-        plain: {
-          light: {
-            neutral: {
-              border: 'border-light-neutral'
-            },
-            primary: {
-              border: 'border-light-primary'
-            },
-            secondary: {
-              border: 'border-light-secondary'
-            },
-            success: {
-              border: 'border-light-success'
-            },
-            warning: {
-              border: 'border-light-warning'
-            },
-            error: {
-              border: 'border-light-error'
-            }
-          }
-        },
-        soft: {
-          light: {
-            neutral: {
-              border: 'border-light-neutral'
-            },
-            primary: {
-              border: 'border-light-primary'
-            },
-            secondary: {
-              border: 'border-light-secondary'
-            },
-            success: {
-              border: 'border-light-success'
-            },
-            warning: {
-              border: 'border-light-warning'
-            },
-            error: {
-              border: 'border-light-error'
-            }
-          }
-        },
-        solid: {
-          light: {
-            neutral: {
-              border: 'border-light-on-neutral/20'
-            },
-            primary: {
-              border: 'border-light-on-primary/20'
-            },
-            secondary: {
-              border: 'border-light-on-secondary/20'
-            },
-            success: {
-              border: 'border-light-on-success/20'
-            },
-            warning: {
-              border: 'border-light-on-warning/20'
-            },
-            error: {
-              border: 'border-light-on-error/20'
-            }
+        dark: {
+          neutral: {
+            border: 'border-dark-neutral/20'
+          },
+          primary: {
+            border: 'border-dark-primary/20'
+          },
+          secondary: {
+            border: 'border-dark-secondary/20'
+          },
+          success: {
+            border: 'border-dark-success/20'
+          },
+          warning: {
+            border: 'border-dark-warning/20'
+          },
+          error: {
+            border: 'border-dark-error/20'
           }
         }
       }

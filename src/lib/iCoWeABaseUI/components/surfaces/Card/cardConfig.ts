@@ -1,18 +1,9 @@
 const cardConfig = {
   defaultProps: {
+    spacing: 'none',
     variant: 'plain',
     color: 'neutral',
-    spacing: 'none',
-    border: 'none',
-    shadow: false
-  },
-  styles: {
-    base: {
-      borderRadius: 'rounded-xl'
-    },
-    shadow: {
-      shadow: 'shadow-sm'
-    }
+    border: 'none'
   }
 };
 

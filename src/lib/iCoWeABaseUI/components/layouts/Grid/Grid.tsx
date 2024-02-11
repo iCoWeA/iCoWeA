@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -34,30 +34,45 @@ const Grid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
   } = useConfig('grid', gridConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = gridConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = gridConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    flow !== 'row' && styles.flows[flow],
-    justify !== 'stretch' && styles.justifies[justify],
-    align !== 'stretch' && styles.aligns[align],
-    justifyContent !== 'start' && styles.contentAligns[justifyContent],
-    alignContent !== 'start' && styles.contentAligns[alignContent],
-    gap !== 'none' && styles.gaps[gap],
-    rowGap !== 'none' && styles.rowGaps[rowGap],
-    colGap !== 'none' && styles.colGaps[colGap],
+    return mergeClasses(
+      styles.base,
+      flow !== 'row' && styles.flows[flow],
+      justify !== 'stretch' && styles.justifies[justify],
+      align !== 'stretch' && styles.aligns[align],
+      justifyContent !== 'start' && styles.contentJustifies[justifyContent],
+      alignContent !== 'start' && styles.contentAligns[alignContent],
+      gap !== 'none' && styles.gaps[gap],
+      rowGap !== 'none' && styles.rowGaps[rowGap],
+      colGap !== 'none' && styles.colGaps[colGap],
+      defaultClassName,
+      className
+    );
+  }, [
+    flow,
+    justify,
+    align,
+    justifyContent,
+    alignContent,
+    gap,
+    rowGap,
+    colGap,
     defaultClassName,
     className
-  );
+  ]);
 
   return (
     <Box
+      position="static"
+      block={false}
+      spacing="none"
       variant="default"
       color="inherit"
-      spacing="none"
-      panel={false}
       border={false}
-      block={false}
+      radius="none"
+      shadow={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}

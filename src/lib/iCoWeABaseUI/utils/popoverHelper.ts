@@ -1,56 +1,56 @@
-export const setPosition = (element: HTMLElement, position: OuterPositions, anchorX: number, anchorY: number, anchorTop: number, anchorLeft: number, anchorHeight: number, anchorWidth: number, offset: number = 0, responsive: boolean = false): OuterPositions => {
+export const setPlacement = (element: HTMLElement, placement: OuterPlacements, anchorX: number, anchorY: number, anchorTop: number, anchorLeft: number, anchorHeight: number, anchorWidth: number, offset: number = 0, responsive: boolean = false): OuterPlacements => {
   const cords = { top: anchorTop, left: anchorLeft };
-  const positions = position.split('-');
+  const splittedPlacements = placement.split('-');
   const viewport = { top: document.documentElement.scrollTop, left: document.documentElement.scrollLeft, height: document.documentElement.clientHeight, width: document.documentElement.clientWidth };
-  const defaultPosition = position;
+  const defaultPosition = placement;
 
   const elementCoords = element.getBoundingClientRect();
 
-  setOffset(element, position, offset);
+  setOffset(element, placement, offset);
 
-  if (positions[0] === 'top') {
+  if (splittedPlacements[0] === 'top') {
     cords.top = anchorTop - elementCoords.height;
-    position = 'top';
+    placement = 'top';
 
     if (responsive && anchorY - elementCoords.height < 0) {
       cords.top = anchorTop + anchorHeight;
-      position = 'bottom';
+      placement = 'bottom';
     }
   }
 
-  if (positions[0] === 'bottom') {
+  if (splittedPlacements[0] === 'bottom') {
     cords.top = anchorTop + anchorHeight;
-    position = 'bottom';
+    placement = 'bottom';
 
     if (responsive && anchorY + anchorHeight + elementCoords.height > viewport.height) {
       cords.top = anchorTop - elementCoords.height;
-      position = 'top';
+      placement = 'top';
     }
   }
 
-  if (positions[0] === 'left') {
+  if (splittedPlacements[0] === 'left') {
     cords.left = anchorLeft - elementCoords.width;
-    position = 'left';
+    placement = 'left';
 
     if (responsive && anchorX - elementCoords.width < 0) {
       cords.left = anchorLeft + anchorWidth;
-      position = 'right';
+      placement = 'right';
     }
   }
 
-  if (positions[0] === 'right') {
+  if (splittedPlacements[0] === 'right') {
     cords.left = anchorLeft + anchorWidth;
-    position = 'right';
+    placement = 'right';
 
     if (responsive && anchorX + anchorWidth + elementCoords.width > viewport.width) {
       cords.left = anchorLeft - elementCoords.width;
-      position = 'left';
+      placement = 'left';
     }
   }
 
-  if ((positions[0] === 'top' || positions[0] === 'bottom') && positions[1] === 'start') {
+  if ((splittedPlacements[0] === 'top' || splittedPlacements[0] === 'bottom') && splittedPlacements[1] === 'start') {
     cords.left = anchorLeft;
-    position += '-start';
+    placement += '-start';
 
     if (responsive && anchorWidth > elementCoords.width && anchorX < 0) {
       const overflowSize = -anchorX;
@@ -63,9 +63,9 @@ export const setPosition = (element: HTMLElement, position: OuterPositions, anch
     }
   }
 
-  if ((positions[0] === 'top' || positions[0] === 'bottom') && positions[1] === 'end') {
+  if ((splittedPlacements[0] === 'top' || splittedPlacements[0] === 'bottom') && splittedPlacements[1] === 'end') {
     cords.left = anchorLeft + anchorWidth - elementCoords.width;
-    position += '-end';
+    placement += '-end';
 
     if (responsive && anchorWidth > elementCoords.width && anchorX + anchorWidth > viewport.width) {
       const overflowSize = anchorX + anchorWidth - viewport.width;
@@ -78,7 +78,7 @@ export const setPosition = (element: HTMLElement, position: OuterPositions, anch
     }
   }
 
-  if ((positions[0] === 'top' || positions[0] === 'bottom') && positions[1] === undefined) {
+  if ((splittedPlacements[0] === 'top' || splittedPlacements[0] === 'bottom') && splittedPlacements[1] === undefined) {
     const center = (anchorWidth / 2) - (elementCoords.width / 2);
 
     cords.left = anchorLeft + center;
@@ -104,9 +104,9 @@ export const setPosition = (element: HTMLElement, position: OuterPositions, anch
     }
   }
 
-  if ((positions[0] === 'left' || positions[0] === 'right') && positions[1] === 'start') {
+  if ((splittedPlacements[0] === 'left' || splittedPlacements[0] === 'right') && splittedPlacements[1] === 'start') {
     cords.top = anchorTop;
-    position += '-start';
+    placement += '-start';
 
     if (responsive && anchorHeight > elementCoords.height && anchorY < 0) {
       const overflowSize = -anchorY;
@@ -119,9 +119,9 @@ export const setPosition = (element: HTMLElement, position: OuterPositions, anch
     }
   }
 
-  if ((positions[0] === 'left' || positions[0] === 'right') && positions[1] === 'end') {
+  if ((splittedPlacements[0] === 'left' || splittedPlacements[0] === 'right') && splittedPlacements[1] === 'end') {
     cords.top = anchorTop + anchorHeight - elementCoords.height;
-    position += '-end';
+    placement += '-end';
 
     if (responsive && anchorHeight > elementCoords.height && anchorY + anchorHeight > viewport.height) {
       const overflowSize = anchorY + anchorHeight - viewport.height;
@@ -134,7 +134,7 @@ export const setPosition = (element: HTMLElement, position: OuterPositions, anch
     }
   }
 
-  if ((positions[0] === 'left' || positions[0] === 'right') && positions[1] === undefined) {
+  if ((splittedPlacements[0] === 'left' || splittedPlacements[0] === 'right') && splittedPlacements[1] === undefined) {
     const center = (anchorHeight / 2) - (elementCoords.height / 2);
 
     cords.top = anchorTop + center;
@@ -163,31 +163,57 @@ export const setPosition = (element: HTMLElement, position: OuterPositions, anch
   element.style.top = `${cords.top}px`;
   element.style.left = `${cords.left}px`;
 
-  if (defaultPosition !== position) {
-    setOffset(element, position, offset);
+  if (defaultPosition !== placement) {
+    setOffset(element, placement, offset);
   }
 
-  return position;
+  return placement;
 };
 
-export const setOffset = (element: HTMLElement, position: OuterPositions, offset: number = 0): void => {
+export const setOffset = (element: HTMLElement, placement: OuterPlacements, offset: number = 0): void => {
   if (offset <= 0) {
     return;
   }
 
-  if (position.startsWith('top')) {
+  if (placement.startsWith('top')) {
     element.style.padding = `0px 0px ${offset}px 0px`;
   }
 
-  if (position.startsWith('bottom')) {
+  if (placement.startsWith('bottom')) {
     element.style.padding = `${offset}px 0px 0px 0px`;
   }
 
-  if (position.startsWith('left')) {
+  if (placement.startsWith('left')) {
     element.style.padding = `0px ${offset}px 0px 0px`;
   }
 
-  if (position.startsWith('right')) {
+  if (placement.startsWith('right')) {
     element.style.padding = `0px 0px 0px ${offset}px`;
+  }
+};
+
+export const setArrowPlacement = (arrow: HTMLElement, placement: OuterPlacements): void => {
+  if (placement.startsWith('top')) {
+    arrow.style.top = '100%';
+    arrow.style.left = '50%';
+    arrow.style.transform = 'translateX(-50%)';
+  }
+
+  if (placement.startsWith('bottom')) {
+    arrow.style.top = '0%';
+    arrow.style.left = '50%';
+    arrow.style.transform = 'translate(-50%, -100%) rotate(-180deg)';
+  }
+
+  if (placement.startsWith('left')) {
+    arrow.style.top = '50%';
+    arrow.style.left = '100%';
+    arrow.style.transform = 'translateY(-50%) rotate(-90deg)';
+  }
+
+  if (placement.startsWith('right')) {
+    arrow.style.top = '50%';
+    arrow.style.left = '0%';
+    arrow.style.transform = 'translate(-100%, -50%) rotate(90deg)';
   }
 };

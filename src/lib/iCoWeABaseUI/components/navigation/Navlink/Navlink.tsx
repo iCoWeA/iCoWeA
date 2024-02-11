@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import React, { type CSSProperties, type ReactNode, forwardRef } from 'react';
+
+import React, { type CSSProperties, type ReactNode, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -7,13 +8,13 @@ import LinkButton, { type LinkButtonProps } from '../LinkButton/LinkButton';
 import navlinkConfig from './navlinkConfig';
 
 export type NavlinkDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
-  size?: Sizes;
-  icon?: boolean;
-  border?: boolean;
+  size?: Spacings;
   block?: boolean;
-  shadow?: boolean;
+  icon?: boolean;
+  variant?: Variants;
+  color?: DefaultColors;
+  border?: boolean;
+  radius?: Radiuses;
   loading?: boolean;
   noRipple?: boolean;
 };
@@ -22,9 +23,9 @@ export type NavlinkProps = LinkButtonProps &
 NavlinkDefaultProps & {
   active?: boolean;
   activeVariant?: Variants;
-  activeColor?: Colors;
-  activeStyle?: CSSProperties;
+  activeColor?: DefaultColors;
   activeClassName?: string;
+  activeStyle?: CSSProperties;
   activeChildren?: ReactNode;
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
@@ -38,13 +39,13 @@ const Navlink = forwardRef<HTMLAnchorElement, NavlinkProps>((props, ref) => {
     active,
     activeVariant,
     activeColor,
-    activeStyle,
     activeClassName,
+    activeStyle,
     activeChildren,
     defaultClassName,
+    className,
     href,
     style,
-    className,
     children,
     ...restProps
   } = useConfig('navlink', navlinkConfig.defaultProps, props);
@@ -52,21 +53,23 @@ const Navlink = forwardRef<HTMLAnchorElement, NavlinkProps>((props, ref) => {
   const isActive = active ?? href === location.href;
 
   /* --- Set classes --- */
-  const styles = navlinkConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = navlinkConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    isActive && styles.active,
-    defaultClassName,
-    (isActive && activeClassName) || className
-  );
+    return mergeClasses(
+      isActive && styles.active,
+      defaultClassName,
+      (isActive && activeClassName) || className
+    );
+  }, [isActive, defaultClassName, activeClassName, className]);
 
   return (
     <LinkButton
       variant={(isActive && activeVariant) || variant}
       color={(isActive && activeColor) || color}
       style={(isActive && activeStyle) || style}
-      href={href}
       className={mergedClassName}
+      href={href}
       ref={ref}
       {...restProps}
     >

@@ -9,15 +9,14 @@ import Spinner, { type SpinnerProps } from '../Spinner/Spinner';
 import circularProgressConfig from './circularProgressConfig';
 
 export type CircularProgressDefaultProps = {
-  color?: Colors;
-  size?: Sizes;
-  innerBar?: TextColors;
-  value?: number | string;
+  size?: Spacings;
+  color?: DefaultTextColors;
+  value?: string | number;
 };
 
 export type CircularProgressProps = SpinnerProps &
 CircularProgressDefaultProps & {
-  strokeWidth?: number | string;
+  innerBar?: DefaultTextColors;
   disabled?: boolean;
 };
 
@@ -30,11 +29,11 @@ const CircularProgress = forwardRef<HTMLDivElement, CircularProgressProps>((prop
 
   return (
     <Spinner
-      rotate={false}
-      aria-valuenow={+value}
-      aria-valuemin={0}
-      aria-valuemax={100}
+      stable
       value={value}
+      aria-valuemax={100}
+      aria-valuemin={0}
+      aria-valuenow={+value}
       ref={ref}
       {...restProps}
     />

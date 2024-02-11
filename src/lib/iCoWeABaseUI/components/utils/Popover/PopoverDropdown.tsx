@@ -1,33 +1,30 @@
-import React, { type FC } from 'react';
+import React, { type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import Card, { type CardProps } from '../../surfaces/Card/Card';
 import popoverConfig from './popoverConfig';
 
-export type PopoverDropdownDefaultProps = CardProps & {
-  variant?: Variants;
-};
+export type PopoverDropdownDefaultProps = CardProps;
 
 export type PopoverDropdownProps = PopoverDropdownDefaultProps & {
+  size: Spacings;
   variant: Variants;
-  color: Colors;
-  spacing: Spacing;
+  color: DefaultColors;
+  border: Borders;
 };
 
-const PopoverDropdown: FC<PopoverDropdownProps> = ({ spacing, className, ...restProps }) => {
+const PopoverDropdown: FC<PopoverDropdownProps> = ({ size, className, ...restProps }) => {
   /* --- Set classes --- */
-  const styles = popoverConfig.styles.dropdown;
+  const mergedClassName = useMemo(() => {
+    const styles = popoverConfig.styles.dropdown;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    spacing !== 'none' && styles.spacings[spacing],
-    className
-  );
+    return mergeClasses(styles.base, size !== 'none' && styles.sizes[size], className);
+  }, [size, className]);
 
   return (
     <Card
       spacing="none"
-      border={false}
+      position="relative"
       shadow
       className={mergedClassName}
       {...restProps}

@@ -1,6 +1,6 @@
 const formControlConfig = {
   defaultProps: {
-    align: 'start',
+    align: 'stretch',
     gap: 'base'
   },
   styles: {

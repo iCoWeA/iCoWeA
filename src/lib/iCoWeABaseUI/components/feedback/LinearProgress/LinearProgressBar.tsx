@@ -1,61 +1,53 @@
-import React, { type FC } from 'react';
+import React, { type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
+import { cutTextColor } from '../../../utils/utils';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import linearProgressConfig from './linearProgressConfig';
 
-export type LinearProgressBarDefaultProps = FlexProps & {
-  color?: Colors;
-};
+export type LinearProgressBarDefaultProps = Omit<FlexProps, 'color'>;
 
 export type LinearProgressBarProps = LinearProgressBarDefaultProps & {
-  theme: Themes;
-  variant: Variants;
-  color: Colors;
-  orientation: Orientations;
+  vertical: boolean;
+  color: TextColors;
   value: number | string;
+  disabled?: boolean;
 };
 
 const LinearProgressBar: FC<LinearProgressBarProps> = ({
-  theme,
-  variant,
+  vertical,
   color,
-  orientation,
   value,
-  style,
-  disabled,
   className,
+  style,
   ...restProps
 }) => {
   /* --- Set styles --- */
-  const mergedStyle =
-    orientation === 'vertical'
-      ? { height: `${value}%`, ...style }
-      : { width: `${value}%`, ...style };
+  const mergedStyle = vertical
+    ? { height: `${value}%`, ...style }
+    : { width: `${value}%`, ...style };
 
   /* --- Set classes --- */
-  const styles = linearProgressConfig.styles.progressBar;
+  const mergedClassName = useMemo(() => {
+    const styles = linearProgressConfig.styles.progressBar;
+    const orientation = vertical ? 'vertical' : 'horizontal';
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.orientations[orientation],
-    !disabled && styles.variants[variant][theme][color],
-    className
-  );
+    return mergeClasses(styles.base, styles.orientations[orientation], className);
+  }, [vertical, className]);
 
   return (
     <Flex
-      variant="solid"
-      color="inherit"
       direction="row"
       wrap="nowrap"
       justify="center"
       align="center"
       gap="none"
-      disabled={disabled}
-      grow={false}
-      style={mergedStyle}
+      position={vertical ? 'relative' : 'static'}
+      variant={color.startsWith('on') ? 'plain' : 'solid'}
+      color={cutTextColor(color)}
+      radius="circular"
       className={mergedClassName}
+      style={mergedStyle}
       {...restProps}
     />
   );

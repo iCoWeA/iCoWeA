@@ -1,19 +1,18 @@
-import React, { type ReactNode, forwardRef } from 'react';
+import React, { type ReactNode, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { addPanelSize } from '../../../utils/utils';
 import CloseButton, { type CloseButtonProps } from '../../inputs/CloseButton/CloseButton';
 import Stack, { type StackProps } from '../../layouts/Stack/Stack';
 import Container, { type ContainerProps } from '../../surfaces/Container/Container';
-import AlertBody from './AlertBody';
 import alertConfig from './alertConfig';
 
 export type AlerDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
   size?: Sizes;
+  variant?: Variants;
+  color?: DefaultColors;
   border?: Borders;
-  shadow?: boolean;
   closable?: Closable;
 };
 
@@ -24,50 +23,48 @@ AlerDefaultProps & {
   bodyProps?: StackProps;
   leftDecoratorProps?: StackProps;
   rightDecoratorProps?: StackProps;
-  closeButton?: CloseButtonProps;
+  buttonProps?: CloseButtonProps;
 };
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   const {
+    size,
     variant,
     color,
-    size,
-    shadow,
     closable,
     leftDecorator,
     rightDecorator,
     bodyProps,
     leftDecoratorProps,
     rightDecoratorProps,
-    closeButton,
+    buttonProps,
     defaultClassName,
     className,
     children,
     ...restProps
-  } = useConfig('alert', alertConfig.defaultProps.alert, props);
+  } = useConfig('alert', alertConfig.defaultProps, props);
+
+  const spacing = addPanelSize(size);
 
   /* --- Set classes --- */
-  const styles = alertConfig.styles.root;
+  const mergedClassName = useMemo(() => {
+    const styles = alertConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    shadow && styles.shadow,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(styles.base, defaultClassName, className);
+  }, [defaultClassName, className]);
 
   return (
     <Container
+      spacing={spacing}
+      layout="default"
+      closable={closable}
       variant={variant}
       color={color}
-      layout="default"
-      spacing={size}
-      panel
+      radius="rounded"
+      shadow
       align="start"
       wrap="nowrap"
       gap={size}
-      closable={closable}
-      closeGap={size}
       className={mergedClassName}
       role="alert"
       ref={ref}
@@ -83,7 +80,15 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
           {leftDecorator}
         </Stack>
       )}
-      <AlertBody {...bodyProps}>{children}</AlertBody>
+      <Stack
+        justify="start"
+        align="stretch"
+        gap="base"
+        block
+        {...bodyProps}
+      >
+        {children}
+      </Stack>
       {rightDecorator && (
         <Stack
           justify="start"
@@ -94,16 +99,14 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
           {rightDecorator}
         </Stack>
       )}
-      {closable !== 'none' && (
+      {closable !== 'none' && spacing !== 'none' && (
         <CloseButton
-          position={closable}
-          panel
-          variant={variant}
+          placement={closable}
+          size={spacing}
+          variant={variant === 'default' || variant === 'solid' ? 'default' : 'text'}
           color={color}
-          size={size}
-          border={false}
           noRipple={false}
-          {...closeButton}
+          {...buttonProps}
         />
       )}
     </Container>

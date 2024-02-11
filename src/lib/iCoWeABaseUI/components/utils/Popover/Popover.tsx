@@ -2,9 +2,10 @@ import React, {
   type MutableRefObject,
   forwardRef,
   useRef,
-  useState,
   useImperativeHandle,
-  useEffect
+  useCallback,
+  useEffect,
+  useMemo
 } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
@@ -13,65 +14,70 @@ import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import useWindowResize from '../../../hooks/useWindowResize';
 import useWindowScroll from '../../../hooks/useWindowScroll';
-import { setPosition } from '../../../utils/popoverHelper';
+import { setArrowPlacement, setPlacement } from '../../../utils/popoverHelper';
 import Popper, { type PopperProps } from '../Popper/Popper';
 import PopoverArrow, { type PopoverArrowDefaultProps } from './PopoverArrow';
 import PopoverDropdown, { type PopoverDropdownDefaultProps } from './PopoverDropdown';
 import popoverConfig from './popoverConfig';
+import useMergeRefs from '../../../hooks/useMergeRefs';
 
 export type PopoverDefaultProps = {
-  position?: OuterPositions;
+  placement?: OuterPlacements;
   offset?: number | string;
+  spacing?: Spacings;
   variant?: Variants;
-  color?: Colors;
-  spacing?: Spacing;
+  color?: DefaultColors;
+  border?: Borders;
   responsive?: boolean;
-  arrow?: boolean;
   openOnHover?: boolean;
   lockScroll?: boolean;
   closeOnOutsideClick?: boolean;
   closeOnEscape?: boolean;
-  backdrop?: boolean;
   closeOnBackdropClick?: boolean;
+  arrow?: boolean;
+  backdrop?: Backdrop;
 };
 
-export type PopoverProps = Omit<PopperProps, 'variant'> &
+export type PopoverProps = PopperProps &
 PopoverDefaultProps & {
   onOpen?: ((state: boolean) => void) | ((state?: boolean) => void);
   onClose?: ((state: boolean) => void) | ((state?: boolean) => void);
   open?: boolean;
   portalTarget?: Element | null;
-  anchorRef?: MutableRefObject<HTMLElement | null>;
   dropdownProps?: PopoverDropdownDefaultProps;
   arrowProps?: PopoverArrowDefaultProps;
+  anchorRef?: MutableRefObject<HTMLElement | null>;
+  arrowRef?: MutableRefObject<HTMLDivElement | null>;
 };
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) => {
   const {
     onOpen,
-    open,
-    position,
+    placement,
     offset,
+    spacing,
     variant,
     color,
-    spacing,
+    border,
     responsive,
-    arrow,
     openOnHover,
+    arrow,
+    open,
     portalTarget,
-    anchorRef,
     dropdownProps,
     arrowProps,
+    anchorRef,
+    arrowRef,
     defaultClassName,
     className,
     children,
     ...restProps
   } = useConfig('popover', popoverConfig.defaultProps, props);
+
   const theme = useTheme();
 
   const ref = useRef<HTMLDivElement>(null);
-
-  const [resizedPosition, setResizedPosition] = useState<OuterPositions>(position);
+  const arrRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
     forwardedRef,
@@ -80,32 +86,34 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) =
   );
 
   /* --- Set event handlers --- */
-  const openHandler = onOpen && (() => onOpen(true));
+  const openHandler = useCallback(() => (onOpen ? onOpen(true) : undefined), [onOpen]);
 
-  const resizeHandler = (): void => {
+  const resizeHandler = useCallback((): void => {
     if (!ref.current || !anchorRef?.current) {
       return;
     }
 
-    setResizedPosition(
-      setPosition(
-        ref.current,
-        position,
-        anchorRef.current.getBoundingClientRect().x,
-        anchorRef.current.getBoundingClientRect().y,
-        portalTarget
-          ? anchorRef.current.getBoundingClientRect().y + document.documentElement.scrollTop
-          : anchorRef.current.offsetTop,
-        portalTarget
-          ? anchorRef.current.getBoundingClientRect().x + document.documentElement.scrollLeft
-          : anchorRef.current.offsetLeft,
-        anchorRef.current.offsetHeight,
-        anchorRef.current.offsetWidth,
-        +offset,
-        responsive
-      )
+    const newPlacement = setPlacement(
+      ref.current,
+      placement,
+      anchorRef.current.getBoundingClientRect().x,
+      anchorRef.current.getBoundingClientRect().y,
+      portalTarget
+        ? anchorRef.current.getBoundingClientRect().y + document.documentElement.scrollTop
+        : anchorRef.current.offsetTop,
+      portalTarget
+        ? anchorRef.current.getBoundingClientRect().x + document.documentElement.scrollLeft
+        : anchorRef.current.offsetLeft,
+      anchorRef.current.offsetHeight,
+      anchorRef.current.offsetWidth,
+      +offset,
+      responsive
     );
-  };
+
+    if (arrow && arrRef.current) {
+      setArrowPlacement(arrRef.current, newPlacement);
+    }
+  }, [placement, !!portalTarget, offset, responsive, arrow]);
 
   useEffect(() => {
     resizeHandler();
@@ -118,9 +126,11 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) =
   useWindowScroll(responsive && open && resizeHandler);
 
   /* --- Set classes --- */
-  const styles = popoverConfig.styles.root;
+  const mergedClassName = useMemo(() => {
+    const styles = popoverConfig.styles.root;
 
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
+    return mergeClasses(styles.base, defaultClassName, className);
+  }, [defaultClassName, className]);
 
   return (
     <Popper
@@ -134,17 +144,18 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) =
       {...restProps}
     >
       <PopoverDropdown
+        size={spacing}
         variant={variant}
         color={color}
-        spacing={spacing}
+        border={border}
         {...dropdownProps}
       >
         {arrow && (
           <PopoverArrow
             theme={theme}
-            position={resizedPosition}
             variant={variant}
             color={color}
+            ref={useMergeRefs<HTMLDivElement>(arrRef, arrowRef)}
             {...arrowProps}
           />
         )}

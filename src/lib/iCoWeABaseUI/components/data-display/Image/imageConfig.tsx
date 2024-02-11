@@ -1,14 +1,19 @@
 const imageConfig = {
   defaultProps: {
-    block: false
+    radius: 'rounded'
   },
   styles: {
     base: {
       display: 'inline-block',
       width: 'w-full'
     },
-    rounded: {
-      borderRadius: 'rounded-xl'
+    radiuses: {
+      rounded: {
+        borderRadius: 'rounded-xl'
+      },
+      circular: {
+        borderRadius: 'rounded-full'
+      }
     }
   }
 };

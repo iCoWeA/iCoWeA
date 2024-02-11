@@ -1,32 +1,32 @@
 import {
-  type RefObject,
   type MutableRefObject,
+  type RefObject,
   type ReactElement,
   forwardRef,
   useRef,
   useImperativeHandle,
+  useCallback,
   cloneElement
 } from 'react';
 
 import useAddEventListener from '../../../hooks/useAddEventListener';
 import { cloneRef } from '../../../utils/utils';
-import { type CursorPosition } from './Tooltip';
 
 export type TooltipAnchorProps = {
   setState?: ((state: boolean) => void) | ((state?: boolean) => void);
   resizeHandler: VoidFunction;
-  open?: boolean;
-  isOpen: boolean;
   keepOnHover: boolean;
   followCursor: boolean;
-  rootRef: RefObject<HTMLDivElement>;
+  open?: boolean;
+  isOpen: boolean;
   cursor: MutableRefObject<CursorPosition>;
+  rootRef: RefObject<HTMLDivElement>;
   children: ReactElement;
 };
 
 const TooltipAnchor = forwardRef<HTMLElement, TooltipAnchorProps>(
   (
-    { setState, resizeHandler, open, isOpen, keepOnHover, followCursor, rootRef, cursor, children },
+    { setState, resizeHandler, keepOnHover, followCursor, open, isOpen, cursor, rootRef, children },
     forwardedRef
   ) => {
     const ref = useRef<HTMLElement>(null);
@@ -40,36 +40,45 @@ const TooltipAnchor = forwardRef<HTMLElement, TooltipAnchorProps>(
     /* --- Set event handlers --- */
     const isControlled = open !== undefined;
 
-    const enterHandler = (event: MouseEvent): void => {
-      if (setState !== undefined) {
-        setState(true);
-      }
+    const enterHandler = useCallback(
+      (event: MouseEvent): void => {
+        if (setState !== undefined) {
+          setState(true);
+        }
 
-      cursor.current.x = event.clientX;
-      cursor.current.y = event.clientY;
-    };
+        cursor.current.x = event.clientX;
+        cursor.current.y = event.clientY;
+      },
+      [setState]
+    );
 
-    const moveHandler = (event: MouseEvent): void => {
-      cursor.current.x = event.clientX;
-      cursor.current.y = event.clientY;
+    const moveHandler = useCallback(
+      (event: MouseEvent): void => {
+        cursor.current.x = event.clientX;
+        cursor.current.y = event.clientY;
 
-      resizeHandler();
-    };
+        resizeHandler();
+      },
+      [resizeHandler]
+    );
 
-    const leaveHandler = (): void => {
+    const leaveHandler = useCallback((): void => {
       if (setState !== undefined) {
         setState(false);
       }
-    };
+    }, [setState]);
 
-    const keepLeaveHandler = (event: MouseEvent): void => {
-      if (
-        !(rootRef.current?.contains(event.relatedTarget as Node) ?? false) &&
-        setState !== undefined
-      ) {
-        setState(false);
-      }
-    };
+    const keepLeaveHandler = useCallback(
+      (event: MouseEvent): void => {
+        if (
+          !(rootRef.current?.contains(event.relatedTarget as Node) ?? false) &&
+          setState !== undefined
+        ) {
+          setState(false);
+        }
+      },
+      [setState]
+    );
 
     useAddEventListener(ref, 'mouseenter', !isControlled && !isOpen && enterHandler);
 

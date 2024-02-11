@@ -1,50 +1,40 @@
-import React, { type LiHTMLAttributes, forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
+import DefaultListItem, {
+  type DefaultListItemProps
+} from '../../../../iCoWeAUI/components/DefaultListItem/DefaultListItem';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
 import listItemConfig from './listItemConfig';
 
 export type ListItemDefaultProps = {
-  spacing?: Spacing;
-  divider?: boolean;
-  block?: boolean;
+  spacing?: Spacings;
+  variant?: Variants;
+  color?: Colors;
+  border?: Borders;
+  radius?: Radiuses;
   justify?: JustifyContent;
   align?: AlignItems;
   gap?: Gaps;
 };
 
-export type ListItemProps = LiHTMLAttributes<HTMLLIElement> & ListItemDefaultProps;
+export type ListItemProps = DefaultListItemProps & ListItemDefaultProps;
 
 const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
-  const {
-    spacing,
-    block,
-    divider,
-    justify,
-    align,
-    gap,
-    defaultClassName,
-    className,
-    ...restProps
-  } = useConfig('listItem', listItemConfig.defaultProps, props);
+  const { defaultClassName, className, ...restProps } = useConfig(
+    'listItem',
+    listItemConfig.defaultProps,
+    props
+  );
 
   /* --- Set classes--- */
-  const styles = listItemConfig.styles;
-
-  const mergedClassName = mergeClasses(
-    styles.base,
-    spacing !== 'none' && styles.spacings[spacing],
-    divider && styles.divider,
-    block && styles.block,
-    justify !== 'start' && styles.justifies[justify],
-    align !== 'stretch' && styles.aligns[align],
-    gap !== 'none' && styles.gaps[gap],
-    defaultClassName,
-    className
+  const mergedClassName = useMemo(
+    () => mergeClasses(defaultClassName, className),
+    [defaultClassName, className]
   );
 
   return (
-    <li
+    <DefaultListItem
       className={mergedClassName}
       ref={ref}
       {...restProps}

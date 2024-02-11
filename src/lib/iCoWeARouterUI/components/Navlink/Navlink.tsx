@@ -1,29 +1,31 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import React, { type CSSProperties, type ReactNode, forwardRef } from 'react';
+
+import React, { type CSSProperties, type ReactNode, forwardRef, useCallback } from 'react';
 import {
   NavLink as RouterNavlink,
   type NavLinkProps as RouterNavlinkProps
 } from 'react-router-dom';
 
-import ButtonSpinner, {
-  type ButtonSpinnerProps
-} from '../../../iCoWeAUI/components/ButtonSpinner/ButtonSpinner';
-import Ripple, { type RippleProps } from '../../../iCoWeAUI/components/Ripple/Ripple';
+import { getBorderVariant, reverseColor } from '../../../iCoWeABaseUI/utils/utils';
+import DefaultRipple, {
+  type DefaultRippleProps
+} from '../../../iCoWeAUI/components/DefaultRipple/DefaultRipple';
 import useTheme from '../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../iCoWeAUI/utils/utils';
 import useConfig from '../../hooks/useConfig';
+import NavlinkSpinner, { type NavlinkSpinnerProps } from './NavlinkSpinner';
 import navlinkConfig from './navlinkConfig';
 
 type State = { isActive: boolean; isPending: boolean };
 
 export type NavlinkDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
-  size?: Sizes;
-  icon?: boolean;
-  border?: boolean;
+  size?: Spacings;
   block?: boolean;
-  shadow?: boolean;
+  icon?: boolean;
+  variant?: Variants;
+  color?: DefaultColors;
+  border?: boolean;
+  radius?: Radiuses;
   loading?: boolean;
   noRipple?: boolean;
 };
@@ -31,53 +33,53 @@ export type NavlinkDefaultProps = {
 export type NavlinkProps = RouterNavlinkProps &
 NavlinkDefaultProps & {
   activeVariant?: Variants;
-  activeColor?: Colors;
-  activeStyle?: CSSProperties;
+  activeColor?: DefaultColors;
   activeClassName?: string;
+  activeStyle?: CSSProperties;
   activeChildren?: ReactNode;
   pendingVariant?: Variants;
-  pendingColor?: Colors;
-  pendingStyle?: CSSProperties;
+  pendingColor?: DefaultColors;
   pendingClassName?: string;
+  pendingStyle?: CSSProperties;
   pendingChildren?: ReactNode;
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
-  rippleProps?: RippleProps;
-  spinnerProps?: ButtonSpinnerProps;
-  style?: CSSProperties;
+  rippleProps?: DefaultRippleProps;
+  spinnerProps?: NavlinkSpinnerProps;
   disabled?: boolean;
+  style?: CSSProperties;
   children?: ReactNode;
 };
 
 const Navlink = forwardRef<HTMLAnchorElement, NavlinkProps>((props, ref) => {
   const {
+    size,
+    block,
+    icon,
     variant,
     color,
-    size,
-    icon,
     border,
-    block,
-    shadow,
+    radius,
     loading,
     noRipple,
     activeVariant,
     activeColor,
-    activeStyle,
     activeClassName,
+    activeStyle,
     activeChildren,
     pendingVariant,
     pendingColor,
-    pendingStyle,
     pendingClassName,
+    pendingStyle,
     pendingChildren,
     leftDecorator,
     rightDecorator,
     rippleProps,
     spinnerProps,
-    disabled,
     defaultClassName,
-    style,
     className,
+    disabled,
+    style,
     children,
     ...restProps
   } = useConfig('navlink', navlinkConfig.defaultProps, props);
@@ -85,61 +87,94 @@ const Navlink = forwardRef<HTMLAnchorElement, NavlinkProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = navlinkConfig.styles;
-  const sizeVariant = icon ? 'icon' : 'default';
+  const mergedClassName = useCallback(
+    ({ isActive, isPending }: State): string => {
+      const styles = navlinkConfig.styles.root;
+      const sizeVariant = icon ? 'icon' : 'default';
+      const stateVariant = (isActive && activeVariant) || (isPending && pendingVariant) || variant;
+      const stateColor = (isActive && activeColor) || (isPending && pendingColor) || color;
+      const borderVariant = getBorderVariant(stateVariant);
 
-  const mergedClassName = ({ isActive, isPending }: State): string =>
-    mergeClasses(
-      styles.base,
-      styles.sizes[sizeVariant][size],
-      disabled
-        ? styles.disabled[theme]
-        : styles.variants[(isActive && activeVariant) || (isPending && pendingVariant) || variant][
-          theme
-        ][(isActive && activeColor) || (isPending && pendingColor) || color],
-      isActive && styles.active,
-      icon && styles.icon,
-      border && styles.border,
-      block && styles.block,
-      shadow && styles.shadow,
-      loading && styles.loading,
+      return mergeClasses(
+        styles.base,
+        ((!noRipple && !disabled) || loading) && styles.ripple,
+        block && styles.block,
+        icon && styles.icon,
+        border && styles.border,
+        stateVariant === 'solid' && !disabled && styles.shadow,
+        radius !== 'none' && styles.radiuses[radius],
+        styles.sizes[sizeVariant][size],
+        disabled ? styles.disabled[theme] : styles.variants[stateVariant][theme][stateColor],
+        border && !disabled && styles.borderVariants[borderVariant][theme][stateColor],
+        loading && styles.loading,
+        defaultClassName,
+        (isActive && activeClassName) || (isPending && pendingClassName) || className
+      );
+    },
+    [
+      icon,
+      activeVariant,
+      pendingVariant,
+      variant,
+      activeColor,
+      pendingColor,
+      color,
+      noRipple,
+      disabled,
+      loading,
+      block,
+      border,
+      radius,
+      size,
+      theme,
       defaultClassName,
-      (isActive && activeClassName) || (isPending && pendingClassName) || className
-    );
+      activeClassName,
+      pendingClassName,
+      className
+    ]
+  );
 
-  const mergedStyles = ({ isActive, isPending }: State): CSSProperties | undefined =>
-    (isActive && activeStyle) || (isPending && pendingStyle) || style;
+  const mergedStyles = useCallback(
+    ({ isActive, isPending }: State): CSSProperties | undefined =>
+      (isActive && activeStyle) || (isPending && pendingStyle) || style,
+    [activeStyle, pendingStyle, style]
+  );
 
   return (
     <RouterNavlink
-      style={mergedStyles}
       className={mergedClassName}
+      style={mergedStyles}
       ref={ref}
       {...restProps}
     >
-      {({ isActive, isPending }) => (
-        <>
-          {leftDecorator}
-          {(isActive && activeChildren) || (isPending && pendingChildren) || children}
-          {rightDecorator}
-          {loading && (
-            <ButtonSpinner
-              variant={(isActive && activeVariant) || (isPending && pendingVariant) || variant}
-              color={(isActive && activeColor) || (isPending && pendingColor) || color}
-              value="75"
-              {...spinnerProps}
-            />
-          )}
-          {!noRipple && (
-            <Ripple
-              variant={(isActive && activeVariant) || (isPending && pendingVariant) || variant}
-              color={(isActive && activeColor) || (isPending && pendingColor) || color}
-              sibling={false}
-              {...rippleProps}
-            />
-          )}
-        </>
-      )}
+      {({ isActive, isPending }) => {
+        const stateVariant =
+          (isActive && activeVariant) || (isPending && pendingVariant) || variant;
+        const stateColor = (isActive && activeColor) || (isPending && pendingColor) || color;
+
+        return (
+          <>
+            {leftDecorator}
+            {(isActive && activeChildren) || (isPending && pendingChildren) || children}
+            {rightDecorator}
+            {loading && (
+              <NavlinkSpinner
+                color={reverseColor(stateVariant, stateColor)}
+                disabled={disabled}
+                {...spinnerProps}
+              />
+            )}
+            {!noRipple && !disabled && (
+              <DefaultRipple
+                color={reverseColor(stateVariant, stateColor)}
+                border={border}
+                sibling={false}
+                {...rippleProps}
+              />
+            )}
+          </>
+        );
+      }}
     </RouterNavlink>
   );
 });

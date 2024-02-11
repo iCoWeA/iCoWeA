@@ -5,7 +5,9 @@ import React, {
   forwardRef,
   useRef,
   useState,
-  useImperativeHandle
+  useImperativeHandle,
+  useCallback,
+  useMemo
 } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
@@ -13,6 +15,7 @@ import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import useMergeRefs from '../../../hooks/useMergeRefs';
+import { getInputVariant } from '../../../utils/utils';
 import InputClearance, { type InputClearanceProps } from './InputClearance';
 import InputContainer, { type InputContainerProps } from './InputContainer';
 import InputDecorator, { type InputDecoratorProps } from './InputDecorator';
@@ -22,14 +25,14 @@ import inputConfig from './inputConfig';
 
 export type InputDefaultProps = {
   variant?: InputVariants;
-  color?: Colors;
+  color?: DefaultTextColors;
   block?: boolean;
-  valid?: boolean;
-  invalid?: boolean;
 };
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> &
 InputDefaultProps & {
+  valid?: boolean;
+  invalid?: boolean;
   label?: ReactNode;
   leftDecoration?: ReactNode;
   rightDecoration?: ReactNode;
@@ -59,12 +62,12 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
     labelProps,
     clearanceProps,
     inputRef,
-    placeholder,
-    id,
-    disabled,
-    value,
     defaultClassName,
     className,
+    disabled,
+    id,
+    placeholder,
+    value,
     ...restProps
   } = useConfig('input', inputConfig.defaultProps, props);
 
@@ -83,41 +86,48 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
   );
 
   /* --- Set event handlers --- */
-  const focusHandler = (event: FocusEvent): void => {
+  const focusHandler = useCallback((event: FocusEvent): void => {
     if (ref.current === event.target) {
       setIsFocused(true);
     }
-  };
+  }, []);
 
-  const blurHandler = (event: FocusEvent): void => {
+  const blurHandler = useCallback((event: FocusEvent): void => {
     if (event.relatedTarget === null || event.relatedTarget !== containerRef.current) {
       setIsFocused(false);
     }
-  };
+  }, []);
 
   useAddEventListener(ref, 'focus', focusHandler);
 
   useAddEventListener(ref, 'blur', blurHandler);
 
   /* --- Set classes --- */
-  const styles = inputConfig.styles.input;
+  const mergedClassName = useMemo(() => {
+    const styles = inputConfig.styles.input;
+    const inputVariant = getInputVariant(color);
 
-  const mergedClassName = mergeClasses(styles.base, styles.colors[theme], className);
+    return mergeClasses(
+      styles.base,
+      styles.color[inputVariant][theme],
+      defaultClassName,
+      className
+    );
+  }, [color, theme, defaultClassName, className]);
 
   return (
     <InputContainer
       block={block}
       isFocused={isFocused}
-      disabled={disabled}
       inputRef={ref}
-      defaultClassName={defaultClassName}
+      disabled={disabled}
       ref={containerRef}
       {...containerProps}
     >
       <InputDecorator
-        position="left"
-        variant={variant}
+        placement="left"
         theme={theme}
+        inputVariant={variant}
         color={color}
         valid={valid}
         invalid={invalid}
@@ -127,8 +137,8 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
         {leftDecoration}
       </InputDecorator>
       <InputFieldset
-        variant={variant}
         theme={theme}
+        inputVariant={variant}
         color={color}
         valid={valid}
         invalid={invalid}
@@ -140,8 +150,8 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
         )}
         {label && (
           <InputLabel
-            variant={variant}
             theme={theme}
+            variant={variant}
             color={color}
             valid={valid}
             invalid={invalid}
@@ -153,20 +163,20 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
           </InputLabel>
         )}
         <input
-          placeholder={isFocused ? placeholder : undefined}
-          id={id}
-          disabled={disabled}
-          value={value}
           className={mergedClassName}
+          disabled={disabled}
+          id={id}
+          placeholder={isFocused ? placeholder : undefined}
           type="text"
+          value={value}
           ref={mergedRefs}
           {...restProps}
         />
       </InputFieldset>
       <InputDecorator
-        position="right"
-        variant={variant}
+        placement="right"
         theme={theme}
+        inputVariant={variant}
         color={color}
         valid={valid}
         invalid={invalid}

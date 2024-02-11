@@ -1,4 +1,4 @@
-import React, { type ReactElement, forwardRef, cloneElement, Fragment } from 'react';
+import React, { type ReactElement, forwardRef, useMemo, cloneElement, Fragment } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
@@ -11,14 +11,14 @@ import buttonGroupConfig from './buttonGroupConfig';
 
 export type ButtonGroupDefaultProps = {
   vertical?: boolean;
-  divided?: boolean;
-  variant?: Variants;
-  color?: Colors;
   size?: Sizes;
-  icon?: boolean;
-  border?: boolean;
   block?: boolean;
-  shadow?: boolean;
+  icon?: boolean;
+  variant?: Variants;
+  color?: DefaultColors;
+  border?: boolean;
+  divided?: boolean;
+  radius?: Radiuses;
   loading?: boolean;
   noRipple?: boolean;
 };
@@ -31,18 +31,18 @@ ButtonGroupDefaultProps & {
 const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) => {
   const {
     vertical,
-    divided,
+    size,
+    block,
+    icon,
     variant,
     color,
-    size,
-    icon,
     border,
-    block,
-    shadow,
+    divided,
+    radius,
     loading,
     noRipple,
-    className,
     defaultClassName,
+    className,
     children,
     ...restProps
   } = useConfig('buttonGroup', buttonGroupConfig.defaultProps, props);
@@ -50,27 +50,24 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = buttonGroupConfig.styles.root;
+  const mergedClassName = useMemo(() => {
+    const styles = buttonGroupConfig.styles.root;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    block && styles.block,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(styles.base, block && styles.block, defaultClassName, className);
+  }, [block, defaultClassName, className]);
 
   /* --- Set buttons --- */
   let buttonNodes;
 
   if (children && !Array.isArray(children)) {
     buttonNodes = cloneElement(children, {
+      size,
+      block,
+      icon,
       variant,
       color,
-      size,
-      icon,
       border,
-      block,
-      shadow,
+      radius,
       loading,
       noRipple
     });
@@ -83,17 +80,17 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
       buttonNodes[i] = (
         <Fragment key={i}>
           <ButtonGroupButton
-            position={i === 0 ? 'left' : isLast(children, i) ? 'right' : 'middle'}
-            vertical={vertical}
+            placement={i === 0 ? 'left' : isLast(children, i) ? 'right' : 'middle'}
             theme={theme}
+            vertical={vertical}
+            size={size}
+            block={block}
+            icon={icon}
             variant={variant}
             color={color}
-            size={size}
-            icon={icon}
-            divided={divided}
             border={border}
-            block={block}
-            shadow={shadow}
+            divided={divided}
+            radius={radius}
             loading={loading}
             noRipple={noRipple}
             element={children[i]}
@@ -110,10 +107,9 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) =>
       justify="start"
       align="stretch"
       gap="none"
-      grow={false}
       block={block}
-      role="group"
       className={mergedClassName}
+      role="group"
       ref={ref}
       {...restProps}
     >

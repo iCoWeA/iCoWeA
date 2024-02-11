@@ -1,4 +1,4 @@
-import React, { type LabelHTMLAttributes, type ReactNode, forwardRef } from 'react';
+import React, { type LabelHTMLAttributes, type ReactNode, forwardRef, useMemo } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
@@ -6,9 +6,9 @@ import useConfig from '../../../hooks/useConfig';
 import labelConfig from './labelConfig';
 
 export type LabelDefauProps = {
-  position?: Positions;
-  color?: TextColors;
+  placement?: Placements;
   size?: Sizes;
+  color?: TextColors;
   align?: AlignItems;
   gap?: Gaps;
 };
@@ -20,9 +20,9 @@ LabelDefauProps & {
 
 const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
   const {
-    position,
-    color,
+    placement,
     size,
+    color,
     align,
     gap,
     label,
@@ -31,21 +31,24 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
     children,
     ...restProps
   } = useConfig('label', labelConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = labelConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = labelConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    (position === 'top' || position === 'bottom') && styles.columns,
-    color !== 'inherit' && styles.colors[theme][color],
-    styles.sizes[size],
-    align !== 'stretch' && styles.aligns[align],
-    gap !== 'none' && styles.gaps[gap],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      (placement === 'top' || placement === 'bottom') && styles.columns,
+      styles.sizes[size],
+      align !== 'stretch' && styles.aligns[align],
+      gap !== 'none' && styles.gaps[gap],
+      color !== 'inherit' && styles.colors[theme][color],
+      defaultClassName,
+      className
+    );
+  }, [placement, size, align, gap, theme, color, defaultClassName, className]);
 
   return (
     <label
@@ -53,8 +56,8 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      {position === 'top' || position === 'left' ? label : children}
-      {position === 'top' || position === 'left' ? children : label}
+      {placement === 'top' || placement === 'left' ? label : children}
+      {placement === 'top' || placement === 'left' ? children : label}
     </label>
   );
 });

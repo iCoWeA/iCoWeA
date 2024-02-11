@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
@@ -15,12 +15,12 @@ export type BackdropDefaultProps = {
 export type BackdropProps = TransitionProps &
 BackdropDefaultProps & {
   onClose?: (() => void) | ((state: boolean) => void);
-  portalTarget?: Element | null;
   open?: boolean;
+  portalTarget?: Element | null;
 };
 
 const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, forwardedRef) => {
-  const { onClose, open, invisible, portalTarget, defaultClassName, className, ...restProps } =
+  const { onClose, invisible, open, portalTarget, defaultClassName, className, ...restProps } =
     useConfig('backdrop', backdropConfig.defaultProps, props);
 
   const theme = useTheme();
@@ -34,27 +34,29 @@ const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, forwardedRef)
   );
 
   /* --- Set event handlers --- */
-  const clickHandler = onClose && (() => onClose(false));
+  const clickHandler = useCallback(() => (onClose ? onClose(false) : undefined), [onClose]);
 
   useAddEventListener(ref, 'click', clickHandler);
 
   /* --- Set classes --- */
-  const styles = backdropConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = backdropConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    !invisible && styles.background[theme],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      !invisible && styles.background[theme],
+      defaultClassName,
+      className
+    );
+  }, [invisible, theme, defaultClassName, className]);
 
   /* --- Set portal --- */
   const node = (
     <Transition
-      enter={open}
-      variant="fade"
-      smooth
+      transition="fade"
+      smooth={false}
       unmountOnExit={false}
+      enter={open}
       aria-hidden={true}
       className={mergedClassName}
       ref={ref}

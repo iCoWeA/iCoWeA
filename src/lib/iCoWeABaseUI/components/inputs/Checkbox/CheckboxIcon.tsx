@@ -1,55 +1,56 @@
-import React, { type FC } from 'react';
+import React, { type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import Icon, { type IconProps } from '../../data-display/Icon/Icon';
 import checkboxConfig from './checkboxConfig';
 
-export type CheckboxIconDefaultProps = IconProps & {
-  color?: Colors;
-};
+export type CheckboxIconDefaultProps = IconProps;
 
 export type CheckboxIconProps = CheckboxIconDefaultProps & {
   theme: Themes;
-  color: Colors;
   size: Sizes;
+  variant: Variants;
+  color: Colors;
   border: boolean;
-  valid: boolean;
-  invalid: boolean;
+  valid?: boolean;
+  invalid?: boolean;
   checked?: boolean;
   disabled?: boolean;
 };
 
 const CheckboxIcon: FC<CheckboxIconProps> = ({
   theme,
+  variant,
   color,
-  border,
   valid,
   invalid,
   checked,
-  disabled,
   className,
+  disabled,
   children,
   ...restProps
 }) => {
   /* --- Set classes --- */
-  const styles = checkboxConfig.styles.icon;
+  const mergedClassName = useMemo(() => {
+    const styles = checkboxConfig.styles.icon;
+    const colorVariant = invalid ? 'invalid' : valid ? 'valid' : 'default';
+    const checkVariant = checked ? 'checked' : 'unchecked';
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    !valid && !invalid && !checked && !disabled && styles.color[theme],
-    valid && !disabled && !checked && styles.valid[theme],
-    invalid && !disabled && !checked && styles.invalid[theme],
-    disabled && styles.disabled[theme],
-    checked && disabled && styles.disabledChecked[theme],
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      !checked && styles.unchecked,
+      !checked && styles.color[colorVariant][theme],
+      disabled && styles.disabled[checkVariant][theme],
+      className
+    );
+  }, [variant, checked, disabled, invalid, valid, theme, className]);
 
   return (
     <Icon
-      variant="solid"
-      color={valid ? 'success' : invalid ? 'error' : color}
-      spacing={false}
-      border={!checked && border}
+      spacing="text"
+      variant={variant}
+      color={checked && !disabled ? (invalid ? 'error' : valid ? 'success' : color) : 'inherit'}
+      radius="none"
       className={mergedClassName}
       {...restProps}
     >

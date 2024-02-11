@@ -1,22 +1,21 @@
 const accordionConfig = {
   defaultProps: {
-    variant: 'default',
-    color: 'neutral',
     size: 'md',
+    variant: 'text',
+    color: 'neutral',
     border: 'none',
     divider: false,
+    radius: 'rounded',
     noRipple: false
   },
   styles: {
     root: {
       base: {
-        borderRadius: 'rounded-xl',
         overflow: 'overflow-hidden'
       }
     },
     header: {
       base: {
-        borderRadius: 'rounded-none',
         userSelect: 'select-auto',
         justifyContent: 'justify-start'
       },

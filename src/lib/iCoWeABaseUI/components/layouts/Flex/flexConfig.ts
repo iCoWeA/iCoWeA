@@ -4,15 +4,11 @@ const flexConfig = {
     wrap: 'wrap',
     justify: 'start',
     align: 'center',
-    gap: 'none',
-    grow: false
+    gap: 'none'
   },
   styles: {
     base: {
       display: 'flex'
-    },
-    grow: {
-      flexGrow: 'grow'
     },
     directions: {
       col: {

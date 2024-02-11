@@ -1,33 +1,54 @@
 const listConfig = {
   defaultProps: {
-    spacing: 'md',
-    gap: 'none',
+    block: true,
     row: false,
-    block: false
+    justify: 'start',
+    align: 'stretch',
+    gap: 'none'
   },
   styles: {
     base: {
-      display: 'flex'
+      display: 'flex',
+      flexWrap: 'flex-wrap'
     },
     block: {
       width: 'w-full'
     },
-    row: {
-      flexWrap: 'flex-wrap',
-      alignItems: 'align-center'
-    },
     column: {
       flexDirection: 'flex-col'
     },
-    spacing: {
-      sm: {
-        padding: 'py-2'
+    justifies: {
+      end: {
+        justifyContent: 'justify-end'
       },
-      md: {
-        padding: 'py-3'
+      center: {
+        justifyContent: 'justify-center'
       },
-      lg: {
-        padding: 'py-4'
+      stretch: {
+        justifyContent: 'justify-stretch'
+      },
+      between: {
+        justifyContent: 'justify-between'
+      },
+      around: {
+        justifyContent: 'justify-around'
+      },
+      evenly: {
+        justifyContent: 'justify-evenly'
+      }
+    },
+    aligns: {
+      start: {
+        alignItems: 'items-start'
+      },
+      end: {
+        alignItems: 'items-end'
+      },
+      center: {
+        alignItems: 'items-center'
+      },
+      baseline: {
+        alignItems: 'items-baseline'
       }
     },
     gaps: {

@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import Mark, { type MarkProps } from '../../data-display/Mark/Mark';
@@ -7,19 +7,24 @@ import spinnerConfig from './spinnerConfig';
 export type SpinnerLabelDefaultProps = MarkProps;
 
 export type SpinnerLabelProps = SpinnerLabelDefaultProps & {
+  theme: Themes;
   size: Sizes;
+  variant: Variants;
+  color: Colors;
+  disabled?: boolean;
 };
 
-const SpinnerLabel: FC<SpinnerLabelProps> = ({ className, ...restProps }) => {
+const SpinnerLabel: FC<SpinnerLabelProps> = ({ theme, color, className, disabled, ...restProps }) => {
   /* -- Set classes --- */
-  const styles = spinnerConfig.styles.label;
+  const mergedClassName = useMemo(() => {
+    const styles = spinnerConfig.styles.label;
 
-  const mergedClassName = mergeClasses(styles.base, className);
+    return mergeClasses(styles.base, disabled && styles.disabled[theme], className);
+  }, [disabled, theme, className]);
 
   return (
     <Mark
-      variant="default"
-      color="inherit"
+      color={disabled ? 'inherit' : color}
       border={false}
       className={mergedClassName}
       {...restProps}

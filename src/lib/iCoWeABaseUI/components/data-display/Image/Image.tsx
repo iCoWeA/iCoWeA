@@ -1,31 +1,33 @@
-import React, { type ImgHTMLAttributes, forwardRef } from 'react';
+import React, { type ImgHTMLAttributes, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
 import imageConfig from './imageConfig';
 
 export type ImageDefaultProps = {
-  block?: boolean;
+  radius?: Radiuses;
 };
 
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & ImageDefaultProps;
 
 const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
-  const { block, defaultClassName, className, ...restProps } = useConfig(
+  const { radius, defaultClassName, className, ...restProps } = useConfig(
     'image',
     imageConfig.defaultProps,
     props
   );
 
   /* --- Set classes --- */
-  const styles = imageConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = imageConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    !block && styles.rounded,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      radius !== 'none' && styles.radiuses[radius],
+      defaultClassName,
+      className
+    );
+  }, [radius, defaultClassName, className]);
 
   return (
     <img

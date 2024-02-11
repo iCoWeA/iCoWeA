@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import Mark, { type MarkProps } from '../../data-display/Mark/Mark';
@@ -16,15 +16,17 @@ const LinearProgressLabel: FC<LinearProgressLabelProps> = ({
   ...restProps
 }) => {
   /* -- Set classes --- */
-  const styles = linearProgressConfig.styles.label;
+  const mergedClassName = useMemo(() => {
+    const styles = linearProgressConfig.styles.label;
 
-  const mergedClassName = mergeClasses(styles.base, vertical && styles.vertical, className);
+    return mergeClasses(styles.base, vertical && styles.vertical, className);
+  }, [vertical, className]);
 
   return (
     <Mark
+      size="sm"
       variant="default"
       color="inherit"
-      size="sm"
       border={false}
       className={mergedClassName}
       {...restProps}

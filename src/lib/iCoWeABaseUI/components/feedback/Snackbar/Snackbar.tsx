@@ -1,4 +1,4 @@
-import React, { type MutableRefObject, forwardRef } from 'react';
+import React, { type MutableRefObject, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -6,7 +6,7 @@ import Popper, { type PopperProps } from '../../utils/Popper/Popper';
 import snackbarConfig from './snackbarConfig';
 
 export type SnackbarDefaultProps = {
-  position?: InnerPositions;
+  placement?: InnerPlacements;
   closeOnEscape?: boolean;
   closeDuration?: number;
 };
@@ -20,29 +20,26 @@ SnackbarDefaultProps & {
 };
 
 const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
-  const { position, defaultClassName, className, ...restProps } = useConfig(
+  const { placement, defaultClassName, className, ...restProps } = useConfig(
     'snackbar',
     snackbarConfig.defaultProps,
     props
   );
 
   /* --- Set classes --- */
-  const styles = snackbarConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = snackbarConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.positions[position],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(styles.base, styles.placements[placement], defaultClassName, className);
+  }, [placement, defaultClassName, className]);
 
   return (
     <Popper
       lockScroll={false}
       closeOnOutsideClick
       focusTrap={false}
-      backdrop={false}
       closeOnBackdropClick
+      backdrop="none"
       className={mergedClassName}
       ref={ref}
       {...restProps}

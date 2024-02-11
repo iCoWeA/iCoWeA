@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import ExpandIcon, { type ExpandIconProps } from '../../feedback/ExpandIcon/ExpandIcon';
@@ -12,14 +12,16 @@ export type AccordionExpandIconProps = AccordionExpandIconDefaultProps & {
 
 const AccordionExpandIcon: FC<AccordionExpandIconProps> = ({ right, className, ...restProps }) => {
   /* --- Set classes --- */
-  const styles = accordionConfig.styles.expandIcon;
+  const mergedClassName = useMemo(() => {
+    const styles = accordionConfig.styles.expandIcon;
 
-  const mergedClassName = mergeClasses(right && styles.right, className);
+    return mergeClasses(right && styles.right, className);
+  }, [right, className]);
 
   return (
     <ExpandIcon
-      color="inherit"
       size="md"
+      color="inherit"
       className={mergedClassName}
       {...restProps}
     />

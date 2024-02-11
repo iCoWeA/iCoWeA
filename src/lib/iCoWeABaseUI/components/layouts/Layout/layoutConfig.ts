@@ -6,7 +6,7 @@ const layoutConfig = {
     layouts: {
       root: {
         minHeight: 'min-h-screen',
-        font: 'antialiased font-normal text-sm font-sans'
+        font: 'text-sm font-sans'
       },
       default: {
         margin: 'mx-auto',

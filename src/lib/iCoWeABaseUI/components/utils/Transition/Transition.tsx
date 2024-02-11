@@ -3,7 +3,9 @@ import React, {
   forwardRef,
   useRef,
   useImperativeHandle,
-  useEffect
+  useCallback,
+  useEffect,
+  useMemo
 } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
@@ -14,7 +16,7 @@ import { setTransitionStyle } from '../../../utils/transitionHelper';
 import transitionConfig from './transitionConfig';
 
 export type TransitionDefaultProps = {
-  variant?: Transitions;
+  transition?: Transitions;
   smooth?: boolean;
   unmountOnExit?: boolean;
 };
@@ -34,10 +36,10 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
     onExit,
     onEntering,
     onExiting,
-    enter,
-    variant,
+    transition,
     smooth,
     unmountOnExit,
+    enter,
     defaultClassName,
     className,
     children,
@@ -55,22 +57,23 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
   );
 
   /* --- Set event handlers --- */
-  const isEntering = state === TransitionStates.ENTER || state === TransitionStates.ENTERING;
   const isUnmounted = state === TransitionStates.EXIT && !enter;
 
-  const transitionEndHandler = (event: Event): void => {
+  const transitionEndHandler = useCallback((event: Event): void => {
     if (event.target === ref.current) {
       stopTransition();
     }
-  };
+  }, []);
 
   useEffect(() => {
     startTransition(enter);
   }, [enter]);
 
   useEffect(() => {
-    setTransitionStyle(ref, variant, smooth, isEntering, isUnmounted);
-  }, [variant, smooth, isEntering, isUnmounted]);
+    const isEntering = state === TransitionStates.ENTER || state === TransitionStates.ENTERING;
+
+    setTransitionStyle(ref, transition, smooth, isEntering, isUnmounted);
+  }, [transition, smooth, state, isUnmounted]);
 
   useEffect(() => {
     if (state === TransitionStates.ENTER && onEnter) {
@@ -93,14 +96,17 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
   useAddEventListener(ref, 'transitionend', transitionEndHandler);
 
   /* --- Set classes --- */
-  const styles = transitionConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = transitionConfig.styles;
+    const transitionVariant = smooth ? 'smooth' : 'default';
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    (variant === 'grow-x' || variant === 'grow-y') && styles.grow,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      styles.transitions[transitionVariant][transition],
+      defaultClassName,
+      className
+    );
+  }, [smooth, transition, defaultClassName, className]);
 
   return (
     <div

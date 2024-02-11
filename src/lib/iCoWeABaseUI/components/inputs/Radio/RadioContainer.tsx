@@ -1,9 +1,10 @@
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
+import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import radioConfig from './radioConfig';
 
-export type RadioContainerDefaultProps = BaseHTMLAttributes<HTMLDivElement>;
+export type RadioContainerDefaultProps = FlexProps;
 
 export type RadioContainerProps = RadioContainerDefaultProps & {
   size: Sizes;
@@ -14,18 +15,27 @@ export type RadioContainerProps = RadioContainerDefaultProps & {
 const RadioContainer = forwardRef<HTMLDivElement, RadioContainerProps>(
   ({ size, noRipple, checked, className, ...restProps }, ref) => {
     /* --- Set classes --- */
-    const styles = radioConfig.styles.root;
-    const sizeVariant = noRipple ? 'plain' : 'default';
+    const mergedClassName = useMemo(() => {
+      const styles = radioConfig.styles.root;
+      const sizeVariant = noRipple ? 'plain' : 'default';
 
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.sizes[sizeVariant][size],
-      checked && styles.checked,
-      className
-    );
+      return mergeClasses(
+        styles.base,
+        checked && styles.checked,
+        styles.sizes[sizeVariant][size],
+        className
+      );
+    }, [noRipple, checked, size, className]);
 
     return (
-      <div
+      <Flex
+        direction="row"
+        wrap="nowrap"
+        justify="start"
+        align="stretch"
+        gap="none"
+        position="relative"
+        radius="circular"
         className={mergedClassName}
         ref={ref}
         {...restProps}

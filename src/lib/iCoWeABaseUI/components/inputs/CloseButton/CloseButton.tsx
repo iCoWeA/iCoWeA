@@ -1,47 +1,48 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { cutPanelSize } from '../../../utils/utils';
 import Icon, { type IconProps } from '../../data-display/Icon/Icon';
 import Button, { type ButtonProps } from '../Button/Button';
 import closeButtonConfig from './closeButtonConfig';
 
 export type CloseButtonDefaultProps = {
-  position?: SidePositions;
-  panel?: boolean;
+  placement?: Closable
+  size?: PanelSpacings;
   variant?: Variants;
-  color?: Colors;
-  size?: Sizes;
-  border?: boolean;
+  color?: DefaultColors;
   noRipple?: boolean;
 };
 
-export type CloseButtonProps = ButtonProps &
+export type CloseButtonProps = Omit<ButtonProps, 'size'> &
 CloseButtonDefaultProps & {
   iconProps?: IconProps;
 };
 
 const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref) => {
-  const { position, panel, size, iconProps, defaultClassName, className, children, ...restProps } =
+  const { placement, size, iconProps, defaultClassName, className, children, ...restProps } =
     useConfig('closeButton', closeButtonConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = closeButtonConfig.styles;
-  const positionVariant = panel ? 'panel' : 'default';
+  const mergedClassName = useMemo(() => {
+    const styles = closeButtonConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.positions[positionVariant][position][size],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      placement !== 'none' && styles.base,
+      placement !== 'none' && size !== 'none' && styles.placements[placement][size],
+      defaultClassName,
+      className
+    );
+  }, [placement, size, defaultClassName, className]);
 
   return (
     <Button
-      size={size}
-      icon
+      size={cutPanelSize(size)}
       block={false}
-      shadow={false}
+      icon
+      border={false}
+      radius="circular"
       loading={false}
       className={mergedClassName}
       ref={ref}
@@ -49,10 +50,12 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref)
     >
       {children ?? (
         <Icon
-          variant="text"
-          color="inherit"
           size="md"
+          spacing="text"
+          variant="default"
+          color="inherit"
           border={false}
+          radius="none"
           {...iconProps}
         >
           <svg

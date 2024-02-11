@@ -2,14 +2,14 @@ import { createContext } from 'react';
 
 type AccordionContext = {
   onToggle?: VoidFunction;
-  open: boolean;
-  variant: Variants;
-  color: Colors;
   size: Sizes;
+  variant: Variants;
+  color: DefaultColors;
   divider: boolean;
   noRipple: boolean,
+  open: boolean;
   openVariant?: Variants;
-  openColor?: Colors;
+  openColor?: DefaultColors;
   leftExpandIcon?: boolean;
   rightExpandIcon?: boolean;
   indexId?: string;
@@ -17,12 +17,12 @@ type AccordionContext = {
 };
 
 export const initialState: AccordionContext = {
-  open: false,
+  size: 'md',
   variant: 'default',
   color: 'neutral',
-  size: 'md',
   divider: false,
-  noRipple: false
+  noRipple: false,
+  open: false
 };
 
 const accordionContext = createContext(initialState);

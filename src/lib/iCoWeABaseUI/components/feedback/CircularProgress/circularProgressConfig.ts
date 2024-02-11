@@ -1,8 +1,7 @@
 const circularProgressConfig = {
   defaultProps: {
-    color: 'primary',
     size: 'md',
-    innerBar: 'neutral',
+    color: 'primary',
     value: 0
   }
 };

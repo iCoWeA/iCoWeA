@@ -1,40 +1,38 @@
-import React, { type BaseHTMLAttributes, type FC } from 'react';
+import React, { type BaseHTMLAttributes, type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
+import { cutPanelSize } from '../../../utils/utils';
 import dividerConfig from './dividerConfig';
 
 export type DividerLineDefaultProps = BaseHTMLAttributes<HTMLHRElement>;
 
 export type DividerLineProps = DividerLineDefaultProps & {
-  position: ContainerPositions;
-  orientation: Orientations;
-  spacing: Spacing;
-  panel: boolean;
+  placement: ContainerPlacements;
+  vertical: boolean;
+  spacing: PanelSpacings;
 };
 
 const DividerLine: FC<DividerLineProps> = ({
-  position,
-  orientation,
+  placement,
+  vertical,
   spacing,
-  panel,
   className,
   ...restProps
 }) => {
   /* --- Set classes --- */
-  const styles = dividerConfig.styles.line;
-  const sizeVariant = panel ? 'panel' : 'default';
+  const mergedClassName = useMemo(() => {
+    const styles = dividerConfig.styles.line;
+    const orientation = vertical ? 'vertical' : 'horizontal';
+    const horizontalSpacing = cutPanelSize(spacing);
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.orientations[orientation],
-    spacing !== 'none' &&
-      orientation === 'horizontal' &&
-      styles.spacing.horizontal[position][spacing],
-    spacing !== 'none' &&
-      orientation === 'vertical' &&
-      styles.spacing.vertical[sizeVariant][position][spacing],
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      styles.orientations[orientation],
+      horizontalSpacing !== 'none' && !vertical && styles.spacing.horizontal[placement][horizontalSpacing],
+      spacing !== 'none' && vertical && styles.spacing.vertical[placement][spacing],
+      className
+    );
+  }, [vertical, spacing, placement, className]);
 
   return (
     <hr

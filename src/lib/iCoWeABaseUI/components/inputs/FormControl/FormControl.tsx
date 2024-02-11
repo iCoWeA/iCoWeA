@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -20,9 +20,11 @@ const FormControl = forwardRef<HTMLDivElement, FormControlProps>((props, ref) =>
   );
 
   /* --- Set props --- */
-  const styles = formControlConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = formControlConfig.styles;
 
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
+    return mergeClasses(styles.base, defaultClassName, className);
+  }, [defaultClassName, className]);
 
   return (
     <Stack

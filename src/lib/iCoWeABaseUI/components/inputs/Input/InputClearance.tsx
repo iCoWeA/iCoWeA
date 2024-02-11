@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, type FC } from 'react';
+import React, { type BaseHTMLAttributes, type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import inputConfig from './inputConfig';
@@ -9,9 +9,11 @@ export type InputClearanceProps = InputClearanceDefaultProps;
 
 const InputClearance: FC<InputClearanceProps> = ({ className, ...restProps }) => {
   /* --- Set classes --- */
-  const styles = inputConfig.styles.clearance;
+  const mergedClassName = useMemo(() => {
+    const styles = inputConfig.styles.clearance;
 
-  const mergedClassName = mergeClasses(styles.base, className);
+    return mergeClasses(styles.base, className);
+  }, [className]);
 
   return (
     <legend

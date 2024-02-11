@@ -1,4 +1,4 @@
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useMemo } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
@@ -6,16 +6,16 @@ import useConfig from '../../../hooks/useConfig';
 import titleConfig from './titleConfig';
 
 export type TitleDefaultProps = {
-  variant?: TitleVariants;
+  size?: TitleSizes;
+  gutter?: boolean;
   color?: TextColors;
   align?: Aligns;
-  gutter?: boolean;
 };
 
 export type TitleProps = BaseHTMLAttributes<HTMLHeadingElement> & TitleDefaultProps;
 
 const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
-  const { variant, color, align, gutter, defaultClassName, className, ...restProps } = useConfig(
+  const { size, gutter, color, align, defaultClassName, className, ...restProps } = useConfig(
     'title',
     titleConfig.defaultProps,
     props
@@ -24,19 +24,21 @@ const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = titleConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = titleConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant],
-    color !== 'inherit' && styles.colors[theme][color],
-    align !== 'left' && styles.aligns[align],
-    gutter && styles.gutters[variant],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      styles.sizes[size],
+      gutter && styles.gutters[size],
+      align !== 'left' && styles.aligns[align],
+      color !== 'inherit' && styles.colors[theme][color],
+      defaultClassName,
+      className
+    );
+  }, [size, gutter, align, theme, color, defaultClassName, className]);
 
-  if (variant === '1') {
+  if (size === '1') {
     return (
       <h1
         className={mergedClassName}
@@ -46,7 +48,7 @@ const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
     );
   }
 
-  if (variant === '2') {
+  if (size === '2') {
     return (
       <h2
         className={mergedClassName}
@@ -56,7 +58,7 @@ const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
     );
   }
 
-  if (variant === '3') {
+  if (size === '3') {
     return (
       <h3
         className={mergedClassName}
@@ -66,7 +68,7 @@ const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
     );
   }
 
-  if (variant === '4') {
+  if (size === '4') {
     return (
       <h4
         className={mergedClassName}
@@ -76,7 +78,7 @@ const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
     );
   }
 
-  if (variant === '5') {
+  if (size === '5') {
     return (
       <h5
         className={mergedClassName}

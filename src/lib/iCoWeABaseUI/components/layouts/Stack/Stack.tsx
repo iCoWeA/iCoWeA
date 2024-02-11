@@ -19,8 +19,6 @@ const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
     <Flex
       direction="col"
       wrap="wrap"
-      grow={false}
-      block={false}
       ref={ref}
       {...mergedProps}
     />

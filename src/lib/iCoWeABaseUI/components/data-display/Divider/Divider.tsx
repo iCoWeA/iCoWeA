@@ -1,22 +1,22 @@
-import React, { forwardRef, type ReactNode } from 'react';
+import React, { forwardRef, useMemo, type ReactNode } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { cutTextColor } from '../../../utils/utils';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import DividerLine, { type DividerLineDefaultProps } from './DividerLine';
 import dividerConfig from './dividerConfig';
 
 export type DividerDefaultProps = {
-  color?: TextColors;
+  placement?: ContainerPlacements;
   vertical?: boolean;
-  spacing?: Spacing;
-  panel?: boolean;
-  justify?: ContainerPositions;
+  spacing?: PanelSpacings;
+  color?: TextColors;
   gap?: Gaps;
 };
 
-export type DividerProps = Omit<FlexProps, 'justify'> &
+export type DividerProps = Omit<FlexProps, 'color'> &
 DividerDefaultProps & {
   leftLineProps?: DividerLineDefaultProps;
   rightLineProps?: DividerLineDefaultProps;
@@ -24,11 +24,11 @@ DividerDefaultProps & {
 
 const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
   const {
-    color,
+    placement,
     vertical,
     spacing,
-    panel,
-    justify,
+    color,
+    gap,
     leftLineProps,
     rightLineProps,
     defaultClassName,
@@ -40,59 +40,58 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = dividerConfig.styles.root;
-  const orientation = vertical ? 'vertical' : 'horizontal';
+  const mergedClassName = useMemo(() => {
+    const styles = dividerConfig.styles.root;
+    const orientation = vertical ? 'vertical' : 'horizontal';
 
-  const mergedClassName = mergeClasses(
-    styles.orientations[orientation],
-    color === 'neutral' && styles.color[theme],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      styles.orientations[orientation],
+      color === 'neutral' && styles.color[theme],
+      defaultClassName,
+      className
+    );
+  }, [vertical, theme, color, defaultClassName, className]);
 
   let node: ReactNode;
 
-  if (children && justify === 'left') {
+  if (children && placement === 'left') {
     node = (
       <>
         {children}
         <DividerLine
-          position="right"
-          orientation={orientation}
+          placement="right"
+          vertical={vertical}
           spacing={spacing}
-          panel={panel}
           {...rightLineProps}
         />
       </>
     );
-  } else if (children && justify === 'middle') {
+  } else if (children && placement === 'middle') {
     node = (
       <>
         <DividerLine
-          position="left"
-          orientation={orientation}
+          placement="left"
+          vertical={vertical}
           spacing={spacing}
-          panel={panel}
           {...leftLineProps}
         />
         {children}
         <DividerLine
-          position="right"
-          orientation={orientation}
+          placement="right"
+          vertical={vertical}
           spacing={spacing}
-          panel={panel}
           {...rightLineProps}
         />
       </>
     );
-  } else if (children && justify === 'right') {
+  } else if (children && placement === 'right') {
     node = (
       <>
         <DividerLine
-          position="left"
-          orientation={orientation}
+          placement="left"
+          vertical={vertical}
           spacing={spacing}
-          panel={panel}
           {...leftLineProps}
         />
         {children}
@@ -101,10 +100,9 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
   } else {
     node = (
       <DividerLine
-        position="middle"
-        orientation={orientation}
+        placement="middle"
+        vertical={vertical}
         spacing={spacing}
-        panel={panel}
         {...leftLineProps}
       />
     );
@@ -112,12 +110,13 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
 
   return (
     <Flex
-      color={color === 'neutral' ? 'inherit' : color}
       direction={vertical ? 'col' : 'row'}
       wrap="nowrap"
       justify="stretch"
       align="center"
-      grow={false}
+      gap={children ? gap : 'none'}
+      variant={color.startsWith('on') ? 'default' : 'text'}
+      color={color === 'neutral' ? 'inherit' : cutTextColor(color)}
       className={mergedClassName}
       ref={ref}
       {...restProps}

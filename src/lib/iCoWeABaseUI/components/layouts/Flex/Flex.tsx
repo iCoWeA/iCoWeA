@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -11,38 +11,40 @@ export type FlexDefaultProps = {
   justify?: JustifyContent;
   align?: AlignItems;
   gap?: Gaps;
-  grow?: boolean;
 };
 
 export type FlexProps = BoxProps & FlexDefaultProps;
 
 const Flex = forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
-  const { direction, wrap, justify, align, gap, grow, defaultClassName, className, ...restProps } =
+  const { direction, wrap, justify, align, gap, defaultClassName, className, ...restProps } =
     useConfig('flex', flexConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = flexConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = flexConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    direction !== 'row' && styles.directions[direction],
-    wrap !== 'nowrap' && styles.wraps[wrap],
-    justify !== 'start' && styles.justifies[justify],
-    align !== 'stretch' && styles.aligns[align],
-    gap !== 'none' && styles.gaps[gap],
-    grow && styles.grow,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      direction !== 'row' && styles.directions[direction],
+      wrap !== 'nowrap' && styles.wraps[wrap],
+      justify !== 'start' && styles.justifies[justify],
+      align !== 'stretch' && styles.aligns[align],
+      gap !== 'none' && styles.gaps[gap],
+      defaultClassName,
+      className
+    );
+  }, [direction, wrap, justify, align, gap, defaultClassName, className]);
 
   return (
     <Box
+      position="static"
+      block={false}
+      spacing="none"
       variant="default"
       color="inherit"
-      spacing="none"
-      panel={false}
       border={false}
-      block={false}
+      radius="none"
+      shadow={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}

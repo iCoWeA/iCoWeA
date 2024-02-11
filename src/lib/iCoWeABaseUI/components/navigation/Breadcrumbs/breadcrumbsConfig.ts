@@ -1,7 +1,7 @@
 const breadcrumbsConfig = {
   defaultProps: {
-    color: 'neutral',
     block: false,
+    color: 'neutral',
     gap: 'base',
     separator: '/'
   }

@@ -1,45 +1,37 @@
-import React, { type BaseHTMLAttributes, type FC } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import popoverConfig from './popoverConfig';
 
 export type PopoverArrowDefaultProps = BaseHTMLAttributes<HTMLDivElement> & {
-  color?: Colors;
+  color?: DefaultColors;
 };
 
 export type PopoverArrowProps = PopoverArrowDefaultProps & {
   theme: Themes;
-  position: OuterPositions;
   variant: Variants;
-  color: Colors;
+  color: DefaultColors;
 };
 
-const PopoverArrow: FC<PopoverArrowProps> = ({
-  theme,
-  position,
-  variant,
-  color,
-  className,
-  children,
-  ...restProps
-}) => {
-  /* --- Set classes --- */
-  const styles = popoverConfig.styles.arrow;
-  const splitedPosition = position.split('-')[0] as Positions;
+const PopoverArrow = forwardRef<HTMLDivElement, PopoverArrowProps>(
+  ({ theme, variant, color, className, children, ...restProps }, ref) => {
+    /* --- Set classes --- */
+    const mergedClassName = useMemo(() => {
+      const styles = popoverConfig.styles.arrow;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.positions[splitedPosition],
-    styles.variants[variant][theme][color],
-    className
-  );
+      return mergeClasses(styles.base, styles.variants[variant][theme][color], className);
+    }, [variant, theme, color, className]);
 
-  return (
-    <div
-      className={mergedClassName}
-      {...restProps}
-    />
-  );
-};
+    return (
+      <div
+        className={mergedClassName}
+        ref={ref}
+        {...restProps}
+      />
+    );
+  }
+);
+
+PopoverArrow.displayName = 'PopoverArrow';
 
 export default PopoverArrow;

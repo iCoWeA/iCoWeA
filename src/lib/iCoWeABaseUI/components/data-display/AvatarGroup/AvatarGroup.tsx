@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -19,14 +19,12 @@ const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>((props, ref) =>
   );
 
   /* --- Set classes --- */
-  const styles = avatarGroupConfig.styles;
-  const orientation = vertical ? 'vertical' : 'horizontal';
+  const mergedClassName = useMemo(() => {
+    const styles = avatarGroupConfig.styles;
+    const orientation = vertical ? 'vertical' : 'horizontal';
 
-  const mergedClassName = mergeClasses(
-    styles.orientations[orientation],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(styles.orientations[orientation], defaultClassName, className);
+  }, [vertical, defaultClassName, className]);
 
   return (
     <Flex
@@ -35,7 +33,6 @@ const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>((props, ref) =>
       justify="start"
       align="center"
       gap="none"
-      grow={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}

@@ -1,13 +1,13 @@
 const toggleButtonGroupConfig = {
   defaultProps: {
     vertical: false,
-    variant: 'default',
-    color: 'primary',
     size: 'md',
-    icon: false,
-    border: false,
     block: false,
-    shadow: false,
+    icon: false,
+    variant: 'text',
+    color: 'primary',
+    border: false,
+    radius: 'rounded',
     noRipple: false
   },
   styles: {
@@ -22,14 +22,15 @@ const toggleButtonGroupConfig = {
     },
     button: {
       base: {
-        width: 'w-auto',
         zIndex: 'z-100',
-        flexGrow: 'grow',
         active: 'active:z-200 [&.checked:active]:z-400',
         focus: 'focus:z-200 [&.checked:focus]:z-400',
-        focusVisible: 'focus-visible:z-200 focus-visible:border-transparent [&.checked:focus-visible]:z-400',
+        focusVisible: 'focus-visible:z-200 [&.checked:focus-visible]:z-400',
         checked: '[&.checked]:z-300',
         disabled: 'disabled:z-0'
+      },
+      width: {
+        width: 'w-auto'
       },
       orientations: {
         horizontal: {

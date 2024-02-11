@@ -1,15 +1,10 @@
 const containerConfig = {
   defaultProps: {
-    layout: 'default',
     spacing: 'md',
-    panel: false,
-    closable: 'none',
-    closeGap: 'base'
+    layout: 'default',
+    closable: 'none'
   },
   styles: {
-    closable: {
-      position: 'relative'
-    },
     layouts: {
       header: {
         padding: 'pb-0'

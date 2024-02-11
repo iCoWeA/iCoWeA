@@ -1,10 +1,12 @@
 const fabConfig = {
   defaultProps: {
-    variant: 'solid',
-    color: 'primary',
     size: 'md',
     icon: false,
+    variant: 'solid',
+    color: 'primary',
     border: false,
+    radius: 'rounded',
+    loading: false,
     noRipple: false
   },
   styles: {
@@ -13,11 +15,11 @@ const fabConfig = {
       zIndex: 'z-3000'
     },
     shadow: {
-      shadow: 'shadow-md',
-      hover: 'hover:shadow-lg',
-      active: 'active:shadow-sm',
-      focus: 'focus:shadow-sm',
-      focusVisible: 'focus-visible:shadow-sm'
+      shadow: 'shadow-xl',
+      hover: 'hover:shadow-2xl',
+      active: 'active:shadow-xl',
+      focus: 'focus:shadow-xl',
+      focusVisible: 'focus-visible:shadow-xl'
     }
   }
 };

@@ -1,16 +1,24 @@
-import React, { type SVGAttributes, type ReactElement, type FC, cloneElement } from 'react';
+import React, {
+  type SVGAttributes,
+  type ReactElement,
+  type FC,
+  useMemo,
+  cloneElement
+} from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { getBorderVariant } from '../../../utils/utils';
 import iconConfig from './iconConfig';
 
 export type IconDefaultProps = {
-  variant?: IconVariants;
-  color?: TextColors;
   size?: Sizes;
-  spacing?: boolean;
+  spacing?: IconSpacing;
+  variant?: Variants;
+  color?: Colors;
   border?: boolean;
+  radius?: Radiuses;
 };
 
 export type IconProps = Omit<SVGAttributes<SVGSVGElement>, 'spacing'> &
@@ -20,11 +28,12 @@ IconDefaultProps & {
 
 const Icon: FC<IconProps> = (props) => {
   const {
-    variant,
-    color,
     size,
     spacing,
+    variant,
+    color,
     border,
+    radius,
     defaultClassName,
     className,
     children,
@@ -34,19 +43,24 @@ const Icon: FC<IconProps> = (props) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = iconConfig.styles;
-  const sizeVariant = spacing ? (border ? 'bordered' : 'spaced') : 'default';
-  const colorVariant = variant === 'default' || variant === 'text' ? 'default' : variant;
+  const mergedClassName = useMemo(() => {
+    const styles = iconConfig.styles;
+    const spacingVariant =
+      spacing === 'icon' && border ? 'bordered' : spacing === 'text' ? 'text' : 'default';
+    const borderVariant = getBorderVariant(variant);
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.sizes[sizeVariant][size],
-    spacing && styles.spacing[size],
-    color !== 'inherit' && styles.variants[colorVariant][theme][color],
-    border && styles.border,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      border && styles.border,
+      spacing === 'icon' && styles.spacing[size],
+      radius !== 'none' && styles.radiuses[radius],
+      styles.sizes[spacingVariant][size],
+      color !== 'inherit' && styles.variants[variant][theme][color],
+      border && color !== 'inherit' && styles.borderVariants[borderVariant][theme][color],
+      defaultClassName,
+      className
+    );
+  }, [spacing, border, variant, size, radius, theme, color, defaultClassName, className]);
 
   if (children) {
     return cloneElement(children, {

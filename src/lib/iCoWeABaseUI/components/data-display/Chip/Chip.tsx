@@ -1,45 +1,40 @@
-import React, { type ReactNode, forwardRef } from 'react';
+import React, { type ReactNode, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import CloseButton, { type CloseButtonProps } from '../../inputs/CloseButton/CloseButton';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
-import { type IconProps } from '../Icon/Icon';
-import ChipButton, { type ChipButtonDefaultProps } from './ChipButton';
 import chipConfig from './chipConfig';
 
 export type ChipDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
   size?: Sizes;
+  variant?: Variants;
+  color?: DefaultColors;
   border?: boolean;
 };
 
 export type ChipProps = FlexProps &
 ChipDefaultProps & {
-  leftCloseButton?: boolean;
-  rightCloseButton?: boolean;
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
-  leftButtonProps?: ChipButtonDefaultProps;
-  rightButtonProps?: ChipButtonDefaultProps;
-  leftButtonIconProps?: IconProps;
-  rightButtonIconProps?: IconProps;
+  leftCloseButton?: boolean;
+  rightCloseButton?: boolean;
+  leftButtonProps?: CloseButtonProps;
+  rightButtonProps?: CloseButtonProps;
   disabled?: boolean;
 };
 
 const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
   const {
+    size,
     variant,
     color,
-    size,
-    leftCloseButton,
-    rightCloseButton,
     leftDecorator,
     rightDecorator,
+    leftCloseButton,
+    rightCloseButton,
     leftButtonProps,
     rightButtonProps,
-    leftButtonIconProps,
-    rightButtonIconProps,
     defaultClassName,
     className,
     children,
@@ -47,36 +42,33 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
   } = useConfig('chip', chipConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = chipConfig.styles.root;
+  const mergedClassName = useMemo(() => {
+    const styles = chipConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.sizes[size],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(styles.base, styles.sizes[size], defaultClassName, className);
+  }, [size, defaultClassName, className]);
 
   return (
     <Flex
-      variant={variant}
-      color={color}
-      spacing="none"
       direction="row"
       wrap="nowrap"
       justify="start"
       align="center"
       gap="base"
-      grow={false}
+      variant={variant}
+      color={color}
+      radius="circular"
       className={mergedClassName}
       ref={ref}
       {...restProps}
     >
       {leftCloseButton && (
-        <ChipButton
-          position="left"
-          variant={variant}
+        <CloseButton
+          placement="none"
+          size="none"
+          variant={variant === 'default' || variant === 'solid' ? 'default' : 'text'}
           color={color}
-          iconProps={leftButtonIconProps}
+          noRipple={false}
           {...leftButtonProps}
         />
       )}
@@ -84,11 +76,12 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>((props, ref) => {
       {children}
       {rightDecorator}
       {rightCloseButton && (
-        <ChipButton
-          position="right"
-          variant={variant}
+        <CloseButton
+          placement="none"
+          size="none"
+          variant={variant === 'default' || variant === 'solid' ? 'default' : 'text'}
           color={color}
-          iconProps={rightButtonIconProps}
+          noRipple={false}
           {...rightButtonProps}
         />
       )}

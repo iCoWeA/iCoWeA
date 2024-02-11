@@ -1,57 +1,66 @@
-import React, { type ReactNode, forwardRef } from 'react';
+import React, { type MutableRefObject, type ReactNode, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
-import BadgeAnchor, { type BadgeAnchorDefaultProps } from './BadgeAnchor';
 import badgeConfig from './badgeConfig';
 
 export type BadgeDefaultProps = {
-  position?: CornerPositions;
-  variant?: Variants;
-  color?: Colors;
+  placement?: CornerPlacements;
   size?: Sizes;
+  variant?: Variants;
+  color?: DefaultColors;
   border?: boolean;
   invisible?: boolean;
 };
 
 export type BadgeProps = Omit<FlexProps, 'content'> &
 BadgeDefaultProps & {
-  anchorProps?: BadgeAnchorDefaultProps;
+  anchorProps?: FlexProps;
+  badgeRef?: MutableRefObject<HTMLDivElement> | null;
   content?: ReactNode;
   disabled?: boolean;
 };
 
 const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   const {
-    position,
+    placement,
     size,
     border,
     invisible,
-    content,
     anchorProps,
+    badgeRef,
     defaultClassName,
     className,
+    content,
     children,
     ...restProps
   } = useConfig('badge', badgeConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = badgeConfig.styles.root;
-  const sizeVariant = !content ? 'empty' : border ? 'border' : 'default';
+  const mergedClassName = useMemo(() => {
+    const styles = badgeConfig.styles;
+    const sizeVariant = !content ? 'empty' : border ? 'border' : 'default';
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.positions[position],
-    styles.sizes[sizeVariant][size],
-    border && styles.border,
-    invisible && styles.invisible,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      border && styles.border,
+      invisible && styles.invisible,
+      styles.placements[placement],
+      styles.sizes[sizeVariant][size],
+      defaultClassName,
+      className
+    );
+  }, [!!content, border, invisible, placement, size, defaultClassName, className]);
 
   return (
-    <BadgeAnchor
+    <Flex
+      direction="row"
+      wrap="nowrap"
+      justify="start"
+      align="stretch"
+      gap="none"
+      position="relative"
       ref={ref}
       {...anchorProps}
     >
@@ -62,13 +71,16 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
         justify="center"
         align="center"
         gap="base"
-        grow={false}
+        position="absolute"
+        border={border}
+        radius="circular"
         className={mergedClassName}
+        ref={badgeRef}
         {...restProps}
       >
         {content}
       </Flex>
-    </BadgeAnchor>
+    </Flex>
   );
 });
 

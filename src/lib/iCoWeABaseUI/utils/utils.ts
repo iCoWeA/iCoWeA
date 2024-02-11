@@ -22,3 +22,23 @@ export const getFocusableElements = (element: HTMLElement): HTMLElement[] => [..
 ].filter(
   el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden')
 );
+
+export const getBorderType = (border: Borders): 'none' | 'all' | 'x' | 'y' | 'top' | 'bottom' | 'left' | 'right' => {
+  if (typeof border === 'boolean') {
+    return border ? 'all' : 'none';
+  }
+
+  return border;
+};
+
+export const addPanelSize = (size: Spacings): PanelSpacings => (size + '-panel') as PanelSpacings;
+
+export const cutPanelSize = (size: PanelSpacings): Spacings => size.replace('-panel', '') as Spacings;
+
+export const reverseColor = (variant: Variants, color: DefaultColors): DefaultTextColors => (variant === 'default' || variant === 'solid' ? 'on-' + color : color) as DefaultTextColors;
+
+export const cutTextColor = (color: TextColors): Colors => color.replace('on-', '') as Colors;
+
+export const getBorderVariant = (variant: Variants): TextVariants => variant === 'default' || variant === 'solid' ? 'default' : 'solid';
+
+export const getInputVariant = (color: DefaultTextColors): 'default' | 'solid' => color.startsWith('on') ? 'default' : 'solid';

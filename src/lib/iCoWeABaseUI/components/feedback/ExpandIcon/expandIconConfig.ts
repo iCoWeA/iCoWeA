@@ -1,11 +1,11 @@
 const expandIconConfig = {
   defaultProps: {
-    color: 'inherit',
-    size: 'md'
+    size: 'md',
+    color: 'inherit'
   },
   styles: {
     base: {
-      transition: 'transition'
+      transition: 'transition-transform'
     },
     open: {
       transform: 'rotate-180'

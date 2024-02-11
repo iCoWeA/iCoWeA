@@ -1,19 +1,21 @@
 const tooltipConfig = {
   defaultProps: {
-    position: 'bottom',
+    placement: 'bottom',
     offset: 0,
+    spacing: 'md',
     variant: 'solid',
     color: 'neutral',
-    spacing: 'md',
-    responsive: true,
-    arrow: false,
+    border: false,
     keepOnHover: false,
     followCursor: false,
-    closeOnEscape: false
+    responsive: true,
+    closeOnEscape: false,
+    arrow: false
   },
   styles: {
     base: {
-      zIndes: 'z-5000'
+      zIndes: 'z-5000',
+      font: 'text-xs'
     },
     followCursor: {
       position: 'fixed',

@@ -2,7 +2,7 @@
  * aria-labelledby
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
@@ -13,16 +13,15 @@ import LinearProgressLabel, { type LinearProgressLabelDefaultProps } from './Lin
 import linearProgressConfig from './linearProgressConfig';
 
 export type LinearProgressDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
-  size?: Sizes;
   vertical?: boolean;
-  innerBar?: TextColors;
+  size?: Sizes;
+  color?: DefaultTextColors;
   value?: number | string;
 };
 
-export type LinearProgressProps = FlexProps &
+export type LinearProgressProps = Omit<FlexProps, 'color'> &
 LinearProgressDefaultProps & {
+  innerBar?: DefaultTextColors;
   progressBarProps?: LinearProgressBarDefaultProps;
   labelProps?: LinearProgressLabelDefaultProps;
   disabled?: boolean;
@@ -30,17 +29,16 @@ LinearProgressDefaultProps & {
 
 const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, ref) => {
   const {
-    variant,
-    color,
-    size,
     vertical,
+    size,
+    color,
+    value,
     innerBar,
     progressBarProps,
     labelProps,
-    value,
-    disabled,
     defaultClassName,
     className,
+    disabled,
     children,
     ...restContainerProps
   } = useConfig('linearProgress', linearProgressConfig.defaultProps, props);
@@ -48,17 +46,17 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = linearProgressConfig.styles.root;
-  const orientation = vertical ? 'vertical' : 'horizontal';
+  const mergedClassName = useMemo(() => {
+    const styles = linearProgressConfig.styles.root;
+    const orientation = vertical ? 'vertical' : 'horizontal';
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    children ? styles.labelSizes[orientation] : styles.sizes[orientation][size],
-    innerBar !== 'inherit' && !disabled && styles.colors[theme][innerBar],
-    disabled && styles.disabled[theme],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      !disabled && innerBar && styles.colors[theme][innerBar],
+      children ? styles.sizes.label[orientation] : styles.sizes.default[orientation][size],
+      defaultClassName,
+      className
+    );
+  }, [vertical, !!children, size, disabled, theme, innerBar, defaultClassName, className]);
 
   return (
     <Flex
@@ -67,21 +65,20 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
       justify="start"
       align="stretch"
       gap="none"
-      grow={false}
-      block
-      aria-valuenow={+value}
-      aria-valuemin={0}
+      block={!vertical}
+      radius="circular"
       aria-valuemax={100}
-      role="progressbar"
+      aria-valuemin={0}
+      aria-valuenow={+value}
       className={mergedClassName}
+      disabled={disabled}
+      role="progressbar"
       ref={ref}
       {...restContainerProps}
     >
       <LinearProgressBar
-        theme={theme}
-        variant={variant}
+        vertical={vertical}
         color={color}
-        orientation={orientation}
         value={value}
         disabled={disabled}
         {...progressBarProps}
@@ -89,7 +86,6 @@ const LinearProgress = forwardRef<HTMLDivElement, LinearProgressProps>((props, r
         {children && (
           <LinearProgressLabel
             vertical={vertical}
-            disabled={disabled}
             {...labelProps}
           >
             {children}

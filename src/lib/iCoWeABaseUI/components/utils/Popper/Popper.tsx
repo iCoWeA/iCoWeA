@@ -1,7 +1,12 @@
-import React, { type MutableRefObject, forwardRef, useRef, useImperativeHandle } from 'react';
+import React, {
+  type MutableRefObject,
+  forwardRef,
+  useRef,
+  useImperativeHandle,
+  useCallback
+} from 'react';
 import { createPortal } from 'react-dom';
 
-import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useClickOutside from '../../../hooks/useClickOutside';
 import useConfig from '../../../hooks/useConfig';
 import useFocusTrap from '../../../hooks/useFocusTrap';
@@ -18,8 +23,8 @@ export type PopperDefaultProps = {
   closeOnEscape?: boolean;
   closeDuration?: number;
   focusTrap?: boolean;
-  backdrop?: boolean;
   closeOnBackdropClick?: boolean;
+  backdrop?: Backdrop;
 };
 
 export type PopperProps = TransitionProps &
@@ -27,26 +32,24 @@ PopperDefaultProps & {
   onClose?: ((state: boolean) => void) | ((state?: boolean) => void);
   open?: boolean;
   portalTarget?: Element | null;
-  anchorRef?: MutableRefObject<HTMLElement | null>;
   backdropProps?: BackdropProps;
+  anchorRef?: MutableRefObject<HTMLElement | null>;
 };
 
 const Popper = forwardRef<HTMLDivElement, PopperProps>((props, forwardedRef) => {
   const {
     onClose,
-    open,
     lockScroll,
     closeOnOutsideClick,
     closeOnEscape,
     closeDuration,
     focusTrap,
-    backdrop,
     closeOnBackdropClick,
+    backdrop,
+    open,
     portalTarget,
-    anchorRef,
     backdropProps,
-    defaultClassName,
-    className,
+    anchorRef,
     ...restProps
   } = useConfig('popper', popperConfig.defaultProps, props);
 
@@ -59,31 +62,29 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, forwardedRef) => 
   );
 
   /* --- Set event handlers --- */
-  const closeHandler = onClose && (() => onClose(false));
+  const closeHandler = useCallback(() => (onClose ? onClose(false) : undefined), [onClose]);
 
   useFocusTrap(ref, open && focusTrap);
 
   useLockScroll(lockScroll && open);
 
-  useClickOutside(closeOnOutsideClick && open && !backdrop && closeHandler, ref, anchorRef);
+  useClickOutside(
+    closeOnOutsideClick && open && backdrop === 'none' && closeHandler,
+    ref,
+    anchorRef
+  );
 
   useKeyboard('Escape', closeOnEscape && closeHandler);
 
   useTimer(open && closeHandler, closeDuration);
 
-  /* --- Set classes --- */
-  const styles = popperConfig.styles;
-
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
-
   /* --- Set portal --- */
   const node = (
     <Transition
-      enter={open}
-      variant="fade"
+      transition="fade"
       smooth={false}
       unmountOnExit={false}
-      className={mergedClassName}
+      enter={open}
       ref={ref}
       {...restProps}
     />
@@ -91,11 +92,11 @@ const Popper = forwardRef<HTMLDivElement, PopperProps>((props, forwardedRef) => 
 
   return (
     <>
-      {backdrop && (
+      {backdrop !== 'none' && (
         <Backdrop
           onClose={closeOnBackdropClick ? onClose : undefined}
+          invisible={backdrop === 'invisible'}
           open={open}
-          invisible
           {...backdropProps}
         />
       )}

@@ -17,10 +17,6 @@ const textareaConfig = {
       block: {
         width: 'w-full'
       },
-      disabled: {
-        pointer: 'pointer-events-none',
-        userSelect: 'select-none'
-      },
       shift: {
         group: 'shift'
       },
@@ -32,19 +28,6 @@ const textareaConfig = {
       base: {
         transition: 'transition-colors'
       },
-      positions: {
-        left: {
-          padding: 'pr-4'
-        },
-        middle: {
-          position: 'relative',
-          dispaly: 'block',
-          width: 'w-full'
-        },
-        right: {
-          padding: 'pl-4'
-        }
-      },
       padding: {
         left: {
           padding: 'pl-4'
@@ -53,23 +36,26 @@ const textareaConfig = {
           padding: 'pr-4'
         }
       },
-      variants: {
+      placements: {
         default: {
           left: {
             margin: 'mb-px',
-            padding: 'pt-4 pb-0.5',
+            padding: 'pr-4 pt-4 pb-0.5',
             border: 'border-b',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           },
           middle: {
+            position: 'relative',
+            dispaly: 'block',
             margin: 'mb-px',
             padding: 'pt-4 pb-0.5',
             border: 'border-b',
+            flexGrow: 'grow',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           },
           right: {
             margin: 'mb-px',
-            padding: 'pt-4 pb-0.5',
+            padding: 'pl-4 pt-4 pb-0.5',
             border: 'border-b',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           }
@@ -77,20 +63,23 @@ const textareaConfig = {
         outlined: {
           left: {
             margin: 'my-px ml-px',
-            padding: 'py-2',
+            padding: 'pr-4 py-2',
             border: 'border-y border-l',
             borderRadius: 'rounded-l-lg',
             focusWithin: 'group-[.focus]:m-0 group-[.focus]:border-y-2 group-[.focus]:border-l-2'
           },
           middle: {
+            position: 'relative',
+            dispaly: 'block',
             margin: 'my-px',
             padding: 'py-2',
             border: 'border-y',
+            flexGrow: 'grow',
             focusWithin: 'group-[.focus]:m-0 group-[.focus]:border-y-2'
           },
           right: {
             margin: 'my-px mr-px',
-            padding: 'py-2',
+            padding: 'pl-4 py-2',
             border: 'border-y border-r',
             borderRadius: 'rounded-r-lg',
             focusWithin: 'group-[.focus]:m-0 group-[.focus]:border-y-2 group-[.focus]:border-r-2'
@@ -99,45 +88,63 @@ const textareaConfig = {
         soft: {
           left: {
             margin: 'mb-px',
-            padding: 'pt-4 pb-0.5',
+            padding: 'pr-4 pt-4 pb-0.5',
             border: 'border-b',
             borderRadius: 'rounded-tl-lg',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           },
           middle: {
+            position: 'relative',
+            dispaly: 'block',
             margin: 'mb-px',
             padding: 'pt-4 pb-0.5',
             border: 'border-b',
+            flexGrow: 'grow',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           },
           right: {
             margin: 'mb-px',
-            padding: 'pt-4 pb-0.5',
+            padding: 'pl-4 pt-4 pb-0.5',
             border: 'border-b',
             borderRadius: 'rounded-tr-lg',
             focusWithin: 'group-[.focus]:mb-0 group-[.focus]:border-b-2'
           }
         }
       },
+      color: {
+        disabled: {
+          light: {
+            border: 'border-light-neutral/40',
+            background: 'bg-light-neutral/20'
+          },
+          dark: {
+            border: 'border-dark-neutral/40',
+            background: 'bg-dark-neutral/20'
+          }
+        },
+        valid: {
+          light: {
+            border: 'border-light-success'
+          },
+          dark: {
+            border: 'border-dark-success'
+          }
+        },
+        invalid: {
+          light: {
+            border: 'border-light-error'
+          },
+          dark: {
+            border: 'border-dark-error'
+          }
+        }
+      },
       background: {
         light: {
           background: 'bg-light-neutral/10'
-        }
-      },
-      valid: {
-        light: {
-          border: 'border-light-success'
-        }
-      },
-      invalid: {
-        light: {
-          border: 'border-light-error'
-        }
-      },
-      disabled: {
-        light: {
-          border: 'border-light-neutral/40',
-          background: 'bg-light-neutral/20'
+        },
+        dark: {
+          background: 'bg-dark-neutral/10'
         }
       },
       colors: {
@@ -165,6 +172,80 @@ const textareaConfig = {
           error: {
             border: 'border-light-divider',
             focusWithin: 'group-[.focus]:border-light-error'
+          },
+          'on-neutral': {
+            border: 'border-light-divider',
+            focusWithin: 'group-[.focus]:border-light-on-neutral'
+          },
+          'on-primary': {
+            border: 'border-light-divider',
+            focusWithin: 'group-[.focus]:border-light-on-primary'
+          },
+          'on-secondary': {
+            border: 'border-light-divider',
+            focusWithin: 'group-[.focus]:border-light-on-secondary'
+          },
+          'on-success': {
+            border: 'border-light-divider',
+            focusWithin: 'group-[.focus]:border-light-on-success'
+          },
+          'on-warning': {
+            border: 'border-light-divider',
+            focusWithin: 'group-[.focus]:border-light-on-warning'
+          },
+          'on-error': {
+            border: 'border-light-divider',
+            focusWithin: 'group-[.focus]:border-light-on-error'
+          }
+        },
+        dark: {
+          neutral: {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-neutral'
+          },
+          primary: {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-primary'
+          },
+          secondary: {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-secondary'
+          },
+          success: {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-success'
+          },
+          warning: {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-warning'
+          },
+          error: {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-error'
+          },
+          'on-neutral': {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-on-neutral'
+          },
+          'on-primary': {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-on-primary'
+          },
+          'on-secondary': {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-on-secondary'
+          },
+          'on-success': {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-on-success'
+          },
+          'on-warning': {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-on-warning'
+          },
+          'on-error': {
+            border: 'border-dark-divider',
+            focusWithin: 'group-[.focus]:border-dark-on-error'
           }
         }
       }
@@ -175,13 +256,26 @@ const textareaConfig = {
         width: 'w-full',
         height: 'h-20',
         resize: 'resize-none',
-        font: 'font-semibold',
+        font: 'text-sm font-semibold',
         background: 'bg-transparent',
         focus: 'focus:outline-0'
       },
-      colors: {
-        light: {
-          color: 'text-light-neutral'
+      color: {
+        default: {
+          light: {
+            color: 'text-light-on-neutral'
+          },
+          dark: {
+            color: 'text-dark-on-neutral'
+          }
+        },
+        solid: {
+          light: {
+            color: 'text-light-neutral'
+          },
+          dark: {
+            color: 'text-dark-neutral'
+          }
         }
       }
     },
@@ -206,7 +300,7 @@ const textareaConfig = {
         position: 'absolute',
         left: 'left-0',
         display: 'flex',
-        height: 'h-5',
+        font: 'text-sm',
         alignItems: 'align-center',
         gap: 'gap-2',
         transition: 'transition-all',
@@ -215,7 +309,7 @@ const textareaConfig = {
         shift: 'group-[.shift]:h-4 group-[.shift]:text-xs',
         focusWithin: 'group-[.focus]:h-4 group-[.focus]:text-xs'
       },
-      variants: {
+      placements: {
         default: {
           top: 'top-4',
           shift: 'group-[.shift]:top-0 group-[.shift]:translate-y-0',
@@ -232,55 +326,123 @@ const textareaConfig = {
           focusWithin: 'group-[.focus]:top-0 group-[.focus]:translate-y-0'
         }
       },
-      valid: {
-        light: {
-          fill: 'fill-light-success',
-          color: 'text-light-success'
-        }
-      },
-      invalid: {
-        light: {
-          fill: 'fill-light-error',
-          color: 'text-light-error'
-        }
-      },
-      disabled: {
-        light: {
-          fill: 'fill-light-neutral/40',
-          color: 'text-light-neutral/40'
+      color: {
+        default: {
+          light: {
+            fill: 'fill-light-divider',
+            color: 'text-light-divider'
+          },
+          dark: {
+            fill: 'fill-dark-divider',
+            color: 'text-dark-divider'
+          }
+        },
+        disabled: {
+          light: {
+            fill: 'fill-light-neutral/40',
+            color: 'text-light-neutral/40'
+          },
+          dark: {
+            fill: 'fill-dark-neutral/40',
+            color: 'text-dark-neutral/40'
+          }
+        },
+        valid: {
+          light: {
+            fill: 'fill-light-success',
+            color: 'text-light-success'
+          },
+          dark: {
+            fill: 'fill-dark-success',
+            color: 'text-dark-success'
+          }
+        },
+        invalid: {
+          light: {
+            fill: 'fill-light-error',
+            color: 'text-light-error'
+          },
+          dark: {
+            fill: 'fill-dark-error',
+            color: 'text-dark-error'
+          }
         }
       },
       colors: {
         light: {
           neutral: {
-            fill: 'fill-light-neutral',
-            color: 'text-light-neutral',
             focusWithin: 'group-[.focus]:fill-light-neutral group-[.focus]:text-light-neutral'
           },
           primary: {
-            fill: 'fill-light-neutral',
-            color: 'text-light-neutral',
             focusWithin: 'group-[.focus]:fill-light-primary group-[.focus]:text-light-primary'
           },
           secondary: {
-            fill: 'fill-light-neutral',
-            color: 'text-light-neutral',
             focusWithin: 'group-[.focus]:fill-light-secondary group-[.focus]:text-light-secondary'
           },
           success: {
-            fill: 'fill-light-neutral',
-            color: 'text-light-neutral',
             focusWithin: 'group-[.focus]:fill-light-success group-[.focus]:text-light-success'
           },
           warning: {
-            fill: 'fill-light-neutral',
-            color: 'text-light-neutral',
             focusWithin: 'group-[.focus]:fill-light-warning group-[.focus]:text-light-warning'
           },
           error: {
-            fill: 'fill-light-neutral',
-            color: 'text-light-neutral',
             focusWithin: 'group-[.focus]:fill-light-error group-[.focus]:text-light-error'
+          },
+          'on-neutral': {
+            focusWithin: 'group-[.focus]:fill-light-on-neutral group-[.focus]:text-light-on-neutral'
+          },
+          'on-primary': {
+            focusWithin: 'group-[.focus]:fill-light-on-primary group-[.focus]:text-light-on-primary'
+          },
+          'on-secondary': {
+            focusWithin: 'group-[.focus]:fill-light-on-secondary group-[.focus]:text-light-on-secondary'
+          },
+          'on-success': {
+            focusWithin: 'group-[.focus]:fill-light-on-success group-[.focus]:text-light-on-success'
+          },
+          'on-warning': {
+            focusWithin: 'group-[.focus]:fill-light-on-warning group-[.focus]:text-light-on-warning'
+          },
+          'on-error': {
+            focusWithin: 'group-[.focus]:fill-light-on-error group-[.focus]:text-light-on-error'
+          }
+        },
+        dark: {
+          neutral: {
+            focusWithin: 'group-[.focus]:fill-dark-neutral group-[.focus]:text-dark-neutral'
+          },
+          primary: {
+            focusWithin: 'group-[.focus]:fill-dark-primary group-[.focus]:text-dark-primary'
+          },
+          secondary: {
+            focusWithin: 'group-[.focus]:fill-dark-secondary group-[.focus]:text-dark-secondary'
+          },
+          success: {
+            focusWithin: 'group-[.focus]:fill-dark-success group-[.focus]:text-dark-success'
+          },
+          warning: {
+            focusWithin: 'group-[.focus]:fill-dark-warning group-[.focus]:text-dark-warning'
+          },
+          error: {
+            focusWithin: 'group-[.focus]:fill-dark-error group-[.focus]:text-dark-error'
+          },
+          'on-neutral': {
+            focusWithin: 'group-[.focus]:fill-dark-on-neutral group-[.focus]:text-dark-on-neutral'
+          },
+          'on-primary': {
+            focusWithin: 'group-[.focus]:fill-dark-on-primary group-[.focus]:text-dark-on-primary'
+          },
+          'on-secondary': {
+            focusWithin: 'group-[.focus]:fill-dark-on-secondary group-[.focus]:text-dark-on-secondary'
+          },
+          'on-success': {
+            focusWithin: 'group-[.focus]:fill-dark-on-success group-[.focus]:text-dark-on-success'
+          },
+          'on-warning': {
+            focusWithin: 'group-[.focus]:fill-dark-on-warning group-[.focus]:text-dark-on-warning'
+          },
+          'on-error': {
+            focusWithin: 'group-[.focus]:fill-dark-on-error group-[.focus]:text-dark-on-error'
           }
         }
       }

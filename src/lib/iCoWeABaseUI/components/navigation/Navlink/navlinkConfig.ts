@@ -1,12 +1,12 @@
 const navlinkConfig = {
   defaultProps: {
-    variant: 'default',
-    color: 'primary',
     size: 'md',
-    icon: false,
-    border: false,
     block: false,
-    shadow: false,
+    icon: false,
+    variant: 'text',
+    color: 'primary',
+    border: false,
+    radius: 'circular',
     loading: false,
     noRipple: false
   },

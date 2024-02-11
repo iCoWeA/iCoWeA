@@ -2,16 +2,17 @@
  * aria-labelledby
  */
 
-import React, { type BaseHTMLAttributes, forwardRef } from 'react';
+import React, { type BaseHTMLAttributes, forwardRef, useMemo } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { getBorderType, getBorderVariant } from '../../../utils/utils';
 import mainConfig from './mainConfig';
 
 export type MainDefaultProps = {
   variant?: Variants;
-  color?: TextColors;
+  color?: Colors;
   border?: Borders;
 };
 
@@ -27,16 +28,22 @@ const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = mainConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = mainConfig.styles;
+    const borderType = getBorderType(border);
+    const borderVariant = getBorderVariant(variant);
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    color !== 'inherit' && styles.variants[variant][theme][color],
-    typeof border === 'string' && border !== 'none' && styles.borders[border],
-    typeof border === 'boolean' && border && styles.borders.all,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      borderType !== 'none' && styles.borders[borderType],
+      color !== 'inherit' && styles.variants[variant][theme][color],
+      color !== 'inherit' &&
+        borderType !== 'none' &&
+        styles.borderVariants[borderVariant][theme][color],
+      defaultClassName,
+      className
+    );
+  }, [border, variant, theme, color, defaultClassName, className]);
 
   return (
     <main

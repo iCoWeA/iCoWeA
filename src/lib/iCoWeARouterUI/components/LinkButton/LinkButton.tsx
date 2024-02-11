@@ -1,23 +1,22 @@
-import React, { type ReactNode, forwardRef } from 'react';
+import React, { type ReactNode, forwardRef, useMemo } from 'react';
 import { Link as RouterLink, type LinkProps as RouterLinkProps } from 'react-router-dom';
 
-import ButtonSpinner, {
-  type ButtonSpinnerProps
-} from '../../../iCoWeAUI/components/ButtonSpinner/ButtonSpinner';
-import Ripple, { type RippleProps } from '../../../iCoWeAUI/components/Ripple/Ripple';
+import { getBorderVariant, reverseColor } from '../../../iCoWeABaseUI/utils/utils';
+import DefaultRipple, { type DefaultRippleProps } from '../../../iCoWeAUI/components/DefaultRipple/DefaultRipple';
 import useTheme from '../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../iCoWeAUI/utils/utils';
 import useConfig from '../../hooks/useConfig';
+import LinkButtonSpinner, { type LinkButtonSpinnerDefaultProps } from './LinkButtonSpinner';
 import linkButtonConfig from './linkButtonConfig';
 
 export type LinkButtonDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
-  size?: Sizes;
-  icon?: boolean;
-  border?: boolean;
+  size?: Spacings;
   block?: boolean;
-  shadow?: boolean;
+  icon?: boolean;
+  variant?: Variants;
+  color?: DefaultColors;
+  border?: boolean;
+  radius?: Radiuses;
   loading?: boolean;
   noRipple?: boolean;
 };
@@ -26,29 +25,29 @@ export type LinkButtonProps = RouterLinkProps &
 LinkButtonDefaultProps & {
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
-  rippleProps?: RippleProps;
-  spinnerProps?: ButtonSpinnerProps;
+  rippleProps?: DefaultRippleProps;
+  spinnerProps?: LinkButtonSpinnerDefaultProps;
   disabled?: boolean;
 };
 
 const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>((props, ref) => {
   const {
+    size,
+    block,
+    icon,
     variant,
     color,
-    size,
-    icon,
     border,
-    block,
-    shadow,
+    radius,
     loading,
     noRipple,
     leftDecorator,
     rightDecorator,
     rippleProps,
     spinnerProps,
-    disabled,
     defaultClassName,
     className,
+    disabled,
     children,
     ...restProps
   } = useConfig('linkButton', linkButtonConfig.defaultProps, props);
@@ -56,21 +55,42 @@ const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>((props, ref) =
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = linkButtonConfig.styles;
-  const sizeVariant = icon ? 'icon' : 'default';
+  const borderVariant = getBorderVariant(variant);
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.sizes[sizeVariant][size],
-    disabled ? styles.disabled[theme] : styles.variants[variant][theme][color],
-    icon && styles.icon,
-    border && styles.border,
-    block && styles.block,
-    shadow && styles.shadow,
-    loading && styles.loading,
+  const mergedClassName = useMemo(() => {
+    const styles = linkButtonConfig.styles.root;
+    const sizeVariant = icon ? 'icon' : 'default';
+
+    return mergeClasses(
+      styles.base,
+      ((!noRipple && !disabled) || loading) && styles.ripple,
+      block && styles.block,
+      icon && styles.icon,
+      border && styles.border,
+      variant === 'solid' && !disabled && styles.shadow,
+      radius !== 'none' && styles.radiuses[radius],
+      styles.sizes[sizeVariant][size],
+      disabled ? styles.disabled[theme] : styles.variants[variant][theme][color],
+      border && !disabled && styles.borderVariants[borderVariant][theme][color],
+      loading && styles.loading,
+      defaultClassName,
+      className
+    );
+  }, [
+    noRipple,
+    loading,
+    block,
+    icon,
+    border,
+    radius,
+    disabled,
+    variant,
+    theme,
+    color,
+    size,
     defaultClassName,
     className
-  );
+  ]);
 
   return (
     <RouterLink
@@ -82,17 +102,16 @@ const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>((props, ref) =
       {children}
       {rightDecorator}
       {loading && (
-        <ButtonSpinner
-          variant={variant}
-          color={color}
-          value="75"
+        <LinkButtonSpinner
+          color={reverseColor(variant, color)}
+          disabled={disabled}
           {...spinnerProps}
         />
       )}
-      {!noRipple && (
-        <Ripple
-          variant={variant}
-          color={color}
+      {!noRipple && !disabled && (
+        <DefaultRipple
+          color={reverseColor(variant, color)}
+          border={border}
           sibling={false}
           {...rippleProps}
         />

@@ -1,10 +1,13 @@
 const drawerConfig = {
   defaultProps: {
+    placement: 'left',
     variant: 'plain',
     color: 'neutral',
-    position: 'left',
+    radius: 'rounded',
     closeOnEscape: true,
-    focusTrap: false
+    focusTrap: false,
+    smooth: false,
+    backdrop: 'visible'
   },
   styles: {
     root: {
@@ -12,7 +15,7 @@ const drawerConfig = {
         position: 'fixed',
         zIndex: 'z-4000'
       },
-      positions: {
+      placements: {
         top: {
           top: 'top-0',
           left: 'left-0',
@@ -36,22 +39,46 @@ const drawerConfig = {
       }
     },
     container: {
-      positions: {
+      orientations: {
+        horizontal: {
+          width: 'w-full'
+        },
+        vertical: {
+          height: 'h-full'
+        }
+      },
+      radiuses: {
         top: {
-          width: 'w-full',
-          borderRadius: 'rounded-b-xl'
+          rounded: {
+            borderRadius: 'rounded-b-xl'
+          },
+          circular: {
+            borderRadius: 'rounded-b-full'
+          }
         },
         bottom: {
-          width: 'w-full',
-          borderRadius: 'rounded-t-xl'
+          rounded: {
+            borderRadius: 'rounded-t-xl'
+          },
+          circular: {
+            borderRadius: 'rounded-t-full'
+          }
         },
         left: {
-          width: 'h-full',
-          borderRadius: 'rounded-r-xl'
+          rounded: {
+            borderRadius: 'rounded-r-xl'
+          },
+          circular: {
+            borderRadius: 'rounded-r-full'
+          }
         },
         right: {
-          width: 'h-full',
-          borderRadius: 'rounded-l-xl'
+          rounded: {
+            borderRadius: 'rounded-l-xl'
+          },
+          circular: {
+            borderRadius: 'rounded-l-full'
+          }
         }
       }
     }

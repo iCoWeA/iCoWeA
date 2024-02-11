@@ -1,4 +1,4 @@
-import React, { type LabelHTMLAttributes, type FC } from 'react';
+import React, { type LabelHTMLAttributes, type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import inputConfig from './inputConfig';
@@ -6,36 +6,37 @@ import inputConfig from './inputConfig';
 export type InputLabelDefaultProps = LabelHTMLAttributes<HTMLLabelElement>;
 
 export type InputLabelProps = InputLabelDefaultProps & {
-  variant: InputVariants;
   theme: Themes;
-  color: Colors;
-  valid: boolean;
-  invalid: boolean;
+  variant: InputVariants;
+  color: DefaultTextColors;
+  valid?: boolean;
+  invalid?: boolean;
   disabled?: boolean;
 };
 
 const InputLabel: FC<InputLabelProps> = ({
-  variant,
   theme,
+  variant,
   color,
   valid,
   invalid,
-  disabled,
   className,
+  disabled,
   ...restProps
 }) => {
   /* --- Set classes --- */
-  const styles = inputConfig.styles.label;
+  const mergedClassName = useMemo(() => {
+    const styles = inputConfig.styles.label;
+    const colorVariant = disabled ? 'disabled' : invalid ? 'invalid' : valid ? 'valid' : 'default';
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant],
-    !valid && !invalid && !disabled && styles.colors[theme][color],
-    valid && !disabled && styles.valid[theme],
-    invalid && !disabled && styles.invalid[theme],
-    disabled && styles.disabled[theme],
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      styles.placements[variant],
+      styles.color[colorVariant][theme],
+      colorVariant === 'default' && styles.colors[theme][color],
+      className
+    );
+  }, [disabled, invalid, valid, variant, theme, color, className]);
 
   return (
     <label

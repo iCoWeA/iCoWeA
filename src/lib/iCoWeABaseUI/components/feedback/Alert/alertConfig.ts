@@ -1,27 +1,14 @@
 const alertConfig = {
   defaultProps: {
-    alert: {
-      variant: 'solid',
-      color: 'primary',
-      size: 'md',
-      border: 'none',
-      shadow: true,
-      closable: 'none'
-    }
+    size: 'md',
+    variant: 'solid',
+    color: 'warning',
+    border: 'none',
+    closable: 'none'
   },
   styles: {
-    root: {
-      base: {
-        borderRadius: 'rounded-xl'
-      },
-      shadow: {
-        shadow: 'shadow-sm'
-      }
-    },
-    body: {
-      base: {
-        flexGrow: 'grow'
-      }
+    base: {
+      font: 'text-sm'
     }
   }
 };

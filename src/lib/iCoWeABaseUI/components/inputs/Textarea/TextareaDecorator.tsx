@@ -1,49 +1,47 @@
-import React, { type FC } from 'react';
+import React, { type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
-import textareaConfig from './textareaConfig';
+import inputConfig from './textareaConfig';
 
-export type TextareaDecoratorDefaultProps = Omit<FlexProps, 'variant'> & {
-  variant?: InputVariants;
-};
+export type TextareaDecoratorDefaultProps = FlexProps;
 
-export type TextareaDecoratorProps = TextareaDecoratorDefaultProps & {
-  position: SidePositions;
-  variant: InputVariants;
+export type TextareaDecoratorProps = Omit<TextareaDecoratorDefaultProps, 'color'> & {
+  placement: SidePlacements;
   theme: Themes;
-  color: Colors;
-  valid: boolean;
-  invalid: boolean;
+  inputVariant: InputVariants;
+  color: DefaultTextColors;
+  valid?: boolean;
+  invalid?: boolean;
+  disabled?: boolean;
 };
 
 const TextareaDecorator: FC<TextareaDecoratorProps> = ({
-  position,
-  variant,
+  placement,
   theme,
+  inputVariant,
   color,
   valid,
   invalid,
-  disabled,
   className,
+  disabled,
   children,
   ...restProps
 }) => {
   /* --- Set classes --- */
-  const styles = textareaConfig.styles.container;
+  const mergedClassName = useMemo(() => {
+    const styles = inputConfig.styles.container;
+    const colorVariant = disabled ? 'disabled' : invalid ? 'invalid' : valid ? 'valid' : false;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.positions[position],
-    styles.variants[variant][position],
-    children && styles.padding[position],
-    !disabled && variant === 'soft' && styles.background[theme],
-    !valid && !invalid && !disabled && styles.colors[theme][color],
-    valid && !disabled && styles.valid[theme],
-    invalid && !disabled && styles.invalid[theme],
-    disabled && styles.disabled[theme],
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      children && styles.padding[placement],
+      styles.placements[inputVariant][placement],
+      colorVariant ? styles.color[colorVariant][theme] : styles.colors[theme][color],
+      !colorVariant && inputVariant === 'soft' && styles.background[theme],
+      className
+    );
+  }, [disabled, invalid, valid, inputVariant, !!children, placement, theme, color, className]);
 
   return (
     <Flex
@@ -52,7 +50,6 @@ const TextareaDecorator: FC<TextareaDecoratorProps> = ({
       justify="start"
       align="start"
       gap="base"
-      grow={false}
       className={mergedClassName}
       {...restProps}
     >

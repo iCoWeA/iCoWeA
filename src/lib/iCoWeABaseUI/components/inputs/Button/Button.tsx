@@ -1,22 +1,21 @@
-import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef } from 'react';
+import React, { type ButtonHTMLAttributes, type ReactNode, forwardRef, useMemo } from 'react';
 
-import ButtonSpinner, {
-  type ButtonSpinnerProps
-} from '../../../../iCoWeAUI/components/ButtonSpinner/ButtonSpinner';
-import Ripple, { type RippleProps } from '../../../../iCoWeAUI/components/Ripple/Ripple';
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { getBorderVariant, reverseColor } from '../../../utils/utils';
+import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
+import ButtonSpinner, { type ButtonSpinnerDefaultProps } from './ButtonSpinner';
 import buttonConfig from './buttonConfig';
 
 export type ButtonDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
-  size?: Sizes;
-  icon?: boolean;
-  border?: boolean;
+  size?: Spacings;
   block?: boolean;
-  shadow?: boolean;
+  icon?: boolean;
+  variant?: Variants;
+  color?: DefaultColors;
+  border?: boolean;
+  radius?: Radiuses;
   loading?: boolean;
   noRipple?: boolean;
 };
@@ -26,18 +25,18 @@ ButtonDefaultProps & {
   leftDecorator?: ReactNode;
   rightDecorator?: ReactNode;
   rippleProps?: RippleProps;
-  spinnerProps?: ButtonSpinnerProps;
+  spinnerProps?: ButtonSpinnerDefaultProps;
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
+    size,
+    block,
+    icon,
     variant,
     color,
-    size,
-    icon,
     border,
-    block,
-    shadow,
+    radius,
     loading,
     noRipple,
     leftDecorator,
@@ -46,6 +45,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     spinnerProps,
     defaultClassName,
     className,
+    disabled,
     children,
     ...restProps
   } = useConfig('button', buttonConfig.defaultProps, props);
@@ -53,26 +53,47 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = buttonConfig.styles;
-  const sizeVariant = icon ? 'icon' : 'default';
+  const borderVariant = getBorderVariant(variant);
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.variants[variant][theme][color],
-    styles.disabled[theme],
-    styles.sizes[sizeVariant][size],
-    icon && styles.icon,
-    border && styles.border,
-    block && styles.block,
-    shadow && styles.shadow,
-    loading && styles.loading,
+  const mergedClassName = useMemo(() => {
+    const styles = buttonConfig.styles.root;
+    const sizeVariant = icon ? 'icon' : 'default';
+
+    return mergeClasses(
+      styles.base,
+      ((!noRipple && !disabled) || loading) && styles.ripple,
+      block && styles.block,
+      icon && styles.icon,
+      border && styles.border,
+      variant === 'solid' && !disabled && styles.shadow,
+      radius !== 'none' && styles.radiuses[radius],
+      styles.sizes[sizeVariant][size],
+      disabled ? styles.disabled[theme] : styles.variants[variant][theme][color],
+      border && !disabled && styles.borderVariants[borderVariant][theme][color],
+      loading && styles.loading,
+      defaultClassName,
+      className
+    );
+  }, [
+    noRipple,
+    loading,
+    block,
+    icon,
+    border,
+    radius,
+    disabled,
+    variant,
+    theme,
+    color,
+    size,
     defaultClassName,
     className
-  );
+  ]);
 
   return (
     <button
       className={mergedClassName}
+      disabled={disabled}
       type="button"
       ref={ref}
       {...restProps}
@@ -82,16 +103,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       {rightDecorator}
       {loading && (
         <ButtonSpinner
-          variant={variant}
-          color={color}
-          value="75"
+          color={reverseColor(variant, color)}
+          disabled={disabled}
           {...spinnerProps}
         />
       )}
-      {!noRipple && (
+      {!noRipple && !disabled && (
         <Ripple
-          variant={variant}
-          color={color}
+          color={reverseColor(variant, color)}
+          border={border}
           sibling={false}
           {...rippleProps}
         />

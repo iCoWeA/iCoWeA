@@ -4,53 +4,55 @@
 
 import React, {
   type InputHTMLAttributes,
-  type ReactElement,
   type MutableRefObject,
-  forwardRef
+  type ReactElement,
+  forwardRef,
+  useMemo
 } from 'react';
 
-import Ripple, { type RippleProps } from '../../../../iCoWeAUI/components/Ripple/Ripple';
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { cutTextColor } from '../../../utils/utils';
+import Ripple, { type RippleProps } from '../../utils/Ripple/Ripple';
 import CheckboxContainer, { type CheckboxContainerDefaultProps } from './CheckboxContainer';
 import CheckboxIcon, { type CheckboxIconDefaultProps } from './CheckboxIcon';
 import checkboxConfig from './checkboxConfig';
 
 export type CheckboxDefaultProps = {
-  color?: Colors;
   size?: Sizes;
+  color?: DefaultTextColors;
   border?: boolean;
-  valid?: boolean;
-  invalid?: boolean;
   noRipple?: boolean;
 };
 
 export type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> &
 CheckboxDefaultProps & {
-  children?: ReactElement<SVGSVGElement>;
+  valid?: boolean;
+  invalid?: boolean;
   containerProps?: CheckboxContainerDefaultProps;
   iconProps?: CheckboxIconDefaultProps;
   rippleProps?: RippleProps;
   inputRef?: MutableRefObject<HTMLInputElement | null>;
+  children?: ReactElement<SVGSVGElement>;
 };
 
 const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   const {
-    color,
     size,
+    color,
     border,
+    noRipple,
     valid,
     invalid,
-    noRipple,
     containerProps,
     iconProps,
     rippleProps,
     inputRef,
-    checked,
-    disabled,
     defaultClassName,
+    checked,
     className,
+    disabled,
     children,
     ...restProps
   } = useConfig('checkbox', checkboxConfig.defaultProps, props);
@@ -58,37 +60,41 @@ const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = checkboxConfig.styles.input;
+  const mergedClassName = useMemo(() => {
+    const styles = checkboxConfig.styles.input;
 
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
+    return mergeClasses(styles.base, defaultClassName, className);
+  }, [defaultClassName, className]);
 
   return (
     <CheckboxContainer
       size={size}
       noRipple={noRipple}
       checked={checked}
+      ref={ref}
       {...containerProps}
     >
       <input
-        className={mergedClassName}
         checked={checked}
+        className={mergedClassName}
         disabled={disabled}
         type="checkbox"
         ref={inputRef}
         {...restProps}
       />
-      {!noRipple && (
+      {!noRipple && !disabled && (
         <Ripple
-          variant="default"
-          color={checked ? color : valid ? 'success' : invalid ? 'error' : 'neutral'}
+          color={invalid ? 'error' : valid ? 'success' : checked ? color : 'neutral'}
+          border={false}
           sibling
           {...rippleProps}
         />
       )}
       <CheckboxIcon
         theme={theme}
-        color={color}
         size={size}
+        variant={color.startsWith('on') ? 'plain' : 'solid'}
+        color={cutTextColor(color)}
         border={border}
         valid={valid}
         invalid={invalid}

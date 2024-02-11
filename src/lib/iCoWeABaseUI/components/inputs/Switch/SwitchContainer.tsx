@@ -1,45 +1,49 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
+import { cutTextColor } from '../../../utils/utils';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import switchConfig from './switchConfig';
 
-export type SwitchContainerDefaultProps = FlexProps & {
-  color?: Colors;
-};
+export type SwitchContainerDefaultProps = Omit<FlexProps, 'color'>;
 
 export type SwitchContainerProps = SwitchContainerDefaultProps & {
   theme: Themes;
-  color: Colors;
   size: Sizes;
+  color: DefaultTextColors;
   checked?: boolean;
+  disabled?: boolean;
 };
 
 const SwitchContainer = forwardRef<HTMLDivElement, SwitchContainerProps>(
-  ({ theme, size, checked, disabled, className, ...restProps }, ref) => {
+  ({ theme, size, variant, color, checked, className, ...restProps }, ref) => {
     /* --- Set classes --- */
-    const styles = switchConfig.styles.root;
+    const isDefault = color.startsWith('on');
 
-    const mergedClassName = mergeClasses(
-      styles.base,
-      styles.sizes[size],
-      !checked && !disabled && styles.color[theme],
-      !checked && disabled && styles.disabled[theme],
-      checked && styles.checked,
-      className
-    );
+    const mergedClassName = useMemo(() => {
+      const styles = switchConfig.styles.root;
+      const colorVariant = isDefault ? 'default' : 'solid';
+
+      return mergeClasses(
+        styles.base,
+        checked && styles.checked,
+        styles.sizes[size],
+        !checked && styles.color[colorVariant][theme],
+        className
+      );
+    }, [isDefault, checked, size, theme, className]);
 
     return (
       <Flex
-        variant="solid"
-        spacing="none"
         direction="row"
         wrap="nowrap"
-        justify="stretch"
+        justify="start"
         align="stretch"
         gap="none"
-        grow={false}
-        disabled={disabled}
+        position="relative"
+        variant={isDefault ? 'plain' : 'solid'}
+        color={checked ? cutTextColor(color) : 'inherit'}
+        radius="circular"
         className={mergedClassName}
         ref={ref}
         {...restProps}

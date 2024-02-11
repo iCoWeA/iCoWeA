@@ -1,6 +1,6 @@
 const snackbarConfig = {
   defaultProps: {
-    position: 'bottom-left',
+    placement: 'bottom-left',
     closeOnEscape: false,
     closeDuration: -1
   },
@@ -9,7 +9,7 @@ const snackbarConfig = {
       position: 'fixed',
       zIndex: 'z-3000'
     },
-    positions: {
+    placements: {
       top: {
         top: 'top-8',
         left: 'left-2/4',

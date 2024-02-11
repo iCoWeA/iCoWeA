@@ -5,7 +5,9 @@ import React, {
   useRef,
   useState,
   useImperativeHandle,
-  useEffect
+  useCallback,
+  useEffect,
+  useMemo
 } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
@@ -14,27 +16,23 @@ import useConfig from '../../../hooks/useConfig';
 import usePrevious from '../../../hooks/usePrevious';
 import useWindowResize from '../../../hooks/useWindowResize';
 import useWindowScroll from '../../../hooks/useWindowScroll';
-import { setPosition } from '../../../utils/popoverHelper';
+import { setPlacement, setArrowPlacement } from '../../../utils/popoverHelper';
 import Popover, { type PopoverProps } from '../../utils/Popover/Popover';
 import TooltipAnchor from './TooltipAnchor';
 import tooltipConfig from './tooltipConfig';
 
-export type CursorPosition = {
-  x: number;
-  y: number;
-};
-
 export type TooltipDefaultProps = {
-  position?: OuterPositions;
+  placement?: OuterPlacements;
   offset?: number | string;
+  spacing?: Spacings;
   variant?: Variants;
-  color?: Colors;
-  spacing?: Spacing;
-  responsive?: boolean;
-  arrow?: boolean;
+  color?: DefaultColors;
+  border?: Borders;
   keepOnHover?: boolean;
   followCursor?: boolean;
+  responsive?: boolean;
   closeOnEscape?: boolean;
+  arrow?: boolean;
 };
 
 export type TooltipProps = Omit<PopoverProps, 'content'> &
@@ -49,12 +47,13 @@ TooltipDefaultProps & {
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) => {
   const {
     onClose,
-    open,
-    position,
+    placement,
     offset,
     responsive,
     keepOnHover,
     followCursor,
+    arrow,
+    open,
     portalTarget,
     defaultClassName,
     className,
@@ -65,11 +64,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) =
 
   const ref = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLElement>(null);
+  const arrowRef = useRef<HTMLDivElement>(null);
   const cursor = useRef<CursorPosition>({ x: 0, y: 0 });
   const prevOpen = usePrevious(open);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [resizedPosition, setResizedPosition] = useState<OuterPositions>(position);
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
     forwardedRef,
@@ -80,71 +79,64 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) =
   /* --- Set event handlers --- */
   const isControlled = open !== undefined;
 
-  const resizeHandler = (): void => {
+  const resizeHandler = useCallback((): void => {
     if (!ref.current || !anchorRef?.current) {
       return;
     }
 
+    let newPlacement: OuterPlacements;
+
     if (followCursor) {
-      setResizedPosition(
-        setPosition(
-          ref.current,
-          position,
-          cursor.current.x,
-          cursor.current.y,
-          cursor.current.y,
-          cursor.current.x,
-          0,
-          0,
-          +offset,
-          responsive
-        )
+      newPlacement = setPlacement(
+        ref.current,
+        placement,
+        cursor.current.x,
+        cursor.current.y,
+        cursor.current.y,
+        cursor.current.x,
+        0,
+        0,
+        +offset,
+        responsive
       );
     } else {
-      setResizedPosition(
-        setPosition(
-          ref.current,
-          position,
-          anchorRef.current.getBoundingClientRect().x,
-          anchorRef.current.getBoundingClientRect().y,
-          portalTarget
-            ? anchorRef.current.getBoundingClientRect().y + document.documentElement.scrollTop
-            : anchorRef.current.offsetTop,
-          portalTarget
-            ? anchorRef.current.getBoundingClientRect().x + document.documentElement.scrollLeft
-            : anchorRef.current.offsetLeft,
-          anchorRef.current.offsetHeight,
-          anchorRef.current.offsetWidth,
-          +offset,
-          responsive
-        )
+      newPlacement = setPlacement(
+        ref.current,
+        placement,
+        anchorRef.current.getBoundingClientRect().x,
+        anchorRef.current.getBoundingClientRect().y,
+        portalTarget
+          ? anchorRef.current.getBoundingClientRect().y + document.documentElement.scrollTop
+          : anchorRef.current.offsetTop,
+        portalTarget
+          ? anchorRef.current.getBoundingClientRect().x + document.documentElement.scrollLeft
+          : anchorRef.current.offsetLeft,
+        anchorRef.current.offsetHeight,
+        anchorRef.current.offsetWidth,
+        +offset,
+        responsive
       );
     }
-  };
 
-  const enterHandler = (event: MouseEvent): void => {
-    if (!(anchorRef.current?.contains(event.relatedTarget as Node) ?? false)) {
-      if (isControlled && onClose !== undefined) {
-        onClose(false);
-      }
-
-      if (!isControlled) {
-        setIsOpen(false);
-      }
+    if (arrow && arrowRef.current) {
+      setArrowPlacement(arrowRef.current, newPlacement);
     }
-  };
+  }, [followCursor, placement, offset, responsive, !!portalTarget, arrow]);
 
-  const leaveHandler = (event: MouseEvent): void => {
-    if (!(anchorRef.current?.contains(event.relatedTarget as Node) ?? false)) {
-      if (isControlled && onClose !== undefined) {
-        onClose(false);
-      }
+  const leaveHandler = useCallback(
+    (event: MouseEvent): void => {
+      if (!(anchorRef.current?.contains(event.relatedTarget as Node) ?? false)) {
+        if (isControlled && onClose !== undefined) {
+          onClose(false);
+        }
 
-      if (!isControlled) {
-        setIsOpen(false);
+        if (!isControlled) {
+          setIsOpen(false);
+        }
       }
-    }
-  };
+    },
+    [isControlled, onClose]
+  );
 
   useEffect(() => {
     if (prevOpen !== undefined && open === undefined) {
@@ -158,21 +150,23 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) =
 
   useWindowResize(responsive && (open ?? isOpen) && resizeHandler);
 
-  useWindowScroll(responsive && open && resizeHandler);
+  useWindowScroll(responsive && (open ?? isOpen) && resizeHandler);
 
-  useAddEventListener(ref, 'mouseenter', keepOnHover && (open ?? isOpen) && enterHandler);
+  useAddEventListener(ref, 'mouseenter', keepOnHover && (open ?? isOpen) && leaveHandler);
 
   useAddEventListener(ref, 'mouseleave', keepOnHover && (open ?? isOpen) && leaveHandler);
 
   /* --- Set classes --- */
-  const styles = tooltipConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = tooltipConfig.styles;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    followCursor && styles.followCursor,
-    defaultClassName,
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      followCursor && styles.followCursor,
+      defaultClassName,
+      className
+    );
+  }, [followCursor, defaultClassName, className]);
 
   return (
     <>
@@ -180,12 +174,12 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) =
         <TooltipAnchor
           setState={isControlled ? onClose : setIsOpen}
           resizeHandler={resizeHandler}
-          open={open}
-          isOpen={isOpen}
           keepOnHover={keepOnHover}
           followCursor={followCursor}
-          rootRef={ref}
+          open={open}
+          isOpen={isOpen}
           cursor={cursor}
+          rootRef={ref}
           ref={anchorRef}
         >
           {children}
@@ -193,18 +187,18 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) =
       )}
       <Popover
         onClose={isControlled ? onClose : setIsOpen}
-        open={open ?? isOpen}
-        position={resizedPosition}
-        offset="0"
         responsive={false}
         openOnHover={false}
         lockScroll={false}
         closeOnOutsideClick={false}
-        backdrop={false}
-        closeOnBackdropClick={false}
+        closeOnBackdropClick
+        arrow={arrow}
+        backdrop="none"
+        open={open ?? isOpen}
         portalTarget={portalTarget}
-        role="tooltip"
+        arrowRef={arrowRef}
         className={mergedClassName}
+        role="tooltip"
         ref={ref}
         {...restProps}
       >

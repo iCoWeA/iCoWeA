@@ -1,63 +1,66 @@
-import { type ReactElement, type FC, cloneElement } from 'react';
+import { type ReactElement, type FC, useMemo, cloneElement } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import { type ToggleButtonProps } from '../ToggleButton/ToggleButton';
 import toggleButtonGroupConfig from './toggleButtonGroupConfig';
 
 export type ToggleButtonGroupButtonProps = {
-  position: ContainerPositions;
+  placement: ContainerPlacements;
   vertical: boolean;
-  variant: Variants;
-  color: Colors;
   size: Sizes;
-  icon: boolean;
-  border: boolean;
   block: boolean;
-  shadow: boolean;
+  icon: boolean;
+  variant: Variants;
+  color: DefaultColors;
+  border: boolean;
+  radius: Radiuses;
   noRipple: boolean;
   checkedVariant?: Variants;
-  checkedColor?: Colors;
+  checkedColor?: DefaultColors;
   element: ReactElement<ToggleButtonProps>;
 };
 
 const ToggleButtonGroupButton: FC<ToggleButtonGroupButtonProps> = ({
-  position,
+  placement,
   vertical,
+  size,
+  block,
+  icon,
   variant,
   color,
-  size,
-  icon,
   border,
-  block,
-  shadow,
+  radius,
   noRipple,
   checkedVariant,
   checkedColor,
   element
 }) => {
   /* --- Set classes --- */
-  const styles = toggleButtonGroupConfig.styles.button;
-  const orientation = vertical ? 'vertical' : 'horizontal';
+  const mergedClassName = useMemo(() => {
+    const styles = toggleButtonGroupConfig.styles.button;
+    const orientation = vertical ? 'vertical' : 'horizontal';
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.orientations[orientation][position],
-    border && styles.border[orientation][position],
-    element.props.className
-  );
+    return mergeClasses(
+      styles.base,
+      !block && styles.width,
+      styles.orientations[orientation][placement],
+      border && styles.border[orientation][placement],
+      element.props.className
+    );
+  }, [vertical, block, placement, border, element.props.className]);
 
   return cloneElement(element, {
-    className: mergedClassName,
+    size,
+    block,
+    icon,
     variant,
     color,
-    size,
-    icon,
     border,
-    block,
-    shadow,
+    radius,
     noRipple,
     checkedVariant,
-    checkedColor
+    checkedColor,
+    className: mergedClassName
   });
 };
 

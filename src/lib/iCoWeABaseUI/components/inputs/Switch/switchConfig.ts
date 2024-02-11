@@ -1,15 +1,13 @@
 const switchConfig = {
   defaultProps: {
-    color: 'primary',
-    size: 'md'
+    size: 'md',
+    color: 'primary'
   },
   styles: {
     root: {
       base: {
-        position: 'relative',
         display: 'inline-flex',
-        borderRadius: 'rounded-full',
-        transition: 'transition-[background]'
+        transition: 'transition-color'
       },
       checked: {
         group: 'checked'
@@ -29,15 +27,21 @@ const switchConfig = {
         }
       },
       color: {
-        light: {
-          fill: 'fill-light-neutral-variant',
-          background: 'bg-light-neutral/10'
-        }
-      },
-      disabled: {
-        light: {
-          fill: 'fill-light-neutral-variant',
-          background: 'bg-light-neutral/20'
+        default: {
+          light: {
+            background: 'bg-light-on-neutral/10'
+          },
+          dark: {
+            background: 'bg-dark-on-neutral/10'
+          }
+        },
+        solid: {
+          light: {
+            background: 'bg-light-neutral/10'
+          },
+          dark: {
+            background: 'bg-dark-neutral/10'
+          }
         }
       }
     },
@@ -48,8 +52,7 @@ const switchConfig = {
         height: 'h-full',
         background: 'bg-transparent',
         appearance: 'appearance-none',
-        focus: 'focus:outline-0',
-        disabled: 'disabled:pointer-events-none'
+        focus: 'focus:outline-0'
       }
     },
     dot: {
@@ -57,26 +60,11 @@ const switchConfig = {
         position: 'absolute',
         top: 'top-0',
         left: 'left-0',
-        padding: 'p-0.5',
         transition: 'transition',
         pointerEvent: 'pointer-events-none'
       },
       checked: {
         transform: 'translate-x-full'
-      },
-      sizes: {
-        sm: {
-          width: 'w-4',
-          height: 'h-4'
-        },
-        md: {
-          width: 'w-5',
-          height: 'h-5'
-        },
-        lg: {
-          width: 'w-6',
-          height: 'h-6'
-        }
       }
     }
   }

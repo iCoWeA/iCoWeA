@@ -1,44 +1,52 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
+import { cutPanelSize } from '../../../utils/utils';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import containerConfig from './containerConfig';
 
 export type ContainerDefaultProps = {
+  spacing?: PanelSpacings;
   layout?: ContainerLayouts;
-  spacing?: Spacing;
-  panel?: boolean;
   closable?: Closable;
-  closeGap?: Gaps;
 };
 
-export type ContainerProps = FlexProps & ContainerDefaultProps;
+export type ContainerProps = FlexProps &
+ContainerDefaultProps & {
+  buttonGap?: Gaps;
+};
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
-  const { layout, spacing, closable, closeGap, defaultClassName, className, ...restProps } =
+  const { spacing, layout, closable, gap, buttonGap, defaultClassName, className, ...restProps } =
     useConfig('container', containerConfig.defaultProps, props);
 
   /* --- Set classes --- */
-  const styles = containerConfig.styles;
+  const gapVariant = gap ?? (layout === 'body' ? 'none' : 'base');
 
-  const mergedClassName = mergeClasses(
-    layout !== 'default' && layout !== 'body' && styles.layouts[layout],
-    closable !== 'none' && styles.closable,
-    closable !== 'none' && spacing !== 'none' && styles.gap[spacing][closeGap][closable],
-    defaultClassName,
-    className
-  );
+  const mergedClassName = useMemo(() => {
+    const styles = containerConfig.styles;
+    const spacingVariant = cutPanelSize(spacing);
+
+    return mergeClasses(
+      layout !== 'default' && layout !== 'body' && styles.layouts[layout],
+      closable !== 'none' &&
+        spacingVariant !== 'none' &&
+        styles.gap[spacingVariant][buttonGap ?? gapVariant][closable],
+      defaultClassName,
+      className
+    );
+  }, [spacing, layout, closable, buttonGap, gapVariant, defaultClassName, className]);
 
   return (
     <Flex
-      spacing={spacing}
       direction={layout === 'body' ? 'col' : 'row'}
       wrap="wrap"
       justify="start"
       align={layout === 'body' ? 'stretch' : 'center'}
-      gap={layout === 'body' ? 'none' : 'base'}
-      grow={false}
+      gap={gapVariant}
+      spacing={spacing}
+      position={closable === 'none' ? 'static' : 'relative'}
       block
       className={mergedClassName}
       ref={ref}

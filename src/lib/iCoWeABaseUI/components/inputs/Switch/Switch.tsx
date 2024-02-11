@@ -1,8 +1,9 @@
 import React, {
   type InputHTMLAttributes,
-  type ReactElement,
   type MutableRefObject,
-  forwardRef
+  type ReactElement,
+  forwardRef,
+  useMemo
 } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
@@ -13,60 +14,62 @@ import SwitchDot, { type SwitchDotDefaultProps } from './SwitchDot';
 import switchConfig from './switchConfig';
 
 export type SwitchDefaultProps = {
-  color?: Colors;
   size?: Sizes;
+  color?: DefaultTextColors;
 };
 
 export type SwitchProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> &
 SwitchDefaultProps & {
-  children?: ReactElement<SVGSVGElement>;
   containerProps?: SwitchContainerDefaultProps;
   dotProps?: SwitchDotDefaultProps;
   inputRef?: MutableRefObject<HTMLInputElement | null>;
+  children?: ReactElement<SVGSVGElement>;
 };
 
 const Switch = forwardRef<HTMLDivElement, SwitchProps>((props, ref) => {
   const {
-    color,
     size,
+    color,
     containerProps,
     dotProps,
     inputRef,
-    checked,
-    disabled,
     defaultClassName,
+    checked,
     className,
+    disabled,
     children,
     ...restProps
   } = useConfig('switch', switchConfig.defaultProps, props);
+
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = switchConfig.styles.input;
+  const mergedClassName = useMemo(() => {
+    const styles = switchConfig.styles.input;
 
-  const mergedClassName = mergeClasses(styles.base, defaultClassName, className);
+    return mergeClasses(styles.base, defaultClassName, className);
+  }, [defaultClassName, className]);
 
   return (
     <SwitchContainer
       theme={theme}
-      color={color}
       size={size}
-      disabled={disabled}
+      color={color}
       checked={checked}
+      disabled={disabled}
       ref={ref}
       {...containerProps}
     >
       <input
-        className={mergedClassName}
         checked={checked}
+        className={mergedClassName}
         disabled={disabled}
-        type="checkbox"
         role="switch"
+        type="checkbox"
         ref={inputRef}
         {...restProps}
       />
       <SwitchDot
-        theme={theme}
         size={size}
         checked={checked}
         {...dotProps}

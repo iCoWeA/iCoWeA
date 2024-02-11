@@ -1,35 +1,100 @@
 const listButtonConfig = {
   defaultProps: {
-    variant: 'default',
-    color: 'primary',
     size: 'md',
-    border: false,
-    block: false,
+    variant: 'text',
+    color: 'neutral',
+    border: 'none',
+    radius: 'circular',
     noRipple: false
   },
   styles: {
     base: {
-      userSelect: 'select-auto',
-      justifyContent: 'justify-start'
+      transition: 'transition-all',
+      focus: 'focus:outline-none',
+      focusVisible: 'focus-visible:ring-4 focus-visible:border-transparent'
     },
     selected: {
       group: 'selected'
     },
-    block: {
-      borderRadius: 'rounded-none'
+    ripple: {
+      position: 'relative'
     },
-    sizes: {
-      sm: {
-        padding: 'px-4 py-2',
-        gap: 'gap-4'
+    variants: {
+      light: {
+        neutral: {
+          focusVisible: 'focus-visible:ring-light-neutral'
+        },
+        primary: {
+          focusVisible: 'focus-visible:ring-light-primary'
+        },
+        secondary: {
+          focusVisible: 'focus-visible:ring-light-secondary'
+        },
+        success: {
+          focusVisible: 'focus-visible:ring-light-success'
+        },
+        warning: {
+          focusVisible: 'focus-visible:ring-light-warning'
+        },
+        error: {
+          focusVisible: 'focus-visible:ring-light-error'
+        },
+        'on-neutral': {
+          focusVisible: 'focus-visible:ring-light-on-neutral'
+        },
+        'on-primary': {
+          focusVisible: 'focus-visible:ring-light-on-primary'
+        },
+        'on-secondary': {
+          focusVisible: 'focus-visible:ring-light-on-secondary'
+        },
+        'on-success': {
+          focusVisible: 'focus-visible:ring-light-on-success'
+        },
+        'on-warning': {
+          focusVisible: 'focus-visible:ring-light-on-warning'
+        },
+        'on-error': {
+          focusVisible: 'focus-visible:ring-light-on-error'
+        }
       },
-      md: {
-        padding: 'px-6 py-3',
-        gap: 'gap-6'
-      },
-      lg: {
-        padding: 'px-8 py-4',
-        gap: 'gap-8'
+      dark: {
+        neutral: {
+          focusVisible: 'focus-visible:ring-dark-neutral'
+        },
+        primary: {
+          focusVisible: 'focus-visible:ring-dark-primary'
+        },
+        secondary: {
+          focusVisible: 'focus-visible:ring-dark-secondary'
+        },
+        success: {
+          focusVisible: 'focus-visible:ring-dark-success'
+        },
+        warning: {
+          focusVisible: 'focus-visible:ring-dark-warning'
+        },
+        error: {
+          focusVisible: 'focus-visible:ring-dark-error'
+        },
+        'on-neutral': {
+          focusVisible: 'focus-visible:ring-dark-on-neutral'
+        },
+        'on-primary': {
+          focusVisible: 'focus-visible:ring-dark-on-primary'
+        },
+        'on-secondary': {
+          focusVisible: 'focus-visible:ring-dark-on-secondary'
+        },
+        'on-success': {
+          focusVisible: 'focus-visible:ring-dark-on-success'
+        },
+        'on-warning': {
+          focusVisible: 'focus-visible:ring-dark-on-warning'
+        },
+        'on-error': {
+          focusVisible: 'focus-visible:ring-dark-on-error'
+        }
       }
     }
   }

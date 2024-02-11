@@ -1,4 +1,4 @@
-import React, { type FieldsetHTMLAttributes, type FC } from 'react';
+import React, { type FieldsetHTMLAttributes, type FC, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import inputConfig from './inputConfig';
@@ -6,37 +6,37 @@ import inputConfig from './inputConfig';
 export type InputFieldsetDefaultProps = FieldsetHTMLAttributes<HTMLFieldSetElement>;
 
 export type InputFieldsetProps = InputFieldsetDefaultProps & {
-  variant: InputVariants;
   theme: Themes;
-  color: Colors;
-  valid: boolean;
-  invalid: boolean;
+  inputVariant: InputVariants;
+  color: DefaultTextColors;
+  valid?: boolean;
+  invalid?: boolean;
+  disabled?: boolean;
 };
 
 const InputFieldset: FC<InputFieldsetProps> = ({
-  variant,
   theme,
+  inputVariant,
   color,
   valid,
   invalid,
-  disabled,
   className,
+  disabled,
   ...restProps
 }) => {
   /* --- Set classes --- */
-  const styles = inputConfig.styles.container;
+  const mergedClassName = useMemo(() => {
+    const styles = inputConfig.styles.container;
+    const colorVariant = disabled ? 'disabled' : invalid ? 'invalid' : valid ? 'valid' : false;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.positions.middle,
-    styles.variants[variant].middle,
-    !disabled && variant === 'soft' && styles.background[theme],
-    !valid && !invalid && !disabled && styles.colors[theme][color],
-    valid && !disabled && styles.valid[theme],
-    invalid && !disabled && styles.invalid[theme],
-    disabled && styles.disabled[theme],
-    className
-  );
+    return mergeClasses(
+      styles.base,
+      styles.placements[inputVariant].middle,
+      colorVariant ? styles.color[colorVariant][theme] : styles.colors[theme][color],
+      !colorVariant && inputVariant === 'soft' && styles.background[theme],
+      className
+    );
+  }, [disabled, invalid, valid, inputVariant, theme, color, className]);
 
   return (
     <fieldset

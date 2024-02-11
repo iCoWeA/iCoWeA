@@ -1,50 +1,43 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
+import DefaultSpinner, {
+  type DefaultSpinnerProps
+} from '../../../../iCoWeAUI/components/DefaultSpinner/DefaultSpinner';
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
-import Stack, { type StackProps } from '../../layouts/Stack/Stack';
-import SpinnerBar, { type SpinnerBarDefaultProps } from './SpinnerBar';
-import SpinnerContainer, { type SpinnerContainerDefaultProps } from './SpinnerContainer';
+import { cutTextColor } from '../../../utils/utils';
+import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import SpinnerLabel, { type SpinnerLabelDefaultProps } from './SpinnerLabel';
-import SpinnerProgressBar, { type SpinnerProgressBarDefaultProps } from './SpinnerProgressBar';
 import spinnerConfig from './spinnerConfig';
 
 export type SpinnerDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
-  size?: Sizes;
-  innerBar?: TextColors;
-  rotate?: boolean;
-  value?: number | string;
+  size?: Spacings;
+  color?: DefaultTextColors;
+  stable?: boolean;
+  value?: string | number;
 };
 
-export type SpinnerProps = StackProps &
+export type SpinnerProps = DefaultSpinnerProps &
 SpinnerDefaultProps & {
-  containerProps?: SpinnerContainerDefaultProps;
-  barProps?: SpinnerBarDefaultProps;
-  progressBarProps?: SpinnerProgressBarDefaultProps;
+  innerBar?: DefaultTextColors;
+  containerProps?: FlexProps;
   labelProps?: SpinnerLabelDefaultProps;
-  strokeWidth?: number | string;
   disabled?: boolean;
 };
 
 const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
   const {
-    variant,
-    color,
     size,
-    innerBar,
-    rotate,
-    containerProps,
-    barProps,
-    progressBarProps,
-    labelProps,
+    color,
+    stable,
     value,
-    strokeWidth = 4,
-    disabled,
+    innerBar,
+    containerProps,
+    labelProps,
     defaultClassName,
     className,
+    disabled,
     children,
     ...restProps
   } = useConfig('spinner', spinnerConfig.defaultProps, props);
@@ -52,56 +45,46 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
   const theme = useTheme();
 
   /* --- Set classes --- */
-  const styles = spinnerConfig.styles.root;
+  const mergedClassName = useMemo(() => {
+    const styles = spinnerConfig.styles.root;
 
-  const mergedClassName = mergeClasses(
-    styles.base,
-    styles.sizes[size],
-    disabled ? styles.disabled[theme] : styles.variants[variant][theme][color],
-    defaultClassName,
-    className
-  );
+    return mergeClasses(styles.base, defaultClassName, className);
+  }, [defaultClassName, className]);
 
   return (
-    <Stack
-      justify="center"
-      align="center"
+    <Flex
+      direction="row"
+      wrap="nowrap"
+      justify="start"
+      align="stretch"
       gap="none"
-      disabled={disabled}
-      role="progressbar"
+      position={children ? 'relative' : 'static'}
       className={mergedClassName}
       ref={ref}
-      {...restProps}
+      {...containerProps}
     >
-      <SpinnerContainer
-        rotate={rotate}
-        {...containerProps}
-      >
-        {innerBar !== 'inherit' && (
-          <SpinnerBar
-            theme={theme}
-            color={innerBar}
-            strokeWidth={strokeWidth}
-            disabled={disabled}
-            {...barProps}
-          />
-        )}
-        <SpinnerProgressBar
-          strokeWidth={strokeWidth}
-          value={value}
-          {...progressBarProps}
-        />
-      </SpinnerContainer>
+      <DefaultSpinner
+        size={size}
+        color={color}
+        stable={stable}
+        value={value}
+        innerBar={innerBar}
+        disabled={disabled}
+        {...restProps}
+      />
       {children && (
         <SpinnerLabel
-          size={size}
+          theme={theme}
+          size={size === 'none' ? 'sm' : size}
+          variant={color.startsWith('on') ? 'default' : 'text'}
+          color={cutTextColor(color)}
           disabled={disabled}
           {...labelProps}
         >
           {children}
         </SpinnerLabel>
       )}
-    </Stack>
+    </Flex>
   );
 });
 

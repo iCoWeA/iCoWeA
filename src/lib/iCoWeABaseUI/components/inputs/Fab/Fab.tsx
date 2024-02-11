@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
@@ -6,11 +6,13 @@ import Button, { type ButtonProps } from '../Button/Button';
 import fabConfig from './fabConfig';
 
 export type FabDefaultProps = {
-  variant?: Variants;
-  color?: Colors;
   size?: Sizes;
   icon?: boolean;
+  variant?: Variants;
+  color?: DefaultColors;
   border?: boolean;
+  radius?: Radiuses;
+  loading?: boolean;
   noRipple?: boolean;
 };
 
@@ -24,15 +26,15 @@ const Fab = forwardRef<HTMLButtonElement, FabProps>((props, ref) => {
   );
 
   /* --- Set classes --- */
-  const styles = fabConfig.styles;
+  const mergedClassName = useMemo(() => {
+    const styles = fabConfig.styles;
 
-  const mergedClassName = mergeClasses(styles.base, styles.shadow, defaultClassName, className);
+    return mergeClasses(styles.base, styles.shadow, defaultClassName, className);
+  }, [defaultClassName, className]);
 
   return (
     <Button
       block={false}
-      shadow
-      loading={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}

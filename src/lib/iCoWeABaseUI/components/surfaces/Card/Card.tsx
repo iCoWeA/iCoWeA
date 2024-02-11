@@ -1,44 +1,29 @@
 import React, { forwardRef } from 'react';
 
-import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
 import Stack, { type StackProps } from '../../layouts/Stack/Stack';
 import cardConfig from './cardConfig';
 
 export type CardDefaultProps = {
+  spacing?: PanelSpacings;
   variant?: Variants;
-  color?: Colors;
-  spacing?: Spacing;
+  color?: DefaultColors;
   border?: Borders;
-  shadow?: boolean;
 };
 
 export type CardProps = StackProps & CardDefaultProps;
 
 const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
-  const { shadow, defaultClassName, className, ...restProps } = useConfig(
-    'card',
-    cardConfig.defaultProps,
-    props
-  );
-  /* --- Set classes --- */
-  const styles = cardConfig.styles;
-
-  const mergedClassName = mergeClasses(
-    styles.base,
-    shadow && styles.shadow,
-    defaultClassName,
-    className
-  );
+  const mergedProps = useConfig('card', cardConfig.defaultProps, props);
 
   return (
     <Stack
       justify="start"
       align="stretch"
       gap="none"
-      className={mergedClassName}
+      radius="rounded"
       ref={ref}
-      {...restProps}
+      {...mergedProps}
     />
   );
 });
