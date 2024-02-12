@@ -17,7 +17,7 @@ export const Component: FC = () => {
     <Section>
       <Flex
         wrap="nowrap"
-        justify="between"
+        justify='center'
         gap="lg"
         className="max-lg:flex-col"
       >
