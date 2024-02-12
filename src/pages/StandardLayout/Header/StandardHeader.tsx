@@ -22,6 +22,7 @@ const StandardHeader: FC = () => {
             <Navlink
               to="/"
               activeVariant="solid"
+              activeColor="secondary"
             >
               Home
             </Navlink>
@@ -30,6 +31,7 @@ const StandardHeader: FC = () => {
             <Navlink
               to="projects"
               activeVariant="solid"
+              activeColor="secondary"
             >
               Projects
             </Navlink>
@@ -38,6 +40,7 @@ const StandardHeader: FC = () => {
             <Navlink
               to="about"
               activeVariant="solid"
+              activeColor="secondary"
             >
               About
             </Navlink>
@@ -46,6 +49,7 @@ const StandardHeader: FC = () => {
             <Navlink
               to="contact"
               activeVariant="solid"
+              activeColor="secondary"
             >
               Contact
             </Navlink>
