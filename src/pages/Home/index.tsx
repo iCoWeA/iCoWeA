@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -17,7 +16,7 @@ export const Component: FC = () => {
     <Section>
       <Flex
         wrap="nowrap"
-        justify='center'
+        justify="center"
         gap="lg"
         className="max-lg:flex-col"
       >
