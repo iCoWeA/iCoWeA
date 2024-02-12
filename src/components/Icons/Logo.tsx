@@ -4,8 +4,8 @@ import Icon, { type IconProps } from '../../lib/iCoWeABaseUI/components/data-dis
 
 const Logo: FC<IconProps> = (props) => (
   <Icon
-    variant="default"
     size="md"
+    spacing="default"
     {...props}
   >
     <svg
