@@ -2,7 +2,6 @@ import React, { type FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
-import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import StandardFooter from './Footer/StandardFooter';
 import StandardHeader from './Header/StandardHeader';
 
@@ -13,11 +12,7 @@ export const Component: FC = () => (
     color="primary"
   >
     <StandardHeader />
-    <Layout layout="default">
-      <Main>
-        <Outlet />
-      </Main>
-    </Layout>
+    <Outlet />
     <StandardFooter />
   </Layout>
 );
