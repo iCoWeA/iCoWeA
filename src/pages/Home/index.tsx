@@ -18,7 +18,7 @@ export const Component: FC = () => {
         wrap="nowrap"
         justify="center"
         gap="lg"
-        className="max-lg:flex-col"
+        className="max-md:flex-col"
       >
         <Stack gap="sm">
           <Title
@@ -68,7 +68,7 @@ export const Component: FC = () => {
         <MovableAvatar
           distance={16}
           border
-          className="w-full max-w-120 border-8"
+          className="w-full max-w-[25rem] border-8"
           src={require('../../assets/images/photo.png')}
         />
       </Flex>
