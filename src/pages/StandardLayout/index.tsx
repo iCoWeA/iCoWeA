@@ -13,7 +13,7 @@ export const Component: FC = () => (
     color="primary"
   >
     <StandardHeader />
-    <Layout>
+    <Layout layout="default">
       <Main>
         <Outlet />
       </Main>
