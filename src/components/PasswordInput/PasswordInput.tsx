@@ -1,21 +1,43 @@
 import React, { type FC, useState } from 'react';
 
-import Input, { type InputProps } from '../../lib/iCoWeaUI/components/inputs/Input/Input';
-import PasswordToggleButton from './PasswordToggleButton';
+import Input, { type InputProps } from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
+import { type ToggleButtonProps } from '../../lib/iCoWeABaseUI/components/inputs/ToggleButton/ToggleButton';
+import PasswordInputButton from './PasswordInputButton';
 
-const PasswordInput: FC<InputProps> = (props) => {
-  const [isShow, setIsShow] = useState(false);
+export type PasswordInputProps = InputProps & {
+  placement?: SidePlacements;
+  buttonProps?: ToggleButtonProps;
+};
+
+const PasswordInput: FC<PasswordInputProps> = ({
+  placement = 'right',
+  buttonProps,
+  ...restProps
+}) => {
+  const [isShown, setIsShown] = useState(false);
 
   return (
     <Input
-      rightDecoration={
-        <PasswordToggleButton
-          checked={isShow}
-          onClick={() => setIsShow((isShow) => !isShow)}
-        />
+      leftDecoration={
+        placement === 'left' && (
+          <PasswordInputButton
+            onClick={() => setIsShown((isShown) => !isShown)}
+            checked={isShown}
+            {...buttonProps}
+          />
+        )
       }
-      type={isShow ? 'text' : 'password'}
-      {...props}
+      rightDecoration={
+        placement === 'right' && (
+          <PasswordInputButton
+            onClick={() => setIsShown((isShown) => !isShown)}
+            checked={isShown}
+            {...buttonProps}
+          />
+        )
+      }
+      type={isShown ? 'text' : 'password'}
+      {...restProps}
     />
   );
 };
