@@ -11,6 +11,7 @@ const PasswordInputButton: FC<ToggleButtonProps> = ({ checked, ...restProps }) =
     size="sm"
     icon
     color="neutral"
+    radius='circular'
     {...restProps}
   >
     {checked
