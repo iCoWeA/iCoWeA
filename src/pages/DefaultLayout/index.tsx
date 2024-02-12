@@ -7,7 +7,7 @@ import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 export const Component: FC = () => (
   <Layout
     layout="root"
-    variant="soft"
+    variant="solid"
     color="primary"
   >
     <Layout layout="default">
