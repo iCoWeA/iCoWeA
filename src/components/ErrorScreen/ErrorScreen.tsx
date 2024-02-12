@@ -16,14 +16,14 @@ const ErrorScreen: FC<ErrorScreenProps> = ({ children }) => (
     align="center"
   >
     <Title
-      variant="2"
+      size="2"
       color="inherit"
     >
       ERROR
     </Title>
     {children && (
       <Title
-        variant="3"
+        size="3"
         color="inherit"
       >
         {children}
