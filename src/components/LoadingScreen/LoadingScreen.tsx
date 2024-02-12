@@ -11,7 +11,7 @@ const LoadingScreen: FC = () => (
     justify="center"
     align="center"
   >
-    <Spinner variant="solid" />
+    <Spinner color="on-primary" />
   </Layout>
 );
 
