@@ -5,11 +5,12 @@ import { auth } from '../../firebase';
 
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import Textfield from '../../components/Textfield/Textfield';
-import { EMAIL_PATTERN } from '../../data/constants';
-import Button from '../../lib/iCoWeaUI/components/inputs/Button/Button';
-import Section from '../../lib/iCoWeaUI/components/layouts/Section/Section';
-import Card from '../../lib/iCoWeaUI/components/surfaces/Card/Card';
-import useForm from '../../lib/iCoWeaUI/hooks/useForm';
+import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
+import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
+import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
+import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
+import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
+import { EMAIL_PATTERN } from '../../lib/iCoWeAUtilsUI/data/constants';
 
 export const Component: FC = () => {
   const {
@@ -22,41 +23,44 @@ export const Component: FC = () => {
   return (
     <Section>
       <Form
-        method="post"
         onSubmit={resetForm}
+        method="post"
       >
         <Card
           spacing="md"
           gap="md"
           className="mx-auto max-w-120"
         >
-          <Textfield
-            indexId="email"
-            invalid={inputs.email.error}
-            onChange={(event) => {
-              change(event, 1000);
-            }}
-            onBlur={blur}
-            value={inputs.email.value}
-            type="email"
-            pattern={EMAIL_PATTERN}
-            required
-          />
-          <Textfield>
-            <PasswordInput
-              block
-              label="Password"
-              invalid={inputs.password.error}
+          <Textfield errorText={inputs.email.error && 'Invalid email'}>
+            <Input
               onChange={(event) => {
                 change(event, 1000);
               }}
               onBlur={blur}
+              block
+              invalid={inputs.email.error}
+              label="Email"
+              id="email"
+              name="email"
+              pattern={EMAIL_PATTERN}
+              required
+              value={inputs.email.value}
+            />
+          </Textfield>
+          <Textfield errorText={inputs.password.error && 'Invalid password'}>
+            <PasswordInput
+              onChange={(event) => {
+                change(event, 1000);
+              }}
+              onBlur={blur}
+              block
+              invalid={inputs.password.error}
+              label="Password"
               id="password"
               name="password"
-              value={inputs.password.value}
               required
+              value={inputs.password.value}
             />
-            {inputs.password.error && 'Invalid password'}
           </Textfield>
           <Button
             block
