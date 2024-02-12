@@ -11,33 +11,33 @@ const useMoveAxisToCursor = (anchorRef: MutableRefObject<HTMLDivElement | null>,
         return;
       }
 
-      const x = event.clientX;
-      const y = event.clientY;
+      const clientX = event.clientX;
+      const clieentY = event.clientY;
 
-      const { left, top } = anchorRef.current.getBoundingClientRect();
+      const { x, y } = anchorRef.current.getBoundingClientRect();
       const width = anchorRef.current.offsetWidth;
       const height = anchorRef.current.offsetHeight;
 
-      const centerX = left + width / 2;
-      const centerY = top + height / 2;
+      const centerX = x + width / 2;
+      const centerY = y + height / 2;
 
-      let a = Math.abs(x - centerX);
-      let b = Math.abs(y - centerY);
-      const A = Math.atan(a / b);
+      let left = Math.abs(clientX - centerX);
+      let top = Math.abs(clieentY - centerY);
+      const A = Math.atan(left / top);
 
-      a = Math.round(Math.sin(A) * distance * 1000) / 1000;
-      b = Math.round(Math.cos(A) * distance * 1000) / 1000;
+      left = Math.round(Math.sin(A) * distance * 1000) / 1000;
+      top = Math.round(Math.cos(A) * distance * 1000) / 1000;
 
       if (reverse) {
-        a = centerX < x ? -a : a;
-        b = centerY < y ? -b : b;
+        left = centerX < clientX ? -left : left;
+        top = centerY < clieentY ? -top : top;
       } else {
-        a = centerX <= x ? a : -a;
-        b = centerY <= y ? b : -b;
+        left = centerX <= clientX ? left : -left;
+        top = centerY <= clieentY ? top : -top;
       }
 
-      imageRef.current.style.left = `${a}px`;
-      imageRef.current.style.top = `${b}px`;
+      imageRef.current.style.left = `${left}px`;
+      imageRef.current.style.top = `${top}px`;
     };
 
     window.addEventListener('mousemove', moveHandler);
