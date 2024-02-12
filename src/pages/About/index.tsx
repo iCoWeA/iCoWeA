@@ -2,6 +2,7 @@ import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
 
 import MovableAvatar from '../../components/MovableAvatar/MovableAvatar';
+import Text from '../../lib/iCoWeABaseUI/components/data-display/Text/Text';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
@@ -13,39 +14,40 @@ export const Component: FC = () => {
   const user = useSelector(selectUser);
 
   return (
-    <Section className='animate-slide'>
+    <Section className="animate-slide">
       <Flex
         wrap="nowrap"
         justify="center"
         gap="lg"
-        className="max-md:flex-col"
+        className="max-lg:flex-col"
       >
+        <MovableAvatar
+          distance={10}
+          border
+          className="w-full max-w-[25rem] border-8"
+          src={require('../../assets/images/photo.png')}
+        />
         <Stack gap="sm">
           <Title
-            size="3"
+            size="5"
             color="inherit"
           >
-            Hi, I&apos;m
+            Software developer
           </Title>
           <Title
             size="1"
+            gutter
             color="secondary"
           >
             {(user?.firstname ?? '') + ' ' + (user?.lastname ?? '')}
           </Title>
-          <Title
-            size="4"
-            color="inherit"
-          >
-            SOFTWARE DEVELOPER
-          </Title>
-          <Title
-            size="5"
-            color="inherit"
+          <Text
+            size="lg"
             gutter
+            color="inherit"
           >
-            based in Košice, Slovakia.
-          </Title>
+            {user?.about}
+          </Text>
           <Flex gap="sm">
             <LinkButton
               to="projects"
@@ -65,12 +67,6 @@ export const Component: FC = () => {
             </LinkButton>
           </Flex>
         </Stack>
-        <MovableAvatar
-          distance={10}
-          border
-          className="w-full max-w-[25rem] border-8"
-          src={require('../../assets/images/photo.png')}
-        />
       </Flex>
     </Section>
   );
