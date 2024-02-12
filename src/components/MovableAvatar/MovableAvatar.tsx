@@ -7,22 +7,22 @@ import Avatar, {
 import Image from '../../lib/iCoWeABaseUI/components/data-display/Image/Image';
 
 export type MovableAvatarProps = AvatarProps & {
-  distance: string | number;
-  reverse: boolean;
+  distance?: number;
+  reverse?: boolean;
 };
 
 const MovableAvatar: FC<MovableAvatarProps> = ({
-  distance,
-  reverse,
-  src,
-  alt,
+  distance = 0,
+  reverse = false,
   imageProps,
+  alt,
+  src,
   ...restProps
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
-  useMoveAxisToCursor(ref, imageRef, typeof distance === 'string' ? +distance : distance, reverse);
+  useMoveAxisToCursor(ref, imageRef, distance, reverse);
 
   return (
     <Avatar
@@ -34,8 +34,8 @@ const MovableAvatar: FC<MovableAvatarProps> = ({
         className="relative"
         src={src}
         style={{
-          width: `calc(100% + ${2 * +distance}px)`,
-          height: `calc(100% + ${2 * +distance}px)`
+          width: distance === 0 ? '100%' : `calc(100% + ${2 * distance}px`,
+          height: distance === 0 ? '100%' : `calc(100% + ${2 * distance}px`
         }}
         ref={imageRef}
         {...imageProps}
