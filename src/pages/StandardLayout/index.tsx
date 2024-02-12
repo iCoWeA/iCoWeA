@@ -9,7 +9,7 @@ import StandardHeader from './Header/StandardHeader';
 export const Component: FC = () => (
   <Layout
     layout="root"
-    variant="solid"
+    variant="soft"
     color="primary"
   >
     <StandardHeader />

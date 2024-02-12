@@ -6,7 +6,7 @@ import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
 const LoadingScreen: FC = () => (
   <Layout
     layout="root"
-    variant="solid"
+    variant="soft"
     color="primary"
     justify="center"
     align="center"

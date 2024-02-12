@@ -10,7 +10,7 @@ type ErrorScreenProps = {
 const ErrorScreen: FC<ErrorScreenProps> = ({ children }) => (
   <Layout
     layout="root"
-    variant="solid"
+    variant="soft"
     color="primary"
     justify="center"
     align="center"
