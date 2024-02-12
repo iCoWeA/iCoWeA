@@ -2,21 +2,22 @@ import React, { type FC } from 'react';
 
 import FormControl, {
   type FormControlProps
-} from '../../lib/iCoWeaUI/components/inputs/FormControl/FormControl';
-import Input, { type InputProps } from '../../lib/iCoWeaUI/components/inputs/Input/Input';
-import Label, { type LabelProps } from '../../lib/iCoWeaUI/components/inputs/Label/Label';
+} from '../../lib/iCoWeABaseUI/components/inputs/FormControl/FormControl';
+import Input, { type InputProps } from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
+import Label, { type LabelProps } from '../../lib/iCoWeABaseUI/components/inputs/Label/Label';
+import { upperCaseFirstLetter } from '../../lib/iCoWeAUtilsUI/utils/utils';
 
 type TextfieldProps = InputProps & {
-  indexId?: string;
   labelVariant?: 'floating' | 'text' | 'none';
+  indexId?: string;
   containerProps?: FormControlProps;
   labelProps?: LabelProps;
 };
 
 const Textfield: FC<TextfieldProps> = ({
-  indexId,
   labelVariant = 'floating',
   invalid,
+  indexId,
   containerProps,
   labelProps,
   children,
@@ -32,20 +33,20 @@ const Textfield: FC<TextfieldProps> = ({
           <Label
             htmlFor={indexId}
             {...labelProps}
-          >{`${indexId[0].toUpperCase() + indexId.slice(1).replace('-', ' ')}`}</Label>
+          >{`${upperCaseFirstLetter(indexId).replace('-', ' ')}`}</Label>
         )}
         <Input
           block
           label={
             labelVariant === 'floating' &&
             indexId &&
-            `${indexId[0].toUpperCase() + indexId.slice(1).replace('-', ' ')}`
+            `${upperCaseFirstLetter(indexId).replace('-', ' ')}`
           }
           id={indexId}
           name={indexId}
           {...restProps}
         />
-        {invalid && indexId && `Invalid ${indexId}`}
+        {invalid && indexId && `Invalid ${indexId.replace('-', ' ')}`}
       </>
     )}
   </FormControl>
