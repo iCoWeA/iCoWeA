@@ -11,7 +11,7 @@ const StandardHeader: FC = () => {
   const breakpoint = useSelector(selectBreakpoint);
 
   return (
-    <Header>
+    <Header shadow>
       <Logo />
       {(breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD) && <MobileNavigation />}
       {breakpoint !== Breakpoints.SM && breakpoint !== Breakpoints.MD && <DefaultNavigation />}
