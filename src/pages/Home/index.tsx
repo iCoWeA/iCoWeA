@@ -21,7 +21,7 @@ export const Component: FC = () => {
           <Flex
             wrap="nowrap"
             gap="xxl"
-            className="max-md:flex-col"
+            className="max-lg:flex-col"
           >
             <Stack gap="md">
               <Title
