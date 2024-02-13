@@ -18,7 +18,11 @@ export const Component: FC = () => {
       color="neutral"
     >
       <DashboardHeader />
-      {(breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD) && <Outlet />}
+      {(breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD) && (
+        <Layout layout="dashboard">
+          <Outlet />
+        </Layout>
+      )}
       {breakpoint !== Breakpoints.SM && breakpoint !== Breakpoints.MD && (
         <Layout layout="dashboard">
           <DashboardSidebar />
