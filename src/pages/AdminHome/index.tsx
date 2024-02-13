@@ -1,17 +1,23 @@
 import React, { type FC } from 'react';
 
-import Section from '../../lib/iCoWeaUI/components/layouts/Section/Section';
-import Stack from '../../lib/iCoWeaUI/components/layouts/Stack/Stack';
+import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
+import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
+import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import MessagesCard from './MessagesCard';
 import UserCard from './UserCard';
 
 export const Component: FC = () => (
-  <Section>
-    <Stack gap="md">
-      <UserCard />
-      <MessagesCard />
-    </Stack>
-  </Section>
+  <Main
+    placement="right"
+    block
+  >
+    <Section>
+      <Stack gap="lg">
+        <UserCard />
+        <MessagesCard />
+      </Stack>
+    </Section>
+  </Main>
 );
 
 Component.displayName = 'AdminHomeRoute';
