@@ -1,9 +1,9 @@
 import React, { type FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Layout from '../../lib/iCoWeaUI/components/layouts/Layout/Layout';
-import Main from '../../lib/iCoWeaUI/components/layouts/Main/Main';
-import DashboardHeader from './DashboardHeader';
+import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
+import DashboardFooter from './Footer/DashboardFooter';
+import DashboardHeader from './Header/DashboardHeader';
 
 export const Component: FC = () => (
   <Layout
@@ -12,11 +12,8 @@ export const Component: FC = () => (
     color="neutral"
   >
     <DashboardHeader />
-    <Layout layout="dashboard">
-      <Main>
-        <Outlet />
-      </Main>
-    </Layout>
+    <Outlet />
+    <DashboardFooter />
   </Layout>
 );
 
