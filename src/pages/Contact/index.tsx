@@ -25,10 +25,7 @@ export const Component: FC = () => {
             >
               Contact
             </Title>
-            <Flex
-              justify="between"
-              gap="xxl"
-            >
+            <Flex gap="xxl">
               <Stack gap="lg">
                 <Flex gap="sm">
                   <Icon spacing="default">
