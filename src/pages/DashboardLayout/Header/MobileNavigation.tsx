@@ -33,6 +33,7 @@ const MobileNavigation: FC = () => {
         onClose={() => dispatch(navbarActions.close())}
         open={open}
         spacing="lg-panel"
+        align="start"
         gap="xl"
       >
         <Logo />
