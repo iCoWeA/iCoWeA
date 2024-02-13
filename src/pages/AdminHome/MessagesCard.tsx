@@ -1,28 +1,30 @@
 import React, { type FC } from 'react';
 
-import Title from '../../lib/iCoWeaUI/components/data-display/Title/Title';
-import Card from '../../lib/iCoWeaUI/components/surfaces/Card/Card';
+import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
+import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
 
-const MessagesCard: FC = () => (
-  <Card
-    variant="solid"
-    color="primary"
-    spacing="md"
-  >
-    <Title
-      variant="2"
-      color="inherit"
-      gutter
+const MessagesCard: FC = () => {
+  return (
+    <Card
+      spacing="lg"
+      variant="solid"
+      color="primary"
+      gap="lg"
     >
-      0
-    </Title>
-    <Title
-      variant="4"
-      color="inherit"
-    >
-      Messages
-    </Title>
-  </Card>
-);
+      <Title
+        size="2"
+        color="inherit"
+      >
+        0
+      </Title>
+      <Title
+        size="4"
+        color="inherit"
+      >
+        Messages
+      </Title>
+    </Card>
+  );
+};
 
 export default MessagesCard;
