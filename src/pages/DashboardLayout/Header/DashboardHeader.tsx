@@ -1,6 +1,7 @@
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
 
+import Logo from '../../../components/Icons/Logo';
 import Avatar from '../../../lib/iCoWeABaseUI/components/data-display/Avatar/Avatar';
 import Text from '../../../lib/iCoWeABaseUI/components/data-display/Text/Text';
 import Title from '../../../lib/iCoWeABaseUI/components/data-display/Title/Title';
@@ -20,9 +21,9 @@ const DashboardHeader: FC = () => {
     <Header
       block
       shadow
-      justify={breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD ? 'between' : 'end'}
     >
       {(breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD) && <MobileNavigation />}
+      {breakpoint !== Breakpoints.SM && breakpoint !== Breakpoints.MD && <Logo />}
       <Flex gap="base">
         <Stack>
           <Title>{`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(
