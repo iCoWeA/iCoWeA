@@ -27,8 +27,8 @@ export const Component: FC = () => {
         method="post"
       >
         <Card
-          spacing="md"
-          gap="md"
+          spacing="lg"
+          gap="lg"
           className="mx-auto max-w-120"
         >
           <Textfield errorText={inputs.email.error && 'Invalid email'}>
