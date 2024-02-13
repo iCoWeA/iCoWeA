@@ -20,8 +20,8 @@ export const Component: FC = () => {
         <Section className="animate-slide">
           <Flex
             wrap="nowrap"
-            justify="center"
-            className="gap-16 max-md:flex-col"
+            gap="xxl"
+            className="max-md:flex-col"
           >
             <Stack gap="md">
               <Title
@@ -34,7 +34,7 @@ export const Component: FC = () => {
                 size="1"
                 color="secondary"
               >
-                {(user?.firstname ?? '') + ' ' + (user?.lastname ?? '')}
+                {`${user.firstname} ${user.lastname}`}
               </Title>
               <Title
                 size="4"
@@ -49,7 +49,7 @@ export const Component: FC = () => {
               >
                 based in Košice, Slovakia.
               </Title>
-              <Flex gap="sm">
+              <Flex gap="md">
                 <LinkButton
                   to="projects"
                   size="lg"
