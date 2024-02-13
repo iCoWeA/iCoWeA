@@ -15,9 +15,9 @@ declare global {
     postalCode: string,
     city: string,
     country: string,
-    github?: string,
-    linkedin?: string,
-    instagram?: string,
-    facebook?: string
+    github: string,
+    linkedin: string,
+    instagram: string,
+    facebook: string
   };
 };
