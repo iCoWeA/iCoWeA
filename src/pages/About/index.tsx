@@ -30,7 +30,7 @@ export const Component: FC = () => {
               className="w-full max-w-[25rem] border-8"
               src={require('../../assets/images/photo.png')}
             />
-            <Stack gap="md">
+            <Stack gap="sm">
               <Title
                 size="5"
                 color="inherit"
@@ -51,7 +51,7 @@ export const Component: FC = () => {
               >
                 {user.about}
               </Text>
-              <Flex gap="md">
+              <Flex gap="sm">
                 <LinkButton
                   to="projects"
                   size="lg"
