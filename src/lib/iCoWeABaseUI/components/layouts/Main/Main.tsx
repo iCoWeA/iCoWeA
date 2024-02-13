@@ -11,6 +11,7 @@ import { getBorderType, getBorderVariant } from '../../../utils/utils';
 import mainConfig from './mainConfig';
 
 export type MainDefaultProps = {
+  block?: boolean;
   variant?: Variants;
   color?: Colors;
   border?: Borders;
@@ -19,7 +20,7 @@ export type MainDefaultProps = {
 export type MainProps = BaseHTMLAttributes<HTMLElement> & MainDefaultProps;
 
 const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
-  const { variant, color, border, defaultClassName, className, ...restProps } = useConfig(
+  const { block, variant, color, border, defaultClassName, className, ...restProps } = useConfig(
     'main',
     mainConfig.defaultProps,
     props
@@ -35,6 +36,7 @@ const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
 
     return mergeClasses(
       styles.base,
+      !block && styles.block,
       borderType !== 'none' && styles.borders[borderType],
       color !== 'inherit' && styles.variants[variant][theme][color],
       color !== 'inherit' &&
@@ -43,7 +45,7 @@ const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
       defaultClassName,
       className
     );
-  }, [border, variant, theme, color, defaultClassName, className]);
+  }, [border, block, variant, theme, color, defaultClassName, className]);
 
   return (
     <main

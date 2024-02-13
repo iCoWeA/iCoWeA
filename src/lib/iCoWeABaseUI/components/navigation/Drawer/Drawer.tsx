@@ -2,12 +2,13 @@ import React, { type MutableRefObject, forwardRef, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useConfig from '../../../hooks/useConfig';
-import Popper, { type PopperProps } from '../../utils/Popper/Popper';
-import DrawerContainer, { type DrawerContainerDefaultProps } from './DrawerContainer';
+import Stack, { type StackProps } from '../../layouts/Stack/Stack';
+import DrawerPopper, { type DrawerPopperDefaultProps } from './DrawerPopper';
 import drawerConfig from './drawerConfig';
 
 export type DrawerDefaultProps = {
   placement?: Placements;
+  spacing?: PanelSpacings;
   variant?: Variants;
   color?: DefaultColors;
   radius?: Radiuses;
@@ -17,23 +18,28 @@ export type DrawerDefaultProps = {
   backdrop?: Backdrop;
 };
 
-export type DrawerProps = PopperProps &
+export type DrawerProps = StackProps &
 DrawerDefaultProps & {
   onClose?: ((state: boolean) => void) | ((state?: boolean) => void);
   open?: boolean;
   portalTarget?: Element | null;
   anchorRef?: MutableRefObject<HTMLElement | null>;
-  containerProps?: DrawerContainerDefaultProps;
+  popperProps?: DrawerPopperDefaultProps;
 };
 
 const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
   const {
+    onClose,
     placement,
-    variant,
-    color,
     radius,
+    closeOnEscape,
+    focusTrap,
+    smooth,
     backdrop,
-    containerProps,
+    open,
+    portalTarget,
+    anchorRef,
+    popperProps,
     defaultClassName,
     className,
     children,
@@ -42,33 +48,41 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
 
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
-    const styles = drawerConfig.styles.root;
+    const styles = drawerConfig.styles.container;
+    const orientation = placement === 'bottom' || placement === 'top' ? 'horizontal' : 'vertical';
 
-    return mergeClasses(styles.base, styles.placements[placement], defaultClassName, className);
-  }, [placement, defaultClassName, className]);
+    return mergeClasses(
+      styles.orientations[orientation],
+      radius !== 'none' && styles.radiuses[placement][radius],
+      defaultClassName,
+      className
+    );
+  }, [placement, radius, defaultClassName, className]);
 
   return (
-    <Popper
-      lockScroll
-      closeOnOutsideClick={backdrop === 'none'}
-      closeDuration={-1}
-      closeOnBackdropClick
+    <DrawerPopper
+      onClose={onClose}
+      placement={placement}
+      closeOnEscape={closeOnEscape}
+      focusTrap={focusTrap}
+      smooth={smooth}
       backdrop={backdrop}
-      transition={`slide-${placement}`}
-      className={mergedClassName}
+      open={open}
+      portalTarget={portalTarget}
+      anchorRef={anchorRef}
       ref={ref}
-      {...restProps}
+      {...popperProps}
     >
-      <DrawerContainer
-        placement={placement}
-        variant={variant}
-        color={color}
-        radius={radius}
-        {...containerProps}
+      <Stack
+        justify="start"
+        align="stretch"
+        gap="none"
+        className={mergedClassName}
+        {...restProps}
       >
         {children}
-      </DrawerContainer>
-    </Popper>
+      </Stack>
+    </DrawerPopper>
   );
 });
 

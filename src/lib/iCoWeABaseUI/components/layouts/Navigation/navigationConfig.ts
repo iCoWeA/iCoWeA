@@ -5,8 +5,8 @@ const navigationConfig = {
     variant: 'default',
     color: 'inherit',
     border: false,
-    justify: 'center',
-    align: 'center',
+    justify: 'start',
+    align: 'stretch',
     gap: 'md'
   },
   styles: {

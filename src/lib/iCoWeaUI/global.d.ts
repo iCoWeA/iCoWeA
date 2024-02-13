@@ -4,7 +4,7 @@ declare global {
   export type Obj = Record<string, string>;
   export type Placements = 'top' | 'left' | 'right' | 'bottom';
   export type SidePlacements = 'left' | 'right';
-  export type ContainerPlacements = 'left' | 'middle' | 'right';
+  export type BoxPlacements = 'left' | 'middle' | 'right';
   export type InnerPlacements = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' | 'right';
   export type OuterPlacements = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end';
   export type CornerPlacements = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
@@ -39,6 +39,7 @@ declare global {
   export type AlignItems = 'stretch' | 'start' | 'end' | 'center' | 'baseline';
   export type Aligns = 'left' | 'right' | 'center' | 'justify';
   export type Gaps = 'none' | 'base' | 'sm' | 'md' | 'lg';
+  export type BoxGaps = 'none' | 'base' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   export type Backdrop = 'none' | 'visible' | 'invisible';
   export type Transitions = 'fade' | 'grow-x' | 'grow-y' | 'grow' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right';
   export type Layouts = 'root' | 'default' | 'standard' | 'dashboard' | 'fullbleed';

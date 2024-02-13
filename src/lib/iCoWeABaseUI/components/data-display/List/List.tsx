@@ -9,7 +9,7 @@ export type ListDefaultProps = {
   row?: boolean;
   justify?: JustifyContent;
   align?: AlignItems;
-  gap?: Gaps;
+  gap?: BoxGaps;
 };
 
 export type ListProps = BaseHTMLAttributes<HTMLUListElement> & ListDefaultProps;

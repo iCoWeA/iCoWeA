@@ -5,7 +5,7 @@ import { type ButtonProps } from '../Button/Button';
 import buttonGroupConfig from './buttonGroupConfig';
 
 export type ButtonGroupButtonProps = {
-  placement: ContainerPlacements;
+  placement: BoxPlacements;
   theme: Themes;
   vertical: boolean;
   size: Sizes;

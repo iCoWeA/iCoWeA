@@ -8,8 +8,7 @@ const sidebarConfig = {
   styles: {
     base: {
       display: 'flex',
-      width: 'w-3/12',
-      maxWidth: 'max-w-120'
+      width: 'w-64'
     },
     placements: {
       left: {

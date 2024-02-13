@@ -1,6 +1,7 @@
 const drawerConfig = {
   defaultProps: {
     placement: 'left',
+    spacing: 'none',
     variant: 'plain',
     color: 'neutral',
     radius: 'rounded',

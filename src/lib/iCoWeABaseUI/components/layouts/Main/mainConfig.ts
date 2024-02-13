@@ -10,6 +10,10 @@ const mainConfig = {
       width: 'w-full',
       flexDirection: 'flex-col'
     },
+    block: {
+      margin: 'mx-auto',
+      maxWidth: 'max-w-232'
+    },
     borders: {
       all: {
         border: 'border'

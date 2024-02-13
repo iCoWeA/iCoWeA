@@ -11,9 +11,9 @@ export type GridDefaultProps = {
   align?: AlignItems;
   justifyContent?: JustifyContent;
   alignContent?: AlignContent;
-  gap?: Gaps;
-  rowGap?: Gaps;
-  colGap?: Gaps;
+  gap?: BoxGaps;
+  rowGap?: BoxGaps;
+  colGap?: BoxGaps;
 };
 
 export type GridProps = BoxProps & GridDefaultProps;
@@ -68,7 +68,7 @@ const Grid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
       position="static"
       block={false}
       spacing="none"
-      variant="default"
+      variant="text"
       color="inherit"
       border={false}
       radius="none"

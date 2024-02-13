@@ -8,7 +8,7 @@ const transitionConfig = {
     base: {
       position: 'relative',
       display: 'block',
-      transitionDuration: 'duration-[2000ms]'
+      transitionDuration: 'duration-[500ms]'
     },
     transitions: {
       default: {

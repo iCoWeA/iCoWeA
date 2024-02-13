@@ -10,7 +10,7 @@ export type FlexDefaultProps = {
   wrap?: Wraps;
   justify?: JustifyContent;
   align?: AlignItems;
-  gap?: Gaps;
+  gap?: BoxGaps;
 };
 
 export type FlexProps = BoxProps & FlexDefaultProps;
@@ -40,7 +40,7 @@ const Flex = forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
       position="static"
       block={false}
       spacing="none"
-      variant="default"
+      variant="text"
       color="inherit"
       border={false}
       radius="none"

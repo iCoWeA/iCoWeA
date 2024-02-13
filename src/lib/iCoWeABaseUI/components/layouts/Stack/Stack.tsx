@@ -7,7 +7,7 @@ import stackConfig from './stackConfig';
 export type StackDefaultProps = {
   justify?: JustifyContent;
   align?: AlignItems;
-  gap?: Gaps;
+  gap?: BoxGaps;
 };
 
 export type StackProps = FlexProps & StackDefaultProps;

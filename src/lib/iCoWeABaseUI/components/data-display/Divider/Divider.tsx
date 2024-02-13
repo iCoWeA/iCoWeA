@@ -9,7 +9,7 @@ import DividerLine, { type DividerLineDefaultProps } from './DividerLine';
 import dividerConfig from './dividerConfig';
 
 export type DividerDefaultProps = {
-  placement?: ContainerPlacements;
+  placement?: BoxPlacements;
   vertical?: boolean;
   spacing?: PanelSpacings;
   color?: TextColors;

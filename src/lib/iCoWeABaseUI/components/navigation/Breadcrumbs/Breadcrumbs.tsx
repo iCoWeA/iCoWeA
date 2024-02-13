@@ -35,7 +35,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
     itemNodes = (
       <ListItem
         spacing="none"
-        variant="default"
+        variant="text"
         color="inherit"
         border={false}
         radius="none"
@@ -57,7 +57,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
         <ListItem
           key={i}
           spacing="none"
-          variant="default"
+          variant="text"
           color="inherit"
           border={false}
           radius="none"
@@ -70,7 +70,7 @@ const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>((props, ref) => {
           {!isLast(children, i) && (
             <Mark
               size="sm"
-              variant="default"
+              variant="text"
               color="inherit"
               border={false}
               {...separatorsProps?.[i]}

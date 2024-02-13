@@ -8,24 +8,21 @@ const defaultSpinnerConfig = {
   styles: {
     root: {
       base: {
-        display: 'inline-block'
+        display: 'inline-block',
+        aspectRatio: 'aspect-square'
       },
       sizes: {
         none: {
-          width: 'w-5',
-          height: 'h-5'
+          width: 'w-5'
         },
         sm: {
-          width: 'w-8',
-          height: 'h-8'
+          width: 'w-8'
         },
         md: {
-          width: 'w-10',
-          height: 'h-10'
+          width: 'w-10'
         },
         lg: {
-          width: 'w-12',
-          height: 'h-12'
+          width: 'w-12'
         }
       }
     },

@@ -7,7 +7,7 @@ import dividerConfig from './dividerConfig';
 export type DividerLineDefaultProps = BaseHTMLAttributes<HTMLHRElement>;
 
 export type DividerLineProps = DividerLineDefaultProps & {
-  placement: ContainerPlacements;
+  placement: BoxPlacements;
   vertical: boolean;
   spacing: PanelSpacings;
 };

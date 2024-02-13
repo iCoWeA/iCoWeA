@@ -28,7 +28,7 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
   return (
     <Flex
       direction={layout === 'root' ? 'col' : 'row'}
-      wrap="wrap"
+      wrap="nowrap"
       justify={layout === 'dashboard' || layout === 'fullbleed' ? 'between' : 'stretch'}
       align={layout === 'default' ? 'center' : 'stretch'}
       gap={layout === 'dashboard' || layout === 'fullbleed' ? 'lg' : 'none'}

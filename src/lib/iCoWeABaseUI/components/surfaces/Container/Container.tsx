@@ -9,6 +9,7 @@ import containerConfig from './containerConfig';
 export type ContainerDefaultProps = {
   spacing?: PanelSpacings;
   layout?: ContainerLayouts;
+  gap?: Gaps;
   closable?: Closable;
 };
 

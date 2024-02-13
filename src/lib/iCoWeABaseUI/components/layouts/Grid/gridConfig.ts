@@ -107,6 +107,12 @@ const gridConfig = {
       },
       lg: {
         gap: 'gap-8'
+      },
+      xl: {
+        gap: 'gap-12'
+      },
+      xxl: {
+        gap: 'gap-16'
       }
     },
     rowGaps: {
@@ -121,6 +127,12 @@ const gridConfig = {
       },
       lg: {
         gap: 'gap-y-8'
+      },
+      xl: {
+        gap: 'gap-y-12'
+      },
+      xxl: {
+        gap: 'gap-y-16'
       }
     },
     colGaps: {
@@ -135,6 +147,12 @@ const gridConfig = {
       },
       lg: {
         gap: 'gap-x-8'
+      },
+      xl: {
+        gap: 'gap-x-12'
+      },
+      xxl: {
+        gap: 'gap-x-16'
       }
     }
   }

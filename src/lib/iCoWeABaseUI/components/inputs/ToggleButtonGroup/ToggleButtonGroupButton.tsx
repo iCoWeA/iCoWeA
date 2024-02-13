@@ -5,7 +5,7 @@ import { type ToggleButtonProps } from '../ToggleButton/ToggleButton';
 import toggleButtonGroupConfig from './toggleButtonGroupConfig';
 
 export type ToggleButtonGroupButtonProps = {
-  placement: ContainerPlacements;
+  placement: BoxPlacements;
   vertical: boolean;
   size: Sizes;
   block: boolean;

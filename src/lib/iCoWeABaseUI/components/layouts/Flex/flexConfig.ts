@@ -75,6 +75,12 @@ const flexConfig = {
       },
       lg: {
         gap: 'gap-8'
+      },
+      xl: {
+        gap: 'gap-12'
+      },
+      xxl: {
+        gap: 'gap-16'
       }
     }
   }

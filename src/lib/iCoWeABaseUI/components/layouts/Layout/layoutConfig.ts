@@ -11,12 +11,14 @@ const layoutConfig = {
       default: {
         margin: 'mx-auto',
         maxWidth: 'max-w-376',
-        padding: 'px-8 max-md:px-4'
+        padding: 'px-8 max-md:px-4',
+        flexGrow: 'grow'
       },
       standard: {
         margin: 'mx-auto',
         maxWidth: 'max-w-376',
-        padding: 'px-8 max-md:px-4'
+        padding: 'px-8 max-md:px-4',
+        flexGrow: 'grow'
       },
       dashboard: {
         padding: 'px-8 max-md:px-4'

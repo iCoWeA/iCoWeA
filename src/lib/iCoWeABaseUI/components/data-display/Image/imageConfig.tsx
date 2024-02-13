@@ -5,7 +5,8 @@ const imageConfig = {
   styles: {
     base: {
       display: 'inline-block',
-      width: 'w-full'
+      width: 'w-full',
+      maxWidth: 'max-w-none'
     },
     radiuses: {
       rounded: {
