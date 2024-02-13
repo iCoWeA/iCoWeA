@@ -9,12 +9,12 @@ import containerConfig from './containerConfig';
 export type ContainerDefaultProps = {
   spacing?: PanelSpacings;
   layout?: ContainerLayouts;
-  gap?: Gaps;
   closable?: Closable;
 };
 
 export type ContainerProps = FlexProps &
 ContainerDefaultProps & {
+  gap?: Gaps;
   buttonGap?: Gaps;
 };
 

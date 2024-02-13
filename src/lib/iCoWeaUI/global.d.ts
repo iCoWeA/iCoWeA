@@ -8,6 +8,7 @@ declare global {
   export type InnerPlacements = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' | 'right';
   export type OuterPlacements = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end';
   export type CornerPlacements = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+  export type LayoutPlacements = 'left' | 'right' | 'middle' | 'full';
   export type Positions = 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky';
   export type Orientations = 'vertical' | 'horizontal';
   export type Sizes = 'sm' | 'md' | 'lg';
