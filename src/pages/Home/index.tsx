@@ -23,7 +23,7 @@ export const Component: FC = () => {
             gap="xxl"
             className="max-lg:flex-col"
           >
-            <Stack gap="md">
+            <Stack gap="sm">
               <Title
                 size="3"
                 color="inherit"
@@ -32,6 +32,7 @@ export const Component: FC = () => {
               </Title>
               <Title
                 size="1"
+                gutter
                 color="secondary"
               >
                 {`${user.firstname} ${user.lastname}`}
@@ -49,7 +50,7 @@ export const Component: FC = () => {
               >
                 based in Košice, Slovakia.
               </Title>
-              <Flex gap="md">
+              <Flex gap="sm">
                 <LinkButton
                   to="projects"
                   size="lg"
