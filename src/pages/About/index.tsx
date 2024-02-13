@@ -21,8 +21,8 @@ export const Component: FC = () => {
         <Section className="animate-slide">
           <Flex
             wrap="nowrap"
-            justify="center"
-            className="gap-16 max-lg:flex-col"
+            gap="xxl"
+            className="max-lg:flex-col"
           >
             <MovableAvatar
               distance={10}
@@ -42,16 +42,16 @@ export const Component: FC = () => {
                 gutter
                 color="secondary"
               >
-                {(user?.firstname ?? '') + ' ' + (user?.lastname ?? '')}
+                {`${user.firstname} ${user.lastname}`}
               </Title>
               <Text
                 size="lg"
                 gutter
                 color="inherit"
               >
-                {user?.about}
+                {user.about}
               </Text>
-              <Flex gap="sm">
+              <Flex gap="md">
                 <LinkButton
                   to="projects"
                   size="lg"
