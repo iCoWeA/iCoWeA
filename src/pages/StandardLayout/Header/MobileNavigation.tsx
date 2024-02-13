@@ -33,7 +33,7 @@ const MobileNavigation: FC = () => {
         onClose={() => dispatch(navbarActions.close())}
         open={open}
         spacing="lg"
-        className="w-[15rem]"
+        className="w-64"
       >
         <Navigation
           vertical
