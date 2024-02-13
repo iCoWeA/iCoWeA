@@ -52,7 +52,7 @@ export const Component: FC = () => {
               </Title>
               <Flex gap="sm">
                 <LinkButton
-                  to="projects"
+                  to="/projects"
                   size="lg"
                   variant="solid"
                   color="secondary"
@@ -60,7 +60,7 @@ export const Component: FC = () => {
                   View my works
                 </LinkButton>
                 <LinkButton
-                  to="contact"
+                  to="/contact"
                   size="lg"
                   variant="default"
                   color="secondary"
