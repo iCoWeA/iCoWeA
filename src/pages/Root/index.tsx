@@ -13,6 +13,8 @@ const Component: FC = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
+  const isEmpty = Object.keys(user).every((key) => key === '');
+
   /* --- Set event handlers --- */
   useEffect(() => {
     const userRef = ref(database, 'users/0');
@@ -33,7 +35,7 @@ const Component: FC = () => {
   return (
     <>
       <ScrollRestoration />
-      {user ? <Outlet /> : <LoadingScreen />}
+      {isEmpty ? <LoadingScreen /> : <Outlet />}
     </>
   );
 };
