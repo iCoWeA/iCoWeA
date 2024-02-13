@@ -45,6 +45,7 @@ const drawerConfig = {
           width: 'w-full'
         },
         vertical: {
+          width: 'w-64',
           height: 'h-full'
         }
       },
