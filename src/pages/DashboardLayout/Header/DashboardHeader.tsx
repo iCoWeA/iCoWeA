@@ -20,9 +20,9 @@ const DashboardHeader: FC = () => {
     <Header
       block
       shadow
-      justify={breakpoint === Breakpoints.SM ? 'between' : 'end'}
+      justify={breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD ? 'between' : 'end'}
     >
-      {breakpoint === Breakpoints.SM && <MobileNavigation />}
+      {(breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD) && <MobileNavigation />}
       <Flex gap="base">
         <Stack>
           <Title>{`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(
