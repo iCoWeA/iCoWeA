@@ -1,10 +1,10 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { type FC } from 'react';
 import { Form, redirect } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase';
 
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import Textfield from '../../components/Textfield/Textfield';
+import { auth } from '../../firebase';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
