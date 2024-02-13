@@ -7,6 +7,8 @@ import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import Textfield from '../../components/Textfield/Textfield';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
+import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
+import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
 import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
 import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
@@ -21,57 +23,60 @@ export const Component: FC = () => {
   } = useForm({ email: '', password: '' });
 
   return (
-    <Section>
-      <Form
-        onSubmit={resetForm}
-        method="post"
-      >
-        <Card
-          spacing="lg"
-          gap="lg"
-          className="mx-auto max-w-120"
-        >
-          <Textfield errorText={inputs.email.error && 'Invalid email'}>
-            <Input
-              onChange={(event) => {
-                change(event, 1000);
-              }}
-              onBlur={blur}
-              block
-              invalid={inputs.email.error}
-              label="Email"
-              id="email"
-              name="email"
-              pattern={EMAIL_PATTERN}
-              required
-              value={inputs.email.value}
-            />
-          </Textfield>
-          <Textfield errorText={inputs.password.error && 'Invalid password'}>
-            <PasswordInput
-              onChange={(event) => {
-                change(event, 1000);
-              }}
-              onBlur={blur}
-              block
-              invalid={inputs.password.error}
-              label="Password"
-              id="password"
-              name="password"
-              required
-              value={inputs.password.value}
-            />
-          </Textfield>
-          <Button
-            block
-            disabled={!isFormValid}
-            type="submit"
+    <Layout layout="default">
+      <Main>
+        <Section>
+          <Form
+            onSubmit={resetForm}
+            method="post"
           >
-            LOGIN
-          </Button>
-        </Card>
-      </Form>
-    </Section>
+            <Card
+              spacing="lg"
+              gap="lg"
+            >
+              <Textfield errorText={inputs.email.error && 'Invalid email'}>
+                <Input
+                  onChange={(event) => {
+                    change(event, 1000);
+                  }}
+                  onBlur={blur}
+                  block
+                  invalid={inputs.email.error}
+                  label="Email"
+                  id="email"
+                  name="email"
+                  pattern={EMAIL_PATTERN}
+                  required
+                  value={inputs.email.value}
+                />
+              </Textfield>
+              <Textfield errorText={inputs.password.error && 'Invalid password'}>
+                <PasswordInput
+                  onChange={(event) => {
+                    change(event, 1000);
+                  }}
+                  onBlur={blur}
+                  block
+                  invalid={inputs.password.error}
+                  label="Password"
+                  id="password"
+                  name="password"
+                  required
+                  value={inputs.password.value}
+                />
+              </Textfield>
+              <Button
+                block
+                disabled={!isFormValid}
+                type="submit"
+              >
+                LOGIN
+              </Button>
+            </Card>
+          </Form>
+        </Section>
+      </Main>
+    </Layout>
   );
 };
 
