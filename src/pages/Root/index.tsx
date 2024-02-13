@@ -13,7 +13,7 @@ const Component: FC = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-  const isEmpty = Object.keys(user).every((key) => key === '');
+  const isEmpty = user.id === '';
 
   /* --- Set event handlers --- */
   useEffect(() => {
