@@ -9,6 +9,7 @@ import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import LinkButton from '../../lib/iCoWeARouterUI/components/LinkButton/LinkButton';
+import { upperCaseFirstLetter } from '../../lib/iCoWeAUtilsUI/utils/utils';
 import { selectUser } from '../../store/slices/user';
 
 export const Component: FC = () => {
@@ -72,6 +73,7 @@ export const Component: FC = () => {
             <MovableAvatar
               distance={10}
               border
+              alt={`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(user.lastname)}`}
               className="w-full max-w-[25rem] border-8"
               src={require('../../assets/images/photo.png')}
             />
