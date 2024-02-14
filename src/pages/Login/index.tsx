@@ -82,6 +82,7 @@ export const Component: FC = () => {
 
 export const action = async ({ request }: { request: Request }): Promise<unknown> => {
   const formData = await request.formData();
+
   const email = formData.get('email')?.toString() ?? '';
   const password = formData.get('password')?.toString() ?? '';
 
