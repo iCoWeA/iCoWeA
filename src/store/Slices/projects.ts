@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { type StoreState } from '..';
 
-const initialState: Project[] = [];
+export type Projects = Record<string, Project>;
+
+const initialState: Projects = {};
 
 const projects = createSlice({
   name: 'projects',
@@ -12,7 +14,7 @@ const projects = createSlice({
   }
 });
 
-export const selectProjects = ({ projects }: StoreState): Project[] => projects;
+export const selectProjects = ({ projects }: StoreState): Projects => projects;
 
 export const projectsActions = projects.actions;
 
