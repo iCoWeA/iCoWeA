@@ -1,4 +1,4 @@
-import React, { type Dispatch, type FC } from 'react';
+import React, { type Dispatch, type SetStateAction, type FC } from 'react';
 import { Form } from 'react-router-dom';
 
 import Textfield from '../../components/Textfield/Textfield';
@@ -8,7 +8,7 @@ import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
 
 export type AddProjectFormProps = {
-  setOpen: Dispatch<React.SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
@@ -82,6 +82,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
           size="lg"
           block
           disabled={!isFormValid}
+          name="add"
           type="submit"
         >
           Save

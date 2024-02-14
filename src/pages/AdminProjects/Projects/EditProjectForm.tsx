@@ -1,4 +1,4 @@
-import React, { type Dispatch, type FC } from 'react';
+import React, { type Dispatch, type SetStateAction, type FC } from 'react';
 import { Form } from 'react-router-dom';
 
 import Textfield from '../../../components/Textfield/Textfield';
@@ -10,7 +10,7 @@ import useForm from '../../../lib/iCoWeAHooks/hooks/useForm';
 import { isFormChanged } from '../../../utils/utils';
 
 export type AddProjectFormProps = {
-  setIsEditing: Dispatch<React.SetStateAction<boolean>>;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
   id: string;
   name: string;
   url: string;
