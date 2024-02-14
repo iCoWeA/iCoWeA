@@ -423,4 +423,4 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
   return data;
 };
 
-Component.displayName = 'AdminHomeRoute';
+Component.displayName = 'AdminSettingsRoute';
