@@ -7,10 +7,11 @@ declare global {
     lastname: string,
     email: string
     phone: string,
-    imageURL: string,
+    image: string,
     dob: string;
     about: string,
     street: string,
+    streetNumber: string;
     postalCode: string,
     city: string,
     country: string,
