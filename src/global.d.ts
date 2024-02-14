@@ -2,7 +2,6 @@ export {};
 
 declare global {
   export type User = {
-    id: string,
     firstname: string,
     lastname: string,
     email: string
