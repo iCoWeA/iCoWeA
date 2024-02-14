@@ -6,7 +6,7 @@ declare global {
     lastname: string,
     email: string
     phone: string,
-    image: string,
+    imageURL: string,
     dob: string;
     about: string,
     street: string,
@@ -14,10 +14,10 @@ declare global {
     postalCode: string,
     city: string,
     country: string,
-    github: string,
-    linkedin: string,
-    instagram: string,
-    facebook: string
+    githubURL: string,
+    linkedinURL: string,
+    instagramURL: string,
+    facebookURL: string
   };
 
   export type Project = {

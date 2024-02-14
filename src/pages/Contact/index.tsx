@@ -83,7 +83,7 @@ export const Component: FC = () => {
                   grow
                 >
                   <Link
-                    to={user.github}
+                    to={user.githubURL}
                     target="_blanc"
                   >
                     <Icon
@@ -100,7 +100,7 @@ export const Component: FC = () => {
                     </Icon>
                   </Link>
                   <Link
-                    to={user.linkedin}
+                    to={user.linkedinURL}
                     target="_blanc"
                   >
                     <Icon
@@ -117,7 +117,7 @@ export const Component: FC = () => {
                     </Icon>
                   </Link>
                   <Link
-                    to={user.facebook}
+                    to={user.facebookURL}
                     target="_blanc"
                   >
                     <Icon
@@ -134,7 +134,7 @@ export const Component: FC = () => {
                     </Icon>
                   </Link>
                   <Link
-                    to={user.instagram}
+                    to={user.instagramURL}
                     target="_blanc"
                   >
                     <Icon
