@@ -17,6 +17,7 @@ const StandardFooter: FC = () => {
         Designed by <Link to="/">Richard Wagner</Link>{' '}
         <Link
           to={github}
+          target='_blanc'
           className="ml-4"
         >
           <Icon>

@@ -51,13 +51,13 @@ const MobileNavigation: FC = () => {
               activeVariant="solid"
               leftDecorator={
                 <Icon>
-                <svg
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-                </svg>
-              </Icon>
+                  <svg
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                  </svg>
+                </Icon>
               }
             >
               Home
@@ -123,7 +123,10 @@ const MobileNavigation: FC = () => {
           align="end"
           grow
         >
-          <Link to={user.github}>
+          <Link
+            to={user.github}
+            target="_blanc"
+          >
             <Icon>
               <svg
                 focusable="false"
@@ -133,7 +136,10 @@ const MobileNavigation: FC = () => {
               </svg>
             </Icon>
           </Link>
-          <Link to={user.linkedin}>
+          <Link
+            to={user.linkedin}
+            target="_blanc"
+          >
             <Icon>
               <svg
                 focusable="false"
@@ -143,7 +149,10 @@ const MobileNavigation: FC = () => {
               </svg>
             </Icon>
           </Link>
-          <Link to={user.facebook}>
+          <Link
+            to={user.facebook}
+            target="_blanc"
+          >
             <Icon>
               <svg
                 focusable="false"
@@ -153,7 +162,10 @@ const MobileNavigation: FC = () => {
               </svg>
             </Icon>
           </Link>
-          <Link to={user.instagram}>
+          <Link
+            to={user.instagram}
+            target="_blanc"
+          >
             <Icon>
               <svg
                 focusable="false"

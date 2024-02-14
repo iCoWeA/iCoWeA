@@ -82,7 +82,10 @@ export const Component: FC = () => {
                   align="end"
                   grow
                 >
-                  <Link to={user.github}>
+                  <Link
+                    to={user.github}
+                    target="_blanc"
+                  >
                     <Icon
                       spacing="default"
                       variant="default"
@@ -96,7 +99,10 @@ export const Component: FC = () => {
                       </svg>
                     </Icon>
                   </Link>
-                  <Link to={user.linkedin}>
+                  <Link
+                    to={user.linkedin}
+                    target="_blanc"
+                  >
                     <Icon
                       spacing="default"
                       variant="default"
@@ -110,7 +116,10 @@ export const Component: FC = () => {
                       </svg>
                     </Icon>
                   </Link>
-                  <Link to={user.facebook}>
+                  <Link
+                    to={user.facebook}
+                    target="_blanc"
+                  >
                     <Icon
                       spacing="default"
                       variant="default"
@@ -124,7 +133,10 @@ export const Component: FC = () => {
                       </svg>
                     </Icon>
                   </Link>
-                  <Link to={user.instagram}>
+                  <Link
+                    to={user.instagram}
+                    target="_blanc"
+                  >
                     <Icon
                       spacing="default"
                       variant="default"
