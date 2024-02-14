@@ -1,6 +1,8 @@
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
+import { push, child, ref, set } from 'firebase/database';
 
+import { database } from '../../firebase';
 import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
@@ -141,6 +143,30 @@ export const Component: FC = () => {
       </Main>
     </Layout>
   );
+};
+
+export const action = async ({ request }: { request: Request }): Promise<unknown> => {
+  const formData = await request.formData();
+
+  const name = formData.get('name')?.toString() ?? '';
+  const email = formData.get('email')?.toString() ?? '';
+  const subject = formData.get('subject')?.toString() ?? '';
+  const message = formData.get('message')?.toString() ?? '';
+
+  const key = push(child(ref(database), 'messages')).key;
+
+  if (key === null) {
+    throw new Error('No key !');
+  }
+
+  await set(ref(database, `messages/${key}`), {
+    name,
+    email,
+    subject,
+    message
+  });
+
+  return null;
 };
 
 Component.displayName = 'ContactRoute';
