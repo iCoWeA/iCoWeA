@@ -14,7 +14,7 @@ const Component: FC = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-  const isEmpty = Object.keys(user).every((key) => key === '');
+  const isEmpty = Object.keys(user).every((key) => user[key as keyof User] === '');
 
   /* --- Set event handlers --- */
   useEffect(() => {
