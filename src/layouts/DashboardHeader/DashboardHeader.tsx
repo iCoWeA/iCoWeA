@@ -38,7 +38,7 @@ const DashboardHeader: FC = () => {
         <Avatar
           color="neutral"
           alt={name}
-          src={require('../../assets/images/photo.png')}
+          src={user.image}
         />
       </Flex>
     </Header>

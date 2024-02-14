@@ -75,7 +75,7 @@ export const Component: FC = () => {
               border
               alt={`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(user.lastname)}`}
               className="w-full max-w-[25rem] border-8"
-              src={require('../../assets/images/photo.png')}
+              src={user.image}
             />
           </Flex>
         </Section>

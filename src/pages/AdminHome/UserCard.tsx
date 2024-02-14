@@ -26,7 +26,7 @@ const UserCard: FC = () => {
         <Avatar
           alt={`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(user.lastname)}`}
           className="w-24"
-          src={require('../../assets/images/photo.png')}
+          src={user.image}
         />
         <Stack justify="between">
           <Title size="2">{`${user.firstname} ${user.lastname}`}</Title>
