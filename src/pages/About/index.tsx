@@ -79,4 +79,4 @@ export const Component: FC = () => {
   );
 };
 
-Component.displayName = 'HomeRoute';
+Component.displayName = 'AboutRoute';
