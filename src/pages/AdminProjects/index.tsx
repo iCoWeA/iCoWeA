@@ -1,5 +1,5 @@
 import React, { type FC } from 'react';
-import { push, child, ref, set } from 'firebase/database';
+import { update, ref, remove, push, child, set } from 'firebase/database';
 
 import { database } from '../../firebase';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
@@ -16,11 +16,26 @@ export const Component: FC = () => (
 export const action = async ({ request }: { request: Request }): Promise<unknown> => {
   const formData = await request.formData();
 
+  const edit = formData.get('edit')?.toString();
+  const del = formData.get('del')?.toString();
+
   const data = {
     name: formData.get('name')?.toString() ?? '',
     url: formData.get('url')?.toString() ?? '',
     imageURL: formData.get('image-url')?.toString() ?? ''
   };
+
+  if (edit) {
+    await update(ref(database, `projects/${edit}`), data);
+
+    return data;
+  }
+
+  if (del) {
+    await remove(ref(database, `projects/${del}`));
+
+    return del;
+  }
 
   const key = push(child(ref(database), 'projects')).key;
 
