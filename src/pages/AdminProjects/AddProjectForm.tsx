@@ -80,8 +80,8 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
         </Textfield>
         <Button
           size="lg"
-          disabled={!isFormValid}
           block
+          disabled={!isFormValid}
           type="submit"
         >
           Save

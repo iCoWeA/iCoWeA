@@ -379,8 +379,8 @@ export const Component: FC = () => {
             </Grid>
             <Button
               size="lg"
-              disabled={!isFormValid || !isFormChanged(user, { streetNumber, postalCode, ...rest })}
               block
+              disabled={!isFormValid || !isFormChanged(user, { streetNumber, postalCode, ...rest })}
               type="submit"
             >
               Save
