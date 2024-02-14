@@ -9,7 +9,6 @@ import useWindowResize from '../../lib/iCoWeABaseUI/hooks/useWindowResize';
 import { breakpointActions } from '../../store/slices/breakpoint';
 import { projectsActions } from '../../store/slices/projects';
 import { selectUser, userActions } from '../../store/slices/user';
-import { setData } from '../../utils/utils';
 
 const Component: FC = () => {
   const dispatch = useDispatch();
@@ -37,7 +36,7 @@ const Component: FC = () => {
 
     return onValue(userRef, (snap) => {
       if (snap.exists()) {
-        dispatch(projectsActions.setProjects(setData(snap.val())));
+        dispatch(projectsActions.setProjects(snap.val()));
       }
     });
   }, []);
