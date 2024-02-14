@@ -5,11 +5,10 @@ declare global {
     id: string,
     firstname: string,
     lastname: string,
-    imageURL: string,
-    email: string,
+    email: string
     phone: string,
-    sex: 'man' | 'woman',
-    dob: string,
+    imageURL: string,
+    dob: string;
     about: string,
     street: string,
     postalCode: string,
