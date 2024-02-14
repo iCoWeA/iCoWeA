@@ -1,22 +1,43 @@
-import React, { type FC, useState } from 'react';
+import React, { type Dispatch, type SetStateAction, type FC, useRef, useCallback } from 'react';
 
 import Icon from '../../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import ListButton from '../../../lib/iCoWeABaseUI/components/data-display/ListButton/ListButton';
 import ListItem from '../../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
 import Button from '../../../lib/iCoWeABaseUI/components/inputs/Button/Button';
+import useAddEventListener from '../../../lib/iCoWeABaseUI/hooks/useAddEventListener';
 import EditProjectForm from './EditProjectForm';
 
 export type ProjectListButtonProps = {
+  setIsEditing: Dispatch<SetStateAction<number>>;
+  isEditing: number;
   id: string;
   name: string;
   url: string;
   imageURL: string;
+  position: number;
+  draggable: boolean;
 };
 
-const ProjectListButton: FC<ProjectListButtonProps> = ({ id, name, url, imageURL }) => {
-  const [isEditing, setIsEditing] = useState(false);
+const ProjectListButton: FC<ProjectListButtonProps> = ({
+  setIsEditing,
+  isEditing,
+  id,
+  name,
+  url,
+  imageURL,
+  position,
+  draggable
+}) => {
+  const ref = useRef<HTMLLIElement>(null);
 
-  if (isEditing) {
+  /* --- Set event handlers --- */
+  const dragStartHandler = useCallback((event: DragEvent): void => {
+    event.dataTransfer?.setData('listId', id);
+  }, []);
+
+  useAddEventListener(ref, 'dragstart', dragStartHandler);
+
+  if (isEditing === position) {
     return (
       <ListItem
         spacing="md"
@@ -42,11 +63,13 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({ id, name, url, imageURL
       color="primary"
       radius="rounded"
       justify="between"
+      draggable={draggable}
+      ref={ref}
     >
       {name}
       <Button
         onClick={() => {
-          setIsEditing(true);
+          setIsEditing(position);
         }}
         size="sm"
         variant="plain"
