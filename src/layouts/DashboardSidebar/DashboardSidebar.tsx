@@ -1,11 +1,11 @@
 import React, { type FC } from 'react';
 
-import Icon from '../../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
-import ListItem from '../../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
-import Navigation from '../../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
-import Sidebar from '../../../lib/iCoWeABaseUI/components/layouts/Sidebar/Sidebar';
-import Stack from '../../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
-import ListNavlink from '../../../lib/iCoWeARouterUI/components/ListNavlink/ListNavlink';
+import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
+import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
+import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
+import Sidebar from '../../lib/iCoWeABaseUI/components/layouts/Sidebar/Sidebar';
+import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
+import ListNavlink from '../../lib/iCoWeARouterUI/components/ListNavlink/ListNavlink';
 
 const DashboardSidebar: FC = () => (
   <Sidebar>

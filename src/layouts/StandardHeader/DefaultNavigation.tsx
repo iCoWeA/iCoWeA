@@ -1,8 +1,8 @@
 import React, { type FC } from 'react';
 
-import ListItem from '../../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
-import Navigation from '../../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
-import Navlink from '../../../lib/iCoWeARouterUI/components/Navlink/Navlink';
+import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
+import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
+import Navlink from '../../lib/iCoWeARouterUI/components/Navlink/Navlink';
 
 const DefaultNavigation: FC = () => (
   <Navigation>

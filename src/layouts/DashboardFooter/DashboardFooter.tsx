@@ -1,8 +1,8 @@
 import React, { type FC } from 'react';
 
-import Text from '../../../lib/iCoWeABaseUI/components/data-display/Text/Text';
-import Footer from '../../../lib/iCoWeABaseUI/components/layouts/Footer/Footer';
-import Link from '../../../lib/iCoWeARouterUI/components/Link/Link';
+import Text from '../../lib/iCoWeABaseUI/components/data-display/Text/Text';
+import Footer from '../../lib/iCoWeABaseUI/components/layouts/Footer/Footer';
+import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 
 const DashboardFooter: FC = () => (
   <Footer
