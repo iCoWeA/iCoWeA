@@ -14,7 +14,6 @@ const AddProject: FC = () => {
     <Section>
       <Card
         spacing="lg"
-        gap="lg"
         align="center"
       >
         <Collapse
