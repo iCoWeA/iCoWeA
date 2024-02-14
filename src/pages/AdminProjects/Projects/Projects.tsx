@@ -35,18 +35,17 @@ const Projects: FC = () => {
         spacing="lg"
         gap="lg"
       >
-        <List gap="md">
-          {nodes.length === 0 && (
-            <Title
-              size="4"
-              color="primary"
-              align="center"
-            >
-              No projects
-            </Title>
-          )}
-          {nodes.length !== 0 && nodes}
-        </List>
+        {nodes.length === 0 && (
+          <Title
+            size="3"
+            color="primary"
+            align="center"
+          >
+            No projects
+          </Title>
+        )}
+        {nodes.length !== 0 && <List gap="md">{nodes}</List>}
+
         {isDraged && <TrashArea setIsDraged={setIsDraged} />}
       </Card>
     </Section>
