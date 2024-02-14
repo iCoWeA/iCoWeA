@@ -7,12 +7,13 @@ import Button from '../../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import EditProjectForm from './EditProjectForm';
 
 export type ProjectListButtonProps = {
+  id: string;
   name: string;
   url: string;
   imageURL: string;
 };
 
-const ProjectListButton: FC<ProjectListButtonProps> = ({ name, url, imageURL }) => {
+const ProjectListButton: FC<ProjectListButtonProps> = ({ id, name, url, imageURL }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
@@ -25,6 +26,7 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({ name, url, imageURL }) 
       >
         <EditProjectForm
           setIsEditing={setIsEditing}
+          id={id}
           name={name}
           url={url}
           imageURL={imageURL}

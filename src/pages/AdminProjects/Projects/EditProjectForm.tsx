@@ -11,12 +11,13 @@ import { isFormChanged } from '../../../utils/utils';
 
 export type AddProjectFormProps = {
   setIsEditing: Dispatch<React.SetStateAction<boolean>>;
+  id: string;
   name: string;
   url: string;
   imageURL: string;
 };
 
-const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, name, url, imageURL }) => {
+const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, imageURL }) => {
   const {
     state: { inputs, isFormValid },
     change,
@@ -102,6 +103,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, name, url, imag
             !isFormChanged({ name, url, imageURL }, { ...inputs, imageURL: inputs['image-url'] })
           }
           name="edit"
+          value={id}
           type="submit"
           leftDecorator={
             <Icon>
