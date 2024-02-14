@@ -56,7 +56,7 @@ export const Component: FC = () => {
       placement="full"
       block
     >
-      <Section>
+      <Section className="max-w-232">
         <Form
           method="post"
           onFocus={(event) => {
@@ -66,7 +66,6 @@ export const Component: FC = () => {
           <Card
             spacing="lg"
             gap="xxl"
-            className="max-w-232"
           >
             <Grid
               block

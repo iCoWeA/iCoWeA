@@ -11,7 +11,7 @@ export const Component: FC = () => (
     placement="full"
     block
   >
-    <Section>
+    <Section className="max-w-232">
       <Stack gap="lg">
         <UserCard />
         <MessagesCard />

@@ -17,7 +17,6 @@ const UserCard: FC = () => {
     <Card
       spacing="lg"
       gap="lg"
-      className='max-w-232'
     >
       <Flex
         gap="md"
@@ -26,7 +25,7 @@ const UserCard: FC = () => {
         <Avatar
           alt={`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(user.lastname)}`}
           className="w-24"
-          src={user.image}
+          src={require('../../assets/images/photo.png')}
         />
         <Stack justify="between">
           <Title size="2">{`${user.firstname} ${user.lastname}`}</Title>
