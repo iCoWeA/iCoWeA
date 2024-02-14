@@ -18,6 +18,7 @@ const MobileNavigation: FC = () => {
       <Button
         onClick={() => dispatch(navbarActions.toggle())}
         icon
+        color="secondary"
       >
         <Icon>
           <svg
