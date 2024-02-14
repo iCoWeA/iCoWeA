@@ -96,12 +96,13 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, name, url, imag
         <Button
           block
           variant="plain"
+          className="col-span-2 max-md:col-span-1"
           disabled={
             !isFormValid ||
             !isFormChanged({ name, url, imageURL }, { ...inputs, imageURL: inputs['image-url'] })
           }
+          name="edit"
           type="submit"
-          className="col-span-2 max-md:col-span-1"
           leftDecorator={
             <Icon>
               <svg
