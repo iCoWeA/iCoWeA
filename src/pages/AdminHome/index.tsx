@@ -8,7 +8,7 @@ import UserCard from './UserCard';
 
 export const Component: FC = () => (
   <Main
-    placement="right"
+    placement="full"
     block
   >
     <Section>
