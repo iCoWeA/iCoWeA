@@ -22,6 +22,7 @@ const DashboardSidebar: FC = () => (
         <ListItem>
           <ListNavlink
             to="admin"
+            end
             activeVariant="solid"
           >
             <Icon>
