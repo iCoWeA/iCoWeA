@@ -28,7 +28,7 @@ const ContactForm: FC = () => {
       <Flex gap="lg">
         <Stack
           gap="lg"
-          className="grow"
+          grow
         >
           <Textfield errorText={inputs.name.error && 'Invalid name'}>
             <Input
@@ -87,7 +87,7 @@ const ContactForm: FC = () => {
         </Stack>
         <Stack
           gap="lg"
-          className="grow"
+          grow
         >
           <Textfield errorText={inputs.message.error && 'Invalid message'}>
             <Textarea

@@ -113,7 +113,7 @@ const MobileNavigation: FC = () => {
         <Flex
           justify="between"
           align="end"
-          className="grow"
+          grow
         >
           <Link to={user.github}>
             <Icon>
