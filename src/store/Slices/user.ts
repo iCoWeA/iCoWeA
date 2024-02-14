@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { type StoreState } from '..';
 
 const initialState: User = {
-  id: '',
   firstname: '',
   lastname: '',
   image: '',
