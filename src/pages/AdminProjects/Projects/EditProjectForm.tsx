@@ -10,7 +10,7 @@ import useForm from '../../../lib/iCoWeAHooks/hooks/useForm';
 import { isFormChanged } from '../../../utils/utils';
 
 export type AddProjectFormProps = {
-  setIsEditing: Dispatch<SetStateAction<boolean>>;
+  setIsEditing: Dispatch<SetStateAction<string>>;
   id: string;
   name: string;
   url: string;
@@ -30,7 +30,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
     <Form
       onSubmit={() => {
         resetForm();
-        setIsEditing(false);
+        setIsEditing('');
       }}
       onFocus={(event) => {
         revalidForm(event.target);
@@ -120,7 +120,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
         </Button>
         <Button
           onClick={() => {
-            setIsEditing(false);
+            setIsEditing('');
           }}
           block
           color="error"

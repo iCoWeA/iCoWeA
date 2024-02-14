@@ -1,22 +1,50 @@
-import React, { type FC, useState } from 'react';
+import React, { type Dispatch, type SetStateAction, type FC, useRef, useCallback } from 'react';
 
 import Icon from '../../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import ListButton from '../../../lib/iCoWeABaseUI/components/data-display/ListButton/ListButton';
 import ListItem from '../../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
 import Button from '../../../lib/iCoWeABaseUI/components/inputs/Button/Button';
+import useAddEventListener from '../../../lib/iCoWeABaseUI/hooks/useAddEventListener';
 import EditProjectForm from './EditProjectForm';
 
 export type ProjectListButtonProps = {
+  setIsDraged: Dispatch<SetStateAction<boolean>>;
+  setIsEditing: Dispatch<SetStateAction<string>>;
+  isEditing: string;
   id: string;
   name: string;
   url: string;
   imageURL: string;
+  draggable: boolean;
 };
 
-const ProjectListButton: FC<ProjectListButtonProps> = ({ id, name, url, imageURL }) => {
-  const [isEditing, setIsEditing] = useState(false);
+const ProjectListButton: FC<ProjectListButtonProps> = ({
+  setIsDraged,
+  setIsEditing,
+  isEditing,
+  id,
+  name,
+  url,
+  imageURL,
+  draggable
+}) => {
+  const ref = useRef<HTMLLIElement>(null);
 
-  if (isEditing) {
+  /* --- Set event handlers --- */
+  const dragStartHandler = useCallback((event: DragEvent): void => {
+    event.dataTransfer?.setData('listId', id);
+    setIsDraged(false);
+  }, []);
+
+  const dragEndHandler = useCallback((event: DragEvent): void => {
+    setIsDraged(false);
+  }, []);
+
+  useAddEventListener(ref, 'dragstart', dragStartHandler);
+
+  useAddEventListener(ref, 'dragend', dragEndHandler);
+
+  if (isEditing === id) {
     return (
       <ListItem
         spacing="md"
@@ -42,11 +70,13 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({ id, name, url, imageURL
       color="primary"
       radius="rounded"
       justify="between"
+      draggable={draggable}
+      ref={ref}
     >
       {name}
       <Button
         onClick={() => {
-          setIsEditing(false);
+          setIsEditing(id);
         }}
         size="sm"
         variant="plain"
