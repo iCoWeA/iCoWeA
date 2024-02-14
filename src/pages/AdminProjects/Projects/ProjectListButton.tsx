@@ -40,9 +40,9 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({
     setIsDraged(false);
   }, []);
 
-  useAddEventListener(ref, 'dragstart', dragStartHandler);
+  useAddEventListener(ref, 'dragstart', !isEditing && dragStartHandler);
 
-  useAddEventListener(ref, 'dragend', dragEndHandler);
+  useAddEventListener(ref, 'dragend', !isEditing && dragEndHandler);
 
   if (isEditing === id) {
     return (
