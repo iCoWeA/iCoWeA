@@ -5,7 +5,7 @@ import { type StoreState } from '..';
 const initialState: User = {
   firstname: '',
   lastname: '',
-  image: '',
+  imageURL: '',
   email: '',
   phone: '',
   dob: '',
@@ -15,10 +15,10 @@ const initialState: User = {
   postalCode: '',
   city: '',
   country: '',
-  github: '',
-  linkedin: '',
-  instagram: '',
-  facebook: ''
+  githubURL: '',
+  linkedinURL: '',
+  instagramURL: '',
+  facebookURL: ''
 };
 
 const user = createSlice({

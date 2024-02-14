@@ -8,7 +8,7 @@ import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectUser } from '../../store/slices/user';
 
 const StandardFooter: FC = () => {
-  const github = useSelector(selectUser).github;
+  const github = useSelector(selectUser).githubURL;
 
   return (
     <Footer containerProps={{ className: 'max-lg:flex-col' }}>

@@ -35,7 +35,7 @@ export const Component: FC = () => {
     lastname: user.lastname,
     phone: user.phone,
     email: user.email,
-    image: user.image,
+    'image-url': user.imageURL,
     dob: user.dob,
     about: user.about,
     street: user.street,
@@ -43,10 +43,10 @@ export const Component: FC = () => {
     'postal-code': user.postalCode,
     city: user.city,
     country: user.country,
-    github: user.github,
-    linkedin: user.linkedin,
-    instagram: user.instagram,
-    facebook: user.facebook
+    'github-url': user.githubURL,
+    'linkedin-url': user.linkedinURL,
+    'instagram-url': user.instagramURL,
+    'facebook-url': user.facebookURL
   });
 
   return (
@@ -145,7 +145,7 @@ export const Component: FC = () => {
                   value={inputs.phone.value}
                 />
               </Textfield>
-              <Textfield errorText={inputs.image.error && 'Invalid image'}>
+              <Textfield errorText={inputs['image-url'].error && 'Invalid image URL'}>
                 <Input
                   onChange={(event) => {
                     change(event, 1000);
@@ -153,12 +153,12 @@ export const Component: FC = () => {
                   onBlur={blur}
                   block
                   variant="default"
-                  invalid={inputs.image.error}
-                  label="Image"
-                  id="image"
-                  name="image"
+                  invalid={inputs['image-url'].error}
+                  label="Image URL"
+                  id="image-url"
+                  name="image-url"
                   required
-                  value={inputs.image.value}
+                  value={inputs['image-url'].value}
                 />
               </Textfield>
               <Textfield errorText={inputs.dob.error && 'Invalid date of birth'}>
@@ -310,7 +310,7 @@ export const Component: FC = () => {
               >
                 Social networks
               </Title>
-              <Textfield errorText={inputs.github.error && 'Invalid github'}>
+              <Textfield errorText={inputs['github-url'].error && 'Invalid github'}>
                 <Input
                   onChange={(event) => {
                     change(event, 1000);
@@ -318,15 +318,15 @@ export const Component: FC = () => {
                   onBlur={blur}
                   block
                   variant="default"
-                  invalid={inputs.github.error}
-                  label="github"
-                  id="github"
-                  name="github"
+                  invalid={inputs['github-url'].error}
+                  label="Github URL"
+                  id="github-url"
+                  name="github-url"
                   required
-                  value={inputs.github.value}
+                  value={inputs['github-url'].value}
                 />
               </Textfield>
-              <Textfield errorText={inputs.linkedin.error && 'Invalid linkedIn'}>
+              <Textfield errorText={inputs['linkedin-url'].error && 'Invalid linkedIn'}>
                 <Input
                   onChange={(event) => {
                     change(event, 1000);
@@ -334,15 +334,15 @@ export const Component: FC = () => {
                   onBlur={blur}
                   block
                   variant="default"
-                  invalid={inputs.linkedin.error}
-                  label="LinkedIn"
-                  id="linkedin"
-                  name="linkedin"
+                  invalid={inputs['linkedin-url'].error}
+                  label="LinkedIn URL"
+                  id="linkedin-url"
+                  name="linkedin-url"
                   required
-                  value={inputs.linkedin.value}
+                  value={inputs['linkedin-url'].value}
                 />
               </Textfield>
-              <Textfield errorText={inputs.facebook.error && 'Invalid facebook'}>
+              <Textfield errorText={inputs['facebook-url'].error && 'Invalid facebook'}>
                 <Input
                   onChange={(event) => {
                     change(event, 1000);
@@ -350,15 +350,15 @@ export const Component: FC = () => {
                   onBlur={blur}
                   block
                   variant="default"
-                  invalid={inputs.facebook.error}
-                  label="Facebook"
-                  id="facebook"
-                  name="facebook"
+                  invalid={inputs['facebook-url'].error}
+                  label="Facebook URL"
+                  id="facebook-url"
+                  name="facebook-url"
                   required
-                  value={inputs.facebook.value}
+                  value={inputs['facebook-url'].value}
                 />
               </Textfield>
-              <Textfield errorText={inputs.instagram.error && 'Invalid instagram'}>
+              <Textfield errorText={inputs['instagram-url'].error && 'Invalid instagram'}>
                 <Input
                   onChange={(event) => {
                     change(event, 1000);
@@ -366,12 +366,12 @@ export const Component: FC = () => {
                   onBlur={blur}
                   block
                   variant="default"
-                  invalid={inputs.instagram.error}
-                  label="instagram"
-                  id="instagram"
-                  name="instagram"
+                  invalid={inputs['instagram-url'].error}
+                  label="Instagram URL"
+                  id="instagram-url"
+                  name="instagram-url"
                   required
-                  value={inputs.instagram.value}
+                  value={inputs['instagram-url'].value}
                 />
               </Textfield>
             </Grid>
@@ -383,7 +383,12 @@ export const Component: FC = () => {
                 !isFormChanged(user, {
                   ...inputs,
                   streetNumber: inputs['street-number'],
-                  postalCode: inputs['postal-code']
+                  postalCode: inputs['postal-code'],
+                  imageURL: inputs['image-url'],
+                  githubURL: inputs['github-url'],
+                  linkedinURL: inputs['linkedin-url'],
+                  facebookURL: inputs['facebook-url'],
+                  instagramURL: inputs['instagram-url']
                 })
               }
               type="submit"
