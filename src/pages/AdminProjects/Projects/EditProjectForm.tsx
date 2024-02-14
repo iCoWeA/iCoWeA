@@ -7,6 +7,7 @@ import Button from '../../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Input from '../../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import Grid from '../../../lib/iCoWeABaseUI/components/layouts/Grid/Grid';
 import useForm from '../../../lib/iCoWeAHooks/hooks/useForm';
+import { isFormChanged } from '../../../utils/utils';
 
 export type AddProjectFormProps = {
   setIsEditing: Dispatch<React.SetStateAction<boolean>>;
@@ -20,6 +21,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, name, url, imag
     state: { inputs, isFormValid },
     change,
     blur,
+    revalidForm,
     resetForm
   } = useForm({ name, url, 'image-url': imageURL });
 
@@ -28,6 +30,9 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, name, url, imag
       onSubmit={() => {
         resetForm();
         setIsEditing(false);
+      }}
+      onFocus={(event) => {
+        revalidForm(event.target);
       }}
       method="post"
       className="w-full"
@@ -91,7 +96,10 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, name, url, imag
         <Button
           block
           variant="plain"
-          disabled={!isFormValid}
+          disabled={
+            !isFormValid ||
+            !isFormChanged({ name, url, imageURL }, { ...inputs, imageURL: inputs['image-url'] })
+          }
           type="submit"
           className="col-span-2 max-md:col-span-1"
           leftDecorator={
