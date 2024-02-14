@@ -9,7 +9,6 @@ const initialState: User = {
   imageURL: '',
   email: '',
   phone: '',
-  sex: 'man',
   dob: '',
   about: '',
   street: '',
