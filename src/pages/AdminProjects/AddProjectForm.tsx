@@ -1,5 +1,4 @@
 import React, { type Dispatch, type SetStateAction, type FC } from 'react';
-import { useSelector } from 'react-redux';
 import { Form } from 'react-router-dom';
 
 import Textfield from '../../components/Textfield/Textfield';
@@ -7,15 +6,12 @@ import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
-import { selectProjects } from '../../store/slices/projects';
 
 export type AddProjectFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
-  const projects = useSelector(selectProjects);
-
   const {
     state: { inputs, isFormValid },
     change,
@@ -88,7 +84,6 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
           disabled={!isFormValid}
           name="add"
           type="submit"
-          value={Object.keys(projects).length + 1}
         >
           Save
         </Button>
