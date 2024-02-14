@@ -1,8 +1,10 @@
+import { update, ref } from 'firebase/database';
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-router-dom';
 
 import Textfield from '../../components/Textfield/Textfield';
+import { database } from '../../firebase';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
@@ -27,8 +29,7 @@ export const Component: FC = () => {
     state: { inputs, isFormValid },
     change,
     blur,
-    revalidForm,
-    resetForm
+    revalidForm
   } = useForm({
     firstname: user.firstname,
     lastname: user.lastname,
@@ -58,7 +59,6 @@ export const Component: FC = () => {
       <Section>
         <Form
           method="post"
-          onSubmit={resetForm}
           onFocus={(event) => {
             revalidForm(event.target);
           }}
@@ -394,6 +394,33 @@ export const Component: FC = () => {
       </Section>
     </Main>
   );
+};
+
+export const action = async ({ request }: { request: Request }): Promise<unknown> => {
+  const formData = await request.formData();
+
+  const data = {
+    firstname: formData.get('firstname')?.toString() ?? '',
+    lastname: formData.get('lastname')?.toString() ?? '',
+    phone: formData.get('phone')?.toString() ?? '',
+    email: formData.get('email')?.toString() ?? '',
+    image: formData.get('image')?.toString() ?? '',
+    dob: formData.get('dob')?.toString() ?? '',
+    about: formData.get('about')?.toString() ?? '',
+    street: formData.get('street')?.toString() ?? '',
+    streetNumber: formData.get('street-number')?.toString() ?? '',
+    city: formData.get('city')?.toString() ?? '',
+    country: formData.get('country')?.toString() ?? '',
+    postalCode: formData.get('postal-code')?.toString() ?? '',
+    github: formData.get('github')?.toString() ?? '',
+    linkedin: formData.get('linkedin')?.toString() ?? '',
+    instagram: formData.get('instagram')?.toString() ?? '',
+    facebook: formData.get('facebook')?.toString() ?? ''
+  };
+
+  await update(ref(database, 'users/0'), data);
+
+  return data;
 };
 
 Component.displayName = 'AdminHomeRoute';

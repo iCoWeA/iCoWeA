@@ -148,10 +148,12 @@ export const Component: FC = () => {
 export const action = async ({ request }: { request: Request }): Promise<unknown> => {
   const formData = await request.formData();
 
-  const name = formData.get('name')?.toString() ?? '';
-  const email = formData.get('email')?.toString() ?? '';
-  const subject = formData.get('subject')?.toString() ?? '';
-  const message = formData.get('message')?.toString() ?? '';
+  const data = {
+    name: formData.get('name')?.toString() ?? '',
+    email: formData.get('email')?.toString() ?? '',
+    subject: formData.get('subject')?.toString() ?? '',
+    message: formData.get('message')?.toString() ?? ''
+  };
 
   const key = push(child(ref(database), 'messages')).key;
 
@@ -159,14 +161,9 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     throw new Error('No key !');
   }
 
-  await set(ref(database, `messages/${key}`), {
-    name,
-    email,
-    subject,
-    message
-  });
+  await set(ref(database, `messages/${key}`), data);
 
-  return null;
+  return data;
 };
 
 Component.displayName = 'ContactRoute';
