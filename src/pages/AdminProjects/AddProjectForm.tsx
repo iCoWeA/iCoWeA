@@ -26,7 +26,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
         setOpen(false);
       }}
       method="post"
-      className='mb-8'
+      className="mb-8"
     >
       <Stack gap="lg">
         <Textfield>
