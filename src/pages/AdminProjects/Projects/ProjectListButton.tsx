@@ -41,7 +41,7 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({ name, url, imageURL }) 
       radius="rounded"
       justify="between"
     >
-      name
+      {name}
       <Button
         onClick={() => {
           setIsEditing(true);
