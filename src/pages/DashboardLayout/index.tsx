@@ -1,12 +1,12 @@
 import React, { type FC } from 'react';
+import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
+import DashboardFooter from '../../layouts/DashboardFooter/DashboardFooter';
+import DashboardHeader from '../../layouts/DashboardHeader/DashboardHeader';
+import DashboardSidebar from '../../layouts/DashboardSidebar/DashboardSidebar';
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
-import DashboardFooter from './Footer/DashboardFooter';
-import DashboardHeader from './Header/DashboardHeader';
-import DashboardSidebar from './Sidebar/DashboardSidebar';
-import { useSelector } from 'react-redux';
-import { Breakpoints, selectBreakpoint } from '../../store/slices/breakpoint';
+import { selectBreakpoint, Breakpoints } from '../../store/slices/breakpoint';
 
 export const Component: FC = () => {
   const breakpoint = useSelector(selectBreakpoint);
