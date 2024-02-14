@@ -2,7 +2,7 @@ import React, { type FC } from 'react';
 import { Form } from 'react-router-dom';
 
 import Textfield from '../../components/Textfield/Textfield';
-import { NAME_PATTERN } from '../../data/constants';
+import { NAME_PATTERN, TEXT_PATTERN } from '../../data/constants';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import Textarea from '../../lib/iCoWeABaseUI/components/inputs/Textarea/Textarea';
@@ -42,6 +42,7 @@ const ContactForm: FC = () => {
               invalid={inputs.name.error}
               label="Name"
               id="name"
+              maxLength={32}
               name="name"
               pattern={NAME_PATTERN}
               required
@@ -78,8 +79,9 @@ const ContactForm: FC = () => {
               invalid={inputs.subject.error}
               label="Subject"
               id="subject"
+              maxLength={32}
               name="subject"
-              pattern={NAME_PATTERN}
+              pattern={TEXT_PATTERN}
               required
               value={inputs.subject.value}
             />
@@ -102,6 +104,7 @@ const ContactForm: FC = () => {
               label="Message"
               className="h-[5.75rem]"
               id="message"
+              maxLength={500}
               name="message"
               required
               value={inputs.message.value}
