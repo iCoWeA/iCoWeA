@@ -82,7 +82,6 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
           size="lg"
           block
           disabled={!isFormValid}
-          name="add"
           type="submit"
         >
           Save
