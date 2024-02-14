@@ -10,6 +10,7 @@ const MessagesCard: FC = () => {
       variant="solid"
       color="primary"
       gap="lg"
+      className="max-w-232"
     >
       <Title
         size="2"

@@ -17,6 +17,7 @@ const UserCard: FC = () => {
     <Card
       spacing="lg"
       gap="lg"
+      className='max-w-232'
     >
       <Flex
         gap="md"
