@@ -7,7 +7,9 @@ import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import { database } from '../../firebase';
 import useWindowResize from '../../lib/iCoWeABaseUI/hooks/useWindowResize';
 import { breakpointActions } from '../../store/slices/breakpoint';
+import { projectsActions } from '../../store/slices/projects';
 import { selectUser, userActions } from '../../store/slices/user';
+import { setData } from '../../utils/utils';
 
 const Component: FC = () => {
   const dispatch = useDispatch();
@@ -27,6 +29,16 @@ const Component: FC = () => {
       }
 
       throw new Error('User not found');
+    });
+  }, []);
+
+  useEffect(() => {
+    const userRef = ref(database, 'projects');
+
+    return onValue(userRef, (snap) => {
+      if (snap.exists()) {
+        dispatch(projectsActions.setProjects(setData(snap.val())));
+      }
     });
   }, []);
 

@@ -20,4 +20,11 @@ declare global {
     instagram: string,
     facebook: string
   };
+
+  export type Project = {
+    id: string;
+    name: string;
+    url: string;
+    imageURL: string;
+  };
 };
