@@ -37,6 +37,8 @@ const Component: FC = () => {
     return onValue(userRef, (snap) => {
       if (snap.exists()) {
         dispatch(projectsActions.setProjects(snap.val()));
+
+        return;
       }
 
       dispatch(projectsActions.setProjects({}));
