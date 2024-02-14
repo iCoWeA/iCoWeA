@@ -2,14 +2,17 @@ import React, { type FC } from 'react';
 import { Form } from 'react-router-dom';
 
 import Textfield from '../../components/Textfield/Textfield';
-import { NAME_PATTERN, TEXT_PATTERN } from '../../data/constants';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import Textarea from '../../lib/iCoWeABaseUI/components/inputs/Textarea/Textarea';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
-import { EMAIL_PATTERN } from '../../lib/iCoWeAUtilsUI/data/constants';
+import {
+  FULLNAME_PATTERN,
+  EMAIL_PATTERN,
+  TEXT_PATTERN
+} from '../../lib/iCoWeAUtilsUI/data/constants';
 
 const ContactForm: FC = () => {
   const {
@@ -44,7 +47,7 @@ const ContactForm: FC = () => {
               id="name"
               maxLength={32}
               name="name"
-              pattern={NAME_PATTERN}
+              pattern={FULLNAME_PATTERN}
               required
               value={inputs.name.value}
             />
