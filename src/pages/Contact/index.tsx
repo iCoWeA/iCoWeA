@@ -82,11 +82,12 @@ export const Component: FC = () => {
                   align="end"
                   grow
                 >
-                  <Link
-                    to={user.github}
-                    color="inherit"
-                  >
-                    <Icon spacing="default">
+                  <Link to={user.github}>
+                    <Icon
+                      spacing="default"
+                      variant="default"
+                      color="primary"
+                    >
                       <svg
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -95,11 +96,12 @@ export const Component: FC = () => {
                       </svg>
                     </Icon>
                   </Link>
-                  <Link
-                    to={user.linkedin}
-                    color="inherit"
-                  >
-                    <Icon spacing="default">
+                  <Link to={user.linkedin}>
+                    <Icon
+                      spacing="default"
+                      variant="default"
+                      color="primary"
+                    >
                       <svg
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -108,11 +110,12 @@ export const Component: FC = () => {
                       </svg>
                     </Icon>
                   </Link>
-                  <Link
-                    to={user.facebook}
-                    color="inherit"
-                  >
-                    <Icon spacing="default">
+                  <Link to={user.facebook}>
+                    <Icon
+                      spacing="default"
+                      variant="default"
+                      color="primary"
+                    >
                       <svg
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -121,11 +124,12 @@ export const Component: FC = () => {
                       </svg>
                     </Icon>
                   </Link>
-                  <Link
-                    to={user.instagram}
-                    color="inherit"
-                  >
-                    <Icon spacing="default">
+                  <Link to={user.instagram}>
+                    <Icon
+                      spacing="default"
+                      variant="default"
+                      color="primary"
+                    >
                       <svg
                         focusable="false"
                         viewBox="0 0 24 24"
