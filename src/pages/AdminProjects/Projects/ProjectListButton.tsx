@@ -8,6 +8,7 @@ import useAddEventListener from '../../../lib/iCoWeABaseUI/hooks/useAddEventList
 import EditProjectForm from './EditProjectForm';
 
 export type ProjectListButtonProps = {
+  setDraged: Dispatch<SetStateAction<number>>;
   setIsEditing: Dispatch<SetStateAction<number>>;
   isEditing: number;
   id: string;
@@ -19,6 +20,7 @@ export type ProjectListButtonProps = {
 };
 
 const ProjectListButton: FC<ProjectListButtonProps> = ({
+  setDraged,
   setIsEditing,
   isEditing,
   id,
@@ -35,7 +37,13 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({
     event.dataTransfer?.setData('listId', id);
   }, []);
 
+  const dragEndHandler = useCallback((event: DragEvent): void => {
+    setDraged(-1);
+  }, []);
+
   useAddEventListener(ref, 'dragstart', dragStartHandler);
+
+  useAddEventListener(ref, 'dragend', dragEndHandler);
 
   if (isEditing === position) {
     return (
