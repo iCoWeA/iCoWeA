@@ -12,7 +12,7 @@ export type TrashAreaProps = {
 const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
   const submit = useSubmit();
 
-  const ref = useRef<HTMLLIElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   /* --- Set event handlers --- */
   const dragOverHandler = useCallback((event: DragEvent): void => {
@@ -22,6 +22,7 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
   const dropHandler = useCallback((event: DragEvent): void => {
     setIsDraged(false);
     submit({ del: event.dataTransfer?.getData('listId') ?? '' }, { method: 'post' });
+    console.log('close');
   }, []);
 
   useAddEventListener(ref, 'dragover', dragOverHandler);
@@ -33,6 +34,7 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
       spacing="sm-panel"
       variant="soft"
       color="error"
+      ref={ref}
     >
       <Icon
         size="sm"
