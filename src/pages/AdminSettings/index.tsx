@@ -49,8 +49,6 @@ export const Component: FC = () => {
     facebook: user.facebook
   });
 
-  const { 'street-number': streetNumber, 'postal-code': postalCode, ...rest } = inputs;
-
   return (
     <Main placement="full">
       <Section>
@@ -380,7 +378,14 @@ export const Component: FC = () => {
             <Button
               size="lg"
               block
-              disabled={!isFormValid || !isFormChanged(user, { streetNumber, postalCode, ...rest })}
+              disabled={
+                !isFormValid ||
+                !isFormChanged(user, {
+                  ...inputs,
+                  streetNumber: inputs['street-number'],
+                  postalCode: inputs['postal-code']
+                })
+              }
               type="submit"
             >
               Save
