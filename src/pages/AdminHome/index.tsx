@@ -7,11 +7,8 @@ import MessagesCard from './MessagesCard';
 import UserCard from './UserCard';
 
 export const Component: FC = () => (
-  <Main
-    placement="full"
-    block
-  >
-    <Section className="max-w-232">
+  <Main placement="full">
+    <Section>
       <Stack gap="lg">
         <UserCard />
         <MessagesCard />

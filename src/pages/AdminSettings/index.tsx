@@ -52,11 +52,8 @@ export const Component: FC = () => {
   const { 'street-number': streetNumber, 'postal-code': postalCode, ...rest } = inputs;
 
   return (
-    <Main
-      placement="full"
-      block
-    >
-      <Section className="max-w-232">
+    <Main placement="full">
+      <Section>
         <Form
           method="post"
           onFocus={(event) => {
