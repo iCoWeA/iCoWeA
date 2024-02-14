@@ -1,4 +1,11 @@
-import React, { type Dispatch, type SetStateAction, type FC, useRef, useCallback } from 'react';
+import React, {
+  type Dispatch,
+  type SetStateAction,
+  type FC,
+  useRef,
+  useCallback,
+  useState
+} from 'react';
 
 import { useSubmit } from 'react-router-dom';
 import Icon from '../../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
@@ -14,9 +21,16 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
 
   const ref = useRef<HTMLDivElement>(null);
 
+  const [isHovered, setIsHovered] = useState(false);
+
   /* --- Set event handlers --- */
   const dragOverHandler = useCallback((event: DragEvent): void => {
     event.preventDefault();
+    setIsHovered(true);
+  }, []);
+
+  const dragLeaveHandler = useCallback((event: DragEvent): void => {
+    setIsHovered(false);
   }, []);
 
   const dropHandler = useCallback((event: DragEvent): void => {
@@ -26,26 +40,43 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
 
   useAddEventListener(ref, 'dragover', dragOverHandler);
 
+  useAddEventListener(ref, 'dragleave', dragLeaveHandler);
+
   useAddEventListener(ref, 'drop', dropHandler);
 
   return (
     <Card
       spacing="sm-panel"
-      variant="soft"
+      variant={isHovered ? 'solid' : 'soft'}
       color="error"
       ref={ref}
     >
-      <Icon
-        size="sm"
-        spacing="default"
-      >
-        <svg
-          focusable="false"
-          viewBox="0 0 24 24"
+      {isHovered && (
+        <Icon
+          size="lg"
+          spacing="default"
         >
-          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zm2.46-7.12 1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"></path>
-        </svg>
-      </Icon>
+          <svg
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"></path>
+          </svg>
+        </Icon>
+      )}
+      {!isHovered && (
+        <Icon
+          size="lg"
+          spacing="default"
+        >
+          <svg
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM8 9h8v10H8zm7.5-5-1-1h-5l-1 1H5v2h14V4z"></path>
+          </svg>
+        </Icon>
+      )}
     </Card>
   );
 };
