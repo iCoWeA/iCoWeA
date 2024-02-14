@@ -22,7 +22,6 @@ declare global {
   };
 
   export type Project = {
-    id: string;
     name: string;
     url: string;
     imageURL: string;
