@@ -38,6 +38,8 @@ const Component: FC = () => {
       if (snap.exists()) {
         dispatch(projectsActions.setProjects(snap.val()));
       }
+
+      dispatch(projectsActions.setProjects({}));
     });
   }, []);
 

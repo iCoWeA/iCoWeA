@@ -22,7 +22,6 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
   const dropHandler = useCallback((event: DragEvent): void => {
     setIsDraged(false);
     submit({ del: event.dataTransfer?.getData('listId') ?? '' }, { method: 'post' });
-    console.log('close');
   }, []);
 
   useAddEventListener(ref, 'dragover', dragOverHandler);
