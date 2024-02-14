@@ -1,6 +1,7 @@
 import React, { type FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Logo from '../../components/Icons/Logo';
 import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
@@ -32,8 +33,11 @@ const MobileNavigation: FC = () => {
       <Drawer
         onClose={() => dispatch(navbarActions.close())}
         open={open}
-        spacing="lg"
+        spacing="lg-panel"
+        align="start"
+        gap="xl"
       >
+        <Logo />
         <Navigation
           vertical
           block
