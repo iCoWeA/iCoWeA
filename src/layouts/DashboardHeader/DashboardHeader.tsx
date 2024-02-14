@@ -16,6 +16,7 @@ import MobileNavigation from './MobileNavigation';
 const DashboardHeader: FC = () => {
   const breakpoint = useSelector(selectBreakpoint);
   const user = useSelector(selectUser);
+  const name = `${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(user.lastname)}`;
 
   return (
     <Header
@@ -26,9 +27,7 @@ const DashboardHeader: FC = () => {
       {breakpoint !== Breakpoints.SM && breakpoint !== Breakpoints.MD && <Logo />}
       <Flex gap="base">
         <Stack>
-          <Title>{`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(
-            user.lastname
-          )}`}</Title>
+          <Title>{name}</Title>
           <Text
             size="sm"
             align="right"
@@ -38,8 +37,8 @@ const DashboardHeader: FC = () => {
         </Stack>
         <Avatar
           color="neutral"
-          alt={user.firstname[0].toLocaleUpperCase() + user.lastname[0].toLocaleUpperCase()}
-          src={require('../../../assets/images/photo.png')}
+          alt={name}
+          src={require('../../assets/images/photo.png')}
         />
       </Flex>
     </Header>
