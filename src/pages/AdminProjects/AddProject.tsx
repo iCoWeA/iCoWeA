@@ -23,6 +23,12 @@ const AddProject: FC = () => {
           <AddProjectForm setOpen={setOpen} />
         </Collapse>
         <Button
+          onClick={() => {
+            setOpen((open) => !open);
+          }}
+          size="lg"
+          color={open ? 'error' : 'primary'}
+          className="transition-colors duration-500"
           leftDecorator={
             <Icon className={`relative duration-500 ${open ? 'rotate-45' : 'rotate-0'}`}>
               <svg
@@ -33,12 +39,6 @@ const AddProject: FC = () => {
               </svg>
             </Icon>
           }
-          onClick={() => {
-            setOpen((open) => !open);
-          }}
-          size="lg"
-          color={open ? 'error' : 'primary'}
-          className="transition-colors duration-500"
         >
           {open ? 'Cancel' : 'Add project'}
         </Button>
