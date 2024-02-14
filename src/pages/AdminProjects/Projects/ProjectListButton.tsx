@@ -33,10 +33,10 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({
   /* --- Set event handlers --- */
   const dragStartHandler = useCallback((event: DragEvent): void => {
     event.dataTransfer?.setData('listId', id);
-    setIsDraged(false);
+    setIsDraged(true);
   }, []);
 
-  const dragEndHandler = useCallback((event: DragEvent): void => {
+  const dragEndHandler = useCallback((): void => {
     setIsDraged(false);
   }, []);
 
