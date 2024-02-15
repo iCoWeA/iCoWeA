@@ -21,7 +21,7 @@ const DashboardSidebar: FC = () => (
       >
         <ListItem>
           <ListNavlink
-            to="admin"
+            to=""
             end
             activeVariant="solid"
             leftDecorator={
@@ -40,7 +40,7 @@ const DashboardSidebar: FC = () => (
         </ListItem>
         <ListItem>
           <ListNavlink
-            to="admin/projects"
+            to="projects"
             activeVariant="solid"
             leftDecorator={
               <Icon>
@@ -58,7 +58,7 @@ const DashboardSidebar: FC = () => (
         </ListItem>
         <ListItem>
           <ListNavlink
-            to="admin/settings"
+            to="settings"
             activeVariant="solid"
             leftDecorator={
               <Icon>

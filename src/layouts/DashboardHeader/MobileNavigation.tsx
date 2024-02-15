@@ -42,7 +42,7 @@ const MobileNavigation: FC = () => {
         >
           <ListItem>
             <ListNavlink
-              to="admin"
+              to=""
               end
               activeVariant="solid"
               leftDecorator={
@@ -61,7 +61,7 @@ const MobileNavigation: FC = () => {
           </ListItem>
           <ListItem>
             <ListNavlink
-              to="admin/projects"
+              to="projects"
               activeVariant="solid"
               leftDecorator={
                 <Icon>
@@ -79,7 +79,7 @@ const MobileNavigation: FC = () => {
           </ListItem>
           <ListItem>
             <ListNavlink
-              to="admin/settings"
+              to="settings"
               activeVariant="solid"
               leftDecorator={
                 <Icon>
