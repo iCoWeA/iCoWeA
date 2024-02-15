@@ -1,12 +1,12 @@
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
 
+import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
 import MovableAvatar from '../../components/MovableAvatar/MovableAvatar';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
-import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import LinkButton from '../../lib/iCoWeARouterUI/components/LinkButton/LinkButton';
 import { upperCaseFirstLetter } from '../../lib/iCoWeAUtilsUI/utils/utils';
@@ -18,7 +18,7 @@ export const Component: FC = () => {
   return (
     <Layout layout="default">
       <Main>
-        <Section className="animate-slide">
+        <AnimatedSection>
           <Flex
             wrap="nowrap"
             gap="xxl"
@@ -75,7 +75,7 @@ export const Component: FC = () => {
               src={user.imageURL}
             />
           </Flex>
-        </Section>
+        </AnimatedSection>
       </Main>
     </Layout>
   );
