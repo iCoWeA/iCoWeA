@@ -28,7 +28,7 @@ const UserCard: FC = () => {
           src={user.imageURL}
         />
         <Stack justify="between">
-          <Title size="2">{`${user.firstname} ${user.lastname}`}</Title>
+          <Title size="3">{`${user.firstname} ${user.lastname}`}</Title>
           <Title size="4">Admin</Title>
         </Stack>
       </Flex>
