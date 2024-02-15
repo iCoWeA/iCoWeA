@@ -5,13 +5,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorScreen from './components/ErrorScreen/ErrorScreen';
 import ConfigProvider from './lib/iCoWeAUI/providers/ConfigProvider';
 import ThemeProvider from './lib/iCoWeAUI/providers/ThemeProvider';
-import RootRoute from './pages/RootRoute';
+import Root from './pages/Root';
 import store from './store';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootRoute />,
+    element: <Root />,
     errorElement: <ErrorScreen />,
     children: [
       {
