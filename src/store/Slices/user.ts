@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { type StoreState } from '..';
 
@@ -21,12 +21,14 @@ const initialState: User = {
   facebookURL: ''
 };
 
+const reducers = {
+  setUser: (_: User, action: PayloadAction<User>) => action.payload
+};
+
 const user = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    setUser: (_, action) => action.payload
-  }
+  reducers
 });
 
 export const selectUser = ({ user }: StoreState): User => user;

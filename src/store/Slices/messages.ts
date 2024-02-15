@@ -1,18 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { type StoreState } from '..';
 
-const initialState: Project[] = [];
+export type Messages = Record<string, Message>;
+
+const initialState: Messages = {};
+
+const reducers = {
+  setMessage: (_: Messages, action: PayloadAction<Messages>) => action.payload
+};
 
 const messages = createSlice({
   name: 'messages',
   initialState,
-  reducers: {
-    setMessages: (_, action) => action.payload
-  }
+  reducers
 });
 
-export const selectMessages = ({ messages }: StoreState): Project[] => messages;
+export const selectMessages = ({ messages }: StoreState): Messages => messages;
 
 export const messagesActions = messages.actions;
 
