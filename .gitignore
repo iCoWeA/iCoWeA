@@ -30,7 +30,7 @@ typings.d.ts
 
 .firebaserc
 firebase.json
-.
+/.firebase
 
 /save
-save.txt
+todo
