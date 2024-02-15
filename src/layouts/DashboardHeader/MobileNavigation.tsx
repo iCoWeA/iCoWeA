@@ -7,12 +7,11 @@ import Logo from '../../components/Icons/Logo';
 import ProjectIcon from '../../components/Icons/ProjectIcon';
 import SettingsIcon from '../../components/Icons/SettingsIcon';
 import LogoutButton from '../../components/LogoutButton/logoutButton';
-import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
+import Navlink from '../../components/NavlinkButton/NavlinkButton';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
 import Drawer from '../../lib/iCoWeABaseUI/components/navigation/Drawer/Drawer';
 import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
-import ListNavlink from '../../lib/iCoWeARouterUI/components/ListNavlink/ListNavlink';
 import { selectNavbar, navbarActions } from '../../store/slices/navbar';
 
 const MobileNavigation: FC = () => {
@@ -40,34 +39,28 @@ const MobileNavigation: FC = () => {
           vertical
           block
         >
-          <ListItem>
-            <ListNavlink
-              to=""
-              end
-              activeVariant="solid"
-              leftDecorator={<HomeIcon />}
-            >
-              Home
-            </ListNavlink>
-          </ListItem>
-          <ListItem>
-            <ListNavlink
-              to="projects"
-              activeVariant="solid"
-              leftDecorator={<ProjectIcon />}
-            >
-              Projects
-            </ListNavlink>
-          </ListItem>
-          <ListItem>
-            <ListNavlink
-              to="settings"
-              activeVariant="solid"
-              leftDecorator={<SettingsIcon />}
-            >
-              Settings
-            </ListNavlink>
-          </ListItem>
+          <Navlink
+            to=""
+            end
+            activeVariant="solid"
+            leftDecorator={<HomeIcon />}
+          >
+            Home
+          </Navlink>
+          <Navlink
+            to="projects"
+            activeVariant="solid"
+            leftDecorator={<ProjectIcon />}
+          >
+            Projects
+          </Navlink>
+          <Navlink
+            to="settings"
+            activeVariant="solid"
+            leftDecorator={<SettingsIcon />}
+          >
+            Settings
+          </Navlink>
         </Navigation>
         <LogoutButton />
       </Drawer>
