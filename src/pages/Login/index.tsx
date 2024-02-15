@@ -42,7 +42,6 @@ export const Component: FC = () => {
         className="w-full max-w-[32rem] px-4"
       >
         <Alert
-          color="error"
           leftDecorator={
             <Icon>
               <svg
