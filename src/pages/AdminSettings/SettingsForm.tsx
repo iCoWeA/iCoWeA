@@ -21,12 +21,7 @@ import { isFormChanged } from '../../utils/utils';
 const SettingsForm: FC = () => {
   const user = useSelector(selectUser);
 
-  const {
-    state: { inputs, isFormValid },
-    change,
-    blur,
-    revalidForm
-  } = useForm({
+  const initialValues = {
     firstname: user.firstname,
     lastname: user.lastname,
     phone: user.phone,
@@ -43,7 +38,14 @@ const SettingsForm: FC = () => {
     'linkedin-url': user.linkedinURL,
     'instagram-url': user.instagramURL,
     'facebook-url': user.facebookURL
-  });
+  };
+
+  const {
+    state: { inputs, isFormValid },
+    change,
+    blur,
+    revalidForm
+  } = useForm(initialValues);
 
   return (
     <Form
@@ -322,19 +324,7 @@ const SettingsForm: FC = () => {
         </Grid>
         <SubmitButton
           size="lg"
-          disabled={
-            !isFormValid ||
-            !isFormChanged(user, {
-              ...inputs,
-              streetNumber: inputs['street-number'],
-              postalCode: inputs['postal-code'],
-              imageURL: inputs['image-url'],
-              githubURL: inputs['github-url'],
-              linkedinURL: inputs['linkedin-url'],
-              facebookURL: inputs['facebook-url'],
-              instagramURL: inputs['instagram-url']
-            })
-          }
+          disabled={!isFormValid || !isFormChanged(initialValues, inputs)}
         >
           Save
         </SubmitButton>
