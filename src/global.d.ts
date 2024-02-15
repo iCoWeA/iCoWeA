@@ -25,4 +25,11 @@ declare global {
     url: string;
     imageURL: string;
   };
+
+  export type Message = {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+  };
 };
