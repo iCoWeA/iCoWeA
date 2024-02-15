@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { type FC } from 'react';
-import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
+import React, { type FC, useState } from 'react';
+
+import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
 import Overlay from '../../lib/iCoWeABaseUI/components/feedback/Overlay/Overlay';
+import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
 import LinkButton from '../../lib/iCoWeARouterUI/components/LinkButton/LinkButton';
-import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 
 export type ProjectCardProps = {
   name: string;
