@@ -2,14 +2,16 @@ import React, { type FC } from 'react';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import ErrorScreen from './components/ErrorScreen/ErrorScreen';
 import ConfigProvider from './lib/iCoWeAUI/providers/ConfigProvider';
 import ThemeProvider from './lib/iCoWeAUI/providers/ThemeProvider';
+import RootRoute from './pages/RootRoute';
 import store from './store';
 
 const router = createBrowserRouter([
   {
-    path: '/'
-    /* element: <Root />,
+    path: '/',
+    element: <RootRoute />,
     errorElement: <ErrorScreen />,
     children: [
       {
@@ -27,34 +29,48 @@ const router = createBrowserRouter([
         lazy: async () => await import('./pages/StandardLayout'),
         children: [
           {
-            path: '',
             index: true,
             lazy: async () => await import('./pages/Home')
+          },
+          {
+            path: 'projects',
+            lazy: async () => await import('./pages/Projects')
+          },
+          {
+            path: 'about',
+            lazy: async () => await import('./pages/About')
+          },
+          {
+            path: 'contact',
+            lazy: async () => await import('./pages/Contact')
           }
         ]
       },
       {
-        path: '',
-        lazy: async () => await import('./pages/DashboardLayout'),
+        path: 'admin',
+        lazy: async () => await import('./pages/Admin'),
         children: [
           {
-            path: 'admin',
-            lazy: async () => await import('./pages/Admin'),
+            path: '',
+            lazy: async () => await import('./pages/DashboardLayout'),
             children: [
               {
-                path: '',
                 index: true,
                 lazy: async () => await import('./pages/AdminHome')
               },
               {
-                path: 'my-account',
-                lazy: async () => await import('./pages/AdminMyAccount')
+                path: 'projects',
+                lazy: async () => await import('./pages/AdminProjects')
+              },
+              {
+                path: 'settings',
+                lazy: async () => await import('./pages/AdminSettings')
               }
             ]
           }
         ]
       }
-    ] */
+    ]
   }
 ]);
 
