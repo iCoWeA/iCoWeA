@@ -8,8 +8,10 @@ import ProjectIcon from '../../components/Icons/ProjectIcon';
 import SettingsIcon from '../../components/Icons/SettingsIcon';
 import LogoutButton from '../../components/LogoutButton/logoutButton';
 import Navlink from '../../components/NavlinkButton/NavlinkButton';
+import ThemeButton from '../../components/ThemeButton.tsx/ThemeButton';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
+import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import Drawer from '../../lib/iCoWeABaseUI/components/navigation/Drawer/Drawer';
 import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectNavbar, navbarActions } from '../../store/slices/navbar';
@@ -62,7 +64,13 @@ const MobileNavigation: FC = () => {
             Settings
           </Navlink>
         </Navigation>
-        <LogoutButton />
+        <Stack
+          gap="lg"
+          align="center"
+        >
+          <ThemeButton block />
+          <LogoutButton />
+        </Stack>
       </Drawer>
     </>
   );
