@@ -29,9 +29,7 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
     setIsHovered(true);
   }, []);
 
-  const dragLeaveHandler = useCallback((event: DragEvent): void => {
-    setIsHovered(false);
-  }, []);
+  const dragLeaveHandler = useCallback((): void => setIsHovered(false), []);
 
   const dropHandler = useCallback((event: DragEvent): void => {
     setIsDraged(false);

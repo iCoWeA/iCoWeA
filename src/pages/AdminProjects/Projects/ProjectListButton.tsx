@@ -36,9 +36,7 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({
     setIsDraged(true);
   }, []);
 
-  const dragEndHandler = useCallback((): void => {
-    setIsDraged(false);
-  }, []);
+  const dragEndHandler = useCallback((): void => setIsDraged(false), []);
 
   useAddEventListener(ref, 'dragstart', !isEditing && dragStartHandler);
 
@@ -75,9 +73,7 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({
     >
       {name}
       <Button
-        onClick={() => {
-          setIsEditing(id);
-        }}
+        onClick={() => setIsEditing(id)}
         size="sm"
         variant="plain"
         leftDecorator={

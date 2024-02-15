@@ -54,9 +54,7 @@ export const Component: FC = () => {
       <Section>
         <Form
           method="post"
-          onFocus={(event) => {
-            revalidForm(event.target);
-          }}
+          onFocus={(event) => revalidForm(event.target)}
         >
           <Card
             spacing="lg"
@@ -76,9 +74,7 @@ export const Component: FC = () => {
               </Title>
               <Textfield errorText={inputs.firstname.error && 'Invalid firstname'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -94,9 +90,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs.lastname.error && 'Invalid lastname'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -112,9 +106,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs.email.error && 'Invalid email'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -129,9 +121,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs.phone.error && 'Invalid phone'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -147,9 +137,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs['image-url'].error && 'Invalid image URL'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -163,9 +151,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs.dob.error && 'Invalid date of birth'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -183,9 +169,7 @@ export const Component: FC = () => {
                 className="col-span-2 max-md:col-span-1"
               >
                 <Textarea
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -213,9 +197,7 @@ export const Component: FC = () => {
               </Title>
               <Textfield errorText={inputs.street.error && 'Invalid street'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -230,9 +212,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs['street-number'].error && 'Invalid street number'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -248,9 +228,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs.city.error && 'Invalid city'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -265,9 +243,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs.country.error && 'Invalid country'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -282,9 +258,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs['postal-code'].error && 'Invalid postal-code'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -312,9 +286,7 @@ export const Component: FC = () => {
               </Title>
               <Textfield errorText={inputs['github-url'].error && 'Invalid github'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -328,9 +300,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs['linkedin-url'].error && 'Invalid linkedIn'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -344,9 +314,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs['facebook-url'].error && 'Invalid facebook'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"
@@ -360,9 +328,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs['instagram-url'].error && 'Invalid instagram'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   variant="default"

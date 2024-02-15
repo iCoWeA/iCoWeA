@@ -32,9 +32,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
         resetForm();
         setIsEditing('');
       }}
-      onFocus={(event) => {
-        revalidForm(event.target);
-      }}
+      onFocus={(event) => revalidForm(event.target)}
       method="post"
       className="w-full"
     >
@@ -44,9 +42,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
       >
         <Textfield>
           <Input
-            onChange={(event) => {
-              change(event, 1000);
-            }}
+            onChange={(event) => change(event, 1000)}
             onBlur={blur}
             block
             variant="default"
@@ -62,9 +58,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
         </Textfield>
         <Textfield>
           <Input
-            onChange={(event) => {
-              change(event, 1000);
-            }}
+            onChange={(event) => change(event, 1000)}
             onBlur={blur}
             block
             variant="default"
@@ -79,9 +73,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
         </Textfield>
         <Textfield>
           <Input
-            onChange={(event) => {
-              change(event, 1000);
-            }}
+            onChange={(event) => change(event, 1000)}
             onBlur={blur}
             block
             variant="default"

@@ -31,9 +31,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
       <Stack gap="lg">
         <Textfield>
           <Input
-            onChange={(event) => {
-              change(event, 1000);
-            }}
+            onChange={(event) => change(event, 1000)}
             onBlur={blur}
             block
             variant="default"
@@ -48,9 +46,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
         </Textfield>
         <Textfield>
           <Input
-            onChange={(event) => {
-              change(event, 1000);
-            }}
+            onChange={(event) => change(event, 1000)}
             onBlur={blur}
             block
             variant="default"
@@ -64,9 +60,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
         </Textfield>
         <Textfield>
           <Input
-            onChange={(event) => {
-              change(event, 1000);
-            }}
+            onChange={(event) => change(event, 1000)}
             onBlur={blur}
             block
             variant="default"
