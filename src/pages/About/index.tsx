@@ -26,10 +26,7 @@ export const Component: FC = () => {
             className="max-lg:flex-col"
           >
             <MovableAvatar
-              distance={10}
-              border
               alt={`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(user.lastname)}`}
-              className="aspect-square w-full h-auto max-w-[25rem] border-8"
               src={user.imageURL}
             />
             <Stack gap="sm">

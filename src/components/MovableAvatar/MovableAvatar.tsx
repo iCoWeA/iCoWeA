@@ -12,7 +12,7 @@ export type MovableAvatarProps = AvatarProps & {
 };
 
 const MovableAvatar: FC<MovableAvatarProps> = ({
-  distance = 0,
+  distance = 10,
   reverse = false,
   imageProps,
   alt,
@@ -26,6 +26,8 @@ const MovableAvatar: FC<MovableAvatarProps> = ({
 
   return (
     <Avatar
+      border
+      className="aspect-square h-auto w-full max-w-[25rem] border-8"
       ref={ref}
       {...restProps}
     >
