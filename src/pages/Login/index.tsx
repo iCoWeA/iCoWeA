@@ -1,77 +1,62 @@
+import React, { type FC, useState, useEffect } from 'react';
+import { useActionData, useNavigation, redirect } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import React, { type FC } from 'react';
-import { Form, redirect } from 'react-router-dom';
 
-import PasswordInput from '../../components/PasswordInput/PasswordInput';
-import Textfield from '../../components/Textfield/Textfield';
 import { auth } from '../../firebase';
-import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
-import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
+import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
+import Alert from '../../lib/iCoWeABaseUI/components/feedback/Alert/Alert';
+import Snackbar from '../../lib/iCoWeABaseUI/components/feedback/Snackbar/Snackbar';
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
-import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
-import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
-import { EMAIL_PATTERN } from '../../lib/iCoWeAUtilsUI/data/constants';
+import LoginForm from './LoginForm';
 
 export const Component: FC = () => {
-  const {
-    state: { inputs, isFormValid },
-    change,
-    blur,
-    resetForm
-  } = useForm({ email: '', password: '' });
+  const actionData = useActionData() as string;
+  const navigation = useNavigation();
+
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (navigation.state === 'idle' && actionData) {
+      setError(true);
+    }
+  }, [navigation.state, actionData]);
 
   return (
     <Layout layout="default">
       <Main>
         <Section>
-          <Form
-            onSubmit={resetForm}
-            method="post"
-          >
-            <Card
-              spacing="lg"
-              gap="lg"
-            >
-              <Textfield errorText={inputs.email.error && 'Invalid email'}>
-                <Input
-                  onChange={(event) => change(event, 1000)}
-                  onBlur={blur}
-                  block
-                  invalid={inputs.email.error}
-                  label="Email"
-                  id="email"
-                  name="email"
-                  pattern={EMAIL_PATTERN}
-                  required
-                  value={inputs.email.value}
-                />
-              </Textfield>
-              <Textfield errorText={inputs.password.error && 'Invalid password'}>
-                <PasswordInput
-                  onChange={(event) => change(event, 1000)}
-                  onBlur={blur}
-                  block
-                  invalid={inputs.password.error}
-                  label="Password"
-                  id="password"
-                  name="password"
-                  required
-                  value={inputs.password.value}
-                />
-              </Textfield>
-              <Button
-                block
-                disabled={!isFormValid}
-                type="submit"
-              >
-                LOGIN
-              </Button>
-            </Card>
-          </Form>
+          <LoginForm
+            setError={setError}
+            state={navigation.state}
+          />
         </Section>
       </Main>
+      <Snackbar
+        onClose={setError}
+        open={error}
+        placement="bottom"
+        closeDuration={5000}
+        unmountOnExit
+        className="w-full max-w-[32rem] px-4"
+      >
+        <Alert
+          color="error"
+          leftDecorator={
+            <Icon>
+              <svg
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-2h2zm0-4h-2V7h2z"></path>
+              </svg>
+            </Icon>
+          }
+        >
+          {actionData}
+        </Alert>
+      </Snackbar>
     </Layout>
   );
 };
@@ -88,7 +73,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     return 'Login error';
   }
 
-  return redirect('/admin-home');
+  return redirect('/admin');
 };
 
 Component.displayName = 'LoginRoot';
