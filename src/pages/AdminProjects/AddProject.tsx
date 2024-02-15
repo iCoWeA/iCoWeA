@@ -1,6 +1,6 @@
 import React, { type FC, useState } from 'react';
 
-import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
+import CloseIcon from '../../components/Icons/CloseIcon';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
 import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
@@ -30,14 +30,7 @@ const AddProject: FC = () => {
           color={open ? 'error' : 'primary'}
           className="transition-colors duration-500"
           leftDecorator={
-            <Icon className={`relative duration-500 ${open ? 'rotate-45' : 'rotate-0'}`}>
-              <svg
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
-              </svg>
-            </Icon>
+            <CloseIcon className={`relative duration-500 ${open ? 'rotate-0' : 'rotate-45'}`} />
           }
         >
           {open ? 'Cancel' : 'Add project'}

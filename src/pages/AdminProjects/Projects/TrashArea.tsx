@@ -3,12 +3,13 @@ import React, {
   type SetStateAction,
   type FC,
   useRef,
-  useCallback,
-  useState
+  useState,
+  useCallback
 } from 'react';
-
 import { useSubmit } from 'react-router-dom';
-import Icon from '../../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
+
+import FullTrash from '../../../components/Icons/FullTrash';
+import Trash from '../../../components/Icons/Trash';
 import Card from '../../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
 import useAddEventListener from '../../../lib/iCoWeABaseUI/hooks/useAddEventListener';
 
@@ -50,30 +51,16 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
       ref={ref}
     >
       {isHovered && (
-        <Icon
+        <FullTrash
           size="lg"
           spacing="default"
-        >
-          <svg
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"></path>
-          </svg>
-        </Icon>
+        />
       )}
       {!isHovered && (
-        <Icon
+        <Trash
           size="lg"
           spacing="default"
-        >
-          <svg
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM8 9h8v10H8zm7.5-5-1-1h-5l-1 1H5v2h14V4z"></path>
-          </svg>
-        </Icon>
+        />
       )}
     </Card>
   );
