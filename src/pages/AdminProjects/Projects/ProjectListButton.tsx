@@ -1,6 +1,6 @@
 import React, { type Dispatch, type SetStateAction, type FC, useRef, useCallback } from 'react';
 
-import Icon from '../../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
+import EditIcon from '../../../components/Icons/EditIcon';
 import ListButton from '../../../lib/iCoWeABaseUI/components/data-display/ListButton/ListButton';
 import ListItem from '../../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
 import Button from '../../../lib/iCoWeABaseUI/components/inputs/Button/Button';
@@ -76,16 +76,7 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({
         onClick={() => setIsEditing(id)}
         size="sm"
         variant="plain"
-        leftDecorator={
-          <Icon>
-            <svg
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"></path>
-            </svg>
-          </Icon>
-        }
+        leftDecorator={<EditIcon />}
       >
         Edit
       </Button>
