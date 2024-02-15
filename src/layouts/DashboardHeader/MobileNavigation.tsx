@@ -5,7 +5,7 @@ import HomeIcon from '../../components/Icons/HomeIcon';
 import Logo from '../../components/Icons/Logo';
 import ProjectIcon from '../../components/Icons/ProjectIcon';
 import SettingsIcon from '../../components/Icons/SettingsIcon';
-import LogoutButton from '../../components/LogoutButton/logoutButton';
+import LogoutButton from '../../components/LogoutButton/LogoutButton';
 import Navlink from '../../components/NavlinkButton/NavlinkButton';
 import ThemeButton from '../../components/ThemeButton.tsx/ThemeButton';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';

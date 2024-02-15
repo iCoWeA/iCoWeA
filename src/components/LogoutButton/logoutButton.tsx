@@ -11,9 +11,7 @@ const LogoutButton: FC = () => (
       void signOut(appAuth);
     }}
     block
-    variant="soft"
     color="error"
-    className="mt-auto"
     leftDecorator={<LogoutIcon />}
   >
     Logout
