@@ -46,7 +46,10 @@ const DefaultNavigation: FC = () => (
         </Navlink>
       </ListItem>
     </Navigation>
-    <ThemeButton />
+    <ThemeButton
+      icon
+      radius="rounded"
+    />
   </Flex>
 );
 
