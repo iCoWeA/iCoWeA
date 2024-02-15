@@ -7,7 +7,7 @@ export type Messages = Record<string, Message>;
 const initialState: Messages = {};
 
 const reducers = {
-  setMessage: (_: Messages, action: PayloadAction<Messages>) => action.payload
+  setMessages: (_: Messages, action: PayloadAction<Messages>) => action.payload
 };
 
 const messages = createSlice({

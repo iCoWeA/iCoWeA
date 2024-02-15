@@ -7,7 +7,7 @@ export type Projects = Record<string, Project>;
 const initialState: Projects = {};
 
 const reducers = {
-  setMessage: (_: Projects, action: PayloadAction<Projects>) => action.payload
+  setProjects: (_: Projects, action: PayloadAction<Projects>) => action.payload
 };
 
 const projects = createSlice({
