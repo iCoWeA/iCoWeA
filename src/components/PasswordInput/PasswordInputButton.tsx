@@ -15,8 +15,8 @@ const PasswordInputButton: FC<ToggleButtonProps> = ({ checked, ...restProps }) =
     radius="circular"
     {...restProps}
   >
-    {checked && <VisibleIcon />}
-    {!checked && <UnvisibleIcon />}
+    {checked && <UnvisibleIcon />}
+    {!checked && <VisibleIcon />}
   </ToggleButton>
 );
 
