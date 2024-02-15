@@ -1,6 +1,5 @@
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { push, child, ref, set } from 'firebase/database';
 
 import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
@@ -17,6 +16,7 @@ import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
+import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectUser } from '../../store/slices/user';
 import ContactForm from './ContactForm';
 
