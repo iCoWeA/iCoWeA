@@ -11,13 +11,12 @@ import InstagramIcon from '../../components/Icons/InstagramIcon';
 import LinkedInIcon from '../../components/Icons/LinkedInIcon';
 import Logo from '../../components/Icons/Logo';
 import ProjectIcon from '../../components/Icons/ProjectIcon';
-import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
+import Navlink from '../../components/NavlinkButton/NavlinkButton';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
 import Drawer from '../../lib/iCoWeABaseUI/components/navigation/Drawer/Drawer';
 import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
-import ListNavlink from '../../lib/iCoWeARouterUI/components/ListNavlink/ListNavlink';
 import { selectNavbar, navbarActions } from '../../store/slices/navbar';
 import { selectUser } from '../../store/slices/user';
 
@@ -48,42 +47,34 @@ const MobileNavigation: FC = () => {
           vertical
           block
         >
-          <ListItem>
-            <ListNavlink
-              to="/"
-              activeVariant="solid"
-              leftDecorator={<HomeIcon />}
-            >
-              Home
-            </ListNavlink>
-          </ListItem>
-          <ListItem>
-            <ListNavlink
-              to="projects"
-              activeVariant="solid"
-              leftDecorator={<ProjectIcon />}
-            >
-              Projects
-            </ListNavlink>
-          </ListItem>
-          <ListItem>
-            <ListNavlink
-              to="about"
-              activeVariant="solid"
-              leftDecorator={<AboutIcon />}
-            >
-              About
-            </ListNavlink>
-          </ListItem>
-          <ListItem>
-            <ListNavlink
-              to="contact"
-              activeVariant="solid"
-              leftDecorator={<ContactIcon />}
-            >
-              Contact
-            </ListNavlink>
-          </ListItem>
+          <Navlink
+            to="/"
+            activeVariant="solid"
+            leftDecorator={<HomeIcon />}
+          >
+            Home
+          </Navlink>
+          <Navlink
+            to="projects"
+            activeVariant="solid"
+            leftDecorator={<ProjectIcon />}
+          >
+            Projects
+          </Navlink>
+          <Navlink
+            to="about"
+            activeVariant="solid"
+            leftDecorator={<AboutIcon />}
+          >
+            About
+          </Navlink>
+          <Navlink
+            to="contact"
+            activeVariant="solid"
+            leftDecorator={<ContactIcon />}
+          >
+            Contact
+          </Navlink>
         </Navigation>
         <Flex
           justify="between"
