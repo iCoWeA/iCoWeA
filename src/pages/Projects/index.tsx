@@ -36,7 +36,15 @@ export const Component: FC = () => {
                 No projects
               </Title>
             )}
-            {nodes.length !== 0 && <List align="center">{nodes}</List>}
+            {nodes.length !== 0 && (
+              <List
+                row
+                justify="center"
+                gap="xxl"
+              >
+                {nodes}
+              </List>
+            )}
           </Flex>
         </Section>
       </Main>
