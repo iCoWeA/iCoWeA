@@ -2,8 +2,8 @@ import React, { type FC, useState, useEffect } from 'react';
 import { useActionData, useNavigation, redirect } from 'react-router-dom';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
+import ErrorIcon from '../../components/Icons/ErrorIcon';
 import { appAuth } from '../../firebase';
-import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import Alert from '../../lib/iCoWeABaseUI/components/feedback/Alert/Alert';
 import Snackbar from '../../lib/iCoWeABaseUI/components/feedback/Snackbar/Snackbar';
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
@@ -41,20 +41,7 @@ export const Component: FC = () => {
         unmountOnExit
         className="w-full max-w-[32rem] px-4"
       >
-        <Alert
-          leftDecorator={
-            <Icon>
-              <svg
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-2h2zm0-4h-2V7h2z"></path>
-              </svg>
-            </Icon>
-          }
-        >
-          {actionData}
-        </Alert>
+        <Alert leftDecorator={<ErrorIcon />}>{actionData}</Alert>
       </Snackbar>
     </Layout>
   );
