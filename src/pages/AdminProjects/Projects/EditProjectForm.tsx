@@ -1,10 +1,11 @@
 import React, { type Dispatch, type SetStateAction, type FC } from 'react';
 import { Form } from 'react-router-dom';
 
+import InputControl from '../../../components/InputControl/InputControl';
+import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import Textfield from '../../../components/Textfield/Textfield';
 import Icon from '../../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import Button from '../../../lib/iCoWeABaseUI/components/inputs/Button/Button';
-import Input from '../../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import Grid from '../../../lib/iCoWeABaseUI/components/layouts/Grid/Grid';
 import useForm from '../../../lib/iCoWeAHooks/hooks/useForm';
 import { isFormChanged } from '../../../utils/utils';
@@ -40,11 +41,10 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
         gap="md"
         className="grid-cols-3 max-md:grid-cols-1"
       >
-        <Textfield>
-          <Input
+        <InputControl>
+          <Textfield
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
-            block
             variant="default"
             color="on-primary"
             invalid={inputs.name.error}
@@ -55,12 +55,11 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
             required
             value={inputs.name.value}
           />
-        </Textfield>
-        <Textfield>
-          <Input
+        </InputControl>
+        <InputControl>
+          <Textfield
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
-            block
             variant="default"
             color="on-primary"
             invalid={inputs.url.error}
@@ -70,12 +69,11 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
             required
             value={inputs.url.value}
           />
-        </Textfield>
-        <Textfield>
-          <Input
+        </InputControl>
+        <InputControl>
+          <Textfield
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
-            block
             variant="default"
             color="on-primary"
             invalid={inputs['image-url'].error}
@@ -85,9 +83,8 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
             required
             value={inputs['image-url'].value}
           />
-        </Textfield>
-        <Button
-          block
+        </InputControl>
+        <SubmitButton
           variant="plain"
           className="col-span-2 max-md:col-span-1"
           disabled={
@@ -96,7 +93,6 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
           }
           name="edit"
           value={id}
-          type="submit"
           leftDecorator={
             <Icon>
               <svg
@@ -109,7 +105,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
           }
         >
           Save
-        </Button>
+        </SubmitButton>
         <Button
           onClick={() => {
             setIsEditing('');
