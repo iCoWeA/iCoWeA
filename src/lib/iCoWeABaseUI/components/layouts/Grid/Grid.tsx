@@ -73,6 +73,7 @@ const Grid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
       border={false}
       radius="none"
       shadow={false}
+      grow={false}
       className={mergedClassName}
       ref={ref}
       {...restProps}
