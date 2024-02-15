@@ -1,10 +1,10 @@
 import React, { type Dispatch, type SetStateAction, type FC } from 'react';
 import { Form } from 'react-router-dom';
 
+import InputControl from '../../components/InputControl/InputControl';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
+import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import Textfield from '../../components/Textfield/Textfield';
-import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
-import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
 import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
 import { EMAIL_PATTERN } from '../../lib/iCoWeAUtilsUI/data/constants';
@@ -35,11 +35,10 @@ const Loginform: FC<LoginFormProps> = ({ setError, state }) => {
         gap="lg"
         className="w-full max-w-[30rem] mx-auto"
       >
-        <Textfield errorText={inputs.email.error && 'Invalid email'}>
-          <Input
+        <InputControl errorText={inputs.email.error && 'Invalid email'}>
+          <Textfield
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
-            block
             invalid={inputs.email.error}
             label="Email"
             id="email"
@@ -48,8 +47,8 @@ const Loginform: FC<LoginFormProps> = ({ setError, state }) => {
             required
             value={inputs.email.value}
           />
-        </Textfield>
-        <Textfield errorText={inputs.password.error && 'Invalid password'}>
+        </InputControl>
+        <InputControl errorText={inputs.password.error && 'Invalid password'}>
           <PasswordInput
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
@@ -61,15 +60,13 @@ const Loginform: FC<LoginFormProps> = ({ setError, state }) => {
             required
             value={inputs.password.value}
           />
-        </Textfield>
-        <Button
-          block
+        </InputControl>
+        <SubmitButton
           loading={state === 'submitting'}
           disabled={!isFormValid}
-          type="submit"
         >
           LOGIN
-        </Button>
+        </SubmitButton>
       </Card>
     </Form>
   );
