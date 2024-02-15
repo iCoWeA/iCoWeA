@@ -21,6 +21,10 @@ const router = createBrowserRouter([
           {
             path: 'login',
             lazy: async () => await import('./pages/Login')
+          },
+          {
+            path: 'logout',
+            lazy: async () => await import('./pages/Logout')
           }
         ]
       },
