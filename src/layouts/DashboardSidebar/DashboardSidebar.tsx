@@ -3,7 +3,7 @@ import React, { type FC } from 'react';
 import HomeIcon from '../../components/Icons/HomeIcon';
 import ProjectIcon from '../../components/Icons/ProjectIcon';
 import SettingsIcon from '../../components/Icons/SettingsIcon';
-import LogoutButton from '../../components/LogoutButton/logoutButton';
+import LogoutButton from '../../components/LogoutButton/LogoutButton';
 import ThemeButton from '../../components/ThemeButton.tsx/ThemeButton';
 import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';

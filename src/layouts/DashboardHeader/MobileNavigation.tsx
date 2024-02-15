@@ -66,7 +66,9 @@ const MobileNavigation: FC = () => {
         </Navigation>
         <Stack
           gap="lg"
+          justify="end"
           align="center"
+          grow
         >
           <ThemeButton block />
           <LogoutButton />
