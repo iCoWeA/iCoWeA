@@ -1,5 +1,6 @@
 import React, { type FC } from 'react';
 
+import LogoutButton from '../../components/LogoutButton/logoutButton';
 import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
@@ -75,6 +76,7 @@ const DashboardSidebar: FC = () => (
           </ListNavlink>
         </ListItem>
       </Navigation>
+      <LogoutButton />
     </Stack>
   </Sidebar>
 );
