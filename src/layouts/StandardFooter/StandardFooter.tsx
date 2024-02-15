@@ -1,10 +1,10 @@
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import GithubIcon from '../../components/Icons/GithubIcon';
 import Text from '../../lib/iCoWeABaseUI/components/data-display/Text/Text';
 import Footer from '../../lib/iCoWeABaseUI/components/layouts/Footer/Footer';
+import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectUser } from '../../store/slices/user';
 
 const StandardFooter: FC = () => {
