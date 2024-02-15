@@ -35,9 +35,7 @@ const ContactForm: FC = () => {
         >
           <Textfield errorText={inputs.name.error && 'Invalid name'}>
             <Input
-              onChange={(event) => {
-                change(event, 1000);
-              }}
+              onChange={(event) => change(event, 1000)}
               onBlur={blur}
               block
               variant="default"
@@ -54,9 +52,7 @@ const ContactForm: FC = () => {
           </Textfield>
           <Textfield errorText={inputs.email.error && 'Invalid email'}>
             <Input
-              onChange={(event) => {
-                change(event, 1000);
-              }}
+              onChange={(event) => change(event, 1000)}
               onBlur={blur}
               block
               variant="default"
@@ -72,9 +68,7 @@ const ContactForm: FC = () => {
           </Textfield>
           <Textfield errorText={inputs.subject.error && 'Invalid subject'}>
             <Input
-              onChange={(event) => {
-                change(event, 1000);
-              }}
+              onChange={(event) => change(event, 1000)}
               onBlur={blur}
               block
               variant="default"
@@ -96,9 +90,7 @@ const ContactForm: FC = () => {
         >
           <Textfield errorText={inputs.message.error && 'Invalid message'}>
             <Textarea
-              onChange={(event) => {
-                change(event, 1000);
-              }}
+              onChange={(event) => change(event, 1000)}
               onBlur={blur}
               block
               variant="default"

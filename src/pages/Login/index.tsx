@@ -36,9 +36,7 @@ export const Component: FC = () => {
             >
               <Textfield errorText={inputs.email.error && 'Invalid email'}>
                 <Input
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   invalid={inputs.email.error}
@@ -52,9 +50,7 @@ export const Component: FC = () => {
               </Textfield>
               <Textfield errorText={inputs.password.error && 'Invalid password'}>
                 <PasswordInput
-                  onChange={(event) => {
-                    change(event, 1000);
-                  }}
+                  onChange={(event) => change(event, 1000)}
                   onBlur={blur}
                   block
                   invalid={inputs.password.error}
