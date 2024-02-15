@@ -1,6 +1,7 @@
 import React, { type FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import HamburgerIcon from '../../components/Icons/HamburgerIcon';
 import Logo from '../../components/Icons/Logo';
 import LogoutButton from '../../components/LogoutButton/logoutButton';
 import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
@@ -22,14 +23,7 @@ const MobileNavigation: FC = () => {
         onClick={() => dispatch(navbarActions.toggle())}
         icon
       >
-        <Icon>
-          <svg
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z"></path>
-          </svg>
-        </Icon>
+        <HamburgerIcon />
       </Button>
       <Drawer
         onClose={() => dispatch(navbarActions.close())}
