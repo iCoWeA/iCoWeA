@@ -1,6 +1,5 @@
 import React, { type FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import HamburgerIcon from '../../components/Icons/HamburgerIcon';
 import HomeIcon from '../../components/Icons/HomeIcon';
 import Logo from '../../components/Icons/Logo';

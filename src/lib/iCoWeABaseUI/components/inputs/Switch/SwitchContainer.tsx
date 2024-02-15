@@ -16,7 +16,7 @@ export type SwitchContainerProps = SwitchContainerDefaultProps & {
 };
 
 const SwitchContainer = forwardRef<HTMLDivElement, SwitchContainerProps>(
-  ({ theme, size, variant, color, checked, className, ...restProps }, ref) => {
+  ({ theme, size, color, checked, className, ...restProps }, ref) => {
     /* --- Set classes --- */
     const isDefault = color.startsWith('on');
 

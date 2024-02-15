@@ -60,11 +60,12 @@ const switchConfig = {
         position: 'absolute',
         top: 'top-0',
         left: 'left-0',
-        transition: 'transition',
+        transition: 'transition-all',
         pointerEvent: 'pointer-events-none'
       },
       checked: {
-        transform: 'translate-x-full'
+        left: 'left-full',
+        transform: '-translate-x-full'
       }
     }
   }

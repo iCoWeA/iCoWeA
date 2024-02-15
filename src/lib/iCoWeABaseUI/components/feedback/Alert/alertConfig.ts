@@ -2,7 +2,7 @@ const alertConfig = {
   defaultProps: {
     size: 'md',
     variant: 'solid',
-    color: 'warning',
+    color: 'error',
     border: 'none',
     closable: 'none'
   },

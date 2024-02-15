@@ -36,7 +36,7 @@ const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>((props, ref) => {
   return (
     <Popper
       lockScroll={false}
-      closeOnOutsideClick
+      closeOnOutsideClick={false}
       focusTrap={false}
       closeOnBackdropClick
       backdrop="none"
