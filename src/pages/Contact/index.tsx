@@ -1,16 +1,16 @@
 import React, { type FC } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { push, child, ref, set } from 'firebase/database';
 
+import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
 import { database } from '../../firebase';
 import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
-import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
-import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectUser } from '../../store/slices/user';
 import ContactForm from './ContactForm';
 
@@ -20,7 +20,7 @@ export const Component: FC = () => {
   return (
     <Layout>
       <Main>
-        <Section className="animate-slide">
+        <AnimatedSection>
           <Stack gap="xxl">
             <Title
               size="1"
@@ -155,7 +155,7 @@ export const Component: FC = () => {
               <ContactForm />
             </Flex>
           </Stack>
-        </Section>
+        </AnimatedSection>
       </Main>
     </Layout>
   );
