@@ -15,6 +15,7 @@ export type BoxDefaultProps = {
   border?: Borders;
   radius?: Radiuses;
   shadow?: boolean;
+  grow?: boolean;
 };
 
 export type BoxProps = BaseHTMLAttributes<HTMLDivElement> &
@@ -32,6 +33,7 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     border,
     radius,
     shadow,
+    grow,
     defaultClassName,
     className,
     disabled,
@@ -49,6 +51,7 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     return mergeClasses(
       styles.base,
       block && styles.block,
+      grow && styles.grow,
       shadow && styles.shadow,
       position !== 'static' && styles.positions[position],
       borderType !== 'none' && styles.borders[borderType],
@@ -66,6 +69,7 @@ const Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   }, [
     border,
     block,
+    grow,
     shadow,
     position,
     radius,

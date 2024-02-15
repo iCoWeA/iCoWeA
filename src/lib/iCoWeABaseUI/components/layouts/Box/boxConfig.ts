@@ -7,7 +7,8 @@ const boxConfig = {
     color: 'inherit',
     border: 'none',
     radius: 'none',
-    shadow: false
+    shadow: false,
+    grow: false
   },
   styles: {
     base: {
@@ -15,6 +16,9 @@ const boxConfig = {
     },
     block: {
       width: 'w-full'
+    },
+    grow: {
+      flexGrow: 'grow'
     },
     shadow: {
       boxShadow: 'shadow-xl'

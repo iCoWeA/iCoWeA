@@ -3,7 +3,8 @@ const sidebarConfig = {
   styles: {
     base: {
       display: 'flex',
-      width: 'w-64'
+      width: 'w-64',
+      flexShrink: 'shrink-0'
     }
   }
 };

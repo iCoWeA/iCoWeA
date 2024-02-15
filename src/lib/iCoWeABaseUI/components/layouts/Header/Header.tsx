@@ -20,6 +20,7 @@ export type HeaderDefaultProps = {
   shadow?: boolean;
   justify?: JustifyContent;
   align?: AlignItems;
+  gap?: BoxGaps;
 };
 
 export type HeaderProps = BaseHTMLAttributes<HTMLElement> &
@@ -37,6 +38,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
     shadow,
     justify,
     align,
+    gap,
     containerProps,
     defaultClassName,
     className,
@@ -73,9 +75,10 @@ const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       {...restProps}
     >
       <Layout
-        layout={block ? 'dashboard' : 'fullbleed'}
+        layout={block ? 'full' : 'fullbleed'}
         justify={justify}
         align={align}
+        gap={gap}
         {...containerProps}
       >
         {children}

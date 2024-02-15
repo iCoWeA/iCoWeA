@@ -4,30 +4,30 @@ import { deepClone } from '../utils/utils';
 
 enum ActionTypes {LOADING, SUCCESS, FAILED}
 
-interface State<T> {
+type State<T> = {
   isLoading: boolean;
   data?: T;
   error: unknown;
-}
+};
 
-interface Action<T> {
+type Action<T> = {
   type: ActionTypes;
   payload?: {
     data?: T;
     error?: unknown;
   };
-}
+};
 
-interface Actions {
+type Actions = {
   loading: <T>() => Action<T>;
   success: <T>(data: T) => Action<T>;
   failed: <T>(error: unknown) => Action<T>;
-}
+};
 
-interface Return<T> {
+type Return<T> = {
   state: State<T>,
   send: (url: string, request?: RequestInit) => Promise<void>;
-}
+};
 
 const reducer = <T>(prevState: State<T>, { type, payload }: Action<T>): State<T> => {
   const state = deepClone(prevState);

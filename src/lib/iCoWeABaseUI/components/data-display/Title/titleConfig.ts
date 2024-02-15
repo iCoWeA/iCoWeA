@@ -15,10 +15,10 @@ const titleConfig = {
         font: 'text-6xl'
       },
       2: {
-        font: 'text-4xl'
+        font: 'text-5xl'
       },
       3: {
-        font: 'text-3xl'
+        font: 'text-4xl'
       },
       4: {
         font: 'text-2xl'

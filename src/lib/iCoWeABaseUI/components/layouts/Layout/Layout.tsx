@@ -29,9 +29,9 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
     <Flex
       direction={layout === 'root' ? 'col' : 'row'}
       wrap="nowrap"
-      justify={layout === 'dashboard' || layout === 'fullbleed' ? 'between' : 'stretch'}
+      justify={layout === 'full' || layout === 'fullbleed' ? 'between' : 'start'}
       align={layout === 'default' ? 'center' : 'stretch'}
-      gap={layout === 'dashboard' || layout === 'fullbleed' ? 'lg' : 'none'}
+      gap={layout === 'full' || layout === 'fullbleed' ? 'lg' : 'none'}
       block
       className={mergedClassName}
       ref={ref}

@@ -2,45 +2,47 @@ import { type FocusEventHandler, useRef, useReducer, useEffect, useCallback, typ
 
 import { deepClone } from '../utils/utils';
 
-enum ActionTypes {CHANGE, DEBOUNCED_CHANGE, BLUR, REVALID, RESET, RESET_FORM}
+enum ActionTypes {CHANGE, DEBOUNCED_CHANGE, BLUR, REVALID, REVALID_FORM, RESET, RESET_FORM}
 
-interface InputState {
+export type InputState = {
   value: string;
   valid: boolean;
   error: boolean;
   timerId: number;
-}
+};
 
-interface State {
+type State = {
   inputs: Record<string, InputState>;
   isFormValid: boolean;
-}
+};
 
-interface Action {
+type Action = {
   type: ActionTypes,
-  payload: { input?: HTMLInputElement | HTMLTextAreaElement, name?: string; timerId?: number, defaultValue?: string; config?: Obj };
-}
+  payload: { input?: HTMLInputElement | HTMLTextAreaElement, name?: string; form?: HTMLFormElement, timerId?: number, defaultValue?: string; config?: Obj };
+};
 
-interface Actions {
+type Actions = {
   change: (input: HTMLInputElement | HTMLTextAreaElement) => Action;
   debouncedChange: (input: HTMLInputElement | HTMLTextAreaElement, timerId: number) => Action;
   revalid: (input: HTMLInputElement | HTMLTextAreaElement) => Action;
+  revalidForm: (form: HTMLFormElement) => Action;
   blur: (input: HTMLInputElement | HTMLTextAreaElement) => Action;
   reset: (name: string, defaultValue: string) => Action;
   resetForm: (config: Obj) => Action;
-}
+};
 
-interface Return {
+type Return = {
   state: State;
   change: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, delay?: number) => void;
   blur: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  revalidForm: (form: HTMLFormElement) => void;
   reset: (name: string) => void;
   resetForm: () => void;
-}
+};
 
 const initialTimerId = -1;
 
-const validate = (input?: HTMLInputElement | HTMLTextAreaElement): boolean => {
+const validate = (input?: HTMLInputElement | HTMLTextAreaElement | null): boolean => {
   if (!input) {
     return false;
   }
@@ -63,7 +65,7 @@ const initialize = (defaultValue: string = ''): InputState => ({
   timerId: initialTimerId
 });
 
-const reducer = (prevState: State, { type, payload: { input, name = input?.name ?? '', timerId = initialTimerId, defaultValue = '', config } }: Action): State => {
+const reducer = (prevState: State, { type, payload: { input, name = input?.name ?? '', form, timerId = initialTimerId, defaultValue = '', config } }: Action): State => {
   const state = deepClone(prevState);
 
   if (type === ActionTypes.CHANGE) {
@@ -92,7 +94,15 @@ const reducer = (prevState: State, { type, payload: { input, name = input?.name 
   if (type === ActionTypes.REVALID) {
     clearTimeout(state.inputs[name].timerId);
     state.inputs[name].error = !state.inputs[name].valid;
-    state.inputs[name].timerId = timerId;
+    state.inputs[name].timerId = initialTimerId;
+  }
+
+  if (type === ActionTypes.REVALID_FORM) {
+    Object.keys(state.inputs).forEach((name) => {
+      clearTimeout(state.inputs[name].timerId);
+      state.inputs[name].timerId = initialTimerId;
+      state.inputs[name].valid = validate(form?.querySelector(`[name='${name}']`));
+    });
   }
 
   if (type === ActionTypes.BLUR) {
@@ -142,6 +152,7 @@ const actions: Actions = {
     type: ActionTypes.REVALID,
     payload: { input }
   }),
+  revalidForm: (form) => ({ type: ActionTypes.REVALID_FORM, payload: form }),
   blur: (input) => ({
     type: ActionTypes.BLUR,
     payload: { input }
@@ -180,6 +191,10 @@ const useForm = (config: Obj): Return => {
     dispatch(actions.blur(target));
   }, []);
 
+  const revalidForm = useCallback((form: HTMLFormElement) => {
+    dispatch(actions.revalidForm(form));
+  }, []);
+
   const reset = useCallback((name: string): void => {
     dispatch(actions.reset(name, savedConfig.current[name]));
   }, []);
@@ -192,6 +207,7 @@ const useForm = (config: Obj): Return => {
     state,
     change,
     blur,
+    revalidForm,
     reset,
     resetForm
   };

@@ -18,6 +18,7 @@ export type FooterDefaultProps = {
   border?: boolean;
   justify?: JustifyContent;
   align?: AlignItems;
+  gap?: BoxGaps;
 };
 
 export type FooterProps = BaseHTMLAttributes<HTMLElement> &
@@ -33,6 +34,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
     border,
     justify,
     align,
+    gap,
     containerProps,
     defaultClassName,
     className,
@@ -67,9 +69,10 @@ const Footer = forwardRef<HTMLElement, FooterProps>((props, ref) => {
       {...restProps}
     >
       <Layout
-        layout={block ? 'dashboard' : 'fullbleed'}
+        layout={block ? 'full' : 'fullbleed'}
         justify={justify}
         align={align}
+        gap={gap}
         {...containerProps}
       >
         {children}

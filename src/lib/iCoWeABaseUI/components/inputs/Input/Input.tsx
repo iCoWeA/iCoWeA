@@ -121,6 +121,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
       isFocused={isFocused}
       inputRef={ref}
       disabled={disabled}
+      value={value}
       ref={containerRef}
       {...containerProps}
     >

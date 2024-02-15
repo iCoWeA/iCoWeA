@@ -62,7 +62,6 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      {children}
       {src && src !== '' && (
         <Image
           radius={radius}
@@ -71,6 +70,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
           {...imageProps}
         />
       )}
+      {!src && (children ?? alt)}
     </Flex>
   );
 });

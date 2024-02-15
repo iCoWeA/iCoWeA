@@ -5,7 +5,8 @@ const footerConfig = {
     color: 'neutral',
     border: false,
     justify: 'between',
-    align: 'center'
+    align: 'center',
+    gap: 'lg'
   },
   styles: {
     base: {

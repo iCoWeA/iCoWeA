@@ -8,18 +8,21 @@ const mainConfig = {
       width: 'w-full',
       flexDirection: 'flex-col'
     },
+    block: {
+      maxWidth: 'max-w-232'
+    },
     placements: {
       left: {
-        margin: 'ml-auto mr-8',
-        maxWidth: 'max-w-232'
+        margin: 'mx-8 max-md:ml-4'
       },
       middle: {
-        margin: 'mx-auto',
-        maxWidth: 'max-w-232'
+        margin: 'mx-auto'
       },
       right: {
-        margin: 'ml-8 mr-auto',
-        maxWidth: 'max-w-232'
+        margin: 'mx-8 max-md:mr-4'
+      },
+      full: {
+        margin: 'mx-8 max-md:mx-4'
       }
     }
   }

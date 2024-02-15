@@ -121,6 +121,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
       isFocused={isFocused}
       inputRef={ref}
       disabled={disabled}
+      value={value}
       ref={containerRef}
       {...containerProps}
     >

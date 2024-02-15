@@ -14,22 +14,31 @@ export type DrawerContainerProps = DrawerContainerDefaultProps & {
   variant: Variants;
   color: DefaultColors;
   radius: Radiuses;
+  justify: JustifyContent;
+  align: AlignItems;
+  gap: BoxGaps;
 };
 
-const DraweContainer: FC<DrawerContainerProps> = ({ placement, radius, className, ...restProps }) => {
+const DraweContainer: FC<DrawerContainerProps> = ({
+  placement,
+  radius,
+  className,
+  ...restProps
+}) => {
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
     const styles = drawerConfig.styles.container;
     const orientation = placement === 'bottom' || placement === 'top' ? 'horizontal' : 'vertical';
 
-    return mergeClasses(styles.orientations[orientation], radius !== 'none' && styles.radiuses[placement][radius], className);
+    return mergeClasses(
+      styles.orientations[orientation],
+      radius !== 'none' && styles.radiuses[placement][radius],
+      className
+    );
   }, [placement, radius, className]);
 
   return (
     <Stack
-      justify="start"
-      align="stretch"
-      gap="none"
       className={mergedClassName}
       {...restProps}
     />

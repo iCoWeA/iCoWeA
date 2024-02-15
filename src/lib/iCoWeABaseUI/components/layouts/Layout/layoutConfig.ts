@@ -21,6 +21,9 @@ const layoutConfig = {
         flexGrow: 'grow'
       },
       dashboard: {
+        flexGrow: 'grow'
+      },
+      full: {
         padding: 'px-8 max-md:px-4'
       },
       fullbleed: {

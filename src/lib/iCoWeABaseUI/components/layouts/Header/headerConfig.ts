@@ -7,7 +7,8 @@ const headerConfig = {
     border: false,
     shadow: false,
     justify: 'between',
-    align: 'center'
+    align: 'center',
+    gap: 'lg'
   },
   styles: {
     base: {

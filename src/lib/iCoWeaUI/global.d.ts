@@ -43,7 +43,7 @@ declare global {
   export type BoxGaps = 'none' | 'base' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   export type Backdrop = 'none' | 'visible' | 'invisible';
   export type Transitions = 'fade' | 'grow-x' | 'grow-y' | 'grow' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right';
-  export type Layouts = 'root' | 'default' | 'standard' | 'dashboard' | 'fullbleed';
+  export type Layouts = 'root' | 'default' | 'standard' | 'dashboard' | 'full' | 'fullbleed';
   export type ContainerLayouts = 'default' | 'header' | 'footer' | 'body';
   export type Closable = 'none' | 'left' | 'right';
   export type Variants = 'default' | 'text' | 'soft' | 'plain' | 'solid';

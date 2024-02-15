@@ -12,6 +12,9 @@ export type DrawerDefaultProps = {
   variant?: Variants;
   color?: DefaultColors;
   radius?: Radiuses;
+  justify?: JustifyContent;
+  align?: AlignItems;
+  gap?: BoxGaps;
   closeOnEscape?: boolean;
   focusTrap?: boolean;
   smooth?: boolean;
@@ -34,6 +37,9 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
     variant,
     color,
     radius,
+    justify,
+    align,
+    gap,
     backdrop,
     containerProps,
     defaultClassName,
@@ -67,6 +73,9 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>((props, ref) => {
         variant={variant}
         color={color}
         radius={radius}
+        justify={justify}
+        align={align}
+        gap={gap}
         {...containerProps}
       >
         {children}

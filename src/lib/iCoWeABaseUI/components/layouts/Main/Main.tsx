@@ -10,12 +10,13 @@ import mainConfig from './mainConfig';
 
 export type MainDefaultProps = {
   placement?: LayoutPlacements;
+  block?: boolean;
 };
 
 export type MainProps = BaseHTMLAttributes<HTMLElement> & MainDefaultProps;
 
 const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
-  const { placement, defaultClassName, className, ...restProps } = useConfig(
+  const { placement, block, defaultClassName, className, ...restProps } = useConfig(
     'main',
     mainConfig.defaultProps,
     props
@@ -27,11 +28,12 @@ const Main = forwardRef<HTMLElement, MainProps>((props, ref) => {
 
     return mergeClasses(
       styles.base,
-      placement !== 'full' && styles.placements[placement],
+      !block && styles.block,
+      styles.placements[placement],
       defaultClassName,
       className
     );
-  }, [placement, defaultClassName, className]);
+  }, [placement, block, defaultClassName, className]);
 
   return (
     <main

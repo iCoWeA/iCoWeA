@@ -19,10 +19,11 @@ export type InputContainerProps = InputContianerDefaultProps & {
   isFocused: boolean;
   inputRef: MutableRefObject<HTMLInputElement | null>;
   disabled?: boolean;
+  value?: string | number | readonly string[];
 };
 
 const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(
-  ({ block, isFocused, inputRef, className, disabled, ...restProps }, forwardedRef) => {
+  ({ block, isFocused, inputRef, className, disabled, value, ...restProps }, forwardedRef) => {
     const ref = useRef<HTMLDivElement>(null);
 
     useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
@@ -43,8 +44,7 @@ const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(
     /* --- Set classes --- */
     const mergedClassName = useMemo(() => {
       const styles = inputConfig.styles.root;
-      const isShifted =
-        typeof inputRef.current?.value === 'string' && inputRef.current?.value !== '';
+      const isShifted = value && value !== '';
 
       return mergeClasses(
         styles.base,
@@ -53,7 +53,7 @@ const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(
         isFocused && styles.focus,
         className
       );
-    }, [block, isFocused, className]);
+    }, [value, block, isFocused, className]);
 
     return (
       <Flex
