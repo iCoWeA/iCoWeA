@@ -40,7 +40,9 @@ const MobileNavigation: FC = () => {
         spacing="lg-panel"
         gap="xl"
       >
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         <Navigation
           vertical
           block
