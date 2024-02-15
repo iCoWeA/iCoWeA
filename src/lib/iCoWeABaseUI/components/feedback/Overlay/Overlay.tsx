@@ -49,7 +49,7 @@ const Overlay = forwardRef<HTMLDivElement, OverlayProps>((props, forwardedRef) =
       smooth={false}
       unmountOnExit={false}
       enter={open}
-      aria-hidden={true}
+      aria-hidden
       className={mergedClassName}
       ref={ref}
       {...restProps}
