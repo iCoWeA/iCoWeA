@@ -1,4 +1,4 @@
-import React, { type FC, useEffect } from 'react';
+import React, { type FC, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScrollRestoration, Outlet } from 'react-router-dom';
 import { ref, onValue } from 'firebase/database';
@@ -6,6 +6,7 @@ import { ref, onValue } from 'firebase/database';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import { database } from '../../firebase';
 import useWindowResize from '../../lib/iCoWeABaseUI/hooks/useWindowResize';
+import themeContext from '../../lib/iCoWeAUI/contexts/theme';
 import { breakpointActions } from '../../store/slices/breakpoint';
 import { projectsActions } from '../../store/slices/projects';
 import { selectUser, userActions } from '../../store/slices/user';
@@ -13,8 +14,17 @@ import { selectUser, userActions } from '../../store/slices/user';
 const Component: FC = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const setTheme = useContext(themeContext).setTheme;
 
   const isEmpty = Object.keys(user).every((key) => user[key as keyof User] === '');
+
+  useEffect(() => {
+    const theme = localStorage.getItem('theme');
+
+    if (theme === 'dark' || theme === 'light') {
+      setTheme(theme);
+    }
+  }, []);
 
   /* --- Set event handlers --- */
   useEffect(() => {
