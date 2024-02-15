@@ -34,7 +34,7 @@ export const Component: FC = () => {
   }, []);
 
   useEffect(() => {
-    return onAuthStateChanged(appAuth, (user) => !user && navigate('/login'));
+    return onAuthStateChanged(appAuth, (user) => !user && navigate('/logout'));
   }, []);
 
   return isEmpty.current ? <LoadingScreen /> : <Outlet />;
