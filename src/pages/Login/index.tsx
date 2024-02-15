@@ -1,6 +1,6 @@
 import React, { type FC, useState, useEffect } from 'react';
 import { useActionData, useNavigation, redirect } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 import { appAuth } from '../../firebase';
 import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
@@ -70,6 +70,8 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
   try {
     await signInWithEmailAndPassword(appAuth, email, password);
   } catch (error) {
+    void signOut(appAuth);
+
     return 'Login error';
   }
 
