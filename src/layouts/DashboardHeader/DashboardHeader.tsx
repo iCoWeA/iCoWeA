@@ -8,6 +8,7 @@ import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Header from '../../lib/iCoWeABaseUI/components/layouts/Header/Header';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
+import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { upperCaseFirstLetter } from '../../lib/iCoWeAUtilsUI/utils/utils';
 import { selectBreakpoint, Breakpoints } from '../../store/slices/breakpoint';
 import { selectUser } from '../../store/slices/user';
@@ -24,7 +25,11 @@ const DashboardHeader: FC = () => {
       shadow
     >
       {(breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD) && <MobileNavigation />}
-      {breakpoint !== Breakpoints.SM && breakpoint !== Breakpoints.MD && <Logo />}
+      {breakpoint !== Breakpoints.SM && breakpoint !== Breakpoints.MD && (
+        <Link to="">
+          <Logo />
+        </Link>
+      )}
       <Flex gap="base">
         <Stack>
           <Title>{name}</Title>

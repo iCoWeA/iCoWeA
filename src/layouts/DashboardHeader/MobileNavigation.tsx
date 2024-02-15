@@ -7,6 +7,7 @@ import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/Li
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
 import Drawer from '../../lib/iCoWeABaseUI/components/navigation/Drawer/Drawer';
+import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import ListNavlink from '../../lib/iCoWeARouterUI/components/ListNavlink/ListNavlink';
 import { selectNavbar, navbarActions } from '../../store/slices/navbar';
 
@@ -35,7 +36,9 @@ const MobileNavigation: FC = () => {
         spacing="lg-panel"
         gap="xl"
       >
-        <Logo />
+        <Link to="">
+          <Logo />
+        </Link>
         <Navigation
           vertical
           block
