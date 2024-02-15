@@ -2,15 +2,15 @@ import React, { type FC } from 'react';
 
 import Icon, { type IconProps } from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 
-const EditIcon: FC<IconProps> = (props) => (
+const ErrorIcon: FC<IconProps> = (props) => (
   <Icon {...props}>
     <svg
       focusable="false"
       viewBox="0 0 24 24"
     >
-      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"></path>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-2h2zm0-4h-2V7h2z"></path>
     </svg>
   </Icon>
 );
 
-export default EditIcon;
+export default ErrorIcon;
