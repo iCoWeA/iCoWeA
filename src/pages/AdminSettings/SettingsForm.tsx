@@ -160,6 +160,7 @@ const SettingsForm: FC = () => {
               onChange={(event) => change(event, 1000)}
               onBlur={blur}
               variant="default"
+              block
               invalid={inputs.about.error}
               label="About me"
               id="about"
