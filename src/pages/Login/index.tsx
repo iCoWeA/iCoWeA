@@ -2,7 +2,7 @@ import React, { type FC, useState, useEffect } from 'react';
 import { useActionData, useNavigation, redirect } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
-import { auth } from '../../firebase';
+import { appAuth } from '../../firebase';
 import Icon from '../../lib/iCoWeABaseUI/components/data-display/Icon/Icon';
 import Alert from '../../lib/iCoWeABaseUI/components/feedback/Alert/Alert';
 import Snackbar from '../../lib/iCoWeABaseUI/components/feedback/Snackbar/Snackbar';
@@ -68,7 +68,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
   const password = formData.get('password')?.toString() ?? '';
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(appAuth, email, password);
   } catch (error) {
     return 'Login error';
   }
