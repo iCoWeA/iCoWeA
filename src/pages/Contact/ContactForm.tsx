@@ -1,9 +1,9 @@
 import React, { type FC } from 'react';
 import { Form } from 'react-router-dom';
 
+import InputControl from '../../components/InputControl/InputControl';
+import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import Textfield from '../../components/Textfield/Textfield';
-import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
-import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import Textarea from '../../lib/iCoWeABaseUI/components/inputs/Textarea/Textarea';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
@@ -33,11 +33,12 @@ const ContactForm: FC = () => {
           gap="lg"
           grow
         >
-          <Textfield errorText={inputs.name.error && 'Invalid name'}>
-            <Input
-              onChange={(event) => change(event, 1000)}
+          <InputControl errorText={inputs.name.error && 'Invalid name'}>
+            <Textfield
+              onChange={(event) => {
+                change(event, 1000);
+              }}
               onBlur={blur}
-              block
               variant="default"
               color="secondary"
               invalid={inputs.name.error}
@@ -49,12 +50,13 @@ const ContactForm: FC = () => {
               required
               value={inputs.name.value}
             />
-          </Textfield>
-          <Textfield errorText={inputs.email.error && 'Invalid email'}>
-            <Input
-              onChange={(event) => change(event, 1000)}
+          </InputControl>
+          <InputControl errorText={inputs.email.error && 'Invalid email'}>
+            <Textfield
+              onChange={(event) => {
+                change(event, 1000);
+              }}
               onBlur={blur}
-              block
               variant="default"
               color="secondary"
               invalid={inputs.email.error}
@@ -65,12 +67,13 @@ const ContactForm: FC = () => {
               required
               value={inputs.email.value}
             />
-          </Textfield>
-          <Textfield errorText={inputs.subject.error && 'Invalid subject'}>
-            <Input
-              onChange={(event) => change(event, 1000)}
+          </InputControl>
+          <InputControl errorText={inputs.subject.error && 'Invalid subject'}>
+            <Textfield
+              onChange={(event) => {
+                change(event, 1000);
+              }}
               onBlur={blur}
-              block
               variant="default"
               color="secondary"
               invalid={inputs.subject.error}
@@ -82,17 +85,18 @@ const ContactForm: FC = () => {
               required
               value={inputs.subject.value}
             />
-          </Textfield>
+          </InputControl>
         </Stack>
         <Stack
           gap="lg"
           grow
         >
-          <Textfield errorText={inputs.message.error && 'Invalid message'}>
+          <InputControl errorText={inputs.message.error && 'Invalid message'}>
             <Textarea
-              onChange={(event) => change(event, 1000)}
+              onChange={(event) => {
+                change(event, 1000);
+              }}
               onBlur={blur}
-              block
               variant="default"
               color="secondary"
               invalid={inputs.message.error}
@@ -104,15 +108,13 @@ const ContactForm: FC = () => {
               required
               value={inputs.message.value}
             />
-          </Textfield>
-          <Button
-            block
+          </InputControl>
+          <SubmitButton
             color="secondary"
             disabled={!isFormValid}
-            type="submit"
           >
             SEND
-          </Button>
+          </SubmitButton>
         </Stack>
       </Flex>
     </Form>
