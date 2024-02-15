@@ -74,7 +74,7 @@ export const Component: FC = () => {
               distance={10}
               border
               alt={`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(user.lastname)}`}
-              className="w-full max-w-[25rem] border-8"
+              className="aspect-square w-full h-auto max-w-[25rem] border-8"
               src={user.imageURL}
             />
           </Flex>
