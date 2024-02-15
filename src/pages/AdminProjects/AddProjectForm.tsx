@@ -1,9 +1,9 @@
 import React, { type Dispatch, type SetStateAction, type FC } from 'react';
 import { Form } from 'react-router-dom';
 
+import InputControl from '../../components/InputControl/InputControl';
+import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import Textfield from '../../components/Textfield/Textfield';
-import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
-import Input from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
 
@@ -29,11 +29,10 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
       className="mb-8"
     >
       <Stack gap="lg">
-        <Textfield>
-          <Input
+        <InputControl>
+          <Textfield
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
-            block
             variant="default"
             invalid={inputs.name.error}
             label="Name"
@@ -43,12 +42,11 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
             required
             value={inputs.name.value}
           />
-        </Textfield>
-        <Textfield>
-          <Input
+        </InputControl>
+        <InputControl>
+          <Textfield
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
-            block
             variant="default"
             invalid={inputs.url.error}
             label="Url"
@@ -57,12 +55,11 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
             required
             value={inputs.url.value}
           />
-        </Textfield>
-        <Textfield>
-          <Input
+        </InputControl>
+        <InputControl>
+          <Textfield
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
-            block
             variant="default"
             invalid={inputs['image-url'].error}
             label="Image URL"
@@ -71,16 +68,14 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen }) => {
             required
             value={inputs['image-url'].value}
           />
-        </Textfield>
-        <Button
+        </InputControl>
+        <SubmitButton
           size="lg"
-          block
           disabled={!isFormValid}
           name="add"
-          type="submit"
         >
           Save
-        </Button>
+        </SubmitButton>
       </Stack>
     </Form>
   );
