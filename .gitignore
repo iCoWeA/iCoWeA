@@ -28,5 +28,9 @@ tsconfig.json
 typings.d.ts
 .eslintrc.json
 
+.firebaserc
+firebase.json
+.
+
 /save
 save.txt
