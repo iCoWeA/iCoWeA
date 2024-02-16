@@ -3,6 +3,7 @@ import React, { type Dispatch, type SetStateAction, type FC, useRef, useCallback
 import EditIcon from '../../../components/Icons/EditIcon';
 import ListButton from '../../../lib/iCoWeABaseUI/components/data-display/ListButton/ListButton';
 import ListItem from '../../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
+import Tooltip from '../../../lib/iCoWeABaseUI/components/data-display/Tooltip/Tooltip';
 import Button from '../../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import useAddEventListener from '../../../lib/iCoWeABaseUI/hooks/useAddEventListener';
 import EditProjectForm from './EditProjectForm';
@@ -70,14 +71,22 @@ const ProjectItem: FC<ProjectItemProps> = ({
       ref={ref}
     >
       {name}
-      <Button
-        onClick={() => setIsEditing(id)}
-        size="sm"
+      <Tooltip
+        offset={4}
+        spacing="sm"
         variant="plain"
-        leftDecorator={<EditIcon />}
+        content="Edit"
+        dropdownProps={{ className: 'rounded-lg' }}
       >
-        Edit
-      </Button>
+        <Button
+          onClick={() => setIsEditing(id)}
+          icon
+          size="sm"
+          variant="plain"
+        >
+          <EditIcon />
+        </Button>
+      </Tooltip>
     </ListButton>
   );
 };
