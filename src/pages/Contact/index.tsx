@@ -142,7 +142,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     email: formData.get('email')?.toString() ?? '',
     subject: formData.get('subject')?.toString() ?? '',
     message: formData.get('message')?.toString() ?? '',
-    unread: 'true',
+    unread: true,
     creationDate: new Date().toISOString(),
     lastModificationDate: new Date().toISOString()
   };
