@@ -13,6 +13,7 @@ import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
 import {
   NAME_PATTERN,
   EMAIL_PATTERN,
+  PHONE_PATTERN,
   NUMBER_PATTERN
 } from '../../lib/iCoWeAUtilsUI/data/constants';
 import { selectUser } from '../../store/slices/user';
@@ -122,7 +123,7 @@ const SettingsForm: FC = () => {
               id="phone"
               maxLength={10}
               name="phone"
-              pattern={NUMBER_PATTERN}
+              pattern={PHONE_PATTERN}
               required
               value={inputs.phone.value}
             />
