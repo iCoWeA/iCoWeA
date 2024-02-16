@@ -47,7 +47,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
             variant="default"
-            color="on-neutral"
+            color="on-secondary"
             invalid={inputs.name.error}
             label="Name"
             id="name"
@@ -62,7 +62,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
             variant="default"
-            color="on-neutral"
+            color="on-secondary"
             invalid={inputs.url.error}
             label="Url"
             id="url"
@@ -76,7 +76,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, name, url, 
             onChange={(event) => change(event, 1000)}
             onBlur={blur}
             variant="default"
-            color="on-neutral"
+            color="on-secondary"
             invalid={inputs['image-url'].error}
             label="Image URL"
             id="image-url"
