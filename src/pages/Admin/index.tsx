@@ -14,6 +14,8 @@ export const Component: FC = () => {
 
   useSelector(selectMessages);
 
+  const wasLogged = useRef(false);
+
   const isEmpty = useRef(true);
 
   /* --- Set event handlers --- */
@@ -34,7 +36,19 @@ export const Component: FC = () => {
   }, []);
 
   useEffect(() => {
-    return onAuthStateChanged(appAuth, (user) => !user && navigate('/logout'));
+    return onAuthStateChanged(appAuth, (user) => {
+      if (user) {
+        wasLogged.current = true;
+      } else {
+        if (wasLogged.current) {
+          navigate('/logout');
+        } else {
+          navigate('/login');
+        }
+
+        wasLogged.current = false;
+      }
+    });
   }, []);
 
   return isEmpty.current ? <LoadingScreen /> : <Outlet />;
