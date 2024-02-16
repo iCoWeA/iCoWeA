@@ -30,6 +30,8 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
     setIsHovered(true);
   }, []);
 
+  const dragEnterHandler = useCallback((): void => setIsHovered(true), []);
+
   const dragLeaveHandler = useCallback((): void => setIsHovered(false), []);
 
   const dropHandler = useCallback((event: DragEvent): void => {
@@ -38,6 +40,8 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
   }, []);
 
   useAddEventListener(ref, 'dragover', dragOverHandler);
+
+  useAddEventListener(ref, 'dragenter', dragEnterHandler);
 
   useAddEventListener(ref, 'dragleave', dragLeaveHandler);
 
@@ -54,12 +58,14 @@ const TrashArea: FC<TrashAreaProps> = ({ setIsDraged }) => {
         <FullTrash
           size="lg"
           spacing="default"
+          className="pointer-events-none"
         />
       )}
       {!isHovered && (
         <Trash
           size="lg"
           spacing="default"
+          className="pointer-events-none"
         />
       )}
     </Card>
