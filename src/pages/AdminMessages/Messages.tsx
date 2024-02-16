@@ -64,7 +64,6 @@ const Messages: FC = () => {
           <ToggleButton
             onClick={() => setDescendingSort((sort) => !sort)}
             checked={descendingSort}
-            size="lg"
             variant="solid"
             leftDecorator={<SortIcon className={descendingSort ? '' : 'rotate-180'} />}
           >
