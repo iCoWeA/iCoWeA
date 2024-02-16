@@ -44,7 +44,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     throw new Error('No del');
   }
 
-  await remove(ref(database, `projects/${del}`));
+  await remove(ref(database, `messages/${del}`));
 
   return del;
 };
