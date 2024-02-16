@@ -45,7 +45,6 @@ const ProjectItem: FC<ProjectItemProps> = ({
   if (isEditing === id) {
     return (
       <ListItem
-        spacing="md"
         variant="solid"
         color="primary"
         radius="rounded"
@@ -63,7 +62,6 @@ const ProjectItem: FC<ProjectItemProps> = ({
 
   return (
     <ListButton
-      size="sm"
       variant="solid"
       color="primary"
       radius="rounded"
