@@ -32,7 +32,7 @@ const MessagesCard: FC<CountCardProps> = ({ count, children, ...restProps }) => 
         {counter}
       </Title>
       <Title
-        size="4"
+        size="5"
         color="inherit"
       >
         {children}
