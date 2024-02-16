@@ -121,7 +121,7 @@ const SettingsForm: FC = () => {
               invalid={inputs.phone.error}
               label="Phone"
               id="phone"
-              maxLength={10}
+              maxLength={13}
               name="phone"
               pattern={PHONE_PATTERN}
               required

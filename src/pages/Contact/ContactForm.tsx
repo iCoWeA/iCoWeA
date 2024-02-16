@@ -97,6 +97,7 @@ const ContactForm: FC = () => {
                 change(event, 1000);
               }}
               onBlur={blur}
+              block
               variant="default"
               color="secondary"
               invalid={inputs.message.error}
