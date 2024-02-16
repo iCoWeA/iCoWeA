@@ -62,6 +62,7 @@ const Loginform: FC<LoginFormProps> = ({ setError, state }) => {
           />
         </InputControl>
         <SubmitButton
+          color="secondary"
           loading={state === 'submitting'}
           disabled={!isFormValid}
         >
