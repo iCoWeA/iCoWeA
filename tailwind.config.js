@@ -36,7 +36,7 @@ module.exports = {
         'on-neutral': '#1a1a1a',
         'soft-neutral': '#262626',
         'neutral-variant': '#808080',
-        'on-neutral-variant': '#ffffff',
+        'on-neutral-variant': '#bfbfbf',
         primary: '#6a3eda',
         'on-primary': '#ffffff',
         'soft-primary': '#bda9ef',

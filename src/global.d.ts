@@ -24,6 +24,8 @@ declare global {
     name: string;
     url: string;
     imageURL: string;
+    creationDate: string;
+    lastModificationDate: string;
   };
 
   export type Message = {
@@ -32,5 +34,7 @@ declare global {
     subject: string;
     message: string;
     unread: boolean;
+    creationDate: string;
+    lastModificationDate: string;
   };
 };

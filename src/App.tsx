@@ -67,6 +67,10 @@ const router = createBrowserRouter([
                 lazy: async () => await import('./pages/AdminProjects')
               },
               {
+                path: 'messages',
+                lazy: async () => await import('./pages/AdminMessages')
+              },
+              {
                 path: 'settings',
                 lazy: async () => await import('./pages/AdminSettings')
               }
