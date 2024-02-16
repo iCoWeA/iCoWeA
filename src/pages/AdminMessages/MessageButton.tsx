@@ -79,7 +79,7 @@ const MessageButton: FC<MessageItemProps> = ({
           variant={unread ? 'default' : 'text'}
           color="neutral"
         >
-          {unread ? <MessageIcon /> : <ReadMessageIcon />}
+          {unread ? <ReadMessageIcon /> : <MessageIcon />}
         </Button>
       </Tooltip>
     </ListButton>
