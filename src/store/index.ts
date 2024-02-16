@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import breakpoint from './slices/breakpoint';
+import wasLogged from './slices/login';
 import messages from './slices/messages';
 import navbar from './slices/navbar';
 import projects from './slices/projects';
@@ -10,6 +11,7 @@ const store = configureStore({
   reducer: {
     breakpoint: breakpoint.reducer,
     navbar: navbar.reducer,
+    wasLogged: wasLogged.reducer,
     user: user.reducer,
     projects: projects.reducer,
     messages: messages.reducer
