@@ -13,7 +13,7 @@ export type MessageItemProps = {
   setIsReading: Dispatch<SetStateAction<string>>;
   isReading: string;
   id: string;
-  name: string;
+  subject: string;
   unread: boolean;
   draggable: boolean;
 };
@@ -23,7 +23,7 @@ const MessageButton: FC<MessageItemProps> = ({
   setIsReading,
   isReading,
   id,
-  name,
+  subject,
   unread,
   draggable
 }) => {
@@ -56,7 +56,7 @@ const MessageButton: FC<MessageItemProps> = ({
       draggable={draggable}
       ref={ref}
     >
-      {name}
+      {subject}
       <Tooltip
         offset={4}
         spacing="sm"

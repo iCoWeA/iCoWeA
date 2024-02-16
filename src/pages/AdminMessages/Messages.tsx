@@ -47,7 +47,7 @@ const Messages: FC = () => {
           setIsReading={setIsReading}
           isReading={isReading}
           id={key}
-          name={messages[key].name}
+          subject={messages[key].subject}
           unread={messages[key].unread}
           draggable={!isDraged && isReading === ''}
         />
@@ -66,7 +66,6 @@ const Messages: FC = () => {
             checked={descendingSort}
             size="lg"
             variant="solid"
-            radius="circular"
             leftDecorator={<SortIcon className={descendingSort ? '' : 'rotate-180'} />}
           >
             {descendingSort ? 'Newest date' : 'Latest date'}
