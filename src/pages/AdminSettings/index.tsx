@@ -33,7 +33,8 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     githubURL: formData.get('github-url')?.toString() ?? '',
     linkedinURL: formData.get('linkedin-url')?.toString() ?? '',
     instagramURL: formData.get('instagram-url')?.toString() ?? '',
-    facebookURL: formData.get('facebook-url')?.toString() ?? ''
+    facebookURL: formData.get('facebook-url')?.toString() ?? '',
+    lastModificationDate: new Date().toISOString()
   };
 
   await update(ref(database, 'users/0'), data);
