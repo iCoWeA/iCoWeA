@@ -19,10 +19,11 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
   const edit = formData.get('edit')?.toString();
   const del = formData.get('del')?.toString();
 
-  const data = {
+  const data: Obj = {
     name: formData.get('name')?.toString() ?? '',
     url: formData.get('url')?.toString() ?? '',
-    imageURL: formData.get('image-url')?.toString() ?? ''
+    imageURL: formData.get('image-url')?.toString() ?? '',
+    lastModificationDate: new Date().toISOString()
   };
 
   if (edit) {
@@ -36,6 +37,8 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
 
     return del;
   }
+
+  data.creationDate = new Date().toISOString();
 
   const key = push(child(ref(database), 'projects')).key;
 
