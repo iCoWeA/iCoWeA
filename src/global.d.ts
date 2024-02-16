@@ -31,5 +31,6 @@ declare global {
     email: string;
     subject: string;
     message: string;
+    unread: boolean;
   };
 };
