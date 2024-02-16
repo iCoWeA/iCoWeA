@@ -33,7 +33,7 @@ const ProjectItem: FC<ProjectItemProps> = ({
 
   /* --- Set event handlers --- */
   const dragStartHandler = useCallback((event: DragEvent): void => {
-    event.dataTransfer?.setData('listId', id);
+    event.dataTransfer?.setData('projectId', id);
     setIsDraged(true);
   }, []);
 
