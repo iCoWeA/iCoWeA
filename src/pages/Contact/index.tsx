@@ -18,6 +18,7 @@ import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectUser } from '../../store/slices/user';
+import { modifyNumber } from '../../utils/utils';
 import ContactForm from './ContactForm';
 
 export const Component: FC = () => {
@@ -39,13 +40,28 @@ export const Component: FC = () => {
               gap="xxl"
             >
               <Stack gap="lg">
-                <Flex gap="sm">
-                  <PhoneIcon spacing="default" />
-                  <Title color="inherit">{user.phone}</Title>
+                <Flex
+                  gap="sm"
+                  wrap="nowrap"
+                >
+                  <PhoneIcon
+                    spacing="default"
+                    className="shrink-0"
+                  />
+                  <Title color="inherit">{modifyNumber(user.phone)}</Title>
                 </Flex>
-                <Flex gap="sm">
-                  <PointIcon spacing="default" />
-                  <Title color="inherit">{`${user.street}, ${user.country}`}</Title>
+                <Flex
+                  gap="sm"
+                  wrap="nowrap"
+                >
+                  <PointIcon
+                    spacing="default"
+                    className="shrink-0"
+                  />
+                  <Title
+                    color="inherit"
+                    className="break-all"
+                  >{`${user.street} ${user.streetNumber} ${user.city}, ${user.country}`}</Title>
                 </Flex>
                 <Flex
                   gap="sm"
