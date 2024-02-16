@@ -82,7 +82,7 @@ const ProjectItem: FC<ProjectItemProps> = ({
           onClick={() => setIsEditing(id)}
           icon
           size="sm"
-          variant="plain"
+          variant="default"
         >
           <EditIcon />
         </Button>
