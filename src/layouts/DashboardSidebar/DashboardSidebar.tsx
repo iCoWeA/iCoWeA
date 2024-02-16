@@ -1,6 +1,7 @@
 import React, { type FC } from 'react';
 
 import HomeIcon from '../../components/Icons/HomeIcon';
+import MessageIcon from '../../components/Icons/MessageIcon';
 import ProjectIcon from '../../components/Icons/ProjectIcon';
 import SettingsIcon from '../../components/Icons/SettingsIcon';
 import LogoutButton from '../../components/LogoutButton/LogoutButton';
@@ -41,6 +42,15 @@ const DashboardSidebar: FC = () => (
             leftDecorator={<ProjectIcon />}
           >
             Projects
+          </ListNavlink>
+        </ListItem>
+        <ListItem>
+          <ListNavlink
+            to="messages"
+            activeVariant="solid"
+            leftDecorator={<MessageIcon />}
+          >
+            Messages
           </ListNavlink>
         </ListItem>
         <ListItem>

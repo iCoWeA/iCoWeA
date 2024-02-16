@@ -1,8 +1,10 @@
 import React, { type FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import HamburgerIcon from '../../components/Icons/HamburgerIcon';
 import HomeIcon from '../../components/Icons/HomeIcon';
 import Logo from '../../components/Icons/Logo';
+import MessageIcon from '../../components/Icons/MessageIcon';
 import ProjectIcon from '../../components/Icons/ProjectIcon';
 import SettingsIcon from '../../components/Icons/SettingsIcon';
 import LogoutButton from '../../components/LogoutButton/LogoutButton';
@@ -54,6 +56,13 @@ const MobileNavigation: FC = () => {
             leftDecorator={<ProjectIcon />}
           >
             Projects
+          </Navlink>
+          <Navlink
+            to="messages"
+            activeVariant="solid"
+            leftDecorator={<MessageIcon />}
+          >
+            Messages
           </Navlink>
           <Navlink
             to="settings"
