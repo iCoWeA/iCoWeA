@@ -11,7 +11,7 @@ const DashboardFooter: FC = () => (
   >
     <Text align="center">Copyright © 2024 Richard Wagner. All Rights Reserved.</Text>
     <Text align="center">
-      Designed by <Link to="/">Richard Wagner</Link>
+      Designed by <Link to="/">Richard Wagner</Link>. Powered by <Link to="/">iCoWeAUI</Link>
     </Text>
   </Footer>
 );
