@@ -141,7 +141,10 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     name: formData.get('name')?.toString() ?? '',
     email: formData.get('email')?.toString() ?? '',
     subject: formData.get('subject')?.toString() ?? '',
-    message: formData.get('message')?.toString() ?? ''
+    message: formData.get('message')?.toString() ?? '',
+    readed: 'false',
+    creationDate: new Date().toISOString(),
+    lastModificationDate: new Date().toISOString()
   };
 
   const key = push(child(ref(database), 'messages')).key;
