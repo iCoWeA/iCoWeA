@@ -1,18 +1,21 @@
 import React, { type FC } from 'react';
 
+import Grid from '../../lib/iCoWeABaseUI/components/layouts/Grid/Grid';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
-import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import MessagesCard from './MessagesCard';
 import UserCard from './UserCard';
 
 export const Component: FC = () => (
   <Main placement="full">
     <Section>
-      <Stack gap="lg">
+      <Grid
+        gap="lg"
+        className="grid-cols-3 max-md:grid-cols-1 "
+      >
         <UserCard />
         <MessagesCard />
-      </Stack>
+      </Grid>
     </Section>
   </Main>
 );
