@@ -17,6 +17,7 @@ const UserCard: FC = () => {
     <Card
       spacing="lg"
       gap="lg"
+      className='col-span-3 max-md:col-span-1'
     >
       <Flex
         gap="md"
