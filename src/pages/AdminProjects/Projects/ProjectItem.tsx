@@ -74,7 +74,7 @@ const ProjectItem: FC<ProjectItemProps> = ({
       <Tooltip
         offset={4}
         spacing="sm"
-        variant="plain"
+        variant="solid"
         content="Edit"
         dropdownProps={{ className: 'rounded-lg' }}
       >
