@@ -53,6 +53,7 @@ const MessageButton: FC<MessageItemProps> = ({
       color="neutral"
       radius="rounded"
       justify="between"
+      className={unread ? 'font-bold' : ''}
       draggable={draggable}
       ref={ref}
     >
