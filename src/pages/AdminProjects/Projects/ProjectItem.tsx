@@ -7,7 +7,7 @@ import Button from '../../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import useAddEventListener from '../../../lib/iCoWeABaseUI/hooks/useAddEventListener';
 import EditProjectForm from './EditProjectForm';
 
-export type ProjectListButtonProps = {
+export type ProjectItemProps = {
   setIsDraged: Dispatch<SetStateAction<boolean>>;
   setIsEditing: Dispatch<SetStateAction<string>>;
   isEditing: string;
@@ -18,7 +18,7 @@ export type ProjectListButtonProps = {
   draggable: boolean;
 };
 
-const ProjectListButton: FC<ProjectListButtonProps> = ({
+const ProjectItem: FC<ProjectItemProps> = ({
   setIsDraged,
   setIsEditing,
   isEditing,
@@ -84,4 +84,4 @@ const ProjectListButton: FC<ProjectListButtonProps> = ({
   );
 };
 
-export default ProjectListButton;
+export default ProjectItem;
