@@ -40,7 +40,7 @@ const ContactForm: FC = () => {
               }}
               onBlur={blur}
               variant="default"
-              color="secondary"
+              color="on-secondary"
               invalid={inputs.name.error}
               label="Name"
               id="name"
@@ -58,7 +58,7 @@ const ContactForm: FC = () => {
               }}
               onBlur={blur}
               variant="default"
-              color="secondary"
+              color="on-secondary"
               invalid={inputs.email.error}
               label="Email"
               id="email"
@@ -75,7 +75,7 @@ const ContactForm: FC = () => {
               }}
               onBlur={blur}
               variant="default"
-              color="secondary"
+              color="on-secondary"
               invalid={inputs.subject.error}
               label="Subject"
               id="subject"
@@ -99,7 +99,7 @@ const ContactForm: FC = () => {
               onBlur={blur}
               block
               variant="default"
-              color="secondary"
+              color="on-secondary"
               invalid={inputs.message.error}
               label="Message"
               className="h-[5.75rem]"
