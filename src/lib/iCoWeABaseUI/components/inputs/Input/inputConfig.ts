@@ -257,21 +257,81 @@ const inputConfig = {
         background: 'bg-transparent',
         focus: 'focus:outline-0'
       },
-      color: {
-        default: {
-          light: {
-            color: 'text-light-on-neutral'
+      colors: {
+        light: {
+          neutral: {
+            color: 'text-light-on-neutral-variant'
           },
-          dark: {
-            color: 'text-dark-on-neutral'
-          }
-        },
-        solid: {
-          light: {
+          primary: {
             color: 'text-light-neutral'
           },
-          dark: {
+          secondary: {
+            color: 'text-light-neutral'
+          },
+          success: {
+            color: 'text-light-neutral'
+          },
+          warning: {
+            color: 'text-light-neutral'
+          },
+          error: {
+            color: 'text-light-neutral'
+          },
+          'on-neutral': {
+            color: 'text-light-on-neutral'
+          },
+          'on-primary': {
+            color: 'text-light-on-primary'
+          },
+          'on-secondary': {
+            color: 'text-light-on-secondary'
+          },
+          'on-success': {
+            color: 'text-light-on-success'
+          },
+          'on-warning': {
+            color: 'text-light-on-warning'
+          },
+          'on-error': {
+            color: 'text-light-on-error'
+          }
+        },
+        dark: {
+          neutral: {
+            color: 'text-dark-on-neutral-variant'
+          },
+          primary: {
             color: 'text-dark-neutral'
+          },
+          secondary: {
+            color: 'text-dark-neutral'
+          },
+          success: {
+            color: 'text-dark-neutral'
+          },
+          warning: {
+            color: 'text-dark-neutral'
+          },
+          error: {
+            color: 'text-dark-neutral'
+          },
+          'on-neutral': {
+            color: 'text-dark-on-neutral'
+          },
+          'on-primary': {
+            color: 'text-dark-on-primary'
+          },
+          'on-secondary': {
+            color: 'text-dark-on-secondary'
+          },
+          'on-success': {
+            color: 'text-dark-on-success'
+          },
+          'on-warning': {
+            color: 'text-dark-on-warning'
+          },
+          'on-error': {
+            color: 'text-dark-on-error'
           }
         }
       }

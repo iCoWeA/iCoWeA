@@ -40,5 +40,3 @@ export const reverseColor = (variant: Variants, color: DefaultColors): DefaultTe
 export const cutTextColor = (color: TextColors): Colors => color.replace('on-', '') as Colors;
 
 export const getBorderVariant = (variant: Variants): TextVariants => variant === 'default' || variant === 'solid' ? 'default' : 'solid';
-
-export const getInputVariant = (color: DefaultTextColors): 'default' | 'solid' => color.startsWith('on') ? 'default' : 'solid';

@@ -15,7 +15,6 @@ import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import useMergeRefs from '../../../hooks/useMergeRefs';
-import { getInputVariant } from '../../../utils/utils';
 import TextareaClearance, { type TextareaClearanceProps } from './TextareaClearance';
 import TextareaContainer, { type TextareaContainerProps } from './TextareaContainer';
 import TextareaDecorator, { type TextareaDecoratorProps } from './TextareaDecorator';
@@ -105,11 +104,10 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
     const styles = inputConfig.styles.textarea;
-    const inputVariant = getInputVariant(color);
 
     return mergeClasses(
       styles.base,
-      styles.color[inputVariant][theme],
+      styles.colors[theme][color],
       defaultClassName,
       className
     );

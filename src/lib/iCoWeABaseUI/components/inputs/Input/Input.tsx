@@ -15,7 +15,6 @@ import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import useMergeRefs from '../../../hooks/useMergeRefs';
-import { getInputVariant } from '../../../utils/utils';
 import InputClearance, { type InputClearanceProps } from './InputClearance';
 import InputContainer, { type InputContainerProps } from './InputContainer';
 import InputDecorator, { type InputDecoratorProps } from './InputDecorator';
@@ -105,14 +104,8 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
     const styles = inputConfig.styles.input;
-    const inputVariant = getInputVariant(color);
 
-    return mergeClasses(
-      styles.base,
-      styles.color[inputVariant][theme],
-      defaultClassName,
-      className
-    );
+    return mergeClasses(styles.base, styles.colors[theme][color], defaultClassName, className);
   }, [color, theme, defaultClassName, className]);
 
   return (
