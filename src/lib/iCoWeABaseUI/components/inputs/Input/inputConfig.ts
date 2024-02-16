@@ -177,23 +177,23 @@ const inputConfig = {
           },
           'on-primary': {
             border: 'border-light-divider',
-            focusWithin: 'group-[.focus]:border-light-on-primary'
+            focusWithin: 'group-[.focus]:border-light-primary'
           },
           'on-secondary': {
             border: 'border-light-divider',
-            focusWithin: 'group-[.focus]:border-light-on-secondary'
+            focusWithin: 'group-[.focus]:border-light-secondary'
           },
           'on-success': {
             border: 'border-light-divider',
-            focusWithin: 'group-[.focus]:border-light-on-success'
+            focusWithin: 'group-[.focus]:border-light-success'
           },
           'on-warning': {
             border: 'border-light-divider',
-            focusWithin: 'group-[.focus]:border-light-on-warning'
+            focusWithin: 'group-[.focus]:border-light-warning'
           },
           'on-error': {
             border: 'border-light-divider',
-            focusWithin: 'group-[.focus]:border-light-on-error'
+            focusWithin: 'group-[.focus]:border-light-error'
           }
         },
         dark: {
@@ -227,23 +227,23 @@ const inputConfig = {
           },
           'on-primary': {
             border: 'border-dark-divider',
-            focusWithin: 'group-[.focus]:border-dark-on-primary'
+            focusWithin: 'group-[.focus]:border-dark-primary'
           },
           'on-secondary': {
             border: 'border-dark-divider',
-            focusWithin: 'group-[.focus]:border-dark-on-secondary'
+            focusWithin: 'group-[.focus]:border-dark-secondary'
           },
           'on-success': {
             border: 'border-dark-divider',
-            focusWithin: 'group-[.focus]:border-dark-on-success'
+            focusWithin: 'group-[.focus]:border-dark-success'
           },
           'on-warning': {
             border: 'border-dark-divider',
-            focusWithin: 'group-[.focus]:border-dark-on-warning'
+            focusWithin: 'group-[.focus]:border-dark-warning'
           },
           'on-error': {
             border: 'border-dark-divider',
-            focusWithin: 'group-[.focus]:border-dark-on-error'
+            focusWithin: 'group-[.focus]:border-dark-error'
           }
         }
       }
@@ -388,19 +388,19 @@ const inputConfig = {
             focusWithin: 'group-[.focus]:fill-light-on-neutral group-[.focus]:text-light-on-neutral'
           },
           'on-primary': {
-            focusWithin: 'group-[.focus]:fill-light-on-primary group-[.focus]:text-light-on-primary'
+            focusWithin: 'group-[.focus]:fill-light-primary group-[.focus]:text-light-primary'
           },
           'on-secondary': {
-            focusWithin: 'group-[.focus]:fill-light-on-secondary group-[.focus]:text-light-on-secondary'
+            focusWithin: 'group-[.focus]:fill-light-secondary group-[.focus]:text-light-secondary'
           },
           'on-success': {
-            focusWithin: 'group-[.focus]:fill-light-on-success group-[.focus]:text-light-on-success'
+            focusWithin: 'group-[.focus]:fill-light-success group-[.focus]:text-light-success'
           },
           'on-warning': {
-            focusWithin: 'group-[.focus]:fill-light-on-warning group-[.focus]:text-light-on-warning'
+            focusWithin: 'group-[.focus]:fill-light-warning group-[.focus]:text-light-warning'
           },
           'on-error': {
-            focusWithin: 'group-[.focus]:fill-light-on-error group-[.focus]:text-light-on-error'
+            focusWithin: 'group-[.focus]:fill-light-error group-[.focus]:text-light-error'
           }
         },
         dark: {
@@ -426,19 +426,19 @@ const inputConfig = {
             focusWithin: 'group-[.focus]:fill-dark-on-neutral group-[.focus]:text-dark-on-neutral'
           },
           'on-primary': {
-            focusWithin: 'group-[.focus]:fill-dark-on-primary group-[.focus]:text-dark-on-primary'
+            focusWithin: 'group-[.focus]:fill-dark-primary group-[.focus]:text-dark-primary'
           },
           'on-secondary': {
-            focusWithin: 'group-[.focus]:fill-dark-on-secondary group-[.focus]:text-dark-on-secondary'
+            focusWithin: 'group-[.focus]:fill-dark-secondary group-[.focus]:text-dark-secondary'
           },
           'on-success': {
-            focusWithin: 'group-[.focus]:fill-dark-on-success group-[.focus]:text-dark-on-success'
+            focusWithin: 'group-[.focus]:fill-dark-success group-[.focus]:text-dark-success'
           },
           'on-warning': {
-            focusWithin: 'group-[.focus]:fill-dark-on-warning group-[.focus]:text-dark-on-warning'
+            focusWithin: 'group-[.focus]:fill-dark-warning group-[.focus]:text-dark-warning'
           },
           'on-error': {
-            focusWithin: 'group-[.focus]:fill-dark-on-error group-[.focus]:text-dark-on-error'
+            focusWithin: 'group-[.focus]:fill-dark-error group-[.focus]:text-dark-error'
           }
         }
       }
