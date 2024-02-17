@@ -35,7 +35,8 @@ const MessageItem: FC<MessageItemProps> = ({ setIsReading, name, email, subject,
         onClick={() => setIsReading('')}
         placement="right"
         size="md-panel"
-        variant="default"
+        variant="text"
+        color="neutral"
       />
       <Stack gap="sm">
         <Text className="break-all">
