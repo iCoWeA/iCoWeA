@@ -52,13 +52,13 @@ const ProjectButton: FC<ProjectButtonProps> = ({
         spacing="sm"
         variant="solid"
         content="Edit"
-        dropdownProps={{ className: 'rounded-lg' }}
       >
         <Button
           onClick={() => setIsEditing(id)}
           icon
           size="sm"
           variant="default"
+          radius='rounded'
         >
           <EditIcon />
         </Button>

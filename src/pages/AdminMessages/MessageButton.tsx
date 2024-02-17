@@ -62,8 +62,8 @@ const MessageButton: FC<MessageItemProps> = ({
         offset={4}
         spacing="sm"
         variant={unread ? 'plain' : 'solid'}
+        radius="rounded"
         content={unread ? 'Mark as read' : 'Mark as unread'}
-        dropdownProps={{ className: 'rounded-lg' }}
       >
         <Button
           onClick={(event) => {
