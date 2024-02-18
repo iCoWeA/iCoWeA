@@ -11,6 +11,7 @@ export type DefaultListItemDefaultProps = {
   color?: Colors;
   border?: Borders;
   radius?: Radiuses;
+  col?: boolean;
   justify?: JustifyContent;
   align?: AlignItems;
   gap?: Gaps;
@@ -28,6 +29,7 @@ const DefaultListItem = forwardRef<HTMLLIElement, DefaultListItemProps>((props, 
     color,
     border,
     radius,
+    col,
     justify,
     align,
     gap,
@@ -46,6 +48,7 @@ const DefaultListItem = forwardRef<HTMLLIElement, DefaultListItemProps>((props, 
 
     return mergeClasses(
       styles.base,
+      col && styles.col,
       spacing !== 'none' && styles.spacings[spacing],
       borderType !== 'none' && styles.borders[borderType],
       radius !== 'none' && styles.radiuses[radius],
@@ -60,7 +63,20 @@ const DefaultListItem = forwardRef<HTMLLIElement, DefaultListItemProps>((props, 
         styles.borderVariants[borderVariant][theme][color],
       className
     );
-  }, [border, spacing, radius, justify, align, gap, disabled, variant, theme, color, className]);
+  }, [
+    border,
+    col,
+    spacing,
+    radius,
+    justify,
+    align,
+    gap,
+    disabled,
+    variant,
+    theme,
+    color,
+    className
+  ]);
 
   return (
     <li

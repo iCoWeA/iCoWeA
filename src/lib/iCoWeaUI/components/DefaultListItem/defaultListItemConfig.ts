@@ -5,6 +5,7 @@ const defaultListItemConfig = {
     color: 'inherit',
     border: false,
     radius: 'none',
+    col: false,
     justify: 'start',
     align: 'center',
     gap: 'md'
@@ -12,6 +13,9 @@ const defaultListItemConfig = {
   styles: {
     base: {
       display: 'flex'
+    },
+    col: {
+      direction: 'flex-col'
     },
     spacings: {
       sm: {
@@ -263,34 +267,34 @@ const defaultListItemConfig = {
         },
         dark: {
           neutral: {
-            fill: 'fill-dark-soft-neutral',
-            color: 'text-dark-soft-neutral',
-            background: 'bg-dark-neutral'
+            fill: 'fill-dark-neutral',
+            color: 'text-dark-neutral',
+            background: 'bg-dark-soft-neutral'
           },
           primary: {
-            fill: 'fill-dark-soft-primary',
-            color: 'text-dark-soft-primary',
-            background: 'bg-dark-primary'
+            fill: 'fill-dark-primary',
+            color: 'text-dark-primary',
+            background: 'bg-dark-soft-primary'
           },
           secondary: {
-            fill: 'fill-dark-soft-secondary',
-            color: 'text-dark-soft-secondary',
-            background: 'bg-dark-secondary'
+            fill: 'fill-dark-secondary',
+            color: 'text-dark-secondary',
+            background: 'bg-dark-soft-secondary'
           },
           success: {
-            fill: 'fill-dark-soft-success',
-            color: 'text-dark-soft-success',
-            background: 'bg-dark-success'
+            fill: 'fill-dark-success',
+            color: 'text-dark-success',
+            background: 'bg-dark-soft-success'
           },
           warning: {
-            fill: 'fill-dark-soft-warning',
-            color: 'text-dark-soft-warning',
-            background: 'bg-dark-warning'
+            fill: 'fill-dark-warning',
+            color: 'text-dark-warning',
+            background: 'bg-dark-soft-warning'
           },
           error: {
-            fill: 'fill-dark-soft-error',
-            color: 'text-dark-soft-error',
-            background: 'bg-dark-error'
+            fill: 'fill-dark-error',
+            color: 'text-dark-error',
+            background: 'bg-dark-soft-error'
           }
         }
       },
