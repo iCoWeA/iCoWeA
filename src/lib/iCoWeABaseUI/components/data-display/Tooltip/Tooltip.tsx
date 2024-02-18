@@ -28,6 +28,7 @@ export type TooltipDefaultProps = {
   variant?: Variants;
   color?: DefaultColors;
   border?: Borders;
+  radius?: Radiuses;
   keepOnHover?: boolean;
   followCursor?: boolean;
   responsive?: boolean;

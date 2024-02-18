@@ -6,6 +6,7 @@ const tooltipConfig = {
     variant: 'solid',
     color: 'neutral',
     border: false,
+    radius: 'circular',
     keepOnHover: false,
     followCursor: false,
     responsive: true,
@@ -15,7 +16,8 @@ const tooltipConfig = {
   styles: {
     base: {
       zIndes: 'z-5000',
-      font: 'text-xs'
+      font: 'text-xs',
+      whitespace: 'whitespace-nowrap'
     },
     followCursor: {
       position: 'fixed',
