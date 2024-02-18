@@ -11,20 +11,27 @@ export type PopoverDropdownProps = PopoverDropdownDefaultProps & {
   variant: Variants;
   color: DefaultColors;
   border: Borders;
+  radius: Radiuses;
 };
 
-const PopoverDropdown: FC<PopoverDropdownProps> = ({ size, className, ...restProps }) => {
+const PopoverDropdown: FC<PopoverDropdownProps> = ({ size, radius, className, ...restProps }) => {
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
     const styles = popoverConfig.styles.dropdown;
 
-    return mergeClasses(styles.base, size !== 'none' && styles.sizes[size], className);
-  }, [size, className]);
+    return mergeClasses(
+      styles.base,
+      size !== 'none' && styles.sizes[size],
+      radius === 'rounded' && styles.radius,
+      className
+    );
+  }, [size, radius, className]);
 
   return (
     <Card
       spacing="none"
       position="relative"
+      radius={radius === 'circular' ? 'circular' : 'none'}
       shadow
       className={mergedClassName}
       {...restProps}

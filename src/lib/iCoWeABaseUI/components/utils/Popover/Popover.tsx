@@ -28,6 +28,7 @@ export type PopoverDefaultProps = {
   variant?: Variants;
   color?: DefaultColors;
   border?: Borders;
+  radius?: Radiuses;
   responsive?: boolean;
   openOnHover?: boolean;
   lockScroll?: boolean;
@@ -59,6 +60,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) =
     variant,
     color,
     border,
+    radius,
     responsive,
     openOnHover,
     arrow,
@@ -148,6 +150,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) =
         variant={variant}
         color={color}
         border={border}
+        radius={radius}
         {...dropdownProps}
       >
         {arrow && (

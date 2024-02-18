@@ -6,6 +6,7 @@ const popoverConfig = {
     variant: 'solid',
     color: 'neutral',
     border: false,
+    radius: 'circular',
     responsive: true,
     openOnHover: false,
     lockScroll: false,
@@ -36,6 +37,9 @@ const popoverConfig = {
         lg: {
           paddding: 'px-4 py-2'
         }
+      },
+      radius: {
+        borderRadius: 'rounded-lg'
       }
     },
     arrow: {
