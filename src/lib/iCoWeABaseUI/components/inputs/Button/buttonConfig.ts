@@ -13,8 +13,7 @@ const buttonConfig = {
   styles: {
     root: {
       base: {
-        display: 'flex',
-        width: 'w-fit',
+        display: 'inline-flex',
         height: 'h-fit',
         alignItems: 'items-center',
         gap: 'gap-2',

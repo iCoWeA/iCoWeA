@@ -13,6 +13,7 @@ export type ListItemDefaultProps = {
   color?: Colors;
   border?: Borders;
   radius?: Radiuses;
+  col?: boolean;
   justify?: JustifyContent;
   align?: AlignItems;
   gap?: Gaps;

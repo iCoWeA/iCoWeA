@@ -9,7 +9,7 @@ const textareaConfig = {
   styles: {
     root: {
       base: {
-        width: 'w-fit',
+        display: 'inline-flex',
         height: 'h-fit',
         focus: 'focus:outline-0',
         group: 'group'

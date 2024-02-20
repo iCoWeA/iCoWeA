@@ -72,6 +72,7 @@ const ListButton = forwardRef<HTMLLIElement, ListButtonProps>((props, ref) => {
       variant={stateVariant}
       color={stateColor}
       border={border}
+      col={false}
       justify="start"
       align="center"
       gap={size}

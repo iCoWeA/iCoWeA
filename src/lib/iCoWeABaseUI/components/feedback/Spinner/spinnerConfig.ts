@@ -8,7 +8,7 @@ const spinnerConfig = {
   styles: {
     root: {
       base: {
-        width: 'w-fit',
+        display: 'inline-flex',
         height: 'h-fit'
       }
     },
