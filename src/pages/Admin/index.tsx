@@ -53,3 +53,5 @@ export const Component: FC = () => {
 
   return isEmpty.current ? <LoadingScreen /> : <Outlet />;
 };
+
+Component.displayName = 'AdminRoute';
