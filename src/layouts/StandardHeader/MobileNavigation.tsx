@@ -16,7 +16,6 @@ import ThemeButton from '../../components/ThemeButton.tsx/ThemeButton';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
-import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import Drawer from '../../lib/iCoWeABaseUI/components/navigation/Drawer/Drawer';
 import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectNavbar, navbarActions } from '../../store/slices/navbar';
@@ -45,6 +44,7 @@ const MobileNavigation: FC = () => {
         onClose={closeHandler}
         open={open}
         spacing="lg-panel"
+        align="stretch"
         gap="xl"
       >
         <Link to="/">
@@ -83,43 +83,36 @@ const MobileNavigation: FC = () => {
             Contact
           </Navlink>
         </Navigation>
-        <Stack
-          gap="lg"
-          justify="end"
-          align="center"
-          grow
-        >
-          <ThemeButton block />
-          <Flex
-            block
-            justify="between"
+        <ThemeButton
+          block
+          className="mt-auto"
+        />
+        <Flex justify="between">
+          <Link
+            to={user.githubURL}
+            target="_blanc"
           >
-            <Link
-              to={user.githubURL}
-              target="_blanc"
-            >
-              <GithubIcon />
-            </Link>
-            <Link
-              to={user.linkedinURL}
-              target="_blanc"
-            >
-              <LinkedInIcon />
-            </Link>
-            <Link
-              to={user.facebookURL}
-              target="_blanc"
-            >
-              <FacebookIcon />
-            </Link>
-            <Link
-              to={user.instagramURL}
-              target="_blanc"
-            >
-              <InstagramIcon />
-            </Link>
-          </Flex>
-        </Stack>
+            <GithubIcon />
+          </Link>
+          <Link
+            to={user.linkedinURL}
+            target="_blanc"
+          >
+            <LinkedInIcon />
+          </Link>
+          <Link
+            to={user.facebookURL}
+            target="_blanc"
+          >
+            <FacebookIcon />
+          </Link>
+          <Link
+            to={user.instagramURL}
+            target="_blanc"
+          >
+            <InstagramIcon />
+          </Link>
+        </Flex>
       </Drawer>
     </>
   );
