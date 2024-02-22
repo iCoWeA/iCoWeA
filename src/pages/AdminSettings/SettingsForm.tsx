@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { type ChangeEvent, type FC, type FocusEvent, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-router-dom';
 
@@ -48,10 +48,26 @@ const SettingsForm: FC = () => {
     revalidForm
   } = useForm(initialValues);
 
+  /* -- Set event handlers --- */
+  const changeHandler = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => change(event, 1000),
+    []
+  );
+
+  const changeTextareaHandler = useCallback(
+    (event: ChangeEvent<HTMLTextAreaElement>) => change(event, 1000),
+    []
+  );
+
+  const focusHandler = useCallback(
+    (event: FocusEvent<HTMLFormElement>) => revalidForm(event.target),
+    []
+  );
+
   return (
     <Form
       method="post"
-      onFocus={(event) => revalidForm(event.target)}
+      onFocus={focusHandler}
     >
       <Card
         spacing="lg"
@@ -71,7 +87,7 @@ const SettingsForm: FC = () => {
           </Title>
           <InputControl errorText={inputs.firstname.error && 'Invalid firstname'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs.firstname.error}
@@ -86,7 +102,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs.lastname.error && 'Invalid lastname'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs.lastname.error}
@@ -101,7 +117,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs.email.error && 'Invalid email'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs.email.error}
@@ -115,7 +131,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs.phone.error && 'Invalid phone'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs.phone.error}
@@ -130,7 +146,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs['image-url'].error && 'Invalid image URL'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs['image-url'].error}
@@ -143,7 +159,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs.dob.error && 'Invalid date of birth'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs.dob.error}
@@ -160,7 +176,7 @@ const SettingsForm: FC = () => {
             className="col-span-2 max-md:col-span-1"
           >
             <Textarea
-              onChange={(event) => change(event, 1000)}
+              onChange={changeTextareaHandler}
               onBlur={blur}
               variant="default"
               block
@@ -188,7 +204,7 @@ const SettingsForm: FC = () => {
           </Title>
           <InputControl errorText={inputs.street.error && 'Invalid street'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs.street.error}
@@ -202,7 +218,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs['street-number'].error && 'Invalid street number'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs['street-number'].error}
@@ -217,7 +233,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs.city.error && 'Invalid city'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs.city.error}
@@ -231,7 +247,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs.country.error && 'Invalid country'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs.country.error}
@@ -245,7 +261,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs['postal-code'].error && 'Invalid postal-code'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs['postal-code'].error}
@@ -272,7 +288,7 @@ const SettingsForm: FC = () => {
           </Title>
           <InputControl errorText={inputs['github-url'].error && 'Invalid github'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs['github-url'].error}
@@ -285,7 +301,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs['linkedin-url'].error && 'Invalid linkedIn'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs['linkedin-url'].error}
@@ -298,7 +314,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs['facebook-url'].error && 'Invalid facebook'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs['facebook-url'].error}
@@ -311,7 +327,7 @@ const SettingsForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs['instagram-url'].error && 'Invalid instagram'}>
             <Textfield
-              onChange={(event) => change(event, 1000)}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               invalid={inputs['instagram-url'].error}
