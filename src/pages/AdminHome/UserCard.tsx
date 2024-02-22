@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 import Avatar from '../../lib/iCoWeABaseUI/components/data-display/Avatar/Avatar';
 import Text from '../../lib/iCoWeABaseUI/components/data-display/Text/Text';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
-import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
-import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
+import Grid from '../../lib/iCoWeABaseUI/components/layouts/Grid/Grid';
 import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
 import { upperCaseFirstLetter } from '../../lib/iCoWeAUtilsUI/utils/utils';
 import { selectUser } from '../../store/slices/user';
@@ -17,22 +16,20 @@ const UserCard: FC = () => {
     <Card
       spacing="lg"
       gap="lg"
-      className='col-span-3 max-md:col-span-1'
+      className="col-span-3 max-md:col-span-1"
     >
-      <Flex
+      <Grid
         gap="md"
-        align="stretch"
+        className="grid-cols-[auto_1fr]"
       >
         <Avatar
           alt={`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(user.lastname)}`}
-          className="w-24 h-24"
+          className="w-24 h-24 row-span-2"
           src={user.imageURL}
         />
-        <Stack justify="between">
-          <Title size="3">{`${user.firstname} ${user.lastname}`}</Title>
-          <Title size="4">Admin</Title>
-        </Stack>
-      </Flex>
+        <Title size="3">{`${user.firstname} ${user.lastname}`}</Title>
+        <Title size="4">Admin</Title>
+      </Grid>
       <Text>Welcome back to our comunity.</Text>
     </Card>
   );
