@@ -23,6 +23,7 @@ const useFocusTrap = (ref?: MutableRefObject<HTMLElement | null>, enable?: boole
     };
 
     document.addEventListener('blur', handleWindowBlur, true);
+
     return () => document.removeEventListener('blur', handleWindowBlur, true);
   }, [enable]);
 };
