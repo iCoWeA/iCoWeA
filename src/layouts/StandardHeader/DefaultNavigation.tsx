@@ -1,9 +1,9 @@
 import React, { type FC } from 'react';
 
-import Navlink from '../../components/NavlinkButton/NavlinkButton';
 import ThemeButton from '../../components/ThemeButton.tsx/ThemeButton';
 import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
+import Navlink from '../../lib/iCoWeARouterUI/components/Navlink/Navlink';
 
 const DefaultNavigation: FC = () => (
   <>

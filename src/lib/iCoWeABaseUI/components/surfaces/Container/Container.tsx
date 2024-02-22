@@ -42,7 +42,7 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
   return (
     <Flex
       direction={layout === 'body' ? 'col' : 'row'}
-      wrap="wrap"
+      wrap={layout === 'footer' || layout === 'header' ? 'nowrap' : 'wrap'}
       justify="start"
       align={layout === 'body' ? 'stretch' : 'center'}
       gap={gapVariant}
