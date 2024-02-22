@@ -1,4 +1,4 @@
-import React, { type FC, useState } from 'react';
+import React, { type FC, useState, useCallback } from 'react';
 
 import Input, { type InputProps } from '../../lib/iCoWeABaseUI/components/inputs/Input/Input';
 import { type ToggleButtonProps } from '../../lib/iCoWeABaseUI/components/inputs/ToggleButton/ToggleButton';
@@ -16,12 +16,15 @@ const PasswordInput: FC<PasswordInputProps> = ({
 }) => {
   const [isShown, setIsShown] = useState(false);
 
+  /* --- Set event handlers --- */
+  const clickHandler = useCallback(() => setIsShown((isShown) => !isShown), []);
+
   return (
     <Input
       leftDecoration={
         placement === 'left' && (
           <PasswordInputButton
-            onClick={() => setIsShown((isShown) => !isShown)}
+            onClick={clickHandler}
             checked={isShown}
             {...buttonProps}
           />
@@ -30,7 +33,7 @@ const PasswordInput: FC<PasswordInputProps> = ({
       rightDecoration={
         placement === 'right' && (
           <PasswordInputButton
-            onClick={() => setIsShown((isShown) => !isShown)}
+            onClick={clickHandler}
             checked={isShown}
             {...buttonProps}
           />

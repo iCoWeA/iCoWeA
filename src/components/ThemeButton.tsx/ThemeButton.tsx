@@ -1,4 +1,4 @@
-import React, { type FC, useContext } from 'react';
+import React, { type FC, useContext, useCallback } from 'react';
 
 import ToggleButton, {
   type ToggleButtonProps
@@ -13,13 +13,16 @@ const ThemeButton: FC<ToggleButtonProps> = (props) => {
 
   const checked = useTheme() === 'dark';
 
+  /* --- Set event handlers --- */
+  const clickHandler = useCallback(() => {
+    localStorage.setItem('theme', checked ? 'light' : 'dark');
+
+    setTheme((theme) => (theme === 'light' ? 'dark' : 'light'));
+  }, []);
+
   return (
     <ToggleButton
-      onClick={() => {
-        localStorage.setItem('theme', checked ? 'light' : 'dark');
-
-        setTheme((theme) => (theme === 'light' ? 'dark' : 'light'));
-      }}
+      onClick={clickHandler}
       checked={checked}
       variant="soft"
       color="neutral"
