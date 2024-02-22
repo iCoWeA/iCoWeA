@@ -5,14 +5,10 @@ import InputControl from '../../components/InputControl/InputControl';
 import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import Textfield from '../../components/Textfield/Textfield';
 import Textarea from '../../lib/iCoWeABaseUI/components/inputs/Textarea/Textarea';
-import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
+import Grid from '../../lib/iCoWeABaseUI/components/layouts/Grid/Grid';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
-import {
-  FULLNAME_PATTERN,
-  EMAIL_PATTERN,
-  TEXT_PATTERN
-} from '../../lib/iCoWeAUtilsUI/data/constants';
+import { FULLNAME_PATTERN, EMAIL_PATTERN, TEXT_PATTERN } from '../../lib/iCoWeAUtilsUI/data/constants';
 
 const ContactForm: FC = () => {
   const {
@@ -39,11 +35,8 @@ const ContactForm: FC = () => {
       method="post"
       className="grow"
     >
-      <Flex gap="lg">
-        <Stack
-          gap="lg"
-          grow
-        >
+      <Grid gap="lg" className='grid-cols-2 max-md:grid-cols-1'>
+        <Stack gap="lg">
           <InputControl errorText={inputs.name.error && 'Invalid name'}>
             <Textfield
               onChange={changeHandler}
@@ -92,10 +85,7 @@ const ContactForm: FC = () => {
             />
           </InputControl>
         </Stack>
-        <Stack
-          gap="lg"
-          grow
-        >
+        <Stack gap="lg">
           <InputControl errorText={inputs.message.error && 'Invalid message'}>
             <Textarea
               onChange={changeTextareaHandler}
@@ -120,7 +110,7 @@ const ContactForm: FC = () => {
             SEND
           </SubmitButton>
         </Stack>
-      </Flex>
+      </Grid>
     </Form>
   );
 };
