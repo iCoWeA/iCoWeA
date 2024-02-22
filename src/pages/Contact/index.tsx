@@ -13,6 +13,7 @@ import PointIcon from '../../components/Icons/PointIcon';
 import { database } from '../../firebase';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
+import Grid from '../../lib/iCoWeABaseUI/components/layouts/Grid/Grid';
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
@@ -39,49 +40,30 @@ export const Component: FC = () => {
               align="start"
               gap="xxl"
             >
-              <Stack gap="lg">
-                <Flex
-                  gap="sm"
-                  wrap="nowrap"
+              <Grid
+                align="center"
+                rowGap="lg"
+                colGap="sm"
+                className="grid-cols-[2.5rem_auto]"
+              >
+                <PhoneIcon spacing="default" />
+                <Title color="inherit">{modifyNumber(user.phone)}</Title>
+                <PointIcon spacing="default" />
+                <Title
+                  color="inherit"
+                  className="break-all"
+                >{`${user.street} ${user.streetNumber} ${user.city}, ${user.country}`}</Title>
+                <MessageIcon spacing="default" />
+                <Title
+                  color="inherit"
+                  className="break-all"
                 >
-                  <PhoneIcon
-                    spacing="default"
-                    className="shrink-0"
-                  />
-                  <Title color="inherit">{modifyNumber(user.phone)}</Title>
-                </Flex>
-                <Flex
-                  gap="sm"
-                  wrap="nowrap"
-                >
-                  <PointIcon
-                    spacing="default"
-                    className="shrink-0"
-                  />
-                  <Title
-                    color="inherit"
-                    className="break-all"
-                  >{`${user.street} ${user.streetNumber} ${user.city}, ${user.country}`}</Title>
-                </Flex>
-                <Flex
-                  gap="sm"
-                  wrap="nowrap"
-                >
-                  <MessageIcon
-                    spacing="default"
-                    className="shrink-0"
-                  />
-                  <Title
-                    color="inherit"
-                    className="break-all"
-                  >
-                    {user.email}
-                  </Title>
-                </Flex>
+                  {user.email}
+                </Title>
                 <Flex
                   justify="between"
                   align="end"
-                  grow
+                  className="col-span-2"
                 >
                   <Link
                     to={user.githubURL}
@@ -124,7 +106,7 @@ export const Component: FC = () => {
                     />
                   </Link>
                 </Flex>
-              </Stack>
+              </Grid>
               <ContactForm />
             </Flex>
           </Stack>
