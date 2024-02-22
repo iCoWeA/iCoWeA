@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { type FC, useCallback, type ChangeEvent } from 'react';
 import { Form } from 'react-router-dom';
 
 import InputControl from '../../components/InputControl/InputControl';
@@ -22,6 +22,17 @@ const ContactForm: FC = () => {
     resetForm
   } = useForm({ name: '', email: '', subject: '', message: '' });
 
+  /* -- Set event handlers --- */
+  const changeHandler = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => change(event, 1000),
+    []
+  );
+
+  const changeTextareaHandler = useCallback(
+    (event: ChangeEvent<HTMLTextAreaElement>) => change(event, 1000),
+    []
+  );
+
   return (
     <Form
       onSubmit={resetForm}
@@ -35,9 +46,7 @@ const ContactForm: FC = () => {
         >
           <InputControl errorText={inputs.name.error && 'Invalid name'}>
             <Textfield
-              onChange={(event) => {
-                change(event, 1000);
-              }}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               color="on-secondary"
@@ -53,9 +62,7 @@ const ContactForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs.email.error && 'Invalid email'}>
             <Textfield
-              onChange={(event) => {
-                change(event, 1000);
-              }}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               color="on-secondary"
@@ -70,9 +77,7 @@ const ContactForm: FC = () => {
           </InputControl>
           <InputControl errorText={inputs.subject.error && 'Invalid subject'}>
             <Textfield
-              onChange={(event) => {
-                change(event, 1000);
-              }}
+              onChange={changeHandler}
               onBlur={blur}
               variant="default"
               color="on-secondary"
@@ -93,9 +98,7 @@ const ContactForm: FC = () => {
         >
           <InputControl errorText={inputs.message.error && 'Invalid message'}>
             <Textarea
-              onChange={(event) => {
-                change(event, 1000);
-              }}
+              onChange={changeTextareaHandler}
               onBlur={blur}
               block
               variant="default"
