@@ -11,7 +11,7 @@ const navigationConfig = {
   },
   styles: {
     base: {
-      display: 'flex'
+      display: 'inline-flex'
     },
     block: {
       width: 'w-full'
