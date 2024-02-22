@@ -12,7 +12,6 @@ import Navlink from '../../components/NavlinkButton/NavlinkButton';
 import ThemeButton from '../../components/ThemeButton.tsx/ThemeButton';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
-import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import Drawer from '../../lib/iCoWeABaseUI/components/navigation/Drawer/Drawer';
 import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectNavbar, navbarActions } from '../../store/slices/navbar';
@@ -38,7 +37,6 @@ const MobileNavigation: FC = () => {
         onClose={closeHandler}
         open={open}
         spacing="lg-panel"
-        gap="xl"
       >
         <Link to="">
           <Logo />
@@ -46,6 +44,7 @@ const MobileNavigation: FC = () => {
         <Navigation
           vertical
           block
+          className="mt-12"
         >
           <Navlink
             to=""
@@ -77,15 +76,11 @@ const MobileNavigation: FC = () => {
             Settings
           </Navlink>
         </Navigation>
-        <Stack
-          gap="lg"
-          justify="end"
-          align="center"
-          grow
-        >
-          <ThemeButton block />
-          <LogoutButton />
-        </Stack>
+        <ThemeButton
+          block
+          className="mt-auto"
+        />
+        <LogoutButton className="mt-6" />
       </Drawer>
     </>
   );
