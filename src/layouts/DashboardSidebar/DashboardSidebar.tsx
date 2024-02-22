@@ -19,7 +19,7 @@ const DashboardSidebar: FC = () => (
       spacing="lg"
       variant="plain"
       color="neutral"
-      justify="between"
+      gap="md"
     >
       <Navigation
         vertical
@@ -63,13 +63,11 @@ const DashboardSidebar: FC = () => (
           </ListNavlink>
         </ListItem>
       </Navigation>
-      <Stack
-        gap="lg"
-        align="center"
-      >
-        <ThemeButton block />
-        <LogoutButton />
-      </Stack>
+      <ThemeButton
+        block
+        className="mt-auto"
+      />
+      <LogoutButton />
     </Stack>
   </Sidebar>
 );
