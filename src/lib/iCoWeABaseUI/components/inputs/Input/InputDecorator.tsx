@@ -4,9 +4,11 @@ import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import inputConfig from './inputConfig';
 
-export type InputDecoratorDefaultProps = FlexProps;
+export type InputDecoratorDefaultProps = Omit<FlexProps, 'color'> & {
+  color?: DefaultTextColors;
+};
 
-export type InputDecoratorProps = Omit<InputDecoratorDefaultProps, 'color'> & {
+export type InputDecoratorProps = InputDecoratorDefaultProps & {
   placement: SidePlacements;
   theme: Themes;
   inputVariant: InputVariants;

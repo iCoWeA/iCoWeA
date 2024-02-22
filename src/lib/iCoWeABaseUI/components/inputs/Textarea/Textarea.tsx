@@ -15,12 +15,12 @@ import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import useMergeRefs from '../../../hooks/useMergeRefs';
-import TextareaClearance, { type TextareaClearanceProps } from './TextareaClearance';
-import TextareaContainer, { type TextareaContainerProps } from './TextareaContainer';
-import TextareaDecorator, { type TextareaDecoratorProps } from './TextareaDecorator';
-import TextareaFieldset, { type TextareaFieldsetProps } from './TextareaFieldset';
-import TextareaLabel, { type TextareaLabelProps } from './TextareaLabel';
-import inputConfig from './textareaConfig';
+import TextareaClearance, { type TextareaClearanceDefaultProps } from './TextareaClearance';
+import TextareaContainer, { type TextareaContainerDefaultProps } from './TextareaContainer';
+import TextareaDecorator, { type TextareaDecoratorDefaultProps } from './TextareaDecorator';
+import TextareaFieldset, { type TextareaFieldsetDefaultProps } from './TextareaFieldset';
+import TextareaLabel, { type TextareaLabelDefaultProps } from './TextareaLabel';
+import textareaConfig from './textareaConfig';
 
 export type TextareaDefaultProps = {
   variant?: InputVariants;
@@ -35,12 +35,12 @@ TextareaDefaultProps & {
   label?: ReactNode;
   leftDecoration?: ReactNode;
   rightDecoration?: ReactNode;
-  containerProps?: TextareaContainerProps;
-  fieldsetProps?: TextareaFieldsetProps;
-  leftDecoratorProps?: TextareaDecoratorProps;
-  rightDecoratorProps?: TextareaDecoratorProps;
-  labelProps?: TextareaLabelProps;
-  clearanceProps?: TextareaClearanceProps;
+  containerProps?: TextareaContainerDefaultProps;
+  fieldsetProps?: TextareaFieldsetDefaultProps;
+  leftDecoratorProps?: TextareaDecoratorDefaultProps;
+  rightDecoratorProps?: TextareaDecoratorDefaultProps;
+  labelProps?: TextareaLabelDefaultProps;
+  clearanceProps?: TextareaClearanceDefaultProps;
   inputRef?: MutableRefObject<HTMLTextAreaElement> | null;
 };
 
@@ -68,7 +68,7 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
     placeholder,
     value,
     ...restProps
-  } = useConfig('input', inputConfig.defaultProps, props);
+  } = useConfig('textarea', textareaConfig.defaultProps, props);
 
   const theme = useTheme();
 
@@ -103,14 +103,9 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
 
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
-    const styles = inputConfig.styles.textarea;
+    const styles = textareaConfig.styles.textarea;
 
-    return mergeClasses(
-      styles.base,
-      styles.colors[theme][color],
-      defaultClassName,
-      className
-    );
+    return mergeClasses(styles.base, styles.colors[theme][color], defaultClassName, className);
   }, [color, theme, defaultClassName, className]);
 
   return (

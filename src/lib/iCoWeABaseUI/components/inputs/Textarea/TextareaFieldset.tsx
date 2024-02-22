@@ -3,7 +3,9 @@ import React, { type FieldsetHTMLAttributes, type FC, useMemo } from 'react';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import inputConfig from './textareaConfig';
 
-export type TextareaFieldsetDefaultProps = FieldsetHTMLAttributes<HTMLFieldSetElement>;
+export type TextareaFieldsetDefaultProps = FieldsetHTMLAttributes<HTMLFieldSetElement> & {
+  color?: DefaultTextColors;
+};
 
 export type TextareaFieldsetProps = TextareaFieldsetDefaultProps & {
   theme: Themes;

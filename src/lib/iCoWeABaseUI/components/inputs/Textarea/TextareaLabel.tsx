@@ -3,7 +3,9 @@ import React, { type LabelHTMLAttributes, type FC, useMemo } from 'react';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import inputConfig from './textareaConfig';
 
-export type TextareaLabelDefaultProps = LabelHTMLAttributes<HTMLLabelElement>;
+export type TextareaLabelDefaultProps = LabelHTMLAttributes<HTMLLabelElement> & {
+  color?: DefaultTextColors;
+};
 
 export type TextareaLabelProps = TextareaLabelDefaultProps & {
   theme: Themes;

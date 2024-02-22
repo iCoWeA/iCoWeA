@@ -3,7 +3,9 @@ import React, { type FieldsetHTMLAttributes, type FC, useMemo } from 'react';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import inputConfig from './inputConfig';
 
-export type InputFieldsetDefaultProps = FieldsetHTMLAttributes<HTMLFieldSetElement>;
+export type InputFieldsetDefaultProps = FieldsetHTMLAttributes<HTMLFieldSetElement> & {
+  color?: DefaultTextColors;
+};
 
 export type InputFieldsetProps = InputFieldsetDefaultProps & {
   theme: Themes;

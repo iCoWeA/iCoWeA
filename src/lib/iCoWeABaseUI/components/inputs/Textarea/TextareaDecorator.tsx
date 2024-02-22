@@ -4,9 +4,11 @@ import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import inputConfig from './textareaConfig';
 
-export type TextareaDecoratorDefaultProps = FlexProps;
+export type TextareaDecoratorDefaultProps = Omit<FlexProps, 'color'> & {
+  color?: DefaultTextColors;
+};
 
-export type TextareaDecoratorProps = Omit<TextareaDecoratorDefaultProps, 'color'> & {
+export type TextareaDecoratorProps = TextareaDecoratorDefaultProps & {
   placement: SidePlacements;
   theme: Themes;
   inputVariant: InputVariants;

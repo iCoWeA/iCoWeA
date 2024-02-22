@@ -1,6 +1,6 @@
-import { type FocusEventHandler, useRef, useReducer, useEffect, useCallback, type ChangeEvent, type FocusEvent } from 'react';
+import { type ChangeEvent, type FocusEvent, type FocusEventHandler, useCallback, useEffect, useReducer, useRef } from 'react';
 
-import { deepClone } from '../utils/utils';
+import { deepClone, validate } from '../utils/utils';
 
 enum ActionTypes {CHANGE, DEBOUNCED_CHANGE, BLUR, REVALID, REVALID_FORM, RESET, RESET_FORM}
 
@@ -41,22 +41,6 @@ type Return = {
 };
 
 const initialTimerId = -1;
-
-const validate = (input?: HTMLInputElement | HTMLTextAreaElement | null): boolean => {
-  if (!input) {
-    return false;
-  }
-
-  if (input instanceof HTMLInputElement && input.pattern && input.pattern !== '') {
-    return input.value.search(input.pattern) !== -1;
-  }
-
-  if (input.required) {
-    return input.checkValidity();
-  }
-
-  return true;
-};
 
 const initialize = (defaultValue: string = ''): InputState => ({
   value: defaultValue,

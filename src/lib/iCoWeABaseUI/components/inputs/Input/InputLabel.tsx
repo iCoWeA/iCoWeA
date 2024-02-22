@@ -3,7 +3,9 @@ import React, { type LabelHTMLAttributes, type FC, useMemo } from 'react';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import inputConfig from './inputConfig';
 
-export type InputLabelDefaultProps = LabelHTMLAttributes<HTMLLabelElement>;
+export type InputLabelDefaultProps = LabelHTMLAttributes<HTMLLabelElement> & {
+  color?: DefaultTextColors;
+};
 
 export type InputLabelProps = InputLabelDefaultProps & {
   theme: Themes;

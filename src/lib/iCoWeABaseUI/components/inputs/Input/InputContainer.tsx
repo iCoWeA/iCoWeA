@@ -12,9 +12,9 @@ import useAddEventListener from '../../../hooks/useAddEventListener';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import inputConfig from './inputConfig';
 
-export type InputContianerDefaultProps = FlexProps;
+export type InputContainerDefaultProps = FlexProps;
 
-export type InputContainerProps = InputContianerDefaultProps & {
+export type InputContainerProps = InputContainerDefaultProps & {
   block: boolean;
   isFocused: boolean;
   inputRef: MutableRefObject<HTMLInputElement | null>;
@@ -44,12 +44,11 @@ const InputContainer = forwardRef<HTMLDivElement, InputContainerProps>(
     /* --- Set classes --- */
     const mergedClassName = useMemo(() => {
       const styles = inputConfig.styles.root;
-      const isShifted = value && value !== '';
 
       return mergeClasses(
         styles.base,
         block && styles.block,
-        isShifted && styles.shift,
+        value && styles.shift,
         isFocused && styles.focus,
         className
       );

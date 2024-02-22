@@ -12,9 +12,9 @@ import useAddEventListener from '../../../hooks/useAddEventListener';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
 import inputConfig from './textareaConfig';
 
-export type TextareaContianerDefaultProps = FlexProps;
+export type TextareaContainerDefaultProps = FlexProps;
 
-export type TextareaContainerProps = TextareaContianerDefaultProps & {
+export type TextareaContainerProps = TextareaContainerDefaultProps & {
   block: boolean;
   isFocused: boolean;
   inputRef: MutableRefObject<HTMLTextAreaElement | null>;
@@ -44,12 +44,11 @@ const TextareaContainer = forwardRef<HTMLDivElement, TextareaContainerProps>(
     /* --- Set classes --- */
     const mergedClassName = useMemo(() => {
       const styles = inputConfig.styles.root;
-      const isShifted = value && value !== '';
 
       return mergeClasses(
         styles.base,
         block && styles.block,
-        isShifted && styles.shift,
+        value && styles.shift,
         isFocused && styles.focus,
         className
       );

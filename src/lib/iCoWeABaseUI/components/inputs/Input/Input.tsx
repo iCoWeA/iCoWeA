@@ -15,11 +15,11 @@ import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import useMergeRefs from '../../../hooks/useMergeRefs';
-import InputClearance, { type InputClearanceProps } from './InputClearance';
-import InputContainer, { type InputContainerProps } from './InputContainer';
-import InputDecorator, { type InputDecoratorProps } from './InputDecorator';
-import InputFieldset, { type InputFieldsetProps } from './InputFieldset';
-import InputLabel, { type InputLabelProps } from './InputLabel';
+import InputClearance, { type InputClearanceDefaultProps } from './InputClearance';
+import InputContainer, { type InputContainerDefaultProps } from './InputContainer';
+import InputDecorator, { type InputDecoratorDefaultProps } from './InputDecorator';
+import InputFieldset, { type InputFieldsetDefaultProps } from './InputFieldset';
+import InputLabel, { type InputLabelDefaultProps } from './InputLabel';
 import inputConfig from './inputConfig';
 
 export type InputDefaultProps = {
@@ -35,12 +35,12 @@ InputDefaultProps & {
   label?: ReactNode;
   leftDecoration?: ReactNode;
   rightDecoration?: ReactNode;
-  containerProps?: InputContainerProps;
-  fieldsetProps?: InputFieldsetProps;
-  leftDecoratorProps?: InputDecoratorProps;
-  rightDecoratorProps?: InputDecoratorProps;
-  labelProps?: InputLabelProps;
-  clearanceProps?: InputClearanceProps;
+  containerProps?: InputContainerDefaultProps;
+  fieldsetProps?: InputFieldsetDefaultProps;
+  leftDecoratorProps?: InputDecoratorDefaultProps;
+  rightDecoratorProps?: InputDecoratorDefaultProps;
+  labelProps?: InputLabelDefaultProps;
+  clearanceProps?: InputClearanceDefaultProps;
   inputRef?: MutableRefObject<HTMLInputElement> | null;
 };
 
