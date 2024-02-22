@@ -1,14 +1,13 @@
 import React, { type FC } from 'react';
 
+import Navlink from '../../components/NavlinkButton/NavlinkButton';
 import ThemeButton from '../../components/ThemeButton.tsx/ThemeButton';
 import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
-import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
-import Navlink from '../../lib/iCoWeARouterUI/components/Navlink/Navlink';
 
 const DefaultNavigation: FC = () => (
-  <Flex gap="lg">
-    <Navigation>
+  <>
+    <Navigation className="ml-auto">
       <ListItem>
         <Navlink
           to="/"
@@ -50,7 +49,7 @@ const DefaultNavigation: FC = () => (
       icon
       radius="rounded"
     />
-  </Flex>
+  </>
 );
 
 export default DefaultNavigation;
