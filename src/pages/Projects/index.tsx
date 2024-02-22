@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
 import List from '../../lib/iCoWeABaseUI/components/data-display/List/List';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
-import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Layout from '../../lib/iCoWeABaseUI/components/layouts/Layout/Layout';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import { selectProjects } from '../../store/slices/projects';
@@ -26,26 +25,24 @@ export const Component: FC = () => {
     <Layout layout="default">
       <Main>
         <AnimatedSection>
-          <Flex>
-            {nodes.length === 0 && (
-              <Title
-                size="2"
-                color="on-primary"
-                align="center"
-              >
-                No projects
-              </Title>
-            )}
-            {nodes.length !== 0 && (
-              <List
-                row
-                justify="center"
-                gap="xxl"
-              >
-                {nodes}
-              </List>
-            )}
-          </Flex>
+          {nodes.length === 0 && (
+            <Title
+              size="2"
+              color="on-primary"
+              align="center"
+            >
+              No projects
+            </Title>
+          )}
+          {nodes.length !== 0 && (
+            <List
+              row
+              justify="center"
+              gap="xxl"
+            >
+              {nodes}
+            </List>
+          )}
         </AnimatedSection>
       </Main>
     </Layout>
