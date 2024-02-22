@@ -18,7 +18,7 @@ const ThemeButton: FC<ToggleButtonProps> = (props) => {
     localStorage.setItem('theme', checked ? 'light' : 'dark');
 
     setTheme((theme) => (theme === 'light' ? 'dark' : 'light'));
-  }, []);
+  }, [checked]);
 
   return (
     <ToggleButton
