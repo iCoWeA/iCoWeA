@@ -11,13 +11,18 @@ import MobileNavigation from './MobileNavigation';
 const StandardHeader: FC = () => {
   const breakpoint = useSelector(selectBreakpoint);
 
+  const isSm = breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD;
+
   return (
-    <Header shadow>
+    <Header
+      justify={isSm ? 'between' : 'start'}
+      shadow
+    >
       <Link to="/">
         <Logo />
       </Link>
-      {(breakpoint === Breakpoints.SM || breakpoint === Breakpoints.MD) && <MobileNavigation />}
-      {breakpoint !== Breakpoints.SM && breakpoint !== Breakpoints.MD && <DefaultNavigation />}
+      {isSm && <MobileNavigation />}
+      {!isSm && <DefaultNavigation />}
     </Header>
   );
 };
