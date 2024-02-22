@@ -2,24 +2,24 @@ import React, {
   type MutableRefObject,
   forwardRef,
   useRef,
+  useState,
   useImperativeHandle,
-  useCallback,
   useEffect,
+  useCallback,
   useMemo
 } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
-import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
+import useMergeRefs from '../../../hooks/useMergeRefs';
 import useWindowResize from '../../../hooks/useWindowResize';
 import useWindowScroll from '../../../hooks/useWindowScroll';
-import { setArrowPlacement, setPlacement } from '../../../utils/popoverHelper';
+import { setPlacement, setArrowPlacement } from '../../../utils/popoverHelper';
 import Popper, { type PopperProps } from '../Popper/Popper';
 import PopoverArrow, { type PopoverArrowDefaultProps } from './PopoverArrow';
 import PopoverDropdown, { type PopoverDropdownDefaultProps } from './PopoverDropdown';
 import popoverConfig from './popoverConfig';
-import useMergeRefs from '../../../hooks/useMergeRefs';
 
 export type PopoverDefaultProps = {
   placement?: OuterPlacements;
@@ -30,7 +30,6 @@ export type PopoverDefaultProps = {
   border?: Borders;
   radius?: Radiuses;
   responsive?: boolean;
-  openOnHover?: boolean;
   lockScroll?: boolean;
   closeOnOutsideClick?: boolean;
   closeOnEscape?: boolean;
@@ -41,7 +40,6 @@ export type PopoverDefaultProps = {
 
 export type PopoverProps = PopperProps &
 PopoverDefaultProps & {
-  onOpen?: ((state: boolean) => void) | ((state?: boolean) => void);
   onClose?: ((state: boolean) => void) | ((state?: boolean) => void);
   open?: boolean;
   portalTarget?: Element | null;
@@ -53,7 +51,6 @@ PopoverDefaultProps & {
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) => {
   const {
-    onOpen,
     placement,
     offset,
     spacing,
@@ -62,7 +59,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) =
     border,
     radius,
     responsive,
-    openOnHover,
     arrow,
     open,
     portalTarget,
@@ -81,15 +77,17 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) =
   const ref = useRef<HTMLDivElement>(null);
   const arrRef = useRef<HTMLDivElement>(null);
 
+  const [isRendered, setIsRendered] = useState(false);
+
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
     forwardedRef,
     () => ref.current,
     []
   );
 
-  /* --- Set event handlers --- */
-  const openHandler = useCallback(() => (onOpen ? onOpen(true) : undefined), [onOpen]);
+  useEffect(() => setIsRendered(true), []);
 
+  /* --- Set event handlers --- */
   const resizeHandler = useCallback((): void => {
     if (!ref.current || !anchorRef?.current) {
       return;
@@ -117,12 +115,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) =
     }
   }, [placement, !!portalTarget, offset, responsive, arrow]);
 
-  useEffect(() => {
-    resizeHandler();
-  }, [open]);
-
-  useAddEventListener(anchorRef, 'mouseenter', openOnHover && !open && openHandler);
-
   useWindowResize(responsive && open && resizeHandler);
 
   useWindowScroll(responsive && open && resizeHandler);
@@ -136,7 +128,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>((props, forwardedRef) =
 
   return (
     <Popper
-      open={open}
+      onEntering={resizeHandler}
+      open={isRendered ? open : false}
       closeDuration={-1}
       focusTrap={false}
       anchorRef={anchorRef}

@@ -1,18 +1,18 @@
 import React, {
-  type TextareaHTMLAttributes,
-  type ReactNode,
+  type FocusEvent,
   type MutableRefObject,
+  type ReactNode,
+  type TextareaHTMLAttributes,
   forwardRef,
-  useRef,
-  useState,
-  useImperativeHandle,
   useCallback,
-  useMemo
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState
 } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
-import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import useMergeRefs from '../../../hooks/useMergeRefs';
 import TextareaClearance, { type TextareaClearanceDefaultProps } from './TextareaClearance';
@@ -46,6 +46,8 @@ TextareaDefaultProps & {
 
 const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef) => {
   const {
+    onFocus,
+    onBlur,
     variant,
     color,
     block,
@@ -85,21 +87,26 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
   );
 
   /* --- Set event handlers --- */
-  const focusHandler = useCallback((event: FocusEvent): void => {
-    if (ref.current === event.target) {
-      setIsFocused(true);
+  const focusHandler = useCallback((event: FocusEvent<HTMLTextAreaElement>): void => {
+    setIsFocused(true);
+
+    if (onFocus) {
+      onFocus(event);
     }
   }, []);
 
-  const blurHandler = useCallback((event: FocusEvent): void => {
-    if (event.relatedTarget === null || event.relatedTarget !== containerRef.current) {
-      setIsFocused(false);
-    }
-  }, []);
+  const blurHandler = useCallback(
+    (event: FocusEvent<HTMLTextAreaElement>): void => {
+      if (event.relatedTarget === null || event.relatedTarget !== containerRef.current) {
+        setIsFocused(false);
+      }
 
-  useAddEventListener(ref, 'focus', focusHandler);
-
-  useAddEventListener(ref, 'blur', blurHandler);
+      if (onBlur) {
+        onBlur(event);
+      }
+    },
+    [onBlur]
+  );
 
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
@@ -157,6 +164,8 @@ const Textarea = forwardRef<HTMLDivElement, TextareaProps>((props, forwardedRef)
           </TextareaLabel>
         )}
         <textarea
+          onFocus={focusHandler}
+          onBlur={blurHandler}
           className={mergedClassName}
           disabled={disabled}
           id={id}

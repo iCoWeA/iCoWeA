@@ -1,17 +1,17 @@
 import React, {
   type BaseHTMLAttributes,
+  type TransitionEvent,
   forwardRef,
-  useRef,
-  useImperativeHandle,
   useCallback,
   useEffect,
-  useMemo
+  useImperativeHandle,
+  useMemo,
+  useRef
 } from 'react';
 
-import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
-import useAddEventListener from '../../../hooks/useAddEventListener';
-import useConfig from '../../../hooks/useConfig';
 import useTransition, { TransitionStates } from '../../../hooks/useTransition';
+import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
+import useConfig from '../../../hooks/useConfig';
 import { setTransitionStyle } from '../../../utils/transitionHelper';
 import transitionConfig from './transitionConfig';
 
@@ -36,12 +36,14 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
     onExit,
     onEntering,
     onExiting,
+    onTransitionEnd,
     transition,
     smooth,
     unmountOnExit,
     enter,
     defaultClassName,
     className,
+    style,
     children,
     ...restProps
   } = useConfig('transition', transitionConfig.defaultProps, props);
@@ -57,43 +59,32 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
   );
 
   /* --- Set event handlers --- */
+  const transitionEndHandler = useCallback(
+    (event: TransitionEvent<HTMLDivElement>): void => {
+      if (ref.current === event.target) {
+        stopTransition(onEnter, onExit);
+      }
+
+      if (onTransitionEnd) {
+        onTransitionEnd(event);
+      }
+    },
+    [onEnter, onExit, onTransitionEnd]
+  );
+
+  useEffect(() => {
+    startTransition(enter, onEntering, onExiting);
+  }, [enter, onEntering, onExiting]);
+
+  /* --- Set styles --- */
   const isUnmounted = state === TransitionStates.EXIT && !enter;
+  const isEntering = state === TransitionStates.ENTER || state === TransitionStates.ENTERING;
 
-  const transitionEndHandler = useCallback((event: Event): void => {
-    if (event.target === ref.current) {
-      stopTransition();
-    }
-  }, []);
-
-  useEffect(() => {
-    startTransition(enter);
-  }, [enter]);
-
-  useEffect(() => {
-    const isEntering = state === TransitionStates.ENTER || state === TransitionStates.ENTERING;
-
-    setTransitionStyle(ref, transition, smooth, isEntering, isUnmounted);
-  }, [transition, smooth, state, isUnmounted]);
-
-  useEffect(() => {
-    if (state === TransitionStates.ENTER && onEnter) {
-      onEnter();
-    }
-
-    if (state === TransitionStates.EXIT && onExit) {
-      onExit();
-    }
-
-    if (state === TransitionStates.ENTERING && onEntering) {
-      onEntering();
-    }
-
-    if (state === TransitionStates.EXITING && onExiting) {
-      onExiting();
-    }
-  }, [state, onEnter, onExit, onEntering, onExiting]);
-
-  useAddEventListener(ref, 'transitionend', transitionEndHandler);
+  const mergedStyles = useMemo(
+    () =>
+      setTransitionStyle(transition, smooth, isEntering, isUnmounted, ref.current?.scrollHeight),
+    [transition, smooth, isEntering, isUnmounted]
+  );
 
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
@@ -110,7 +101,12 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, forwarded
 
   return (
     <div
+      onTransitionEnd={transitionEndHandler}
       className={mergedClassName}
+      style={{
+        ...mergedStyles,
+        ...style
+      }}
       ref={ref}
       {...restProps}
     >

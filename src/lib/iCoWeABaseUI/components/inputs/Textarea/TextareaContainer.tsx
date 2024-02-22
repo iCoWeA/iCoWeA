@@ -1,16 +1,16 @@
 import React, {
+  type FocusEvent,
   type MutableRefObject,
   forwardRef,
-  useRef,
-  useImperativeHandle,
   useCallback,
-  useMemo
+  useImperativeHandle,
+  useMemo,
+  useRef
 } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
-import useAddEventListener from '../../../hooks/useAddEventListener';
 import Flex, { type FlexProps } from '../../layouts/Flex/Flex';
-import inputConfig from './textareaConfig';
+import inputConfig from '../Input/inputConfig';
 
 export type TextareaContainerDefaultProps = FlexProps;
 
@@ -23,7 +23,10 @@ export type TextareaContainerProps = TextareaContainerDefaultProps & {
 };
 
 const TextareaContainer = forwardRef<HTMLDivElement, TextareaContainerProps>(
-  ({ block, isFocused, inputRef, className, disabled, value, ...restProps }, forwardedRef) => {
+  (
+    { onFocus, block, isFocused, inputRef, className, disabled, value, ...restProps },
+    forwardedRef
+  ) => {
     const ref = useRef<HTMLDivElement>(null);
 
     useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
@@ -33,13 +36,18 @@ const TextareaContainer = forwardRef<HTMLDivElement, TextareaContainerProps>(
     );
 
     /* --- Set event handlers --- */
-    const focusHandler = useCallback((event: FocusEvent): void => {
-      if (ref.current === event.target || inputRef.current === event.target) {
-        inputRef.current?.focus();
-      }
-    }, []);
+    const focusHandler = useCallback(
+      (event: FocusEvent<HTMLDivElement>): void => {
+        if (ref.current === event.target) {
+          inputRef.current?.focus();
+        }
 
-    useAddEventListener(ref, 'focus', focusHandler);
+        if (onFocus) {
+          onFocus(event);
+        }
+      },
+      [onFocus]
+    );
 
     /* --- Set classes --- */
     const mergedClassName = useMemo(() => {
@@ -56,6 +64,7 @@ const TextareaContainer = forwardRef<HTMLDivElement, TextareaContainerProps>(
 
     return (
       <Flex
+        onFocus={focusHandler}
         direction="row"
         wrap="nowrap"
         justify="start"

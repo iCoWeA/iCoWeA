@@ -1,7 +1,7 @@
-import { createContext } from 'react';
+import { type Dispatch, type SetStateAction, createContext } from 'react';
 
 type AccordionContext = {
-  onToggle?: VoidFunction;
+  onToggle?: Dispatch<SetStateAction<boolean>>;
   size: Sizes;
   variant: Variants;
   color: DefaultColors;

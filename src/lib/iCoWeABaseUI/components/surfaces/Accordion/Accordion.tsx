@@ -62,7 +62,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>((props, ref) => {
 
   const context = useMemo(
     () => ({
-      onToggle: open === undefined ? () => setIsOpen((isOpen) => !isOpen) : undefined,
+      onToggle: open === undefined ? setIsOpen : undefined,
       size,
       variant,
       color,

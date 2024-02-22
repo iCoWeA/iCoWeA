@@ -1,8 +1,14 @@
-import React, { forwardRef, useRef, useImperativeHandle, useCallback, useMemo } from 'react';
+import React, {
+  type MouseEvent,
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef
+} from 'react';
 import { createPortal } from 'react-dom';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
-import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import Transition, { type TransitionProps } from '../../utils/Transition/Transition';
 import overlayConfig from './overlayConfig';
@@ -19,8 +25,16 @@ OverlayDefaultProps & {
 };
 
 const Overlay = forwardRef<HTMLDivElement, OverlayProps>((props, forwardedRef) => {
-  const { onClose, invisible, open, portalTarget, defaultClassName, className, ...restProps } =
-    useConfig('overlay', overlayConfig.defaultProps, props);
+  const {
+    onClose,
+    onClick,
+    invisible,
+    open,
+    portalTarget,
+    defaultClassName,
+    className,
+    ...restProps
+  } = useConfig('overlay', overlayConfig.defaultProps, props);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -31,9 +45,18 @@ const Overlay = forwardRef<HTMLDivElement, OverlayProps>((props, forwardedRef) =
   );
 
   /* --- Set event handlers --- */
-  const clickHandler = useCallback(() => (onClose ? onClose(false) : undefined), [onClose]);
+  const clickHandler = useCallback(
+    (event: MouseEvent<HTMLDivElement>) => {
+      if (onClose && event.target === ref.current) {
+        onClose(false);
+      }
 
-  useAddEventListener(ref, 'click', clickHandler);
+      if (onClick) {
+        onClick(event);
+      }
+    },
+    [onClose, onClick]
+  );
 
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
@@ -45,6 +68,7 @@ const Overlay = forwardRef<HTMLDivElement, OverlayProps>((props, forwardedRef) =
   /* --- Set portal --- */
   const node = (
     <Transition
+      onClick={clickHandler}
       transition="fade"
       smooth={false}
       unmountOnExit={false}

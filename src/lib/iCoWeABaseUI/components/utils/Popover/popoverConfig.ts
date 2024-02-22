@@ -8,7 +8,6 @@ const popoverConfig = {
     border: false,
     radius: 'circular',
     responsive: true,
-    openOnHover: false,
     lockScroll: false,
     closeOnOutsideClick: true,
     closeOnEscape: false,

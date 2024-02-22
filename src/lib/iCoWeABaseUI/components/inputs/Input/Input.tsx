@@ -1,18 +1,18 @@
 import React, {
+  type FocusEvent,
   type InputHTMLAttributes,
-  type ReactNode,
   type MutableRefObject,
+  type ReactNode,
   forwardRef,
-  useRef,
-  useState,
-  useImperativeHandle,
   useCallback,
-  useMemo
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState
 } from 'react';
 
 import useTheme from '../../../../iCoWeAUI/hooks/useTheme';
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
-import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import useMergeRefs from '../../../hooks/useMergeRefs';
 import InputClearance, { type InputClearanceDefaultProps } from './InputClearance';
@@ -46,6 +46,8 @@ InputDefaultProps & {
 
 const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
   const {
+    onFocus,
+    onBlur,
     variant,
     color,
     block,
@@ -85,21 +87,29 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
   );
 
   /* --- Set event handlers --- */
-  const focusHandler = useCallback((event: FocusEvent): void => {
-    if (ref.current === event.target) {
+  const focusHandler = useCallback(
+    (event: FocusEvent<HTMLInputElement>): void => {
       setIsFocused(true);
-    }
-  }, []);
 
-  const blurHandler = useCallback((event: FocusEvent): void => {
-    if (event.relatedTarget === null || event.relatedTarget !== containerRef.current) {
-      setIsFocused(false);
-    }
-  }, []);
+      if (onFocus) {
+        onFocus(event);
+      }
+    },
+    [onFocus]
+  );
 
-  useAddEventListener(ref, 'focus', focusHandler);
+  const blurHandler = useCallback(
+    (event: FocusEvent<HTMLInputElement>): void => {
+      if (event.relatedTarget === null || event.relatedTarget !== containerRef.current) {
+        setIsFocused(false);
+      }
 
-  useAddEventListener(ref, 'blur', blurHandler);
+      if (onBlur) {
+        onBlur(event);
+      }
+    },
+    [onBlur]
+  );
 
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
@@ -157,6 +167,8 @@ const Input = forwardRef<HTMLDivElement, InputProps>((props, forwardedRef) => {
           </InputLabel>
         )}
         <input
+          onFocus={focusHandler}
+          onBlur={blurHandler}
           className={mergedClassName}
           disabled={disabled}
           id={id}

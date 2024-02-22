@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import React, { forwardRef, useContext, useRef, useImperativeHandle, useMemo } from 'react';
+
+import React, { type MouseEvent, forwardRef, useCallback, useContext, useMemo } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
 import accordionContext from '../../../contexts/accordion';
-import useAddEventListener from '../../../hooks/useAddEventListener';
 import Button, { type ButtonProps } from '../../inputs/Button/Button';
 import AccordionExpandIcon, { type AccordionExpandIconDefaultProps } from './AccordionExpandIcon';
 import accordionConfig from './accordionConfig';
@@ -17,8 +17,8 @@ export type AccordionHeaderProps = AccordionHeaderDefaultProps & {
 
 const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
   (
-    { leftExpandIconProps, rightExpandIconProps, className, children, ...restProps },
-    forwardedRef
+    { onClick, leftExpandIconProps, rightExpandIconProps, className, children, ...restProps },
+    ref
   ) => {
     const {
       onToggle,
@@ -35,16 +35,19 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
       disabled
     } = useContext(accordionContext);
 
-    const ref = useRef<HTMLButtonElement>(null);
-
-    useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
-      forwardedRef,
-      () => ref.current,
-      []
-    );
-
     /* --- Set event handlers --- */
-    useAddEventListener(ref, 'click', onToggle);
+    const clickHandler = useCallback(
+      (event: MouseEvent<HTMLButtonElement>) => {
+        if (onToggle) {
+          onToggle((open) => !open);
+        }
+
+        if (onClick) {
+          onClick(event);
+        }
+      },
+      [onToggle, onClick]
+    );
 
     /* --- Set classes --- */
     const mergedClassName = useMemo(() => {
@@ -55,6 +58,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 
     return (
       <Button
+        onClick={clickHandler}
         size={size}
         block
         icon={false}

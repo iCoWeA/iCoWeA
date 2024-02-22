@@ -1,17 +1,17 @@
 import React, {
-  type ReactNode,
+  type MouseEvent,
   type ReactElement,
+  type ReactNode,
   forwardRef,
-  useRef,
-  useState,
-  useImperativeHandle,
   useCallback,
   useEffect,
-  useMemo
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState
 } from 'react';
 
 import { mergeClasses } from '../../../../iCoWeAUI/utils/utils';
-import useAddEventListener from '../../../hooks/useAddEventListener';
 import useConfig from '../../../hooks/useConfig';
 import usePrevious from '../../../hooks/usePrevious';
 import useWindowResize from '../../../hooks/useWindowResize';
@@ -124,8 +124,8 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) =
     }
   }, [followCursor, placement, offset, responsive, !!portalTarget, arrow]);
 
-  const leaveHandler = useCallback(
-    (event: MouseEvent): void => {
+  const mouseLeaveHandler = useCallback(
+    (event: MouseEvent<HTMLDivElement>): void => {
       if (!(anchorRef.current?.contains(event.relatedTarget as Node) ?? false)) {
         if (isControlled && onClose !== undefined) {
           onClose(false);
@@ -145,17 +145,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) =
     }
   }, [open]);
 
-  useEffect(() => {
-    resizeHandler();
-  }, [open ?? isOpen]);
-
   useWindowResize(responsive && (open ?? isOpen) && resizeHandler);
 
   useWindowScroll(responsive && (open ?? isOpen) && resizeHandler);
-
-  useAddEventListener(ref, 'mouseenter', keepOnHover && (open ?? isOpen) && leaveHandler);
-
-  useAddEventListener(ref, 'mouseleave', keepOnHover && (open ?? isOpen) && leaveHandler);
 
   /* --- Set classes --- */
   const mergedClassName = useMemo(() => {
@@ -187,9 +179,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, forwardedRef) =
         </TooltipAnchor>
       )}
       <Popover
+        onMouseLeave={mouseLeaveHandler}
         onClose={isControlled ? onClose : setIsOpen}
-        responsive={false}
-        openOnHover={false}
+        onEntering={resizeHandler}
         lockScroll={false}
         closeOnOutsideClick={false}
         closeOnBackdropClick
