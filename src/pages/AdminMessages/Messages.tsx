@@ -23,10 +23,10 @@ const Messages: FC = () => {
   const nodes = Object.keys(messages)
     .sort((a, b) =>
       descendingSort
-        ? new Date(messages[b].creationDate).getMilliseconds() -
-          new Date(messages[a].creationDate).getMilliseconds()
-        : new Date(messages[a].creationDate).getMilliseconds() -
+        ? new Date(messages[a].creationDate).getMilliseconds() -
           new Date(messages[b].creationDate).getMilliseconds()
+        : new Date(messages[b].creationDate).getMilliseconds() -
+          new Date(messages[a].creationDate).getMilliseconds()
     )
     .map((key) =>
       isReading === key
