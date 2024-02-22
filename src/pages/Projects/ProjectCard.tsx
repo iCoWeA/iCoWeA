@@ -1,4 +1,4 @@
-import React, { type FC, useState } from 'react';
+import React, { type FC, useState, useCallback } from 'react';
 
 import LinkIcon from '../../components/Icons/LinkIcon';
 import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
@@ -15,15 +15,18 @@ export type ProjectCardProps = {
 const ProjectCard: FC<ProjectCardProps> = ({ name, url, imageURL }) => {
   const [open, setOpen] = useState(false);
 
+  /* -- Set event handlers --- */
+  const mouseEnterHandler = useCallback(() => setOpen(true), []);
+
+  const mouseLeaveHandler = useCallback(() => setOpen(false), []);
+
   return (
     <ListItem
       align="stretch"
       className="relative w-full max-w-[25rem] h-[30rem]"
     >
       <Card
-        onMouseEnter={() => {
-          setOpen(true);
-        }}
+        onMouseEnter={mouseEnterHandler}
         block
         variant="solid"
         color="primary"
@@ -32,9 +35,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ name, url, imageURL }) => {
         style={{ backgroundImage: `url("${imageURL}")` }}
       />
       <Overlay
-        onMouseLeave={() => {
-          setOpen(false);
-        }}
+        onMouseLeave={mouseLeaveHandler}
         open={open}
         className="rounded-xl"
       >

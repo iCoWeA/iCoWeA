@@ -1,4 +1,10 @@
-import React, { type Dispatch, type SetStateAction, type FC } from 'react';
+import React, {
+  type Dispatch,
+  type SetStateAction,
+  type FC,
+  useCallback,
+  type ChangeEvent
+} from 'react';
 import { Form } from 'react-router-dom';
 
 import InputControl from '../../components/InputControl/InputControl';
@@ -22,6 +28,12 @@ const Loginform: FC<LoginFormProps> = ({ setError, state }) => {
     resetForm
   } = useForm({ email: '', password: '' });
 
+  /* -- Set event handlers --- */
+  const changeHandler = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => change(event, 1000),
+    []
+  );
+
   return (
     <Form
       onSubmit={() => {
@@ -37,7 +49,7 @@ const Loginform: FC<LoginFormProps> = ({ setError, state }) => {
       >
         <InputControl errorText={inputs.email.error && 'Invalid email'}>
           <Textfield
-            onChange={(event) => change(event, 1000)}
+            onChange={changeHandler}
             onBlur={blur}
             invalid={inputs.email.error}
             label="Email"
@@ -50,7 +62,7 @@ const Loginform: FC<LoginFormProps> = ({ setError, state }) => {
         </InputControl>
         <InputControl errorText={inputs.password.error && 'Invalid password'}>
           <PasswordInput
-            onChange={(event) => change(event, 1000)}
+            onChange={changeHandler}
             onBlur={blur}
             block
             invalid={inputs.password.error}
