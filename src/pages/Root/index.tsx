@@ -16,7 +16,7 @@ const Component: FC = () => {
   const user = useSelector(selectUser);
   const setTheme = useContext(themeContext).setTheme;
 
-  const isEmpty = Object.keys(user).every((key) => user[key as keyof User] === '');
+  const isEmpty = Object.keys(user).every((key) => !user[key as keyof User]);
 
   useEffect(() => {
     const theme = localStorage.getItem('theme');
