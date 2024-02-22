@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { type FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import HamburgerIcon from '../../components/Icons/HamburgerIcon';
@@ -21,16 +21,21 @@ const MobileNavigation: FC = () => {
   const dispatch = useDispatch();
   const open = useSelector(selectNavbar);
 
+  /* --- Set event handlers --- */
+  const clickHandler = useCallback(() => dispatch(navbarActions.toggle()), []);
+
+  const closeHandler = useCallback(() => dispatch(navbarActions.close()), []);
+
   return (
     <>
       <Button
-        onClick={() => dispatch(navbarActions.toggle())}
+        onClick={clickHandler}
         icon
       >
         <HamburgerIcon />
       </Button>
       <Drawer
-        onClose={() => dispatch(navbarActions.close())}
+        onClose={closeHandler}
         open={open}
         spacing="lg-panel"
         gap="xl"
