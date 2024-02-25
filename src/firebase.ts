@@ -3,14 +3,13 @@ import { getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyC1CNW0Q-6I7aQqTxBn-JECIIXyUOIACsQ',
-  authDomain: 'icowea-ed3ee.firebaseapp.com',
-  databaseURL: 'https://icowea-ed3ee-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'icowea-ed3ee',
-  storageBucket: 'icowea-ed3ee.appspot.com',
-  messagingSenderId: '450764627942',
-  appId: '1:450764627942:web:59554908698e5298528027',
-  measurementId: 'G-PEZ0YBCT37'
+  apiKey: 'AIzaSyClYyvFHCYVSnURzU-DknJjMuIPRjhQwgI',
+  authDomain: 'icowea-72ba3.firebaseapp.com',
+  databaseURL: 'https://icowea-72ba3-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'icowea-72ba3',
+  storageBucket: 'icowea-72ba3.appspot.com',
+  messagingSenderId: '873283364728',
+  appId: '1:873283364728:web:4bdd9dc7f2815a339e4a8d'
 };
 
 const app = initializeApp(firebaseConfig);
