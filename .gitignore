@@ -32,5 +32,4 @@ typings.d.ts
 firebase.json
 /.firebase
 
-/save
 todo
