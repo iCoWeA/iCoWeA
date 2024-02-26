@@ -23,8 +23,9 @@ const UserCard: FC = () => {
         className="grid-cols-[auto_1fr]"
       >
         <Avatar
+          size="xxl"
           alt={`${upperCaseFirstLetter(user.firstname)} ${upperCaseFirstLetter(user.lastname)}`}
-          className="w-24 h-24 row-span-2"
+          className="row-span-2"
           src={user.imageURL}
         />
         <Title size="3">{`${user.firstname} ${user.lastname}`}</Title>
