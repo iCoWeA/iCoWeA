@@ -49,7 +49,8 @@ const drawerConfig = {
         },
         vertical: {
           width: 'w-64',
-          height: 'h-full'
+          height: 'h-full',
+          overflow: 'overflow-auto'
         }
       },
       radiuses: {

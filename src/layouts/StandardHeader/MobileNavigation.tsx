@@ -87,7 +87,10 @@ const MobileNavigation: FC = () => {
             Contact
           </Navlink>
         </Navigation>
-        <Stack className={`mt-auto${isMobile ? ' mb-[5.5rem]' : ''}`}>
+        <Stack
+          gap="md"
+          className={`mt-auto${isMobile ? ' mb-[5.5rem]' : ''}`}
+        >
           <ThemeButton
             block
             className="mt-auto"

@@ -39,6 +39,7 @@ const DraweContainer: FC<DrawerContainerProps> = ({
 
   return (
     <Stack
+      wrap={placement === 'bottom' || placement === 'top' ? 'wrap' : 'nowrap'}
       className={mergedClassName}
       {...restProps}
     />
