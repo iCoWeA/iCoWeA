@@ -29,7 +29,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     return 'Login error';
   }
 
-  return redirect('/user');
+  return redirect('/admin');
 };
 
 Component.displayName = 'LoginRoot';
