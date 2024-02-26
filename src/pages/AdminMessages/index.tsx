@@ -40,13 +40,13 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     return data;
   }
 
-  if (!del) {
-    throw new Error('No del');
+  if (del) {
+    await remove(ref(database, `messages/${del}`));
+
+    return del;
   }
 
-  await remove(ref(database, `messages/${del}`));
-
-  return del;
+  return null;
 };
 
 Component.displayName = 'AdminProjectsRoute';
