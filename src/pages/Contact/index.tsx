@@ -30,7 +30,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
   const key = push(child(ref(database), 'messages')).key;
 
   if (key === null) {
-    throw new Error('No key !');
+    return null;
   }
 
   await set(ref(database, `messages/${key}`), data);
