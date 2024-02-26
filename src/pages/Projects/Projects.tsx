@@ -7,7 +7,7 @@ import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import { selectProjects } from '../../store/slices/projects';
 import ProjectCard from './ProjectCard';
 
-const Project: FC = () => {
+const Projects: FC = () => {
   const projects = useSelector(selectProjects);
 
   const nodes = useMemo(
@@ -47,4 +47,4 @@ const Project: FC = () => {
   );
 };
 
-export default Project;
+export default Projects;
