@@ -9,7 +9,7 @@ const listButtonConfig = {
   },
   styles: {
     base: {
-      transition: 'transition-all',
+      transition: 'transition-colors',
       focus: 'focus:outline-none',
       focusVisible: 'focus-visible:ring-4 focus-visible:border-transparent'
     },

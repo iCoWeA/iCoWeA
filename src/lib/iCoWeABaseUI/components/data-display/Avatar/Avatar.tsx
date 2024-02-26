@@ -7,7 +7,7 @@ import Image, { type ImageProps } from '../Image/Image';
 import avatarConfig from './avatarConfig';
 
 export type AvatarDefaultProps = {
-  size?: Spacings;
+  size?: AllSizes;
   variant?: Variants;
   color?: DefaultColors;
   border?: boolean;
@@ -62,7 +62,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      {src && src !== '' && (
+      {src && (
         <Image
           radius={radius}
           alt={alt}

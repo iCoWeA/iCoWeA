@@ -14,7 +14,9 @@ const buttonConfig = {
     root: {
       base: {
         display: 'inline-flex',
+        width: 'w-fit',
         height: 'h-fit',
+        justifyContent: 'justify-center',
         alignItems: 'items-center',
         gap: 'gap-2',
         font: 'font-semibold',
@@ -27,8 +29,7 @@ const buttonConfig = {
         position: 'relative'
       },
       block: {
-        width: 'w-full',
-        justifyContent: 'justify-center'
+        width: 'w-full'
       },
       icon: {
         aspectRatio: 'aspect-square'

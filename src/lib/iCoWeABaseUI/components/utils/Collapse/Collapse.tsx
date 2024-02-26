@@ -3,13 +3,15 @@ import React, {
   forwardRef,
   useRef,
   useImperativeHandle,
-  useCallback
+  useCallback,
+  useEffect
 } from 'react';
 
 import useClickOutside from '../../../hooks/useClickOutside';
 import useConfig from '../../../hooks/useConfig';
 import useKeyboard from '../../../hooks/useKeyboard';
 import useTimer from '../../../hooks/useTimer';
+import useWindowResize from '../../../hooks/useWindowResize';
 import Transition, { type TransitionProps } from '../Transition/Transition';
 import collapseConfig from './collapseConfig';
 
@@ -51,11 +53,25 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, forwardedRef)
   /* --- Set event handlers --- */
   const closeHandler = useCallback(() => (onClose ? onClose(false) : undefined), [onClose]);
 
+  const resizeHandler = useCallback(() => {
+    if (ref?.current?.style) {
+      ref.current.style.height = `${ref.current?.firstElementChild?.clientHeight ?? '0'}px`;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      resizeHandler();
+    }
+  });
+
   useClickOutside(closeOnOutsideClick && open && closeHandler, ref, anchorRef);
 
   useKeyboard('Escape', closeOnEscape && closeHandler);
 
   useTimer(open && closeHandler, closeDuration);
+
+  useWindowResize(open && resizeHandler);
 
   return (
     <Transition

@@ -9,7 +9,7 @@ import DefaultSpinnerProgressBar, {
 import defaultSpinnerConfig from './defaultSpinnerConfig';
 
 export type DefaultSpinnerDefaultProps = {
-  size?: Spacings;
+  size?: AllSizes;
   color?: DefaultTextColors;
   stable?: boolean;
   value?: string | number;

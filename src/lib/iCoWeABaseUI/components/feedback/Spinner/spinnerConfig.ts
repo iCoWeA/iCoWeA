@@ -9,6 +9,7 @@ const spinnerConfig = {
     root: {
       base: {
         display: 'inline-flex',
+        width: 'w-fit',
         height: 'h-fit'
       }
     },
@@ -19,6 +20,26 @@ const spinnerConfig = {
         top: 'top-2/4',
         translate: '-translate-x-2/4 -translate-y-2/4',
         userSelect: 'select-none'
+      },
+      sizes: {
+        none: {
+          fontSize: 'text-xs'
+        },
+        sm: {
+          fontSize: 'text-xs'
+        },
+        md: {
+          fontSize: 'text-sm'
+        },
+        lg: {
+          fontSize: 'text-base'
+        },
+        xl: {
+          fontSize: 'text-lg'
+        },
+        xxl: {
+          fontSize: 'text-2xl'
+        }
       },
       disabled: {
         light: {

@@ -42,7 +42,7 @@ const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>((props, re
   const mergedClassName = useMemo(() => {
     const styles = toggleButtonConfig.styles;
 
-    return mergeClasses(checked && styles.checked, defaultClassName, className);
+    return mergeClasses(styles.base, checked && styles.checked, defaultClassName, className);
   }, [checked, defaultClassName, className]);
 
   return (

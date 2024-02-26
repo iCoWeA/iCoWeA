@@ -7,6 +7,7 @@ const chipConfig = {
   },
   styles: {
     base: {
+      width: 'w-fit',
       height: 'h-fit',
       fontSize: 'text-xs'
     },

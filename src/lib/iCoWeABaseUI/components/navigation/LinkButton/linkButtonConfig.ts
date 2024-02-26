@@ -14,6 +14,7 @@ const linkButtonConfig = {
     root: {
       base: {
         display: 'inline-flex',
+        width: 'w-fit',
         height: 'h-fit',
         alignItems: 'items-center',
         gap: 'gap-2',

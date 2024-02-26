@@ -12,7 +12,7 @@ import SpinnerLabel, { type SpinnerLabelDefaultProps } from './SpinnerLabel';
 import spinnerConfig from './spinnerConfig';
 
 export type SpinnerDefaultProps = {
-  size?: Spacings;
+  size?: AllSizes;
   color?: DefaultTextColors;
   stable?: boolean;
   value?: string | number;
@@ -75,7 +75,7 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
       {children && (
         <SpinnerLabel
           theme={theme}
-          size={size === 'none' ? 'sm' : size}
+          size={size}
           variant={color.startsWith('on') ? 'default' : 'text'}
           color={cutTextColor(color)}
           disabled={disabled}

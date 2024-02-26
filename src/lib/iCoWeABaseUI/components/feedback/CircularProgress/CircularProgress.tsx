@@ -9,7 +9,7 @@ import Spinner, { type SpinnerProps } from '../Spinner/Spinner';
 import circularProgressConfig from './circularProgressConfig';
 
 export type CircularProgressDefaultProps = {
-  size?: Spacings;
+  size?: AllSizes;
   color?: DefaultTextColors;
   value?: string | number;
 };

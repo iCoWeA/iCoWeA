@@ -12,6 +12,7 @@ declare global {
   export type Positions = 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky';
   export type Orientations = 'vertical' | 'horizontal';
   export type Sizes = 'sm' | 'md' | 'lg';
+  export type AllSizes = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   export type TitleSizes =
   | '1'
   | '2'

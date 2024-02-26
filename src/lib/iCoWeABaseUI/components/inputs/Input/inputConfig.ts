@@ -8,6 +8,7 @@ const inputConfig = {
     root: {
       base: {
         display: 'inline-flex',
+        width: 'w-fit',
         height: 'h-fit',
         focus: 'focus:outline-0',
         group: 'group'

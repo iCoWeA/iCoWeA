@@ -10,6 +10,9 @@ const toggleButtonConfig = {
     noRipple: false
   },
   styles: {
+    base: {
+      transition: 'transition-all'
+    },
     checked: {
       group: 'checked'
     }

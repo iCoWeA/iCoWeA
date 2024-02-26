@@ -37,6 +37,16 @@ const avatarConfig = {
           width: 'w-12',
           height: 'h-12',
           fontSize: 'text-base'
+        },
+        xl: {
+          width: 'w-16',
+          height: 'h-16',
+          fontSize: 'text-lg'
+        },
+        xxl: {
+          width: 'w-24',
+          height: 'h-24',
+          fontSize: 'text-2xl'
         }
       },
       border: {
@@ -59,6 +69,16 @@ const avatarConfig = {
           width: 'w-13',
           height: 'h-13',
           fontSize: 'text-base'
+        },
+        xl: {
+          width: 'w-17',
+          height: 'h-17',
+          fontSize: 'text-lg'
+        },
+        xxl: {
+          width: 'w-25',
+          height: 'h-25',
+          fontSize: 'text-2xl'
         }
       }
     }
