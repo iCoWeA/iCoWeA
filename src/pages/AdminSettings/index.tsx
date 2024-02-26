@@ -3,14 +3,11 @@ import { update, ref } from 'firebase/database';
 
 import { database } from '../../firebase';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
-import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
 import SettingsForm from './SettingsForm';
 
 export const Component: FC = () => (
   <Main placement="full">
-    <Section>
-      <SettingsForm />
-    </Section>
+    <SettingsForm />
   </Main>
 );
 
