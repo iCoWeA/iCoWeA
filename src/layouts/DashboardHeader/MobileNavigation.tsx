@@ -10,8 +10,10 @@ import SettingsIcon from '../../components/Icons/SettingsIcon';
 import LogoutButton from '../../components/LogoutButton/LogoutButton';
 import Navlink from '../../components/NavlinkButton/NavlinkButton';
 import ThemeButton from '../../components/ThemeButton.tsx/ThemeButton';
+import { MOBILE_REGEX } from '../../data/constants';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
+import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import Drawer from '../../lib/iCoWeABaseUI/components/navigation/Drawer/Drawer';
 import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectNavbar, navbarActions } from '../../store/slices/navbar';
@@ -19,6 +21,8 @@ import { selectNavbar, navbarActions } from '../../store/slices/navbar';
 const MobileNavigation: FC = () => {
   const dispatch = useDispatch();
   const open = useSelector(selectNavbar);
+
+  const isMobile = MOBILE_REGEX.test(navigator.userAgent);
 
   /* --- Set event handlers --- */
   const clickHandler = useCallback(() => dispatch(navbarActions.toggle()), []);
@@ -76,11 +80,16 @@ const MobileNavigation: FC = () => {
             Settings
           </Navlink>
         </Navigation>
-        <ThemeButton
-          block
-          className="mt-auto"
-        />
-        <LogoutButton className="mt-6" />
+        <Stack
+          gap="md"
+          className={`mt-auto${isMobile ? ' mb-[5.5rem]' : ''}`}
+        >
+          <ThemeButton
+            block
+            className="mt-auto"
+          />
+          <LogoutButton className="mt-6" />
+        </Stack>
       </Drawer>
     </>
   );

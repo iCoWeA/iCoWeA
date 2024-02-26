@@ -13,9 +13,11 @@ import Logo from '../../components/Icons/Logo';
 import ProjectIcon from '../../components/Icons/ProjectIcon';
 import Navlink from '../../components/NavlinkButton/NavlinkButton';
 import ThemeButton from '../../components/ThemeButton.tsx/ThemeButton';
+import { MOBILE_REGEX } from '../../data/constants';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Navigation from '../../lib/iCoWeABaseUI/components/layouts/Navigation/Navigation';
+import Stack from '../../lib/iCoWeABaseUI/components/layouts/Stack/Stack';
 import Drawer from '../../lib/iCoWeABaseUI/components/navigation/Drawer/Drawer';
 import Link from '../../lib/iCoWeARouterUI/components/Link/Link';
 import { selectNavbar, navbarActions } from '../../store/slices/navbar';
@@ -25,6 +27,8 @@ const MobileNavigation: FC = () => {
   const dispatch = useDispatch();
   const open = useSelector(selectNavbar);
   const user = useSelector(selectUser);
+
+  const isMobile = MOBILE_REGEX.test(navigator.userAgent);
 
   /* --- Set event handlers --- */
   const clickHandler = useCallback(() => dispatch(navbarActions.toggle()), []);
@@ -83,36 +87,38 @@ const MobileNavigation: FC = () => {
             Contact
           </Navlink>
         </Navigation>
-        <ThemeButton
-          block
-          className="mt-auto"
-        />
-        <Flex justify="between">
-          <Link
-            to={user.githubURL}
-            target="_blanc"
-          >
-            <GithubIcon />
-          </Link>
-          <Link
-            to={user.linkedinURL}
-            target="_blanc"
-          >
-            <LinkedInIcon />
-          </Link>
-          <Link
-            to={user.facebookURL}
-            target="_blanc"
-          >
-            <FacebookIcon />
-          </Link>
-          <Link
-            to={user.instagramURL}
-            target="_blanc"
-          >
-            <InstagramIcon />
-          </Link>
-        </Flex>
+        <Stack className={`mt-auto${isMobile ? ' mb-[5.5rem]' : ''}`}>
+          <ThemeButton
+            block
+            className="mt-auto"
+          />
+          <Flex justify="between">
+            <Link
+              to={user.githubURL}
+              target="_blanc"
+            >
+              <GithubIcon />
+            </Link>
+            <Link
+              to={user.linkedinURL}
+              target="_blanc"
+            >
+              <LinkedInIcon />
+            </Link>
+            <Link
+              to={user.facebookURL}
+              target="_blanc"
+            >
+              <FacebookIcon />
+            </Link>
+            <Link
+              to={user.instagramURL}
+              target="_blanc"
+            >
+              <InstagramIcon />
+            </Link>
+          </Flex>
+        </Stack>
       </Drawer>
     </>
   );
