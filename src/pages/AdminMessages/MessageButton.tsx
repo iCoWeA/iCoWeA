@@ -131,7 +131,7 @@ const MessageButton: FC<MessageItemProps> = ({ setDraging, draging, id, message 
   return (
     <ListItem
       onDragStart={draging ? undefined : dragStartHandler}
-      onDragEnd={draging && draging === id ? dragEndHandler : undefined}
+      onDragEnd={draging === id ? dragEndHandler : undefined}
       onClick={clickHandler}
       spacing="md"
       variant={message.unread ? 'solid' : 'plain'}
@@ -163,6 +163,7 @@ const MessageButton: FC<MessageItemProps> = ({ setDraging, draging, id, message 
         </Button>
       </Tooltip>
       <Tooltip
+        placement='bottom-end'
         offset="8"
         variant={message.unread ? 'plain' : 'solid'}
         content="Drag to Reorder or Delete"

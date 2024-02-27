@@ -36,7 +36,7 @@ const Messages: FC = () => {
             message={messages[key]}
           />
         )),
-    [messages, descendingSort]
+    [messages, descendingSort, draging]
   );
 
   return (
