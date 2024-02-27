@@ -2,7 +2,7 @@ import React, { type FC, useState, useCallback } from 'react';
 
 import CloseIcon from '../../components/Icons/CloseIcon';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
-import AddTaskForm from './AddTaskForm';
+import AddTaskForm from './AddProjectForm';
 
 const AddProject: FC = () => {
   const [open, setOpen] = useState(false);
