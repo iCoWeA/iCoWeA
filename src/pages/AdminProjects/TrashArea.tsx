@@ -21,6 +21,8 @@ type TrashAreaProps = {
 const TrashArea: FC<TrashAreaProps> = ({ setDraging, draging }) => {
   const submit = useSubmit();
 
+  const isOpen = !!draging;
+
   const [isHovered, setIsHovered] = useState(false);
 
   /* --- Set event handlers --- */
@@ -40,8 +42,8 @@ const TrashArea: FC<TrashAreaProps> = ({ setDraging, draging }) => {
 
   return (
     <Collapse
-      open={!!draging}
-      className="mt-8"
+      open={isOpen}
+      className={isOpen ? 'mt-8' : ''}
     >
       <Card
         onDragOver={dragOverHandler}
