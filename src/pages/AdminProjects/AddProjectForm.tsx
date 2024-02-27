@@ -14,6 +14,7 @@ import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
 import Collapse from '../../lib/iCoWeABaseUI/components/utils/Collapse/Collapse';
 import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
 import { selectProjects } from '../../store/slices/projects';
+import { isNameUsed } from '../../utils/utils';
 
 export type AddProjectFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -93,7 +94,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen, open }) => {
             value={inputs['image-url'].value}
           />
           <SubmitButton
-            disabled={!isFormValid}
+            disabled={!isFormValid || isNameUsed(inputs.name.value, projects)}
             name="add"
             value={Object.keys(projects).length}
           >
