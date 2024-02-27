@@ -1,4 +1,4 @@
-import React, { type ChangeEvent, type FC, type FocusEvent, useCallback, useMemo } from 'react';
+import React, { type ChangeEvent, type FC, type FocusEvent, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ import Textarea from '../../lib/iCoWeABaseUI/components/inputs/Textarea/Textarea
 import Grid from '../../lib/iCoWeABaseUI/components/layouts/Grid/Grid';
 import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
 import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
-import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
+import useForm, { type InputState } from '../../lib/iCoWeAHooks/hooks/useForm';
 import {
   NAME_PATTERN,
   EMAIL_PATTERN,
@@ -18,39 +18,66 @@ import {
   NUMBER_PATTERN
 } from '../../lib/iCoWeAUtilsUI/data/constants';
 import { selectUser } from '../../store/slices/user';
-import { isFormChanged } from '../../utils/utils';
+
+const isFormInvalid = (
+  isFormValid: boolean,
+  inputs: Record<string, InputState>,
+  user: User
+): boolean => {
+  if (!isFormValid) {
+    return true;
+  }
+
+  if (
+    user.firstname === inputs.firstname.value &&
+    user.lastname === inputs.lastname.value &&
+    user.phone === inputs.phone.value &&
+    user.email === inputs.email.value &&
+    user.imageURL === inputs['image-url'].value &&
+    user.dob === inputs.dob.value &&
+    user.about === inputs.about.value &&
+    user.street === inputs.street.value &&
+    user.streetNumber === inputs['street-number'].value &&
+    user.postalCode === inputs['postal-code'].value &&
+    user.city === inputs.city.value &&
+    user.country === inputs.country.value &&
+    user.githubURL === inputs['github-url'].value &&
+    user.linkedinURL === inputs['linkedin-url'].value &&
+    user.instagramURL === inputs['instagram-url'].value &&
+    user.facebookURL === inputs['facebook-url'].value
+  ) {
+    return true;
+  }
+
+  return false;
+};
 
 const SettingsForm: FC = () => {
   const user = useSelector(selectUser);
-
-  const initialValues = useMemo(
-    () => ({
-      firstname: user.firstname,
-      lastname: user.lastname,
-      phone: user.phone,
-      email: user.email,
-      'image-url': user.imageURL,
-      dob: user.dob,
-      about: user.about,
-      street: user.street,
-      'street-number': user.streetNumber,
-      'postal-code': user.postalCode,
-      city: user.city,
-      country: user.country,
-      'github-url': user.githubURL,
-      'linkedin-url': user.linkedinURL,
-      'instagram-url': user.instagramURL,
-      'facebook-url': user.facebookURL
-    }),
-    [user]
-  );
 
   const {
     state: { inputs, isFormValid },
     change,
     blur,
     revalidForm
-  } = useForm(initialValues);
+  } = useForm({
+    firstname: user.firstname,
+    lastname: user.lastname,
+    phone: user.phone,
+    email: user.email,
+    'image-url': user.imageURL,
+    dob: user.dob,
+    about: user.about,
+    street: user.street,
+    'street-number': user.streetNumber,
+    'postal-code': user.postalCode,
+    city: user.city,
+    country: user.country,
+    'github-url': user.githubURL,
+    'linkedin-url': user.linkedinURL,
+    'instagram-url': user.instagramURL,
+    'facebook-url': user.facebookURL
+  });
 
   /* -- Set event handlers --- */
   const changeHandler = useCallback(
@@ -346,7 +373,7 @@ const SettingsForm: FC = () => {
           </Grid>
           <SubmitButton
             size="lg"
-            disabled={!isFormValid || !isFormChanged(initialValues, inputs)}
+            disabled={isFormInvalid(isFormValid, inputs, user)}
           >
             Save
           </SubmitButton>
