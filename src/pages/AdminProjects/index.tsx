@@ -14,6 +14,7 @@ export const Component: FC = () => (
 export const action = async ({ request }: { request: Request }): Promise<unknown> => {
   const formData = await request.formData();
 
+  const add = formData.get('add')?.toString();
   const edit = formData.get('edit')?.toString();
   const reorder = formData.get('reorder')?.toString();
   const del = formData.get('del')?.toString();
@@ -25,6 +26,21 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     lastModificationDate: new Date().toISOString()
   };
 
+  if (add) {
+    data.order = add;
+    data.creationDate = new Date().toISOString();
+
+    const key = push(child(ref(database), 'projects')).key;
+
+    if (key === null) {
+      return null;
+    }
+
+    await set(ref(database, `projects/${key}`), data);
+
+    return data;
+  }
+
   if (edit) {
     await update(ref(database, `projects/${edit}`), data);
 
@@ -34,7 +50,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
   if (reorder) {
     const data = JSON.parse(reorder);
 
-    await update(ref(database, 'tasks'), data);
+    await update(ref(database, 'projects'), data);
 
     return data;
   }
@@ -45,17 +61,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
     return {};
   }
 
-  data.creationDate = new Date().toISOString();
-
-  const key = push(child(ref(database), 'projects')).key;
-
-  if (key === null) {
-    return null;
-  }
-
-  await set(ref(database, `projects/${key}`), data);
-
-  return data;
+  return null;
 };
 
 Component.displayName = 'AdminProjectsRoute';
