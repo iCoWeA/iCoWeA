@@ -1,22 +1,50 @@
 import React, { type ChangeEvent, type Dispatch, type FC, type FocusEvent, type SetStateAction, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Form } from 'react-router-dom';
 
-import { type Projects } from '../../store/slices/projects';
+import { type Projects, selectProjects } from '../../store/slices/projects';
 import CloseIcon from '../../components/Icons/CloseIcon';
 import EditIcon from '../../components/Icons/EditIcon';
 import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import Textfield from '../../components/Textfield/Textfield';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Grid from '../../lib/iCoWeABaseUI/components/layouts/Grid/Grid';
-import useForm from '../../lib/iCoWeAHooks/hooks/useForm';
+import useForm, { type InputState } from '../../lib/iCoWeAHooks/hooks/useForm';
+import { isNameUsed } from '../../utils/utils';
 
 export type AddProjectFormProps = {
   setIsEditing: Dispatch<SetStateAction<boolean>>;
   id: string;
-  projects: Projects;
 };
 
-const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, projects }) => {
+const isFormInvalid = (
+  isFormValid: boolean,
+  inputs: Record<string, InputState>,
+  projects: Projects,
+  id: string
+): boolean => {
+  if (!isFormValid) {
+    return true;
+  }
+
+  if (isNameUsed(inputs.name.value, projects)) {
+    return true;
+  }
+
+  if (
+    projects[id].name === inputs.name.value &&
+    projects[id].url === inputs.url.value &&
+    projects[id].imageURL === inputs['image-url'].value
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
+const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id }) => {
+  const projects = useSelector(selectProjects);
+
   const {
     state: { inputs, isFormValid },
     change,
@@ -56,7 +84,10 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, projects })
       method="post"
       className="w-full"
     >
-      <Grid gap="sm" className='grid-cols-3 max-md:grid-cols-1'>
+      <Grid
+        gap="sm"
+        className="grid-cols-3 max-md:grid-cols-1"
+      >
         <Textfield
           onChange={changeHandler}
           onBlur={blur}
@@ -95,7 +126,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setIsEditing, id, projects })
         <SubmitButton
           size="sm"
           className="col-span-2 max-md:col-span-1"
-          disabled={!isFormValid}
+          disabled={isFormInvalid(isFormValid, inputs, projects, id)}
           name="edit"
           value={id}
           leftDecorator={<EditIcon />}
