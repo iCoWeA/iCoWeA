@@ -5,27 +5,22 @@ import React, {
   type SetStateAction,
   useCallback
 } from 'react';
-
-import { type Projects } from '../../store/slices/projects';
+import { useSelector } from 'react-redux';
 import { useSubmit } from 'react-router-dom';
+
 import ReorderIcon from '../../components/Icons/ReorderIcon';
 import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
+import { selectProjects } from '../../store/slices/projects';
 
 type ReorderProjectProps = {
   setDraging: Dispatch<SetStateAction<string>>;
   setIsHovering: Dispatch<SetStateAction<boolean>>;
   draging: string;
   id: string;
-  projects: Projects;
 };
 
-const ReorderProject: FC<ReorderProjectProps> = ({
-  setDraging,
-  setIsHovering,
-  draging,
-  id,
-  projects
-}) => {
+const ReorderProject: FC<ReorderProjectProps> = ({ setDraging, setIsHovering, draging, id }) => {
+  const projects = useSelector(selectProjects);
   const submit = useSubmit();
 
   const dragLeaveHandler = useCallback(() => setIsHovering(false), []);
