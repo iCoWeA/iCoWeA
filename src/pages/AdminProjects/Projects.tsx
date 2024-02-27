@@ -13,6 +13,7 @@ const Projects: FC = () => {
   const projects = useSelector(selectProjects);
 
   const [draging, setDraging] = useState('');
+  const [hovering, setHovering] = useState('');
 
   const nodes = useMemo(() => {
     return Object.keys(projects)
@@ -21,12 +22,14 @@ const Projects: FC = () => {
         <Project
           key={key}
           setDraging={setDraging}
+          setHovering={setHovering}
           draging={draging}
+          hovering={hovering}
           id={key}
           projects={projects}
         />
       ));
-  }, [projects, draging]);
+  }, [projects, draging, hovering]);
 
   return (
     <Section>
