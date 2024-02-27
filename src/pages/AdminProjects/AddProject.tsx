@@ -1,42 +1,32 @@
-import React, { type FC, useState } from 'react';
+import React, { type FC, useState, useCallback } from 'react';
 
 import CloseIcon from '../../components/Icons/CloseIcon';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
-import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
-import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
-import Collapse from '../../lib/iCoWeABaseUI/components/utils/Collapse/Collapse';
-import AddProjectForm from './AddProjectForm';
+import AddTaskForm from './AddTaskForm';
 
 const AddProject: FC = () => {
   const [open, setOpen] = useState(false);
 
+  /* --- Set event handlers --- */
+  const clickHandler = useCallback(() => setOpen((open) => !open), []);
+
   return (
-    <Section>
-      <Card
-        spacing="lg"
-        align="center"
+    <>
+      <Button
+        onClick={clickHandler}
+        color={open ? 'error' : 'primary'}
+        className="self-end transition-colors duration-500"
+        leftDecorator={
+          <CloseIcon className={`relative duration-500 ${open ? 'rotate-0' : 'rotate-45'}`} />
+        }
       >
-        <Collapse
-          open={open}
-          className="w-full"
-        >
-          <AddProjectForm setOpen={setOpen} />
-        </Collapse>
-        <Button
-          onClick={() => {
-            setOpen((open) => !open);
-          }}
-          size="lg"
-          color={open ? 'error' : 'primary'}
-          className="transition-colors duration-500"
-          leftDecorator={
-            <CloseIcon className={`relative duration-500 ${open ? 'rotate-0' : 'rotate-45'}`} />
-          }
-        >
-          {open ? 'Cancel' : 'Add project'}
-        </Button>
-      </Card>
-    </Section>
+        {open ? 'Cancel' : 'Add project'}
+      </Button>
+      <AddTaskForm
+        setOpen={setOpen}
+        open={open}
+      />
+    </>
   );
 };
 
