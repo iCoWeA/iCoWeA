@@ -1,16 +1,14 @@
 import React, { type Dispatch, type SetStateAction, type FC } from 'react';
 
 import ListItem from '../../lib/iCoWeABaseUI/components/data-display/ListItem/ListItem';
-import { type Projects } from '../../store/slices/projects';
 import EditTaskForm from './EditProjectForm';
 
 type EditProjectProps = {
   setIsEditing: Dispatch<SetStateAction<boolean>>;
   id: string;
-  projects: Projects;
 };
 
-const EditProject: FC<EditProjectProps> = ({ setIsEditing, id, projects }) => {
+const EditProject: FC<EditProjectProps> = ({ setIsEditing, id }) => {
   return (
     <ListItem
       spacing="md"
@@ -21,7 +19,6 @@ const EditProject: FC<EditProjectProps> = ({ setIsEditing, id, projects }) => {
       <EditTaskForm
         setIsEditing={setIsEditing}
         id={id}
-        projects={projects}
       />
     </ListItem>
   );
