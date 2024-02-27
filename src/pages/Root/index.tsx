@@ -33,11 +33,9 @@ const Component: FC = () => {
     return onValue(userRef, (snap) => {
       if (snap.exists()) {
         dispatch(userActions.setUser(snap.val()));
-
-        return;
+      } else {
+        throw new Error('User not found');
       }
-
-      throw new Error('User not found');
     });
   }, []);
 
@@ -47,11 +45,9 @@ const Component: FC = () => {
     return onValue(userRef, (snap) => {
       if (snap.exists()) {
         dispatch(projectsActions.setProjects(snap.val()));
-
-        return;
+      } else {
+        dispatch(projectsActions.setProjects({}));
       }
-
-      dispatch(projectsActions.setProjects({}));
     });
   }, []);
 
