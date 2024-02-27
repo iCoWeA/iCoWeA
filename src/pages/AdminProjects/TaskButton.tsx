@@ -31,7 +31,7 @@ const ProjectButton: FC<ProjectItemProps> = ({ setDraging, draging, id, projects
   /* --- Set event handlers --- */
   const dragStartHandler = useCallback(
     (event: DragEvent<HTMLLIElement>): void => {
-      event.dataTransfer?.setData('taskId', id);
+      event.dataTransfer?.setData('messageId', id);
       setDraging(id);
     },
     [id]
