@@ -5,8 +5,8 @@ import List from '../../lib/iCoWeABaseUI/components/data-display/List/List';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
 import { selectProjects } from '../../store/slices/projects';
-import AddTask from './AddTask';
-import TaskButton from './TaskButton';
+import AddProject from './AddProject';
+import Project from './Project';
 import TrashArea from './TrashArea';
 
 const Projects: FC = () => {
@@ -18,7 +18,7 @@ const Projects: FC = () => {
     return Object.keys(projects)
       .sort((a, b) => +projects[a].order - +projects[b].order)
       .map((key) => (
-        <TaskButton
+        <Project
           key={key}
           setDraging={setDraging}
           draging={draging}
@@ -38,7 +38,7 @@ const Projects: FC = () => {
       >
         {"Today's tasks"}
       </Title>
-      <AddTask />
+      <AddProject />
       {nodes.length === 0 && (
         <Title
           size="4"
