@@ -155,7 +155,7 @@ const Message: FC<MessageProps> = ({ setDraging, draging, id, message }) => {
           onClick={clickReadHandler}
           size="sm"
           icon
-          variant={message.unread ? 'default' : 'text'}
+          variant='text'
           color="neutral"
           className="ml-auto"
         >
