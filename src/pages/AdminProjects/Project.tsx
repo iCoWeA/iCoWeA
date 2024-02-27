@@ -53,7 +53,6 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
       <EditProject
         setIsEditing={setIsEditing}
         id={id}
-        projects={projects}
       />
     );
   }
@@ -65,7 +64,6 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
         setIsHovering={setIsHovering}
         draging={draging}
         id={id}
-        projects={projects}
       />
     );
   }
@@ -85,7 +83,7 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
       <Title className="select-none">{projects[id].name}</Title>
       <Tooltip
         offset="8"
-        content="Edit task"
+        content="Edit project"
       >
         <Button
           onClick={clickEditHandler}
