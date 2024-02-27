@@ -88,13 +88,11 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setOpen, open }) => {
             invalid={inputs['image-url'].error}
             label="Image URL"
             id="image-url"
-            maxLength={32}
             name="image-url"
             required
             value={inputs['image-url'].value}
           />
           <SubmitButton
-            size="sm"
             disabled={!isFormValid}
             name="add"
             value={Object.keys(projects).length}
