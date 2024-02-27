@@ -16,7 +16,8 @@ import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
 import Tooltip from '../../lib/iCoWeABaseUI/components/data-display/Tooltip/Tooltip';
 import Button from '../../lib/iCoWeABaseUI/components/inputs/Button/Button';
 import Box from '../../lib/iCoWeABaseUI/components/layouts/Box/Box';
-import EditTask from './EditTasks';
+import EditProject from './EditProject';
+import ReorderProject from './ReorderProject';
 
 export type ProjectProps = {
   setDraging: Dispatch<SetStateAction<string>>;
@@ -32,7 +33,7 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
   /* --- Set event handlers --- */
   const dragStartHandler = useCallback(
     (event: DragEvent<HTMLLIElement>): void => {
-      event.dataTransfer?.setData('taskId', id);
+      event.dataTransfer?.setData('projectId', id);
       setDraging(id);
     },
     [id]
@@ -49,7 +50,7 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
 
   if (isEditing) {
     return (
-      <EditTask
+      <EditProject
         setIsEditing={setIsEditing}
         id={id}
         projects={projects}
@@ -59,7 +60,7 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
 
   if (isHovering) {
     return (
-      <ReorderTask
+      <ReorderProject
         setDraging={setDraging}
         setIsHovering={setIsEditing}
         draging={draging}
