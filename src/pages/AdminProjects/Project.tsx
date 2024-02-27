@@ -62,7 +62,7 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
     return (
       <ReorderProject
         setDraging={setDraging}
-        setIsHovering={setIsEditing}
+        setIsHovering={setIsHovering}
         draging={draging}
         id={id}
         projects={projects}

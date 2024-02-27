@@ -69,9 +69,9 @@ const ReorderProject: FC<ReorderProjectProps> = ({
 
   return (
     <ListItem
-      onDragLeave={draging && draging !== id ? dragLeaveHandler : undefined}
-      onDragOver={draging && draging !== id ? dragOverHandler : undefined}
-      onDrop={draging && draging !== id ? dropHandler : undefined}
+      onDragLeave={draging !== id ? dragLeaveHandler : undefined}
+      onDragOver={draging !== id ? dragOverHandler : undefined}
+      onDrop={draging !== id ? dropHandler : undefined}
       spacing="md"
       variant="plain"
       color="neutral"
