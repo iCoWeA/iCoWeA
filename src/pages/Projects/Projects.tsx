@@ -12,14 +12,16 @@ const Projects: FC = () => {
 
   const nodes = useMemo(
     () =>
-      Object.keys(projects).map((key) => (
-        <ProjectCard
-          key={key}
-          name={projects[key].name}
-          url={projects[key].url}
-          imageURL={projects[key].imageURL}
-        />
-      )),
+      Object.keys(projects)
+        .sort((a, b) => +projects[a].order - +projects[b].order)
+        .map((key) => (
+          <ProjectCard
+            key={key}
+            name={projects[key].name}
+            url={projects[key].url}
+            imageURL={projects[key].imageURL}
+          />
+        )),
     [projects]
   );
 
