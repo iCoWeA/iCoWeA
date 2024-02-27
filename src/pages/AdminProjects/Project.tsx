@@ -21,14 +21,22 @@ import ReorderProject from './ReorderProject';
 
 export type ProjectProps = {
   setDraging: Dispatch<SetStateAction<string>>;
+  setHovering: Dispatch<SetStateAction<string>>;
   draging: string;
+  hovering: string;
   id: string;
   projects: Projects;
 };
 
-const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
+const Project: FC<ProjectProps> = ({
+  setDraging,
+  setHovering,
+  draging,
+  hovering,
+  id,
+  projects
+}) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
 
   /* --- Set event handlers --- */
   const dragStartHandler = useCallback(
@@ -41,7 +49,11 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
 
   const dragEndHandler = useCallback(() => setDraging(''), []);
 
-  const dragEnterHandler = useCallback(() => setIsHovering(true), []);
+  const dragEnterHandler = useCallback(() => {
+    if (id === draging) {
+      setHovering(id);
+    }
+  }, [id, draging]);
 
   const clickEditHandler = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -57,11 +69,11 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
     );
   }
 
-  if (isHovering) {
+  if (hovering === id) {
     return (
       <ReorderProject
         setDraging={setDraging}
-        setIsHovering={setIsHovering}
+        setHovering={setHovering}
         draging={draging}
         id={id}
       />
@@ -70,9 +82,9 @@ const Project: FC<ProjectProps> = ({ setDraging, draging, id, projects }) => {
 
   return (
     <ListItem
-      onDragStart={draging ? undefined : dragStartHandler}
-      onDragEnd={draging === id ? dragEndHandler : undefined}
-      onDragEnter={draging !== id ? dragEnterHandler : undefined}
+      onDragStart={dragStartHandler}
+      onDragEnd={dragEndHandler}
+      onDragEnter={dragEnterHandler}
       spacing="md"
       variant="plain"
       color="neutral"

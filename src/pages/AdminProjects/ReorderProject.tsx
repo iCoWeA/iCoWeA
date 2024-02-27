@@ -14,23 +14,36 @@ import { selectProjects } from '../../store/slices/projects';
 
 type ReorderProjectProps = {
   setDraging: Dispatch<SetStateAction<string>>;
-  setIsHovering: Dispatch<SetStateAction<boolean>>;
+  setHovering: Dispatch<SetStateAction<string>>;
   draging: string;
   id: string;
 };
 
-const ReorderProject: FC<ReorderProjectProps> = ({ setDraging, setIsHovering, draging, id }) => {
+const ReorderProject: FC<ReorderProjectProps> = ({ setDraging, setHovering, draging, id }) => {
   const projects = useSelector(selectProjects);
   const submit = useSubmit();
 
-  const dragLeaveHandler = useCallback(() => setIsHovering(false), []);
+  const dragLeaveHandler = useCallback(() => {
+    if (draging !== id) {
+      setHovering('');
+    }
+  }, [draging, id]);
 
-  const dragOverHandler = useCallback((event: DragEvent<HTMLLIElement>): void => {
-    event.preventDefault();
-  }, []);
+  const dragOverHandler = useCallback(
+    (event: DragEvent<HTMLLIElement>): void => {
+      if (draging !== id) {
+        event.preventDefault();
+      }
+    },
+    [draging, id]
+  );
 
   const dropHandler = useCallback(
     (event: DragEvent<HTMLLIElement>): void => {
+      if (draging === id) {
+        return;
+      }
+
       const dragId = event.dataTransfer.getData('projectId');
 
       const data: Record<string, Record<'order', string>> = {
@@ -55,11 +68,11 @@ const ReorderProject: FC<ReorderProjectProps> = ({ setDraging, setIsHovering, dr
         }
       });
 
-      setIsHovering(false);
+      setHovering('');
       setDraging('');
       submit({ reorder: JSON.stringify(data) }, { method: 'post' });
     },
-    [id, projects]
+    [draging, id, projects]
   );
 
   return (
