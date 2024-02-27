@@ -27,11 +27,9 @@ export const Component: FC = () => {
 
       if (snap.exists()) {
         dispatch(messagesActions.setMessages(snap.val()));
-
-        return;
+      } else {
+        dispatch(messagesActions.setMessages({}));
       }
-
-      dispatch(messagesActions.setMessages({}));
     });
   }, []);
 
@@ -39,15 +37,17 @@ export const Component: FC = () => {
     return onAuthStateChanged(appAuth, (user) => {
       if (user) {
         wasLogged.current = true;
-      } else {
-        if (wasLogged.current) {
-          navigate('/logout');
-        } else {
-          navigate('/login');
-        }
 
-        wasLogged.current = false;
+        return;
       }
+
+      if (wasLogged.current) {
+        navigate('/logout');
+      } else {
+        navigate('/login');
+      }
+
+      wasLogged.current = false;
     });
   }, []);
 
