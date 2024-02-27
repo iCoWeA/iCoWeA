@@ -36,7 +36,7 @@ const Projects: FC = () => {
         align="center"
         className="mb-12"
       >
-        {"Today's tasks"}
+        Projects
       </Title>
       <AddProject />
       {nodes.length === 0 && (
