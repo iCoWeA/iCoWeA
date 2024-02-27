@@ -1,14 +1,12 @@
 import React, { type FC, useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import SortIcon from '../../components/Icons/SortIcon';
 import List from '../../lib/iCoWeABaseUI/components/data-display/List/List';
 import Title from '../../lib/iCoWeABaseUI/components/data-display/Title/Title';
-import ToggleButton from '../../lib/iCoWeABaseUI/components/inputs/ToggleButton/ToggleButton';
-import Flex from '../../lib/iCoWeABaseUI/components/layouts/Flex/Flex';
 import Section from '../../lib/iCoWeABaseUI/components/layouts/Section/Section';
 import { selectMessages } from '../../store/slices/messages';
-import MessageButton from './MessageButton';
+import Controls from './Controls';
+import MessageButton from './Message';
 import TrashArea from './TrashArea';
 
 const Messages: FC = () => {
@@ -22,10 +20,10 @@ const Messages: FC = () => {
       Object.keys(messages)
         .sort((a, b) =>
           descendingSort
-            ? new Date(messages[a].creationDate).getMilliseconds() -
-              new Date(messages[b].creationDate).getMilliseconds()
-            : new Date(messages[b].creationDate).getMilliseconds() -
-              new Date(messages[a].creationDate).getMilliseconds()
+            ? new Date(messages[b].creationDate).getTime() -
+              new Date(messages[a].creationDate).getTime()
+            : new Date(messages[a].creationDate).getTime() -
+              new Date(messages[b].creationDate).getTime()
         )
         .map((key) => (
           <MessageButton
@@ -49,16 +47,10 @@ const Messages: FC = () => {
       >
         Messages
       </Title>
-      <Flex>
-        <ToggleButton
-          onClick={() => setDescendingSort((sort) => !sort)}
-          checked={descendingSort}
-          variant="solid"
-          leftDecorator={<SortIcon className={descendingSort ? '' : 'rotate-180'} />}
-        >
-          {descendingSort ? 'Newest date' : 'Latest date'}
-        </ToggleButton>
-      </Flex>
+      <Controls
+        setDescendingSort={setDescendingSort}
+        descendingSort={descendingSort}
+      />
       {nodes.length === 0 && (
         <Title
           size="4"
