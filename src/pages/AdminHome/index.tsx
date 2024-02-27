@@ -4,7 +4,10 @@ import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import Introduction from './Introduction';
 
 export const Component: FC = () => (
-  <Main placement="full">
+  <Main
+    placement="full"
+    block
+  >
     <Introduction />
   </Main>
 );

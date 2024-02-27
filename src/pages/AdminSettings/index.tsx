@@ -6,7 +6,10 @@ import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import SettingsForm from './SettingsForm';
 
 export const Component: FC = () => (
-  <Main placement="full">
+  <Main
+    placement="full"
+    block
+  >
     <SettingsForm />
   </Main>
 );
