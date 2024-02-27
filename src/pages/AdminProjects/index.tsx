@@ -3,7 +3,7 @@ import { update, ref, remove, push, child, set } from 'firebase/database';
 
 import { database } from '../../firebase';
 import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
-import Projects from '../Projects/Projects';
+import Projects from './Projects';
 
 export const Component: FC = () => (
   <Main placement="full">
