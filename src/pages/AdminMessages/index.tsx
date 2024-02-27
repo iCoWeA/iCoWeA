@@ -6,7 +6,10 @@ import Main from '../../lib/iCoWeABaseUI/components/layouts/Main/Main';
 import Messages from './Messages';
 
 export const Component: FC = () => (
-  <Main placement="full">
+  <Main
+    placement="full"
+    block
+  >
     <Messages />
   </Main>
 );
