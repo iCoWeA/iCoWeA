@@ -24,6 +24,7 @@ declare global {
     name: string;
     url: string;
     imageURL: string;
+    order: string;
     creationDate: string;
     lastModificationDate: string;
   };
