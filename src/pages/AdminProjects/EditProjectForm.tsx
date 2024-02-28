@@ -34,7 +34,7 @@ const isFormInvalid = (
     return true;
   }
 
-  if (isNameUsed(inputs.name.value, projects)) {
+  if (projects[id].name !== inputs.name.value && isNameUsed(inputs.name.value, projects)) {
     return true;
   }
 
