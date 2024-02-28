@@ -50,7 +50,7 @@ const Project: FC<ProjectProps> = ({
   const dragEndHandler = useCallback(() => setDraging(''), []);
 
   const dragEnterHandler = useCallback(() => {
-    if (id === draging) {
+    if (id !== draging) {
       setHovering(id);
     }
   }, [id, draging]);
