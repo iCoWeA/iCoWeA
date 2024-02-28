@@ -41,11 +41,11 @@ const TrashArea: FC<TrashAreaProps> = ({ setDraging, draging }) => {
   const dropHandler = useCallback(
     (event: DragEvent): void => {
       const dragId = event.dataTransfer?.getData('projectId');
-      const data: Record<string, Record<'order', string>> = {};
+      const data: Record<string, Record<'order', number>> = {};
 
       Object.keys(projects).forEach((key) => {
         if (projects[key].order > projects[dragId].order) {
-          data[key] = { ...projects[key], order: `${+projects[key].order - 1}` };
+          data[key] = { ...projects[key], order: projects[key].order - 1 };
         }
       });
 

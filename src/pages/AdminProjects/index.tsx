@@ -22,7 +22,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
   const reorder = formData.get('reorder')?.toString();
   const del = formData.get('del')?.toString();
 
-  const data: Obj = {
+  const data: Record<string, any> = {
     name: formData.get('name')?.toString() ?? '',
     url: formData.get('url')?.toString() ?? '',
     imageURL: formData.get('image-url')?.toString() ?? '',
@@ -30,7 +30,7 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
   };
 
   if (add) {
-    data.order = add;
+    data.order = +add;
     data.creationDate = new Date().toISOString();
 
     const key = push(child(ref(database), 'projects')).key;

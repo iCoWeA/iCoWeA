@@ -46,7 +46,7 @@ const ReorderProject: FC<ReorderProjectProps> = ({ setDraging, setHovering, drag
 
       const dragId = event.dataTransfer.getData('projectId');
 
-      const data: Record<string, Record<'order', string>> = {
+      const data: Record<string, Record<'order', number>> = {
         [dragId]: { ...projects[dragId], order: projects[id].order }
       };
 
@@ -56,7 +56,7 @@ const ReorderProject: FC<ReorderProjectProps> = ({ setDraging, setHovering, drag
           projects[dragId].order < projects[key].order &&
           projects[key].order <= projects[id].order
         ) {
-          data[key] = { ...projects[key], order: `${+projects[key].order - 1}` };
+          data[key] = { ...projects[key], order: projects[key].order - 1 };
         }
 
         if (
@@ -64,7 +64,7 @@ const ReorderProject: FC<ReorderProjectProps> = ({ setDraging, setHovering, drag
           projects[key].order < projects[dragId].order &&
           projects[id].order <= projects[key].order
         ) {
-          data[key] = { ...projects[key], order: `${+projects[key].order + 1}` };
+          data[key] = { ...projects[key], order: projects[key].order + 1 };
         }
       });
 
