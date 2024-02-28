@@ -77,9 +77,9 @@ const ReorderProject: FC<ReorderProjectProps> = ({ setDraging, setHovering, drag
 
   return (
     <ListItem
-      onDragLeave={draging !== id ? dragLeaveHandler : undefined}
-      onDragOver={draging !== id ? dragOverHandler : undefined}
-      onDrop={draging !== id ? dropHandler : undefined}
+      onDragLeave={dragLeaveHandler}
+      onDragOver={dragOverHandler}
+      onDrop={dropHandler}
       spacing="md"
       variant="plain"
       color="neutral"
