@@ -6,12 +6,14 @@ import React, {
   useCallback,
   useState
 } from 'react';
+import { useSelector } from 'react-redux';
 import { useSubmit } from 'react-router-dom';
 
 import FullTrash from '../../components/Icons/FullTrash';
 import Trash from '../../components/Icons/Trash';
 import Card from '../../lib/iCoWeABaseUI/components/surfaces/Card/Card';
 import Collapse from '../../lib/iCoWeABaseUI/components/utils/Collapse/Collapse';
+import { selectProjects } from '../../store/slices/projects';
 
 type TrashAreaProps = {
   setDraging: Dispatch<SetStateAction<string>>;
@@ -19,6 +21,7 @@ type TrashAreaProps = {
 };
 
 const TrashArea: FC<TrashAreaProps> = ({ setDraging, draging }) => {
+  const projects = useSelector(selectProjects);
   const submit = useSubmit();
 
   const isOpen = !!draging;
@@ -35,10 +38,22 @@ const TrashArea: FC<TrashAreaProps> = ({ setDraging, draging }) => {
 
   const dragLeaveHandler = useCallback((): void => setIsHovered(false), []);
 
-  const dropHandler = useCallback((event: DragEvent): void => {
-    setDraging('');
-    submit({ del: event.dataTransfer?.getData('projectId') ?? '' }, { method: 'post' });
-  }, []);
+  const dropHandler = useCallback(
+    (event: DragEvent): void => {
+      const dragId = event.dataTransfer?.getData('projectId');
+      const data: Record<string, Record<'order', string>> = {};
+
+      Object.keys(projects).forEach((key) => {
+        if (projects[key].order > projects[dragId].order) {
+          data[key] = { ...projects[key], order: `${+projects[key].order - 1}` };
+        }
+      });
+
+      setDraging('');
+      submit({ del: JSON.stringify({ delete: dragId, ...data }) }, { method: 'post' });
+    },
+    [projects]
+  );
 
   return (
     <Collapse

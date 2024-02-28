@@ -59,9 +59,15 @@ export const action = async ({ request }: { request: Request }): Promise<unknown
   }
 
   if (del) {
-    await remove(ref(database, `projects/${del}`));
+    const data: Obj = JSON.parse(del);
 
-    return {};
+    await remove(ref(database, `projects/${data.delete}`));
+
+    delete data.delete;
+
+    await update(ref(database, 'projects'), data);
+
+    return data;
   }
 
   return null;
