@@ -1,7 +1,7 @@
 import { type InputState } from '../lib/iCoWeAHooks/hooks/useForm';
 import { type Projects } from '../store/slices/projects';
 
-export const isNameUsed = (name: string, projects: Projects): boolean => Object.keys(projects).some((key) => projects[key].name.toLowerCase() === name.toLowerCase());
+export const isNameUsed = (name: string, projects: Projects): boolean => Object.keys(projects).some((key) => projects[key].name === name);
 
 export const isFormChanged = (defaultValue: Obj, values: Record<string, InputState>): boolean =>
   Object.keys(defaultValue).some((key) => defaultValue[key] !== values[key].value);
